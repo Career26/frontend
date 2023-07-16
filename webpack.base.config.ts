@@ -33,30 +33,8 @@ const config: Configuration = {
         use: { loader: 'ts-loader' },
       },
       {
-        test: /\.(scss)$/,
-        use: [
-          CSSInject,
-          {
-            loader: 'css-loader',
-            options: {
-              modules: {
-                mode: 'local',
-                localIdentName: '[name]_[local]_[hash:base64:5]',
-                exportLocalsConvention: 'camelCaseOnly',
-              },
-              importLoaders: 2,
-              sourceMap: false,
-            },
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              postcssOptions: { plugins: [['autoprefixer', {}]] },
-              sourceMap: true,
-            },
-          },
-          'sass-loader',
-        ],
+        test: /\.scss$/,
+        use: ['style-loader', 'css-loader', 'sass-loader'],
       },
     ],
   },

@@ -34,6 +34,7 @@ module.exports = {
   ],
   rules: {
     curly: ['error', 'all'],
+    'react/jsx-props-no-spreading': 0,
     'prettier/prettier': ['error', { ...prettierConfig }],
     '@typescript-eslint/no-var-requires': 0,
     'import/prefer-default-export': 0,

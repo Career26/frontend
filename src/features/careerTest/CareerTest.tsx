@@ -49,7 +49,14 @@ export const CareerTest = () => {
   }, [activeStep]);
 
   return (
-    <Modal opened title="Careers Test" onClose={() => {}} withCloseButton={false} size="auto">
+    <Modal
+      opened
+      title="Careers Test"
+      onClose={() => {}}
+      withCloseButton={false}
+      size="auto"
+      w="80%"
+    >
       <Stepper active={activeStep} onStepClick={setActiveStep} breakpoint="sm">
         <Stepper.Step label="About you" description="Who are you?" />
         <Stepper.Step label="Areas of interest" description="What excites you?" />

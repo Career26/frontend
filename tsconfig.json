@@ -14,7 +14,8 @@
     "paths": {
       "@slices/*": ["./src/state/slices/*"],
       "@state/*": ["./src/state/*"],
-      "@shared/*": ["./src/shared/*"]
+      "@shared/*": ["./src/shared/*"],
+      "@mocks/*": ["./src/mocks/*"]
     }
   }
 }

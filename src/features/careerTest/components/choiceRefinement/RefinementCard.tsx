@@ -1,6 +1,7 @@
 import { Card, Text } from '@mantine/core';
 import React from 'react';
 import classNames from 'classnames';
+
 import { CardInformation } from './choiceRefinementTypes';
 
 import './choiceRefinement.scss';

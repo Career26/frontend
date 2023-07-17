@@ -1,17 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from '@mantine/form';
-import {
-  ActionIcon,
-  Button,
-  Card,
-  Grid,
-  Group,
-  Indicator,
-  Loader,
-  Modal,
-  Stepper,
-} from '@mantine/core';
+import { Modal, Stepper } from '@mantine/core';
+import { StepperButtons } from '@shared/components/StepperButtons';
+
 import { ChoiceRefinement } from './components/choiceRefinement/ChoiceRefinement';
+import { TestResult } from './components/testResult/TestResult';
 
 const finalStep = 4;
 
@@ -49,44 +42,24 @@ export const CareerTest = () => {
   }, [activeStep]);
 
   return (
-    <Modal
-      opened
-      title="Careers Test"
-      onClose={() => {}}
-      withCloseButton={false}
-      size="auto"
-      w="80%"
-    >
-      <Stepper active={activeStep} onStepClick={setActiveStep} breakpoint="sm">
-        <Stepper.Step label="About you" description="Who are you?" />
-        <Stepper.Step label="Areas of interest" description="What excites you?" />
-        <Stepper.Step label="Previous experiences" description="What have you done?" />
-        <Stepper.Step label="Refine your choices" description="What industries suit you?">
+    <Modal opened title="Careers Test" onClose={() => {}} withCloseButton={false} size="auto">
+      <Stepper active={activeStep} onStepClick={setActiveStep} size="auto">
+        <Stepper.Step label="About you" />
+        <Stepper.Step label="Areas of interest" />
+        <Stepper.Step label="Previous experiences" />
+        <Stepper.Step label="Refine your choices">
           <ChoiceRefinement />
         </Stepper.Step>
         <Stepper.Completed>
-          {!loading && (
-            <>
-              <div>*--Results Diagram here here--*</div>
-              <div>
-                Create a FREE account now to explore your potential careers
-                <li>Discover industry insights</li>
-                <li>Get access to real interview quesitons</li>
-                <li>Refine your CV and cover letter</li>
-              </div>
-            </>
-          )}
-          {loading && <Loader />}
+          <TestResult />
         </Stepper.Completed>
       </Stepper>
-      <Group position="apart" mt="xl">
-        <Button variant="default" onClick={clickBack} disabled={activeStep === 0 || loading}>
-          Back
-        </Button>
-        <Button onClick={clickNext} disabled={loading}>
-          {activeStep === finalStep && !loading ? 'Create Account' : 'Next'}
-        </Button>
-      </Group>
+      <StepperButtons
+        clickBack={clickBack}
+        clickNext={clickNext}
+        loading={loading}
+        nextLabel={activeStep === finalStep && !loading ? 'Create Account' : 'Next'}
+      />
     </Modal>
   );
 };

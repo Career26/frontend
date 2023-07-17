@@ -1,0 +1,13 @@
+@use 'src/shared/styles/colorStyles.scss';
+
+.resultCard {
+  &:hover {
+    box-shadow: 0 0 8px colorStyles.$shadow;
+    cursor: pointer;
+  }
+}
+
+.topRow {
+  display: flex;
+  justify-content: row;
+}

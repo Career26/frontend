@@ -3,3 +3,5 @@ export type CardInformation = {
   info: string;
   id: string;
 };
+
+export type TestResultCard = CardInformation & { reason: string; salary: string };

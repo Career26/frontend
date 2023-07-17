@@ -1,16 +1,8 @@
 import { Grid, Loader } from '@mantine/core';
 import React, { useEffect, useState } from 'react';
+import { mockCardData } from '@mocks/careerTestMocks';
 
 import { RefinementCard } from './RefinementCard';
-import { CardInformation } from './choiceRefinementTypes';
-
-type ChoiceRefinementProps = {};
-
-const mockCardData: CardInformation[] = [1, 2, 3, 4, 5, 6, 7, 8].map((_i, j) => ({
-  id: String(j),
-  header: `Indudstry ${j}`,
-  info: `Info about industry ${j} blah blah blah blah blah blah blah blah blah`,
-}));
 
 const checkIsSelected = (id: string, selectedCardIds: string[]) =>
   !!selectedCardIds.find((cardId) => cardId === id);
@@ -39,7 +31,7 @@ export const ChoiceRefinement = () => {
   return (
     <Grid>
       {mockCardData.map((card) => (
-        <Grid.Col md={6} lg={3} key={`refinement-${card.header}`}>
+        <Grid.Col md={4} lg={4} key={`refinement-${card.header}`}>
           <RefinementCard
             {...card}
             onClick={() => clickCard(card.id)}

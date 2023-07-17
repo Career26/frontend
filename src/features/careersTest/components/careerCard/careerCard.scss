@@ -1,0 +1,19 @@
+@use 'src/shared/styles/globalStyles.scss';
+@use 'src/shared/styles/colorStyles.scss';
+
+.careerCard {
+  min-width: 200px !important;
+  height: 100% !important;
+
+  .cardHeader {
+    font-weight: bold;
+  }
+  &:hover {
+    cursor: pointer;
+    box-shadow: colorStyles.$shadow;
+  }
+}
+
+.selected {
+  background-color: colorStyles.$selected !important;
+}

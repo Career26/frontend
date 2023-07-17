@@ -4,17 +4,24 @@ import { Stepper } from '@shared/components/stepper/Stepper';
 
 import { CareerRefinement } from './components/careerRefinement/CareerRefinement';
 import { TestResult } from './components/testResult/TestResult';
+import { Formik, Form, Field, ErrorMessage, FormikContextType } from 'formik';
 
 import './careersTest.scss';
-
-const finalStep = 4;
+import { initialCareersFormValues } from './config/careersFormConstants';
+import { CareersTestFormValues } from './careersTestTypes';
+import { EducationForm } from './components/forms/EducationForm';
+import { educationFormSchema } from './config/careersFormSchemas';
 
 const steps = [
-  { label: 'About you' },
-  { label: 'Areas of interest' },
-  { label: 'Previous experiences' },
-  { label: 'Refine your choices' },
+  { label: 'Education' },
+  { label: 'Past Experience' },
+  { label: 'Interests' },
+  { label: 'Work Preferences' },
+  { label: 'Work-life Balance' },
+  { label: 'Refine Choices' },
 ];
+
+const finalStep = steps.length;
 
 export const CareersTest = () => {
   const [loading, setLoading] = useState(false);
@@ -32,11 +39,26 @@ export const CareersTest = () => {
     setActiveStep(activeStep - 1);
   };
 
-  const checkNextIsDisabled = () => {
+  const checkNextIsDisabled = (formik: FormikContextType<CareersTestFormValues>) => {
+    if (Object.keys(formik.errors).length) {
+      return true;
+    }
     if (activeStep !== 3) {
       return loading;
     }
     return loading || !selectedCardIds.length;
+  };
+
+  const handleFormSubmit = () => {
+    console.log('submitted');
+    setActiveStep(activeStep + 1);
+  };
+
+  const getValidationSchema = () => {
+    if (activeStep === 0) {
+      return educationFormSchema;
+    }
+    return undefined;
   };
 
   useEffect(() => {
@@ -47,24 +69,35 @@ export const CareersTest = () => {
   }, [activeStep]);
 
   return (
-    <ConfirmationDialog
-      open
-      title="Careers Test"
-      onCancel={clickBack}
-      onConfirm={clickNext}
-      cancelLabel="Back"
-      confirmDisabled={checkNextIsDisabled()}
-      confirmLabel={activeStep === finalStep && !loading ? 'Create Account' : 'Next'}
-      extraClasses="careersTest"
+    <Formik
+      validationSchema={getValidationSchema()}
+      initialValues={initialCareersFormValues}
+      onSubmit={handleFormSubmit}
     >
-      <Stepper activeStep={activeStep} steps={steps} />
-      {activeStep === 3 && (
-        <CareerRefinement
-          selectedCardIds={selectedCardIds}
-          setSelectedCardIds={setSelectedCardIds}
-        />
+      {(formik) => (
+        <ConfirmationDialog
+          open
+          title="Careers Test"
+          onCancel={clickBack}
+          onConfirm={clickNext}
+          cancelLabel="Back"
+          confirmDisabled={!formik.isValid || loading}
+          confirmLabel={activeStep === finalStep && !loading ? 'Create Account' : 'Next'}
+          extraClasses="careersTest"
+        >
+          <Stepper activeStep={activeStep} steps={steps} />
+          <Form>
+            {activeStep === 0 && <EducationForm formik={formik} />}
+            {activeStep === 3 && (
+              <CareerRefinement
+                selectedCardIds={selectedCardIds}
+                setSelectedCardIds={setSelectedCardIds}
+              />
+            )}
+            {activeStep === 4 && <TestResult />}
+          </Form>
+        </ConfirmationDialog>
       )}
-      {activeStep === 4 && <TestResult />}
-    </ConfirmationDialog>
+    </Formik>
   );
 };

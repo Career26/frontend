@@ -28,10 +28,8 @@ export const CareersTest = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [selectedCardIds, setSelectedCardIds] = useState<string[]>([]);
 
-  const clickNext = () => {
-    if (activeStep === finalStep) {
-      return;
-    }
+  const clickNext = (values: CareersTestFormValues) => {
+    console.log(values);
     setActiveStep(activeStep + 1);
   };
 
@@ -69,7 +67,7 @@ export const CareersTest = () => {
           open
           title="Careers Test"
           onCancel={clickBack}
-          onConfirm={clickNext}
+          onConfirm={() => clickNext(formik.values)}
           cancelLabel="Back"
           confirmDisabled={!formik.isValid || loading}
           confirmLabel={activeStep === finalStep && !loading ? 'Create Account' : 'Next'}
@@ -77,7 +75,7 @@ export const CareersTest = () => {
         >
           <Stepper activeStep={activeStep} steps={steps} />
           <Form>
-            {activeStep === 0 && <EducationForm />}
+            {activeStep === 0 && <EducationForm formik={formik} />}
             {activeStep === 3 && (
               <CareerRefinement
                 selectedCardIds={selectedCardIds}

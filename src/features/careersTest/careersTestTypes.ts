@@ -1,3 +1,7 @@
+import * as Yup from 'yup';
+
+import { educationFormSchema, universitySchema } from './config/careersFormSchemas';
+
 export type Degree = {
   name: string;
   university: string;
@@ -6,12 +10,8 @@ export type Degree = {
   grade: string;
 };
 
-export type CareersTestFormValues = {
-  firstName: string;
-  lastName: string;
-  latestDegree: Degree;
-  additionalDegrees: Degree[];
-};
+export type CareersTestFormValues = Yup.InferType<typeof educationFormSchema>;
+export type UniversityFormValues = Yup.InferType<typeof universitySchema>;
 
 export type CardInformation = {
   jobTitle: string;
@@ -40,7 +40,7 @@ type WorkExperience = {
 };
 
 export type Profile = {
-  additional_degrees: string[];
+  additional_degrees: Degree[];
   areas_of_interest: string[];
   expected_salary: {
     base_currency: string;
@@ -48,13 +48,7 @@ export type Profile = {
     expected_salary: number;
   };
   full_name: string;
-  latest_degree: {
-    grade: string;
-    is_predicted_grade: boolean;
-    level: string;
-    name: string;
-    university: string;
-  };
+  latest_degree: Degree;
   personality_type: {
     work_life_balance_sacrifice: boolean;
     work_style: string;

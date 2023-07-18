@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { ConfirmationDialog } from '@shared/components/dialogs/ConfirmationDialog';
 import { Stepper } from '@shared/components/stepper/Stepper';
+import { Formik, Form, FormikContextType } from 'formik';
 
 import { CareerRefinement } from './components/careerRefinement/CareerRefinement';
 import { TestResult } from './components/testResult/TestResult';
-import { Formik, Form, Field, ErrorMessage, FormikContextType } from 'formik';
-
-import './careersTest.scss';
 import { initialCareersFormValues } from './config/careersFormConstants';
 import { CareersTestFormValues } from './careersTestTypes';
-import { EducationForm } from './components/forms/EducationForm';
 import { educationFormSchema } from './config/careersFormSchemas';
+import { EducationForm } from './components/forms/EducationForm';
+
+import './careersTest.scss';
 
 const steps = [
   { label: 'Education' },
@@ -37,16 +37,6 @@ export const CareersTest = () => {
 
   const clickBack = () => {
     setActiveStep(activeStep - 1);
-  };
-
-  const checkNextIsDisabled = (formik: FormikContextType<CareersTestFormValues>) => {
-    if (Object.keys(formik.errors).length) {
-      return true;
-    }
-    if (activeStep !== 3) {
-      return loading;
-    }
-    return loading || !selectedCardIds.length;
   };
 
   const handleFormSubmit = () => {
@@ -87,7 +77,7 @@ export const CareersTest = () => {
         >
           <Stepper activeStep={activeStep} steps={steps} />
           <Form>
-            {activeStep === 0 && <EducationForm formik={formik} />}
+            {activeStep === 0 && <EducationForm />}
             {activeStep === 3 && (
               <CareerRefinement
                 selectedCardIds={selectedCardIds}

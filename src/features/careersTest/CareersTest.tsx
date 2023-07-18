@@ -7,7 +7,7 @@ import { CareerRefinement } from './components/careerRefinement/CareerRefinement
 import { TestResult } from './components/testResult/TestResult';
 import { initialCareersFormValues } from './config/careersFormConstants';
 import { CareersTestFormValues } from './careersTestTypes';
-import { educationFormSchema } from './config/careersFormSchemas';
+import { companyFormSchema, educationFormSchema } from './config/careersFormSchemas';
 import { EducationForm } from './components/forms/EducationForm';
 
 import './careersTest.scss';
@@ -27,9 +27,11 @@ export const CareersTest = () => {
   const [loading, setLoading] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
   const [selectedCardIds, setSelectedCardIds] = useState<string[]>([]);
+  const [inputValues, setInputValues] = useState({});
 
-  const clickNext = (values: CareersTestFormValues) => {
-    console.log(values);
+  const clickNext = (formValues: CareersTestFormValues) => {
+    console.log(formValues);
+    setInputValues({ ...inputValues, ...formValues });
     setActiveStep(activeStep + 1);
   };
 
@@ -45,6 +47,9 @@ export const CareersTest = () => {
   const getValidationSchema = () => {
     if (activeStep === 0) {
       return educationFormSchema;
+    }
+    if (activeStep === 1) {
+      return companyFormSchema;
     }
     return undefined;
   };

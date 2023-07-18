@@ -19,3 +19,14 @@ export const educationFormSchema = Yup.object().shape({
   latestDegree: universitySchema,
   additionalDegrees: Yup.array(universitySchema).optional(),
 });
+
+export const companyFormSchema = Yup.object({
+  companyName: Yup.string(),
+  rating: Yup.number(),
+  ratingReason: Yup.string(),
+  role: Yup.string(),
+});
+
+export const previousExperienceFormSchema = Yup.object().shape({
+  previousWorkExperience: Yup.array(companyFormSchema),
+});

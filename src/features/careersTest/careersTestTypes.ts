@@ -1,6 +1,11 @@
 import * as Yup from 'yup';
 
-import { educationFormSchema, universitySchema } from './config/careersFormSchemas';
+import {
+  companyFormSchema,
+  educationFormSchema,
+  previousExperienceFormSchema,
+  universitySchema,
+} from './config/careersFormSchemas';
 
 export type Degree = {
   name: string;
@@ -12,6 +17,8 @@ export type Degree = {
 
 export type CareersTestFormValues = Yup.InferType<typeof educationFormSchema>;
 export type UniversityFormValues = Yup.InferType<typeof universitySchema>;
+export type CompanyFormValues = Yup.InferType<typeof companyFormSchema>;
+export type PreviousExperienceFormValues = Yup.InferType<typeof previousExperienceFormSchema>;
 
 export type CardInformation = {
   jobTitle: string;

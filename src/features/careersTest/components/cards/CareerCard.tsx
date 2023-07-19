@@ -10,8 +10,7 @@ import Info from '@mui/icons-material/Info';
 import Lock from '@mui/icons-material/Lock';
 import QuestionMark from '@mui/icons-material/QuestionMark';
 import { Overlay } from '@mantine/core';
-
-import { CardInformation } from '../../careersTestTypes';
+import { CardInformation } from '@careersTest/types/careersTestTypes';
 
 import './cardStyles.scss';
 

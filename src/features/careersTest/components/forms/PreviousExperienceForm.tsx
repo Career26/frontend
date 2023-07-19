@@ -1,8 +1,8 @@
 import { FieldArray, FormikContextType } from 'formik';
 import React from 'react';
 import Button from '@mui/material/Button';
+import { PreviousExperienceFormValues } from '@careersTest/types/careersFormTypes';
 
-import { PreviousExperienceFormValues } from '../../careersTestTypes';
 import { CompanyForm } from './CompanyForm';
 
 type PreviousExperienceFormProps = {

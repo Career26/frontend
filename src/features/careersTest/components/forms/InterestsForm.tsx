@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
+import { basicInterestsList } from '@careersTest/config/careersFormConstants';
 
 import { InterestCard } from '../cards/InterestCard';
-import { basicInterestsList } from '../../config/careersFormConstants';
 
 export const InterestsForm = () => {
   const [availableInterests, setAvailableInterests] = useState<string[]>(basicInterestsList);

@@ -13,7 +13,7 @@ import { companyFormSchema, educationFormSchema } from './config/careersFormSche
 import { EducationForm } from './components/forms/EducationForm';
 import { PreviousExperienceForm } from './components/forms/PreviousExperienceForm';
 import './careersTest.scss';
-import { EducationFormValues, PreviousExperienceFormValues } from './careersTestTypes';
+import { EducationFormValues, PreviousExperienceFormValues } from './types/careersFormTypes';
 import { InterestsForm } from './components/forms/InterestsForm';
 
 const steps = [

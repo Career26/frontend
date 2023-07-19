@@ -30,3 +30,7 @@ export const companyFormSchema = Yup.object({
 export const previousExperienceFormSchema = Yup.object().shape({
   previousWorkExperience: Yup.array(companyFormSchema),
 });
+
+export const areasOfInterestSchema = Yup.object().shape({
+  areasOfInterest: Yup.array(Yup.string()),
+});

@@ -18,7 +18,7 @@
       "@state/*": ["./src/state/*"],
       "@shared/*": ["./src/shared/*"],
       "@mocks/*": ["./src/mocks/*"],
-      "@careersTest/*": ["./src/careersTest/*"]
+      "@careersTest/*": ["./src/features/careersTest/*"]
     }
   }
 }

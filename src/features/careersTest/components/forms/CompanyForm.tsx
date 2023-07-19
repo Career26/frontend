@@ -1,8 +1,7 @@
 import { FormText } from '@shared/forms/FormText';
 import { FormikContextType } from 'formik';
 import React from 'react';
-
-import { PreviousExperienceFormValues } from '../../careersTestTypes';
+import { PreviousExperienceFormValues } from '@careersTest/types/careersFormTypes';
 
 type CompanyFormProps = {
   formik: FormikContextType<PreviousExperienceFormValues>;

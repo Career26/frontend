@@ -1,4 +1,4 @@
-import { CardInformation, CareersResponse } from '../features/careersTest/careersTestTypes';
+import { CardInformation, CareersResponse } from '@careersTest/types/careersTestTypes';
 
 const blahBlahBlah = 'blah blah blah blah blah blah blah blah blah';
 

@@ -2,8 +2,7 @@ import React from 'react';
 import { FormikContextType } from 'formik';
 import { FormText } from '@shared/forms/FormText';
 import { FormCheckbox } from '@shared/forms/FormCheckbox';
-
-import { EducationFormValues } from '../../careersTestTypes';
+import { EducationFormValues } from '@careersTest/types/careersFormTypes';
 
 export const UniversityForm = ({
   formik,

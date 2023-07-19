@@ -2,9 +2,9 @@ import { FieldArray, FormikContextType } from 'formik';
 import React from 'react';
 import { FormText } from '@shared/forms/FormText';
 import Button from '@mui/material/Button';
+import { EducationFormValues } from '@careersTest/types/careersFormTypes';
 
 import { UniversityForm } from './UniversityForm';
-import { EducationFormValues } from '../../careersTestTypes';
 
 type EducationFormProps = {
   formik: FormikContextType<EducationFormValues>;

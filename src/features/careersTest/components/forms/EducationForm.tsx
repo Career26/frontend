@@ -4,10 +4,10 @@ import { FormText } from '@shared/forms/FormText';
 import { Button } from '@mui/material';
 
 import { UniversityForm } from './UniversityForm';
-import { CareersTestFormValues } from '../../careersTestTypes';
+import { EducationFormValues } from '../../careersTestTypes';
 
 type EducationFormProps = {
-  formik: FormikContextType<CareersTestFormValues>;
+  formik: FormikContextType<EducationFormValues>;
 };
 
 export const EducationForm = ({ formik }: EducationFormProps) => (

@@ -1,17 +1,15 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
 import React from 'react';
 import { FormikContextType } from 'formik';
 import { FormText } from '@shared/forms/FormText';
 import { FormCheckbox } from '@shared/forms/FormCheckbox';
 
-import { CareersTestFormValues } from '../../careersTestTypes';
+import { EducationFormValues } from '../../careersTestTypes';
 
 export const UniversityForm = ({
   formik,
   baseField,
 }: {
-  formik: FormikContextType<CareersTestFormValues>;
+  formik: FormikContextType<EducationFormValues>;
   baseField: string;
 }) => (
   <div>
@@ -21,10 +19,8 @@ export const UniversityForm = ({
     <FormText formik={formik} field={`${baseField}.degreeGrade`} label="Degree Grade" />
     <FormCheckbox
       label="Is this grade predicted?"
-      value={!!formik.values[baseField]?.isPredicted}
-      onClick={() =>
-        formik.setFieldValue(`${baseField}.isPredicted`, !formik.values[baseField]?.isPredicted)
-      }
+      formik={formik}
+      field={`${baseField}.isPredicted`}
     />
   </div>
 );

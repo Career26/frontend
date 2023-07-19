@@ -1,16 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { ConfirmationDialog } from '@shared/components/dialogs/ConfirmationDialog';
 import { Stepper } from '@shared/components/stepper/Stepper';
-import { Formik, Form, FormikContextType } from 'formik';
+import { Form, Formik, FormikContextType } from 'formik';
 
 import { CareerRefinement } from './components/careerRefinement/CareerRefinement';
 import { TestResult } from './components/testResult/TestResult';
-import { initialCareersFormValues } from './config/careersFormConstants';
-import { CareersTestFormValues } from './careersTestTypes';
+import {
+  initialEducationFormValues,
+  initialPreviousExperienceFormValues,
+} from './config/careersFormConstants';
 import { companyFormSchema, educationFormSchema } from './config/careersFormSchemas';
 import { EducationForm } from './components/forms/EducationForm';
-
+import { PreviousExperienceForm } from './components/forms/PreviousExperienceForm';
 import './careersTest.scss';
+import { EducationFormValues, PreviousExperienceFormValues } from './careersTestTypes';
 
 const steps = [
   { label: 'Education' },
@@ -29,10 +32,11 @@ export const CareersTest = () => {
   const [selectedCardIds, setSelectedCardIds] = useState<string[]>([]);
   const [inputValues, setInputValues] = useState({});
 
-  const clickNext = (formValues: CareersTestFormValues) => {
+  const clickNext = (formValues: EducationFormValues | PreviousExperienceFormValues) => {
     console.log(formValues);
-    setInputValues({ ...inputValues, ...formValues });
     setActiveStep(activeStep + 1);
+    setInputValues({ ...inputValues, ...formValues });
+    console.log(activeStep);
   };
 
   const clickBack = () => {
@@ -44,29 +48,16 @@ export const CareersTest = () => {
     setActiveStep(activeStep + 1);
   };
 
-  const getValidationSchema = () => {
+  const { schema, initialValues } = useMemo(() => {
     if (activeStep === 0) {
-      return educationFormSchema;
+      return { schema: educationFormSchema, initialValues: initialEducationFormValues };
     }
-    if (activeStep === 1) {
-      return companyFormSchema;
-    }
-    return undefined;
-  };
-
-  useEffect(() => {
-    if (activeStep === finalStep) {
-      setLoading(true);
-      setTimeout(() => setLoading(false), 2000);
-    }
+    // if (activeStep === 1) {
+    return { schema: companyFormSchema, initialValues: initialPreviousExperienceFormValues };
   }, [activeStep]);
 
   return (
-    <Formik
-      validationSchema={getValidationSchema()}
-      initialValues={initialCareersFormValues}
-      onSubmit={handleFormSubmit}
-    >
+    <Formik validationSchema={schema} initialValues={initialValues} onSubmit={handleFormSubmit}>
       {(formik) => (
         <ConfirmationDialog
           open
@@ -74,13 +65,20 @@ export const CareersTest = () => {
           onCancel={clickBack}
           onConfirm={() => clickNext(formik.values)}
           cancelLabel="Back"
-          confirmDisabled={!formik.isValid || loading}
+          confirmDisabled={loading}
           confirmLabel={activeStep === finalStep && !loading ? 'Create Account' : 'Next'}
           extraClasses="careersTest"
         >
           <Stepper activeStep={activeStep} steps={steps} />
           <Form>
-            {activeStep === 0 && <EducationForm formik={formik} />}
+            {activeStep === 0 && (
+              <EducationForm formik={formik as FormikContextType<EducationFormValues>} />
+            )}
+            {activeStep === 1 && (
+              <PreviousExperienceForm
+                formik={formik as FormikContextType<PreviousExperienceFormValues>}
+              />
+            )}
             {activeStep === 3 && (
               <CareerRefinement
                 selectedCardIds={selectedCardIds}

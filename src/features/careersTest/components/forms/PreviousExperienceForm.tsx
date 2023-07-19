@@ -16,11 +16,12 @@ export const PreviousExperienceForm = ({ formik }: PreviousExperienceFormProps) 
       <FieldArray name="previousWorkExperience">
         {({ push, remove }) => (
           <div>
-            <CompanyForm key="company-primary" formik={formik} />
-            {formik.values.previousWorkExperience?.map((company, index) => (
+            <h3>Company 1</h3>
+            <CompanyForm key="company-1" formik={formik} index={0} />
+            {formik.values.previousWorkExperience?.map((_, index) => (
               <>
                 <h3>Company {index + 2}</h3>
-                <CompanyForm key={`company-${company.companyName}`} formik={formik} />
+                <CompanyForm key={`company-${index}`} formik={formik} index={index + 1} />
                 <Button onClick={() => remove(index)}>Remove Company</Button>
               </>
             ))}

@@ -15,7 +15,7 @@ export type Degree = {
   grade: string;
 };
 
-export type CareersTestFormValues = Yup.InferType<typeof educationFormSchema>;
+export type EducationFormValues = Yup.InferType<typeof educationFormSchema>;
 export type UniversityFormValues = Yup.InferType<typeof universitySchema>;
 export type CompanyFormValues = Yup.InferType<typeof companyFormSchema>;
 export type PreviousExperienceFormValues = Yup.InferType<typeof previousExperienceFormSchema>;

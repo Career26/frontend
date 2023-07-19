@@ -8,20 +8,21 @@ export const FormText = <FormValuesType,>({
   field,
 }: {
   label: string;
-  field: keyof FormValuesType;
+  field: keyof FormValuesType | string;
   formik: FormikContextType<FormValuesType>;
 }) => {
-  const errorMessage = formik.errors[field];
-  const helperText = !!formik.touched[field] && !!errorMessage ? String(errorMessage) : '';
+  const formikField = field as keyof FormValuesType;
+  const errorMessage = formik.errors[formikField];
+  const helperText = !!formik.touched[formikField] && !!errorMessage ? String(errorMessage) : '';
   return (
     <TextField
       label={label}
-      value={formik.values[field]}
+      value={formik.values[formikField]}
       onChange={(e) => {
         formik.setFieldTouched(String(field), true);
         formik.setFieldValue(String(field), e.target.value);
       }}
-      error={!!formik.errors[field]}
+      error={!!formik.errors[formikField]}
       helperText={helperText}
     />
   );

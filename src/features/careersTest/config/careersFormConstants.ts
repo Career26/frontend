@@ -1,4 +1,9 @@
-import { CareersTestFormValues, UniversityFormValues } from '../careersTestTypes';
+import {
+  CompanyFormValues,
+  EducationFormValues,
+  PreviousExperienceFormValues,
+  UniversityFormValues,
+} from '../careersTestTypes';
 
 export const initialUniversityFormValues: UniversityFormValues = {
   degreeName: '',
@@ -8,9 +13,20 @@ export const initialUniversityFormValues: UniversityFormValues = {
   degreeGrade: '',
 };
 
-export const initialCareersFormValues: CareersTestFormValues = {
+export const initialEducationFormValues: EducationFormValues = {
   firstName: '',
   lastName: '',
   latestDegree: { ...initialUniversityFormValues },
   additionalDegrees: [],
+};
+
+export const initialCompanyFormValues: CompanyFormValues = {
+  companyName: '',
+  rating: 5,
+  ratingReason: '',
+  role: '',
+};
+
+export const initialPreviousExperienceFormValues: PreviousExperienceFormValues = {
+  previousWorkExperience: [],
 };

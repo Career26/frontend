@@ -1,4 +1,5 @@
-import { Checkbox, FormControlLabel } from '@mui/material';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 import { FormikContextType } from 'formik';
 import React from 'react';
 

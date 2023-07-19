@@ -1,6 +1,7 @@
 import React from 'react';
 import MuiStepper from '@mui/material/Stepper';
-import { Step, StepLabel } from '@mui/material';
+import Step from '@mui/material/Step';
+import StepLabel from '@mui/material/StepLabel';
 
 import './stepperStyles.scss';
 

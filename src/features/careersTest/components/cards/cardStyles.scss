@@ -1,7 +1,7 @@
 @use 'src/shared/styles/globalStyles.scss';
 @use 'src/shared/styles/colorStyles.scss';
 
-.careerCard {
+.card {
   min-width: 200px !important;
   height: 100% !important;
 
@@ -11,6 +11,10 @@
   &:hover {
     cursor: pointer;
     box-shadow: colorStyles.$shadow;
+  }
+  & .MuiBadge-badge {
+    background-color: green;
+    color: white;
   }
 }
 

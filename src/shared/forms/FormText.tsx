@@ -1,6 +1,6 @@
 import { FormikContextType } from 'formik';
 import React from 'react';
-import { TextField } from '@mui/material';
+import TextField from '@mui/material/TextField';
 
 export const FormText = <FormValuesType,>({
   formik,

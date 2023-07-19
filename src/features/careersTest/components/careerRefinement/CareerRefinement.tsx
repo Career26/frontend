@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { mockCardData } from '@mocks/careerTestMocks';
 import Grid from '@mui/material/Grid';
 
-import { CareerCard } from '../careerCard/CareerCard';
+import { CareerCard } from '../cards/CareerCard';
 
 type CareerRefinementProps = {
   selectedCardIds: string[];

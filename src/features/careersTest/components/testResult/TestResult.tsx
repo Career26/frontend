@@ -2,9 +2,11 @@ import { Loader, Text } from '@mantine/core';
 import React, { useEffect, useState } from 'react';
 import Grid from '@mui/material/Grid';
 import { mockCardData } from '@mocks/careerTestMocks';
-import { Insights, Science, Task } from '@mui/icons-material';
+import Insights from '@mui/icons-material/Insights';
+import Task from '@mui/icons-material/Task';
+import Science from '@mui/icons-material/Science';
 
-import { CareerCard } from '../careerCard/CareerCard';
+import { CareerCard } from '../cards/CareerCard';
 
 import './testResult.scss';
 

@@ -14,29 +14,24 @@ import { EducationForm } from './components/forms/EducationForm';
 import { PreviousExperienceForm } from './components/forms/PreviousExperienceForm';
 import './careersTest.scss';
 import { EducationFormValues, PreviousExperienceFormValues } from './careersTestTypes';
+import { InterestsForm } from './components/forms/InterestsForm';
 
 const steps = [
   { label: 'Education' },
   { label: 'Past Experience' },
   { label: 'Interests' },
   { label: 'Work Preferences' },
-  { label: 'Work-life Balance' },
   { label: 'Refine Choices' },
 ];
 
-const finalStep = steps.length;
-
 export const CareersTest = () => {
-  const [loading, setLoading] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
   const [selectedCardIds, setSelectedCardIds] = useState<string[]>([]);
   const [inputValues, setInputValues] = useState({});
 
   const clickNext = (formValues: EducationFormValues | PreviousExperienceFormValues) => {
-    console.log(formValues);
     setActiveStep(activeStep + 1);
     setInputValues({ ...inputValues, ...formValues });
-    console.log(activeStep);
   };
 
   const clickBack = () => {
@@ -45,14 +40,12 @@ export const CareersTest = () => {
 
   const handleFormSubmit = () => {
     console.log('submitted');
-    setActiveStep(activeStep + 1);
   };
 
   const { schema, initialValues } = useMemo(() => {
     if (activeStep === 0) {
       return { schema: educationFormSchema, initialValues: initialEducationFormValues };
     }
-    // if (activeStep === 1) {
     return { schema: companyFormSchema, initialValues: initialPreviousExperienceFormValues };
   }, [activeStep]);
 
@@ -65,8 +58,7 @@ export const CareersTest = () => {
           onCancel={clickBack}
           onConfirm={() => clickNext(formik.values)}
           cancelLabel="Back"
-          confirmDisabled={loading}
-          confirmLabel={activeStep === finalStep && !loading ? 'Create Account' : 'Next'}
+          confirmLabel={activeStep === steps.length ? 'Create Account' : 'Next'}
           extraClasses="careersTest"
         >
           <Stepper activeStep={activeStep} steps={steps} />
@@ -79,7 +71,8 @@ export const CareersTest = () => {
                 formik={formik as FormikContextType<PreviousExperienceFormValues>}
               />
             )}
-            {activeStep === 3 && (
+            {activeStep === 2 && <InterestsForm />}
+            {activeStep === 4 && (
               <CareerRefinement
                 selectedCardIds={selectedCardIds}
                 setSelectedCardIds={setSelectedCardIds}

@@ -1,9 +1,10 @@
 import {
+  AreasOfInterestValues,
   CompanyFormValues,
   EducationFormValues,
   PreviousExperienceFormValues,
   UniversityFormValues,
-} from '../careersTestTypes';
+} from '@careersTest/types/careersFormTypes';
 
 export const initialUniversityFormValues: UniversityFormValues = {
   degreeName: '',
@@ -29,6 +30,10 @@ export const initialCompanyFormValues: CompanyFormValues = {
 
 export const initialPreviousExperienceFormValues: PreviousExperienceFormValues = {
   previousWorkExperience: [],
+};
+
+export const initialAreasOfInterestValues: AreasOfInterestValues = {
+  areasOfInterest: [],
 };
 
 export const basicInterestsList = [

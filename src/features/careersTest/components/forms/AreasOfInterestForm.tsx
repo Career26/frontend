@@ -2,26 +2,42 @@ import React, { useState } from 'react';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import { basicInterestsList } from '@careersTest/config/careersFormConstants';
+import { FormikContextType } from 'formik';
+import { AreasOfInterestValues } from '@careersTest/types/careersFormTypes';
 
 import { InterestCard } from '../cards/InterestCard';
 
-export const InterestsForm = () => {
+type AreasOfInterestFormProps = {
+  formik: FormikContextType<AreasOfInterestValues>;
+};
+
+export const AreasOfInterestForm = ({ formik }: AreasOfInterestFormProps) => {
+  const areasOfInterest = formik.values.areasOfInterest || [];
   const [availableInterests, setAvailableInterests] = useState<string[]>(basicInterestsList);
-  const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
   const [newInterest, setNewInterest] = useState('');
 
+  const removeInterest = (name: string) => {
+    const newInterests = [...areasOfInterest].filter((interest) => interest !== name);
+    formik.setFieldValue('areasOfInterest', newInterests);
+  };
+
+  const addInterest = (name: string) => {
+    const newInterests = [...areasOfInterest, name];
+    formik.setFieldValue('areasOfInterest', newInterests);
+  };
+
   const clickInterest = (name: string) => {
-    if (selectedInterests.includes(name)) {
-      setSelectedInterests(selectedInterests.filter((item) => item !== name));
+    if (areasOfInterest.includes(name)) {
+      removeInterest(name);
     } else {
-      setSelectedInterests([...selectedInterests, name]);
+      addInterest(name);
     }
   };
 
   const handleNewItemClick = () => {
     if (newInterest && !availableInterests.includes(newInterest)) {
       setAvailableInterests([...availableInterests, newInterest]);
-      setSelectedInterests([...selectedInterests, newInterest]);
+      addInterest(newInterest);
       setNewInterest('');
     }
   };
@@ -35,7 +51,7 @@ export const InterestsForm = () => {
               <InterestCard
                 name={name}
                 onClick={() => clickInterest(name)}
-                selected={selectedInterests.includes(name)}
+                selected={areasOfInterest.includes(name)}
               />
             </Grid>
           ))}

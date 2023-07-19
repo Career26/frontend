@@ -6,15 +6,24 @@ import { Form, Formik, FormikContextType } from 'formik';
 import { CareerRefinement } from './components/careerRefinement/CareerRefinement';
 import { TestResult } from './components/testResult/TestResult';
 import {
+  initialAreasOfInterestValues,
   initialEducationFormValues,
   initialPreviousExperienceFormValues,
 } from './config/careersFormConstants';
-import { companyFormSchema, educationFormSchema } from './config/careersFormSchemas';
+import {
+  areasOfInterestSchema,
+  educationFormSchema,
+  previousExperienceFormSchema,
+} from './config/careersFormSchemas';
 import { EducationForm } from './components/forms/EducationForm';
 import { PreviousExperienceForm } from './components/forms/PreviousExperienceForm';
 import './careersTest.scss';
-import { EducationFormValues, PreviousExperienceFormValues } from './types/careersFormTypes';
-import { InterestsForm } from './components/forms/InterestsForm';
+import {
+  AreasOfInterestValues,
+  EducationFormValues,
+  PreviousExperienceFormValues,
+} from './types/careersFormTypes';
+import { AreasOfInterestForm } from './components/forms/AreasOfInterestForm';
 
 const steps = [
   { label: 'Education' },
@@ -29,7 +38,9 @@ export const CareersTest = () => {
   const [selectedCardIds, setSelectedCardIds] = useState<string[]>([]);
   const [inputValues, setInputValues] = useState({});
 
-  const clickNext = (formValues: EducationFormValues | PreviousExperienceFormValues) => {
+  const clickNext = (
+    formValues: EducationFormValues | PreviousExperienceFormValues | AreasOfInterestValues,
+  ) => {
     setActiveStep(activeStep + 1);
     setInputValues({ ...inputValues, ...formValues });
   };
@@ -46,7 +57,13 @@ export const CareersTest = () => {
     if (activeStep === 0) {
       return { schema: educationFormSchema, initialValues: initialEducationFormValues };
     }
-    return { schema: companyFormSchema, initialValues: initialPreviousExperienceFormValues };
+    if (activeStep === 1) {
+      return {
+        schema: previousExperienceFormSchema,
+        initialValues: initialPreviousExperienceFormValues,
+      };
+    }
+    return { schema: areasOfInterestSchema, initialValues: initialAreasOfInterestValues };
   }, [activeStep]);
 
   return (
@@ -71,7 +88,9 @@ export const CareersTest = () => {
                 formik={formik as FormikContextType<PreviousExperienceFormValues>}
               />
             )}
-            {activeStep === 2 && <InterestsForm />}
+            {activeStep === 2 && (
+              <AreasOfInterestForm formik={formik as FormikContextType<AreasOfInterestValues>} />
+            )}
             {activeStep === 4 && (
               <CareerRefinement
                 selectedCardIds={selectedCardIds}

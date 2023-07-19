@@ -1,6 +1,6 @@
 import { FieldArray, FormikContextType } from 'formik';
 import React from 'react';
-import { FormText } from '@shared/forms/FormText';
+import { FormText } from '@shared/components/forms/FormText';
 import Button from '@mui/material/Button';
 import { EducationFormValues } from '@careersTest/types/careersFormTypes';
 

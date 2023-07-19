@@ -12,7 +12,7 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
-    "noEmitOnError": true,
+    "noEmit": false,
     "paths": {
       "@slices/*": ["./src/state/slices/*"],
       "@state/*": ["./src/state/*"],

@@ -2,15 +2,19 @@ import { FormikContextType } from 'formik';
 import React from 'react';
 import TextField from '@mui/material/TextField';
 
+type FormTextProps<FormValuesType> = {
+  label: string;
+  field: keyof FormValuesType | string;
+  formik: FormikContextType<FormValuesType>;
+  placeholder?: string;
+};
+
 export const FormText = <FormValuesType,>({
   formik,
   label,
   field,
-}: {
-  label: string;
-  field: keyof FormValuesType | string;
-  formik: FormikContextType<FormValuesType>;
-}) => {
+  placeholder,
+}: FormTextProps<FormValuesType>) => {
   const formikField = field as keyof FormValuesType;
   const errorMessage = formik.errors[formikField];
   const helperText = !!formik.touched[formikField] && !!errorMessage ? String(errorMessage) : '';
@@ -24,6 +28,7 @@ export const FormText = <FormValuesType,>({
       }}
       error={!!formik.errors[formikField]}
       helperText={helperText}
+      placeholder={placeholder}
     />
   );
 };

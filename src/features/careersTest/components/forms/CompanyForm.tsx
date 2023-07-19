@@ -1,4 +1,4 @@
-import { FormText } from '@shared/forms/FormText';
+import { FormText } from '@shared/components/forms/FormText';
 import { FormikContextType } from 'formik';
 import React from 'react';
 import { PreviousExperienceFormValues } from '@careersTest/types/careersFormTypes';

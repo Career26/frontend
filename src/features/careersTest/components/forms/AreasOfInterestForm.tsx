@@ -3,12 +3,12 @@ import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import { basicInterestsList } from '@careersTest/config/careersFormConstants';
 import { FormikContextType } from 'formik';
-import { AreasOfInterestValues } from '@careersTest/types/careersFormTypes';
+import { AreasOfInterestFormValues } from '@careersTest/types/careersFormTypes';
 
 import { InterestCard } from '../cards/InterestCard';
 
 type AreasOfInterestFormProps = {
-  formik: FormikContextType<AreasOfInterestValues>;
+  formik: FormikContextType<AreasOfInterestFormValues>;
 };
 
 export const AreasOfInterestForm = ({ formik }: AreasOfInterestFormProps) => {

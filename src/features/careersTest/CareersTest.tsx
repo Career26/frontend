@@ -9,21 +9,25 @@ import {
   initialAreasOfInterestValues,
   initialEducationFormValues,
   initialPreviousExperienceFormValues,
+  initialWorkPreferencesValues,
 } from './config/careersFormConstants';
 import {
   areasOfInterestSchema,
   educationFormSchema,
   previousExperienceFormSchema,
+  workPreferencesSchema,
 } from './config/careersFormSchemas';
 import { EducationForm } from './components/forms/EducationForm';
 import { PreviousExperienceForm } from './components/forms/PreviousExperienceForm';
 import './careersTest.scss';
 import {
-  AreasOfInterestValues,
+  AreasOfInterestFormValues,
   EducationFormValues,
   PreviousExperienceFormValues,
+  WorkPreferencesFormValues,
 } from './types/careersFormTypes';
 import { AreasOfInterestForm } from './components/forms/AreasOfInterestForm';
+import { WorkPreferencesForm } from './components/forms/WorkPreferencesForm';
 
 const steps = [
   { label: 'Education' },
@@ -38,21 +42,6 @@ export const CareersTest = () => {
   const [selectedCardIds, setSelectedCardIds] = useState<string[]>([]);
   const [inputValues, setInputValues] = useState({});
 
-  const clickNext = (
-    formValues: EducationFormValues | PreviousExperienceFormValues | AreasOfInterestValues,
-  ) => {
-    setActiveStep(activeStep + 1);
-    setInputValues({ ...inputValues, ...formValues });
-  };
-
-  const clickBack = () => {
-    setActiveStep(activeStep - 1);
-  };
-
-  const handleFormSubmit = () => {
-    console.log('submitted');
-  };
-
   const { schema, initialValues } = useMemo(() => {
     if (activeStep === 0) {
       return { schema: educationFormSchema, initialValues: initialEducationFormValues };
@@ -63,8 +52,36 @@ export const CareersTest = () => {
         initialValues: initialPreviousExperienceFormValues,
       };
     }
-    return { schema: areasOfInterestSchema, initialValues: initialAreasOfInterestValues };
+    if (activeStep === 2) {
+      return { schema: areasOfInterestSchema, initialValues: initialAreasOfInterestValues };
+    }
+    return { schema: workPreferencesSchema, initialValues: initialWorkPreferencesValues };
   }, [activeStep]);
+
+  const handleFormSubmit = () => {
+    console.log('submitted');
+    console.log(inputValues);
+  };
+
+  const clickNext = (
+    formik: FormikContextType<
+      | EducationFormValues
+      | PreviousExperienceFormValues
+      | AreasOfInterestFormValues
+      | WorkPreferencesFormValues
+    >,
+  ) => {
+    setInputValues({ ...inputValues, ...formik.values });
+    formik.setValues(initialValues);
+    setActiveStep(activeStep + 1);
+    if (activeStep === 4) {
+      handleFormSubmit();
+    }
+  };
+
+  const clickBack = () => {
+    setActiveStep(activeStep - 1);
+  };
 
   return (
     <Formik validationSchema={schema} initialValues={initialValues} onSubmit={handleFormSubmit}>
@@ -73,7 +90,10 @@ export const CareersTest = () => {
           open
           title="Careers Test"
           onCancel={clickBack}
-          onConfirm={() => clickNext(formik.values)}
+          onConfirm={() => {
+            clickNext(formik);
+          }}
+          ignoreCancelButton={activeStep === 0}
           cancelLabel="Back"
           confirmLabel={activeStep === steps.length ? 'Create Account' : 'Next'}
           extraClasses="careersTest"
@@ -89,7 +109,14 @@ export const CareersTest = () => {
               />
             )}
             {activeStep === 2 && (
-              <AreasOfInterestForm formik={formik as FormikContextType<AreasOfInterestValues>} />
+              <AreasOfInterestForm
+                formik={formik as FormikContextType<AreasOfInterestFormValues>}
+              />
+            )}
+            {activeStep === 3 && (
+              <WorkPreferencesForm
+                formik={formik as FormikContextType<WorkPreferencesFormValues>}
+              />
             )}
             {activeStep === 4 && (
               <CareerRefinement
@@ -97,7 +124,7 @@ export const CareersTest = () => {
                 setSelectedCardIds={setSelectedCardIds}
               />
             )}
-            {activeStep === 4 && <TestResult />}
+            {activeStep === 5 && <TestResult />}
           </Form>
         </ConfirmationDialog>
       )}

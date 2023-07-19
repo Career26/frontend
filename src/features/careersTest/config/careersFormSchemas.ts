@@ -34,3 +34,15 @@ export const previousExperienceFormSchema = Yup.object().shape({
 export const areasOfInterestSchema = Yup.object().shape({
   areasOfInterest: Yup.array(Yup.string()),
 });
+
+export const workPreferencesSchema = Yup.object().shape({
+  workStyle: Yup.string(),
+  enjoyTalkingToPeople: Yup.bool(),
+  wantGoodWorklifeBalance: Yup.bool(),
+  expectedSalary: Yup.object().shape({
+    expectedSalary: Yup.string(),
+    city: Yup.string(),
+    baseCurrency: Yup.string(),
+    symbol: Yup.string(),
+  }),
+});

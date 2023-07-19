@@ -17,7 +17,8 @@
       "@slices/*": ["./src/state/slices/*"],
       "@state/*": ["./src/state/*"],
       "@shared/*": ["./src/shared/*"],
-      "@mocks/*": ["./src/mocks/*"]
+      "@mocks/*": ["./src/mocks/*"],
+      "@careersTest/*": ["./src/careersTest/*"]
     }
   }
 }

@@ -30,3 +30,18 @@ export const initialCompanyFormValues: CompanyFormValues = {
 export const initialPreviousExperienceFormValues: PreviousExperienceFormValues = {
   previousWorkExperience: [],
 };
+
+export const basicInterestsList = [
+  'Finance',
+  'Business',
+  'Law',
+  'Consulting',
+  'Education',
+  'Technology',
+  'Healthcare',
+  'Charity',
+  'Art and Creative Work',
+  'Politics',
+  'Public Services',
+  'Academia / Research',
+];

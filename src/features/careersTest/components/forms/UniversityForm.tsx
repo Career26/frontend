@@ -6,6 +6,8 @@ import { EducationFormValues } from '@careersTest/types/careersFormTypes';
 import { FormSelect } from '@shared/components/forms/FormSelect';
 import { degreeGrades, degreeLevels } from '@careersTest/config/careersFormConstants';
 
+import './universityForm.scss';
+
 export const UniversityForm = ({
   formik,
   baseField,
@@ -23,21 +25,23 @@ export const UniversityForm = ({
       </div>
     </div>
     <div className="row">
-      <div className="column">
-        <FormSelect
-          formik={formik}
-          field={`${baseField}.degreeLevel`}
-          label="Level"
-          options={degreeLevels}
-        />
-      </div>
-      <div className="column">
-        <FormSelect
-          formik={formik}
-          field={`${baseField}.degreeGrade`}
-          label="Grade"
-          options={degreeGrades}
-        />
+      <div className="selectors">
+        <div className="column">
+          <FormSelect
+            formik={formik}
+            field={`${baseField}.degreeLevel`}
+            label="Level"
+            options={degreeLevels}
+          />
+        </div>
+        <div className="column">
+          <FormSelect
+            formik={formik}
+            field={`${baseField}.degreeGrade`}
+            label="Grade"
+            options={degreeGrades}
+          />
+        </div>
       </div>
       <div className="column checkbox">
         <FormCheckbox

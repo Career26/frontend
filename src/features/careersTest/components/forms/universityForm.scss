@@ -1,0 +1,13 @@
+.selectors {
+  width: 75%;
+  display: flex;
+  flex-direction: row;
+}
+
+.checkbox {
+  text-align: right;
+  margin-left: 0;
+  .MuiTypography-root {
+    font-size: 14px;
+  }
+}

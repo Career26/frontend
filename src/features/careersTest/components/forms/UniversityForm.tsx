@@ -3,6 +3,8 @@ import { FormikContextType } from 'formik';
 import { FormText } from '@shared/components/forms/FormText';
 import { FormCheckbox } from '@shared/components/forms/FormCheckbox';
 import { EducationFormValues } from '@careersTest/types/careersFormTypes';
+import { FormSelect } from '@shared/components/forms/FormSelect';
+import { degreeGrades, degreeLevels } from '@careersTest/config/careersFormConstants';
 
 export const UniversityForm = ({
   formik,
@@ -12,14 +14,38 @@ export const UniversityForm = ({
   baseField: string;
 }) => (
   <div>
-    <FormText formik={formik} field={`${baseField}.univeristyName`} label="University Name" />
-    <FormText formik={formik} field={`${baseField}.degreeName`} label="Degree Name" />
-    <FormText formik={formik} field={`${baseField}.degreeLevel`} label="Degree Level" />
-    <FormText formik={formik} field={`${baseField}.degreeGrade`} label="Degree Grade" />
-    <FormCheckbox
-      label="Is this grade predicted?"
-      formik={formik}
-      field={`${baseField}.isPredicted`}
-    />
+    <div className="row">
+      <div className="column">
+        <FormText formik={formik} field={`${baseField}.univeristyName`} label="University Name" />
+      </div>
+      <div className="column">
+        <FormText formik={formik} field={`${baseField}.degreeName`} label="Degree Name" />
+      </div>
+    </div>
+    <div className="row">
+      <div className="column">
+        <FormSelect
+          formik={formik}
+          field={`${baseField}.degreeLevel`}
+          label="Level"
+          options={degreeLevels}
+        />
+      </div>
+      <div className="column">
+        <FormSelect
+          formik={formik}
+          field={`${baseField}.degreeGrade`}
+          label="Grade"
+          options={degreeGrades}
+        />
+      </div>
+      <div className="column checkbox">
+        <FormCheckbox
+          label="Is this grade predicted?"
+          formik={formik}
+          field={`${baseField}.isPredicted`}
+        />
+      </div>
+    </div>
   </div>
 );

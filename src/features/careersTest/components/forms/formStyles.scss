@@ -1,0 +1,53 @@
+$margin: 10px;
+$header-size: 20px;
+$subheader-size: 16px;
+
+.dialogContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+
+  .header {
+    font-size: $header-size;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .subHeader {
+    font-size: $subheader-size;
+    font-weight: bold;
+    text-align: left;
+    justify-content: flex-end;
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: $margin;
+    align-items: center;
+  }
+
+  .column {
+    flex: 1;
+    margin-right: $margin;
+    margin-left: $margin;
+    place-self: center;
+  }
+
+  .MuiDivider-root {
+    margin-top: $margin;
+    margin-bottom: $margin;
+  }
+  .MuiSelect-root,
+  .MuiTextField-root {
+    width: 100%;
+  }
+
+  .checkbox {
+    text-align: right;
+    .MuiTypography-root {
+      font-size: 14px;
+    }
+  }
+}

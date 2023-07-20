@@ -5,7 +5,7 @@ import { Dialog } from './Dialog';
 
 type DialogProps = {
   children: React.ReactNode;
-  title: string;
+  title: string | React.ReactNode;
   open: boolean;
   onCancel?: () => void;
   onConfirm?: () => void;
@@ -38,11 +38,11 @@ export const ConfirmationDialog = ({
     actions={
       <>
         {!ignoreCancelButton && (
-          <Button disabled={cancelDisabled} onClick={onCancel}>
+          <Button disabled={cancelDisabled} onClick={onCancel} variant="outlined">
             {cancelLabel}
           </Button>
         )}
-        <Button disabled={confirmDisabled} onClick={onConfirm}>
+        <Button disabled={confirmDisabled} onClick={onConfirm} variant="contained">
           {confirmLabel}
         </Button>
       </>

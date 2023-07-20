@@ -9,7 +9,7 @@ import './dialogStyles.scss';
 
 type DialogProps = {
   children: React.ReactNode;
-  title: string;
+  title: string | React.ReactNode;
   open: boolean;
   onClose?: () => void;
   actions?: React.ReactNode;

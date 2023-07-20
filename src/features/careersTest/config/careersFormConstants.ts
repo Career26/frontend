@@ -7,6 +7,19 @@ import {
   WorkPreferencesFormValues,
 } from '@careersTest/types/careersFormTypes';
 
+export const degreeLevels = ['PhD', 'MSc', 'MA', 'BSc', 'BA'].map((value) => ({
+  label: value,
+  value,
+}));
+
+export const degreeGrades = [
+  'First Class (1st)',
+  'Second Class Upper (2:1)',
+  'Second Class Lower (2:2)',
+  'Third Class (3rd)',
+  'Pass',
+].map((value) => ({ label: value, value }));
+
 export const workTypeOptions = [
   { label: 'Independent', value: 'INDEPENDENT' },
   { label: 'Group', value: 'Group' },

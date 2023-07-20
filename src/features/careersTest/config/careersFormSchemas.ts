@@ -38,7 +38,7 @@ export const areasOfInterestSchema = Yup.object().shape({
 export const workPreferencesSchema = Yup.object().shape({
   workStyle: Yup.string(),
   enjoyTalkingToPeople: Yup.bool(),
-  wantGoodWorklifeBalance: Yup.bool(),
+  sacrificeWorkLifeBalance: Yup.bool(),
   expectedSalary: Yup.object().shape({
     expectedSalary: Yup.string(),
     city: Yup.string(),

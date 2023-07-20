@@ -28,6 +28,10 @@ $subheader-size: 16px;
     align-items: center;
   }
 
+  .addRow {
+    margin-left: $margin;
+  }
+
   .column {
     flex: 1;
     margin-right: $margin;

@@ -16,7 +16,7 @@ export const UniversityForm = ({
   <div>
     <div className="row">
       <div className="column">
-        <FormText formik={formik} field={`${baseField}.univeristyName`} label="University Name" />
+        <FormText formik={formik} field={`${baseField}.universityName`} label="University Name" />
       </div>
       <div className="column">
         <FormText formik={formik} field={`${baseField}.degreeName`} label="Degree Name" />

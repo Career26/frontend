@@ -50,7 +50,7 @@ export const citiesList = [
 ];
 
 export const initialUniversityFormValues: UniversityFormValues = {
-  degreeName: '',
+  courseName: '',
   universityName: '',
   degreeLevel: '',
   isPredicted: false,

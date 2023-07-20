@@ -7,7 +7,7 @@ const getYupNameString = (field: string) =>
 
 export const universitySchema = Yup.object().shape({
   universityName: Yup.string().required(),
-  degreeName: Yup.string().required(),
+  courseName: Yup.string().required(),
   degreeLevel: Yup.string().required(),
   degreeGrade: Yup.string().required(),
   isPredicted: Yup.bool(),

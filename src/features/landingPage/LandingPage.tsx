@@ -1,11 +1,17 @@
-import { Button, Text, Group, Modal, TextInput, Paper } from '@mantine/core';
 import React from 'react';
 import { useForm } from '@mantine/form';
 import { urls } from '@shared/config/urlConstants';
 import { useHistory } from 'react-router-dom';
+import { Link, Stack, TextField } from '@mui/material';
+import { ConfirmationDialog } from '@shared/components/dialogs/ConfirmationDialog';
 
 export const LandingPage = () => {
   const history = useHistory();
+
+  const clickSignIn = () => {
+    history.push(urls.home);
+  };
+
   const form = useForm({
     initialValues: {
       email: '',
@@ -16,23 +22,26 @@ export const LandingPage = () => {
     },
   });
 
-  const clickSignIn = () => {
-    history.push(urls.home);
-  };
-
   return (
-    <Modal opened onClose={() => {}} withCloseButton={false} size="auto">
-      <Paper title="Sign In">
-        <TextInput label="Email" {...form.getInputProps('email')} />
-        <TextInput label="Password" {...form.getInputProps('password')} />
-        <Button onClick={clickSignIn}>Sign In</Button>
-        <Group>
-          <Text c="dimmed">Don&apos;t have an accont?</Text>
-          <Text fw={700}>
-            <a href={urls.careerTest}>Take our FREE Career Test</a>
-          </Text>
-        </Group>
-      </Paper>
-    </Modal>
+    <ConfirmationDialog open title="Sign In" onConfirm={clickSignIn} ignoreCancelButton>
+      <Stack>
+        <>
+          <TextField
+            label="email"
+            value={form.values.email}
+            onChange={({ target: { value } }) => form.setFieldValue('email', value)}
+          />
+          <TextField
+            label="password"
+            value={form.values.password}
+            onChange={({ target: { value } }) => form.setFieldValue('password', value)}
+          />
+        </>
+        <>
+          <div>Don&apos;t have an account?</div>
+          <Link href={urls.careersTest}>Take our FREE careers test now!</Link>
+        </>
+      </Stack>
+    </ConfirmationDialog>
   );
 };

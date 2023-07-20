@@ -6,16 +6,19 @@
     "esModuleInterop": true,
     "module": "commonjs",
     "moduleResolution": "node",
-    "outDir": "./dist/",
-    "target": "es5",
-    "allowJs": true,
+    "outDir": "dist",
+    "target": "es2017",
     "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
+    "noEmit": false,
     "paths": {
       "@slices/*": ["./src/state/slices/*"],
       "@state/*": ["./src/state/*"],
       "@shared/*": ["./src/shared/*"],
-      "@mocks/*": ["./src/mocks/*"]
+      "@mocks/*": ["./src/mocks/*"],
+      "@careersTest/*": ["./src/features/careersTest/*"]
     }
   }
 }

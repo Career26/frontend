@@ -1,5 +1,5 @@
 export const urls = {
   home: '/home',
   landingPage: '/',
-  careerTest: '/career-test',
+  careersTest: '/career-test',
 };

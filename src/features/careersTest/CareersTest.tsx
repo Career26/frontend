@@ -88,7 +88,7 @@ export const CareersTest = () => {
       {(formik) => (
         <ConfirmationDialog
           open
-          title="Careers Test"
+          title={<Stepper activeStep={activeStep} steps={steps} />}
           onCancel={clickBack}
           onConfirm={() => {
             clickNext(formik);
@@ -98,7 +98,6 @@ export const CareersTest = () => {
           confirmLabel={activeStep === steps.length ? 'Create Account' : 'Next'}
           extraClasses="careersTest"
         >
-          <Stepper activeStep={activeStep} steps={steps} />
           <Form>
             {activeStep === 0 && (
               <EducationForm formik={formik as FormikContextType<EducationFormValues>} />

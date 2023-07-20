@@ -18,10 +18,10 @@ export const UniversityForm = ({
   <div>
     <div className="row">
       <div className="column">
-        <FormText formik={formik} field={`${baseField}.universityName`} label="University Name" />
+        <FormText formik={formik} field={`${baseField}.universityName`} label="University Name*" />
       </div>
       <div className="column">
-        <FormText formik={formik} field={`${baseField}.degreeName`} label="Degree Name" />
+        <FormText formik={formik} field={`${baseField}.degreeName`} label="Degree Name*" />
       </div>
     </div>
     <div className="row">
@@ -30,7 +30,7 @@ export const UniversityForm = ({
           <FormSelect
             formik={formik}
             field={`${baseField}.degreeLevel`}
-            label="Level"
+            label="Level*"
             options={degreeLevels}
           />
         </div>
@@ -38,7 +38,7 @@ export const UniversityForm = ({
           <FormSelect
             formik={formik}
             field={`${baseField}.degreeGrade`}
-            label="Grade"
+            label="Grade*"
             options={degreeGrades}
           />
         </div>

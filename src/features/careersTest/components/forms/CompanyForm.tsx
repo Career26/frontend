@@ -16,17 +16,17 @@ export const CompanyForm = ({ formik, index }: CompanyFormProps) => {
     <div>
       <div className="row">
         <div className="column">
-          <FormText formik={formik} field={`${baseField}.companyName`} label="Company Name" />
+          <FormText formik={formik} field={`${baseField}.companyName`} label="Company Name*" />
         </div>
         <div className="column">
-          <FormText formik={formik} field={`${baseField}.role`} label="Role" />
+          <FormText formik={formik} field={`${baseField}.role`} label="Role*" />
         </div>
         <div className="rateExperience">
           <div className="column">
             <FormText
               formik={formik}
               field={`${baseField}.rating`}
-              label="Rating (1-5)"
+              label="Rating* (1-5)"
               type="number"
             />
           </div>
@@ -37,8 +37,9 @@ export const CompanyForm = ({ formik, index }: CompanyFormProps) => {
           <FormText
             formik={formik}
             field={`${baseField}.ratingReason`}
-            label="Rating Reason"
+            label="Rating Reason*"
             multiline
+            rows={2}
           />
         </div>
       </div>

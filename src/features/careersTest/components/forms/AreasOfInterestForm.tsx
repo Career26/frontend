@@ -4,6 +4,7 @@ import TextField from '@mui/material/TextField';
 import { basicInterestsList } from '@careersTest/config/careersFormConstants';
 import { FormikContextType } from 'formik';
 import { AreasOfInterestFormValues } from '@careersTest/types/careersFormTypes';
+import Divider from '@mui/material/Divider';
 
 import { InterestCard } from '../cards/InterestCard';
 
@@ -44,6 +45,18 @@ export const AreasOfInterestForm = ({ formik }: AreasOfInterestFormProps) => {
 
   return (
     <div className="dialogContainer">
+      <div className="header">Areas of Interest</div>
+      <Divider />
+      <TextField
+        label="Add interest"
+        value={newInterest}
+        onChange={(e) => setNewInterest(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            handleNewItemClick();
+          }
+        }}
+      />
       <div className="dialogContent">
         <Grid container sx={{ display: 'flex', justifyContent: 'center' }}>
           {availableInterests.map((name, i) => (
@@ -56,16 +69,6 @@ export const AreasOfInterestForm = ({ formik }: AreasOfInterestFormProps) => {
             </Grid>
           ))}
         </Grid>
-        <TextField
-          label="Add Interest"
-          value={newInterest}
-          onChange={(e) => setNewInterest(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') {
-              handleNewItemClick();
-            }
-          }}
-        />
       </div>
     </div>
   );

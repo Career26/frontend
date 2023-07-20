@@ -8,7 +8,7 @@ import Divider from '@mui/material/Divider';
 import { RowHeader } from './RowHeader';
 import { UniversityForm } from './UniversityForm';
 
-import './formStyles.scss';
+import '@shared/styles/formStyles.scss';
 
 type EducationFormProps = {
   formik: FormikContextType<EducationFormValues>;

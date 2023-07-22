@@ -1,0 +1,7 @@
+@use '@shared/styles/colorStyles';
+
+.radioButton {
+  .MuiRadio-root.Mui-checked {
+    color: colorStyles.$active;
+  }
+}

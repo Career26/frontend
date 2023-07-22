@@ -25,6 +25,7 @@ $subheader-size: 16px;
     display: flex;
     flex-wrap: wrap;
     margin-top: $margin;
+    margin-bottom: $margin;
     align-items: center;
   }
 
@@ -49,6 +50,10 @@ $subheader-size: 16px;
   }
 }
 
-.radioButton {
+.radioLeft {
+  margin-right: $margin;
+}
+
+.radioRight {
   margin-left: $margin;
 }

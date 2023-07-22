@@ -1,7 +1,7 @@
 import React from 'react';
 import RadioGroup from '@mui/material/RadioGroup';
 import { FormikContextType } from 'formik';
-import { FormRadioButton } from './FormRadioButton';
+import { RadioButton } from '../radioButtons/RadioButton';
 
 import '@shared/styles/formStyles.scss';
 
@@ -9,6 +9,9 @@ type FormRadioButtonsProps<FormikValuesType> = {
   formik: FormikContextType<FormikValuesType>;
   field: keyof FormikValuesType | string;
 };
+
+const yes = 'Yes';
+const no = 'No';
 
 export const FormYesNoRadioButtons = <FormikValuesType,>({
   formik,
@@ -18,7 +21,7 @@ export const FormYesNoRadioButtons = <FormikValuesType,>({
   const isYes = !!formik.values[formikField];
 
   const onClick = (label: 'Yes' | 'No') => {
-    formik.setFieldValue(formikField as string, label === 'Yes');
+    formik.setFieldValue(formikField as string, label === yes);
   };
 
   return (
@@ -28,11 +31,11 @@ export const FormYesNoRadioButtons = <FormikValuesType,>({
       name="radio-buttons-group"
       row
     >
-      <div className="radioButton">
-        <FormRadioButton checked={isYes} onClick={() => onClick('Yes')} label="Yes" />
+      <div className="radioLeft">
+        <RadioButton checked={isYes} onClick={() => onClick(yes)} label={yes} />
       </div>
-      <div className="radioButton">
-        <FormRadioButton checked={!isYes} onClick={() => onClick('No')} label="No" />
+      <div className="radioRight">
+        <RadioButton checked={!isYes} onClick={() => onClick(no)} label={no} />
       </div>
     </RadioGroup>
   );

@@ -25,29 +25,20 @@ export const UniversityForm = ({
       </div>
     </div>
     <div className="row">
-      <div className="selectors">
-        <div className="column">
-          <FormSelect
-            formik={formik}
-            field={`${baseField}.degreeLevel`}
-            label="Level*"
-            options={degreeLevels}
-          />
-        </div>
-        <div className="column">
-          <FormSelect
-            formik={formik}
-            field={`${baseField}.degreeGrade`}
-            label="Grade*"
-            options={degreeGrades}
-          />
-        </div>
-      </div>
-      <div className="column checkbox">
-        <FormCheckbox
-          label="Is this grade predicted?"
+      <div className="column">
+        <FormSelect
           formik={formik}
-          field={`${baseField}.isPredicted`}
+          field={`${baseField}.degreeLevel`}
+          label="Level*"
+          options={degreeLevels}
+        />
+      </div>
+      <div className="column">
+        <FormSelect
+          formik={formik}
+          field={`${baseField}.degreeGrade`}
+          label="Grade*"
+          options={degreeGrades}
         />
       </div>
     </div>

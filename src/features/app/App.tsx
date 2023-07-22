@@ -6,6 +6,13 @@ import { urls } from '@shared/config/urlConstants';
 import { HomePage } from '../homePage/HomePage';
 import { LandingPage } from '../landingPage/LandingPage';
 import { CareersTest } from '../careersTest/CareersTest';
+import { ThemeProvider, createTheme } from '@mui/material';
+
+// const theme = createTheme({
+//   palette: {
+//     primary: { main: '#2196f3' },
+//   },
+// });
 
 export const App = () => (
   <BrowserRouter>

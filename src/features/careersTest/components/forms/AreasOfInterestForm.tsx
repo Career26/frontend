@@ -12,6 +12,7 @@ type AreasOfInterestFormProps = {
   formik: FormikContextType<AreasOfInterestFormValues>;
 };
 
+// autocomplete
 export const AreasOfInterestForm = ({ formik }: AreasOfInterestFormProps) => {
   const areasOfInterest = formik.values.areasOfInterest || [];
   const [availableInterests, setAvailableInterests] = useState<string[]>(basicInterestsList);

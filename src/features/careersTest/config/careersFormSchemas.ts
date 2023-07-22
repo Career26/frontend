@@ -10,7 +10,6 @@ export const universitySchema = Yup.object().shape({
   courseName: Yup.string().required(),
   degreeLevel: Yup.string().required(),
   degreeGrade: Yup.string().required(),
-  isPredicted: Yup.bool(),
 });
 
 export const educationFormSchema = Yup.object().shape({
@@ -45,4 +44,8 @@ export const workPreferencesSchema = Yup.object().shape({
     baseCurrency: Yup.string(),
     symbol: Yup.string(),
   }),
+});
+
+export const refinementSchema = Yup.object().shape({
+  iDontLike: Yup.array(Yup.string()),
 });

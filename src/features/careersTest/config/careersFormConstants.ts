@@ -53,7 +53,6 @@ export const initialUniversityFormValues: UniversityFormValues = {
   courseName: '',
   universityName: '',
   degreeLevel: '',
-  isPredicted: false,
   degreeGrade: '',
 };
 

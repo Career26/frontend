@@ -48,6 +48,7 @@ export const WorkPreferencesForm = ({ formik }: WorkPreferencesFormProps) => {
             field="workStyle"
           />
         </div>
+        {/* autocomplete */}
         <div className="column">
           <FormSelect
             formik={formik}

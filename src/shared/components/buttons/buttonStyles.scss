@@ -1,12 +1,33 @@
+@use '@shared/styles/colorStyles';
+
 .MuiButtonBase-root.MuiButton-root.buttons {
   &.MuiButton-outlined {
-    border-color: black !important;
-    color: black !important;
-    border-radius: 8px !important;
+    border-color: black;
+    color: black;
+    border-radius: 8px;
+    &:hover {
+      background-color: colorStyles.$active-white;
+    }
+    &.active {
+      color: colorStyles.$active;
+      border-color: colorStyles.$active;
+      &:hover {
+        background-color: colorStyles.$active-light;
+      }
+    }
   }
   &.MuiButton-contained {
-    background-color: black !important;
-    color: white !important;
-    border-radius: 8px !important;
+    background-color: black;
+    color: white;
+    border-radius: 8px;
+    &:hover {
+      background-color: colorStyles.$active-black;
+    }
+    &.active {
+      background-color: colorStyles.$active;
+      &:hover {
+        background-color: colorStyles.$active-dark;
+      }
+    }
   }
 }

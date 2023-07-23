@@ -3,14 +3,12 @@ import { FormikContextType } from 'formik';
 import { FormText } from '@shared/components/forms/FormText';
 import { citiesList } from '@careersTest/config/careersFormConstants';
 import { FormSelect } from '@shared/components/forms/FormSelect';
-import { WorkPreferencesFormValues } from '@careersTest/types/careersFormTypes';
+import { PreferencesFormValues } from '@careersTest/types/careersFormTypes';
 import Divider from '@mui/material/Divider';
 import { FormYesNoRadioButtons } from '@shared/components/forms/FormYesNoRadioButtons';
 
-import './workPreferencesForm.scss';
-
 type WorkPreferencesFormProps = {
-  formik: FormikContextType<WorkPreferencesFormValues>;
+  formik: FormikContextType<PreferencesFormValues>;
 };
 
 const workTypeOptions = [
@@ -18,11 +16,11 @@ const workTypeOptions = [
   { label: 'Group', value: 'Group' },
 ];
 
-export const WorkPreferencesForm = ({ formik }: WorkPreferencesFormProps) => {
+export const WorkStyleForm = ({ formik }: WorkPreferencesFormProps) => {
   const selectedCity =
     citiesList.find((city) => city.value === formik.values.expectedSalary?.city) || citiesList[0];
   return (
-    <div className="dialogContainer">
+    <>
       <div className="header">Work Preferences</div>
       <Divider />
       <div className="row">
@@ -65,6 +63,6 @@ export const WorkPreferencesForm = ({ formik }: WorkPreferencesFormProps) => {
           />
         </div>
       </div>
-    </div>
+    </>
   );
 };

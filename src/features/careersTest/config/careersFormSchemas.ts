@@ -46,6 +46,19 @@ export const workPreferencesSchema = Yup.object().shape({
   }),
 });
 
+export const preferencesFormSchema = Yup.object().shape({
+  areasOfInterest: Yup.array(Yup.string().required()),
+  workStyle: Yup.string(),
+  enjoyTalkingToPeople: Yup.bool(),
+  sacrificeWorkLifeBalance: Yup.bool(),
+  expectedSalary: Yup.object().shape({
+    expectedSalary: Yup.string(),
+    city: Yup.string(),
+    baseCurrency: Yup.string(),
+    symbol: Yup.string(),
+  }),
+});
+
 export const refinementSchema = Yup.object().shape({
   iDontLike: Yup.array(Yup.string()),
 });

@@ -8,7 +8,7 @@ export type Degree = {
 
 export type CardInformation = {
   jobTitle: string;
-  info: string;
+  role: string;
   industry: string;
   reason: string;
   id: string;

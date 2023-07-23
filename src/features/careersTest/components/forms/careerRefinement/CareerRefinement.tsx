@@ -1,5 +1,5 @@
 import React from 'react';
-import { mockCardData } from '@mocks/careerTestMocks';
+import { mockCareersTest } from '@mocks/careerTestMocks';
 import Grid from '@mui/material/Grid';
 
 import { CareerCard } from '@careersTest/components/cards/CareerCard';
@@ -22,7 +22,7 @@ export const CareerRefinement = ({ formik }: CareerRefinementProps) => {
   };
 
   const clickRemove = (id: string) => {
-    const newLikedJobs = [...likedJobs].filter((item) => item !== id);
+    const newLikedJobs: string[] = [...likedJobs].filter((item) => item !== id);
     setFormikValue(newLikedJobs);
   };
 
@@ -30,16 +30,25 @@ export const CareerRefinement = ({ formik }: CareerRefinementProps) => {
     <div className="dialogContainer">
       <div className="dialogContent">
         <Grid container spacing={2}>
-          {mockCardData.map((card) => (
-            <Grid key={`refinement-${card.jobTitle}`} item xs={12} sm={6}>
-              <CareerCard
-                {...card}
-                onClickAdd={() => clickAdd(card.id)}
-                onClickRemove={() => clickRemove(card.id)}
-                selected={!!likedJobs.find((cardId) => cardId === card.id)}
-              />
-            </Grid>
-          ))}
+          {Object.keys(mockCareersTest.career_paths).map((jobId) => {
+            const job = mockCareersTest.career_paths[jobId];
+            return (
+              <Grid key={`refinement-${jobId}`} item xs={12} sm={6}>
+                <CareerCard
+                  jobTitle={job.title}
+                  industry={job.industry}
+                  id={jobId}
+                  salary={job.starting_salary}
+                  companies={job.companies}
+                  role={job.role}
+                  reason={job.reason}
+                  onClickAdd={() => clickAdd(jobId)}
+                  onClickRemove={() => clickRemove(jobId)}
+                  selected={!!likedJobs.find((cardId) => cardId === jobId)}
+                />
+              </Grid>
+            );
+          })}
         </Grid>
       </div>
     </div>

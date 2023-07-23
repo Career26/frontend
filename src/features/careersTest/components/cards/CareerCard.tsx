@@ -76,7 +76,7 @@ const CareerCardActions = ({
 
 export const CareerCard = ({
   jobTitle,
-  info,
+  role,
   salary,
   reason,
   onClickAdd,
@@ -112,7 +112,7 @@ export const CareerCard = ({
         )}
         <div>
           <AttachMoney />
-          Salary: {salary}
+          Salary range: {salary}
         </div>
         <div>
           <Factory />
@@ -120,7 +120,7 @@ export const CareerCard = ({
         </div>
         <div>
           <AccountBalanceIcon />
-          Companies: {companies.join(', ')}
+          Example Companies: {companies.join(', ')}
         </div>
       </CardContent>
       <CardActions>
@@ -138,11 +138,11 @@ export const CareerCard = ({
         <CardContent>
           <div>
             <Info />
-            Info: {info}
+            About the role: {role}
           </div>
           <div>
             <QuestionMark />
-            Reason: {reason}
+            Why we think this is a good fit: {reason}
           </div>
         </CardContent>
       </Collapse>

@@ -1,14 +1,14 @@
 import { FieldArray, FormikContextType } from 'formik';
 import React from 'react';
 import { FormText } from '@shared/components/forms/FormText';
-import Button from '@mui/material/Button';
+import { Button } from '@shared/components/buttons/Button';
 import { EducationFormValues } from '@careersTest/types/careersFormTypes';
 import Divider from '@mui/material/Divider';
 
 import { RowHeader } from './RowHeader';
 import { UniversityForm } from './UniversityForm';
 
-import './formStyles.scss';
+import '@shared/styles/formStyles.scss';
 
 type EducationFormProps = {
   formik: FormikContextType<EducationFormValues>;
@@ -16,9 +16,8 @@ type EducationFormProps = {
 
 export const EducationForm = ({ formik }: EducationFormProps) => (
   <div className="dialogContainer">
-    <div className="header">Education</div>
+    <div className="header">Your Details</div>
     <Divider />
-    <div className="subHeader">Your Details</div>
     <div className="row">
       <div className="column">
         <FormText field="firstName" label="First Name" formik={formik} />
@@ -27,14 +26,16 @@ export const EducationForm = ({ formik }: EducationFormProps) => (
         <FormText field="lastName" label="Last Name" formik={formik} />
       </div>
     </div>
+    <div className="header">Universities</div>
     <Divider />
-    <div className="subHeader">Universities</div>
-    <RowHeader
-      label={formik.values.latestDegree?.universityName}
-      defaultLabel="University"
-      index={1}
-      noButton
-    />
+    <div className="addRow">
+      <RowHeader
+        label={formik.values.latestDegree?.universityName}
+        defaultLabel="University"
+        index={1}
+        noButton
+      />
+    </div>
     <UniversityForm formik={formik} baseField="latestDegree" />
     <FieldArray name="additionalDegrees">
       {({ push, remove }) => (
@@ -45,7 +46,7 @@ export const EducationForm = ({ formik }: EducationFormProps) => (
                 label={formik.values.additionalDegrees?.[index]?.universityName}
                 defaultLabel="University"
                 onClick={() => remove(index)}
-                index={index + 1}
+                index={index + 2}
               />
               <UniversityForm
                 key={`additional-degree-${index}`}
@@ -55,9 +56,7 @@ export const EducationForm = ({ formik }: EducationFormProps) => (
             </>
           ))}
           <div className="row addRow">
-            <Button variant="outlined" onClick={() => push({})}>
-              Add Another University
-            </Button>
+            <Button variant="outlined" onClick={() => push({})} label="Add Another University" />
           </div>
         </div>
       )}

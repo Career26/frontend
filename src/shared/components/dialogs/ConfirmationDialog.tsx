@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from '@mui/material/Button';
+import { Button } from '@shared/components/buttons/Button';
 
 import { Dialog } from './Dialog';
 
@@ -38,13 +38,19 @@ export const ConfirmationDialog = ({
     actions={
       <>
         {!ignoreCancelButton && (
-          <Button disabled={cancelDisabled} onClick={onCancel} variant="outlined">
-            {cancelLabel}
-          </Button>
+          <Button
+            disabled={cancelDisabled}
+            onClick={onCancel}
+            variant="outlined"
+            label={cancelLabel}
+          />
         )}
-        <Button disabled={confirmDisabled} onClick={onConfirm} variant="contained">
-          {confirmLabel}
-        </Button>
+        <Button
+          disabled={confirmDisabled}
+          onClick={onConfirm}
+          variant="contained"
+          label={confirmLabel}
+        />
       </>
     }
   >

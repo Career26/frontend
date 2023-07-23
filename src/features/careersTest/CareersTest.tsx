@@ -23,17 +23,16 @@ import './careersTest.scss';
 import {
   AreasOfInterestFormValues,
   EducationFormValues,
+  PreferencesFormValues,
   PreviousExperienceFormValues,
   WorkPreferencesFormValues,
 } from './types/careersFormTypes';
-import { AreasOfInterestForm } from './components/forms/AreasOfInterestForm';
-import { WorkPreferencesForm } from './components/forms/WorkPreferencesForm';
+import { PreferencesForm } from './components/forms/PreferencesForm';
 
 const steps = [
   { label: 'Education' },
   { label: 'Past Experience' },
-  { label: 'Interests' },
-  { label: 'Work Preferences' },
+  { label: 'Preferences' },
   { label: 'Refine Choices' },
 ];
 
@@ -108,16 +107,9 @@ export const CareersTest = () => {
               />
             )}
             {activeStep === 2 && (
-              <AreasOfInterestForm
-                formik={formik as FormikContextType<AreasOfInterestFormValues>}
-              />
+              <PreferencesForm formik={formik as FormikContextType<PreferencesFormValues>} />
             )}
             {activeStep === 3 && (
-              <WorkPreferencesForm
-                formik={formik as FormikContextType<WorkPreferencesFormValues>}
-              />
-            )}
-            {activeStep === 4 && (
               <CareerRefinement
                 selectedCardIds={selectedCardIds}
                 setSelectedCardIds={setSelectedCardIds}

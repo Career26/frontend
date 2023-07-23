@@ -7,10 +7,9 @@ const getYupNameString = (field: string) =>
 
 export const universitySchema = Yup.object().shape({
   universityName: Yup.string().required(),
-  degreeName: Yup.string().required(),
+  courseName: Yup.string().required(),
   degreeLevel: Yup.string().required(),
   degreeGrade: Yup.string().required(),
-  isPredicted: Yup.bool(),
 });
 
 export const educationFormSchema = Yup.object().shape({
@@ -38,11 +37,28 @@ export const areasOfInterestSchema = Yup.object().shape({
 export const workPreferencesSchema = Yup.object().shape({
   workStyle: Yup.string(),
   enjoyTalkingToPeople: Yup.bool(),
-  wantGoodWorklifeBalance: Yup.bool(),
+  sacrificeWorkLifeBalance: Yup.bool(),
   expectedSalary: Yup.object().shape({
     expectedSalary: Yup.string(),
     city: Yup.string(),
     baseCurrency: Yup.string(),
     symbol: Yup.string(),
   }),
+});
+
+export const preferencesFormSchema = Yup.object().shape({
+  areasOfInterest: Yup.array(Yup.string().required()),
+  workStyle: Yup.string(),
+  enjoyTalkingToPeople: Yup.bool(),
+  sacrificeWorkLifeBalance: Yup.bool(),
+  expectedSalary: Yup.object().shape({
+    expectedSalary: Yup.string(),
+    city: Yup.string(),
+    baseCurrency: Yup.string(),
+    symbol: Yup.string(),
+  }),
+});
+
+export const refinementSchema = Yup.object().shape({
+  iDontLike: Yup.array(Yup.string()),
 });

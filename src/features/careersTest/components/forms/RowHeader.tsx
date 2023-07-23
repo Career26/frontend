@@ -2,7 +2,7 @@ import RemoveCircleOutline from '@mui/icons-material/RemoveCircleOutline';
 import { IconButton } from '@mui/material';
 import React from 'react';
 
-import './formStyles.scss';
+import '@shared/styles/formStyles.scss';
 
 type RowHeaderProps = {
   label?: string;

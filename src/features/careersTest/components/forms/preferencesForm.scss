@@ -1,0 +1,9 @@
+.radio {
+  display: flex;
+  justify-content: space-between;
+  .label {
+    place-self: center;
+    font-size: 18px;
+    width: 70%;
+  }
+}

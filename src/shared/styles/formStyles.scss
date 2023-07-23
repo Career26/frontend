@@ -25,6 +25,7 @@ $subheader-size: 16px;
     display: flex;
     flex-wrap: wrap;
     margin-top: $margin;
+    margin-bottom: $margin;
     align-items: center;
   }
 
@@ -47,11 +48,12 @@ $subheader-size: 16px;
   .MuiTextField-root {
     width: 100%;
   }
+}
 
-  .checkbox {
-    text-align: right;
-    .MuiTypography-root {
-      font-size: 14px;
-    }
-  }
+.radioLeft {
+  margin-right: $margin;
+}
+
+.radioRight {
+  margin-left: $margin;
 }

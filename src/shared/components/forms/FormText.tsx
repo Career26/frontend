@@ -7,6 +7,9 @@ type FormTextProps<FormValuesType> = {
   field: keyof FormValuesType | string;
   formik: FormikContextType<FormValuesType>;
   placeholder?: string;
+  type?: string;
+  multiline?: boolean;
+  rows?: number;
 };
 
 export const FormText = <FormValuesType,>({
@@ -14,6 +17,9 @@ export const FormText = <FormValuesType,>({
   label,
   field,
   placeholder,
+  type,
+  multiline,
+  rows,
 }: FormTextProps<FormValuesType>) => {
   const formikField = field as keyof FormValuesType;
   const errorMessage = formik.errors[formikField];
@@ -29,6 +35,9 @@ export const FormText = <FormValuesType,>({
       error={!!formik.errors[formikField]}
       helperText={helperText}
       placeholder={placeholder}
+      type={type}
+      multiline={multiline}
+      rows={rows}
     />
   );
 };

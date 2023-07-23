@@ -6,6 +6,8 @@ import { EducationFormValues } from '@careersTest/types/careersFormTypes';
 import { FormSelect } from '@shared/components/forms/FormSelect';
 import { degreeGrades, degreeLevels } from '@careersTest/config/careersFormConstants';
 
+import './universityForm.scss';
+
 export const UniversityForm = ({
   formik,
   baseField,
@@ -16,10 +18,10 @@ export const UniversityForm = ({
   <div>
     <div className="row">
       <div className="column">
-        <FormText formik={formik} field={`${baseField}.universityName`} label="University Name" />
+        <FormText formik={formik} field={`${baseField}.universityName`} label="University Name*" />
       </div>
       <div className="column">
-        <FormText formik={formik} field={`${baseField}.degreeName`} label="Degree Name" />
+        <FormText formik={formik} field={`${baseField}.courseName`} label="Course Name*" />
       </div>
     </div>
     <div className="row">
@@ -27,7 +29,7 @@ export const UniversityForm = ({
         <FormSelect
           formik={formik}
           field={`${baseField}.degreeLevel`}
-          label="Level"
+          label="Level*"
           options={degreeLevels}
         />
       </div>
@@ -35,15 +37,8 @@ export const UniversityForm = ({
         <FormSelect
           formik={formik}
           field={`${baseField}.degreeGrade`}
-          label="Grade"
+          label="Grade*"
           options={degreeGrades}
-        />
-      </div>
-      <div className="column checkbox">
-        <FormCheckbox
-          label="Is this grade predicted?"
-          formik={formik}
-          field={`${baseField}.isPredicted`}
         />
       </div>
     </div>

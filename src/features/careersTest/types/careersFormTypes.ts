@@ -3,6 +3,7 @@ import {
   areasOfInterestSchema,
   companyFormSchema,
   educationFormSchema,
+  preferencesFormSchema,
   previousExperienceFormSchema,
   universitySchema,
   workPreferencesSchema,
@@ -14,3 +15,4 @@ export type CompanyFormValues = Yup.InferType<typeof companyFormSchema>;
 export type PreviousExperienceFormValues = Yup.InferType<typeof previousExperienceFormSchema>;
 export type AreasOfInterestFormValues = Yup.InferType<typeof areasOfInterestSchema>;
 export type WorkPreferencesFormValues = Yup.InferType<typeof workPreferencesSchema>;
+export type PreferencesFormValues = Yup.InferType<typeof preferencesFormSchema>;

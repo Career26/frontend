@@ -1,6 +1,6 @@
 import { FieldArray, FormikContextType } from 'formik';
 import React from 'react';
-import Button from '@mui/material/Button';
+import { Button } from '@shared/components/buttons/Button';
 import { PreviousExperienceFormValues } from '@careersTest/types/careersFormTypes';
 import Divider from '@mui/material/Divider';
 
@@ -17,12 +17,14 @@ export const PreviousExperienceForm = ({ formik }: PreviousExperienceFormProps) 
     <div className="dialogContainer">
       <div className="header">Previous Experiences</div>
       <Divider />
-      <RowHeader
-        label={firstExperience?.companyName}
-        defaultLabel="Experience"
-        index={1}
-        noButton
-      />
+      <div className="addRow">
+        <RowHeader
+          label={firstExperience?.companyName}
+          defaultLabel="Experience"
+          index={1}
+          noButton
+        />
+      </div>
       <CompanyForm key="company-1" formik={formik} index={0} />
       <FieldArray name="previousWorkExperience">
         {({ push, remove }) => (
@@ -38,7 +40,7 @@ export const PreviousExperienceForm = ({ formik }: PreviousExperienceFormProps) 
                 <CompanyForm key={`company-${index}`} formik={formik} index={index + 1} />
               </>
             ))}
-            <Button onClick={() => push({})}>Add Another Experience</Button>
+            <Button variant="outlined" onClick={() => push({})} label="Add Another Experience" />
           </div>
         )}
       </FieldArray>

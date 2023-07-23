@@ -50,10 +50,9 @@ export const citiesList = [
 ];
 
 export const initialUniversityFormValues: UniversityFormValues = {
-  degreeName: '',
+  courseName: '',
   universityName: '',
   degreeLevel: '',
-  isPredicted: false,
   degreeGrade: '',
 };
 
@@ -83,7 +82,7 @@ const initialCity = { ...citiesList[0] };
 const initialWorkType = { ...workTypeOptions[0] };
 export const initialWorkPreferencesValues: WorkPreferencesFormValues = {
   workStyle: initialWorkType.value,
-  wantGoodWorklifeBalance: false,
+  sacrificeWorkLifeBalance: false,
   enjoyTalkingToPeople: false,
   expectedSalary: {
     baseCurrency: initialCity.currency,

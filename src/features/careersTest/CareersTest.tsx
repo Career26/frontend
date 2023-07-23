@@ -3,7 +3,7 @@ import { ConfirmationDialog } from '@shared/components/dialogs/ConfirmationDialo
 import { Stepper } from '@shared/components/stepper/Stepper';
 import { Form, Formik, FormikContextType } from 'formik';
 
-import { CareerRefinement } from './components/careerRefinement/CareerRefinement';
+import { CareerRefinement } from './components/forms/careerRefinement/CareerRefinement';
 import { TestResult } from './components/testResult/TestResult';
 import {
   initialAreasOfInterestValues,
@@ -115,7 +115,6 @@ export const CareersTest = () => {
                 setSelectedCardIds={setSelectedCardIds}
               />
             )}
-            {activeStep === 5 && <TestResult />}
           </Form>
         </ConfirmationDialog>
       )}

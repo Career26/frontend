@@ -4,21 +4,47 @@
 .card {
   min-width: 200px !important;
   height: 100% !important;
+  border: globalStyles.$border;
 
   .cardHeader {
     font-weight: bold;
   }
-  &:hover {
-    cursor: pointer;
-    box-shadow: colorStyles.$shadow;
+
+  .MuiCardHeader-root {
+    font-size: 14px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border-bottom: globalStyles.$border;
+    .MuiTypography-root {
+      font-size: 18px;
+    }
   }
-  & .MuiBadge-badge {
-    background-color: green;
-    color: white;
+  .MuiCardActions-root {
+    border-top: globalStyles.$border;
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+  .MuiButtonBase-root.MuiIconButton-root {
+    color: black;
+  }
+  .MuiCollapse-root {
+    border-top: globalStyles.$border;
   }
 }
 
 .selected {
-  background-color: colorStyles.$active !important;
-  color: white !important;
+  .MuiCardHeader-root {
+    background-color: colorStyles.$active !important;
+    color: white !important;
+  }
+  .headerButtons {
+    .MuiButtonBase-root.MuiIconButton-root {
+      color: white;
+      .MuiSvgIcon-colorSuccess {
+        &.MuiSvgIcon-root {
+          color: colorStyles.$completed;
+        }
+      }
+    }
+  }
 }

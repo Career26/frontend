@@ -13,6 +13,7 @@ export type CardInformation = {
   reason: string;
   id: string;
   salary: string;
+  companies: string[];
 };
 
 export type CareerInfo = {

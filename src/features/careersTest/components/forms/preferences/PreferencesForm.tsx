@@ -1,7 +1,6 @@
 import { PreferencesFormValues } from '@careersTest/types/careersFormTypes';
 import { FormikContextType } from 'formik';
 import React from 'react';
-import Divider from '@mui/material/Divider';
 import { InterestsForm } from './InterestsForm';
 import { WorkStyleForm } from './WorkStyleForm';
 

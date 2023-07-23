@@ -1,4 +1,4 @@
-import { CardInformation, CareersResponse } from '@careersTest/types/careersTestTypes';
+import { CareersResponse } from '@careersTest/types/careersTestTypes';
 
 export const mockCareersTest: CareersResponse = {
   career_paths: {

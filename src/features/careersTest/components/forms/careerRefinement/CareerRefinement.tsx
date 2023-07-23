@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { mockCareersTest } from '@mocks/careerTestMocks';
 import Grid from '@mui/material/Grid';
 
@@ -25,6 +25,11 @@ export const CareerRefinement = ({ formik }: CareerRefinementProps) => {
     const newLikedJobs: string[] = [...likedJobs].filter((item) => item !== id);
     setFormikValue(newLikedJobs);
   };
+
+  useEffect(() => {
+    const allJobIds = Object.keys(mockCareersTest.career_paths);
+    setFormikValue(allJobIds);
+  }, [mockCareersTest]);
 
   return (
     <div className="dialogContainer">

@@ -6,16 +6,6 @@ export type Degree = {
   grade: string;
 };
 
-export type CardInformation = {
-  jobTitle: string;
-  role: string;
-  industry: string;
-  reason: string;
-  id: string;
-  salary: string;
-  companies: string[];
-};
-
 export type CareerInfo = {
   companies: string[];
   industry: string;

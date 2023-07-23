@@ -4,18 +4,17 @@ import { Stepper } from '@shared/components/stepper/Stepper';
 import { Form, Formik, FormikContextType } from 'formik';
 
 import { CareerRefinement } from './components/forms/careerRefinement/CareerRefinement';
-import { TestResult } from './components/testResult/TestResult';
 import {
-  initialAreasOfInterestValues,
   initialEducationFormValues,
   initialPreviousExperienceFormValues,
-  initialWorkPreferencesValues,
+  initialPreferencesValues,
+  initialRefinementFormValues,
 } from './config/careersFormConstants';
 import {
-  areasOfInterestSchema,
   educationFormSchema,
+  preferencesFormSchema,
   previousExperienceFormSchema,
-  workPreferencesSchema,
+  refinementSchema,
 } from './config/careersFormSchemas';
 import { EducationForm } from './components/forms/education/EducationForm';
 import { PreviousExperienceForm } from './components/forms/previousExperience/PreviousExperienceForm';
@@ -25,7 +24,7 @@ import {
   EducationFormValues,
   PreferencesFormValues,
   PreviousExperienceFormValues,
-  WorkPreferencesFormValues,
+  RefinementFormValues,
 } from './types/careersFormTypes';
 import { PreferencesForm } from './components/forms/preferences/PreferencesForm';
 
@@ -52,9 +51,9 @@ export const CareersTest = () => {
       };
     }
     if (activeStep === 2) {
-      return { schema: areasOfInterestSchema, initialValues: initialAreasOfInterestValues };
+      return { schema: preferencesFormSchema, initialValues: initialPreferencesValues };
     }
-    return { schema: workPreferencesSchema, initialValues: initialWorkPreferencesValues };
+    return { schema: refinementSchema, initialValues: initialRefinementFormValues };
   }, [activeStep]);
 
   const handleFormSubmit = () => {
@@ -66,8 +65,8 @@ export const CareersTest = () => {
     formik: FormikContextType<
       | EducationFormValues
       | PreviousExperienceFormValues
-      | AreasOfInterestFormValues
-      | WorkPreferencesFormValues
+      | PreferencesFormValues
+      | RefinementFormValues
     >,
   ) => {
     setInputValues({ ...inputValues, ...formik.values });
@@ -110,10 +109,7 @@ export const CareersTest = () => {
               <PreferencesForm formik={formik as FormikContextType<PreferencesFormValues>} />
             )}
             {activeStep === 3 && (
-              <CareerRefinement
-                selectedCardIds={selectedCardIds}
-                setSelectedCardIds={setSelectedCardIds}
-              />
+              <CareerRefinement formik={formik as FormikContextType<RefinementFormValues>} />
             )}
           </Form>
         </ConfirmationDialog>

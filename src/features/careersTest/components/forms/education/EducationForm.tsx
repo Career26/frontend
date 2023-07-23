@@ -5,7 +5,7 @@ import { Button } from '@shared/components/buttons/Button';
 import { EducationFormValues } from '@careersTest/types/careersFormTypes';
 import Divider from '@mui/material/Divider';
 
-import { RowHeader } from './RowHeader';
+import { RowHeader } from '../RowHeader';
 import { UniversityForm } from './UniversityForm';
 
 import '@shared/styles/formStyles.scss';

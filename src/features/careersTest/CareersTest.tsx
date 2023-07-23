@@ -17,8 +17,8 @@ import {
   previousExperienceFormSchema,
   workPreferencesSchema,
 } from './config/careersFormSchemas';
-import { EducationForm } from './components/forms/EducationForm';
-import { PreviousExperienceForm } from './components/forms/PreviousExperienceForm';
+import { EducationForm } from './components/forms/education/EducationForm';
+import { PreviousExperienceForm } from './components/forms/previousExperience/PreviousExperienceForm';
 import './careersTest.scss';
 import {
   AreasOfInterestFormValues,
@@ -27,7 +27,7 @@ import {
   PreviousExperienceFormValues,
   WorkPreferencesFormValues,
 } from './types/careersFormTypes';
-import { PreferencesForm } from './components/forms/PreferencesForm';
+import { PreferencesForm } from './components/forms/preferences/PreferencesForm';
 
 const steps = [
   { label: 'Education' },

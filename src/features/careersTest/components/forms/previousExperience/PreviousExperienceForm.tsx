@@ -5,7 +5,7 @@ import { PreviousExperienceFormValues } from '@careersTest/types/careersFormType
 import Divider from '@mui/material/Divider';
 
 import { CompanyForm } from './CompanyForm';
-import { RowHeader } from './RowHeader';
+import { RowHeader } from '../RowHeader';
 
 type PreviousExperienceFormProps = {
   formik: FormikContextType<PreviousExperienceFormValues>;

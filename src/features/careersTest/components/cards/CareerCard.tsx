@@ -37,7 +37,11 @@ export const CareerCard = ({
   loading,
 }: RefinementCardProps) => {
   if (loading) {
-    return <Loader />;
+    return (
+      <Card className="card">
+        <Loader />
+      </Card>
+    );
   }
   return (
     <Card className="card">

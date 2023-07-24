@@ -34,18 +34,6 @@ export const areasOfInterestSchema = Yup.object().shape({
   areasOfInterest: Yup.array(Yup.string()),
 });
 
-export const workPreferencesSchema = Yup.object().shape({
-  workStyle: Yup.string(),
-  enjoyTalkingToPeople: Yup.bool(),
-  sacrificeWorkLifeBalance: Yup.bool(),
-  expectedSalary: Yup.object().shape({
-    expectedSalary: Yup.string(),
-    city: Yup.string(),
-    baseCurrency: Yup.string(),
-    symbol: Yup.string(),
-  }),
-});
-
 export const preferencesFormSchema = Yup.object().shape({
   areasOfInterest: Yup.array(Yup.string().required()),
   workStyle: Yup.string(),
@@ -60,5 +48,5 @@ export const preferencesFormSchema = Yup.object().shape({
 });
 
 export const refinementSchema = Yup.object().shape({
-  iDontLike: Yup.array(Yup.string()),
+  dislikedJobs: Yup.array(Yup.string().required()),
 });

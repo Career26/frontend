@@ -1,10 +1,10 @@
 import {
-  AreasOfInterestFormValues,
   CompanyFormValues,
   EducationFormValues,
+  PreferencesFormValues,
   PreviousExperienceFormValues,
+  RefinementFormValues,
   UniversityFormValues,
-  WorkPreferencesFormValues,
 } from '@careersTest/types/careersFormTypes';
 
 export const degreeLevels = ['PhD', 'MSc', 'MA', 'BSc', 'BA'].map((value) => ({
@@ -74,13 +74,10 @@ export const initialPreviousExperienceFormValues: PreviousExperienceFormValues =
   previousWorkExperience: [],
 };
 
-export const initialAreasOfInterestValues: AreasOfInterestFormValues = {
-  areasOfInterest: [],
-};
-
 const initialCity = { ...citiesList[0] };
 const initialWorkType = { ...workTypeOptions[0] };
-export const initialWorkPreferencesValues: WorkPreferencesFormValues = {
+export const initialPreferencesValues: PreferencesFormValues = {
+  areasOfInterest: [],
   workStyle: initialWorkType.value,
   sacrificeWorkLifeBalance: false,
   enjoyTalkingToPeople: false,
@@ -90,4 +87,8 @@ export const initialWorkPreferencesValues: WorkPreferencesFormValues = {
     city: initialCity.value,
     expectedSalary: '30,000',
   },
+};
+
+export const initialRefinementFormValues: RefinementFormValues = {
+  dislikedJobs: [],
 };

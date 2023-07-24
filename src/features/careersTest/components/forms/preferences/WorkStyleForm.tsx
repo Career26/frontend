@@ -44,6 +44,7 @@ export const WorkStyleForm = ({ formik }: WorkPreferencesFormProps) => {
             options={workTypeOptions}
             label="Preferred Work Style"
             field="workStyle"
+            defaultValue={workTypeOptions[0].value}
           />
         </div>
         {/* autocomplete */}
@@ -53,6 +54,7 @@ export const WorkStyleForm = ({ formik }: WorkPreferencesFormProps) => {
             options={citiesList}
             label="Preferred City"
             field="expectedSalary.city"
+            defaultValue={citiesList[0].value}
           />
         </div>
         <div className="column">

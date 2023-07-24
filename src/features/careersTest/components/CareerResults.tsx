@@ -1,30 +1,36 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { mockCareersTest } from '@mocks/careerTestMocks';
 import Grid from '@mui/material/Grid';
 
 import { CareerCard } from '@careersTest/components/cards/CareerCard';
-import { FormikContextType } from 'formik';
-import { RefinementFormValues } from '@careersTest/types/careersFormTypes';
+import { CareersFormValues } from '@careersTest/types/careersFormTypes';
+import { useGetCareersTestResultQuery } from '@apis/careersTestApi';
+import { Loader } from '@mantine/core';
 
-type CareerRefinementProps = {
-  formik: FormikContextType<RefinementFormValues>;
+type CareerResultsProps = {
+  profile: CareersFormValues;
 };
 
-export const CareerRefinement = ({ formik }: CareerRefinementProps) => {
-  const dislikedJobs = formik.values.dislikedJobs || [];
-
-  const setFormikValue = (value: string[]) => {
-    formik.setFieldValue('dislikedJobs', value);
-  };
+export const CareerResults = ({ profile }: CareerResultsProps) => {
+  const [dislikedJobs, setDislikedJobs] = useState<string[]>([]);
+  console.log(profile);
+  const { data, isFetching } = useGetCareersTestResultQuery('pikachu');
 
   const clickRemove = (id: string) => {
-    setFormikValue([...dislikedJobs, id]);
+    setDislikedJobs([...dislikedJobs, id]);
   };
 
-  const clickAdd = (id: string) => {
-    const newDislikedJobs: string[] = [...dislikedJobs].filter((item) => item !== id);
-    setFormikValue(newDislikedJobs);
-  };
+  console.log(isFetching);
+
+  useEffect(() => {
+    if (dislikedJobs.length) {
+      setTimeout(() => setDislikedJobs([]), 2000);
+    }
+  }, [dislikedJobs]);
+
+  if (isFetching) {
+    return <Loader />;
+  }
 
   return (
     <div className="dialogContainer">
@@ -42,9 +48,8 @@ export const CareerRefinement = ({ formik }: CareerRefinementProps) => {
                   companies={job.companies}
                   role={job.role}
                   reason={job.reason}
-                  onClickAdd={() => clickAdd(jobId)}
                   onClickRemove={() => clickRemove(jobId)}
-                  selected={!dislikedJobs.find((cardId) => cardId === jobId)}
+                  loading={!!dislikedJobs.find((cardId) => cardId === jobId)}
                 />
               </Grid>
             );

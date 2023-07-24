@@ -30,7 +30,7 @@ const config: Configuration = {
       {
         test: /\.(ts|js)x?$/i,
         exclude: /node_modules/,
-        use: { loader: 'ts-loader' },
+        use: { loader: 'babel-loader' },
       },
       {
         test: /\.scss$/,

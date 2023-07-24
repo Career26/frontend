@@ -1,9 +1,9 @@
 import React from 'react';
 import { FormikContextType } from 'formik';
 import { FormText } from '@shared/components/forms/FormText';
-import { EducationFormValues } from '@careersTest/types/careersFormTypes';
+import { CareersFormValues, EducationFormValues } from '@careersTest/types/careersFormTypes';
 import { FormSelect } from '@shared/components/forms/FormSelect';
-import { degreeGrades, degreeLevels } from '@careersTest/config/careersFormConstants';
+import { degreeGradeOptions, degreeLevelOptions } from '@careersTest/config/careersFormConstants';
 
 import './universityForm.scss';
 
@@ -11,7 +11,7 @@ export const UniversityForm = ({
   formik,
   baseField,
 }: {
-  formik: FormikContextType<EducationFormValues>;
+  formik: FormikContextType<CareersFormValues>;
   baseField: string;
 }) => (
   <div>
@@ -29,8 +29,7 @@ export const UniversityForm = ({
           formik={formik}
           field={`${baseField}.degreeLevel`}
           label="Level*"
-          options={degreeLevels}
-          defaultValue={degreeLevels[0].value}
+          options={degreeLevelOptions}
         />
       </div>
       <div className="column">
@@ -38,8 +37,7 @@ export const UniversityForm = ({
           formik={formik}
           field={`${baseField}.degreeGrade`}
           label="Grade*"
-          options={degreeGrades}
-          defaultValue={degreeGrades[0].value}
+          options={degreeGradeOptions}
         />
       </div>
     </div>

@@ -3,11 +3,11 @@ import Autocomplete from '@mui/material/Autocomplete';
 import Chip from '@mui/material/Chip';
 import TextField from '@mui/material/TextField';
 import { FormikContextType } from 'formik';
-import { PreferencesFormValues } from '@careersTest/types/careersFormTypes';
-import { basicInterestsList } from '@careersTest/config/careersFormConstants';
+import { CareersFormValues, PreferencesFormValues } from '@careersTest/types/careersFormTypes';
+import { interestOptions } from '@careersTest/config/careersFormConstants';
 
 type InterestsSelectorProps = {
-  formik: FormikContextType<PreferencesFormValues>;
+  formik: FormikContextType<CareersFormValues>;
 };
 
 export const InterestsSelector = ({ formik }: InterestsSelectorProps) => {
@@ -29,7 +29,7 @@ export const InterestsSelector = ({ formik }: InterestsSelectorProps) => {
     <Autocomplete
       multiple
       id="multiple-select-chips"
-      options={basicInterestsList}
+      options={interestOptions}
       getOptionDisabled={() => disabled}
       value={selectedInterests}
       inputValue={newInterest}

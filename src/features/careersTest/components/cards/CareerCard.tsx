@@ -1,14 +1,14 @@
 import React from 'react';
-import classNames from 'classnames';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import AttachMoney from '@mui/icons-material/AttachMoney';
 import Factory from '@mui/icons-material/Factory';
-import Lock from '@mui/icons-material/Lock';
-import { Overlay } from '@mantine/core';
+import { Loader, Overlay } from '@mantine/core';
+import IconButton from '@mui/material/IconButton';
+import CardHeader from '@mui/material/CardHeader';
+import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 
-import { CareerCardHeader } from './CareerCardHeader';
 import { CareerCardFooter } from './CareerCardFooter';
 
 import './cardStyles.scss';
@@ -21,10 +21,9 @@ type RefinementCardProps = {
   id: string;
   salary: string;
   companies: string[];
-  selected: boolean;
   locked?: boolean;
   onClickRemove: () => void;
-  onClickAdd: () => void;
+  loading?: boolean;
 };
 
 export const CareerCard = ({
@@ -32,39 +31,49 @@ export const CareerCard = ({
   role,
   salary,
   reason,
-  onClickAdd,
   onClickRemove,
-  selected,
   industry,
   companies,
-  locked,
-}: RefinementCardProps) => (
-  <Card className={classNames('card', { selected })}>
-    <CareerCardHeader
-      jobTitle={jobTitle}
-      onClickAdd={onClickAdd}
-      onClickRemove={onClickRemove}
-      selected={selected}
-    />
-    <CardContent>
-      {locked && (
-        <Overlay blur={8} center style={{ backgroundColor: 'unset' }}>
-          <Lock />
-        </Overlay>
-      )}
-      <div>
-        <AttachMoney />
-        Salary range: {salary}
-      </div>
-      <div>
-        <Factory />
-        Industry: {industry}
-      </div>
-      <div>
-        <AccountBalanceIcon />
-        Example Companies: {companies.join(', ')}
-      </div>
-    </CardContent>
-    <CareerCardFooter role={role} reason={reason} />
-  </Card>
-);
+  loading,
+}: RefinementCardProps) => {
+  if (loading) {
+    return (
+      <Card className="card">
+        <Loader />
+      </Card>
+    );
+  }
+  return (
+    <Card className="card">
+      <CardHeader
+        title={jobTitle}
+        action={
+          <div className="headerButtons">
+            <IconButton
+              arial-label="remove-interest"
+              onClick={onClickRemove}
+              className="iconButtons"
+            >
+              <RemoveCircleOutlineIcon />
+            </IconButton>
+          </div>
+        }
+      />
+      <CardContent>
+        <div>
+          <AttachMoney />
+          Salary range: {salary}
+        </div>
+        <div>
+          <Factory />
+          Industry: {industry}
+        </div>
+        <div>
+          <AccountBalanceIcon />
+          Example Companies: {companies.join(', ')}
+        </div>
+      </CardContent>
+      <CareerCardFooter role={role} reason={reason} />
+    </Card>
+  );
+};

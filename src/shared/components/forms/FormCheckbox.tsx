@@ -1,6 +1,6 @@
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import { FormikContextType } from 'formik';
+import { FormikContextType, getIn } from 'formik';
 import React from 'react';
 
 type FormCheckboxProps<FormikValuesType> = {
@@ -18,7 +18,7 @@ export const FormCheckbox = <FormikValuesType,>({
   labelPlacement = 'start',
 }: FormCheckboxProps<FormikValuesType>) => {
   const formikField = field as keyof FormikValuesType;
-  const value = !!formik.values[formikField];
+  const value = !!getIn(formik.values, formikField as string);
   const onClick = () => {
     formik.setFieldValue(formikField as string, !value);
   };

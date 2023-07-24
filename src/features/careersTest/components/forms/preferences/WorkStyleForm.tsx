@@ -1,14 +1,14 @@
 import React from 'react';
 import { FormikContextType } from 'formik';
 import { FormText } from '@shared/components/forms/FormText';
-import { citiesList } from '@careersTest/config/careersFormConstants';
+import { citiesOptions } from '@careersTest/config/careersFormConstants';
 import { FormSelect } from '@shared/components/forms/FormSelect';
-import { PreferencesFormValues } from '@careersTest/types/careersFormTypes';
+import { CareersFormValues, PreferencesFormValues } from '@careersTest/types/careersFormTypes';
 import Divider from '@mui/material/Divider';
 import { FormYesNoRadioButtons } from '@shared/components/forms/FormYesNoRadioButtons';
 
 type WorkPreferencesFormProps = {
-  formik: FormikContextType<PreferencesFormValues>;
+  formik: FormikContextType<CareersFormValues>;
 };
 
 const workTypeOptions = [
@@ -18,7 +18,8 @@ const workTypeOptions = [
 
 export const WorkStyleForm = ({ formik }: WorkPreferencesFormProps) => {
   const selectedCity =
-    citiesList.find((city) => city.value === formik.values.expectedSalary?.city) || citiesList[0];
+    citiesOptions.find((city) => city.value === formik.values.expectedSalary?.city) ||
+    citiesOptions[0];
   return (
     <>
       <div className="header">Work Preferences</div>
@@ -44,17 +45,14 @@ export const WorkStyleForm = ({ formik }: WorkPreferencesFormProps) => {
             options={workTypeOptions}
             label="Preferred Work Style"
             field="workStyle"
-            defaultValue={workTypeOptions[0].value}
           />
         </div>
-        {/* autocomplete */}
         <div className="column">
           <FormSelect
             formik={formik}
-            options={citiesList}
+            options={citiesOptions}
             label="Preferred City"
             field="expectedSalary.city"
-            defaultValue={citiesList[0].value}
           />
         </div>
         <div className="column">

@@ -1,17 +1,17 @@
 import { FormText } from '@shared/components/forms/FormText';
 import { FormikContextType } from 'formik';
 import React from 'react';
-import { PreviousExperienceFormValues } from '@careersTest/types/careersFormTypes';
+import { CareersFormValues } from '@careersTest/types/careersFormTypes';
 
 import './companyForm.scss';
 
 type CompanyFormProps = {
-  formik: FormikContextType<PreviousExperienceFormValues>;
+  formik: FormikContextType<CareersFormValues>;
   index: number;
 };
 
 export const CompanyForm = ({ formik, index }: CompanyFormProps) => {
-  const baseField = `previousWorkExperience[${index}]`;
+  const baseField = `previousExperiences[${index}]`;
   return (
     <div>
       <div className="row">

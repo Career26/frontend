@@ -48,5 +48,5 @@ export const preferencesFormSchema = Yup.object().shape({
 });
 
 export const refinementSchema = Yup.object().shape({
-  likedJobs: Yup.array(Yup.string().required()),
+  dislikedJobs: Yup.array(Yup.string().required()),
 });

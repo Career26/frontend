@@ -90,5 +90,5 @@ export const initialPreferencesValues: PreferencesFormValues = {
 };
 
 export const initialRefinementFormValues: RefinementFormValues = {
-  likedJobs: [],
+  dislikedJobs: [],
 };

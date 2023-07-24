@@ -11,25 +11,20 @@ type CareerRefinementProps = {
 };
 
 export const CareerRefinement = ({ formik }: CareerRefinementProps) => {
-  const likedJobs = formik.values.likedJobs || [];
+  const dislikedJobs = formik.values.dislikedJobs || [];
 
   const setFormikValue = (value: string[]) => {
-    formik.setFieldValue('likedJobs', value);
-  };
-
-  const clickAdd = (id: string) => {
-    setFormikValue([...likedJobs, id]);
+    formik.setFieldValue('dislikedJobs', value);
   };
 
   const clickRemove = (id: string) => {
-    const newLikedJobs: string[] = [...likedJobs].filter((item) => item !== id);
-    setFormikValue(newLikedJobs);
+    setFormikValue([...dislikedJobs, id]);
   };
 
-  useEffect(() => {
-    const allJobIds = Object.keys(mockCareersTest.career_paths);
-    setFormikValue(allJobIds);
-  }, [mockCareersTest]);
+  const clickAdd = (id: string) => {
+    const newDislikedJobs: string[] = [...dislikedJobs].filter((item) => item !== id);
+    setFormikValue(newDislikedJobs);
+  };
 
   return (
     <div className="dialogContainer">
@@ -49,7 +44,7 @@ export const CareerRefinement = ({ formik }: CareerRefinementProps) => {
                   reason={job.reason}
                   onClickAdd={() => clickAdd(jobId)}
                   onClickRemove={() => clickRemove(jobId)}
-                  selected={!!likedJobs.find((cardId) => cardId === jobId)}
+                  selected={!dislikedJobs.find((cardId) => cardId === jobId)}
                 />
               </Grid>
             );

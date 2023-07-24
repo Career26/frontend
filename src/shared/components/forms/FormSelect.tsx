@@ -10,6 +10,7 @@ type FormSelectProps<FormikValuesType> = {
   options: Array<{ label: string; value: string }>;
   formik: FormikContextType<FormikValuesType>;
   field: keyof FormikValuesType | string;
+  defaultValue: string | FormikValuesType[keyof FormikValuesType];
 };
 
 export const FormSelect = <FormikValuesType,>({
@@ -17,6 +18,7 @@ export const FormSelect = <FormikValuesType,>({
   label,
   options,
   formik,
+  defaultValue,
 }: FormSelectProps<FormikValuesType>) => {
   const formikField = field as keyof FormikValuesType;
   const value = formik.values[formikField];
@@ -32,6 +34,7 @@ export const FormSelect = <FormikValuesType,>({
         label={label}
         fullWidth
         variant="outlined"
+        defaultValue={defaultValue}
       >
         {options.map((option) => (
           <MenuItem key={option.value} value={option.value}>

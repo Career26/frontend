@@ -3,12 +3,12 @@ import { FormikContextType } from 'formik';
 import { FormText } from '@shared/components/forms/FormText';
 import { citiesList } from '@careersTest/config/careersFormConstants';
 import { FormSelect } from '@shared/components/forms/FormSelect';
-import { PreferencesFormValues } from '@careersTest/types/careersFormTypes';
+import { CareersFormValues, PreferencesFormValues } from '@careersTest/types/careersFormTypes';
 import Divider from '@mui/material/Divider';
 import { FormYesNoRadioButtons } from '@shared/components/forms/FormYesNoRadioButtons';
 
 type WorkPreferencesFormProps = {
-  formik: FormikContextType<PreferencesFormValues>;
+  formik: FormikContextType<CareersFormValues>;
 };
 
 const workTypeOptions = [
@@ -44,17 +44,14 @@ export const WorkStyleForm = ({ formik }: WorkPreferencesFormProps) => {
             options={workTypeOptions}
             label="Preferred Work Style"
             field="workStyle"
-            defaultValue={workTypeOptions[0].value}
           />
         </div>
-        {/* autocomplete */}
         <div className="column">
           <FormSelect
             formik={formik}
             options={citiesList}
             label="Preferred City"
             field="expectedSalary.city"
-            defaultValue={citiesList[0].value}
           />
         </div>
         <div className="column">

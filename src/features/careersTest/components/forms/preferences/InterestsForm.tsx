@@ -1,11 +1,11 @@
-import { PreferencesFormValues } from '@careersTest/types/careersFormTypes';
+import { CareersFormValues, PreferencesFormValues } from '@careersTest/types/careersFormTypes';
 import { FormikContextType } from 'formik';
 import React from 'react';
 import { InterestsSelector } from './InterestsSelector';
 import Divider from '@mui/material/Divider';
 
 type PreferencesFormProps = {
-  formik: FormikContextType<PreferencesFormValues>;
+  formik: FormikContextType<CareersFormValues>;
 };
 
 export const InterestsForm = ({ formik }: PreferencesFormProps) => (

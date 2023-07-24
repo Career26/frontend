@@ -1,12 +1,12 @@
 import { FormText } from '@shared/components/forms/FormText';
 import { FormikContextType } from 'formik';
 import React from 'react';
-import { PreviousExperienceFormValues } from '@careersTest/types/careersFormTypes';
+import { CareersFormValues } from '@careersTest/types/careersFormTypes';
 
 import './companyForm.scss';
 
 type CompanyFormProps = {
-  formik: FormikContextType<PreviousExperienceFormValues>;
+  formik: FormikContextType<CareersFormValues>;
   index: number;
 };
 

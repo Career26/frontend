@@ -1,4 +1,4 @@
-import { FormikContextType } from 'formik';
+import { FormikContextType, getIn } from 'formik';
 import React from 'react';
 import TextField from '@mui/material/TextField';
 
@@ -22,17 +22,20 @@ export const FormText = <FormValuesType,>({
   rows,
 }: FormTextProps<FormValuesType>) => {
   const formikField = field as keyof FormValuesType;
-  const errorMessage = formik.errors[formikField];
-  const helperText = !!formik.touched[formikField] && !!errorMessage ? String(errorMessage) : '';
+  const touched = !!getIn(formik.touched, formikField as string);
+  const errorMessage = getIn(formik.errors, formikField as string);
+  const helperText = touched && !!errorMessage ? String(errorMessage) : '';
+  const value = getIn(formik.values, formikField as string);
+
   return (
     <TextField
       label={label}
-      value={formik.values[formikField]}
+      value={value}
       onChange={(e) => {
         formik.setFieldTouched(String(field), true);
         formik.setFieldValue(String(field), e.target.value);
       }}
-      error={!!formik.errors[formikField]}
+      error={!!helperText}
       helperText={helperText}
       placeholder={placeholder}
       type={type}

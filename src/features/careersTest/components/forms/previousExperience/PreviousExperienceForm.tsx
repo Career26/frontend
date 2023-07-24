@@ -1,14 +1,17 @@
-import { FieldArray, FormikContextType } from 'formik';
+import { Field, FieldArray, FormikContextType } from 'formik';
 import React from 'react';
 import { Button } from '@shared/components/buttons/Button';
-import { PreviousExperienceFormValues } from '@careersTest/types/careersFormTypes';
+import {
+  CareersFormValues,
+  PreviousExperienceFormValues,
+} from '@careersTest/types/careersFormTypes';
 import Divider from '@mui/material/Divider';
 
 import { CompanyForm } from './CompanyForm';
 import { RowHeader } from '../RowHeader';
 
 type PreviousExperienceFormProps = {
-  formik: FormikContextType<PreviousExperienceFormValues>;
+  formik: FormikContextType<CareersFormValues>;
 };
 
 export const PreviousExperienceForm = ({ formik }: PreviousExperienceFormProps) => {
@@ -31,6 +34,7 @@ export const PreviousExperienceForm = ({ formik }: PreviousExperienceFormProps) 
           <div>
             {previousWorkExperiences?.map((_, index) => (
               <>
+                <Field name={`previousWorkExperience[${index}]`} />
                 <RowHeader
                   label={previousWorkExperiences?.[index]?.companyName}
                   defaultLabel="Experience"

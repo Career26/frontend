@@ -1,29 +1,34 @@
 import * as Yup from 'yup';
 
-const getYupNameString = (field: string) =>
+const getRequiredYupString = (field: string) => Yup.string().required(`${field} is required`);
+
+const getAlphabeticString = (field: string) =>
   Yup.string()
     .matches(/^[A-Za-z ]*$/, { message: 'Must only containt letters' })
     .required(`${field} is required`);
 
 export const universitySchema = Yup.object().shape({
-  universityName: Yup.string().required(),
-  courseName: Yup.string().required(),
-  degreeLevel: Yup.string().required(),
-  degreeGrade: Yup.string().required(),
+  universityName: getRequiredYupString('University'),
+  courseName: getRequiredYupString('Course name'),
+  degreeLevel: Yup.string().required('You must select a degree level'),
+  degreeGrade: Yup.string().required('You must select a degree grade'),
 });
 
 export const educationFormSchema = Yup.object().shape({
-  firstName: getYupNameString('First name'),
-  lastName: getYupNameString('Last name'),
+  firstName: getRequiredYupString('First name'),
+  lastName: getRequiredYupString('Last name'),
   latestDegree: universitySchema,
   additionalDegrees: Yup.array(universitySchema).optional(),
 });
 
 export const companyFormSchema = Yup.object({
-  companyName: Yup.string(),
-  rating: Yup.number(),
-  ratingReason: Yup.string(),
-  role: Yup.string(),
+  companyName: getRequiredYupString('Company name'),
+  rating: Yup.number()
+    .required('Rating is required')
+    .max(5, 'The maximum score is 5')
+    .min(0, 'The minimum score is 0'),
+  ratingReason: getRequiredYupString('Reason').max(100, 'The maximum character count is 100'),
+  role: getRequiredYupString('Role'),
 });
 
 export const previousExperienceFormSchema = Yup.object().shape({

@@ -92,3 +92,9 @@ export const initialPreferencesValues: PreferencesFormValues = {
 export const initialRefinementFormValues: RefinementFormValues = {
   dislikedJobs: [],
 };
+
+export const initialCareersTestFormValues = {
+  ...initialEducationFormValues,
+  ...initialPreviousExperienceFormValues,
+  ...initialPreferencesValues,
+};

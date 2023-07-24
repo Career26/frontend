@@ -2,7 +2,7 @@ import { FieldArray, FormikContextType } from 'formik';
 import React from 'react';
 import { FormText } from '@shared/components/forms/FormText';
 import { Button } from '@shared/components/buttons/Button';
-import { EducationFormValues } from '@careersTest/types/careersFormTypes';
+import { CareersFormValues, EducationFormValues } from '@careersTest/types/careersFormTypes';
 import Divider from '@mui/material/Divider';
 
 import { RowHeader } from '../RowHeader';
@@ -11,7 +11,7 @@ import { UniversityForm } from './UniversityForm';
 import '@shared/styles/formStyles.scss';
 
 type EducationFormProps = {
-  formik: FormikContextType<EducationFormValues>;
+  formik: FormikContextType<CareersFormValues>;
 };
 
 export const EducationForm = ({ formik }: EducationFormProps) => (
@@ -20,10 +20,10 @@ export const EducationForm = ({ formik }: EducationFormProps) => (
     <Divider />
     <div className="row">
       <div className="column">
-        <FormText field="firstName" label="First Name" formik={formik} />
+        <FormText field="firstName" label="First Name*" formik={formik} />
       </div>
       <div className="column">
-        <FormText field="lastName" label="Last Name" formik={formik} />
+        <FormText field="lastName" label="Last Name*" formik={formik} />
       </div>
     </div>
     <div className="header">Universities</div>

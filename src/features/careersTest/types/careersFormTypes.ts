@@ -16,3 +16,7 @@ export type PreviousExperienceFormValues = Yup.InferType<typeof previousExperien
 export type AreasOfInterestFormValues = Yup.InferType<typeof areasOfInterestSchema>;
 export type PreferencesFormValues = Yup.InferType<typeof preferencesFormSchema>;
 export type RefinementFormValues = Yup.InferType<typeof refinementSchema>;
+
+export type CareersFormValues = EducationFormValues &
+  PreviousExperienceFormValues &
+  PreferencesFormValues;

@@ -3,14 +3,13 @@ import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import { FormikContextType } from 'formik';
+import { FormikContextType, getIn } from 'formik';
 
 type FormSelectProps<FormikValuesType> = {
   label: string;
   options: Array<{ label: string; value: string }>;
   formik: FormikContextType<FormikValuesType>;
   field: keyof FormikValuesType | string;
-  defaultValue: string | FormikValuesType[keyof FormikValuesType];
 };
 
 export const FormSelect = <FormikValuesType,>({
@@ -18,10 +17,9 @@ export const FormSelect = <FormikValuesType,>({
   label,
   options,
   formik,
-  defaultValue,
 }: FormSelectProps<FormikValuesType>) => {
   const formikField = field as keyof FormikValuesType;
-  const value = formik.values[formikField];
+  const value = getIn(formik.values, formikField as string);
   const onChange = (newValue: string | FormikValuesType[keyof FormikValuesType]) => [
     formik.setFieldValue(formikField as string, newValue),
   ];
@@ -34,7 +32,6 @@ export const FormSelect = <FormikValuesType,>({
         label={label}
         fullWidth
         variant="outlined"
-        defaultValue={defaultValue}
       >
         {options.map((option) => (
           <MenuItem key={option.value} value={option.value}>

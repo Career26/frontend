@@ -3,7 +3,7 @@ import { FormikContextType } from 'formik';
 import { FormText } from '@shared/components/forms/FormText';
 import { CareersFormValues, EducationFormValues } from '@careersTest/types/careersFormTypes';
 import { FormSelect } from '@shared/components/forms/FormSelect';
-import { degreeGrades, degreeLevels } from '@careersTest/config/careersFormConstants';
+import { degreeGradeOptions, degreeLevelOptions } from '@careersTest/config/careersFormConstants';
 
 import './universityForm.scss';
 
@@ -29,7 +29,7 @@ export const UniversityForm = ({
           formik={formik}
           field={`${baseField}.degreeLevel`}
           label="Level*"
-          options={degreeLevels}
+          options={degreeLevelOptions}
         />
       </div>
       <div className="column">
@@ -37,7 +37,7 @@ export const UniversityForm = ({
           formik={formik}
           field={`${baseField}.degreeGrade`}
           label="Grade*"
-          options={degreeGrades}
+          options={degreeGradeOptions}
         />
       </div>
     </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import RadioGroup from '@mui/material/RadioGroup';
-import { FormikContextType } from 'formik';
+import { FormikContextType, getIn } from 'formik';
 import { RadioButton } from '../radioButtons/RadioButton';
 
 import '@shared/styles/formStyles.scss';
@@ -18,7 +18,7 @@ export const FormYesNoRadioButtons = <FormikValuesType,>({
   field,
 }: FormRadioButtonsProps<FormikValuesType>) => {
   const formikField = field as keyof FormikValuesType;
-  const isYes = !!formik.values[formikField];
+  const isYes = !!getIn(formik.values, formikField as string);
 
   const onClick = (label: 'Yes' | 'No') => {
     formik.setFieldValue(formikField as string, label === yes);

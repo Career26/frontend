@@ -7,9 +7,6 @@ import CardActions from '@mui/material/CardActions';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { styled } from '@mui/material/styles';
 import Collapse from '@mui/material/Collapse';
-import { AddCircleRounded } from '@mui/icons-material';
-
-import { CareerCardHeader } from './CareerCardHeader';
 
 import './cardStyles.scss';
 

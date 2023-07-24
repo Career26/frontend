@@ -1,18 +1,16 @@
 import {
-  CompanyFormValues,
   EducationFormValues,
   PreferencesFormValues,
   PreviousExperienceFormValues,
-  RefinementFormValues,
   UniversityFormValues,
 } from '@careersTest/types/careersFormTypes';
 
-export const degreeLevels = ['PhD', 'MSc', 'MA', 'BSc', 'BA'].map((value) => ({
+export const degreeLevelOptions = ['PhD', 'MSc', 'MA', 'BSc', 'BA'].map((value) => ({
   label: value,
   value,
 }));
 
-export const degreeGrades = [
+export const degreeGradeOptions = [
   'First Class (1st)',
   'Second Class Upper (2:1)',
   'Second Class Lower (2:2)',
@@ -25,7 +23,7 @@ export const workTypeOptions = [
   { label: 'Group', value: 'Group' },
 ];
 
-export const basicInterestsList = [
+export const interestOptions = [
   'Finance',
   'Business',
   'Law',
@@ -40,7 +38,7 @@ export const basicInterestsList = [
   'Academia / Research',
 ];
 
-export const citiesList = [
+export const citiesOptions = [
   { value: 'LONDON', label: 'London', currency: 'GBP', symbol: '£' },
   { value: 'NEW_YORK', label: 'New York', currency: 'USD', symbol: '$' },
   { value: 'TOKYO', label: 'Tokyo', currency: 'JPY', symbol: '¥' },
@@ -49,7 +47,7 @@ export const citiesList = [
   { value: 'SHANGHAI', label: 'Shanghai', currency: 'RMB', symbol: '¥' },
 ];
 
-export const initialUniversityFormValues: UniversityFormValues = {
+const initialUniversityFormValues: UniversityFormValues = {
   courseName: '',
   universityName: '',
   degreeLevel: '',
@@ -63,20 +61,13 @@ export const initialEducationFormValues: EducationFormValues = {
   additionalDegrees: [],
 };
 
-export const initialCompanyFormValues: CompanyFormValues = {
-  companyName: '',
-  rating: 5,
-  ratingReason: '',
-  role: '',
-};
-
 export const initialPreviousExperienceFormValues: PreviousExperienceFormValues = {
-  previousWorkExperience: [],
+  previousExperiences: [],
 };
 
-const initialCity = { ...citiesList[0] };
+const initialCity = { ...citiesOptions[0] };
 const initialWorkType = { ...workTypeOptions[0] };
-export const initialPreferencesValues: PreferencesFormValues = {
+export const initialPreferencesFormValues: PreferencesFormValues = {
   areasOfInterest: [],
   workStyle: initialWorkType.value,
   sacrificeWorkLifeBalance: false,
@@ -89,12 +80,8 @@ export const initialPreferencesValues: PreferencesFormValues = {
   },
 };
 
-export const initialRefinementFormValues: RefinementFormValues = {
-  dislikedJobs: [],
-};
-
 export const initialCareersTestFormValues = {
   ...initialEducationFormValues,
   ...initialPreviousExperienceFormValues,
-  ...initialPreferencesValues,
+  ...initialPreferencesFormValues,
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormikContextType } from 'formik';
 import { FormText } from '@shared/components/forms/FormText';
-import { citiesList } from '@careersTest/config/careersFormConstants';
+import { citiesOptions } from '@careersTest/config/careersFormConstants';
 import { FormSelect } from '@shared/components/forms/FormSelect';
 import { CareersFormValues, PreferencesFormValues } from '@careersTest/types/careersFormTypes';
 import Divider from '@mui/material/Divider';
@@ -18,7 +18,8 @@ const workTypeOptions = [
 
 export const WorkStyleForm = ({ formik }: WorkPreferencesFormProps) => {
   const selectedCity =
-    citiesList.find((city) => city.value === formik.values.expectedSalary?.city) || citiesList[0];
+    citiesOptions.find((city) => city.value === formik.values.expectedSalary?.city) ||
+    citiesOptions[0];
   return (
     <>
       <div className="header">Work Preferences</div>
@@ -49,7 +50,7 @@ export const WorkStyleForm = ({ formik }: WorkPreferencesFormProps) => {
         <div className="column">
           <FormSelect
             formik={formik}
-            options={citiesList}
+            options={citiesOptions}
             label="Preferred City"
             field="expectedSalary.city"
           />

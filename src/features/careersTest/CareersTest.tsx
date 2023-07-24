@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import { ConfirmationDialog } from '@shared/components/dialogs/ConfirmationDialog';
-import { Stepper } from '@shared/components/stepper/Stepper';
 import { Form, Formik } from 'formik';
+
+import { Stepper } from '@shared/components/stepper/Stepper';
+import { EducationForm } from './components/forms/education/EducationForm';
+import { PreviousExperienceForm } from './components/forms/previousExperience/PreviousExperienceForm';
+import { PreferencesForm } from './components/forms/preferences/PreferencesForm';
+import { CareerResults } from './components/CareerResults';
 
 import { initialCareersTestFormValues } from './config/careersFormConstants';
 import {
@@ -10,12 +15,8 @@ import {
   previousExperienceFormSchema,
   refinementSchema,
 } from './config/careersFormSchemas';
-import { EducationForm } from './components/forms/education/EducationForm';
-import { PreviousExperienceForm } from './components/forms/previousExperience/PreviousExperienceForm';
-import { PreferencesForm } from './components/forms/preferences/PreferencesForm';
 
 import { CareersFormValues } from './types/careersFormTypes';
-import { CareerRefinement } from './components/forms/careerRefinement/CareerRefinement';
 
 import './careersTest.scss';
 
@@ -76,14 +77,14 @@ export const CareersTest = () => {
           confirmDisabled={!Object.values(formik.touched).some((item) => item) || !formik.isValid}
           ignoreCancelButton={activeStep === 0}
           cancelLabel="Back"
-          confirmLabel={activeStep === steps.length ? 'Create Account' : 'Next'}
+          confirmLabel={activeStep === steps.length - 1 ? 'Create Account' : 'Next'}
           extraClasses="careersTest"
         >
           <Form>
             {activeStep === 0 && <EducationForm formik={formik} />}
             {activeStep === 1 && <PreviousExperienceForm formik={formik} />}
             {activeStep === 2 && <PreferencesForm formik={formik} />}
-            {activeStep === 3 && <CareerRefinement profile={formik.values} />}
+            {activeStep === 3 && <CareerResults profile={formik.values} />}
           </Form>
         </ConfirmationDialog>
       )}

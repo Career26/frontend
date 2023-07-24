@@ -1,6 +1,6 @@
 import {
   initialEducationFormValues,
-  initialPreferencesValues,
+  initialPreferencesFormValues,
   initialPreviousExperienceFormValues,
 } from '@careersTest/config/careersFormConstants';
 import {
@@ -20,7 +20,7 @@ type CareeersForm = {
 export const careeersFormInitialState: CareeersForm = {
   education: initialEducationFormValues,
   previousExperiences: initialPreviousExperienceFormValues,
-  preferences: initialPreferencesValues,
+  preferences: initialPreferencesFormValues,
 };
 
 export const careeersFormSlice = createSlice({

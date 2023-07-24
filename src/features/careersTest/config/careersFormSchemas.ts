@@ -2,11 +2,6 @@ import * as Yup from 'yup';
 
 const getRequiredYupString = (field: string) => Yup.string().required(`${field} is required`);
 
-const getAlphabeticString = (field: string) =>
-  Yup.string()
-    .matches(/^[A-Za-z ]*$/, { message: 'Must only containt letters' })
-    .required(`${field} is required`);
-
 export const universitySchema = Yup.object().shape({
   universityName: getRequiredYupString('University'),
   courseName: getRequiredYupString('Course name'),
@@ -32,11 +27,7 @@ export const companyFormSchema = Yup.object({
 });
 
 export const previousExperienceFormSchema = Yup.object().shape({
-  previousWorkExperience: Yup.array(companyFormSchema),
-});
-
-export const areasOfInterestSchema = Yup.object().shape({
-  areasOfInterest: Yup.array(Yup.string()),
+  previousExperiences: Yup.array(companyFormSchema),
 });
 
 export const preferencesFormSchema = Yup.object().shape({

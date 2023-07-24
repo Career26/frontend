@@ -1,10 +1,7 @@
-import { Field, FieldArray, FormikContextType } from 'formik';
+import { FieldArray, FormikContextType } from 'formik';
 import React from 'react';
 import { Button } from '@shared/components/buttons/Button';
-import {
-  CareersFormValues,
-  PreviousExperienceFormValues,
-} from '@careersTest/types/careersFormTypes';
+import { CareersFormValues } from '@careersTest/types/careersFormTypes';
 import Divider from '@mui/material/Divider';
 
 import { CompanyForm } from './CompanyForm';
@@ -15,7 +12,7 @@ type PreviousExperienceFormProps = {
 };
 
 export const PreviousExperienceForm = ({ formik }: PreviousExperienceFormProps) => {
-  const [firstExperience, ...previousWorkExperiences] = formik.values.previousWorkExperience || [];
+  const [firstExperience, ...previousExperiencess] = formik.values.previousExperiences || [];
   return (
     <div className="dialogContainer">
       <div className="header">Previous Experiences</div>
@@ -29,14 +26,13 @@ export const PreviousExperienceForm = ({ formik }: PreviousExperienceFormProps) 
         />
       </div>
       <CompanyForm key="company-1" formik={formik} index={0} />
-      <FieldArray name="previousWorkExperience">
+      <FieldArray name="previousExperiences">
         {({ push, remove }) => (
           <div>
-            {previousWorkExperiences?.map((_, index) => (
+            {previousExperiencess?.map((_, index) => (
               <>
-                <Field name={`previousWorkExperience[${index}]`} />
                 <RowHeader
-                  label={previousWorkExperiences?.[index]?.companyName}
+                  label={previousExperiencess?.[index]?.companyName}
                   defaultLabel="Experience"
                   index={index + 2}
                   onClick={() => remove(index)}

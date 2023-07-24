@@ -3,18 +3,17 @@ import { mockCareersTest } from '@mocks/careerTestMocks';
 import Grid from '@mui/material/Grid';
 
 import { CareerCard } from '@careersTest/components/cards/CareerCard';
-import { FormikContextType } from 'formik';
-import { CareersFormValues, RefinementFormValues } from '@careersTest/types/careersFormTypes';
+import { CareersFormValues } from '@careersTest/types/careersFormTypes';
 import { useGetCareersTestResultQuery } from '@apis/careersTestApi';
 import { Loader } from '@mantine/core';
 
-type CareerRefinementProps = {
+type CareerResultsProps = {
   profile: CareersFormValues;
 };
 
-export const CareerRefinement = ({ profile }: CareerRefinementProps) => {
+export const CareerResults = ({ profile }: CareerResultsProps) => {
   const [dislikedJobs, setDislikedJobs] = useState<string[]>([]);
-
+  console.log(profile);
   const { data, isFetching } = useGetCareersTestResultQuery('pikachu');
 
   const clickRemove = (id: string) => {
@@ -50,7 +49,6 @@ export const CareerRefinement = ({ profile }: CareerRefinementProps) => {
                   role={job.role}
                   reason={job.reason}
                   onClickRemove={() => clickRemove(jobId)}
-                  selected
                   loading={!!dislikedJobs.find((cardId) => cardId === jobId)}
                 />
               </Grid>

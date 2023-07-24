@@ -11,7 +11,7 @@ type CompanyFormProps = {
 };
 
 export const CompanyForm = ({ formik, index }: CompanyFormProps) => {
-  const baseField = `previousWorkExperience[${index}]`;
+  const baseField = `previousExperiences[${index}]`;
   return (
     <div>
       <div className="row">

@@ -23,8 +23,7 @@ export const CareerResults = ({ profile }: CareerResultsProps) => {
   console.log(isFetching);
 
   useEffect(() => {
-    console.log(dislikedJobs);
-    if (dislikedJobs) {
+    if (dislikedJobs.length) {
       setTimeout(() => setDislikedJobs([]), 2000);
     }
   }, [dislikedJobs]);

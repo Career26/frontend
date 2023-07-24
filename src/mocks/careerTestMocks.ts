@@ -63,7 +63,6 @@ export const mockCareersTest: CareersResponse = {
     full_name: 'Bill Gates',
     latest_degree: {
       grade: 'first class honours',
-      is_predicted_grade: false,
       level: 'BSc',
       name: 'Computer Science',
       university: 'The University of Kent',

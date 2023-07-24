@@ -27,20 +27,24 @@ export const companyFormSchema = Yup.object({
 });
 
 export const previousExperienceFormSchema = Yup.object().shape({
-  previousExperiences: Yup.array(companyFormSchema),
+  previousExperiences: Yup.array(companyFormSchema).required(),
 });
 
 export const preferencesFormSchema = Yup.object().shape({
-  areasOfInterest: Yup.array(Yup.string().required()),
-  workStyle: Yup.string(),
-  enjoyTalkingToPeople: Yup.bool(),
-  sacrificeWorkLifeBalance: Yup.bool(),
-  expectedSalary: Yup.object().shape({
-    expectedSalary: Yup.string(),
-    city: Yup.string(),
-    baseCurrency: Yup.string(),
-    symbol: Yup.string(),
-  }),
+  areasOfInterest: Yup.array(Yup.string().required())
+    .required()
+    .length(3, 'Must select only 3 areas of interest'),
+  workStyle: Yup.string().required(),
+  enjoyTalkingToPeople: Yup.bool().required(),
+  sacrificeWorkLifeBalance: Yup.bool().required(),
+  expectedSalary: Yup.object()
+    .shape({
+      expectedSalary: Yup.number().required('Expected salary is required'),
+      city: Yup.string().required(),
+      baseCurrency: Yup.string().required(),
+      symbol: Yup.string(),
+    })
+    .required(),
 });
 
 export const refinementSchema = Yup.object().shape({

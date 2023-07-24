@@ -6,6 +6,7 @@ import { CareerCard } from '@careersTest/components/cards/CareerCard';
 import { CareersFormValues } from '@careersTest/types/careersFormTypes';
 import { useGetCareersTestResultQuery } from '@apis/careersTestApi';
 import { Loader } from '@mantine/core';
+import { getProfileInputValues } from '@careersTest/utils/careersTestUtil';
 
 type CareerResultsProps = {
   profile: CareersFormValues;
@@ -13,7 +14,9 @@ type CareerResultsProps = {
 
 export const CareerResults = ({ profile }: CareerResultsProps) => {
   const [dislikedJobs, setDislikedJobs] = useState<string[]>([]);
-  console.log(profile);
+  const payload = getProfileInputValues(profile);
+  console.log(payload);
+  // TODO: pass payload into RTK api for initial results
   const { data, isFetching } = useGetCareersTestResultQuery('pikachu');
 
   const clickRemove = (id: string) => {
@@ -24,6 +27,7 @@ export const CareerResults = ({ profile }: CareerResultsProps) => {
 
   useEffect(() => {
     if (dislikedJobs.length) {
+      // TODO: lazy query for updated profile with disliked jobs - then map to grid
       setTimeout(() => setDislikedJobs([]), 2000);
     }
   }, [dislikedJobs]);

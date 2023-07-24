@@ -15,6 +15,7 @@ import { PreviousExperienceForm } from './components/forms/previousExperience/Pr
 import { PreferencesForm } from './components/forms/preferences/PreferencesForm';
 
 import { CareersFormValues } from './types/careersFormTypes';
+import { CareerRefinement } from './components/forms/careerRefinement/CareerRefinement';
 
 import './careersTest.scss';
 
@@ -22,7 +23,7 @@ const steps = [
   { label: 'Education' },
   { label: 'Past Experience' },
   { label: 'Preferences' },
-  { label: 'Refine Choices' },
+  { label: 'Your Results' },
 ];
 
 const getSchema = (activeStep: number) => {
@@ -82,7 +83,7 @@ export const CareersTest = () => {
             {activeStep === 0 && <EducationForm formik={formik} />}
             {activeStep === 1 && <PreviousExperienceForm formik={formik} />}
             {activeStep === 2 && <PreferencesForm formik={formik} />}
-            {/* {activeStep === 3 && <CareerRefinement formik={formik} />} */}
+            {activeStep === 3 && <CareerRefinement profile={formik.values} />}
           </Form>
         </ConfirmationDialog>
       )}

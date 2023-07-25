@@ -7,7 +7,7 @@ export const profileApi = createApi({
     baseUrl: 'https://qjop4yl84g.execute-api.eu-west-1.amazonaws.com/Prod',
   }),
   endpoints: (build) => ({
-    generateProfile: build.mutation<Profile, UserProfile>({
+    generateProfile: build.mutation<UserProfile, Profile>({
       query(body) {
         return {
           url: 'profile',

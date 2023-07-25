@@ -22,7 +22,7 @@ export const companyFormSchema = Yup.object({
     .required('Rating is required')
     .max(5, 'The maximum score is 5')
     .min(0, 'The minimum score is 0'),
-  ratingReason: getRequiredYupString('Reason').max(100, 'The maximum character count is 100'),
+  ratingReason: getRequiredYupString('Reason').max(300, 'The maximum character count is 300'),
   role: getRequiredYupString('Role'),
 });
 

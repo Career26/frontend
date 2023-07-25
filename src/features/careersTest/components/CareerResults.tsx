@@ -4,7 +4,7 @@ import Grid from '@mui/material/Grid';
 
 import { CareerCard } from '@careersTest/components/cards/CareerCard';
 import { CareersFormValues } from '@careersTest/types/careersFormTypes';
-import { useGetCareersTestResultQuery } from '@apis/careersTestApi';
+import { useGenerateProfileMutation } from '@apis/profile';
 import { Loader } from '@mantine/core';
 
 type CareerResultsProps = {
@@ -13,24 +13,22 @@ type CareerResultsProps = {
 
 export const CareerResults = ({ profile }: CareerResultsProps) => {
   const [dislikedJobs, setDislikedJobs] = useState<string[]>([]);
-  console.log(profile);
-  const { data, isFetching } = useGetCareersTestResultQuery('pikachu');
+
+  const [generateProfile, generateProfileResults] = useGenerateProfileMutation();
 
   const clickRemove = (id: string) => {
     setDislikedJobs([...dislikedJobs, id]);
   };
 
-  console.log(isFetching);
+  console.log(generateProfileResults);
 
   useEffect(() => {
-    if (dislikedJobs.length) {
-      setTimeout(() => setDislikedJobs([]), 2000);
-    }
-  }, [dislikedJobs]);
+    generateProfile(profile);
+  }, []);
 
-  if (isFetching) {
-    return <Loader />;
-  }
+  // if (isFetching) {
+  //   return <Loader />;
+  // }
 
   return (
     <div className="dialogContainer">

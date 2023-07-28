@@ -1,5 +1,17 @@
 import React from 'react';
-import { createStyles, Container, Text, Button, Group, rem, Image, Title } from '@mantine/core';
+import {
+  createStyles,
+  Container,
+  Text,
+  Button,
+  Group,
+  rem,
+  Image,
+  Title,
+  Badge,
+  Card,
+} from '@mantine/core';
+import { IconCircleCheck } from '@tabler/icons-react';
 import careerProgressImg from './assets/careerProgress.svg';
 import cvImg from './assets/cv.svg';
 import careerPathsImg from './assets/careerPaths.svg';
@@ -9,31 +21,29 @@ import { useHistory } from 'react-router-dom';
 import { urls } from '@shared/config/urlConstants';
 
 const useStyles = createStyles((theme) => ({
-  main: {
+  mainContainer: {
     paddingLeft: 0,
     paddingRight: 0,
     maxWidth: 'none',
   },
 
-  inner: {
+  // hero
+  heroContainer: {
     paddingTop: rem(110),
     paddingBottom: rem(110),
     display: 'flex',
     flexDirection: 'row',
     flex: 1,
-
     [theme.fn.smallerThan('sm')]: {
       paddingBottom: rem(80),
       paddingTop: rem(80),
       flexDirection: 'column-reverse',
     },
   },
-
-  titleContainer: {
+  heroTitleContainer: {
     flex: 1,
   },
-
-  title: {
+  heroTitle: {
     fontSize: rem(62),
     fontWeight: 900,
     lineHeight: 1.1,
@@ -47,8 +57,7 @@ const useStyles = createStyles((theme) => ({
       marginTop: theme.spacing.xl,
     },
   },
-
-  description: {
+  heroDescription: {
     marginTop: theme.spacing.xl,
     fontSize: rem(20),
 
@@ -56,14 +65,12 @@ const useStyles = createStyles((theme) => ({
       fontSize: rem(18),
     },
   },
-
-  image: {
+  heroImage: {
     flex: 1,
     alignSelf: 'center',
     paddingLeft: `calc(${theme.spacing.xl} * 2)`,
     paddingRight: `calc(${theme.spacing.xl} * 2)`,
   },
-
   controls: {
     marginTop: `calc(${theme.spacing.xl} * 2)`,
 
@@ -71,13 +78,13 @@ const useStyles = createStyles((theme) => ({
       marginTop: theme.spacing.xl,
     },
   },
-
   control: {
     [theme.fn.smallerThan('sm')]: {
       flex: 1,
     },
   },
 
+  // features
   featuresMain: {
     display: 'flex',
     flexDirection: 'column',
@@ -117,6 +124,61 @@ const useStyles = createStyles((theme) => ({
     paddingLeft: `calc(${theme.spacing.xl} * 2)`,
     paddingRight: `calc(${theme.spacing.xl} * 2)`,
   },
+
+  // pricing
+  pricingContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    flex: 1,
+    alignItems: 'center',
+    paddingTop: `calc(${theme.spacing.xl} * 1.5)`,
+    paddingBottom: `calc(${theme.spacing.xl} * 1.5)`,
+  },
+  pricingCardContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  pricingCard: {
+    background: theme.colors.blue[0],
+    maxWidth: rem(500),
+    borderRadius: 'sm',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  pricingPlanTitle: {
+    fontSize: rem(22),
+    fontWeight: 800,
+    lineHeight: 1.1,
+    color: theme.colors.gray[9],
+    paddingBottom: theme.spacing.sm,
+  },
+  pricingPlanPrice: {
+    fontSize: rem(28),
+    fontWeight: 800,
+    lineHeight: 1.1,
+    color: theme.colors.gray[9],
+  },
+  bulletPointMain: {
+    paddingTop: theme.spacing.sm,
+    paddingBottom: theme.spacing.sm,
+  },
+  paddedPoint: {
+    paddingTop: theme.spacing.xs,
+    paddingBottom: theme.spacing.xs,
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  bulletPointContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+
+  // call to action
+  actionContainer: {
+    maxWidth: 'none',
+    background: theme.colors.gray[0],
+  },
 }));
 
 export const LandingPage = () => {
@@ -124,10 +186,10 @@ export const LandingPage = () => {
   const history = useHistory();
 
   return (
-    <Container className={classes.main}>
-      <Container className={classes.inner}>
-        <Container className={classes.titleContainer}>
-          <Title className={classes.title}>
+    <Container className={classes.mainContainer}>
+      <Container className={classes.heroContainer}>
+        <Container className={classes.heroTitleContainer}>
+          <Title className={classes.heroTitle}>
             Discover your{' '}
             <Text
               component="span"
@@ -138,7 +200,7 @@ export const LandingPage = () => {
               perfect career
             </Text>
           </Title>
-          <Text className={classes.description} color="dimmed">
+          <Text className={classes.heroDescription} color="dimmed">
             Reveal your perfect career path, ace interviews and elevate your CV with our all-in-one
             career advisory platform
           </Text>
@@ -154,8 +216,7 @@ export const LandingPage = () => {
             </Button>
           </Group>
         </Container>
-
-        <Image src={careerProgressImg} className={classes.image} />
+        <Image src={careerProgressImg} className={classes.heroImage} />
       </Container>
 
       <Container className={classes.featuresMain}>
@@ -189,37 +250,81 @@ export const LandingPage = () => {
         ))}
       </Container>
 
-      <Container className={classes.inner}>
-        <Container className={classes.titleContainer}>
-          <Title className={classes.title}>
-            Join to Achieve{' '}
-            <Text
-              component="span"
-              variant="gradient"
-              gradient={{ from: 'blue', to: 'cyan' }}
-              inherit
-            >
-              Career Success
-            </Text>
-          </Title>
-          <Text className={classes.description} color="dimmed">
-            Ready to Unleash Your Potential? Take Our Free Questionnaire to View Your Personalised
-            Career Paths Now!
-          </Text>
-          <Group className={classes.controls}>
-            <Button
-              size="xl"
-              className={classes.control}
-              variant="gradient"
-              gradient={{ from: 'blue', to: 'cyan' }}
-              onClick={() => history.push(urls.careersTest)}
-            >
-              Try For Free!
-            </Button>
-          </Group>
-        </Container>
+      <Container className={classes.pricingContainer}>
+        <Badge size="xl" radius="sm" variant="light" mb={'xl'}>
+          Pricing
+        </Badge>
 
-        <Image src={successImg} className={classes.image} />
+        <Container className={classes.pricingCardContainer}>
+          <Card className={classes.pricingCard}>
+            <Text className={classes.pricingPlanTitle}>Pro Plan</Text>
+            <Text className={classes.pricingPlanPrice}>
+              £29{' '}
+              <Text className={classes.pricingPlanPrice} component="span">
+                / Month
+              </Text>
+            </Text>
+            <Container className={classes.bulletPointMain}>
+              <span className={classes.bulletPointContainer}>
+                <IconCircleCheck />
+                <Text pl={'xs'} size="md" color="dimmed">
+                  Unlimited Career Path Suggestions
+                </Text>
+              </span>
+              <span className={(classes.bulletPointContainer, classes.paddedPoint)}>
+                <IconCircleCheck />
+                <Text pl={'xs'} size="md" color="dimmed">
+                  Unlimited Interview Question Practise
+                </Text>
+              </span>
+              <span className={classes.bulletPointContainer}>
+                <IconCircleCheck />
+                <Text pl={'xs'} size="md" color="dimmed">
+                  Advanced CV Enhancement and Tailoring
+                </Text>
+              </span>
+            </Container>
+
+            <Button size="md" onClick={() => history.push(urls.careersTest)}>
+              Get Started
+            </Button>
+          </Card>
+        </Container>
+      </Container>
+
+      <Container className={classes.actionContainer}>
+        <Container className={classes.heroContainer}>
+          <Container className={classes.heroTitleContainer}>
+            <Title className={classes.heroTitle}>
+              Join & Achieve{' '}
+              <Text
+                component="span"
+                variant="gradient"
+                gradient={{ from: 'blue', to: 'cyan' }}
+                inherit
+              >
+                Career Success
+              </Text>
+            </Title>
+            <Text className={classes.heroDescription} color="dimmed">
+              Ready to Unleash Your Potential? Take Our Free Questionnaire to View Your Personalised
+              Career Paths Now
+            </Text>
+            <Group className={classes.controls}>
+              <Button
+                size="xl"
+                className={classes.control}
+                variant="gradient"
+                gradient={{ from: 'blue', to: 'cyan' }}
+                onClick={() => history.push(urls.careersTest)}
+              >
+                Try For Free!
+              </Button>
+            </Group>
+          </Container>
+
+          <Image src={successImg} className={classes.heroImage} />
+        </Container>
       </Container>
     </Container>
   );

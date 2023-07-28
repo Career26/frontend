@@ -274,7 +274,7 @@ export const LandingPage = () => {
               <span className={(classes.bulletPointContainer, classes.paddedPoint)}>
                 <IconCircleCheck />
                 <Text pl={'xs'} size="md" color="dimmed">
-                  Unlimited Interview Question Practise
+                  Unlimited Interview Practise
                 </Text>
               </span>
               <span className={classes.bulletPointContainer}>
@@ -307,8 +307,8 @@ export const LandingPage = () => {
               </Text>
             </Title>
             <Text className={classes.heroDescription} color="dimmed">
-              Ready to Unleash Your Potential? Take Our Free Questionnaire to View Your Personalised
-              Career Paths Now
+              Ready to unleash your potential? Take our free questionnaire to view your personalised
+              career paths now
             </Text>
             <Group className={classes.controls}>
               <Button

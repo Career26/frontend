@@ -4,6 +4,7 @@ import careerProgressImg from './assets/careerProgress.svg';
 import cvImg from './assets/cv.svg';
 import careerPathsImg from './assets/careerPaths.svg';
 import interviewImg from './assets/interview.svg';
+import successImg from './assets/success.svg';
 import { useHistory } from 'react-router-dom';
 import { urls } from '@shared/config/urlConstants';
 
@@ -33,7 +34,6 @@ const useStyles = createStyles((theme) => ({
   },
 
   title: {
-    fontFamily: `Greycliff CF, ${theme.fontFamily}`,
     fontSize: rem(62),
     fontWeight: 900,
     lineHeight: 1.1,
@@ -50,7 +50,7 @@ const useStyles = createStyles((theme) => ({
 
   description: {
     marginTop: theme.spacing.xl,
-    fontSize: rem(22),
+    fontSize: rem(20),
 
     [theme.fn.smallerThan('sm')]: {
       fontSize: rem(18),
@@ -60,6 +60,8 @@ const useStyles = createStyles((theme) => ({
   image: {
     flex: 1,
     alignSelf: 'center',
+    paddingLeft: `calc(${theme.spacing.xl} * 2)`,
+    paddingRight: `calc(${theme.spacing.xl} * 2)`,
   },
 
   controls: {
@@ -78,13 +80,11 @@ const useStyles = createStyles((theme) => ({
 
   featuresMain: {
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'column',
     flex: 1,
     background: theme.colors.gray[0],
     padding: 0,
     maxWidth: 'none',
-    paddingTop: theme.spacing.xl,
-    paddingBottom: theme.spacing.xl,
   },
 
   featureContainer: {
@@ -101,19 +101,19 @@ const useStyles = createStyles((theme) => ({
     fontFamily: `Greycliff CF, ${theme.fontFamily}`,
   },
   featureTitle: {
-    paddingBottom: theme.spacing.md,
-    fontSize: rem(25),
+    paddingBottom: theme.spacing.sm,
+    fontSize: rem(24),
     fontWeight: 800,
     lineHeight: 1.1,
-    color: theme.black,
+    color: theme.colors.gray[9],
   },
   featureDescription: {
     paddingBottom: theme.spacing.md,
-    fontSize: rem(18),
+    fontSize: rem(17),
     color: theme.colors.gray[7],
   },
   featureImage: {
-    flex: 1.2,
+    flex: 1,
     paddingLeft: `calc(${theme.spacing.xl} * 2)`,
     paddingRight: `calc(${theme.spacing.xl} * 2)`,
   },
@@ -159,36 +159,67 @@ export const LandingPage = () => {
       </Container>
 
       <Container className={classes.featuresMain}>
-        <Container>
-          {[
-            {
-              image: careerPathsImg,
-              title: 'Discover Your Ideal Career Path',
-              description:
-                'Find the career path that aligns with your aspirations and strengths. Our suggestions empower you to make informed decisions about your future. Take a short questionnaire where we delve into your interests, values, and skills to deliver tailored recommendations. Navigate confidently toward your dream career with our expert guidance.',
-            },
-            {
-              image: interviewImg,
-              title: 'Ace Interviews with Confidence',
-              description:
-                "Step into your interviews with confidence. Our expertly crafted mock interview questions prepare you for any scenario. Practicing with our extensive range of interview simulations, you'll gain the expertise needed to impress employers and be well-equipped to excel in even the most challenging interviews.",
-            },
-            {
-              image: cvImg,
-              title: 'Shine on Your CV',
-              description:
-                'Your CV is your introduction to employers. Let it shine brightly. Our CV enhancement service elevates your CV to stand out in a competitive job market. We craft a CV that highlights your strengths, experiences, and achievements in a compelling manner. Unlock opportunities and leave a lasting impression with a professionally tailored CV that showcases your true potential.',
-            },
-          ].map((item) => (
-            <Container className={classes.featureContainer}>
-              <Container className={classes.featureTextContainer}>
-                <Text className={classes.featureTitle}>{item.title}</Text>
-                <Text className={classes.featureDescription}>{item.description}</Text>
-              </Container>
-              <Image src={item.image} className={classes.featureImage} />
+        {[
+          {
+            image: careerPathsImg,
+            title: 'Discover Your Ideal Career Path',
+            description:
+              "Find the career path that aligns with your aspirations and strengths. Our suggestions empower you to make informed decisions about your future. Take a short questionnaire where we delve into your interests, values, and skills and we'll deliver tailored recommendations. Navigate confidently toward your dream career with our expert guidance.",
+          },
+          {
+            image: interviewImg,
+            title: 'Ace Interviews With Confidence',
+            description:
+              "Step into your interviews with confidence. Our expertly crafted mock interview questions prepare you for any scenario. Practicing with our extensive range of interview simulations, you'll gain the expertise needed to impress employers and be well-equipped to excel in even the most challenging interviews.",
+          },
+          {
+            image: cvImg,
+            title: 'Shine on Your CV',
+            description:
+              'Our CV enhancement service ensures you stand out in a competitive job market. We craft a CV that highlights your strengths, experiences, and achievements in a compelling manner. Unlock opportunities and leave a lasting impression with a professionally tailored CV that showcases your true potential.',
+          },
+        ].map((item) => (
+          <Container className={classes.featureContainer}>
+            <Container className={classes.featureTextContainer}>
+              <Text className={classes.featureTitle}>{item.title}</Text>
+              <Text className={classes.featureDescription}>{item.description}</Text>
             </Container>
-          ))}
+            <Image src={item.image} className={classes.featureImage} />
+          </Container>
+        ))}
+      </Container>
+
+      <Container className={classes.inner}>
+        <Container className={classes.titleContainer}>
+          <Title className={classes.title}>
+            Join to Achieve{' '}
+            <Text
+              component="span"
+              variant="gradient"
+              gradient={{ from: 'blue', to: 'cyan' }}
+              inherit
+            >
+              Career Success
+            </Text>
+          </Title>
+          <Text className={classes.description} color="dimmed">
+            Ready to Unleash Your Potential? Take Our Free Questionnaire to View Your Personalised
+            Career Paths Now!
+          </Text>
+          <Group className={classes.controls}>
+            <Button
+              size="xl"
+              className={classes.control}
+              variant="gradient"
+              gradient={{ from: 'blue', to: 'cyan' }}
+              onClick={() => history.push(urls.careersTest)}
+            >
+              Try For Free!
+            </Button>
+          </Group>
         </Container>
+
+        <Image src={successImg} className={classes.image} />
       </Container>
     </Container>
   );

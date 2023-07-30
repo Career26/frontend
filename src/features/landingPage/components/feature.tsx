@@ -37,11 +37,11 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-type FeatureComponentProps = {
+interface FeatureComponentProps {
   title: string;
   description: string;
   image: string;
-};
+}
 
 export const Feature = ({ title, description, image }: FeatureComponentProps) => {
   const { classes } = useStyles();

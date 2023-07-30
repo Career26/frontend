@@ -10,6 +10,7 @@ import { urls } from '@shared/config/urlConstants';
 import { Feature } from './components/feature';
 import { Hero } from './components/hero';
 import { Pricing } from './components/pricing';
+import { SimpleHeader } from './components/header';
 
 const useStyles = createStyles((theme) => ({
   mainContainer: {
@@ -45,12 +46,14 @@ const useStyles = createStyles((theme) => ({
     color: theme.colors.gray[9],
     paddingTop: theme.spacing.xl,
     paddingBottom: `calc(${theme.spacing.xl} * 1.5)`,
+
     [theme.fn.smallerThan('sm')]: {
       fontSize: rem(42),
       lineHeight: 1.2,
       marginTop: theme.spacing.xl,
     },
   },
+
   pricingTierContainer: {
     display: 'flex',
     flexDirection: 'row',
@@ -61,8 +64,17 @@ export const LandingPage = () => {
   const { classes } = useStyles();
   const history = useHistory();
 
+  const featuresTag = 'features';
+  const pricingTag = 'pricing';
+
   return (
     <Container className={classes.mainContainer}>
+      <SimpleHeader
+        links={[
+          { label: 'Features', link: featuresTag },
+          { label: 'Pricing', link: pricingTag },
+        ]}
+      />
       <Hero
         image={careerProgressImg}
         actionButtonText="Start Your Journey Now!"
@@ -74,7 +86,7 @@ export const LandingPage = () => {
         grayBackground={false}
       />
 
-      <Container className={classes.featuresContainer}>
+      <Container className={classes.featuresContainer} id={featuresTag}>
         {[
           {
             image: careerPathsImg,
@@ -99,11 +111,13 @@ export const LandingPage = () => {
         ))}
       </Container>
 
-      <Container className={classes.pricingContainer}>
+      <Container className={classes.pricingContainer} id={pricingTag}>
         <Badge size="xl" radius="sm" variant="light">
           Pricing
         </Badge>
-        <Text className={classes.pricingText}>Invest in Your Future. Get Started For free!</Text>
+
+        <Text className={classes.pricingText}>Invest in your future. Get started for free!</Text>
+
         <Container className={classes.pricingTierContainer}>
           <Pricing
             title="Free Tier"
@@ -115,6 +129,7 @@ export const LandingPage = () => {
               'Limited Interview Questions',
               'Basic CV Enhancement',
             ]}
+            onClick={() => history.push(urls.careersTest)}
           />
           <Pricing
             title="Premium Tier"
@@ -126,6 +141,7 @@ export const LandingPage = () => {
               'Extensive Interview Questions',
               'Advanced CV Enhancement',
             ]}
+            onClick={() => history.push(urls.careersTest)}
           />
         </Container>
       </Container>

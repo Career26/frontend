@@ -5,8 +5,8 @@ const useStyles = createStyles((theme, grayBackground: Boolean) => ({
   main: {
     padding: 0,
     maxWidth: 'none',
-    paddingTop: rem(110),
-    paddingBottom: rem(110),
+    paddingTop: rem(80),
+    paddingBottom: rem(80),
     background: grayBackground ? theme.colors.gray[0] : theme.white,
     [theme.fn.smallerThan('sm')]: {
       paddingBottom: rem(80),
@@ -71,7 +71,7 @@ const useStyles = createStyles((theme, grayBackground: Boolean) => ({
   },
 }));
 
-type HeroComponentProps = {
+interface HeroComponentProps {
   actionButtonText: string;
   image: string;
   subheadingText: string;
@@ -79,7 +79,7 @@ type HeroComponentProps = {
   colorHeadingText: string;
   grayBackground: boolean;
   onClick: () => void;
-};
+}
 
 export const Hero = ({
   actionButtonText,

@@ -3,20 +3,15 @@ import { createStyles, Container, Text, Button, rem, Card, Badge } from '@mantin
 import { IconCircleCheck } from '@tabler/icons-react';
 
 const useStyles = createStyles((theme) => ({
-  pricingContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    flex: 1,
-    alignItems: 'center',
-  },
-  pricingCardContainer: {
+  main: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     alignContent: 'center',
   },
-  pricingCard: {
+
+  card: {
     background: theme.colors.blue[0],
     width: rem(330),
     borderRadius: 'sm',
@@ -24,23 +19,20 @@ const useStyles = createStyles((theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
   },
-  pricingPlanPrice: {
+
+  priceText: {
     fontSize: rem(28),
     fontWeight: 800,
     lineHeight: 1.1,
     color: theme.colors.gray[9],
   },
-  bulletPointMain: {
+
+  benefitsContainer: {
     paddingTop: theme.spacing.xs,
     paddingBottom: theme.spacing.xs,
   },
-  paddedPoint: {
-    paddingTop: theme.spacing.xs,
-    paddingBottom: theme.spacing.xs,
-    display: 'flex',
-    flexDirection: 'row',
-  },
-  bulletPointContainer: {
+
+  benefitContainer: {
     display: 'flex',
     flexDirection: 'row',
     paddingLeft: 0,
@@ -48,32 +40,42 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-type PricingComponentProps = {
+interface PricingComponentProps {
   title: string;
   amount: string;
   peroid: string;
   benefits: string[];
   buttonText: string;
-};
+  onClick: () => void;
+}
 
-export const Pricing = ({ title, amount, peroid, benefits, buttonText }: PricingComponentProps) => {
+export const Pricing = ({
+  title,
+  amount,
+  peroid,
+  benefits,
+  buttonText,
+  onClick,
+}: PricingComponentProps) => {
   const { classes } = useStyles();
 
   return (
-    <Container className={classes.pricingCardContainer}>
-      <Card className={classes.pricingCard}>
+    <Container className={classes.main}>
+      <Card className={classes.card}>
         <Badge size="xl" radius="sm" variant="light">
           {title}
         </Badge>
-        <Text className={classes.pricingPlanPrice}>
+
+        <Text className={classes.priceText}>
           {amount}{' '}
-          <Text className={classes.pricingPlanPrice} component="span">
+          <Text inherit component="span">
             / {peroid}
           </Text>
         </Text>
-        <Container my="sm" className={classes.bulletPointMain}>
+
+        <Container my="sm" className={classes.benefitsContainer}>
           {benefits.map((benefit, index) => (
-            <Container className={classes.bulletPointContainer} py={index % 2 == 0 ? 0 : 'sm'}>
+            <Container className={classes.benefitContainer} py={index % 2 == 0 ? 0 : 'sm'}>
               <IconCircleCheck />
               <Text pl={'xs'} size="md" color="dimmed">
                 {benefit}
@@ -82,7 +84,7 @@ export const Pricing = ({ title, amount, peroid, benefits, buttonText }: Pricing
           ))}
         </Container>
 
-        <Button size="md" mb={'sm'}>
+        <Button size="md" mb={'sm'} onClick={onClick}>
           {buttonText}
         </Button>
       </Card>

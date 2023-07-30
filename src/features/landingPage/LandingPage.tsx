@@ -102,7 +102,7 @@ export const LandingPage = () => {
           },
           {
             image: cvImg,
-            title: 'Shine on Your CV',
+            title: 'Enhance Your CV',
             description:
               'Our CV enhancement service ensures you stand out in a competitive job market. We craft a CV that highlights your strengths, experiences, and achievements in a compelling manner. Unlock opportunities and leave a lasting impression with a professionally tailored CV that showcases your true potential.',
           },

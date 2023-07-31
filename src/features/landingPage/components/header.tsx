@@ -67,7 +67,7 @@ export const SimpleHeader = ({ links }: HeaderActionProps) => {
   const [opened, { toggle }] = useDisclosure(false);
 
   return (
-    <Header height={HEADER_HEIGHT} sx={{ borderBottom: 0 }}>
+    <Header height={HEADER_HEIGHT} py="sm" sx={{ borderBottom: 0 }}>
       <Container className={classes.inner}>
         <Group>
           <Burger opened={opened} onClick={toggle} className={classes.burger} size="sm" />

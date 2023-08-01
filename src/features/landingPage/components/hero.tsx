@@ -1,5 +1,15 @@
 import React from 'react';
-import { createStyles, Container, Text, Button, Group, rem, Image, Title } from '@mantine/core';
+import {
+  createStyles,
+  Container,
+  Text,
+  Button,
+  Group,
+  rem,
+  Image,
+  Title,
+  Center,
+} from '@mantine/core';
 
 const useStyles = createStyles((theme, grayBackground: Boolean) => ({
   main: {
@@ -62,7 +72,14 @@ const useStyles = createStyles((theme, grayBackground: Boolean) => ({
     },
   },
 
+  imageMobileContainer: {
+    [theme.fn.largerThan('sm')]: {
+      display: 'none',
+    },
+  },
+
   imageMobile: {
+    display: 'flex',
     flex: 1,
     alignSelf: 'center',
     [theme.fn.smallerThan('sm')]: {
@@ -131,7 +148,9 @@ export const Hero = ({
           <Text className={classes.description} color="dimmed">
             {subheadingText}
           </Text>
-          <Image src={image} className={classes.imageMobile} />
+          <Center className={classes.imageMobileContainer}>
+            <Image src={image} className={classes.imageMobile} />
+          </Center>
           <Group className={classes.controlContainer}>
             <Button
               size="xl"

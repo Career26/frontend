@@ -107,9 +107,9 @@ export const LandingPage = () => {
         {[
           {
             image: careerPathsImg,
-            title: 'Discover Your Ideal Career Path',
+            title: 'Discover Your Ideal Career',
             description:
-              "Find the career path that aligns with your aspirations and strengths. Our suggestions empower you to make informed decisions about your future. Take a short questionnaire where we delve into your interests, values, and skills and we'll deliver tailored recommendations. Navigate confidently toward your dream career with our expert guidance.",
+              'Find the career that aligns with your aspirations and strengths. Take our short questionnaire and receive tailored career suggestions. Navigate confidently toward your dream career with our expert guidance.',
           },
           {
             image: interviewImg,

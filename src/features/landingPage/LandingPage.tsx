@@ -1,16 +1,25 @@
 import React from 'react';
+
+// external
+import { useHistory } from 'react-router-dom';
 import { createStyles, Container, Badge, rem, Text } from '@mantine/core';
+
+// components
+import { Feature } from './components/feature';
+import { Hero } from './components/hero';
+import { Pricing } from './components/pricing';
+import { SimpleHeader } from './components/header';
+
+// assets
 import careerProgressImg from './assets/careerProgress.svg';
 import cvImg from './assets/cv.svg';
 import careerPathsImg from './assets/careerPaths.svg';
 import interviewImg from './assets/interview.svg';
 import successImg from './assets/success.svg';
-import { useHistory } from 'react-router-dom';
+
+// config
+import * as constants from './config/constants';
 import { urls } from '@shared/config/urlConstants';
-import { Feature } from './components/feature';
-import { Hero } from './components/hero';
-import { Pricing } from './components/pricing';
-import { SimpleHeader } from './components/header';
 
 const useStyles = createStyles((theme) => ({
   mainContainer: {
@@ -62,17 +71,15 @@ const useStyles = createStyles((theme) => ({
 
 export const LandingPage = () => {
   const { classes } = useStyles();
-  const history = useHistory();
 
-  const featuresTag = 'features';
-  const pricingTag = 'pricing';
+  const history = useHistory();
 
   return (
     <Container className={classes.mainContainer}>
       <SimpleHeader
         links={[
-          { label: 'Features', link: featuresTag },
-          { label: 'Pricing', link: pricingTag },
+          { label: 'Features', link: constants.featuresTag },
+          { label: 'Pricing', link: constants.pricingTag },
         ]}
       />
       <Hero
@@ -86,7 +93,7 @@ export const LandingPage = () => {
         grayBackground={false}
       />
 
-      <Container className={classes.featuresContainer} id={featuresTag}>
+      <Container className={classes.featuresContainer} id={constants.featuresTag}>
         {[
           {
             image: careerPathsImg,
@@ -111,7 +118,7 @@ export const LandingPage = () => {
         ))}
       </Container>
 
-      <Container className={classes.pricingContainer} id={pricingTag}>
+      <Container className={classes.pricingContainer} id={constants.pricingTag}>
         <Badge size="xl" radius="sm" variant="light">
           Pricing
         </Badge>

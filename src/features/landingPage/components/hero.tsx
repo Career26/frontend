@@ -3,14 +3,14 @@ import { createStyles, Container, Text, Button, Group, rem, Image, Title } from 
 
 const useStyles = createStyles((theme, grayBackground: Boolean) => ({
   main: {
-    padding: 0,
-    maxWidth: 'none',
+    padding: theme.spacing.xl,
     paddingTop: rem(80),
     paddingBottom: rem(80),
+    maxWidth: 'none',
     background: grayBackground ? theme.colors.gray[0] : theme.white,
     [theme.fn.smallerThan('sm')]: {
-      paddingBottom: rem(80),
-      paddingTop: rem(80),
+      paddingBottom: rem(40),
+      paddingTop: rem(40),
     },
   },
 
@@ -18,6 +18,7 @@ const useStyles = createStyles((theme, grayBackground: Boolean) => ({
     display: 'flex',
     flexDirection: 'row',
     flex: 1,
+    padding: 0,
     [theme.fn.smallerThan('sm')]: {
       flexDirection: 'column-reverse',
     },
@@ -25,6 +26,8 @@ const useStyles = createStyles((theme, grayBackground: Boolean) => ({
 
   titleContainer: {
     flex: 1,
+    paddingLeft: 0,
+    paddingRight: 0,
   },
 
   title: {
@@ -38,7 +41,6 @@ const useStyles = createStyles((theme, grayBackground: Boolean) => ({
     [theme.fn.smallerThan('sm')]: {
       fontSize: rem(42),
       lineHeight: 1.2,
-      marginTop: theme.spacing.xl,
     },
   },
 
@@ -55,6 +57,25 @@ const useStyles = createStyles((theme, grayBackground: Boolean) => ({
     alignSelf: 'center',
     paddingLeft: `calc(${theme.spacing.xl} * 2)`,
     paddingRight: `calc(${theme.spacing.xl} * 2)`,
+    [theme.fn.smallerThan('sm')]: {
+      display: 'none',
+    },
+  },
+
+  imageMobile: {
+    flex: 1,
+    alignSelf: 'center',
+    [theme.fn.smallerThan('sm')]: {
+      marginTop: `calc(${theme.spacing.xl} * 2)`,
+      marginBottom: `calc(${theme.spacing.xl} * 2)`,
+      maxWidth: rem(350),
+    },
+    [theme.fn.smallerThan('xs')]: {
+      maxWidth: rem(250),
+    },
+    [theme.fn.largerThan('sm')]: {
+      display: 'none',
+    },
   },
 
   controlContainer: {
@@ -110,6 +131,7 @@ export const Hero = ({
           <Text className={classes.description} color="dimmed">
             {subheadingText}
           </Text>
+          <Image src={image} className={classes.imageMobile} />
           <Group className={classes.controlContainer}>
             <Button
               size="xl"

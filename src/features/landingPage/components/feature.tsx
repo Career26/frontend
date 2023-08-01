@@ -8,12 +8,16 @@ const useStyles = createStyles((theme) => ({
     flex: 1,
     alignItems: 'center',
     padding: 0,
-    paddingTop: `calc(${theme.spacing.xl} * 1.5)`,
-    paddingBottom: `calc(${theme.spacing.xl} * 1.5)`,
+    paddingTop: theme.spacing.xl,
+    paddingBottom: theme.spacing.xl,
+    [theme.fn.smallerThan('md')]: {
+      flexDirection: 'column',
+    },
   },
 
   textContainer: {
     flex: 3,
+    padding: 0,
   },
 
   titleText: {
@@ -22,18 +26,27 @@ const useStyles = createStyles((theme) => ({
     fontWeight: 800,
     lineHeight: 1.1,
     color: theme.colors.gray[9],
+    [theme.fn.smallerThan('md')]: {
+      textAlign: 'center',
+    },
   },
 
   descriptionText: {
-    paddingBottom: theme.spacing.md,
     fontSize: rem(17),
     color: theme.colors.gray[7],
+    [theme.fn.smallerThan('md')]: {
+      textAlign: 'center',
+    },
   },
 
   image: {
     flex: 1,
     paddingLeft: `calc(${theme.spacing.xl} * 2)`,
     paddingRight: `calc(${theme.spacing.xl} * 2)`,
+    [theme.fn.smallerThan('md')]: {
+      maxWidth: rem(300),
+      paddingBottom: theme.spacing.xl,
+    },
   },
 }));
 
@@ -48,11 +61,11 @@ export const Feature = ({ title, description, image }: FeatureComponentProps) =>
 
   return (
     <Container className={classes.main}>
+      <Image src={image} className={classes.image} />
       <Container className={classes.textContainer}>
         <Text className={classes.titleText}>{title}</Text>
         <Text className={classes.descriptionText}>{description}</Text>
       </Container>
-      <Image src={image} className={classes.image} />
     </Container>
   );
 };

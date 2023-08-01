@@ -75,7 +75,11 @@ export const Pricing = ({
 
         <Container my="sm" className={classes.benefitsContainer}>
           {benefits.map((benefit, index) => (
-            <Container className={classes.benefitContainer} py={index % 2 == 0 ? 0 : 'sm'}>
+            <Container
+              key={index}
+              className={classes.benefitContainer}
+              py={index % 2 == 0 ? 0 : 'sm'}
+            >
               <IconCircleCheck />
               <Text pl={'xs'} size="md" color="dimmed">
                 {benefit}

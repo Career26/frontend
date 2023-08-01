@@ -33,8 +33,10 @@ const useStyles = createStyles((theme) => ({
     flexDirection: 'column',
     flex: 1,
     background: theme.colors.gray[0],
-    padding: 0,
+    padding: theme.spacing.xl,
     maxWidth: 'none',
+    paddingTop: theme.spacing.xl,
+    paddingBottom: theme.spacing.xl,
   },
 
   pricingContainer: {
@@ -43,6 +45,8 @@ const useStyles = createStyles((theme) => ({
     alignItems: 'center',
     paddingTop: `calc(${theme.spacing.xl} * 2)`,
     paddingBottom: `calc(${theme.spacing.xl} * 2)`,
+    paddingLeft: theme.spacing.xl,
+    paddingRight: theme.spacing.xl,
     maxWidth: 'none',
   },
 
@@ -66,6 +70,9 @@ const useStyles = createStyles((theme) => ({
   pricingTierContainer: {
     display: 'flex',
     flexDirection: 'row',
+    [theme.fn.smallerThan('md')]: {
+      flexDirection: 'column',
+    },
   },
 }));
 
@@ -74,6 +81,8 @@ export const LandingPage = () => {
 
   const history = useHistory();
 
+  const takeTest = () => history.push(urls.careersTest);
+
   return (
     <Container className={classes.mainContainer}>
       <SimpleHeader
@@ -81,6 +90,7 @@ export const LandingPage = () => {
           { label: 'Features', link: constants.featuresTag },
           { label: 'Pricing', link: constants.pricingTag },
         ]}
+        getStarted={takeTest}
       />
       <Hero
         image={careerProgressImg}
@@ -114,7 +124,12 @@ export const LandingPage = () => {
               'Our CV enhancement service ensures you stand out in a competitive job market. We craft a CV that highlights your strengths, experiences, and achievements in a compelling manner. Unlock opportunities and leave a lasting impression with a professionally tailored CV that showcases your true potential.',
           },
         ].map((item) => (
-          <Feature title={item.title} image={item.image} description={item.description} />
+          <Feature
+            title={item.title}
+            key={item.title}
+            image={item.image}
+            description={item.description}
+          />
         ))}
       </Container>
 
@@ -136,7 +151,7 @@ export const LandingPage = () => {
               'Limited Interview Questions',
               'Basic CV Enhancement',
             ]}
-            onClick={() => history.push(urls.careersTest)}
+            onClick={takeTest}
           />
           <Pricing
             title="Premium Tier"
@@ -148,7 +163,7 @@ export const LandingPage = () => {
               'Extensive Interview Questions',
               'Advanced CV Enhancement',
             ]}
-            onClick={() => history.push(urls.careersTest)}
+            onClick={takeTest}
           />
         </Container>
       </Container>
@@ -159,7 +174,7 @@ export const LandingPage = () => {
         subheadingText="Ready to unleash your potential? Take our free questionnaire to view your career paths now"
         headingText="Join & Achieve"
         colorHeadingText="Career Success"
-        onClick={() => history.push(urls.careersTest)}
+        onClick={takeTest}
         grayBackground={true}
       />
     </Container>

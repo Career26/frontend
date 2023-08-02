@@ -104,7 +104,7 @@ export const SimpleHeader = ({ links, getStarted }: HeaderActionProps) => {
       <Container className={classes.inner}>
         <Group>
           <Burger opened={opened} onClick={toggle} className={classes.burger} size="sm" />
-          <Text className={classes.logo}>C26</Text>
+          <Text className={classes.logo}>LOGO HERE</Text>
         </Group>
 
         <Group spacing={5} className={classes.links}>

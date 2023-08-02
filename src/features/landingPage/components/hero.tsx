@@ -98,7 +98,7 @@ const useStyles = createStyles((theme, grayBackground: Boolean) => ({
   controlContainer: {
     marginTop: `calc(${theme.spacing.xl} * 2)`,
     [theme.fn.smallerThan('sm')]: {
-      marginTop: theme.spacing.xl,
+      marginTop: 0,
     },
   },
 

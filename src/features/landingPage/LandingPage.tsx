@@ -2,7 +2,7 @@ import React from 'react';
 
 // external
 import { useHistory } from 'react-router-dom';
-import { createStyles, Container, Badge, rem, Text } from '@mantine/core';
+import { createStyles, Container, Badge, rem, Text, Space } from '@mantine/core';
 
 // components
 import { Feature } from './components/feature';
@@ -51,27 +51,34 @@ const useStyles = createStyles((theme) => ({
   },
 
   pricingText: {
-    fontSize: rem(32),
+    fontSize: rem(36),
     fontWeight: 800,
     lineHeight: 1.1,
     margin: 0,
     padding: 0,
     color: theme.colors.gray[9],
-    paddingTop: theme.spacing.xl,
+    paddingTop: `calc(${theme.spacing.xl} * 1.5)`,
     paddingBottom: `calc(${theme.spacing.xl} * 1.5)`,
 
     [theme.fn.smallerThan('sm')]: {
-      fontSize: rem(42),
+      fontSize: rem(30),
       lineHeight: 1.2,
-      marginTop: theme.spacing.xl,
+      textAlign: 'center',
     },
   },
 
   pricingTierContainer: {
     display: 'flex',
     flexDirection: 'row',
+    padding: 0,
     [theme.fn.smallerThan('md')]: {
       flexDirection: 'column',
+    },
+  },
+  pricingMargin: {
+    paddingBottom: `calc(${theme.spacing.xl} * 2)`,
+    [theme.fn.largerThan('md')]: {
+      display: 'none',
     },
   },
 }));
@@ -97,8 +104,8 @@ export const LandingPage = () => {
         actionButtonText="Start Your Journey Now!"
         subheadingText="Reveal your perfect career path, ace interviews and elevate your CV with our all-in-one
           career advisory platform"
-        headingText="Discover your"
-        colorHeadingText="perfect career"
+        headingText="Discover Your"
+        colorHeadingText="Perfect Career"
         onClick={() => history.push(urls.careersTest)}
         grayBackground={false}
       />
@@ -107,7 +114,7 @@ export const LandingPage = () => {
         {[
           {
             image: careerPathsImg,
-            title: 'Discover Your Ideal Career',
+            title: 'Discover Your Perfect Career',
             description:
               'Find the career that aligns with your aspirations and strengths. Take our short questionnaire and receive tailored career suggestions. Navigate confidently toward your dream career with our expert guidance.',
           },
@@ -115,13 +122,13 @@ export const LandingPage = () => {
             image: interviewImg,
             title: 'Ace Interviews With Confidence',
             description:
-              "Step into your interviews with confidence. Our expertly crafted mock interview questions prepare you for any scenario. Practicing with our extensive range of interview simulations, you'll gain the expertise needed to impress employers and be well-equipped to excel in even the most challenging interviews.",
+              'Step into interviews with confidence. Our expertly crafted interview questions prepare you for any scenario. Gain the expertise needed to impress employers and be well-equipped to excel in even the most challenging interviews.',
           },
           {
             image: cvImg,
             title: 'Enhance Your CV',
             description:
-              'Our CV enhancement service ensures you stand out in a competitive job market. We craft a CV that highlights your strengths, experiences, and achievements in a compelling manner. Unlock opportunities and leave a lasting impression with a professionally tailored CV that showcases your true potential.',
+              'Stand out in a competitive job market with a professional CV that highlights your strengths, experiences, and achievements. Unlock opportunities and leave a lasting impression with a CV that showcases your true potential.',
           },
         ].map((item) => (
           <Feature
@@ -138,7 +145,7 @@ export const LandingPage = () => {
           Pricing
         </Badge>
 
-        <Text className={classes.pricingText}>Invest in your future. Get started for free!</Text>
+        <Text className={classes.pricingText}>Invest in Your Future. Start For Free!</Text>
 
         <Container className={classes.pricingTierContainer}>
           <Pricing
@@ -153,6 +160,7 @@ export const LandingPage = () => {
             ]}
             onClick={takeTest}
           />
+          <Space className={classes.pricingMargin} />
           <Pricing
             title="Premium Tier"
             amount="£29"

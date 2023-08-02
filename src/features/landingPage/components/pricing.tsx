@@ -9,6 +9,7 @@ const useStyles = createStyles((theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
     alignContent: 'center',
+    padding: 0,
   },
 
   card: {
@@ -18,6 +19,9 @@ const useStyles = createStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    [theme.fn.smallerThan('sm')]: {
+      width: rem(300),
+    },
   },
 
   priceText: {
@@ -27,7 +31,15 @@ const useStyles = createStyles((theme) => ({
     color: theme.colors.gray[9],
   },
 
+  benefitText: {
+    fontSize: rem(17),
+    [theme.fn.smallerThan('sm')]: {
+      fontSize: rem(15),
+    },
+  },
+
   benefitsContainer: {
+    padding: 0,
     paddingTop: theme.spacing.xs,
     paddingBottom: theme.spacing.xs,
   },
@@ -35,6 +47,7 @@ const useStyles = createStyles((theme) => ({
   benefitContainer: {
     display: 'flex',
     flexDirection: 'row',
+    alignItems: 'center',
     paddingLeft: 0,
     paddingRight: 0,
   },
@@ -81,7 +94,7 @@ export const Pricing = ({
               py={index % 2 == 0 ? 0 : 'sm'}
             >
               <IconCircleCheck />
-              <Text pl={'xs'} size="md" color="dimmed">
+              <Text pl={'xs'} className={classes.benefitText} color="dimmed">
                 {benefit}
               </Text>
             </Container>

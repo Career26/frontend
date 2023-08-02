@@ -56,30 +56,23 @@ const useStyles = createStyles((theme) => ({
     },
   },
 
-  dropdown: {
-    zIndex: 100,
-  },
-
   mobileLink: {
-    zIndex: 100,
     display: 'block',
     lineHeight: 1,
     textDecoration: 'none',
     color: theme.colors.gray[7],
-    fontSize: theme.fontSizes.sm,
+    fontSize: theme.fontSizes.md,
     fontWeight: 500,
     borderRadius: 0,
     padding: theme.spacing.md,
+
     '&:hover': {
       backgroundColor: theme.colors.gray[0],
     },
+
     [theme.fn.largerThan('md')]: {
       display: 'none',
     },
-  },
-
-  linkLabel: {
-    marginRight: rem(5),
   },
 }));
 
@@ -132,7 +125,7 @@ export const SimpleHeader = ({ links, getStarted }: HeaderActionProps) => {
 
       <Transition transition="pop-top-left" duration={200} mounted={opened}>
         {(styles) => (
-          <Paper className={classes.dropdown} withBorder style={styles}>
+          <Paper withBorder style={styles}>
             {items}
           </Paper>
         )}

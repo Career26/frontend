@@ -19,6 +19,7 @@ const useStyles = createStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+
     [theme.fn.smallerThan('sm')]: {
       width: rem(300),
     },
@@ -33,6 +34,7 @@ const useStyles = createStyles((theme) => ({
 
   benefitText: {
     fontSize: rem(17),
+
     [theme.fn.smallerThan('sm')]: {
       fontSize: rem(15),
     },

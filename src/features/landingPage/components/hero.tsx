@@ -18,6 +18,7 @@ const useStyles = createStyles((theme, grayBackground: Boolean) => ({
     paddingBottom: rem(80),
     maxWidth: 'none',
     background: grayBackground ? theme.colors.gray[0] : theme.white,
+
     [theme.fn.smallerThan('sm')]: {
       paddingBottom: rem(40),
       paddingTop: rem(40),
@@ -57,6 +58,7 @@ const useStyles = createStyles((theme, grayBackground: Boolean) => ({
   description: {
     marginTop: theme.spacing.xl,
     fontSize: rem(20),
+
     [theme.fn.smallerThan('sm')]: {
       fontSize: rem(18),
     },
@@ -67,6 +69,7 @@ const useStyles = createStyles((theme, grayBackground: Boolean) => ({
     alignSelf: 'center',
     paddingLeft: `calc(${theme.spacing.xl} * 2)`,
     paddingRight: `calc(${theme.spacing.xl} * 2)`,
+
     [theme.fn.smallerThan('sm')]: {
       display: 'none',
     },
@@ -82,14 +85,17 @@ const useStyles = createStyles((theme, grayBackground: Boolean) => ({
     display: 'flex',
     flex: 1,
     alignSelf: 'center',
+
     [theme.fn.smallerThan('sm')]: {
       marginTop: `calc(${theme.spacing.xl} * 2)`,
       marginBottom: `calc(${theme.spacing.xl} * 2)`,
       maxWidth: rem(350),
     },
+
     [theme.fn.smallerThan('xs')]: {
       maxWidth: rem(250),
     },
+
     [theme.fn.largerThan('sm')]: {
       display: 'none',
     },
@@ -97,6 +103,7 @@ const useStyles = createStyles((theme, grayBackground: Boolean) => ({
 
   controlContainer: {
     marginTop: `calc(${theme.spacing.xl} * 2)`,
+
     [theme.fn.smallerThan('sm')]: {
       marginTop: 0,
     },

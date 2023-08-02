@@ -10,6 +10,7 @@ const useStyles = createStyles((theme) => ({
     padding: 0,
     paddingTop: theme.spacing.xl,
     paddingBottom: theme.spacing.xl,
+
     [theme.fn.smallerThan('md')]: {
       flexDirection: 'column',
     },
@@ -26,6 +27,7 @@ const useStyles = createStyles((theme) => ({
     fontWeight: 800,
     lineHeight: 1.1,
     color: theme.colors.gray[9],
+
     [theme.fn.smallerThan('md')]: {
       textAlign: 'center',
     },
@@ -34,6 +36,7 @@ const useStyles = createStyles((theme) => ({
   descriptionText: {
     fontSize: rem(17),
     color: theme.colors.gray[7],
+
     [theme.fn.smallerThan('md')]: {
       textAlign: 'center',
     },
@@ -43,6 +46,7 @@ const useStyles = createStyles((theme) => ({
     flex: 1,
     paddingLeft: `calc(${theme.spacing.xl} * 2)`,
     paddingRight: `calc(${theme.spacing.xl} * 2)`,
+
     [theme.fn.smallerThan('md')]: {
       maxWidth: rem(300),
       paddingBottom: theme.spacing.xl,

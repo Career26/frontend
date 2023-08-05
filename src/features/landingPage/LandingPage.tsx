@@ -16,6 +16,7 @@ import cvImg from './assets/cv.svg';
 import careerPathsImg from './assets/careerPaths.svg';
 import interviewImg from './assets/interview.svg';
 import successImg from './assets/success.svg';
+import networkImg from './assets/network.svg';
 
 // config
 import * as constants from './config/constants';
@@ -58,11 +59,11 @@ const useStyles = createStyles((theme) => ({
     color: theme.colors.gray[9],
     paddingTop: `calc(${theme.spacing.xl} * 1.5)`,
     paddingBottom: `calc(${theme.spacing.xl} * 1.5)`,
+    textAlign: 'center',
 
     [theme.fn.smallerThan('sm')]: {
       fontSize: rem(30),
       lineHeight: 1.2,
-      textAlign: 'center',
     },
   },
 
@@ -104,7 +105,7 @@ export const LandingPage = () => {
       <Hero
         image={careerProgressImg}
         actionButtonText="Start Your Journey Now!"
-        subheadingText="Reveal your perfect career path, ace interviews and elevate your CV with our all-in-one
+        subheadingText="Reveal your perfect career path, ace interviews, elevate your CV and connect with a network of professionals with our all-in-one
           career advisory platform"
         headingText="Discover Your"
         colorHeadingText="Perfect Career"
@@ -113,6 +114,7 @@ export const LandingPage = () => {
       />
 
       <Container className={classes.featuresContainer} id={constants.featuresTag}>
+        <Text className={classes.pricingText}>Your All-In-One Career Platform</Text>
         {[
           {
             image: careerPathsImg,
@@ -131,6 +133,12 @@ export const LandingPage = () => {
             title: 'Enhance Your CV',
             description:
               'Stand out in a competitive job market with a professional CV that highlights your strengths, experiences, and achievements. Unlock opportunities and leave a lasting impression with a CV that showcases your true potential.',
+          },
+          {
+            image: networkImg,
+            title: 'Connect With Top Industry Mentors',
+            description:
+              'Access our exclusive network of professionals already thriving in your desired career. Gain valuable insights and receive mentoring from industry insiders who know the secrets to success.',
           },
         ].map((item) => (
           <Feature
@@ -165,7 +173,7 @@ export const LandingPage = () => {
           <Space className={classes.pricingMargin} />
           <Pricing
             title="Premium Tier"
-            amount="£29"
+            amount="£19"
             peroid="Month"
             buttonText="Get Started"
             benefits={[

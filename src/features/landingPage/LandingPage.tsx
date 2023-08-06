@@ -41,18 +41,15 @@ const useStyles = createStyles((theme) => ({
     background: theme.colors.gray[0],
     padding: theme.spacing.xl,
     maxWidth: 'none',
-    paddingTop: theme.spacing.xl,
-    paddingBottom: theme.spacing.xl,
   },
 
   pricingContainer: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    padding: theme.spacing.xl,
     paddingTop: `calc(${theme.spacing.xl} * 2)`,
     paddingBottom: `calc(${theme.spacing.xl} * 2)`,
-    paddingLeft: theme.spacing.xl,
-    paddingRight: theme.spacing.xl,
   },
 
   pricingText: {
@@ -62,8 +59,8 @@ const useStyles = createStyles((theme) => ({
     margin: 0,
     padding: 0,
     color: theme.colors.gray[9],
-    paddingTop: `calc(${theme.spacing.xl} * 1.5)`,
-    paddingBottom: `calc(${theme.spacing.xl} * 1.5)`,
+    paddingTop: theme.spacing.xl,
+    paddingBottom: theme.spacing.xl,
     textAlign: 'center',
 
     [theme.fn.smallerThan('sm')]: {

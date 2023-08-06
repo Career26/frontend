@@ -77,16 +77,16 @@ const useStyles = createStyles((theme) => ({
 }));
 
 interface HeaderActionProps {
-  links: { link: string; label: string }[];
+  links?: { link: string; label: string }[];
   getStarted: () => void;
 }
 
-export const SimpleHeader = ({ links, getStarted }: HeaderActionProps) => {
+export const PageHeader = ({ links, getStarted }: HeaderActionProps) => {
   const { classes, cx } = useStyles();
 
   const [opened, { toggle }] = useDisclosure(false);
 
-  const items = links.map((link) => (
+  const items = links?.map((link) => (
     <a
       key={link.label}
       href={`#${link.link}`}
@@ -100,20 +100,22 @@ export const SimpleHeader = ({ links, getStarted }: HeaderActionProps) => {
   ));
 
   return (
-    <Header height={HEADER_HEIGHT} py="sm" sx={{ borderBottom: 0 }}>
+    <Header height="auto" py="xs" withBorder>
       <Container className={classes.inner}>
         <Group>
           <Burger opened={opened} onClick={toggle} className={classes.burger} size="sm" />
           <Text className={classes.logo}>LOGO HERE</Text>
         </Group>
 
-        <Group spacing={5} className={classes.links}>
-          {links.map((link) => (
-            <a key={link.label} className={classes.link} href={`#${link.link}`}>
-              {link.label}
-            </a>
-          ))}
-        </Group>
+        {links && (
+          <Group spacing={5} className={classes.links}>
+            {links.map((link) => (
+              <a key={link.label} className={classes.link} href={`#${link.link}`}>
+                {link.label}
+              </a>
+            ))}
+          </Group>
+        )}
 
         <Group>
           <Button variant="default">Login</Button>
@@ -122,10 +124,9 @@ export const SimpleHeader = ({ links, getStarted }: HeaderActionProps) => {
           </Button>
         </Group>
       </Container>
-
       <Transition transition="pop-top-left" duration={200} mounted={opened}>
         {(styles) => (
-          <Paper withBorder style={styles}>
+          <Paper withBorder style={styles} sx={{ position: 'fixed', width: '100%' }} mt="xs">
             {items}
           </Paper>
         )}

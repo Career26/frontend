@@ -2,13 +2,24 @@ import React from 'react';
 
 // external
 import { useHistory } from 'react-router-dom';
-import { createStyles, Container, Badge, rem, Text, Space } from '@mantine/core';
+import {
+  createStyles,
+  Container,
+  Badge,
+  rem,
+  Text,
+  Space,
+  AppShell,
+  useMantineTheme,
+} from '@mantine/core';
 
 // components
 import { Feature } from './components/feature';
 import { Hero } from './components/hero';
 import { Pricing } from './components/pricing';
-import { SimpleHeader } from './components/header';
+
+// shared
+import { PageHeader } from '@shared/components/pageHeader/PageHeader';
 
 // assets
 import careerProgressImg from './assets/careerProgress.svg';
@@ -23,12 +34,6 @@ import * as constants from './config/constants';
 import { urls } from '@shared/config/urlConstants';
 
 const useStyles = createStyles((theme) => ({
-  mainContainer: {
-    paddingLeft: 0,
-    paddingRight: 0,
-    maxWidth: 'none',
-  },
-
   featuresContainer: {
     display: 'flex',
     flexDirection: 'column',
@@ -89,6 +94,8 @@ const useStyles = createStyles((theme) => ({
 export const LandingPage = () => {
   const { classes } = useStyles();
 
+  const theme = useMantineTheme();
+
   const history = useHistory();
 
   const takeTest = () => history.push(urls.careersTest);
@@ -121,14 +128,25 @@ export const LandingPage = () => {
   ];
 
   return (
-    <Container className={classes.mainContainer}>
-      <SimpleHeader
-        links={[
-          { label: 'Features', link: constants.featuresTag },
-          { label: 'Pricing', link: constants.pricingTag },
-        ]}
-        getStarted={takeTest}
-      />
+    <AppShell
+      styles={{
+        main: {
+          marginTop: rem(60),
+          paddingTop: `calc(${theme.spacing.xs} * 2)`,
+          paddingRight: '0',
+          paddingLeft: '0',
+        },
+      }}
+      header={
+        <PageHeader
+          links={[
+            { label: 'Features', link: constants.featuresTag },
+            { label: 'Pricing', link: constants.pricingTag },
+          ]}
+          getStarted={takeTest}
+        />
+      }
+    >
       <Hero
         image={careerProgressImg}
         actionButtonText="Start Your Journey Now!"
@@ -197,6 +215,6 @@ export const LandingPage = () => {
         onClick={takeTest}
         grayBackground={true}
       />
-    </Container>
+    </AppShell>
   );
 };

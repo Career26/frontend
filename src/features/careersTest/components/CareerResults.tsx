@@ -22,9 +22,9 @@ export const CareerResults = ({ profile }: CareerResultsProps) => {
 
   console.log(generateProfileResults);
 
-  useEffect(() => {
-    generateProfile(profile);
-  }, []);
+  // useEffect(() => {
+  //   generateProfile(profile);
+  // }, []);
 
   // if (isFetching) {
   //   return <Loader />;

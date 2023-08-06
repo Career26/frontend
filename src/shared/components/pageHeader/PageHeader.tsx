@@ -100,7 +100,7 @@ export const PageHeader = ({ links, getStarted }: HeaderActionProps) => {
   ));
 
   return (
-    <Header height={HEADER_HEIGHT} py="sm" sx={{ borderBottom: 0 }}>
+    <Header height="auto" py="xs" withBorder>
       <Container className={classes.inner}>
         <Group>
           <Burger opened={opened} onClick={toggle} className={classes.burger} size="sm" />
@@ -124,10 +124,9 @@ export const PageHeader = ({ links, getStarted }: HeaderActionProps) => {
           </Button>
         </Group>
       </Container>
-
       <Transition transition="pop-top-left" duration={200} mounted={opened}>
         {(styles) => (
-          <Paper withBorder style={styles}>
+          <Paper withBorder style={styles} sx={{ position: 'fixed', width: '100%' }} mt="xs">
             {items}
           </Paper>
         )}

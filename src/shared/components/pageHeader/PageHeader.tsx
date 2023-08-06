@@ -77,16 +77,16 @@ const useStyles = createStyles((theme) => ({
 }));
 
 interface HeaderActionProps {
-  links: { link: string; label: string }[];
+  links?: { link: string; label: string }[];
   getStarted: () => void;
 }
 
-export const SimpleHeader = ({ links, getStarted }: HeaderActionProps) => {
+export const PageHeader = ({ links, getStarted }: HeaderActionProps) => {
   const { classes, cx } = useStyles();
 
   const [opened, { toggle }] = useDisclosure(false);
 
-  const items = links.map((link) => (
+  const items = links?.map((link) => (
     <a
       key={link.label}
       href={`#${link.link}`}
@@ -107,13 +107,15 @@ export const SimpleHeader = ({ links, getStarted }: HeaderActionProps) => {
           <Text className={classes.logo}>LOGO HERE</Text>
         </Group>
 
-        <Group spacing={5} className={classes.links}>
-          {links.map((link) => (
-            <a key={link.label} className={classes.link} href={`#${link.link}`}>
-              {link.label}
-            </a>
-          ))}
-        </Group>
+        {links && (
+          <Group spacing={5} className={classes.links}>
+            {links.map((link) => (
+              <a key={link.label} className={classes.link} href={`#${link.link}`}>
+                {link.label}
+              </a>
+            ))}
+          </Group>
+        )}
 
         <Group>
           <Button variant="default">Login</Button>

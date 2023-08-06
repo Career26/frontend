@@ -8,7 +8,9 @@ import { createStyles, Container, Badge, rem, Text, Space } from '@mantine/core'
 import { Feature } from './components/feature';
 import { Hero } from './components/hero';
 import { Pricing } from './components/pricing';
-import { SimpleHeader } from './components/header';
+
+// shared
+import { PageHeader } from '@shared/components/pageHeader/PageHeader';
 
 // assets
 import careerProgressImg from './assets/careerProgress.svg';
@@ -122,7 +124,7 @@ export const LandingPage = () => {
 
   return (
     <Container className={classes.mainContainer}>
-      <SimpleHeader
+      <PageHeader
         links={[
           { label: 'Features', link: constants.featuresTag },
           { label: 'Pricing', link: constants.pricingTag },

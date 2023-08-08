@@ -57,7 +57,6 @@ const useStyles = createStyles((theme) => ({
 
     [theme.fn.smallerThan('sm')]: {
       fontSize: rem(30),
-      lineHeight: 1.2,
     },
   },
 

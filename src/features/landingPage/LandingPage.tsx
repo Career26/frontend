@@ -2,16 +2,7 @@ import React from 'react';
 
 // external
 import { useHistory } from 'react-router-dom';
-import {
-  createStyles,
-  Container,
-  Badge,
-  rem,
-  Text,
-  Space,
-  AppShell,
-  useMantineTheme,
-} from '@mantine/core';
+import { createStyles, Container, Badge, rem, Text, Space, useMantineTheme } from '@mantine/core';
 
 // components
 import { Feature } from './components/feature';
@@ -32,6 +23,7 @@ import networkImg from './assets/network.svg';
 // config
 import * as constants from './config/constants';
 import { urls } from '@shared/config/urlConstants';
+import { Shell } from '@shared/components/shell/Shell';
 
 const useStyles = createStyles((theme) => ({
   featuresContainer: {
@@ -125,15 +117,7 @@ export const LandingPage = () => {
   ];
 
   return (
-    <AppShell
-      styles={{
-        main: {
-          marginTop: rem(60),
-          paddingTop: `calc(${theme.spacing.xs} * 2)`,
-          paddingRight: '0',
-          paddingLeft: '0',
-        },
-      }}
+    <Shell
       header={
         <PageHeader
           links={[
@@ -144,74 +128,76 @@ export const LandingPage = () => {
         />
       }
     >
-      <Hero
-        image={careerProgressImg}
-        actionButtonText="Start Your Journey Now!"
-        subheadingText="Reveal your perfect career path, ace interviews, elevate your CV and connect with a network of professionals with our all-in-one
+      <>
+        <Hero
+          image={careerProgressImg}
+          actionButtonText="Start Your Journey Now!"
+          subheadingText="Reveal your perfect career path, ace interviews, elevate your CV and connect with a network of professionals with our all-in-one
           career advisory platform"
-        headingText="Discover Your"
-        colorHeadingText="Perfect Career"
-        onClick={() => history.push(urls.careersTest)}
-        grayBackground={false}
-      />
+          headingText="Discover Your"
+          colorHeadingText="Perfect Career"
+          onClick={() => history.push(urls.careersTest)}
+          grayBackground={false}
+        />
 
-      <Container className={classes.featuresContainer} id={constants.featuresTag}>
-        <Text className={classes.pricingText}>Your All-In-One Career Platform</Text>
-        {features.map((item) => (
-          <Feature
-            title={item.title}
-            key={item.title}
-            image={item.image}
-            description={item.description}
-          />
-        ))}
-      </Container>
-
-      <Container className={classes.pricingContainer} id={constants.pricingTag}>
-        <Badge size="xl" radius="sm" variant="light">
-          Pricing
-        </Badge>
-
-        <Text className={classes.pricingText}>Invest in Your Future. Start For Free!</Text>
-
-        <Container className={classes.pricingTierContainer}>
-          <Pricing
-            title="Free Tier"
-            amount="£0"
-            peroid="Month"
-            buttonText="Try For Free"
-            benefits={[
-              'Personalised Career Paths',
-              'Limited Interview Questions',
-              'Basic CV Enhancement',
-            ]}
-            onClick={takeTest}
-          />
-          <Space className={classes.pricingMargin} />
-          <Pricing
-            title="Premium Tier"
-            amount="£19"
-            peroid="Month"
-            buttonText="Get Started"
-            benefits={[
-              'Personalised Career Paths',
-              'Extensive Interview Questions',
-              'Advanced CV Enhancement',
-            ]}
-            onClick={takeTest}
-          />
+        <Container className={classes.featuresContainer} id={constants.featuresTag}>
+          <Text className={classes.pricingText}>Your All-In-One Career Platform</Text>
+          {features.map((item) => (
+            <Feature
+              title={item.title}
+              key={item.title}
+              image={item.image}
+              description={item.description}
+            />
+          ))}
         </Container>
-      </Container>
 
-      <Hero
-        image={successImg}
-        actionButtonText="Try For Free!"
-        subheadingText="Ready to unleash your potential? Take our free questionnaire to view your career paths now"
-        headingText="Join & Achieve"
-        colorHeadingText="Career Success"
-        onClick={takeTest}
-        grayBackground={true}
-      />
-    </AppShell>
+        <Container className={classes.pricingContainer} id={constants.pricingTag}>
+          <Badge size="xl" radius="sm" variant="light">
+            Pricing
+          </Badge>
+
+          <Text className={classes.pricingText}>Invest in Your Future. Start For Free!</Text>
+
+          <Container className={classes.pricingTierContainer}>
+            <Pricing
+              title="Free Tier"
+              amount="£0"
+              peroid="Month"
+              buttonText="Try For Free"
+              benefits={[
+                'Personalised Career Paths',
+                'Limited Interview Questions',
+                'Basic CV Enhancement',
+              ]}
+              onClick={takeTest}
+            />
+            <Space className={classes.pricingMargin} />
+            <Pricing
+              title="Premium Tier"
+              amount="£19"
+              peroid="Month"
+              buttonText="Get Started"
+              benefits={[
+                'Personalised Career Paths',
+                'Extensive Interview Questions',
+                'Advanced CV Enhancement',
+              ]}
+              onClick={takeTest}
+            />
+          </Container>
+        </Container>
+
+        <Hero
+          image={successImg}
+          actionButtonText="Try For Free!"
+          subheadingText="Ready to unleash your potential? Take our free questionnaire to view your career paths now"
+          headingText="Join & Achieve"
+          colorHeadingText="Career Success"
+          onClick={takeTest}
+          grayBackground={true}
+        />
+      </>
+    </Shell>
   );
 };

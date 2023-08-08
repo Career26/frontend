@@ -2,7 +2,7 @@ import React from 'react';
 
 // external
 import { useHistory } from 'react-router-dom';
-import { createStyles, Container, Badge, rem, Text, Space, useMantineTheme } from '@mantine/core';
+import { createStyles, Container, Badge, rem, Text, Space } from '@mantine/core';
 
 // components
 import { Feature } from './components/feature';
@@ -83,8 +83,6 @@ const useStyles = createStyles((theme) => ({
 export const LandingPage = () => {
   const { classes } = useStyles();
 
-  const theme = useMantineTheme();
-
   const history = useHistory();
 
   const takeTest = () => history.push(urls.careersTest);
@@ -121,8 +119,8 @@ export const LandingPage = () => {
       header={
         <PageHeader
           links={[
-            { label: 'Features', link: constants.featuresTag },
-            { label: 'Pricing', link: constants.pricingTag },
+            { label: 'Features', link: `#${constants.featuresTag}` },
+            { label: 'Pricing', link: `#${constants.pricingTag}` },
           ]}
           getStarted={takeTest}
         />

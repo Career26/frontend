@@ -89,7 +89,7 @@ export const PageHeader = ({ links, getStarted }: HeaderActionProps) => {
   const items = links?.map((link) => (
     <a
       key={link.label}
-      href={`#${link.link}`}
+      href={link.link}
       className={cx(classes.mobileLink)}
       onClick={() => {
         toggle();
@@ -103,7 +103,9 @@ export const PageHeader = ({ links, getStarted }: HeaderActionProps) => {
     <Header height="auto" py="xs" withBorder>
       <Container className={classes.inner}>
         <Group>
-          <Burger opened={opened} onClick={toggle} className={classes.burger} size="sm" />
+          {items && (
+            <Burger opened={opened} onClick={toggle} className={classes.burger} size="sm" />
+          )}
           <Text className={classes.logo}>LOGO HERE</Text>
         </Group>
 
@@ -124,13 +126,15 @@ export const PageHeader = ({ links, getStarted }: HeaderActionProps) => {
           </Button>
         </Group>
       </Container>
-      <Transition transition="pop-top-left" duration={200} mounted={opened}>
-        {(styles) => (
-          <Paper withBorder style={styles} sx={{ position: 'fixed', width: '100%' }} mt="xs">
-            {items}
-          </Paper>
-        )}
-      </Transition>
+      {items && (
+        <Transition transition="pop-top-left" duration={200} mounted={opened}>
+          {(styles) => (
+            <Paper withBorder style={styles} sx={{ position: 'fixed', width: '100%' }} mt="xs">
+              {items}
+            </Paper>
+          )}
+        </Transition>
+      )}
     </Header>
   );
 };

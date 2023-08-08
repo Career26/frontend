@@ -5,7 +5,8 @@ import { urls } from '@shared/config/urlConstants';
 
 import { HomePage } from '../homePage/HomePage';
 import { LandingPage } from '../landingPage/LandingPage';
-import { CareersTest } from '../careersTest/CareersTest';
+// import { CareersTest } from '../careersTest/CareersTest';
+import { CareerTest } from '../careerTest/CareerTest';
 
 export const App = () => (
   <BrowserRouter>
@@ -13,7 +14,7 @@ export const App = () => (
       <Switch>
         <Route path={urls.landingPage} exact component={LandingPage} />
         <Route path={urls.home} component={HomePage} />
-        <Route path={urls.careersTest} component={CareersTest} />
+        <Route path={urls.careersTest} component={CareerTest} />
       </Switch>
     </Suspense>
   </BrowserRouter>

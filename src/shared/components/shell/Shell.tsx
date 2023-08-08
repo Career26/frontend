@@ -19,6 +19,7 @@ export const Shell = ({ header, children }: ShellProps) => {
           paddingTop: `calc(${theme.spacing.xs} * 2)`,
           paddingRight: '0',
           paddingLeft: '0',
+          minHeight: 'auto',
         },
       }}
       header={header}

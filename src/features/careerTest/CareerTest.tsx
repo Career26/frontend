@@ -2,7 +2,7 @@ import React from 'react';
 
 // external
 import { useHistory } from 'react-router-dom';
-import { Card, Container, Text, createStyles, rem } from '@mantine/core';
+import { Card, Container, Image, Text, createStyles, rem } from '@mantine/core';
 
 // shared
 import { PageHeader } from '@shared/components/pageHeader/PageHeader';
@@ -11,20 +11,18 @@ import { PageHeader } from '@shared/components/pageHeader/PageHeader';
 import { urls } from '@shared/config/urlConstants';
 import { Shell } from '@shared/components/shell/Shell';
 
+import analyseImg from './assets/analyse.svg';
+import { Tile } from './components/tile';
+
 const useStyles = createStyles((theme) => ({
   titleContainer: {
     paddingTop: rem(80),
     paddingBottom: theme.spacing.xl,
-
-    [theme.fn.smallerThan('sm')]: {
-      fontSize: rem(60),
-    },
   },
 
   testInfoContainer: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
     paddingTop: `calc(${theme.spacing.xl} * 2)`,
 
     [theme.fn.smallerThan('sm')]: {
@@ -34,16 +32,16 @@ const useStyles = createStyles((theme) => ({
 
   card: {
     background: theme.colors.blue[0],
-    justifyContent: 'center',
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'column',
-    marginLeft: theme.spacing.xl,
-    marginRight: theme.spacing.xl,
-    width: '100%',
+    marginLeft: theme.spacing.sm,
+    marginRight: theme.spacing.sm,
+    width: 'calc(33.33333%)',
 
     [theme.fn.smallerThan('sm')]: {
       margin: 'auto',
+      marginBottom: theme.spacing.xl,
     },
   },
 
@@ -56,6 +54,20 @@ const useStyles = createStyles((theme) => ({
     color: theme.colors.gray[9],
     textAlign: 'center',
   },
+
+  cardTitle: {
+    paddingBottom: theme.spacing.lg,
+    paddingTop: theme.spacing.md,
+    fontSize: rem(18),
+    fontWeight: 800,
+    lineHeight: 1.1,
+    color: theme.colors.gray[9],
+  },
+
+  cardDescription: {
+    paddingBottom: theme.spacing.md,
+    fontSize: rem(15),
+  },
 }));
 
 export const CareerTest = () => {
@@ -65,36 +77,21 @@ export const CareerTest = () => {
 
   const takeTest = () => history.push(urls.careersTest);
 
+  const tileContent = [
+    { title: 'Complete the Test', description: 'Take our career path test', image: analyseImg },
+    { title: 'Explore Your Paths', description: 'Take our career path test', image: analyseImg },
+    { title: 'Unlock Your Potential', description: 'Take our career path test', image: analyseImg },
+  ];
+
   return (
     <Shell header={<PageHeader getStarted={takeTest} />}>
       <>
         <Container className={classes.titleContainer}>
           <Text className={classes.titleText}>Free Career Path Test</Text>
           <Container className={classes.testInfoContainer}>
-            <Card className={classes.card}>
-              <Text align="center" pb="xs">
-                Complete The Test
-              </Text>
-              <Text align="center">
-                Discover career paths suited to your personality by taking our test.
-              </Text>
-            </Card>
-
-            <Card className={classes.card}>
-              <Text align="center" pb="xs">
-                View Your Paths
-              </Text>
-              <Text align="center">Take our career test and provide your information.</Text>
-            </Card>
-
-            <Card className={classes.card}>
-              <Text align="center" pb="xs">
-                Select Your Path
-              </Text>
-              <Text align="center">
-                Select your path, practice interviews, refine your CV and connect with experts.
-              </Text>
-            </Card>
+            {tileContent.map((item) => (
+              <Tile title={item.title} description={item.description} image={item.image} />
+            ))}
           </Container>
         </Container>
       </>

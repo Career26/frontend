@@ -1,7 +1,7 @@
 import React from 'react';
 
 // external
-import { Card, Text, createStyles, rem, Image, Container } from '@mantine/core';
+import { Card, Text, createStyles, rem, Image, Container, Badge } from '@mantine/core';
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -29,6 +29,10 @@ const useStyles = createStyles((theme) => ({
     [theme.fn.smallerThan('sm')]: {
       marginLeft: 0,
     },
+  },
+
+  badge: {
+    paddingBottom: theme.spacing.md,
   },
 
   title: {
@@ -59,18 +63,22 @@ const useStyles = createStyles((theme) => ({
 }));
 
 interface TileComponentProps {
+  number: number;
   title: string;
   description: string;
   image: string;
 }
 
-export const Tile = ({ title, description, image }: TileComponentProps) => {
+export const Tile = ({ number, title, description, image }: TileComponentProps) => {
   const { classes } = useStyles();
 
   return (
     <Card className={classes.card}>
       <Image src={image} className={classes.image} />
       <Container className={classes.textContainer}>
+        <Badge className={classes.badge} size="xl" radius="sm" variant="light">
+          {number}
+        </Badge>
         <Text className={classes.title}>{title}</Text>
         <Text className={classes.description}>{description}</Text>
       </Container>

@@ -89,8 +89,14 @@ export const CareerTest = () => {
         <Container className={classes.titleContainer}>
           <Text className={classes.titleText}>Free Career Path Test</Text>
           <Container className={classes.testInfoContainer}>
-            {tileContent.map((item) => (
-              <Tile title={item.title} description={item.description} image={item.image} />
+            {tileContent.map((item, index) => (
+              <Tile
+                number={index + 1}
+                key={index}
+                title={item.title}
+                description={item.description}
+                image={item.image}
+              />
             ))}
           </Container>
         </Container>

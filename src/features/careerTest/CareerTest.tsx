@@ -2,7 +2,20 @@ import React from 'react';
 
 // external
 import { useHistory } from 'react-router-dom';
-import { Card, Container, Image, Text, createStyles, rem } from '@mantine/core';
+import {
+  Container,
+  Progress,
+  Text,
+  TextInput,
+  createStyles,
+  rem,
+  Select,
+  Group,
+  Button,
+  Checkbox,
+} from '@mantine/core';
+import { IconWriting, IconRoute, IconTrophy } from '@tabler/icons-react';
+import { useForm } from '@mantine/form';
 
 // shared
 import { PageHeader } from '@shared/components/pageHeader/PageHeader';
@@ -10,38 +23,15 @@ import { PageHeader } from '@shared/components/pageHeader/PageHeader';
 // config
 import { urls } from '@shared/config/urlConstants';
 import { Shell } from '@shared/components/shell/Shell';
-
-import analyseImg from './assets/analyse.svg';
 import { Tile } from './components/tile';
 
 const useStyles = createStyles((theme) => ({
   titleContainer: {
     paddingTop: rem(80),
-    paddingBottom: theme.spacing.xl,
-  },
+    // paddingBottom: `calc(${theme.spacing.xl} * 2)`,
 
-  testInfoContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    paddingTop: `calc(${theme.spacing.xl} * 2)`,
-
-    [theme.fn.smallerThan('sm')]: {
-      flexDirection: 'column',
-    },
-  },
-
-  card: {
-    background: theme.colors.blue[0],
-    display: 'flex',
-    alignItems: 'center',
-    flexDirection: 'column',
-    marginLeft: theme.spacing.sm,
-    marginRight: theme.spacing.sm,
-    width: 'calc(33.33333%)',
-
-    [theme.fn.smallerThan('sm')]: {
-      margin: 'auto',
-      marginBottom: theme.spacing.xl,
+    [theme.fn.smallerThan('md')]: {
+      paddingTop: rem(60),
     },
   },
 
@@ -55,18 +45,36 @@ const useStyles = createStyles((theme) => ({
     textAlign: 'center',
   },
 
-  cardTitle: {
-    paddingBottom: theme.spacing.lg,
-    paddingTop: theme.spacing.md,
-    fontSize: rem(18),
-    fontWeight: 800,
-    lineHeight: 1.1,
-    color: theme.colors.gray[9],
+  testInfoContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    paddingTop: `calc(${theme.spacing.xl} * 2)`,
+    paddingBottom: `calc(${theme.spacing.xl} * 2)`,
+    paddingLeft: 0,
+    paddingRight: 0,
+
+    [theme.fn.smallerThan('md')]: {
+      flexDirection: 'column',
+    },
   },
 
-  cardDescription: {
-    paddingBottom: theme.spacing.md,
-    fontSize: rem(15),
+  progressContainer: {
+    paddingTop: 0,
+    paddingBottom: `calc(${theme.spacing.xl} * 2)`,
+  },
+
+  questionContainer: {
+    paddingTop: 0,
+  },
+
+  questionTitle: {
+    fontSize: rem(30),
+    fontWeight: 800,
+    lineHeight: 1.1,
+    margin: 0,
+    padding: 0,
+    color: theme.colors.gray[9],
+    textAlign: 'center',
   },
 }));
 
@@ -78,10 +86,36 @@ export const CareerTest = () => {
   const takeTest = () => history.push(urls.careersTest);
 
   const tileContent = [
-    { title: 'Complete the Test', description: 'Take our career path test', image: analyseImg },
-    { title: 'Explore Your Paths', description: 'Take our career path test', image: analyseImg },
-    { title: 'Unlock Your Potential', description: 'Take our career path test', image: analyseImg },
+    {
+      title: 'Complete the Test',
+      description:
+        'Embark on your career journey by taking our comprehensive test to discover the best path for you.',
+      icon: <IconWriting />,
+    },
+    {
+      title: 'Explore Your Paths',
+      description:
+        'Using the results dive into career paths that align with your strengths and passions. Find the perfect fit.',
+      icon: <IconRoute />,
+    },
+    {
+      title: 'Unlock Your Potential',
+      description:
+        'Elevate your interview skills, refine your CV, and connect with professionals to accelerate your career growth.',
+      icon: <IconTrophy />,
+    },
   ];
+
+  const form = useForm({
+    initialValues: {
+      email: '',
+      isPredictedGrade: false,
+    },
+
+    validate: {
+      email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
+    },
+  });
 
   return (
     <Shell header={<PageHeader getStarted={takeTest} />}>
@@ -91,14 +125,60 @@ export const CareerTest = () => {
           <Container className={classes.testInfoContainer}>
             {tileContent.map((item, index) => (
               <Tile
-                number={index + 1}
+                withSpacing={index % 2 != 0}
+                withBottomPadding={index + 1 !== tileContent.length}
                 key={index}
                 title={item.title}
                 description={item.description}
-                image={item.image}
+                icon={item.icon}
               />
             ))}
           </Container>
+        </Container>
+
+        <Container className={classes.progressContainer}>
+          <Progress value={0} label="0%" size="xl" radius="xl" />
+        </Container>
+
+        <Container className={classes.questionContainer}>
+          <form>
+            <Text className={classes.questionTitle}>Your Recent Education</Text>
+            <TextInput
+              label="What university did you most recently attended?"
+              placeholder="e.g. Cambridge, Oxford"
+            />
+            <TextInput label="What degree did you study?" placeholder="e.g. Computer Science" />
+            <Select
+              label="What type of degree was this?"
+              placeholder="Select a degree type"
+              data={[
+                { value: 'PhD', label: 'PhD' },
+                { value: 'MSc', label: 'MSc' },
+                { value: 'MA', label: 'MA' },
+                { value: 'BSc', label: 'BSc' },
+                { value: 'BA', label: 'BA' },
+              ]}
+            />
+            <Select
+              label="What grade did you achieve / are likley to achieve?"
+              placeholder="Select the achieved grade"
+              data={[
+                { value: 'First Class (1st)', label: 'First Class (1st)' },
+                { value: 'Second Class Upper (2:1)', label: 'Second Class Upper (2:1)' },
+                { value: 'Second Class Lower (2:2', label: 'Second Class Lower (2:2' },
+                { value: 'Third Class (3rd)', label: 'Third Class (3rd)' },
+                { value: 'Pass', label: 'Pass' },
+              ]}
+            />
+            <Checkbox
+              label="This grade is predicted"
+              {...form.getInputProps('isPredictedGrade', { type: 'checkbox' })}
+            />
+
+            <Group position="center" mt="xl">
+              <Button type="submit">Next</Button>
+            </Group>
+          </form>
         </Container>
       </>
     </Shell>

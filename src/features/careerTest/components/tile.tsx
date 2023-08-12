@@ -1,84 +1,96 @@
 import React from 'react';
 
 // external
-import { Card, Text, createStyles, rem, Image, Container, Badge } from '@mantine/core';
+import { Card, Text, createStyles, rem, Container, Badge, ActionIcon } from '@mantine/core';
 
-const useStyles = createStyles((theme) => ({
+interface ThemeProps {
+  withSpacing: boolean;
+  withBottomPadding: boolean;
+}
+
+const useStyles = createStyles((theme, { withSpacing, withBottomPadding }: ThemeProps) => ({
   card: {
     background: theme.colors.blue[0],
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'column',
-    marginLeft: theme.spacing.sm,
-    marginRight: theme.spacing.sm,
-    width: 'calc(33.33333%)',
+    marginLeft: withSpacing ? theme.spacing.lg : 0,
+    marginRight: withSpacing ? theme.spacing.lg : 0,
+    flex: 1,
 
-    [theme.fn.smallerThan('sm')]: {
-      margin: 'auto',
-      marginBottom: theme.spacing.xl,
+    [theme.fn.smallerThan('md')]: {
+      marginBottom: withBottomPadding ? theme.spacing.xl : 0,
       flexDirection: 'row',
       width: '100%',
+      alignItems: 'center',
+      marginLeft: 0,
+      marginRight: 0,
     },
+  },
+
+  iconContainer: {
+    margin: 0,
+    paddingLeft: theme.spacing.sm,
+    paddingRight: `calc(${theme.spacing.sm} * 2)`,
   },
 
   textContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    paddingTop: theme.spacing.xl,
-    paddingBottom: theme.spacing.md,
-    [theme.fn.smallerThan('sm')]: {
+    paddingTop: theme.spacing.sm,
+
+    [theme.fn.smallerThan('md')]: {
       marginLeft: 0,
+      marginRight: 0,
+      padding: 0,
     },
   },
 
-  badge: {
-    paddingBottom: theme.spacing.md,
-  },
-
   title: {
-    paddingBottom: theme.spacing.md,
+    paddingBottom: theme.spacing.sm,
     fontSize: rem(18),
     fontWeight: 800,
     lineHeight: 1.1,
     color: theme.colors.gray[9],
     textAlign: 'center',
 
-    [theme.fn.smallerThan('sm')]: {
+    [theme.fn.smallerThan('md')]: {
       textAlign: 'left',
+      paddingBottom: theme.spacing.xs,
     },
   },
 
   description: {
     fontSize: rem(15),
     textAlign: 'center',
-  },
 
-  image: {
-    maxWidth: 190,
-
-    [theme.fn.smallerThan('sm')]: {
-      maxWidth: 120,
+    [theme.fn.smallerThan('md')]: {
+      textAlign: 'left',
     },
   },
 }));
 
 interface TileComponentProps {
-  number: number;
+  withBottomPadding: boolean;
+  withSpacing: boolean;
   title: string;
   description: string;
-  image: string;
+  icon: JSX.Element;
 }
 
-export const Tile = ({ number, title, description, image }: TileComponentProps) => {
-  const { classes } = useStyles();
+export const Tile = ({
+  withBottomPadding,
+  withSpacing,
+  title,
+  description,
+  icon,
+}: TileComponentProps) => {
+  const { classes } = useStyles({ withSpacing, withBottomPadding });
 
   return (
     <Card className={classes.card}>
-      <Image src={image} className={classes.image} />
+      <Container className={classes.iconContainer}>
+        <ActionIcon color="blue">{icon}</ActionIcon>
+      </Container>
       <Container className={classes.textContainer}>
-        <Badge className={classes.badge} size="xl" radius="sm" variant="light">
-          {number}
-        </Badge>
         <Text className={classes.title}>{title}</Text>
         <Text className={classes.description}>{description}</Text>
       </Container>

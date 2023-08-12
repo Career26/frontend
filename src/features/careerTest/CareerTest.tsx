@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 // external
 import { useHistory } from 'react-router-dom';
@@ -80,6 +80,7 @@ const useStyles = createStyles((theme) => ({
 
 export const CareerTest = () => {
   const { classes } = useStyles();
+  const [progress, setProgress] = useState(0);
 
   const history = useHistory();
 
@@ -137,48 +138,50 @@ export const CareerTest = () => {
         </Container>
 
         <Container className={classes.progressContainer}>
-          <Progress value={0} label="0%" size="xl" radius="xl" />
+          <Progress value={progress} label={`${progress}%`} size="xl" radius="xl" />
         </Container>
 
         <Container className={classes.questionContainer}>
-          <form>
-            <Text className={classes.questionTitle}>Your Recent Education</Text>
-            <TextInput
-              label="What university did you most recently attended?"
-              placeholder="e.g. Cambridge, Oxford"
-            />
-            <TextInput label="What degree did you study?" placeholder="e.g. Computer Science" />
-            <Select
-              label="What type of degree was this?"
-              placeholder="Select a degree type"
-              data={[
-                { value: 'PhD', label: 'PhD' },
-                { value: 'MSc', label: 'MSc' },
-                { value: 'MA', label: 'MA' },
-                { value: 'BSc', label: 'BSc' },
-                { value: 'BA', label: 'BA' },
-              ]}
-            />
-            <Select
-              label="What grade did you achieve / are likley to achieve?"
-              placeholder="Select the achieved grade"
-              data={[
-                { value: 'First Class (1st)', label: 'First Class (1st)' },
-                { value: 'Second Class Upper (2:1)', label: 'Second Class Upper (2:1)' },
-                { value: 'Second Class Lower (2:2', label: 'Second Class Lower (2:2' },
-                { value: 'Third Class (3rd)', label: 'Third Class (3rd)' },
-                { value: 'Pass', label: 'Pass' },
-              ]}
-            />
-            <Checkbox
-              label="This grade is predicted"
-              {...form.getInputProps('isPredictedGrade', { type: 'checkbox' })}
-            />
+          {/* <form> */}
+          <Text className={classes.questionTitle}>Your Recent Education</Text>
+          <TextInput
+            label="What university did you most recently attended?"
+            placeholder="e.g. Cambridge, Oxford"
+          />
+          <TextInput label="What degree did you study?" placeholder="e.g. Computer Science" />
+          <Select
+            label="What type of degree was this?"
+            placeholder="Select a degree type"
+            data={[
+              { value: 'PhD', label: 'PhD' },
+              { value: 'MSc', label: 'MSc' },
+              { value: 'MA', label: 'MA' },
+              { value: 'BSc', label: 'BSc' },
+              { value: 'BA', label: 'BA' },
+            ]}
+          />
+          <Select
+            label="What grade did you achieve / are likley to achieve?"
+            placeholder="Select the achieved grade"
+            data={[
+              { value: 'First Class (1st)', label: 'First Class (1st)' },
+              { value: 'Second Class Upper (2:1)', label: 'Second Class Upper (2:1)' },
+              { value: 'Second Class Lower (2:2', label: 'Second Class Lower (2:2' },
+              { value: 'Third Class (3rd)', label: 'Third Class (3rd)' },
+              { value: 'Pass', label: 'Pass' },
+            ]}
+          />
+          <Checkbox
+            label="This grade is predicted"
+            {...form.getInputProps('isPredictedGrade', { type: 'checkbox' })}
+          />
 
-            <Group position="center" mt="xl">
-              <Button type="submit">Next</Button>
-            </Group>
-          </form>
+          <Group position="center" mt="xl">
+            <Button type="submit" onClick={() => setProgress(progress + 25)}>
+              Next
+            </Button>
+          </Group>
+          {/* </form> */}
         </Container>
       </>
     </Shell>

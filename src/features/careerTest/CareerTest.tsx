@@ -13,8 +13,9 @@ import {
   Group,
   Button,
   Checkbox,
+  Stepper,
 } from '@mantine/core';
-import { IconWriting, IconRoute, IconTrophy } from '@tabler/icons-react';
+import { IconWriting, IconRoute, IconTrophy, IconPlus } from '@tabler/icons-react';
 import { useForm } from '@mantine/form';
 
 // shared
@@ -75,12 +76,22 @@ const useStyles = createStyles((theme) => ({
     padding: 0,
     color: theme.colors.gray[9],
     textAlign: 'center',
+    paddingBottom: theme.spacing.xl,
+  },
+
+  questionInput: {
+    paddingBottom: theme.spacing.xl,
   },
 }));
 
 export const CareerTest = () => {
   const { classes } = useStyles();
   const [progress, setProgress] = useState(0);
+  const [eductionCount, setEducationCount] = useState(1);
+
+  const [active, setActive] = useState(0);
+  const nextStep = () => setActive((current) => (current < 3 ? current + 1 : current));
+  const prevStep = () => setActive((current) => (current > 0 ? current - 1 : current));
 
   const history = useHistory();
 
@@ -137,19 +148,35 @@ export const CareerTest = () => {
           </Container>
         </Container>
 
-        <Container className={classes.progressContainer}>
-          <Progress value={progress} label={`${progress}%`} size="xl" radius="xl" />
+        {progress > 0 && (
+          <Container className={classes.progressContainer}>
+            <Progress value={progress} label={`${progress}%`} size="xl" radius="xl" />
+          </Container>
+        )}
+
+        <Container>
+          <Stepper active={active} onStepClick={setActive} breakpoint="sm">
+            <Stepper.Step label="Education"></Stepper.Step>
+            <Stepper.Step label="Experience"></Stepper.Step>
+            <Stepper.Step label="Preferences"></Stepper.Step>
+            <Stepper.Step label="Career Paths"></Stepper.Step>
+          </Stepper>
         </Container>
 
         <Container className={classes.questionContainer}>
-          {/* <form> */}
           <Text className={classes.questionTitle}>Your Recent Education</Text>
           <TextInput
-            label="What university did you most recently attended?"
+            label="Which university did you attend most recently?"
             placeholder="e.g. Cambridge, Oxford"
+            className={classes.questionInput}
           />
-          <TextInput label="What degree did you study?" placeholder="e.g. Computer Science" />
+          <TextInput
+            label="What degree did you study?"
+            placeholder="e.g. Computer Science"
+            className={classes.questionInput}
+          />
           <Select
+            className={classes.questionInput}
             label="What type of degree was this?"
             placeholder="Select a degree type"
             data={[
@@ -161,6 +188,7 @@ export const CareerTest = () => {
             ]}
           />
           <Select
+            className={classes.questionInput}
             label="What grade did you achieve / are likley to achieve?"
             placeholder="Select the achieved grade"
             data={[
@@ -172,16 +200,22 @@ export const CareerTest = () => {
             ]}
           />
           <Checkbox
+            className={classes.questionInput}
             label="This grade is predicted"
             {...form.getInputProps('isPredictedGrade', { type: 'checkbox' })}
           />
 
-          <Group position="center" mt="xl">
-            <Button type="submit" onClick={() => setProgress(progress + 25)}>
-              Next
+          <Group position="left">
+            <Button leftIcon={<IconPlus />} onClick={() => setEducationCount(eductionCount + 1)}>
+              Add Another University
             </Button>
           </Group>
-          {/* </form> */}
+
+          <Group position="center">
+            <Button type="submit" onClick={() => setActive(active + 1)}>
+              Next Question
+            </Button>
+          </Group>
         </Container>
       </>
     </Shell>

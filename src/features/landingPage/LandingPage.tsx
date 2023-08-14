@@ -121,7 +121,6 @@ export const LandingPage = () => {
             { label: 'Features', link: `#${constants.featuresTag}` },
             { label: 'Pricing', link: `#${constants.pricingTag}` },
           ]}
-          getStarted={takeTest}
         />
       }
     >

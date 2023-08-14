@@ -1,6 +1,6 @@
-import { CareersResponse } from '@careersTest/types/careersTestTypes';
+import { CareerTestResult } from '@shared/types/careerTestTypes';
 
-export const mockCareersTest: CareersResponse = {
+export const mockCareersTest: CareerTestResult = {
   career_paths: {
     '1d19725d-07e7-414d-a525-914e67411d13': {
       companies: ['Goldman Sachs', 'JP Morgan', 'Citadel', 'Bridgewater Associates'],
@@ -63,7 +63,6 @@ export const mockCareersTest: CareersResponse = {
     full_name: 'Bill Gates',
     latest_degree: {
       grade: 'first class honours',
-      is_predicted_grade: false,
       level: 'BSc',
       name: 'Computer Science',
       university: 'The University of Kent',

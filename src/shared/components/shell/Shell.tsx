@@ -1,6 +1,4 @@
 import React, { ReactElement } from 'react';
-
-// external
 import { rem, AppShell, useMantineTheme } from '@mantine/core';
 
 interface ShellProps {

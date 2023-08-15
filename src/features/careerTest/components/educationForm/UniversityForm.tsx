@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Select, Text, TextInput } from '@mantine/core';
+import { Container, Select, TextInput } from '@mantine/core';
 import { UseFormReturnType } from '@mantine/form';
 
 import { DegreeGrade, DegreeLevel, ProfileInput } from '@shared/types/careerTestTypes';
@@ -16,7 +16,6 @@ export const UniversityForm = ({
   const { classes } = questionFormStyles();
   return (
     <Container className={classes.questionContainer}>
-      <Text className={classes.questionTitle}>Education</Text>
       <TextInput
         {...form.getInputProps(`${baseKey}.university`)}
         label="University Name"

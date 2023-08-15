@@ -35,7 +35,7 @@ export type WorkExperience = {
 
 export type WorkExperienceInput = {
   companyName: string;
-  rating: number;
+  rating: string;
   ratingReason: string;
   role: String;
 };

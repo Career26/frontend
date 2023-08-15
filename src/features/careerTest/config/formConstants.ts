@@ -16,7 +16,7 @@ export const initialUniversityValues: University = {
 
 export const initialWorkExperienceValues: WorkExperienceInput = {
   companyName: '',
-  rating: 5,
+  rating: String(5),
   ratingReason: '',
   role: '',
 };

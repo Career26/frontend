@@ -33,10 +33,23 @@ export type WorkExperience = {
   role: string;
 };
 
+export type WorkExperienceInput = {
+  companyName: string;
+  rating: number;
+  ratingReason: string;
+  role: String;
+};
+
 export type WorkPreference = {
   areas_of_interest: string[];
   expected_salary: { base_currency: string; city: string; expected_salary: number };
   personality_type: { work_life_balance_sacrifice: boolean; work_style: string };
+};
+
+export type WorkPreferenceInput = {
+  areasOfInterest: string[];
+  expectedSalary: { baseCurrency: string; city: string; expectedSalary: number };
+  personalityType: { workLifeBalanceSacrifice: boolean; workStyle: string };
 };
 
 export type CompanyResult = {
@@ -54,6 +67,13 @@ export type Profile = WorkPreference & {
   latest_degree: University;
   previous_work_experience: WorkExperience[];
   full_name: string;
+};
+
+export type ProfileInput = WorkPreferenceInput & {
+  additionalDegrees: University[];
+  latestDegree: University;
+  previousWorkExperience: WorkExperienceInput[];
+  fullName: string;
 };
 
 export type CareerTestResult = {

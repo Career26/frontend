@@ -1,51 +1,21 @@
 import React, { useState } from 'react';
 
-import { Container, Group, Button, Stepper } from '@mantine/core';
+import { Group, Button } from '@mantine/core';
 import { IconPlus } from '@tabler/icons-react';
 import { UseFormReturnType } from '@mantine/form';
 
-import {
-  DegreeGrade,
-  DegreeLevel,
-  Profile,
-  University,
-  WorkExperience,
-  WorkType,
-} from '@shared/types/careerTestTypes';
+import { ProfileInput } from '@shared/types/careerTestTypes';
 import { UniversityForm } from './UniversityForm';
+import { initialUniversityValues } from '../../config/formConstants';
 
 const stepperLabels = ['Education', 'Experience', 'Preferences', 'Career Paths'];
 
-const initialUniversityValues: University = {
-  grade: DegreeGrade.FIRST,
-  level: DegreeLevel.BA,
-  name: '',
-  university: '',
-};
-
-const initialWorkExperienceValues: WorkExperience = {
-  company_name: '',
-  rating: 5,
-  rating_reason: '',
-  role: '',
-};
-
-const initialProfileValues: Profile = {
-  additional_degrees: [],
-  areas_of_interest: [],
-  expected_salary: { base_currency: 'GBP', city: 'London', expected_salary: 40000 },
-  personality_type: { work_life_balance_sacrifice: false, work_style: WorkType.GROUP },
-  latest_degree: initialUniversityValues,
-  previous_work_experience: [initialWorkExperienceValues],
-  full_name: 'Test Student',
-};
-
-export const EducationForm = ({ form }: { form: UseFormReturnType<Profile> }) => {
+export const EducationForm = ({ form }: { form: UseFormReturnType<ProfileInput> }) => {
   const [additionalDegreesCount, setAdditionalDegreesCount] = useState(0);
 
   const onClickAddUniversity = () => {
-    form.setFieldValue('additional_degrees', [
-      ...form.values.additional_degrees,
+    form.setFieldValue('additionalDegrees', [
+      ...form.values.additionalDegrees,
       initialUniversityValues,
     ]);
     setAdditionalDegreesCount(additionalDegreesCount + 1);
@@ -53,9 +23,9 @@ export const EducationForm = ({ form }: { form: UseFormReturnType<Profile> }) =>
 
   return (
     <>
-      <UniversityForm form={form} baseKey="latest_degree" />
+      <UniversityForm form={form} baseKey="latestDegree" />
       {[...Array(additionalDegreesCount).keys()].map((key) => {
-        return <UniversityForm form={form} baseKey={`additional_degrees.${key}`} />;
+        return <UniversityForm form={form} baseKey={`additionalDegrees.${key}`} />;
       })}
       <Group position="left">
         <Button leftIcon={<IconPlus />} onClick={onClickAddUniversity}>

@@ -9,8 +9,6 @@ import { UniversityForm } from './UniversityForm';
 import { initialUniversityValues } from '../../config/formConstants';
 import { questionFormStyles } from '../../styles/careeerTestStyles';
 
-const stepperLabels = ['Education', 'Experience', 'Preferences', 'Career Paths'];
-
 export const EducationForm = ({ form }: { form: UseFormReturnType<ProfileInput> }) => {
   const { classes } = questionFormStyles();
 

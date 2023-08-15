@@ -12,6 +12,7 @@ import { ProfileInput } from '@shared/types/careerTestTypes';
 import { EducationForm } from './components/educationForm/EducationForm';
 import { initialProfileValues } from './config/formConstants';
 import { WorkExperienceForm } from './components/workExperienceForm/WorkExperienceForm';
+import { PreferencesForm } from './components/preferencesForm/PreferencesForm';
 
 const stepperLabels = ['Education', 'Experience', 'Preferences', 'Career Paths'];
 
@@ -24,6 +25,9 @@ export const CareerTest = () => {
     }
     if (activeStep === 1) {
       return [`previousWorkExperience.${FORM_INDEX}`];
+    }
+    if (activeStep === 2) {
+      return ['areasOfInterest', 'expectedSalary'];
     }
     return undefined;
   }, [activeStep]);
@@ -53,6 +57,18 @@ export const CareerTest = () => {
           return null;
         },
       },
+      areasOfInterest: (value) => {
+        if (!value.length) {
+          return 'You must select at least one area of interest';
+        }
+        if (value.length > 3) {
+          return 'You can only choose up to three areas of interest';
+        }
+        return null;
+      },
+      expectedSalary: {
+        expectedSalary: (value) => !value && 'Expected salary is required',
+      },
     },
   });
 
@@ -69,11 +85,7 @@ export const CareerTest = () => {
 
   return (
     <Shell header={<PageHeader />}>
-      <form
-        onSubmit={form.onSubmit((values) => {
-          console.log(values);
-        })}
-      >
+      <>
         <CareerTestHeader />
         <Container>
           <Stepper active={activeStep} onStepClick={setActiveStep} breakpoint="sm">
@@ -85,13 +97,14 @@ export const CareerTest = () => {
         <Container>
           {activeStep === 0 && <EducationForm form={form} />}
           {activeStep === 1 && <WorkExperienceForm form={form} />}
+          {activeStep === 2 && <PreferencesForm form={form} />}
           <Group position="center">
             <Button type="submit" onClick={clickNext}>
               Next Question
             </Button>
           </Group>
         </Container>
-      </form>
+      </>
     </Shell>
   );
 };

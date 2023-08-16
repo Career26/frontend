@@ -42,8 +42,6 @@ export const AreasOfInterestForm = ({ form }: { form: UseFormReturnType<ProfileI
 
   const options = exampleAreasOfInterest.filter((value) => !areasOfInterest.includes(value));
 
-  console.log(areasOfInterest);
-
   return (
     <Container className={classes.questionContainer}>
       <Autocomplete

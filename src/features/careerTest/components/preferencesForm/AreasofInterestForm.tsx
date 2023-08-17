@@ -46,7 +46,7 @@ export const AreasOfInterestForm = ({ form }: { form: UseFormReturnType<ProfileI
     <Container className={classes.questionContainer}>
       <Autocomplete
         disabled={areasOfInterest.length > 2}
-        label="Select up to 3 areas of interest (type a new interest if none provided and press enter to add)"
+        label="Select up to 3 areas of interest"
         data={options}
         value={newInterest}
         onChange={(value) => setNewInterest(value)}
@@ -55,9 +55,11 @@ export const AreasOfInterestForm = ({ form }: { form: UseFormReturnType<ProfileI
             addNewInterest(newInterest);
           }
         }}
+        nothingFound="Press Enter to add new interest"
         onItemSubmit={({ value }) => {
           addNewInterest(value);
         }}
+        error={form.errors.areasOfInterest}
       />
       <Chip.Group>
         <Group position="center">

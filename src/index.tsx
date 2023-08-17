@@ -2,10 +2,10 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
+import { MantineProvider } from '@mantine/core';
 
 import { App } from './features/app/App';
 import { store } from './state/store';
-import { MantineProvider } from '@mantine/core';
 
 const container = document.getElementById('root');
 const root = createRoot(container!);

@@ -81,7 +81,9 @@ export const CareerTest = () => {
     }
   };
 
-  console.log(form.values, checkFormIsValid(), activeStep, fieldsToCheck);
+  const clickBack = () => {
+    setActiveStep(activeStep - 1);
+  };
 
   return (
     <Shell header={<PageHeader />}>
@@ -99,8 +101,9 @@ export const CareerTest = () => {
           {activeStep === 1 && <WorkExperienceForm form={form} />}
           {activeStep === 2 && <PreferencesForm form={form} />}
           <Group position="center">
-            <Button type="submit" onClick={clickNext}>
-              Next Question
+            <Button onClick={clickNext}>Next Question</Button>
+            <Button onClick={clickBack} disabled={activeStep === 0}>
+              Back
             </Button>
           </Group>
         </Container>

@@ -5,7 +5,6 @@ import { urls } from '@shared/config/urlConstants';
 
 import { HomePage } from '../homePage/HomePage';
 import { LandingPage } from '../landingPage/LandingPage';
-// import { CareersTest } from '../careersTest/CareersTest';
 import { CareerTest } from '../careerTest/CareerTest';
 
 export const App = () => (

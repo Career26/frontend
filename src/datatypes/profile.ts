@@ -1,4 +1,4 @@
-interface Degree {
+export interface Degree {
   name: string;
   level: string;
   university: string;
@@ -6,7 +6,7 @@ interface Degree {
   isPredictedGrade: boolean;
 }
 
-interface WorkExperience {
+export interface WorkExperience {
   companyName: string;
   role: string;
   rating: number;
@@ -45,7 +45,7 @@ interface ExpectedSalary {
   city: string;
 }
 
-interface WorkPreference {
+export interface WorkPreference {
   areasOfInterest: string[];
   expectedSalary: ExpectedSalary;
   personalityType: PersonalityType;

@@ -1,6 +1,4 @@
-import { CareerTestResult } from '@shared/types/careerTestTypes';
-
-export const mockCareersTest: CareerTestResult = {
+export const mockCareersTest = {
   career_paths: {
     '1d19725d-07e7-414d-a525-914e67411d13': {
       companies: ['Goldman Sachs', 'JP Morgan', 'Citadel', 'Bridgewater Associates'],

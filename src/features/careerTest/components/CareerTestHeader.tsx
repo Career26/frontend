@@ -1,7 +1,6 @@
 import React from 'react';
 import { Container, Text } from '@mantine/core';
-import { IconWriting, IconRoute, IconTrophy, IconPlus } from '@tabler/icons-react';
-
+import { IconWriting, IconRoute, IconTrophy } from '@tabler/icons-react';
 import { Tile } from '@shared/components/tiles/Tile';
 
 import { questionFormStyles } from '../styles/careeerTestStyles';
@@ -35,7 +34,7 @@ export const CareerTestHeader = () => {
       <Container className={classes.testInfoContainer}>
         {headerTiles.map((item, index) => (
           <Tile
-            withSpacing={index % 2 != 0}
+            withSpacing={index % 2 !== 0}
             withBottomPadding={index + 1 !== headerTiles.length}
             key={index}
             title={item.title}

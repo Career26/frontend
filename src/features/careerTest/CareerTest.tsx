@@ -1,14 +1,11 @@
 import React, { useMemo, useState } from 'react';
-
 import { Container, Group, Button, Stepper } from '@mantine/core';
-import { FORM_INDEX, hasLength, useForm } from '@mantine/form';
-
+import { FORM_INDEX, useForm } from '@mantine/form';
 import { PageHeader } from '@shared/components/pageHeader/PageHeader';
-
 import { Shell } from '@shared/components/shell/Shell';
+import { Profile } from '@datatypes/profile';
 
 import { CareerTestHeader } from './components/CareerTestHeader';
-import { ProfileInput } from '@shared/types/careerTestTypes';
 import { EducationForm } from './components/educationForm/EducationForm';
 import { initialProfileValues } from './config/formConstants';
 import { WorkExperienceForm } from './components/workExperienceForm/WorkExperienceForm';
@@ -32,7 +29,7 @@ export const CareerTest = () => {
     return undefined;
   }, [activeStep]);
 
-  const form = useForm<ProfileInput>({
+  const form = useForm<Profile>({
     initialValues: initialProfileValues,
     validateInputOnChange: true,
     validate: {

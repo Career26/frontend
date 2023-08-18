@@ -1,25 +1,19 @@
 import React, { useState } from 'react';
-
-import { questionFormStyles } from '../../styles/careeerTestStyles';
 import { UseFormReturnType } from '@mantine/form';
-import { ProfileInput, WorkType } from '@shared/types/careerTestTypes';
 import { Checkbox, Container, Select, Text, TextInput } from '@mantine/core';
+import { Profile, WorkStyle } from '@datatypes/profile';
+import { exampleCities } from '@careerTest/config/formConstants';
+import { questionFormStyles } from '@careerTest/styles/careeerTestStyles';
 
-const exampleCities = [
-  { value: 'London', label: 'London', baseCurrency: 'GBP', symbol: '£' },
-  { value: 'New York', label: 'New York', baseCurrency: 'USD', symbol: '$' },
-  { value: 'Tokyo', label: 'Tokyo', baseCurrency: 'JPY', symbol: '¥' },
-  { value: 'Sydney', label: 'Sydney', baseCurrency: 'AUD', symbol: '$' },
-  { value: 'Hong Kong', label: 'Hong Kong', baseCurrency: 'HKD', symbol: '$' },
-  { value: 'Shanghai', label: 'Shanghai', baseCurrency: 'RMB', symbol: '¥' },
-];
-
-export const WorkStyleForm = ({ form }: { form: UseFormReturnType<ProfileInput> }) => {
+export const WorkStyleForm = ({ form }: { form: UseFormReturnType<Profile> }) => {
   const { classes } = questionFormStyles();
   const [symbol, setSymbol] = useState('£');
 
   const onChange = (value: string) => {
-    const city = exampleCities.find((item) => item.value === value)!;
+    const city = exampleCities.find((item) => item.value === value);
+    if (!city) {
+      return;
+    }
     form.setFieldValue('expectedSalary.city', city.value);
     form.setFieldValue('expectedSalary.baseCurrency', city.baseCurrency);
     setSymbol(city.symbol);
@@ -31,7 +25,7 @@ export const WorkStyleForm = ({ form }: { form: UseFormReturnType<ProfileInput> 
         {...form.getInputProps('personalityType.workStyle')}
         label="What is your preferred working style?"
         className={classes.questionInput}
-        data={Object.values(WorkType)}
+        data={Object.values(WorkStyle)}
       />
       <Checkbox
         {...form.getInputProps('personalityType.workLifeBalanceSacrifice')}

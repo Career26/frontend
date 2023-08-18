@@ -1,12 +1,13 @@
 import { UseFormReturnType } from '@mantine/form';
-import { ProfileInput } from '@shared/types/careerTestTypes';
 import React from 'react';
-import { questionFormStyles } from '../../styles/careeerTestStyles';
 import { Text } from '@mantine/core';
+import { Profile } from '@datatypes/profile';
+import { questionFormStyles } from '@careerTest/styles/careeerTestStyles';
+
 import { AreasOfInterestForm } from './AreasofInterestForm';
 import { WorkStyleForm } from './WorkStyleForm';
 
-export const PreferencesForm = ({ form }: { form: UseFormReturnType<ProfileInput> }) => {
+export const PreferencesForm = ({ form }: { form: UseFormReturnType<Profile> }) => {
   const { classes } = questionFormStyles();
   return (
     <>

@@ -37,7 +37,7 @@ export type WorkExperienceInput = {
   companyName: string;
   rating: string;
   ratingReason: string;
-  role: String;
+  role: string;
 };
 
 export type WorkPreference = {

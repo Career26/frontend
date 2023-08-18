@@ -1,16 +1,14 @@
 import React from 'react';
 import { Container, Select, TextInput } from '@mantine/core';
 import { UseFormReturnType } from '@mantine/form';
-
-import { DegreeGrade, DegreeLevel, ProfileInput } from '@shared/types/careerTestTypes';
-
-import { questionFormStyles } from '../../styles/careeerTestStyles';
+import { Profile, DegreeGrade, DegreeLevel } from '@datatypes/profile';
+import { questionFormStyles } from '@careerTest/styles/careeerTestStyles';
 
 export const UniversityForm = ({
   form,
   baseKey,
 }: {
-  form: UseFormReturnType<ProfileInput>;
+  form: UseFormReturnType<Profile>;
   baseKey: string;
 }) => {
   const { classes } = questionFormStyles();

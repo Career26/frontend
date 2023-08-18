@@ -1,13 +1,14 @@
 import { UseFormReturnType } from '@mantine/form';
-import { ProfileInput } from '@shared/types/careerTestTypes';
 import React, { useState } from 'react';
-import { initialWorkExperienceValues } from '../../config/formConstants';
-import { questionFormStyles } from '../../styles/careeerTestStyles';
 import { Button, Group, Text } from '@mantine/core';
-import { CompanyForm } from './CompanyForm';
 import { IconPlus } from '@tabler/icons-react';
+import { Profile } from '@datatypes/profile';
+import { initialWorkExperienceValues } from '@careerTest/config/formConstants';
+import { questionFormStyles } from '@careerTest/styles/careeerTestStyles';
 
-export const WorkExperienceForm = ({ form }: { form: UseFormReturnType<ProfileInput> }) => {
+import { CompanyForm } from './CompanyForm';
+
+export const WorkExperienceForm = ({ form }: { form: UseFormReturnType<Profile> }) => {
   const { classes } = questionFormStyles();
 
   const [workExperienceCount, setWorkExperienceCount] = useState(1);

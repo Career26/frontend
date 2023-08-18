@@ -1,18 +1,3 @@
-export interface Degree {
-  name: string;
-  level: string;
-  university: string;
-  grade: string;
-  isPredictedGrade: boolean;
-}
-
-export interface WorkExperience {
-  companyName: string;
-  role: string;
-  rating: number;
-  ratingReason: string;
-}
-
 export enum DegreeGrade {
   FIRST = 'First Class (1st)',
   UPPER_SECOND = 'Second Class Upper (2:1)',
@@ -32,6 +17,21 @@ export enum DegreeLevel {
 export enum WorkStyle {
   GROUP = 'Group',
   INDEPENDANT = 'Independant',
+}
+
+export interface Degree {
+  name: string;
+  level: string;
+  university: string;
+  grade: string;
+  isPredictedGrade: boolean;
+}
+
+export interface WorkExperience {
+  companyName: string;
+  role: string;
+  rating: number;
+  ratingReason: string;
 }
 
 interface PersonalityType {

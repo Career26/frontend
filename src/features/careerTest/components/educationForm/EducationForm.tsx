@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Group, Button, Text } from '@mantine/core';
 import { IconPlus } from '@tabler/icons-react';
 import { UseFormReturnType } from '@mantine/form';
@@ -11,16 +11,13 @@ import { UniversityForm } from './UniversityForm';
 export const EducationForm = ({ form }: { form: UseFormReturnType<Profile> }) => {
   const { classes } = questionFormStyles();
 
-  const [additionalDegreesCount, setAdditionalDegreesCount] = useState(
-    form.values.additionalDegrees.length,
-  );
+  const additionalDegreesCount = form.values.additionalDegrees.length;
 
   const onClickAddUniversity = () => {
     form.setFieldValue('additionalDegrees', [
       ...form.values.additionalDegrees,
       initialUniversityValues,
     ]);
-    setAdditionalDegreesCount(additionalDegreesCount + 1);
   };
 
   return (

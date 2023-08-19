@@ -1,5 +1,5 @@
 import { UseFormReturnType } from '@mantine/form';
-import React, { useState } from 'react';
+import React from 'react';
 import { Button, Group, Text } from '@mantine/core';
 import { IconPlus } from '@tabler/icons-react';
 import { Profile } from '@datatypes/profile';
@@ -11,14 +11,13 @@ import { CompanyForm } from './CompanyForm';
 export const WorkExperienceForm = ({ form }: { form: UseFormReturnType<Profile> }) => {
   const { classes } = questionFormStyles();
 
-  const [workExperienceCount, setWorkExperienceCount] = useState(1);
+  const workExperienceCount = form.values.previousWorkExperience.length;
 
   const onClickAddExperience = () => {
     form.setFieldValue('previousWorkExperience', [
       ...form.values.previousWorkExperience,
       initialWorkExperienceValues,
     ]);
-    setWorkExperienceCount(workExperienceCount + 1);
   };
 
   return (

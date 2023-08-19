@@ -11,7 +11,9 @@ import { UniversityForm } from './UniversityForm';
 export const EducationForm = ({ form }: { form: UseFormReturnType<Profile> }) => {
   const { classes } = questionFormStyles();
 
-  const [additionalDegreesCount, setAdditionalDegreesCount] = useState(0);
+  const [additionalDegreesCount, setAdditionalDegreesCount] = useState(
+    form.values.additionalDegrees.length,
+  );
 
   const onClickAddUniversity = () => {
     form.setFieldValue('additionalDegrees', [

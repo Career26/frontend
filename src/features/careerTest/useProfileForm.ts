@@ -7,10 +7,10 @@ import { initialProfileValues } from './config/formConstants';
 export const useProfileForm = ({ activeStep }: { activeStep: number }) => {
   const fieldsToCheck = useMemo(() => {
     if (activeStep === 0) {
-      return ['latestDegree', `additionalDegrees.${FORM_INDEX}`];
+      return ['latestDegree', 'additionalDegrees', `additionalDegrees.${FORM_INDEX}`];
     }
     if (activeStep === 1) {
-      return [`previousWorkExperience.${FORM_INDEX}`];
+      return ['previousWorkExperience', `previousWorkExperience.${FORM_INDEX}`];
     }
     if (activeStep === 2) {
       return ['areasOfInterest', 'expectedSalary'];
@@ -61,8 +61,7 @@ export const useProfileForm = ({ activeStep }: { activeStep: number }) => {
 
   const checkFormIsValid = () => {
     form.validate();
-    fieldsToCheck?.forEach((field) => form.validateField(field));
-    return fieldsToCheck?.every((field) => form.isValid(field));
+    return !fieldsToCheck?.some((field) => !form.isValid(field));
   };
 
   return { form, checkFormIsValid };

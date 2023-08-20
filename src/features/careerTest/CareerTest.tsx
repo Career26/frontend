@@ -42,7 +42,7 @@ export const CareerTest = () => {
         <Container>
           <Stepper active={activeStep} onStepClick={setActiveStep} breakpoint="sm">
             {stepperLabels.map((label) => (
-              <Stepper.Step label={label} key={`stepper-${label}`} disabled />
+              <Stepper.Step label={label} key={`stepper-${label}`} />
             ))}
           </Stepper>
         </Container>

@@ -24,6 +24,7 @@ export const CompanyForm = ({
         label="Role"
         className={classes.questionInput}
       />
+      {/* Add an info tooltip as to how to rate something */}
       <Select
         {...form.getInputProps(`${baseKey}.rating`)}
         label="Rating"
@@ -38,7 +39,7 @@ export const CompanyForm = ({
       />
       <Textarea
         {...form.getInputProps(`${baseKey}.ratingReason`)}
-        label="Role"
+        label="Reason for rating"
         minRows={3}
         className={classes.questionInput}
       />

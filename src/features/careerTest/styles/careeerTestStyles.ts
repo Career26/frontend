@@ -72,6 +72,7 @@ export const questionFormStyles = createStyles((theme) => ({
   chip: {
     display: 'flex',
     alignItems: 'center',
+    background: theme.colors.blue[0],
     button: {
       '&:hover': {
         color: 'red',

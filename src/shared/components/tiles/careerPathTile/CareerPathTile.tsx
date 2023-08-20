@@ -33,6 +33,9 @@ export const CareerPathTile = ({
         <Button variant="light" color="blue" fullWidth mt="md" radius="md" onClick={open}>
           Explore more
         </Button>
+        <Button variant="light" color="red" fullWidth mt="md" radius="md" onClick={open}>
+          I don&apos;t like this
+        </Button>
       </Card>
       <Modal
         size={500}

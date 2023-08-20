@@ -1,5 +1,5 @@
 import React from 'react';
-import { Group, Button, Text, Divider } from '@mantine/core';
+import { Group, Button, Text, Divider, Container } from '@mantine/core';
 import { IconPlus } from '@tabler/icons-react';
 import { UseFormReturnType } from '@mantine/form';
 import { Profile } from '@datatypes/profile';
@@ -7,6 +7,7 @@ import { initialUniversityValues } from '@careerTest/config/formConstants';
 import { questionFormStyles } from '@careerTest/styles/careeerTestStyles';
 
 import { UniversityForm } from './UniversityForm';
+import { RemoveRowButton } from '../RemoveRowButton';
 
 export const EducationForm = ({ form }: { form: UseFormReturnType<Profile> }) => {
   const { classes } = questionFormStyles();
@@ -20,6 +21,13 @@ export const EducationForm = ({ form }: { form: UseFormReturnType<Profile> }) =>
     ]);
   };
 
+  const onClickRemoveUniversity = (key: number) => {
+    form.setFieldValue(
+      'additionalDegrees',
+      form.values.additionalDegrees.filter((_degree, i) => i !== key),
+    );
+  };
+
   return (
     <>
       <Text className={classes.questionTitle}>Education</Text>
@@ -27,17 +35,30 @@ export const EducationForm = ({ form }: { form: UseFormReturnType<Profile> }) =>
       {[...Array(additionalDegreesCount).keys()].map((key) => {
         const baseKey = `additionalDegrees.${key}`;
         return (
-          <>
+          <div key={baseKey}>
             <Divider size="lg" className={classes.divider} />
-            <UniversityForm form={form} baseKey={baseKey} key={baseKey} />
-          </>
+            <UniversityForm form={form} baseKey={baseKey} />
+            {key + 1 !== additionalDegreesCount && (
+              <Container className={classes.removeButton}>
+                <RemoveRowButton onClick={() => onClickRemoveUniversity(key)} label="University" />
+              </Container>
+            )}
+          </div>
         );
       })}
-      <Group position="left">
-        <Button leftIcon={<IconPlus />} onClick={onClickAddUniversity}>
-          Add Another University
-        </Button>
-      </Group>
+      <Container>
+        <Group className={classes.row}>
+          <Button leftIcon={<IconPlus />} onClick={onClickAddUniversity}>
+            Add Another University
+          </Button>
+          {additionalDegreesCount && (
+            <RemoveRowButton
+              label="University"
+              onClick={() => onClickRemoveUniversity(additionalDegreesCount - 1)}
+            />
+          )}
+        </Group>
+      </Container>
     </>
   );
 };

@@ -24,7 +24,7 @@ export const UniversityForm = ({
         label="Course Name"
         className={classes.questionInput}
       />
-      <div className={classes.questionRow}>
+      <div className={classes.row}>
         <Select
           {...form.getInputProps(`${baseKey}.grade`)}
           label="Grade"

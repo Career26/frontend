@@ -30,7 +30,7 @@ export const questionFormStyles = createStyles((theme) => ({
       flexDirection: 'column',
     },
   },
-  questionRow: {
+  row: {
     display: 'flex',
     justifyContent: 'space-between',
     '> div': {
@@ -56,6 +56,11 @@ export const questionFormStyles = createStyles((theme) => ({
     paddingBottom: theme.spacing.xl,
   },
   questionInput: {
+    paddingBottom: theme.spacing.xl,
+  },
+  removeButton: {
+    display: 'flex',
+    justifyContent: 'right',
     paddingBottom: theme.spacing.xl,
   },
 }));

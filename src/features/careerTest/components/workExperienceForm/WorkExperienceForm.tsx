@@ -30,12 +30,12 @@ export const WorkExperienceForm = ({ form }: { form: UseFormReturnType<Profile> 
 
   return (
     <>
-      <Text className={classes.questionTitle}>Company</Text>
+      <Text className={classes.questionTitle}>Experience</Text>
       {[...Array(workExperienceCount).keys()].map((key) => {
         const baseKey = `previousWorkExperience.${key}`;
         return (
           <div key={baseKey}>
-            <Divider size="lg" className={classes.divider} />
+            {key > 0 && <Divider size="lg" className={classes.divider} />}
             <CompanyForm form={form} baseKey={baseKey} key={baseKey} />
             {key > 0 && key + 1 !== workExperienceCount && (
               <Container className={classes.removeButton}>

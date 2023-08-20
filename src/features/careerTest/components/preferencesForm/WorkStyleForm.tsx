@@ -45,6 +45,7 @@ export const WorkStyleForm = ({ form }: { form: UseFormReturnType<Profile> }) =>
         <NumberInput
           {...form.getInputProps('expectedSalary.expectedSalary')}
           label="What is your expected salary?"
+          parser={(value) => value.replace(/[ $£€¥,]/gm, '')}
           formatter={(value) =>
             !Number.isNaN(parseFloat(value))
               ? `${symbol} ${value}`.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',')

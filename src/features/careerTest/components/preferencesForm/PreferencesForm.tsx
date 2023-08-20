@@ -11,7 +11,7 @@ export const PreferencesForm = ({ form }: { form: UseFormReturnType<Profile> }) 
   const { classes } = questionFormStyles();
   return (
     <>
-      <Text className={classes.questionTitle} />
+      <Text className={classes.questionTitle}>Preferences</Text>
       <AreasOfInterestForm form={form} />
       <WorkStyleForm form={form} />
     </>

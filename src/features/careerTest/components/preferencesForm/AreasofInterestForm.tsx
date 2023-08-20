@@ -1,12 +1,11 @@
-import { UseFormReturnType } from '@mantine/form';
 import React, { useState } from 'react';
 import { ActionIcon, Autocomplete, Chip, Container, Group } from '@mantine/core';
 import { IconX } from '@tabler/icons-react';
-import { Profile } from '@datatypes/profile';
 import { exampleAreasOfInterest } from '@careerTest/config/formConstants';
 import { questionFormStyles } from '@careerTest/styles/careeerTestStyles';
+import { CareerFormProps } from '@careerTest/careerTestTypes';
 
-export const AreasOfInterestForm = ({ form }: { form: UseFormReturnType<Profile> }) => {
+export const AreasOfInterestForm = ({ form }: { form: CareerFormProps }) => {
   const { classes } = questionFormStyles();
   const [newInterest, setNewInterest] = useState('');
 

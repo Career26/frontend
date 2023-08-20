@@ -1,15 +1,14 @@
-import { UseFormReturnType } from '@mantine/form';
 import React from 'react';
 import { Button, Container, Divider, Group, Text } from '@mantine/core';
 import { IconPlus } from '@tabler/icons-react';
-import { Profile } from '@datatypes/profile';
 import { initialWorkExperienceValues } from '@careerTest/config/formConstants';
 import { questionFormStyles } from '@careerTest/styles/careeerTestStyles';
+import { CareerFormProps } from '@careerTest/careerTestTypes';
 
 import { CompanyForm } from './CompanyForm';
 import { RemoveRowButton } from '../RemoveRowButton';
 
-export const WorkExperienceForm = ({ form }: { form: UseFormReturnType<Profile> }) => {
+export const WorkExperienceForm = ({ form }: { form: CareerFormProps }) => {
   const { classes } = questionFormStyles();
 
   const workExperienceCount = form.values.previousWorkExperience.length;

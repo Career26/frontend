@@ -1,15 +1,14 @@
 import React from 'react';
 import { Group, Button, Text, Divider, Container } from '@mantine/core';
 import { IconPlus } from '@tabler/icons-react';
-import { UseFormReturnType } from '@mantine/form';
-import { Profile } from '@datatypes/profile';
 import { initialUniversityValues } from '@careerTest/config/formConstants';
 import { questionFormStyles } from '@careerTest/styles/careeerTestStyles';
+import { CareerFormProps } from '@careerTest/careerTestTypes';
 
 import { UniversityForm } from './UniversityForm';
 import { RemoveRowButton } from '../RemoveRowButton';
 
-export const EducationForm = ({ form }: { form: UseFormReturnType<Profile> }) => {
+export const EducationForm = ({ form }: { form: CareerFormProps }) => {
   const { classes } = questionFormStyles();
 
   const additionalDegreesCount = form.values.additionalDegrees.length;

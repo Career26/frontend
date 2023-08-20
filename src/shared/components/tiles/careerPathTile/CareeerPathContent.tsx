@@ -6,7 +6,7 @@ import { careerPathTileStyles } from './careerPathTileStyles';
 import { IndustrySection } from './IndustrySection';
 
 const BadgeList = ({ title, items, color }: { title: string; items: string[]; color?: string }) => {
-  const { classes } = careerPathTileStyles();
+  const { classes } = careerPathTileStyles({});
   return (
     <>
       <Text weight={500}>{title}</Text>
@@ -31,7 +31,7 @@ export const CareerPathContent = ({
   companies,
   skills,
 }: Omit<CareerPath, 'title'>) => {
-  const { classes } = careerPathTileStyles();
+  const { classes } = careerPathTileStyles({});
   return (
     <>
       <IndustrySection industry={industry} startingSalary={startingSalary} />

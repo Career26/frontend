@@ -15,7 +15,8 @@ export const CareerPathTile = ({
   reason,
   companies,
   skills,
-}: CareerPath) => {
+  onClickDislike,
+}: CareerPath & { onClickDislike: () => void }) => {
   const [opened, { open, close }] = useDisclosure(false);
   const { classes } = careerPathTileStyles();
   return (
@@ -33,7 +34,7 @@ export const CareerPathTile = ({
         <Button variant="light" color="blue" fullWidth mt="md" radius="md" onClick={open}>
           Explore more
         </Button>
-        <Button variant="light" color="red" fullWidth mt="md" radius="md" onClick={open}>
+        <Button variant="light" color="red" fullWidth mt="md" radius="md" onClick={onClickDislike}>
           I don&apos;t like this
         </Button>
       </Card>

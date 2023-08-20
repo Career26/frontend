@@ -1,11 +1,5 @@
-import {
-  DegreeGrade,
-  DegreeLevel,
-  Degree,
-  Profile,
-  WorkExperience,
-  WorkStyle,
-} from '@datatypes/profile';
+import { CareerFormValues } from '@careerTest/careerTestTypes';
+import { DegreeGrade, DegreeLevel, Degree, WorkExperience, WorkStyle } from '@datatypes/profile';
 
 export const exampleCities = [
   { value: 'London', label: 'London', baseCurrency: 'GBP', symbol: '£' },
@@ -46,7 +40,7 @@ export const initialWorkExperienceValues: WorkExperience = {
   role: '',
 };
 
-export const initialProfileValues: Profile = {
+export const initialProfileValues: CareerFormValues = {
   additionalDegrees: [],
   areasOfInterest: [],
   expectedSalary: { baseCurrency: 'GBP', city: 'London', expectedSalary: 40000 },
@@ -54,4 +48,5 @@ export const initialProfileValues: Profile = {
   latestDegree: initialUniversityValues,
   previousWorkExperience: [initialWorkExperienceValues],
   fullName: 'Test Student',
+  dislikedResults: [],
 };

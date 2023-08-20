@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { UseFormReturnType } from '@mantine/form';
 import { Checkbox, Container, NumberInput, Select } from '@mantine/core';
-import { Profile, WorkStyle } from '@datatypes/profile';
+import { WorkStyle } from '@datatypes/profile';
 import { exampleCities } from '@careerTest/config/formConstants';
 import { questionFormStyles } from '@careerTest/styles/careeerTestStyles';
+import { CareerFormProps } from '@careerTest/careerTestTypes';
 
-export const WorkStyleForm = ({ form }: { form: UseFormReturnType<Profile> }) => {
+export const WorkStyleForm = ({ form }: { form: CareerFormProps }) => {
   const { classes } = questionFormStyles();
   const [symbol, setSymbol] = useState('£');
 

@@ -34,7 +34,7 @@ export const questionFormStyles = createStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     '> div': {
-      width: '47%',
+      width: '48%',
     },
   },
   progressContainer: {
@@ -71,6 +71,11 @@ export const questionFormStyles = createStyles((theme) => ({
   chip: {
     display: 'flex',
     alignItems: 'center',
+    button: {
+      '&:hover': {
+        color: 'red',
+      },
+    },
   },
   chipSelectionRow: {
     paddingTop: theme.spacing.md,

@@ -24,18 +24,20 @@ export const UniversityForm = ({
         label="Course Name"
         className={classes.questionInput}
       />
-      <Select
-        {...form.getInputProps(`${baseKey}.grade`)}
-        label="Grade"
-        className={classes.questionInput}
-        data={Object.values(DegreeGrade).map((value) => ({ value, label: value }))}
-      />
-      <Select
-        {...form.getInputProps(`${baseKey}.level`)}
-        label="Level"
-        className={classes.questionInput}
-        data={Object.values(DegreeLevel).map((value) => ({ value, label: value }))}
-      />
+      <div className={classes.questionRow}>
+        <Select
+          {...form.getInputProps(`${baseKey}.grade`)}
+          label="Grade"
+          className={classes.questionInput}
+          data={Object.values(DegreeGrade).map((value) => ({ value, label: value }))}
+        />
+        <Select
+          {...form.getInputProps(`${baseKey}.level`)}
+          label="Level"
+          className={classes.questionInput}
+          data={Object.values(DegreeLevel).map((value) => ({ value, label: value }))}
+        />
+      </div>
     </Container>
   );
 };

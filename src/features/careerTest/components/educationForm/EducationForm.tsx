@@ -1,5 +1,5 @@
 import React from 'react';
-import { Group, Button, Text } from '@mantine/core';
+import { Group, Button, Text, Divider } from '@mantine/core';
 import { IconPlus } from '@tabler/icons-react';
 import { UseFormReturnType } from '@mantine/form';
 import { Profile } from '@datatypes/profile';
@@ -26,7 +26,12 @@ export const EducationForm = ({ form }: { form: UseFormReturnType<Profile> }) =>
       <UniversityForm form={form} baseKey="latestDegree" />
       {[...Array(additionalDegreesCount).keys()].map((key) => {
         const baseKey = `additionalDegrees.${key}`;
-        return <UniversityForm form={form} baseKey={baseKey} key={baseKey} />;
+        return (
+          <>
+            <Divider size="lg" className={classes.divider} />
+            <UniversityForm form={form} baseKey={baseKey} key={baseKey} />
+          </>
+        );
       })}
       <Group position="left">
         <Button leftIcon={<IconPlus />} onClick={onClickAddUniversity}>

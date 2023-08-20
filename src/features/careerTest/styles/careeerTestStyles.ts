@@ -7,6 +7,9 @@ export const questionFormStyles = createStyles((theme) => ({
       paddingTop: rem(60),
     },
   },
+  divider: {
+    paddingBottom: theme.spacing.lg,
+  },
   titleText: {
     fontSize: rem(36),
     fontWeight: 800,
@@ -27,6 +30,13 @@ export const questionFormStyles = createStyles((theme) => ({
       flexDirection: 'column',
     },
   },
+  questionRow: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    '> div': {
+      width: '47%',
+    },
+  },
   progressContainer: {
     paddingTop: 0,
     paddingBottom: `calc(${theme.spacing.xl} * 2)`,
@@ -42,6 +52,7 @@ export const questionFormStyles = createStyles((theme) => ({
     padding: 0,
     color: theme.colors.gray[9],
     textAlign: 'center',
+    paddingTop: theme.spacing.xl,
     paddingBottom: theme.spacing.xl,
   },
   questionInput: {

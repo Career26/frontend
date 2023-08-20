@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Text, Button, Modal } from '@mantine/core';
+import { Card, Text, Button, Modal, LoadingOverlay } from '@mantine/core';
 import { CareerPath } from '@datatypes/career';
 import { useDisclosure } from '@mantine/hooks';
 
@@ -15,8 +15,9 @@ export const CareerPathTile = ({
   reason,
   companies,
   skills,
-  onClickDislike,
-}: CareerPath & { onClickDislike: () => void }) => {
+  buttons,
+  loading = false,
+}: CareerPath & { buttons?: JSX.Element; loading?: boolean }) => {
   const [opened, { open, close }] = useDisclosure(false);
   const { classes } = careerPathTileStyles();
   return (
@@ -34,9 +35,8 @@ export const CareerPathTile = ({
         <Button variant="light" color="blue" fullWidth mt="md" radius="md" onClick={open}>
           Explore more
         </Button>
-        <Button variant="light" color="red" fullWidth mt="md" radius="md" onClick={onClickDislike}>
-          I don&apos;t like this
-        </Button>
+        {buttons}
+        <LoadingOverlay visible={loading} overlayBlur={2} />
       </Card>
       <Modal
         size={500}

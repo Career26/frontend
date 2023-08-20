@@ -17,7 +17,7 @@ export const careerPathTileStyles = createStyles((theme) => ({
     color: theme.colors.gray[9],
     textAlign: 'center',
 
-    [theme.fn.smallerThan('md')]: {
+    [theme.fn.smallerThan('lg')]: {
       textAlign: 'left',
       paddingBottom: theme.spacing.xs,
     },
@@ -25,8 +25,28 @@ export const careerPathTileStyles = createStyles((theme) => ({
   industrySection: {
     display: 'flex',
     placeContent: 'center',
+    justifyContent: 'space-between',
   },
-  role: {
+  careerSection: {
     overflow: 'hidden',
+    paddingBottom: theme.spacing.md,
+  },
+  badgeList: {
+    display: 'flex',
+    paddingTop: theme.spacing.md,
+    paddingBottom: theme.spacing.md,
+    justifyContent: 'space-between',
+    flexFlow: 'wrap',
+  },
+  modal: {
+    '.mantine-Modal-header': {
+      background: theme.colors.blue[0],
+    },
+  },
+  cardContainer: {
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
   },
 }));

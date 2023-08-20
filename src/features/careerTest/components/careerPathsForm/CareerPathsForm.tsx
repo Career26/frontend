@@ -3,7 +3,7 @@ import { Profile } from '@datatypes/profile';
 import { Text, Grid, Container } from '@mantine/core';
 import { UseFormReturnType } from '@mantine/form';
 import { mockCareersTest } from '@mocks/careerTestMocks';
-import { CareerPathTile } from '@shared/components/tiles/CareerPathTile';
+import { CareerPathTile } from '@shared/components/tiles/careerPathTile/CareerPathTile';
 import React from 'react';
 
 export const CareerPathsForm = ({ form }: { form: UseFormReturnType<Profile> }) => {

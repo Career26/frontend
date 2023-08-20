@@ -31,6 +31,7 @@ module.exports = {
         'import/no-extraneous-dependencies': 0,
       },
     },
+    { files: ['**/*Style*'], rules: { 'sonarjs/no-duplicate-string': 0 } },
   ],
   rules: {
     curly: ['error', 'all'],

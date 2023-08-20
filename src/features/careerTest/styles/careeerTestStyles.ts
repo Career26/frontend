@@ -43,6 +43,7 @@ export const questionFormStyles = createStyles((theme) => ({
   },
   questionContainer: {
     paddingTop: 0,
+    paddingBottom: theme.spacing.xl,
   },
   questionTitle: {
     fontSize: rem(30),

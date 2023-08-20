@@ -35,6 +35,7 @@ export const CareerPathTile = ({
         </Button>
       </Card>
       <Modal
+        size={500}
         className={classes.modal}
         opened={opened}
         onClose={close}

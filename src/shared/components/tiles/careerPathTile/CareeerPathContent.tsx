@@ -1,5 +1,5 @@
 import React from 'react';
-import { Badge, Text } from '@mantine/core';
+import { Badge, Grid, Text } from '@mantine/core';
 import { CareerPath } from '@datatypes/career';
 
 import { careerPathTileStyles } from './careerPathTileStyles';
@@ -10,13 +10,15 @@ const BadgeList = ({ title, items, color }: { title: string; items: string[]; co
   return (
     <>
       <Text weight={500}>{title}</Text>
-      <div className={classes.badgeList}>
+      <Grid className={classes.badgeGrid}>
         {items.map((item, key) => (
-          <Badge size="lg" color={color} variant="light" key={`item-${key}`}>
-            {item}
-          </Badge>
+          <Grid.Col md={6} key={`item-${key}`}>
+            <Badge size="lg" color={color} variant="light" key={`item-${key}`}>
+              {item}
+            </Badge>
+          </Grid.Col>
         ))}
-      </div>
+      </Grid>
     </>
   );
 };

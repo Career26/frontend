@@ -31,12 +31,9 @@ export const careerPathTileStyles = createStyles((theme) => ({
     overflow: 'hidden',
     paddingBottom: theme.spacing.md,
   },
-  badgeList: {
-    display: 'flex',
+  badgeGrid: {
     paddingTop: theme.spacing.md,
     paddingBottom: theme.spacing.md,
-    justifyContent: 'space-between',
-    flexFlow: 'wrap',
   },
   modal: {
     '.mantine-Modal-header': {

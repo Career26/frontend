@@ -82,4 +82,7 @@ export const questionFormStyles = createStyles((theme) => ({
   chipSelectionRow: {
     paddingTop: theme.spacing.md,
   },
+  steppers: {
+    paddingTop: theme.spacing.md,
+  },
 }));

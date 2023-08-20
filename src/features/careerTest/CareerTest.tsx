@@ -4,19 +4,19 @@ import { PageHeader } from '@shared/components/pageHeader/PageHeader';
 import { Shell } from '@shared/components/shell/Shell';
 import { useGenerateProfileMutation } from '@apis/profile';
 
-import { CareerTestHeader } from './components/CareerTestHeader';
 import { EducationForm } from './components/educationForm/EducationForm';
 import { WorkExperienceForm } from './components/workExperienceForm/WorkExperienceForm';
 import { PreferencesForm } from './components/preferencesForm/PreferencesForm';
 import { useProfileForm } from './useProfileForm';
 import { CareerPathsForm } from './components/careerPathsForm/CareerPathsForm';
+import { questionFormStyles } from './styles/careeerTestStyles';
 
 const stepperLabels = ['Education', 'Experience', 'Preferences', 'Career Paths'];
 
 export const CareerTest = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [generateProfile, { isLoading: generateProfileIsLoading }] = useGenerateProfileMutation();
-
+  const { classes } = questionFormStyles();
   const { form, checkFormIsValid } = useProfileForm({ activeStep });
 
   const clickNext = async () => {
@@ -39,8 +39,7 @@ export const CareerTest = () => {
   return (
     <Shell header={<PageHeader />}>
       <>
-        <CareerTestHeader />
-        <Container>
+        <Container className={classes.steppers}>
           <Stepper active={activeStep} onStepClick={setActiveStep} breakpoint="sm">
             {stepperLabels.map((label) => (
               <Stepper.Step label={label} key={`stepper-${label}`} />

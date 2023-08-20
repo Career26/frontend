@@ -14,7 +14,7 @@ export const CareerPathsForm = ({ form }: { form: CareerFormProps }) => {
 
   return (
     <Container className={classes.questionContainer}>
-      <Text className={classes.questionTitle}>CareerPaths</Text>
+      <Text className={classes.questionTitle}>Career Paths</Text>
       <Grid>
         {Object.entries(mockCareersTest.careerPaths).map(([key, careerPath]) => (
           <Grid.Col md={6} key={`career-patj-${key}`}>

@@ -21,16 +21,19 @@ export const WorkStyleForm = ({ form }: { form: UseFormReturnType<Profile> }) =>
 
   return (
     <Container className={classes.questionContainer}>
-      <Select
-        {...form.getInputProps('personalityType.workStyle')}
-        label="What is your preferred working style?"
-        className={classes.questionInput}
-        data={Object.values(WorkStyle)}
-      />
-      <Checkbox
-        {...form.getInputProps('personalityType.workLifeBalanceSacrifice')}
-        label="Would you sacrifice your work-life balance?"
-      />
+      <div className={classes.row}>
+        <Select
+          {...form.getInputProps('personalityType.workStyle')}
+          label="What is your preferred working style?"
+          className={classes.questionInput}
+          data={Object.values(WorkStyle)}
+        />
+        <Checkbox
+          className={classes.checkbox}
+          {...form.getInputProps('personalityType.workLifeBalanceSacrifice')}
+          label="Would you sacrifice your work-life balance?"
+        />
+      </div>
       <div className={classes.row}>
         <Select
           {...form.getInputProps('expectedSalary.city')}

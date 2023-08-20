@@ -30,37 +30,40 @@ export const AreasOfInterestForm = ({ form }: { form: UseFormReturnType<Profile>
 
   return (
     <Container className={classes.questionContainer}>
-      <Autocomplete
-        disabled={areasOfInterest.length > 2}
-        label="Select up to 3 areas of interest"
-        data={options}
-        value={newInterest}
-        onChange={(value) => setNewInterest(value)}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter') {
-            addNewInterest(newInterest);
-          }
-        }}
-        nothingFound="Press Enter to add new interest"
-        onItemSubmit={({ value }) => {
-          addNewInterest(value);
-        }}
-        error={form.errors.areasOfInterest}
-      />
-      <Chip.Group>
-        <Group position="center">
-          {areasOfInterest.map((interest) => (
-            <Chip key={`${interest}-chip`}>
-              <div style={{ display: 'flex', flexDirection: 'row' }}>
-                {interest}
-                <ActionIcon onClick={() => removeInterest(interest)}>
-                  <IconX />
-                </ActionIcon>
-              </div>
-            </Chip>
-          ))}
-        </Group>
-      </Chip.Group>
+      <div className={classes.questionInput}>
+        <Autocomplete
+          label="Select up to 3 areas of interest"
+          data={options}
+          value={newInterest}
+          onChange={(value) => setNewInterest(value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              addNewInterest(newInterest);
+            }
+          }}
+          nothingFound="Press Enter to add new interest"
+          onItemSubmit={({ value }) => {
+            addNewInterest(value);
+          }}
+          error={form.errors.areasOfInterest}
+        />
+        <div className={classes.chipSelectionRow}>
+          <Chip.Group>
+            <Group position="center">
+              {areasOfInterest.map((interest) => (
+                <Chip key={`${interest}-chip`}>
+                  <div className={classes.chip}>
+                    {interest}
+                    <ActionIcon onClick={() => removeInterest(interest)} size="sm">
+                      <IconX />
+                    </ActionIcon>
+                  </div>
+                </Chip>
+              ))}
+            </Group>
+          </Chip.Group>
+        </div>
+      </div>
     </Container>
   );
 };

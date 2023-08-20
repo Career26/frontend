@@ -63,4 +63,16 @@ export const questionFormStyles = createStyles((theme) => ({
     justifyContent: 'right',
     paddingBottom: theme.spacing.xl,
   },
+  checkbox: {
+    alignContent: 'center',
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  chip: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  chipSelectionRow: {
+    paddingTop: theme.spacing.md,
+  },
 }));

@@ -9,6 +9,7 @@ import { EducationForm } from './components/educationForm/EducationForm';
 import { WorkExperienceForm } from './components/workExperienceForm/WorkExperienceForm';
 import { PreferencesForm } from './components/preferencesForm/PreferencesForm';
 import { useProfileForm } from './useProfileForm';
+import { CareerPathsForm } from './components/careerPathsForm/CareerPathsForm';
 
 const stepperLabels = ['Education', 'Experience', 'Preferences', 'Career Paths'];
 
@@ -50,6 +51,7 @@ export const CareerTest = () => {
           {activeStep === 0 && <EducationForm form={form} />}
           {activeStep === 1 && <WorkExperienceForm form={form} />}
           {activeStep === 2 && <PreferencesForm form={form} />}
+          {activeStep === 3 && <CareerPathsForm form={form} />}
           <Group position="center">
             <Button onClick={clickBack} disabled={activeStep === 0 || generateProfileIsLoading}>
               Back

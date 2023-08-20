@@ -1,5 +1,7 @@
-export const mockCareersTest = {
-  career_paths: {
+import { CareerResult } from '@datatypes/career';
+
+export const mockCareersTest: CareerResult = {
+  careerPaths: {
     '1d19725d-07e7-414d-a525-914e67411d13': {
       companies: ['Goldman Sachs', 'JP Morgan', 'Citadel', 'Bridgewater Associates'],
       industry: 'Finance',
@@ -7,7 +9,7 @@ export const mockCareersTest = {
         'Your interest in finance and technology, along with your experience in using Python and understanding the interaction between finance and technology, make a career as a Quantitative Analyst a suitable choice. This role allows you to work independently and apply your analytical skills.',
       role: 'As a Quantitative Analyst, you will use mathematical and statistical models to analyze financial data and develop trading strategies. You will work with large datasets, conduct research, and collaborate with traders and other team members.',
       skills: ['Quantitative analysis', 'Financial modeling', 'Programming (Python, R)'],
-      starting_salary: '£60,000 - £80,000',
+      startingSalary: '£60,000 - £80,000',
       title: 'Quantitative Analyst',
     },
     '466db97e-1390-4bcd-854a-bbd6129ce499': {
@@ -17,7 +19,7 @@ export const mockCareersTest = {
         'With your strong background in Computer Science and interest in technology, a career as a Data Scientist would be a suitable choice. This role allows you to work independently and apply your analytical and programming skills to extract insights from data.',
       role: 'As a Data Scientist, you will collect, analyze, and interpret large datasets to identify trends and patterns. You will develop machine learning models, create data visualizations, and communicate findings to stakeholders.',
       skills: ['Data analysis', 'Machine learning', 'Programming (Python, R)'],
-      starting_salary: '£55,000 - £75,000',
+      startingSalary: '£55,000 - £75,000',
       title: 'Data Scientist',
     },
     '55c0677b-dc68-4231-a765-08b00cb826ea': {
@@ -31,7 +33,7 @@ export const mockCareersTest = {
         'Programming languages (e.g., Python, Java)',
         'Financial software development',
       ],
-      starting_salary: '£50,000 - £70,000',
+      startingSalary: '£50,000 - £70,000',
       title: 'Financial Software Developer',
     },
     '949540b9-5501-430a-8820-966c0239a556': {
@@ -45,38 +47,9 @@ export const mockCareersTest = {
         'Problem-solving',
         'Software development lifecycle',
       ],
-      starting_salary: '£50,000 - £70,000',
+      startingSalary: '£50,000 - £70,000',
       title: 'Software Engineer',
     },
   },
   identifier: '01c09237-0462-4ef6-8c15-55fb0d642f88',
-  profile: {
-    additional_degrees: [],
-    areas_of_interest: ['Finance', 'Technology'],
-    expected_salary: {
-      base_currency: 'GBP',
-      city: 'London United Kingdom',
-      expected_salary: 50000,
-    },
-    full_name: 'Bill Gates',
-    latest_degree: {
-      grade: 'first class honours',
-      level: 'BSc',
-      name: 'Computer Science',
-      university: 'The University of Kent',
-    },
-    personality_type: {
-      work_life_balance_sacrifice: true,
-      work_style: 'INDEPENDENT',
-    },
-    previous_work_experience: [
-      {
-        company_name: 'Schroders',
-        rating: 4,
-        rating_reason:
-          'I got to use Python to develop real world applications, and understand first hand how finance and technology can interact',
-        role: 'Global Technology Placement Student',
-      },
-    ],
-  },
 };

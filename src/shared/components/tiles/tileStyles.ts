@@ -1,8 +1,8 @@
 import { createStyles, rem } from '@mantine/core';
 
 interface ThemeProps {
-  withSpacing: boolean;
-  withBottomPadding: boolean;
+  withSpacing?: boolean;
+  withBottomPadding?: boolean;
 }
 
 export const tileStyles = createStyles((theme, { withSpacing, withBottomPadding }: ThemeProps) => ({

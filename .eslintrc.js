@@ -41,6 +41,7 @@ module.exports = {
     'react/function-component-definition': 0,
     'react/no-array-index-key': 0,
     'react/require-default-props': 0,
+    '@typescript-eslint/no-non-null-assertion': 0,
     'no-param-reassign': ['error', { props: true, ignorePropertyModificationsFor: ['state'] }],
     'import/order': [
       'error',

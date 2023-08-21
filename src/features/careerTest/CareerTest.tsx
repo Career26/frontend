@@ -14,8 +14,15 @@ import { CareerTestHeader } from './components/CareerTestHeader';
 
 const stepperLabels = ['Education', 'Experience', 'Preferences', 'Career Paths'];
 
+enum CareerStep {
+  EDUCATION = 0,
+  WORK_EXPERIENCE = 1,
+  PREFERENCES = 2,
+  CAREER_PATHS = 3,
+}
+
 export const CareerTest = () => {
-  const [activeStep, setActiveStep] = useState(0);
+  const [activeStep, setActiveStep] = useState(CareerStep.EDUCATION);
   const [generateProfile, { isLoading: generateProfileIsLoading }] = useGenerateProfileMutation();
   const { classes } = questionFormStyles();
   const { form, checkFormIsValid } = useProfileForm({ activeStep });
@@ -27,7 +34,7 @@ export const CareerTest = () => {
       return;
     }
     form.clearErrors();
-    if (activeStep === 2) {
+    if (activeStep === CareerStep.PREFERENCES) {
       await generateProfile(form.values);
     }
     setActiveStep(activeStep + 1);
@@ -49,22 +56,28 @@ export const CareerTest = () => {
           </Stepper>
         </Container>
         <Container>
-          {activeStep === 0 && <EducationForm form={form} />}
-          {activeStep === 1 && <WorkExperienceForm form={form} />}
-          {activeStep === 2 && <PreferencesForm form={form} />}
-          {activeStep === 3 && <CareerPathsForm />}
-          <Group position="center">
-            <Button onClick={clickBack} disabled={activeStep === 0 || generateProfileIsLoading}>
-              Back
-            </Button>
-            <Button
-              onClick={clickNext}
-              disabled={activeStep === 3 || generateProfileIsLoading}
-              loading={generateProfileIsLoading}
-            >
-              Next
-            </Button>
-          </Group>
+          {activeStep === CareerStep.EDUCATION && <EducationForm form={form} />}
+          {activeStep === CareerStep.WORK_EXPERIENCE && <WorkExperienceForm form={form} />}
+          {activeStep === CareerStep.PREFERENCES && <PreferencesForm form={form} />}
+          {activeStep === CareerStep.CAREER_PATHS && <CareerPathsForm />}
+          {activeStep !== CareerStep.CAREER_PATHS && (
+            <Group position="center">
+              <Button
+                onClick={clickBack}
+                disabled={activeStep === CareerStep.EDUCATION || generateProfileIsLoading}
+              >
+                Back
+              </Button>
+
+              <Button
+                onClick={clickNext}
+                disabled={generateProfileIsLoading}
+                loading={generateProfileIsLoading}
+              >
+                Next
+              </Button>
+            </Group>
+          )}
         </Container>
       </>
     </Shell>

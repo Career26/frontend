@@ -9,7 +9,7 @@ import successImg from '../landingPage/assets/success.svg';
 import { EducationForm } from './components/educationForm/EducationForm';
 import { WorkExperienceForm } from './components/workExperienceForm/WorkExperienceForm';
 import { PreferencesForm } from './components/preferencesForm/PreferencesForm';
-import { useProfileForm } from './useProfileForm';
+import { useProfileForm } from './hooks/useProfileForm';
 import { CareerPathsForm } from './components/careerPathsForm/CareerPathsForm';
 import { questionFormStyles } from './styles/careeerTestStyles';
 import { CareerTestHeader } from './components/CareerTestHeader';

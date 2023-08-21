@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
 import { FORM_INDEX, useForm } from '@mantine/form';
 
-import { initialProfileValues } from './config/formConstants';
-import { CareerFormValues } from './careerTestTypes';
+import { initialProfileValues } from '../config/formConstants';
+import { CareerFormValues } from '../careerTestTypes';
 
 export const useProfileForm = ({ activeStep }: { activeStep: number }) => {
   const fieldsToCheck = useMemo(() => {

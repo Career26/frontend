@@ -3,6 +3,8 @@ import React from 'react';
 import { useAppSelector } from '@state/store';
 import { selectIsLoggedIn } from '@slices/userSlice';
 import { Hero } from '@shared/components/hero/Hero';
+import { useHistory } from 'react-router-dom';
+import { urls } from '@shared/config/urlConstants';
 
 import successImg from '../../landingPage/assets/success.svg';
 import careerPathsImg from '../../landingPage/assets/careerPaths.svg';
@@ -14,6 +16,11 @@ type CareerTestFooterProps = {
 
 export const CareerTestFooter = ({ showSplashPage, activeStep }: CareerTestFooterProps) => {
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
+  const history = useHistory();
+  const goToHomepage = () => {
+    history.push(urls.home);
+  };
+
   if (showSplashPage || activeStep !== CareerStep.COMPLETE) {
     return null;
   }
@@ -25,7 +32,7 @@ export const CareerTestFooter = ({ showSplashPage, activeStep }: CareerTestFoote
         subheadingText="Discover more about your personalised career paths and start preparing for interviews with CV enhancement, interview questions, and more."
         headingText="Your Profile is Built!"
         colorHeadingText="Prepare for your Future"
-        onClick={() => {}}
+        onClick={goToHomepage}
         grayBackground
       />
     );

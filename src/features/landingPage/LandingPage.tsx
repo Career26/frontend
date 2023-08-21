@@ -1,125 +1,32 @@
 import React from 'react';
-
-// external
 import { useHistory } from 'react-router-dom';
-import { createStyles, Container, Badge, rem, Text, Space } from '@mantine/core';
-
-// components
-import { Feature } from './components/feature';
-import { Hero } from './components/hero';
-import { Pricing } from './components/pricing';
-
-// shared
+import { Container, Badge, Text, Space } from '@mantine/core';
 import { PageHeader } from '@shared/components/pageHeader/PageHeader';
-
-// assets
-import careerProgressImg from './assets/careerProgress.svg';
-import cvImg from './assets/cv.svg';
-import careerPathsImg from './assets/careerPaths.svg';
-import interviewImg from './assets/interview.svg';
-import successImg from './assets/success.svg';
-import networkImg from './assets/network.svg';
-
-// config
-import * as constants from './config/constants';
 import { urls } from '@shared/config/urlConstants';
 import { Shell } from '@shared/components/shell/Shell';
+import { Feature } from '@shared/components/feature/Feature';
+import { Hero } from '@shared/components/hero/Hero';
 
-const useStyles = createStyles((theme) => ({
-  featuresContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    flex: 1,
-    background: theme.colors.gray[0],
-    padding: theme.spacing.xl,
-    maxWidth: 'none',
-  },
-
-  pricingContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    padding: theme.spacing.xl,
-    paddingTop: `calc(${theme.spacing.xl} * 2)`,
-    paddingBottom: `calc(${theme.spacing.xl} * 2)`,
-  },
-
-  pricingText: {
-    fontSize: rem(36),
-    fontWeight: 800,
-    lineHeight: 1.1,
-    margin: 0,
-    padding: 0,
-    color: theme.colors.gray[9],
-    paddingTop: theme.spacing.xl,
-    paddingBottom: theme.spacing.xl,
-    textAlign: 'center',
-
-    [theme.fn.smallerThan('sm')]: {
-      fontSize: rem(30),
-    },
-  },
-
-  pricingTierContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    padding: 0,
-
-    [theme.fn.smallerThan('md')]: {
-      flexDirection: 'column',
-    },
-  },
-
-  pricingMargin: {
-    paddingBottom: `calc(${theme.spacing.xl} * 2)`,
-
-    [theme.fn.largerThan('md')]: {
-      paddingRight: `calc(${theme.spacing.xl} * 2)`,
-    },
-  },
-}));
+import { PricingTile } from './components/PricingTile';
+import careerProgressImg from './assets/careerProgress.svg';
+import successImg from './assets/success.svg';
+import { landingPageStyles } from './landinPageStyles';
+import { featureList, featuresTag, pricingTag } from './config/landingPageConstants';
 
 export const LandingPage = () => {
-  const { classes } = useStyles();
+  const { classes } = landingPageStyles();
 
   const history = useHistory();
 
   const takeTest = () => history.push(urls.careersTest);
-
-  const features = [
-    {
-      image: careerPathsImg,
-      title: 'Discover Your Perfect Career',
-      description:
-        'Find the career that aligns with your aspirations and strengths. Take our short questionnaire and receive tailored career suggestions. Navigate confidently toward your dream career with our expert guidance.',
-    },
-    {
-      image: interviewImg,
-      title: 'Ace Interviews With Confidence',
-      description:
-        'Step into interviews with confidence. Our expertly crafted interview questions prepare you for any scenario. Gain the expertise needed to impress employers and be well-equipped to excel in even the most challenging interviews.',
-    },
-    {
-      image: cvImg,
-      title: 'Enhance Your CV',
-      description:
-        'Stand out in a competitive job market with a professional CV that highlights your strengths, experiences, and achievements. Unlock opportunities and leave a lasting impression with a CV that showcases your true potential.',
-    },
-    {
-      image: networkImg,
-      title: 'Connect With Top Industry Mentors',
-      description:
-        'Access our exclusive network of professionals already thriving in your desired career. Gain valuable insights and receive mentoring from industry insiders who know the secrets to success.',
-    },
-  ];
 
   return (
     <Shell
       header={
         <PageHeader
           links={[
-            { label: 'Features', link: `#${constants.featuresTag}` },
-            { label: 'Pricing', link: `#${constants.pricingTag}` },
+            { label: 'Features', link: `#${featuresTag}` },
+            { label: 'Pricing', link: `#${pricingTag}` },
           ]}
         />
       }
@@ -136,9 +43,9 @@ export const LandingPage = () => {
           grayBackground={false}
         />
 
-        <Container className={classes.featuresContainer} id={constants.featuresTag}>
+        <Container className={classes.featuresContainer} id={featuresTag}>
           <Text className={classes.pricingText}>Your All-In-One Career Platform</Text>
-          {features.map((item) => (
+          {featureList.map((item) => (
             <Feature
               title={item.title}
               key={item.title}
@@ -148,7 +55,7 @@ export const LandingPage = () => {
           ))}
         </Container>
 
-        <Container className={classes.pricingContainer} id={constants.pricingTag}>
+        <Container className={classes.pricingContainer} id={pricingTag}>
           <Badge size="xl" radius="sm" variant="light">
             Pricing
           </Badge>
@@ -156,7 +63,7 @@ export const LandingPage = () => {
           <Text className={classes.pricingText}>Invest in Your Future. Start For Free!</Text>
 
           <Container className={classes.pricingTierContainer}>
-            <Pricing
+            <PricingTile
               title="Free Tier"
               amount="£0"
               peroid="Month"
@@ -169,7 +76,7 @@ export const LandingPage = () => {
               onClick={takeTest}
             />
             <Space className={classes.pricingMargin} />
-            <Pricing
+            <PricingTile
               title="Premium Tier"
               amount="£19"
               peroid="Month"
@@ -191,7 +98,7 @@ export const LandingPage = () => {
           headingText="Join & Achieve"
           colorHeadingText="Career Success"
           onClick={takeTest}
-          grayBackground={true}
+          grayBackground
         />
       </>
     </Shell>

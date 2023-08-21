@@ -1,17 +1,6 @@
-import React from 'react';
-import {
-  createStyles,
-  Container,
-  Text,
-  Button,
-  Group,
-  rem,
-  Image,
-  Title,
-  Center,
-} from '@mantine/core';
+import { createStyles, rem } from '@mantine/core';
 
-const useStyles = createStyles((theme, grayBackground: Boolean) => ({
+export const heroStyles = createStyles((theme, grayBackground?: boolean) => ({
   main: {
     padding: theme.spacing.xl,
     paddingTop: rem(80),
@@ -115,63 +104,3 @@ const useStyles = createStyles((theme, grayBackground: Boolean) => ({
     },
   },
 }));
-
-interface HeroComponentProps {
-  actionButtonText: string;
-  image: string;
-  subheadingText: string;
-  headingText: string;
-  colorHeadingText: string;
-  grayBackground: boolean;
-  onClick: () => void;
-}
-
-export const Hero = ({
-  actionButtonText,
-  image,
-  subheadingText,
-  headingText,
-  colorHeadingText,
-  grayBackground,
-  onClick,
-}: HeroComponentProps) => {
-  const { classes } = useStyles(grayBackground);
-
-  return (
-    <Container className={classes.main}>
-      <Container className={classes.innerContainer}>
-        <Container className={classes.titleContainer}>
-          <Title className={classes.title}>
-            {headingText}{' '}
-            <Text
-              component="span"
-              variant="gradient"
-              gradient={{ from: 'blue', to: 'cyan' }}
-              inherit
-            >
-              {colorHeadingText}
-            </Text>
-          </Title>
-          <Text className={classes.description} color="dimmed">
-            {subheadingText}
-          </Text>
-          <Center className={classes.imageMobileContainer}>
-            <Image src={image} className={classes.imageMobile} />
-          </Center>
-          <Group className={classes.controlContainer}>
-            <Button
-              size="xl"
-              className={classes.button}
-              variant="gradient"
-              gradient={{ from: 'blue', to: 'cyan' }}
-              onClick={onClick}
-            >
-              {actionButtonText}
-            </Button>
-          </Group>
-        </Container>
-        <Image src={image} className={classes.image} />
-      </Container>
-    </Container>
-  );
-};

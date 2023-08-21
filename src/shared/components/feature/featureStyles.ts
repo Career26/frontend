@@ -1,7 +1,6 @@
-import React from 'react';
-import { createStyles, Container, Text, rem, Image } from '@mantine/core';
+import { createStyles, rem } from '@mantine/core';
 
-const useStyles = createStyles((theme) => ({
+export const featureStyles = createStyles((theme) => ({
   main: {
     display: 'flex',
     flexDirection: 'row',
@@ -53,23 +52,3 @@ const useStyles = createStyles((theme) => ({
     },
   },
 }));
-
-interface FeatureComponentProps {
-  title: string;
-  description: string;
-  image: string;
-}
-
-export const Feature = ({ title, description, image }: FeatureComponentProps) => {
-  const { classes } = useStyles();
-
-  return (
-    <Container className={classes.main}>
-      <Image src={image} className={classes.image} />
-      <Container className={classes.textContainer}>
-        <Text className={classes.titleText}>{title}</Text>
-        <Text className={classes.descriptionText}>{description}</Text>
-      </Container>
-    </Container>
-  );
-};

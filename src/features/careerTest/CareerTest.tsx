@@ -10,6 +10,7 @@ import { PreferencesForm } from './components/preferencesForm/PreferencesForm';
 import { useProfileForm } from './useProfileForm';
 import { CareerPathsForm } from './components/careerPathsForm/CareerPathsForm';
 import { questionFormStyles } from './styles/careeerTestStyles';
+import { CareerTestHeader } from './components/CareerTestHeader';
 
 const stepperLabels = ['Education', 'Experience', 'Preferences', 'Career Paths'];
 
@@ -39,6 +40,7 @@ export const CareerTest = () => {
   return (
     <Shell header={<PageHeader />}>
       <>
+        <CareerTestHeader />
         <Container className={classes.steppers}>
           <Stepper active={activeStep} onStepClick={setActiveStep} breakpoint="sm">
             {stepperLabels.map((label) => (

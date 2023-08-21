@@ -13,6 +13,7 @@ import { useProfileForm } from './hooks/useProfileForm';
 import { CareerPathsForm } from './components/careerPathsForm/CareerPathsForm';
 import { questionFormStyles } from './styles/careeerTestStyles';
 import { CareerTestHeader } from './components/CareerTestHeader';
+import { SplashPage } from './components/SlashPage';
 
 const stepperLabels = ['Education', 'Experience', 'Preferences', 'Career Paths'];
 
@@ -69,7 +70,7 @@ export const CareerTest = () => {
           {activeStep === CareerStep.WORK_EXPERIENCE && <WorkExperienceForm form={form} />}
           {activeStep === CareerStep.PREFERENCES && <PreferencesForm form={form} />}
           {activeStep === CareerStep.CAREER_PATHS && <CareerPathsForm />}
-          {activeStep === CareerStep.COMPLETE && showSplashPage && <>Loading...</>}
+          {activeStep === CareerStep.COMPLETE && showSplashPage && <SplashPage />}
           {activeStep === CareerStep.COMPLETE && !showSplashPage && <CareerPathsForm />}
           {activeStep !== CareerStep.COMPLETE && (
             <Group position="center">

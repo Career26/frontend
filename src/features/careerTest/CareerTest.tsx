@@ -3,9 +3,7 @@ import { Container, Group, Button, Stepper } from '@mantine/core';
 import { PageHeader } from '@shared/components/pageHeader/PageHeader';
 import { Shell } from '@shared/components/shell/Shell';
 import { useGenerateProfileMutation } from '@apis/profile';
-import { Hero } from '@shared/components/hero/Hero';
 
-import successImg from '../landingPage/assets/success.svg';
 import { EducationForm } from './components/educationForm/EducationForm';
 import { WorkExperienceForm } from './components/workExperienceForm/WorkExperienceForm';
 import { PreferencesForm } from './components/preferencesForm/PreferencesForm';
@@ -14,16 +12,10 @@ import { CareerPathsForm } from './components/careerPathsForm/CareerPathsForm';
 import { questionFormStyles } from './styles/careeerTestStyles';
 import { CareerTestHeader } from './components/CareerTestHeader';
 import { SplashPage } from './components/SlashPage';
+import { CareerStep } from './careerTestTypes';
+import { CareerTestFooter } from './components/CareerTestFooter';
 
 const stepperLabels = ['Education', 'Experience', 'Preferences', 'Career Paths'];
-
-enum CareerStep {
-  EDUCATION = 0,
-  WORK_EXPERIENCE = 1,
-  PREFERENCES = 2,
-  CAREER_PATHS = 3,
-  COMPLETE = 4,
-}
 
 export const CareerTest = () => {
   const [activeStep, setActiveStep] = useState(CareerStep.EDUCATION);
@@ -58,20 +50,21 @@ export const CareerTest = () => {
     <Shell header={<PageHeader />}>
       <>
         <CareerTestHeader />
-        <Container className={classes.steppers}>
-          <Stepper active={activeStep} onStepClick={setActiveStep} breakpoint="sm">
-            {stepperLabels.map((label) => (
-              <Stepper.Step label={label} key={`stepper-${label}`} />
-            ))}
-          </Stepper>
-        </Container>
+        {activeStep !== CareerStep.COMPLETE && (
+          <Container className={classes.steppers}>
+            <Stepper active={activeStep} onStepClick={setActiveStep} breakpoint="sm">
+              {stepperLabels.map((label) => (
+                <Stepper.Step label={label} key={`stepper-${label}`} />
+              ))}
+            </Stepper>
+          </Container>
+        )}
         <Container>
           {activeStep === CareerStep.EDUCATION && <EducationForm form={form} />}
           {activeStep === CareerStep.WORK_EXPERIENCE && <WorkExperienceForm form={form} />}
           {activeStep === CareerStep.PREFERENCES && <PreferencesForm form={form} />}
           {activeStep === CareerStep.CAREER_PATHS && <CareerPathsForm />}
-          {activeStep === CareerStep.COMPLETE && showSplashPage && <SplashPage />}
-          {activeStep === CareerStep.COMPLETE && !showSplashPage && <CareerPathsForm />}
+          {showSplashPage && <SplashPage />}
           {activeStep !== CareerStep.COMPLETE && (
             <Group position="center">
               <Button
@@ -91,17 +84,7 @@ export const CareerTest = () => {
             </Group>
           )}
         </Container>
-        {activeStep === CareerStep.COMPLETE && !showSplashPage && (
-          <Hero
-            image={successImg}
-            actionButtonText="Create a Profile!"
-            subheadingText="Create a free profile to get your save your results and gain access to personalised career paths, CV enhancement, and interview tests to help you achieve your dream career. It only takes a few seconds."
-            headingText="Don't lose your results!"
-            colorHeadingText="Sign up today"
-            onClick={() => {}}
-            grayBackground
-          />
-        )}
+        <CareerTestFooter activeStep={activeStep} showSplashPage={showSplashPage} />
       </>
     </Shell>
   );

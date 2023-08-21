@@ -84,5 +84,6 @@ export const questionFormStyles = createStyles((theme) => ({
   },
   steppers: {
     paddingTop: theme.spacing.md,
+    paddingBottom: theme.spacing.md,
   },
 }));

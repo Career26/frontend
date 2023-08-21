@@ -29,7 +29,7 @@ export const Hero = ({
       <Container className={classes.innerContainer}>
         <Container className={classes.titleContainer}>
           <Title className={classes.title}>
-            {headingText}
+            {headingText}{' '}
             <Text
               component="span"
               variant="gradient"

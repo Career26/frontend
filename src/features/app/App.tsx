@@ -6,6 +6,7 @@ import { urls } from '@shared/config/urlConstants';
 import { HomePage } from '../homePage/HomePage';
 import { LandingPage } from '../landingPage/LandingPage';
 import { CareerTest } from '../careerTest/CareerTest';
+import { OverviewPage } from '../overview/OverviewPage';
 
 export const App = () => (
   <BrowserRouter>
@@ -14,6 +15,7 @@ export const App = () => (
         <Route path={urls.landingPage} exact component={LandingPage} />
         <Route path={urls.home} component={HomePage} />
         <Route path={urls.careersTest} component={CareerTest} />
+        <Route path={urls.overview} component={OverviewPage} />
       </Switch>
     </Suspense>
   </BrowserRouter>

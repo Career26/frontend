@@ -16,8 +16,9 @@ export const CareerPathTile = ({
   companies,
   skills,
   buttons,
+  onClickExplore,
   loading = false,
-}: CareerPath & { buttons?: JSX.Element; loading?: boolean }) => {
+}: CareerPath & { buttons?: JSX.Element; loading?: boolean; onClickExplore?: () => void }) => {
   const [opened, { open, close }] = useDisclosure(false);
   const { classes } = careerPathTileStyles();
   return (
@@ -32,7 +33,14 @@ export const CareerPathTile = ({
         <Text size="sm" color="dimmed" className={classes.careerSection} lineClamp={5}>
           {role}
         </Text>
-        <Button variant="light" color="blue" fullWidth mt="md" radius="md" onClick={open}>
+        <Button
+          variant="light"
+          color="blue"
+          fullWidth
+          mt="md"
+          radius="md"
+          onClick={onClickExplore || open}
+        >
           Explore more
         </Button>
         {buttons}

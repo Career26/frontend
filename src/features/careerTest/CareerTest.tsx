@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Container, Group, Button, Stepper } from '@mantine/core';
-import { PageHeader } from '@shared/components/pageHeader/PageHeader';
 import { Shell } from '@shared/components/shell/Shell';
 import { useGenerateProfileMutation } from '@apis/profile';
 
@@ -47,7 +46,7 @@ export const CareerTest = () => {
   };
 
   return (
-    <Shell header={<PageHeader />}>
+    <Shell>
       <>
         <CareerTestHeader />
         {activeStep !== CareerStep.COMPLETE && (

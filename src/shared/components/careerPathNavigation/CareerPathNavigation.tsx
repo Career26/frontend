@@ -1,29 +1,21 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 import { Header, Container, Group, Select, Button } from '@mantine/core';
 import {
   selectCareerPaths,
   selectSelectedCareerPath,
   selectSelectedCareerPathId,
-  setSelectedCareerPathId,
 } from '@slices/careerPathsSlice';
-import { useAppDispatch, useAppSelector } from '@state/store';
+import { useAppSelector } from '@state/store';
+import { useCareerPathNavigation } from '@shared/hooks/useCareerPathNavigation';
 
 import { careerPathNavigationStyles } from './careerPathNavigationStyles';
 
 export const CareerPathNavigation = () => {
   const { classes } = careerPathNavigationStyles();
-  const history = useHistory();
-  const dispatch = useAppDispatch();
   const selectedCareerPath = useAppSelector(selectSelectedCareerPath);
   const careerPaths = useAppSelector(selectCareerPaths);
   const selectedCareerPathId = useAppSelector(selectSelectedCareerPathId);
-
-  const onClickCareerPath = (id: string) => {
-    dispatch(setSelectedCareerPathId(id));
-    const basePath = history.location.pathname.replace(/([^/]+$)/gm, '');
-    history.push(`${basePath}${id}`);
-  };
+  const { toggleCareerPath } = useCareerPathNavigation();
 
   if (!careerPaths) {
     return null;
@@ -40,14 +32,14 @@ export const CareerPathNavigation = () => {
             }))}
             placeholder={selectedCareerPath?.title}
             value={selectedCareerPathId}
-            onChange={onClickCareerPath}
+            onChange={toggleCareerPath}
           />
         </Group>
         <Group spacing={5} className={classes.links}>
           {Object.entries(careerPaths || {}).map(([id, careerPath]) => (
             <Button
               key={`career-path-${id}`}
-              onClick={() => onClickCareerPath(id)}
+              onClick={() => toggleCareerPath(id)}
               size="xs"
               variant={selectedCareerPathId === id ? 'filled' : 'outline'}
             >

@@ -1,7 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Container, Badge, Text, Space } from '@mantine/core';
-import { PageHeader } from '@shared/components/pageHeader/PageHeader';
 import { urls } from '@shared/config/urlConstants';
 import { Shell } from '@shared/components/shell/Shell';
 import { Feature } from '@shared/components/feature/Feature';
@@ -21,16 +20,7 @@ export const LandingPage = () => {
   const takeTest = () => history.push(urls.careersTest);
 
   return (
-    <Shell
-      header={
-        <PageHeader
-          links={[
-            { label: 'Features', link: `#${featuresTag}` },
-            { label: 'Pricing', link: `#${pricingTag}` },
-          ]}
-        />
-      }
-    >
+    <Shell>
       <>
         <Hero
           image={careerProgressImg}

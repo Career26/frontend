@@ -35,7 +35,7 @@ export const CareerPathNavigation = () => {
             onChange={toggleCareerPath}
           />
         </Group>
-        <Group spacing={5} className={classes.links}>
+        <Group spacing={15} className={classes.links}>
           {Object.entries(careerPaths || {}).map(([id, careerPath]) => (
             <Button
               key={`career-path-${id}`}

@@ -6,7 +6,7 @@ import {
   selectSelectedCareerPathId,
 } from '@slices/careerPathsSlice';
 import { useAppSelector } from '@state/store';
-import { useCareerPathNavigation } from '@shared/hooks/useCareerPathNavigation';
+import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 
 import { careerPathNavigationStyles } from './careerPathNavigationStyles';
 
@@ -15,7 +15,7 @@ export const CareerPathNavigation = () => {
   const selectedCareerPath = useAppSelector(selectSelectedCareerPath);
   const careerPaths = useAppSelector(selectCareerPaths);
   const selectedCareerPathId = useAppSelector(selectSelectedCareerPathId);
-  const { toggleCareerPath } = useCareerPathNavigation();
+  const { toggleCareerPath } = usePageNavigation();
 
   if (!careerPaths) {
     return null;

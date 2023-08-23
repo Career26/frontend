@@ -1,8 +1,7 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 import { Header, Container, Group, Button, Burger, Text, Transition, Paper } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { urls } from '@shared/config/urlConstants';
+import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 
 import { pageHeaderStyles } from './pageHeaderStyles';
 
@@ -11,17 +10,9 @@ interface HeaderActionProps {
 }
 
 export const PageHeader = ({ links }: HeaderActionProps) => {
-  const history = useHistory();
   const { classes, cx } = pageHeaderStyles();
   const [opened, { toggle }] = useDisclosure(false);
-
-  const clickTakeTest = () => {
-    history.push(urls.careersTest);
-  };
-
-  const clickLogo = () => {
-    history.push(urls.landingPage);
-  };
+  const { goToCareerTest, clickLogo } = usePageNavigation();
 
   const MenuItems = links?.map((link) => (
     <a key={link.label} href={link.link} className={cx(classes.mobileLink)} onClick={toggle}>
@@ -58,7 +49,7 @@ export const PageHeader = ({ links }: HeaderActionProps) => {
           <Button
             variant="gradient"
             gradient={{ from: 'blue', to: 'cyan' }}
-            onClick={clickTakeTest}
+            onClick={goToCareerTest}
           >
             Get Started
           </Button>

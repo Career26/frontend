@@ -1,19 +1,22 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { careersTestApi } from '@apis/careersTestApi';
-import careersForm from '@slices/careersFormSlice';
+import { profileApi } from '@apis/profile';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import user from '@slices/userSlice';
+import careerPaths from '@slices/careerPathsSlice';
 
 export const rootReducer = combineReducers({
-  careersForm,
-  [careersTestApi.reducerPath]: careersTestApi.reducer,
+  user,
+  careerPaths,
+  [profileApi.reducerPath]: profileApi.reducer,
 });
 
 export const store = configureStore({
   reducer: {
-    [careersTestApi.reducerPath]: careersTestApi.reducer,
-    careersForm,
+    user,
+    careerPaths,
+    [profileApi.reducerPath]: profileApi.reducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(careersTestApi.middleware),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(profileApi.middleware),
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

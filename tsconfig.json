@@ -1,5 +1,5 @@
 {
-  "include": ["./src/**/*"],
+  "include": ["./src/**/*", "custom.d.ts"],
   "exclude": ["node_modules", "build", "dist"],
   "compilerOptions": {
     "jsx": "react",
@@ -15,11 +15,12 @@
     "noEmit": false,
     "paths": {
       "@slices/*": ["./src/state/slices/*"],
+      "@datatypes/*": ["./src/datatypes/*"],
       "@apis/*": ["./src/state/apis/*"],
       "@state/*": ["./src/state/*"],
       "@shared/*": ["./src/shared/*"],
       "@mocks/*": ["./src/mocks/*"],
-      "@careersTest/*": ["./src/features/careersTest/*"]
+      "@careerTest/*": ["./src/features/careerTest/*"]
     }
   }
 }

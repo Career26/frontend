@@ -1,47 +1,96 @@
 import React from 'react';
-import { useForm } from '@mantine/form';
-import { urls } from '@shared/config/urlConstants';
 import { useHistory } from 'react-router-dom';
-import { Link, Stack, TextField } from '@mui/material';
-import { ConfirmationDialog } from '@shared/components/dialogs/ConfirmationDialog';
+import { Container, Badge, Text, Space } from '@mantine/core';
+import { urls } from '@shared/config/urlConstants';
+import { Shell } from '@shared/components/shell/Shell';
+import { Feature } from '@shared/components/feature/Feature';
+import { Hero } from '@shared/components/hero/Hero';
+
+import { PricingTile } from './components/PricingTile';
+import careerProgressImg from './assets/careerProgress.svg';
+import successImg from './assets/success.svg';
+import { landingPageStyles } from './landinPageStyles';
+import { featureList, featuresTag, pricingTag } from './config/landingPageConstants';
 
 export const LandingPage = () => {
+  const { classes } = landingPageStyles();
+
   const history = useHistory();
 
-  const clickSignIn = () => {
-    history.push(urls.home);
-  };
-
-  const form = useForm({
-    initialValues: {
-      email: '',
-      password: '',
-    },
-    validate: {
-      email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
-    },
-  });
+  const takeTest = () => history.push(urls.careersTest);
 
   return (
-    <ConfirmationDialog open title="Sign In" onConfirm={clickSignIn} ignoreCancelButton>
-      <Stack>
-        <>
-          <TextField
-            label="email"
-            value={form.values.email}
-            onChange={({ target: { value } }) => form.setFieldValue('email', value)}
-          />
-          <TextField
-            label="password"
-            value={form.values.password}
-            onChange={({ target: { value } }) => form.setFieldValue('password', value)}
-          />
-        </>
-        <>
-          <div>Don&apos;t have an account?</div>
-          <Link href={urls.careersTest}>Take our FREE careers test now!</Link>
-        </>
-      </Stack>
-    </ConfirmationDialog>
+    <Shell>
+      <>
+        <Hero
+          image={careerProgressImg}
+          actionButtonText="Start Your Journey Now!"
+          subheadingText="Reveal your perfect career path, ace interviews, elevate your CV and connect with a network of professionals with our all-in-one
+          career advisory platform"
+          headingText="Discover Your"
+          colorHeadingText="Perfect Career"
+          onClick={() => history.push(urls.careersTest)}
+          grayBackground={false}
+        />
+
+        <Container className={classes.featuresContainer} id={featuresTag}>
+          <Text className={classes.pricingText}>Your All-In-One Career Platform</Text>
+          {featureList.map((item) => (
+            <Feature
+              title={item.title}
+              key={item.title}
+              image={item.image}
+              description={item.description}
+            />
+          ))}
+        </Container>
+
+        <Container className={classes.pricingContainer} id={pricingTag}>
+          <Badge size="xl" radius="sm" variant="light">
+            Pricing
+          </Badge>
+
+          <Text className={classes.pricingText}>Invest in Your Future. Start For Free!</Text>
+
+          <Container className={classes.pricingTierContainer}>
+            <PricingTile
+              title="Free Tier"
+              amount="£0"
+              peroid="Month"
+              buttonText="Try For Free"
+              benefits={[
+                'Personalised Career Paths',
+                'Limited Interview Questions',
+                'Basic CV Enhancement',
+              ]}
+              onClick={takeTest}
+            />
+            <Space className={classes.pricingMargin} />
+            <PricingTile
+              title="Premium Tier"
+              amount="£19"
+              peroid="Month"
+              buttonText="Get Started"
+              benefits={[
+                'Personalised Career Paths',
+                'Extensive Interview Questions',
+                'Advanced CV Enhancement',
+              ]}
+              onClick={takeTest}
+            />
+          </Container>
+        </Container>
+
+        <Hero
+          image={successImg}
+          actionButtonText="Try For Free!"
+          subheadingText="Ready to unleash your potential? Take our free questionnaire to view your career paths now"
+          headingText="Join & Achieve"
+          colorHeadingText="Career Success"
+          onClick={takeTest}
+          grayBackground
+        />
+      </>
+    </Shell>
   );
 };

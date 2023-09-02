@@ -1,17 +1,20 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { profileApi } from '@apis/profile';
-import careersForm from '@slices/careersFormSlice';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import user from '@slices/userSlice';
+import careerPaths from '@slices/careerPathsSlice';
 
 export const rootReducer = combineReducers({
-  careersForm,
+  user,
+  careerPaths,
   [profileApi.reducerPath]: profileApi.reducer,
 });
 
 export const store = configureStore({
   reducer: {
+    user,
+    careerPaths,
     [profileApi.reducerPath]: profileApi.reducer,
-    careersForm,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(profileApi.middleware),
 });

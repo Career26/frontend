@@ -26,7 +26,6 @@ const careerLinks = [
 
 export const OverviewPage = () => {
   const { classes } = overviewStyles();
-  usePageNavigation();
   return (
     <Shell>
       <>

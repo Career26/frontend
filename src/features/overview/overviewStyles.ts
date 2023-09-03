@@ -46,7 +46,7 @@ export const overviewStyles = createStyles((theme) => ({
   section: {
     marginBottom: '1000px',
     paddingLeft: rem(20),
-    ':nth-child(odd)': {
+    ':nth-of-type(odd)': {
       backgroundColor: theme.colors.red[0],
     },
     'a >': {

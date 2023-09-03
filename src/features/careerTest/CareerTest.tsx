@@ -61,24 +61,30 @@ export const CareerTest = () => {
           </Container>
         )}
         <Container>
-          {activeStep === CareerStep.EDUCATION && <EducationForm form={form} />}
-          {activeStep === CareerStep.WORK_EXPERIENCE && <WorkExperienceForm form={form} />}
-          {activeStep === CareerStep.PREFERENCES && <PreferencesForm form={form} />}
-          {activeStep === CareerStep.CAREER_PATHS && <CareerPathsForm />}
-          {isLoading && <SplashPage />}
-          {activeStep !== CareerStep.COMPLETE && (
-            <Group position="center">
-              <Button
-                onClick={clickBack}
-                disabled={activeStep === CareerStep.EDUCATION || isLoading}
-              >
-                Back
-              </Button>
+          {isLoading ? (
+            <SplashPage />
+          ) : (
+            <>
+              {activeStep === CareerStep.EDUCATION && <EducationForm form={form} />}
+              {activeStep === CareerStep.WORK_EXPERIENCE && <WorkExperienceForm form={form} />}
+              {activeStep === CareerStep.PREFERENCES && <PreferencesForm form={form} />}
+              {activeStep === CareerStep.CAREER_PATHS && <CareerPathsForm />}
+              {isLoading && <SplashPage />}
+              {activeStep !== CareerStep.COMPLETE && (
+                <Group position="center">
+                  <Button
+                    onClick={clickBack}
+                    disabled={activeStep === CareerStep.EDUCATION || isLoading}
+                  >
+                    Back
+                  </Button>
 
-              <Button onClick={clickNext} disabled={isLoading} loading={isLoading}>
-                Next
-              </Button>
-            </Group>
+                  <Button onClick={clickNext} disabled={isLoading} loading={isLoading}>
+                    Next
+                  </Button>
+                </Group>
+              )}
+            </>
           )}
         </Container>
         <CareerTestFooter activeStep={activeStep} showSplashPage={isLoading} />

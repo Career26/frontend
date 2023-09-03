@@ -1,19 +1,6 @@
 import React from 'react';
-import { CareerPathNavigation } from '@shared/components/careerPathNavigation/CareerPathNavigation';
-import { usePageNavigation } from '@shared/hooks/usePageNavigation';
-import { useAppSelector } from '@state/store';
-import {
-  selectCareerPaths,
-  selectSelectedCareerPath,
-  selectSelectedCareerPathId,
-} from '@slices/careerPathsSlice';
-import { Box, Button, Container, Navbar, ScrollArea } from '@mantine/core';
+import { Button, Navbar, ScrollArea } from '@mantine/core';
 import { Shell } from '@shared/components/shell/Shell';
-import { LandingPage } from '../landingPage/LandingPage';
-import { Feature } from '@shared/components/feature/Feature';
-import { landingPageStyles } from '../landingPage/landinPageStyles';
-import { overviewStyles } from './overviewStyles';
-
 import {
   IconBuildingBank,
   IconReportSearch,
@@ -23,6 +10,8 @@ import {
   IconAtom,
   IconCalendarTime,
 } from '@tabler/icons-react';
+
+import { overviewStyles } from './overviewStyles';
 
 const careerLinks = [
   { label: 'Industry Insights', Icon: IconBuildingBank, anchor: 'industry' },
@@ -35,9 +24,6 @@ const careerLinks = [
 ];
 
 export const OverviewPage = () => {
-  const selectedCareerPath = useAppSelector(selectSelectedCareerPath);
-  const careerPaths = useAppSelector(selectCareerPaths);
-  const selectedCareerPathId = useAppSelector(selectSelectedCareerPathId);
   const { classes } = overviewStyles();
 
   return (

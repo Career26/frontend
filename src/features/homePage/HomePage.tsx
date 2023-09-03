@@ -1,13 +1,13 @@
 import { Container, Grid } from '@mantine/core';
-import { mockCareersTest } from '@mocks/careerTestMocks';
 import { CareerPathTile } from '@shared/components/tiles/careerPathTile/CareerPathTile';
-import { setSelectedCareerPathId } from '@slices/userSlice';
+import { selectCareerPaths, setSelectedCareerPathId } from '@slices/userSlice';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { urls } from '@shared/config/urlConstants';
+import { Shell } from '@shared/components/shell/Shell';
+import { useAppSelector } from '@state/store';
 
 import { homePageStyles } from './homePageStyles';
-import { Shell } from '@shared/components/shell/Shell';
 
 export const HomePage = () => {
   const { classes } = homePageStyles();
@@ -17,11 +17,14 @@ export const HomePage = () => {
     setSelectedCareerPathId(id);
     history.push(`${urls.overview}/${id}`);
   };
+
+  const careerPaths = useAppSelector(selectCareerPaths);
+
   return (
     <Shell>
       <Container className={classes.main}>
         <Grid>
-          {Object.entries(mockCareersTest.careerPaths).map(([id, careerPath]) => (
+          {Object.entries(careerPaths || {}).map(([id, careerPath]) => (
             <Grid.Col md={6} key={`career-path-${id}`} className={classes.gridTile}>
               <CareerPathTile {...careerPath} onClickExplore={() => onClickExplore(id)} />
             </Grid.Col>

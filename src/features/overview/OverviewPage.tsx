@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Navbar, ScrollArea } from '@mantine/core';
+import { Box, Button, Navbar, ScrollArea } from '@mantine/core';
 import { Shell } from '@shared/components/shell/Shell';
 import {
   IconBuildingBank,
@@ -10,6 +10,7 @@ import {
   IconAtom,
   IconCalendarTime,
 } from '@tabler/icons-react';
+import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 
 import { overviewStyles } from './overviewStyles';
 
@@ -25,24 +26,30 @@ const careerLinks = [
 
 export const OverviewPage = () => {
   const { classes } = overviewStyles();
-
+  usePageNavigation();
   return (
     <Shell>
-      <div style={{ display: 'flex' }}>
-        <Navbar height={400} p="xs" className={classes.navBar}>
+      <>
+        <Navbar
+          height={400}
+          p="xs"
+          className={classes.navBar}
+          style={{ marginTop: '0 !important' }}
+        >
           <Navbar.Section grow mt="md" className={classes.navLink}>
             {careerLinks.map(({ label, Icon, anchor }) => (
               <a href={`#${anchor}`} key={`link-${label}`}>
-                <Button leftIcon={<Icon />} key={`career-path-${label}`} size="xs">
-                  {label}
-                </Button>
+                <div className={classes.icon}>
+                  <Icon />
+                </div>
+                {label}
               </a>
             ))}
           </Navbar.Section>
         </Navbar>
 
-        <div className={classes.pageContent}>
-          <ScrollArea>
+        <ScrollArea>
+          <div className={classes.pageContent}>
             {careerLinks.map(({ label, Icon, anchor }) => (
               <div className={classes.section} key={`career-${label}`}>
                 <a id={anchor}>
@@ -54,9 +61,9 @@ export const OverviewPage = () => {
                 </a>
               </div>
             ))}
-          </ScrollArea>
-        </div>
-      </div>
+          </div>
+        </ScrollArea>
+      </>
     </Shell>
   );
 };

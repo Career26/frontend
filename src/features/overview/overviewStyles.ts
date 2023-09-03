@@ -1,34 +1,51 @@
 import { createStyles, rem } from '@mantine/core';
 import { HEADER_HEIGHT } from '@shared/components/pageHeader/pageHeaderStyles';
 
-const NAVBAR_WIDTH = rem(200);
+const NAVBAR_WIDTH = rem(250);
 
 export const overviewStyles = createStyles((theme) => ({
   navBar: {
     width: NAVBAR_WIDTH,
     top: HEADER_HEIGHT,
     position: 'fixed',
+    padding: '0 !important',
+    height: '100%',
+    borderRight: `solid 1px ${theme.colors.gray[9]}`,
   },
   navLink: {
     display: 'flex',
     flexDirection: 'column',
-    gap: rem(30),
-    '> button': {
+    marginTop: '0 !important',
+    '> a': {
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'flex-start',
+      alignItems: 'center',
+      textDecoration: 'none',
+      background: theme.colors.gray[0],
+      height: rem(60),
+      color: theme.colors.gray[9],
+      borderBottom: `solid 1px ${theme.colors.gray[9]}`,
+      '&:hover': {
+        background: theme.colors.gray[3],
+      },
     },
+  },
+
+  icon: {
+    paddingRight: rem(30),
+    paddingLeft: rem(20),
   },
 
   pageContent: {
     display: 'flex',
     flexDirection: 'column',
-    width: `calc(100% - ${NAVBAR_WIDTH})`,
-    marginLeft: NAVBAR_WIDTH,
+    paddingLeft: NAVBAR_WIDTH,
   },
 
   section: {
     marginBottom: '1000px',
+    paddingLeft: rem(20),
     ':nth-child(odd)': {
       backgroundColor: theme.colors.red[0],
     },

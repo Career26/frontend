@@ -8,6 +8,8 @@ export const pageHeaderStyles = createStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
+    paddingLeft: rem(100),
+    paddingRight: rem(100),
   },
   links: {
     [theme.fn.smallerThan('md')]: {

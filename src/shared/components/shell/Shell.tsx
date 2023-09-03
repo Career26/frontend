@@ -14,7 +14,7 @@ export const Shell = ({ header, children }: ShellProps) => {
       styles={{
         main: {
           marginTop: rem(60),
-          paddingTop: `calc(${theme.spacing.xs} * 2)`,
+          // paddingTop: `calc(${theme.spacing.xs} * 2)`,
           paddingRight: '0',
           paddingLeft: '0',
           minHeight: 'auto',

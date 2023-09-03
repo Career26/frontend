@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom';
 import { urls } from '@shared/config/urlConstants';
 
 import { homePageStyles } from './homePageStyles';
+import { Shell } from '@shared/components/shell/Shell';
 
 export const HomePage = () => {
   const { classes } = homePageStyles();
@@ -17,14 +18,16 @@ export const HomePage = () => {
     history.push(`${urls.overview}/${id}`);
   };
   return (
-    <Container className={classes.main}>
-      <Grid>
-        {Object.entries(mockCareersTest.careerPaths).map(([id, careerPath]) => (
-          <Grid.Col md={6} key={`career-path-${id}`} className={classes.gridTile}>
-            <CareerPathTile {...careerPath} onClickExplore={() => onClickExplore(id)} />
-          </Grid.Col>
-        ))}
-      </Grid>
-    </Container>
+    <Shell>
+      <Container className={classes.main}>
+        <Grid>
+          {Object.entries(mockCareersTest.careerPaths).map(([id, careerPath]) => (
+            <Grid.Col md={6} key={`career-path-${id}`} className={classes.gridTile}>
+              <CareerPathTile {...careerPath} onClickExplore={() => onClickExplore(id)} />
+            </Grid.Col>
+          ))}
+        </Grid>
+      </Container>
+    </Shell>
   );
 };

@@ -27,7 +27,7 @@ export const PageHeader = ({ links }: HeaderActionProps) => {
   ));
 
   return (
-    <Header height="auto" py="xs" withBorder>
+    <Header height="auto" py="xs" withBorder style={{ position: 'fixed' }}>
       <Container className={classes.inner}>
         <Group>
           {links?.length && (

@@ -41,30 +41,32 @@ export const OverviewPage = () => {
   const { classes } = overviewStyles();
 
   return (
-    <div style={{ display: 'flex' }}>
-      <Navbar height={400} p="xs" className={classes.navBar}>
-        <Navbar.Section grow mt="md" className={classes.navLink}>
-          {careerLinks.map(({ label, Icon }) => (
-            <Button leftIcon={<Icon />} key={`career-path-${label}`} size="xs">
-              {label}
-            </Button>
-          ))}
-        </Navbar.Section>
-      </Navbar>
-
-      <div className={classes.pageContent}>
-        <ScrollArea>
-          {careerLinks.map(({ label, Icon }) => (
-            <div className={classes.section} key={`career-${label}`}>
-              <div className={classes.header}>
-                <Icon />
+    <Shell>
+      <div style={{ display: 'flex' }}>
+        <Navbar height={400} p="xs" className={classes.navBar}>
+          <Navbar.Section grow mt="md" className={classes.navLink}>
+            {careerLinks.map(({ label, Icon }) => (
+              <Button leftIcon={<Icon />} key={`career-path-${label}`} size="xs">
                 {label}
+              </Button>
+            ))}
+          </Navbar.Section>
+        </Navbar>
+
+        <div className={classes.pageContent}>
+          <ScrollArea>
+            {careerLinks.map(({ label, Icon }) => (
+              <div className={classes.section} key={`career-${label}`}>
+                <div className={classes.header}>
+                  <Icon />
+                  {label}
+                </div>
+                <div className={classes.subHeader}>Description</div>
               </div>
-              <div className={classes.subHeader}>Description</div>
-            </div>
-          ))}
-        </ScrollArea>
+            ))}
+          </ScrollArea>
+        </div>
       </div>
-    </div>
+    </Shell>
   );
 };

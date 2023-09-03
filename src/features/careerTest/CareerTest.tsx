@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Container, Group, Button, Stepper } from '@mantine/core';
 import { Shell } from '@shared/components/shell/Shell';
 import { useGenerateProfileMutation } from '@apis/profile';
+import { generateProfileInputMock } from '@mocks/profileMocks';
 
 import { EducationForm } from './components/educationForm/EducationForm';
 import { WorkExperienceForm } from './components/workExperienceForm/WorkExperienceForm';
@@ -25,14 +26,14 @@ export const CareerTest = () => {
   const [showSplashPage, setShowSplashPage] = useState(false);
 
   const clickNext = async () => {
-    console.log(form.values);
+    console.log(generateProfileInputMock);
     const formIsvalid = checkFormIsValid();
     if (!formIsvalid) {
       return;
     }
     form.clearErrors();
     if (activeStep === CareerStep.PREFERENCES) {
-      await generateProfile(form.values);
+      await generateProfile(generateProfileInputMock);
     }
     if (activeStep === CareerStep.CAREER_PATHS) {
       setShowSplashPage(true);

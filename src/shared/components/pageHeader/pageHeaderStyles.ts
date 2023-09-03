@@ -1,6 +1,6 @@
 import { createStyles, rem } from '@mantine/core';
 
-const HEADER_HEIGHT = rem(60);
+export const HEADER_HEIGHT = rem(60);
 
 export const pageHeaderStyles = createStyles((theme) => ({
   inner: {

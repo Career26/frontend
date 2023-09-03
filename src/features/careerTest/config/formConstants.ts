@@ -48,5 +48,4 @@ export const initialProfileValues: CareerFormValues = {
   latestDegree: initialUniversityValues,
   previousWorkExperience: [initialWorkExperienceValues],
   fullName: 'Test Student',
-  dislikedResults: [],
 };

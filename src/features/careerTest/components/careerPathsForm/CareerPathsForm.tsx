@@ -1,55 +1,70 @@
 import { Text, Grid, Container, Button } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
-import { mockCareersTest } from '@mocks/careerTestMocks';
 import React, { useState } from 'react';
 import { CareerPathTile } from '@shared/components/tiles/careerPathTile/CareerPathTile';
 import { questionFormStyles } from '@careerTest/styles/careeerTestStyles';
-import { Shell } from '@shared/components/shell/Shell';
+import { useLazyRejectCareerQuery } from '@apis/profile';
+import { useAppDispatch, useAppSelector } from '@state/store';
+import { selectCareerPaths, selectProfileId, setCareerPaths } from '@slices/userSlice';
 
 export const CareerPathsForm = () => {
+  const dispatch = useAppDispatch();
   const { classes } = questionFormStyles();
-  const [loading, { toggle }] = useDisclosure(false);
+  const [rejectCareer, { isFetching }] = useLazyRejectCareerQuery();
   const [dislikedRoles, setDislikedRoles] = useState<string[]>([]);
   const rejectionCount = Number(localStorage.getItem('rejectionCount') || 0);
+  const profileId = useAppSelector(selectProfileId);
+  const careerPaths = useAppSelector(selectCareerPaths);
 
-  const onClickDislike = (careerId: string) => {
-    toggle();
-    setDislikedRoles([...dislikedRoles, careerId]);
-    setTimeout(() => toggle(), 2000);
-    localStorage.setItem('rejectionCount', String(rejectionCount + 1));
+  const onClickDislike = async (rejectedCareerId: string) => {
+    setDislikedRoles([...dislikedRoles, rejectedCareerId]);
+    try {
+      const { data } = await rejectCareer({ careerId: rejectedCareerId, profileId: profileId! });
+      if (!data) {
+        throw new Error('No data returned from rejection');
+      }
+      localStorage.setItem('rejectionCount', String(rejectionCount + 1));
+      const newCareerPaths = Object.entries(careerPaths!).reduce((agg, [careerId, careerPath]) => {
+        if (careerId !== rejectedCareerId) {
+          return { ...agg, [careerId]: careerPath };
+        }
+        return { ...agg, ...data };
+      }, {});
+      dispatch(setCareerPaths(newCareerPaths));
+    } catch (error: unknown) {
+      console.error((error as Error).message);
+    }
+    setDislikedRoles(dislikedRoles.filter((id) => id !== rejectedCareerId));
   };
 
   return (
-    <Shell>
-      <Container className={classes.questionContainer}>
-        <Text className={classes.questionTitle}>Career Paths</Text>
-        <Grid>
-          {Object.entries(mockCareersTest.careerPaths).map(([careerId, careerPath]) => {
-            const roleIsLoading = loading && dislikedRoles.includes(careerId);
-            return (
-              <Grid.Col md={6} key={`career-path-${careerId}`}>
-                <CareerPathTile
-                  {...careerPath}
-                  buttons={
-                    <Button
-                      variant="light"
-                      color="red"
-                      fullWidth
-                      mt="md"
-                      radius="md"
-                      onClick={() => onClickDislike(careerId)}
-                      disabled={roleIsLoading}
-                    >
-                      I don&apos;t like this role
-                    </Button>
-                  }
-                  loading={roleIsLoading}
-                />
-              </Grid.Col>
-            );
-          })}
-        </Grid>
-      </Container>
-    </Shell>
+    <Container className={classes.questionContainer}>
+      <Text className={classes.questionTitle}>Career Paths</Text>
+      <Grid>
+        {Object.entries(careerPaths || {}).map(([careerId, careerPath]) => {
+          const roleIsLoading = isFetching && dislikedRoles.includes(careerId);
+          return (
+            <Grid.Col md={6} key={`career-path-${careerId}`}>
+              <CareerPathTile
+                {...careerPath}
+                buttons={
+                  <Button
+                    variant="light"
+                    color="red"
+                    fullWidth
+                    mt="md"
+                    radius="md"
+                    onClick={() => onClickDislike(careerId)}
+                    disabled={roleIsLoading}
+                  >
+                    I don&apos;t like this role
+                  </Button>
+                }
+                loading={roleIsLoading}
+              />
+            </Grid.Col>
+          );
+        })}
+      </Grid>
+    </Container>
   );
 };

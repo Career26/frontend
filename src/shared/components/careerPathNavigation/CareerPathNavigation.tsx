@@ -4,7 +4,7 @@ import {
   selectCareerPaths,
   selectSelectedCareerPath,
   selectSelectedCareerPathId,
-} from '@slices/careerPathsSlice';
+} from '@slices/userSlice';
 import { useAppSelector } from '@state/store';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 

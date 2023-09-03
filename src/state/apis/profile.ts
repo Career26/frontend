@@ -8,15 +8,19 @@ export const profileApi = createApi({
   }),
   endpoints: (build) => ({
     generateProfile: build.mutation<UserProfile, Profile>({
-      query(body) {
-        return {
-          url: 'profile',
-          method: 'POST',
-          body,
-        };
-      },
+      query: (body) => ({
+        url: 'profile',
+        method: 'POST',
+        body,
+      }),
+    }),
+    rejectCareer: build.query<UserProfile['careerPaths'], { profileId: string; careerId: string }>({
+      query: ({ profileId, careerId }) => ({
+        url: `reject/${profileId}/${careerId}`,
+        method: 'GET',
+      }),
     }),
   }),
 });
 
-export const { useGenerateProfileMutation } = profileApi;
+export const { useGenerateProfileMutation, useLazyRejectCareerQuery } = profileApi;

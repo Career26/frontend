@@ -22,6 +22,7 @@ export const CompanyForm = ({ form, baseKey }: { form: CareerFormProps; baseKey:
         {...form.getInputProps(`${baseKey}.rating`)}
         label="Rating"
         className={classes.questionInput}
+        type="number"
         data={[...Array(5).keys()].map((value) => {
           const inputValue = String(value + 1);
           return {

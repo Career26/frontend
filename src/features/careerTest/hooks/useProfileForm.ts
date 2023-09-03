@@ -42,7 +42,15 @@ export const useProfileForm = ({ activeStep }: { activeStep: number }) => {
           }
           return null;
         },
-        rating: (value) => !value && 'Rating is required',
+        rating: (value) => {
+          if (!value) {
+            return 'Rating is required';
+          }
+          if (Number.isNaN(value)) {
+            return 'Expected salary must be a number';
+          }
+          return null;
+        },
       },
       areasOfInterest: (value) => {
         if (!value.length) {
@@ -64,7 +72,7 @@ export const useProfileForm = ({ activeStep }: { activeStep: number }) => {
           if (value < 0) {
             return 'Expected salary cannot be negative';
           }
-          return undefined;
+          return null;
         },
       },
     },

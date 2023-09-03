@@ -8,13 +8,11 @@ export const profileApi = createApi({
   }),
   endpoints: (build) => ({
     generateProfile: build.mutation<UserProfile, Profile>({
-      query(body) {
-        return {
-          url: 'profile',
-          method: 'POST',
-          body,
-        };
-      },
+      query: (body) => ({
+        url: 'profile',
+        method: 'POST',
+        body,
+      }),
     }),
   }),
 });

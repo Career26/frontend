@@ -1,15 +1,17 @@
 import { Text, Grid, Container, Button } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { mockCareersTest } from '@mocks/careerTestMocks';
 import React, { useState } from 'react';
 import { CareerPathTile } from '@shared/components/tiles/careerPathTile/CareerPathTile';
 import { questionFormStyles } from '@careerTest/styles/careeerTestStyles';
+import { useAppSelector } from '@state/store';
+import { selectCareerPaths } from '@slices/userSlice';
 
 export const CareerPathsForm = () => {
   const { classes } = questionFormStyles();
   const [loading, { toggle }] = useDisclosure(false);
   const [dislikedRoles, setDislikedRoles] = useState<string[]>([]);
   const rejectionCount = Number(localStorage.getItem('rejectionCount') || 0);
+  const careerPaths = useAppSelector(selectCareerPaths);
 
   const onClickDislike = (careerId: string) => {
     toggle();
@@ -22,7 +24,7 @@ export const CareerPathsForm = () => {
     <Container className={classes.questionContainer}>
       <Text className={classes.questionTitle}>Career Paths</Text>
       <Grid>
-        {Object.entries(mockCareersTest.careerPaths).map(([careerId, careerPath]) => {
+        {Object.entries(careerPaths || {}).map(([careerId, careerPath]) => {
           const roleIsLoading = loading && dislikedRoles.includes(careerId);
           return (
             <Grid.Col md={6} key={`career-path-${careerId}`}>

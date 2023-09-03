@@ -1,6 +1,5 @@
 import { urls } from '@shared/config/urlConstants';
-import { setSelectedCareerPathId } from '@slices/careerPathsSlice';
-import { selectIsLoggedIn } from '@slices/userSlice';
+import { selectIsLoggedIn, setSelectedCareerPathId } from '@slices/userSlice';
 import { useAppDispatch, useAppSelector } from '@state/store';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';

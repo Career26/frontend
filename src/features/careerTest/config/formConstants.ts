@@ -35,7 +35,7 @@ export const initialUniversityValues: Degree = {
 
 export const initialWorkExperienceValues: WorkExperience = {
   companyName: '',
-  rating: 5,
+  rating: 0,
   ratingReason: '',
   role: '',
 };
@@ -44,9 +44,8 @@ export const initialProfileValues: CareerFormValues = {
   additionalDegrees: [],
   areasOfInterest: [],
   expectedSalary: { baseCurrency: 'GBP', city: 'London', expectedSalary: 40000 },
-  personalityType: { workLifeBalanceSacrifice: false, workStyle: WorkStyle.GROUP },
+  personalityType: { workLifeBalanceSacrifice: false, workStyle: WorkStyle.TEAM },
   latestDegree: initialUniversityValues,
   previousWorkExperience: [initialWorkExperienceValues],
   fullName: 'Test Student',
-  dislikedResults: [],
 };

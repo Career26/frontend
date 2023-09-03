@@ -16,17 +16,14 @@ export const CareerPathsForm = () => {
   const careerPaths = useAppSelector(selectCareerPaths);
 
   const onClickDislike = async (rejectedCareerId: string) => {
-    if (!profileId || !careerPaths) {
-      return;
-    }
     setDislikedRoles([...dislikedRoles, rejectedCareerId]);
     try {
-      const { data } = await rejectCareer({ careerId: rejectedCareerId, profileId });
+      const { data } = await rejectCareer({ careerId: rejectedCareerId, profileId: profileId! });
       if (!data) {
         throw new Error('No data returned from rejection');
       }
       localStorage.setItem('rejectionCount', String(rejectionCount + 1));
-      const newCareerPaths = Object.entries(careerPaths).reduce((agg, [careerId, careerPath]) => {
+      const newCareerPaths = Object.entries(careerPaths!).reduce((agg, [careerId, careerPath]) => {
         if (careerId !== rejectedCareerId) {
           return { ...agg, [careerId]: careerPath };
         }

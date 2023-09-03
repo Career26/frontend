@@ -5,6 +5,7 @@ import { questionFormStyles } from '@careerTest/styles/careeerTestStyles';
 import { useLazyRejectCareerQuery } from '@apis/profile';
 import { useAppDispatch, useAppSelector } from '@state/store';
 import { selectCareerPaths, selectProfileId, setCareerPaths } from '@slices/userSlice';
+import { Shell } from '@shared/components/shell/Shell';
 
 export const CareerPathsForm = () => {
   const dispatch = useAppDispatch();
@@ -37,34 +38,36 @@ export const CareerPathsForm = () => {
   };
 
   return (
-    <Container className={classes.questionContainer}>
-      <Text className={classes.questionTitle}>Career Paths</Text>
-      <Grid>
-        {Object.entries(careerPaths || {}).map(([careerId, careerPath]) => {
-          const roleIsLoading = isFetching && dislikedRoles.includes(careerId);
-          return (
-            <Grid.Col md={6} key={`career-path-${careerId}`}>
-              <CareerPathTile
-                {...careerPath}
-                buttons={
-                  <Button
-                    variant="light"
-                    color="red"
-                    fullWidth
-                    mt="md"
-                    radius="md"
-                    onClick={() => onClickDislike(careerId)}
-                    disabled={roleIsLoading}
-                  >
-                    I don&apos;t like this role
-                  </Button>
-                }
-                loading={roleIsLoading}
-              />
-            </Grid.Col>
-          );
-        })}
-      </Grid>
-    </Container>
+    <Shell>
+      <Container className={classes.questionContainer}>
+        <Text className={classes.questionTitle}>Career Paths</Text>
+        <Grid>
+          {Object.entries(careerPaths || {}).map(([careerId, careerPath]) => {
+            const roleIsLoading = isFetching && dislikedRoles.includes(careerId);
+            return (
+              <Grid.Col md={6} key={`career-path-${careerId}`}>
+                <CareerPathTile
+                  {...careerPath}
+                  buttons={
+                    <Button
+                      variant="light"
+                      color="red"
+                      fullWidth
+                      mt="md"
+                      radius="md"
+                      onClick={() => onClickDislike(careerId)}
+                      disabled={roleIsLoading}
+                    >
+                      I don&apos;t like this role
+                    </Button>
+                  }
+                  loading={roleIsLoading}
+                />
+              </Grid.Col>
+            );
+          })}
+        </Grid>
+      </Container>
+    </Shell>
   );
 };

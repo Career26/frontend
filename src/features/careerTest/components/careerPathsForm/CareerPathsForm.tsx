@@ -4,6 +4,7 @@ import { mockCareersTest } from '@mocks/careerTestMocks';
 import React, { useState } from 'react';
 import { CareerPathTile } from '@shared/components/tiles/careerPathTile/CareerPathTile';
 import { questionFormStyles } from '@careerTest/styles/careeerTestStyles';
+import { Shell } from '@shared/components/shell/Shell';
 
 export const CareerPathsForm = () => {
   const { classes } = questionFormStyles();
@@ -19,34 +20,36 @@ export const CareerPathsForm = () => {
   };
 
   return (
-    <Container className={classes.questionContainer}>
-      <Text className={classes.questionTitle}>Career Paths</Text>
-      <Grid>
-        {Object.entries(mockCareersTest.careerPaths).map(([careerId, careerPath]) => {
-          const roleIsLoading = loading && dislikedRoles.includes(careerId);
-          return (
-            <Grid.Col md={6} key={`career-path-${careerId}`}>
-              <CareerPathTile
-                {...careerPath}
-                buttons={
-                  <Button
-                    variant="light"
-                    color="red"
-                    fullWidth
-                    mt="md"
-                    radius="md"
-                    onClick={() => onClickDislike(careerId)}
-                    disabled={roleIsLoading}
-                  >
-                    I don&apos;t like this role
-                  </Button>
-                }
-                loading={roleIsLoading}
-              />
-            </Grid.Col>
-          );
-        })}
-      </Grid>
-    </Container>
+    <Shell>
+      <Container className={classes.questionContainer}>
+        <Text className={classes.questionTitle}>Career Paths</Text>
+        <Grid>
+          {Object.entries(mockCareersTest.careerPaths).map(([careerId, careerPath]) => {
+            const roleIsLoading = loading && dislikedRoles.includes(careerId);
+            return (
+              <Grid.Col md={6} key={`career-path-${careerId}`}>
+                <CareerPathTile
+                  {...careerPath}
+                  buttons={
+                    <Button
+                      variant="light"
+                      color="red"
+                      fullWidth
+                      mt="md"
+                      radius="md"
+                      onClick={() => onClickDislike(careerId)}
+                      disabled={roleIsLoading}
+                    >
+                      I don&apos;t like this role
+                    </Button>
+                  }
+                  loading={roleIsLoading}
+                />
+              </Grid.Col>
+            );
+          })}
+        </Grid>
+      </Container>
+    </Shell>
   );
 };

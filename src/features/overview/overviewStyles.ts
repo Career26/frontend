@@ -20,6 +20,12 @@ export const overviewStyles = createStyles((theme) => ({
     },
   },
 
+  'a.anchor': {
+    position: 'relative',
+    top: `-${HEADER_HEIGHT}`,
+    visibility: 'hidden',
+  },
+
   pageContent: {
     display: 'flex',
     flexDirection: 'column',

@@ -25,13 +25,13 @@ import {
 } from '@tabler/icons-react';
 
 const careerLinks = [
-  { label: 'Industry Insights', Icon: IconBuildingBank },
-  { label: 'Role Overview', Icon: IconReportSearch },
-  { label: 'Salary Expecation', Icon: IconReportMoney },
-  { label: 'Top Employers', Icon: IconUsers },
-  { label: 'Career Progression', Icon: IconTrendingUp },
-  { label: 'Typical Skills', Icon: IconAtom },
-  { label: 'Application Timeline', Icon: IconCalendarTime },
+  { label: 'Industry Insights', Icon: IconBuildingBank, anchor: 'industry' },
+  { label: 'Role Overview', Icon: IconReportSearch, anchor: 'role' },
+  { label: 'Salary Expecation', Icon: IconReportMoney, anchor: 'salary' },
+  { label: 'Top Employers', Icon: IconUsers, anchor: 'employers' },
+  { label: 'Career Progression', Icon: IconTrendingUp, anchor: 'progression' },
+  { label: 'Typical Skills', Icon: IconAtom, anchor: 'skill' },
+  { label: 'Application Timeline', Icon: IconCalendarTime, anchor: 'timeline' },
 ];
 
 export const OverviewPage = () => {
@@ -45,21 +45,23 @@ export const OverviewPage = () => {
       <div style={{ display: 'flex' }}>
         <Navbar height={400} p="xs" className={classes.navBar}>
           <Navbar.Section grow mt="md" className={classes.navLink}>
-            {careerLinks.map(({ label, Icon }) => (
-              <Button leftIcon={<Icon />} key={`career-path-${label}`} size="xs">
-                {label}
-              </Button>
+            {careerLinks.map(({ label, Icon, anchor }) => (
+              <a href={`#${anchor}`} key={`link-${label}`}>
+                <Button leftIcon={<Icon />} key={`career-path-${label}`} size="xs">
+                  {label}
+                </Button>
+              </a>
             ))}
           </Navbar.Section>
         </Navbar>
 
         <div className={classes.pageContent}>
           <ScrollArea>
-            {careerLinks.map(({ label, Icon }) => (
+            {careerLinks.map(({ label, Icon, anchor }) => (
               <div className={classes.section} key={`career-${label}`}>
                 <div className={classes.header}>
                   <Icon />
-                  {label}
+                  <a id={anchor}>{label}</a>
                 </div>
                 <div className={classes.subHeader}>Description</div>
               </div>

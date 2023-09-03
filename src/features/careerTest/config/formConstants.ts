@@ -35,7 +35,7 @@ export const initialUniversityValues: Degree = {
 
 export const initialWorkExperienceValues: WorkExperience = {
   companyName: '',
-  rating: 5,
+  rating: 0,
   ratingReason: '',
   role: '',
 };

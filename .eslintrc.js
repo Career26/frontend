@@ -31,7 +31,7 @@ module.exports = {
         'import/no-extraneous-dependencies': 0,
       },
     },
-    { files: ['**/*Style*'], rules: { 'sonarjs/no-duplicate-string': 0 } },
+    { files: ['**/*Style*', '**/*Mock*'], rules: { 'sonarjs/no-duplicate-string': 0 } },
   ],
   rules: {
     curly: ['error', 'all'],
@@ -44,6 +44,7 @@ module.exports = {
     'react/require-default-props': 0,
     '@typescript-eslint/no-non-null-assertion': 0,
     'no-param-reassign': ['error', { props: true, ignorePropertyModificationsFor: ['state'] }],
+    'react-hooks/exhaustive-deps': 0,
     'import/order': [
       'error',
       {

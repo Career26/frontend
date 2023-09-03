@@ -1,23 +1,16 @@
+import { CareerResult } from '@datatypes/career';
+import { UserProfile } from '@datatypes/profile';
 import { PayloadAction, createSelector, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '@state/store';
 
-enum ProfileType {
-  UNIVERSITY = 'UNIVERSITY',
-  FREE = 'FREE',
-  PAID = 'PREMIUM',
-}
-
 type UserSlice = {
-  firstName: string;
-  lastName: string;
-  profileType: ProfileType;
+  profile?: UserProfile;
   isLoggedIn: boolean;
+  selectedCareerPathId?: string;
 };
 
 export const userInitialState: UserSlice = {
-  firstName: 'Clark',
-  lastName: 'Kent',
-  profileType: ProfileType.UNIVERSITY,
+  profile: undefined,
   isLoggedIn: true,
 };
 
@@ -25,29 +18,41 @@ export const userSlice = createSlice({
   name: 'user',
   initialState: userInitialState,
   reducers: {
-    setFirstName: (state, { payload }: PayloadAction<string>) => {
-      state.firstName = payload;
+    setProfile: (state, { payload }: PayloadAction<UserSlice['profile']>) => {
+      state.profile = payload;
     },
-    setLastName: (state, { payload }: PayloadAction<string>) => {
-      state.lastName = payload;
+    setCareerPaths: (state, { payload }: PayloadAction<CareerResult['careerPaths']>) => {
+      if (!state.profile) {
+        return;
+      }
+      state.profile = { ...state.profile, careerPaths: payload };
+    },
+    setSelectedCareerPathId: (
+      state,
+      { payload }: PayloadAction<UserSlice['selectedCareerPathId']>,
+    ) => {
+      state.selectedCareerPathId = payload;
     },
   },
 });
 
-export const { setFirstName, setLastName } = userSlice.actions;
+export const { setProfile, setCareerPaths, setSelectedCareerPathId } = userSlice.actions;
 
 const selectUser = (state: RootState) => state.user;
-export const selectFirstName = (state: RootState) => selectUser(state).firstName;
-export const selectLastName = (state: RootState) => selectUser(state).lastName;
-export const selectProfileType = (state: RootState) => selectUser(state).profileType;
+export const selectProfile = (state: RootState) => selectUser(state).profile;
 export const selectIsLoggedIn = (state: RootState) => selectUser(state).isLoggedIn;
-export const selectIsUniversityProfile = createSelector(
-  [selectProfileType],
-  (profileType) => profileType === ProfileType.UNIVERSITY,
-);
-export const selectIsFreeProfile = createSelector(
-  [selectProfileType],
-  (profileType) => profileType === ProfileType.FREE,
+export const selectCareerPaths = (state: RootState) => selectUser(state).profile?.careerPaths;
+export const selectSelectedCareerPathId = (state: RootState) =>
+  selectUser(state).selectedCareerPathId;
+
+export const selectSelectedCareerPath = createSelector(
+  [selectSelectedCareerPathId, selectCareerPaths],
+  (id, careerPaths) => {
+    if (!id || !careerPaths) {
+      return undefined;
+    }
+    return careerPaths[id];
+  },
 );
 
 export default userSlice.reducer;

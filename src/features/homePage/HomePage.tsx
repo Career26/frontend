@@ -1,7 +1,7 @@
 import { Container, Grid } from '@mantine/core';
 import { mockCareersTest } from '@mocks/careerTestMocks';
 import { CareerPathTile } from '@shared/components/tiles/careerPathTile/CareerPathTile';
-import { setSelectedCareerPathId } from '@slices/careerPathsSlice';
+import { setSelectedCareerPathId } from '@slices/userSlice';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { urls } from '@shared/config/urlConstants';

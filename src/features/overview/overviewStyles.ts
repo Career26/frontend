@@ -20,12 +20,6 @@ export const overviewStyles = createStyles((theme) => ({
     },
   },
 
-  'a.anchor': {
-    position: 'relative',
-    top: `-${HEADER_HEIGHT}`,
-    visibility: 'hidden',
-  },
-
   pageContent: {
     display: 'flex',
     flexDirection: 'column',
@@ -37,6 +31,9 @@ export const overviewStyles = createStyles((theme) => ({
     marginBottom: '1000px',
     ':nth-child(odd)': {
       backgroundColor: theme.colors.red[0],
+    },
+    'a >': {
+      marginTop: '2000px',
     },
   },
 

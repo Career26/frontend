@@ -59,11 +59,13 @@ export const OverviewPage = () => {
           <ScrollArea>
             {careerLinks.map(({ label, Icon, anchor }) => (
               <div className={classes.section} key={`career-${label}`}>
-                <div className={classes.header}>
-                  <Icon />
-                  <a id={anchor}>{label}</a>
-                </div>
-                <div className={classes.subHeader}>Description</div>
+                <a id={anchor}>
+                  <div className={classes.header}>
+                    <Icon />
+                    {label}
+                  </div>
+                  <div className={classes.subHeader}>Description</div>
+                </a>
               </div>
             ))}
           </ScrollArea>

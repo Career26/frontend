@@ -121,3 +121,16 @@ export const profileResponseMock: UserProfile = {
   },
   rejectedCareers: {},
 };
+
+export const exampleRejectionResponseMock = {
+  'a5e701c9-0754-4738-a394-42e121bf50c3': {
+    title: 'Data Engineer',
+    industry: 'Technology',
+    reason:
+      'As a Data Engineer, you will have the opportunity to work independently and solve complex technical challenges. Your background in Engineering Science and experience in software engineering make you a suitable candidate for this role.',
+    startingSalary: '\u00a360,000 - \u00a380,000',
+    role: 'As a Data Engineer, you will design, build, and maintain the infrastructure required for data storage, processing, and analysis. You will work with large datasets, develop data pipelines, and ensure data quality and reliability.',
+    companies: ['Google', 'Amazon', 'Facebook'],
+    skills: ['Data processing', 'Database management', 'Programming'],
+  },
+};

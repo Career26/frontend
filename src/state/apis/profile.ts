@@ -14,7 +14,13 @@ export const profileApi = createApi({
         body,
       }),
     }),
+    rejectCareer: build.query<UserProfile['careerPaths'], { profileId: string; careerId: string }>({
+      query: ({ profileId, careerId }) => ({
+        url: `reject/${profileId}/${careerId}`,
+        method: 'GET',
+      }),
+    }),
   }),
 });
 
-export const { useGenerateProfileMutation } = profileApi;
+export const { useGenerateProfileMutation, useLazyRejectCareerQuery } = profileApi;

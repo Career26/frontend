@@ -1,6 +1,6 @@
 import { CareerResult } from '@datatypes/career';
 import { UserProfile } from '@datatypes/profile';
-import { mockCareersTest } from '@mocks/careerTestMocks';
+import { profileResponseMock } from '@mocks/profileMocks';
 import { PayloadAction, createSelector, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '@state/store';
 
@@ -44,7 +44,7 @@ export const selectProfile = (state: RootState) => selectUser(state).profile;
 export const selectProfileId = (state: RootState) => selectUser(state).profile?.identifier;
 export const selectIsLoggedIn = (state: RootState) => selectUser(state).isLoggedIn;
 export const selectCareerPaths = (state: RootState) =>
-  selectUser(state).profile?.careerPaths || mockCareersTest.careerPaths;
+  selectUser(state).profile?.careerPaths || profileResponseMock.careerPaths;
 export const selectSelectedCareerPathId = (state: RootState) =>
   selectUser(state).selectedCareerPathId;
 

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Box, Button, Navbar, ScrollArea } from '@mantine/core';
+import React from 'react';
+import { Navbar, ScrollArea } from '@mantine/core';
 import { Shell } from '@shared/components/shell/Shell';
 import {
   IconBuildingBank,
@@ -27,15 +27,11 @@ const careerLinks = [
 export const OverviewPage = () => {
   const { activeAnchor } = useActiveNavScroll({ navItems: careerLinks });
   const { classes } = overviewStyles();
+
   return (
     <Shell>
       <>
-        <Navbar
-          height={400}
-          p="xs"
-          className={classes.navBar}
-          style={{ marginTop: '0 !important' }}
-        >
+        <Navbar height={400} p="xs" className={classes.navBar}>
           <Navbar.Section grow mt="md" className={classes.navLink}>
             {careerLinks.map(({ label, Icon, anchor }) => (
               <a

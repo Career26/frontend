@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Button, Navbar, ScrollArea } from '@mantine/core';
 import { Shell } from '@shared/components/shell/Shell';
 import {
@@ -10,7 +10,7 @@ import {
   IconAtom,
   IconCalendarTime,
 } from '@tabler/icons-react';
-import { usePageNavigation } from '@shared/hooks/usePageNavigation';
+import { useActiveNavScroll } from '@shared/hooks/useActiveNavScroll';
 
 import { overviewStyles } from './overviewStyles';
 
@@ -25,6 +25,7 @@ const careerLinks = [
 ];
 
 export const OverviewPage = () => {
+  const { activeAnchor } = useActiveNavScroll({ navItems: careerLinks });
   const { classes } = overviewStyles();
   return (
     <Shell>
@@ -37,7 +38,11 @@ export const OverviewPage = () => {
         >
           <Navbar.Section grow mt="md" className={classes.navLink}>
             {careerLinks.map(({ label, Icon, anchor }) => (
-              <a href={`#${anchor}`} key={`link-${label}`}>
+              <a
+                href={`#${anchor}`}
+                key={`link-${label}`}
+                style={{ backgroundColor: activeAnchor === anchor ? 'red' : 'blue' }}
+              >
                 <div className={classes.icon}>
                   <Icon />
                 </div>
@@ -50,14 +55,12 @@ export const OverviewPage = () => {
         <ScrollArea>
           <div className={classes.pageContent}>
             {careerLinks.map(({ label, Icon, anchor }) => (
-              <div className={classes.section} key={`career-${label}`}>
-                <a id={anchor}>
-                  <div className={classes.header}>
-                    <Icon />
-                    {label}
-                  </div>
-                  <div className={classes.subHeader}>Description</div>
-                </a>
+              <div className={classes.section} key={`career-${label}`} id={anchor}>
+                <div className={classes.header}>
+                  <Icon />
+                  {label}
+                </div>
+                <div className={classes.subHeader}>Description</div>
               </div>
             ))}
           </div>

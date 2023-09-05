@@ -5,22 +5,19 @@ const NAVBAR_WIDTH = rem(250);
 
 export const overviewStyles = createStyles((theme) => ({
   content: {
-    height: '350vh',
-    display: 'flex',
+    height: '420vh',
     flexDirection: 'column',
     paddingLeft: `${NAVBAR_WIDTH} !important`,
+    paddingTop: HEADER_HEIGHT,
   },
   navBar: {
     width: NAVBAR_WIDTH,
-    top: HEADER_HEIGHT,
-    padding: '0 !important',
     height: `calc(100% - ${HEADER_HEIGHT})`,
   },
 
   navLink: {
     display: 'flex',
     flexDirection: 'column',
-    marginTop: '0 !important',
     '> a': {
       textDecoration: 'none',
       ':not(:first-child)': { paddingTop: rem(20) },

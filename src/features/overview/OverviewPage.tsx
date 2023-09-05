@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navbar, ScrollArea } from '@mantine/core';
+import { Button, Navbar, ScrollArea } from '@mantine/core';
 import { Shell } from '@shared/components/shell/Shell';
 import {
   IconBuildingBank,
@@ -11,6 +11,7 @@ import {
   IconCalendarTime,
 } from '@tabler/icons-react';
 import { useActiveNavScroll } from '@shared/hooks/useActiveNavScroll';
+import classNames from 'classnames';
 
 import { overviewStyles } from './overviewStyles';
 
@@ -34,15 +35,17 @@ export const OverviewPage = () => {
         <Navbar height={400} p="xs" className={classes.navBar}>
           <Navbar.Section grow mt="md" className={classes.navLink}>
             {careerLinks.map(({ label, Icon, anchor }) => (
-              <a
-                href={`#${anchor}`}
-                key={`link-${label}`}
-                style={{ backgroundColor: activeAnchor === anchor ? 'red' : 'blue' }}
-              >
-                <div className={classes.icon}>
-                  <Icon />
-                </div>
-                {label}
+              <a href={`#${anchor}`} key={`link-${label}`}>
+                <Button
+                  className={classNames(classes.navButton, {
+                    [classes.active]: activeAnchor === anchor,
+                  })}
+                >
+                  <div className={classes.icon}>
+                    <Icon />
+                  </div>
+                  {label}
+                </Button>
               </a>
             ))}
           </Navbar.Section>

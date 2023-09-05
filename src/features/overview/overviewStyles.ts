@@ -10,31 +10,43 @@ export const overviewStyles = createStyles((theme) => ({
     position: 'fixed',
     padding: '0 !important',
     height: '100%',
-    borderRight: `solid 1px ${theme.colors.gray[9]}`,
   },
   navLink: {
     display: 'flex',
     flexDirection: 'column',
     marginTop: '0 !important',
     '> a': {
-      display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'flex-start',
-      alignItems: 'center',
       textDecoration: 'none',
-      background: theme.colors.gray[0],
-      height: rem(60),
-      color: theme.colors.gray[9],
-      borderBottom: `solid 1px ${theme.colors.gray[9]}`,
-      '&:hover': {
-        background: theme.colors.gray[3],
-      },
+      ':not(:first-child)': { paddingTop: rem(20) },
+      paddingLeft: rem(10),
+      paddingRight: rem(10),
+    },
+  },
+
+  navButton: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex',
+    alignItems: 'center',
+    width: '100%',
+    height: rem(60),
+    backgroundColor: 'white',
+    color: theme.colors.gray[9],
+    '&:hover': {
+      color: 'white',
+    },
+  },
+
+  active: {
+    backgroundColor: theme.colors.blue[7],
+    color: 'white',
+    '&:hover': {
+      backgroundColor: theme.colors.blue[4],
     },
   },
 
   icon: {
-    paddingRight: rem(30),
-    paddingLeft: rem(20),
+    paddingRight: rem(20),
   },
 
   pageContent: {

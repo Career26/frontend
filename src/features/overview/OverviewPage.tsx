@@ -28,6 +28,7 @@ export const careerLinks = [
 export const OverviewPage = () => {
   const { activeAnchor } = useActiveNavScroll({ navItems: careerLinks });
   const { classes } = overviewStyles();
+
   return (
     <Shell
       navbar={

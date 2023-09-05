@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 
 type NavScrollProps<T> = T & {
   navItems: { anchor: string }[];
+  headerHeight?: number;
 };
 
-export const useActiveNavScroll = <T>({ navItems }: NavScrollProps<T>) => {
+export const useActiveNavScroll = <T>({ navItems, headerHeight = 60 }: NavScrollProps<T>) => {
   const [activeAnchor, setActiveAnchor] = useState<null | string>(navItems[0].anchor);
   const handleScroll = () => {
     const activeSection = navItems.reduce<{ anchor: string; top?: number }>(
@@ -36,6 +37,29 @@ export const useActiveNavScroll = <T>({ navItems }: NavScrollProps<T>) => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+  const scrollToTargetAdjusted = (targetId: string) => {
+    const targetElement = document.getElementById(targetId);
+    if (targetElement) {
+      const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({
+        top: targetPosition - headerHeight,
+        behavior: 'smooth',
+      });
+    }
+  };
+
+  const anchorLinks = document.querySelectorAll('a[href^="#"]');
+  anchorLinks.forEach((anchor) => {
+    anchor.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = anchor.getAttribute('href')?.substring(1);
+      if (!targetId) {
+        return;
+      }
+      scrollToTargetAdjusted(targetId);
+    });
+  });
 
   return { activeAnchor };
 };

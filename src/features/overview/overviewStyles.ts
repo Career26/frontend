@@ -4,13 +4,19 @@ import { HEADER_HEIGHT } from '@shared/components/pageHeader/pageHeaderStyles';
 const NAVBAR_WIDTH = rem(250);
 
 export const overviewStyles = createStyles((theme) => ({
+  content: {
+    height: '350vh',
+    display: 'flex',
+    flexDirection: 'column',
+    paddingLeft: `${NAVBAR_WIDTH} !important`,
+  },
   navBar: {
     width: NAVBAR_WIDTH,
     top: HEADER_HEIGHT,
-    position: 'fixed',
     padding: '0 !important',
-    height: '100%',
+    height: `calc(100% - ${HEADER_HEIGHT})`,
   },
+
   navLink: {
     display: 'flex',
     flexDirection: 'column',
@@ -33,12 +39,12 @@ export const overviewStyles = createStyles((theme) => ({
     backgroundColor: 'white',
     color: theme.colors.gray[9],
     '&:hover': {
-      color: 'white',
+      backgroundColor: theme.colors.blue[1],
     },
   },
 
   active: {
-    backgroundColor: theme.colors.blue[7],
+    backgroundColor: theme.colors.blue[6],
     color: 'white',
     '&:hover': {
       backgroundColor: theme.colors.blue[4],
@@ -49,20 +55,11 @@ export const overviewStyles = createStyles((theme) => ({
     paddingRight: rem(20),
   },
 
-  pageContent: {
-    display: 'flex',
-    flexDirection: 'column',
-    paddingLeft: NAVBAR_WIDTH,
-  },
-
   section: {
-    marginBottom: '1000px',
+    height: '50vh',
     paddingLeft: rem(20),
     ':nth-of-type(odd)': {
       backgroundColor: theme.colors.red[0],
-    },
-    'a >': {
-      marginTop: '2000px',
     },
   },
 
@@ -76,6 +73,7 @@ export const overviewStyles = createStyles((theme) => ({
     lineHeight: 1.1,
     color: theme.colors.gray[9],
   },
+
   subHeader: {
     fontSize: rem(17),
     color: theme.colors.gray[7],

@@ -33,26 +33,28 @@ export const OverviewPage = () => {
     <Shell>
       <>
         <Navbar height={400} p="xs" className={classes.navBar}>
-          <Navbar.Section grow mt="md" className={classes.navLink}>
-            {careerLinks.map(({ label, Icon, anchor }) => (
-              <a href={`#${anchor}`} key={`link-${label}`}>
-                <Button
-                  className={classNames(classes.navButton, {
-                    [classes.active]: activeAnchor === anchor,
-                  })}
-                >
-                  <div className={classes.icon}>
-                    <Icon />
-                  </div>
-                  {label}
-                </Button>
-              </a>
-            ))}
-          </Navbar.Section>
+          <ScrollArea>
+            <Navbar.Section grow mt="md" className={classes.navLink}>
+              {careerLinks.map(({ label, Icon, anchor }) => (
+                <a href={`#${anchor}`} key={`link-${label}`}>
+                  <Button
+                    className={classNames(classes.navButton, {
+                      [classes.active]: activeAnchor === anchor,
+                    })}
+                  >
+                    <div className={classes.icon}>
+                      <Icon />
+                    </div>
+                    {label}
+                  </Button>
+                </a>
+              ))}
+            </Navbar.Section>
+          </ScrollArea>
         </Navbar>
 
         <ScrollArea>
-          <div className={classes.pageContent}>
+          <div className={classes.content}>
             {careerLinks.map(({ label, Icon, anchor }) => (
               <div className={classes.section} key={`career-${label}`} id={anchor}>
                 <div className={classes.header}>

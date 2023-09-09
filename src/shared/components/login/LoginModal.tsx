@@ -99,7 +99,7 @@ export const LoginModal = () => {
   const checkIsValid = () => {
     form.validate();
     if (hasAccount) {
-      return !['email. password'].some((field) => !form.isValid(field));
+      return !['email', 'password'].some((field) => !form.isValid(field));
     }
     return form.isValid();
   };
@@ -116,37 +116,41 @@ export const LoginModal = () => {
   };
 
   return (
-    <Modal opened={open} onClose={onClose} title="Sign Up" centered className={classes.title}>
-      <Container>
-        {!hasAccount && (
-          <div className={classes.name}>
-            <InputField label="First Name" field="firstName" form={form} />
-            <InputField label="Last Name" field="lastName" form={form} />
-          </div>
-        )}
-        <InputField label="Email" Icon={IconAt} field="email" form={form} />
-        <PasswordField form={form} label="Password" field="field" />
-        {!hasAccount && (
-          <>
-            <PasswordField form={form} label="Confirm Password" field="confirmPassword" />
-            <Checkbox
-              label="I agree to the terms and conditions"
-              className={classes.footer}
-              {...form.getInputProps('agreement')}
-            />
-          </>
-        )}
-        <Group className={classes.footer}>
-          <Text
-            onClick={() => setHasAccount(!hasAccount)}
-            c="dimmed"
-            className={classes.accountSwitch}
-          >
-            {hasAccount ? "Don't have an account? Register" : 'Already have an account? Login'}
-          </Text>
-          <Button onClick={onSubmit}>{hasAccount ? 'Login' : 'Register'}</Button>
-        </Group>
-      </Container>
+    <Modal
+      opened={open}
+      onClose={onClose}
+      title={hasAccount ? 'Sign In' : 'Register Account'}
+      centered
+      className={classes.title}
+    >
+      {!hasAccount && (
+        <div className={classes.name}>
+          <InputField label="First Name" field="firstName" form={form} />
+          <InputField label="Last Name" field="lastName" form={form} />
+        </div>
+      )}
+      <InputField label="Email" Icon={IconAt} field="email" form={form} />
+      <PasswordField form={form} label="Password" field="password" />
+      {!hasAccount && (
+        <>
+          <PasswordField form={form} label="Confirm Password" field="confirmPassword" />
+          <Checkbox
+            label="I agree to the terms and conditions"
+            className={classes.footer}
+            {...form.getInputProps('agreement')}
+          />
+        </>
+      )}
+      <Group className={classes.footer}>
+        <Text
+          onClick={() => setHasAccount(!hasAccount)}
+          c="dimmed"
+          className={classes.accountSwitch}
+        >
+          {hasAccount ? "Don't have an account? Register" : 'Already have an account? Login'}
+        </Text>
+        <Button onClick={onSubmit}>{hasAccount ? 'Login' : 'Register'}</Button>
+      </Group>
     </Modal>
   );
 };

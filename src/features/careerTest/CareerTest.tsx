@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Container, Group, Button, Stepper } from '@mantine/core';
 import { Shell } from '@shared/components/shell/Shell';
 import { useGenerateProfileMutation } from '@apis/profile';
@@ -14,7 +14,7 @@ import { questionFormStyles } from './styles/careeerTestStyles';
 import { CareerTestHeader } from './components/CareerTestHeader';
 import { SplashPage } from './components/SlashPage';
 import { CareerStep } from './careerTestTypes';
-import { CareerTestFooter } from './components/CareerTestFooter';
+import { CareerTestResults } from './components/CareerTestResults';
 
 const stepperLabels = ['Education', 'Experience', 'Preferences', 'Career Paths'];
 
@@ -47,19 +47,28 @@ export const CareerTest = () => {
     setActiveStep(activeStep - 1);
   };
 
+  const nextLabel = useMemo(() => {
+    if (activeStep === CareerStep.PREFERENCES) {
+      return 'See Results';
+    }
+    if (activeStep === CareerStep.CAREER_PATHS) {
+      return 'Save Results';
+    }
+    return 'Next';
+  }, [activeStep]);
+
   return (
     <Shell>
       <>
         <CareerTestHeader />
-        {activeStep !== CareerStep.COMPLETE && (
-          <Container className={classes.steppers}>
-            <Stepper active={activeStep} onStepClick={setActiveStep} breakpoint="sm">
-              {stepperLabels.map((label) => (
-                <Stepper.Step label={label} key={`stepper-${label}`} />
-              ))}
-            </Stepper>
-          </Container>
-        )}
+        <Container className={classes.steppers}>
+          <Stepper active={activeStep} onStepClick={setActiveStep} breakpoint="sm">
+            {stepperLabels.map((label) => (
+              <Stepper.Step label={label} key={`stepper-${label}`} />
+            ))}
+          </Stepper>
+        </Container>
+
         <Container>
           {isLoading ? (
             <SplashPage />
@@ -69,25 +78,25 @@ export const CareerTest = () => {
               {activeStep === CareerStep.WORK_EXPERIENCE && <WorkExperienceForm form={form} />}
               {activeStep === CareerStep.PREFERENCES && <PreferencesForm form={form} />}
               {activeStep === CareerStep.CAREER_PATHS && <CareerPathsForm />}
-              {isLoading && <SplashPage />}
               {activeStep !== CareerStep.COMPLETE && (
                 <Group position="center">
-                  <Button
-                    onClick={clickBack}
-                    disabled={activeStep === CareerStep.EDUCATION || isLoading}
-                  >
-                    Back
-                  </Button>
-
+                  {activeStep !== CareerStep.CAREER_PATHS && (
+                    <Button
+                      onClick={clickBack}
+                      disabled={activeStep === CareerStep.EDUCATION || isLoading}
+                    >
+                      Back
+                    </Button>
+                  )}
                   <Button onClick={clickNext} disabled={isLoading} loading={isLoading}>
-                    Next
+                    {nextLabel}
                   </Button>
                 </Group>
               )}
             </>
           )}
         </Container>
-        <CareerTestFooter activeStep={activeStep} showSplashPage={isLoading} />
+        {activeStep === CareerStep.COMPLETE && <CareerTestResults />}
       </>
     </Shell>
   );

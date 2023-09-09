@@ -14,6 +14,7 @@ import {
 } from '@tabler/icons-react';
 
 import { overviewStyles } from './overviewStyles';
+import { OverviewSection } from './OverviewSection';
 
 export const careerLinks = [
   { label: 'Industry Insights', Icon: IconBuildingBank, anchor: 'industry' },
@@ -54,13 +55,7 @@ export const OverviewPage = () => {
     >
       <div className={classes.content}>
         {careerLinks.map(({ label, Icon, anchor }) => (
-          <div className={classes.section} key={`career-${label}`} id={anchor}>
-            <div className={classes.header}>
-              <Icon />
-              {label}
-            </div>
-            <div className={classes.subHeader}>Description</div>
-          </div>
+          <OverviewSection label={label} Icon={Icon} anchor={anchor} key={`career-${label}`} />
         ))}
       </div>
     </Shell>

@@ -1,19 +1,21 @@
 import React from 'react';
-import { Button, Navbar, ScrollArea } from '@mantine/core';
+import { Navbar, Button } from '@mantine/core';
+import { useActiveNavScroll } from '@shared/hooks/useActiveNavScroll';
+import classNames from 'classnames';
 import { Shell } from '@shared/components/shell/Shell';
 import {
-  IconBuildingBank,
-  IconReportSearch,
-  IconReportMoney,
-  IconUsers,
-  IconTrendingUp,
   IconAtom,
+  IconBuildingBank,
   IconCalendarTime,
+  IconReportMoney,
+  IconReportSearch,
+  IconTrendingUp,
+  IconUsers,
 } from '@tabler/icons-react';
 
 import { overviewStyles } from './overviewStyles';
 
-const careerLinks = [
+export const careerLinks = [
   { label: 'Industry Insights', Icon: IconBuildingBank, anchor: 'industry' },
   { label: 'Role Overview', Icon: IconReportSearch, anchor: 'role' },
   { label: 'Salary Expecation', Icon: IconReportMoney, anchor: 'salary' },
@@ -24,38 +26,42 @@ const careerLinks = [
 ];
 
 export const OverviewPage = () => {
+  const { activeAnchor } = useActiveNavScroll({ navItems: careerLinks });
   const { classes } = overviewStyles();
 
   return (
-    <Shell>
-      <div style={{ display: 'flex' }}>
+    <Shell
+      navbar={
         <Navbar height={400} p="xs" className={classes.navBar}>
           <Navbar.Section grow mt="md" className={classes.navLink}>
             {careerLinks.map(({ label, Icon, anchor }) => (
               <a href={`#${anchor}`} key={`link-${label}`}>
-                <Button leftIcon={<Icon />} key={`career-path-${label}`} size="xs">
+                <Button
+                  className={classNames(classes.navButton, {
+                    [classes.active]: activeAnchor === anchor,
+                  })}
+                >
+                  <div className={classes.icon}>
+                    <Icon />
+                  </div>
                   {label}
                 </Button>
               </a>
             ))}
           </Navbar.Section>
         </Navbar>
-
-        <div className={classes.pageContent}>
-          <ScrollArea>
-            {careerLinks.map(({ label, Icon, anchor }) => (
-              <div className={classes.section} key={`career-${label}`}>
-                <a id={anchor}>
-                  <div className={classes.header}>
-                    <Icon />
-                    {label}
-                  </div>
-                  <div className={classes.subHeader}>Description</div>
-                </a>
-              </div>
-            ))}
-          </ScrollArea>
-        </div>
+      }
+    >
+      <div className={classes.content}>
+        {careerLinks.map(({ label, Icon, anchor }) => (
+          <div className={classes.section} key={`career-${label}`} id={anchor}>
+            <div className={classes.header}>
+              <Icon />
+              {label}
+            </div>
+            <div className={classes.subHeader}>Description</div>
+          </div>
+        ))}
       </div>
     </Shell>
   );

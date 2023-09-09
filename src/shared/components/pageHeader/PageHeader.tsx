@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Container, Group, Button, Burger, Text, Transition, Paper } from '@mantine/core';
+import { Header, Group, Button, Burger, Text, Transition, Paper } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 
@@ -27,34 +27,34 @@ export const PageHeader = ({ links }: HeaderActionProps) => {
   ));
 
   return (
-    <Header height="auto" py="xs" withBorder style={{ position: 'fixed' }}>
-      <Container className={classes.inner}>
-        <Group>
-          {links?.length && (
-            <Burger opened={opened} onClick={toggle} className={classes.burger} size="sm" />
-          )}
-          <Text className={classes.logo} onClick={clickLogo}>
-            LOGO HERE
-          </Text>
-        </Group>
-
+    <Header
+      height="auto"
+      py="xs"
+      withBorder
+      style={{ position: 'fixed' }}
+      className={classes.inner}
+    >
+      <Group>
         {links?.length && (
-          <Group spacing={5} className={classes.links}>
-            {HeaderItems}
-          </Group>
+          <Burger opened={opened} onClick={toggle} className={classes.burger} size="sm" />
         )}
+        <Text className={classes.logo} onClick={clickLogo}>
+          LOGO HERE
+        </Text>
+      </Group>
 
-        <Group>
-          <Button variant="default">Login</Button>
-          <Button
-            variant="gradient"
-            gradient={{ from: 'blue', to: 'cyan' }}
-            onClick={goToCareerTest}
-          >
-            Get Started
-          </Button>
+      {links?.length && (
+        <Group spacing={5} className={classes.links}>
+          {HeaderItems}
         </Group>
-      </Container>
+      )}
+
+      <Group>
+        <Button variant="default">Login</Button>
+        <Button variant="gradient" gradient={{ from: 'blue', to: 'cyan' }} onClick={goToCareerTest}>
+          Get Started
+        </Button>
+      </Group>
 
       {links?.length && (
         <Transition transition="pop-top-left" duration={200} mounted={opened}>

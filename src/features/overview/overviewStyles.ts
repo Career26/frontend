@@ -1,39 +1,62 @@
 import { createStyles, rem } from '@mantine/core';
 import { HEADER_HEIGHT } from '@shared/components/pageHeader/pageHeaderStyles';
 
-const NAVBAR_WIDTH = rem(200);
+const NAVBAR_WIDTH = rem(250);
 
 export const overviewStyles = createStyles((theme) => ({
+  content: {
+    height: '420vh',
+    flexDirection: 'column',
+    paddingLeft: `${NAVBAR_WIDTH} !important`,
+    paddingTop: HEADER_HEIGHT,
+  },
   navBar: {
     width: NAVBAR_WIDTH,
-    top: HEADER_HEIGHT,
-    position: 'fixed',
+    height: `calc(100% - ${HEADER_HEIGHT})`,
   },
+
   navLink: {
     display: 'flex',
     flexDirection: 'column',
-    gap: rem(30),
-    '> button': {
-      display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'flex-start',
+    '> a': {
+      textDecoration: 'none',
+      ':not(:first-child)': { paddingTop: rem(20) },
+      paddingLeft: rem(10),
+      paddingRight: rem(10),
     },
   },
 
-  pageContent: {
+  navButton: {
     display: 'flex',
-    flexDirection: 'column',
-    width: `calc(100% - ${NAVBAR_WIDTH})`,
-    marginLeft: NAVBAR_WIDTH,
+    flexDirection: 'row',
+    justifyContent: 'flex',
+    alignItems: 'center',
+    width: '100%',
+    height: rem(60),
+    backgroundColor: 'white',
+    color: theme.colors.gray[9],
+    '&:hover': {
+      backgroundColor: theme.colors.blue[1],
+    },
+  },
+
+  active: {
+    backgroundColor: theme.colors.blue[6],
+    color: 'white',
+    '&:hover': {
+      backgroundColor: theme.colors.blue[4],
+    },
+  },
+
+  icon: {
+    paddingRight: rem(20),
   },
 
   section: {
-    marginBottom: '1000px',
-    ':nth-child(odd)': {
+    height: '50vh',
+    paddingLeft: rem(20),
+    ':nth-of-type(odd)': {
       backgroundColor: theme.colors.red[0],
-    },
-    'a >': {
-      marginTop: '2000px',
     },
   },
 
@@ -47,6 +70,7 @@ export const overviewStyles = createStyles((theme) => ({
     lineHeight: 1.1,
     color: theme.colors.gray[9],
   },
+
   subHeader: {
     fontSize: rem(17),
     color: theme.colors.gray[7],

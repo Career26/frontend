@@ -118,19 +118,16 @@ export const LoginModal = () => {
   return (
     <Modal opened={open} onClose={onClose} title="Sign Up" centered className={classes.title}>
       <Container>
-        {hasAccount ? (
+        {!hasAccount && (
+          <div className={classes.name}>
+            <InputField label="First Name" field="firstName" form={form} />
+            <InputField label="Last Name" field="lastName" form={form} />
+          </div>
+        )}
+        <InputField label="Email" Icon={IconAt} field="email" form={form} />
+        <PasswordField form={form} label="Password" field="field" />
+        {!hasAccount && (
           <>
-            <InputField label="Email" Icon={IconAt} field="email" form={form} />
-            <PasswordField form={form} label="Password" field="field" />
-          </>
-        ) : (
-          <>
-            <div className={classes.name}>
-              <InputField label="First Name" field="firstName" form={form} />
-              <InputField label="Last Name" field="lastName" form={form} />
-            </div>
-            <InputField label="Email" Icon={IconAt} field="email" form={form} />
-            <PasswordField form={form} label="Password" field="field" />
             <PasswordField form={form} label="Confirm Password" field="confirmPassword" />
             <Checkbox
               label="I agree to the terms and conditions"

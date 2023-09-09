@@ -32,6 +32,7 @@ export const CareerPathsForm = () => {
       }, {});
       dispatch(setCareerPaths(newCareerPaths));
     } catch (error: unknown) {
+      // eslint-disable-next-line no-console
       console.error((error as Error).message);
     }
     setDislikedRoles(dislikedRoles.filter((id) => id !== rejectedCareerId));

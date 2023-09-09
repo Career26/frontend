@@ -6,13 +6,15 @@ import { RootState } from '@state/store';
 
 type UserSlice = {
   profile?: UserProfile;
+  loginModal: { open: boolean; onComplete?: () => void };
   isLoggedIn: boolean;
   selectedCareerPathId?: string;
 };
 
 export const userInitialState: UserSlice = {
-  profile: undefined,
+  profile: profileResponseMock,
   isLoggedIn: true,
+  loginModal: { open: false },
 };
 
 export const userSlice = createSlice({
@@ -21,6 +23,9 @@ export const userSlice = createSlice({
   reducers: {
     setProfile: (state, { payload }: PayloadAction<UserSlice['profile']>) => {
       state.profile = payload;
+    },
+    setLoginModal: (state, { payload }: PayloadAction<UserSlice['loginModal']>) => {
+      state.loginModal = payload;
     },
     setCareerPaths: (state, { payload }: PayloadAction<CareerResult['careerPaths']>) => {
       if (!state.profile) {
@@ -37,14 +42,15 @@ export const userSlice = createSlice({
   },
 });
 
-export const { setProfile, setCareerPaths, setSelectedCareerPathId } = userSlice.actions;
+export const { setLoginModal, setProfile, setCareerPaths, setSelectedCareerPathId } =
+  userSlice.actions;
 
 const selectUser = (state: RootState) => state.user;
+export const selectLoginModal = (state: RootState) => selectUser(state).loginModal;
 export const selectProfile = (state: RootState) => selectUser(state).profile;
 export const selectProfileId = (state: RootState) => selectUser(state).profile?.identifier;
 export const selectIsLoggedIn = (state: RootState) => selectUser(state).isLoggedIn;
-export const selectCareerPaths = (state: RootState) =>
-  selectUser(state).profile?.careerPaths || profileResponseMock.careerPaths;
+export const selectCareerPaths = (state: RootState) => selectUser(state).profile?.careerPaths;
 export const selectSelectedCareerPathId = (state: RootState) =>
   selectUser(state).selectedCareerPathId;
 

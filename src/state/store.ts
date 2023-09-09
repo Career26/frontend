@@ -13,7 +13,8 @@ export const store = configureStore({
     user,
     [profileApi.reducerPath]: profileApi.reducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(profileApi.middleware),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({ serializableCheck: false }).concat(profileApi.middleware),
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

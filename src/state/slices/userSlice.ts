@@ -11,7 +11,7 @@ type UserSlice = {
 };
 
 export const userInitialState: UserSlice = {
-  profile: undefined,
+  profile: profileResponseMock,
   isLoggedIn: true,
 };
 
@@ -43,8 +43,7 @@ const selectUser = (state: RootState) => state.user;
 export const selectProfile = (state: RootState) => selectUser(state).profile;
 export const selectProfileId = (state: RootState) => selectUser(state).profile?.identifier;
 export const selectIsLoggedIn = (state: RootState) => selectUser(state).isLoggedIn;
-export const selectCareerPaths = (state: RootState) =>
-  selectUser(state).profile?.careerPaths || profileResponseMock.careerPaths;
+export const selectCareerPaths = (state: RootState) => selectUser(state).profile?.careerPaths;
 export const selectSelectedCareerPathId = (state: RootState) =>
   selectUser(state).selectedCareerPathId;
 

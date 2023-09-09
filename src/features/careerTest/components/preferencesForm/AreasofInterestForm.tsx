@@ -1,67 +1,29 @@
 import React, { useState } from 'react';
-import { ActionIcon, Autocomplete, Chip, Container, Group } from '@mantine/core';
-import { IconX } from '@tabler/icons-react';
+import { Container, MultiSelect } from '@mantine/core';
 import { exampleAreasOfInterest } from '@careerTest/config/formConstants';
 import { questionFormStyles } from '@careerTest/styles/careeerTestStyles';
 import { CareerFormProps } from '@careerTest/careerTestTypes';
 
 export const AreasOfInterestForm = ({ form }: { form: CareerFormProps }) => {
   const { classes } = questionFormStyles();
-  const [newInterest, setNewInterest] = useState('');
-
-  const {
-    values: { areasOfInterest },
-  } = form;
-
-  const addNewInterest = (value: string) => {
-    form.setFieldValue('areasOfInterest', [...areasOfInterest, value]);
-    setNewInterest('');
-  };
-
-  const removeInterest = (value: string) => {
-    form.setFieldValue(
-      'areasOfInterest',
-      areasOfInterest.filter((interst) => interst !== value),
-    );
-  };
-
-  const options = exampleAreasOfInterest.filter((value) => !areasOfInterest.includes(value));
-
+  const [options, setOptions] = useState([...exampleAreasOfInterest]);
   return (
     <Container className={classes.questionContainer}>
       <div className={classes.questionInput}>
-        <Autocomplete
-          label="Select up to 3 areas of interest"
+        <MultiSelect
           data={options}
-          value={newInterest}
-          onChange={(value) => setNewInterest(value)}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') {
-              addNewInterest(newInterest);
-            }
+          searchable
+          clearable
+          placeholder="Select interests"
+          creatable
+          getCreateLabel={(query) => `+ Add ${query}`}
+          onCreate={(query) => {
+            setOptions([...options, query]);
+            return query;
           }}
-          nothingFound="Press Enter to add new interest"
-          onItemSubmit={({ value }) => {
-            addNewInterest(value);
-          }}
-          error={form.errors.areasOfInterest}
+          label="What are your areas of interest?"
+          {...form.getInputProps('areasOfInterest')}
         />
-        <div className={classes.chipSelectionRow}>
-          <Chip.Group>
-            <Group position="center">
-              {areasOfInterest.map((interest) => (
-                <Chip key={`${interest}-chip`}>
-                  <div className={classes.chip}>
-                    {interest}
-                    <ActionIcon onClick={() => removeInterest(interest)} size="sm">
-                      <IconX />
-                    </ActionIcon>
-                  </div>
-                </Chip>
-              ))}
-            </Group>
-          </Chip.Group>
-        </div>
       </div>
     </Container>
   );

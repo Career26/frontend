@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Container, Group, Button, Stepper } from '@mantine/core';
 import { Shell } from '@shared/components/shell/Shell';
 import { useGenerateProfileMutation } from '@apis/profile';
-import { setProfile } from '@slices/userSlice';
+import { setLoginModal, setProfile } from '@slices/userSlice';
 import { useAppDispatch } from '@state/store';
 
 import { EducationForm } from './components/educationForm/EducationForm';
@@ -40,7 +40,11 @@ export const CareerTest = () => {
     if (activeStep === CareerStep.PREFERENCES) {
       generateProfile(form.values);
     }
-    setActiveStep(activeStep + 1);
+    if (activeStep === CareerStep.CAREER_PATHS) {
+      dispatch(setLoginModal({ open: true, onComplete: () => setActiveStep(activeStep + 1) }));
+    } else {
+      setActiveStep(activeStep + 1);
+    }
   };
 
   const clickBack = () => {

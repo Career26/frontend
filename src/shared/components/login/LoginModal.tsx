@@ -103,6 +103,7 @@ export const LoginModal = () => {
       return;
     }
     // handle log in endpoint
+    onClose();
     if (onComplete) {
       onComplete();
     }

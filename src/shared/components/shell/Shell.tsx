@@ -1,8 +1,6 @@
 import React, { ReactElement } from 'react';
 import { AppShell } from '@mantine/core';
 
-import { LoginModal } from '../login/LoginModal';
-
 interface ShellProps {
   header?: ReactElement;
   children: ReactElement;
@@ -23,6 +21,5 @@ export const Shell = ({ header, children, navbar }: ShellProps) => (
     navbarOffsetBreakpoint="sm"
   >
     {children}
-    <LoginModal />
   </AppShell>
 );

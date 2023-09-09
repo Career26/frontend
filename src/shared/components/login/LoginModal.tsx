@@ -1,14 +1,5 @@
 import React, { useState } from 'react';
-import {
-  Modal,
-  Button,
-  Group,
-  Container,
-  TextInput,
-  Text,
-  PasswordInput,
-  Checkbox,
-} from '@mantine/core';
+import { Modal, Button, Group, TextInput, Text, PasswordInput, Checkbox } from '@mantine/core';
 import { UseFormReturnType, isEmail, matchesField, useForm } from '@mantine/form';
 import { IconAt, IconLock, TablerIconsProps } from '@tabler/icons-react';
 import { useAppDispatch, useAppSelector } from '@state/store';
@@ -75,7 +66,9 @@ export const LoginModal = () => {
   const [hasAccount, setHasAccount] = useState(false);
   const { open, onComplete } = useAppSelector(selectLoginModal);
   const dispatch = useAppDispatch();
-  const onClose = () => dispatch(setLoginModal({ open: false }));
+  const onClose = () => {
+    dispatch(setLoginModal({ open: false }));
+  };
 
   const form = useForm<LoginFormValues>({
     initialValues: {

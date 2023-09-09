@@ -4,6 +4,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 
 import { pageHeaderStyles } from './pageHeaderStyles';
+import { LoginModal } from '../login/LoginModal';
 
 interface HeaderActionProps {
   links?: { link: string; label: string }[];
@@ -34,6 +35,7 @@ export const PageHeader = ({ links }: HeaderActionProps) => {
       style={{ position: 'fixed' }}
       className={classes.inner}
     >
+      <LoginModal />
       <Group>
         {links?.length && (
           <Burger opened={opened} onClick={toggle} className={classes.burger} size="sm" />

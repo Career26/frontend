@@ -22,6 +22,9 @@ const overviewStyles = createStyles((theme) => ({
   navBar: {
     width: NAVBAR_WIDTH,
     height: `calc(100% - ${HEADER_HEIGHT})`,
+    [theme.fn.smallerThan('md')]: {
+      display: 'none',
+    },
   },
 
   navLink: {

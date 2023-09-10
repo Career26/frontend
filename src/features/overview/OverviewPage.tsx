@@ -9,6 +9,7 @@ import { overviewPageMock } from '@mocks/overviewMocks';
 import { OverviewSection } from './OverviewSection';
 import { overviewLinks } from './config/overviewConstants';
 import { CareerProgressionTile } from './tiles/careerProgressionTile/CareerProgressionTile';
+import { TopEmployersTile } from './tiles/TopEmployersTile';
 
 const NAVBAR_WIDTH = rem(250);
 
@@ -115,6 +116,9 @@ export const OverviewPage = () => {
                   promotionTimeline={overviewPageMock.promotionTimeline}
                   salaryProgression={overviewPageMock.salaryProgression}
                 />
+              )}
+              {label === 'Top Employers' && (
+                <TopEmployersTile employers={overviewPageMock.exampleEmployers} />
               )}
             </OverviewSection>
           ))}

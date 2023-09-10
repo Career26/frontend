@@ -2,7 +2,7 @@ import { SalaryProgression } from '@datatypes/overview';
 
 export const getYLabel = (salary: number) => `£${salary / 1000}K`;
 
-export const getGradientLabel = (gradient: number) => `£${gradient} / year`;
+export const getGradientLabel = (gradient: number) => `£${gradient}/yr`;
 
 export const getGradient = (max: number, min: number, salaryProgression: SalaryProgression[]) => {
   const maxAge = Number(salaryProgression[salaryProgression.length - 1].age);

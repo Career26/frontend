@@ -9,6 +9,7 @@ import { overviewPageMock } from '@mocks/overviewMocks';
 import { OverviewSection } from './OverviewSection';
 import { overviewLinks } from './config/overviewConstants';
 import { SalaryTile } from './tiles/salaryTile/SalaryTile';
+import { CareerProgressionTile } from './tiles/careerProgressionTile/CareerProgressionTile';
 
 const NAVBAR_WIDTH = rem(250);
 
@@ -112,6 +113,12 @@ export const OverviewPage = () => {
             <OverviewSection label={label} Icon={Icon} anchor={anchor} key={`career-${label}`}>
               {label === 'Salary Expectation' && (
                 <SalaryTile salaryProgression={overviewPageMock.salaryProgression} />
+              )}
+              {label === 'Career Progression' && (
+                <CareerProgressionTile
+                  promotionTimeline={overviewPageMock.promotionTimeline}
+                  salaryProgression={overviewPageMock.salaryProgression}
+                />
               )}
             </OverviewSection>
           ))}

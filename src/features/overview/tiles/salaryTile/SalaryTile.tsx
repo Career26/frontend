@@ -11,8 +11,9 @@ import {
   CartesianGrid,
 } from 'recharts';
 
-import { SalaryCard, TooltipContent } from './SalaryRenderers';
-import { getGradient, getGradientLabel, getYLabel } from './salaryUtil';
+import { TooltipContent } from './TooltipContent';
+import { getYLabel } from './salaryUtil';
+import { ExpectedSalaryCard } from './ExpectedSalaryCard';
 
 type SalaryTileProps = {
   salaryProgression: SalaryProgression[];
@@ -41,30 +42,12 @@ const slaryStyles = createStyles({
 });
 
 export const SalaryTile = ({ salaryProgression }: SalaryTileProps) => {
-  const [finalMax] = salaryProgression[salaryProgression.length - 1].value;
-  const [startingMax, startingMin] = salaryProgression[0].value;
   const { classes } = slaryStyles();
   return (
     <>
       <div className={classes.leftContainer}>
         <Card>
-          <SalaryCard
-            header="Expected Salaries"
-            rows={[
-              {
-                label: 'Starting Salary',
-                formatter: getYLabel,
-                max: startingMax,
-                min: startingMin,
-              },
-              {
-                label: 'Salary Progression',
-                formatter: getGradientLabel,
-                max: getGradient(finalMax, startingMax, salaryProgression),
-                min: getGradient(startingMax, startingMin, salaryProgression),
-              },
-            ]}
-          />
+          <ExpectedSalaryCard header="Expected Salaries" salaryProgression={salaryProgression} />
         </Card>
       </div>
       <div className={classes.graphContainer}>

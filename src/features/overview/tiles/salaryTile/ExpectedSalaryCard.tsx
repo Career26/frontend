@@ -1,25 +1,10 @@
 import { SalaryProgression } from '@datatypes/overview';
 import { Badge, Card, Group, createStyles, rem, Table } from '@mantine/core';
 import React from 'react';
-import { TooltipProps } from 'recharts';
-import { NameType, ValueType } from 'recharts/types/component/DefaultTooltipContent';
 
-import { getGradientLabel, getYLabel } from './salaryUtil';
+import { getGradient, getGradientLabel, getYLabel } from './salaryUtil';
 
-const rendererStyles = createStyles((theme) => ({
-  tooltip: {
-    display: 'flex',
-    fontSize: '14px',
-    width: '100%',
-    alignContent: 'center',
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
-    border: `1px solid ${theme.colors.gray[9]}`,
-    backgroundColor: 'white',
-    padding: rem(5),
-    gap: rem(5),
-    borderRadius: rem(10),
-  },
+const expectedSalaryCardStyles = createStyles((theme) => ({
   cardHeader: {
     display: 'flex',
     justifyContent: 'center',
@@ -35,35 +20,30 @@ const rendererStyles = createStyles((theme) => ({
   },
 }));
 
-export const TooltipContent = ({ payload }: TooltipProps<ValueType, NameType>) => {
-  const { classes } = rendererStyles();
-  const item: SalaryProgression = payload?.[0]?.payload;
-  if (!item) {
-    return null;
-  }
-  const { value, age } = item;
-  const [max, min] = value;
-  const average = (max + min) / 2;
-  return (
-    <div className={classes.tooltip}>
-      <Badge size="md">Age: {age}</Badge>
-      <Badge color="pink" size="sm">
-        Max: {getYLabel(max)}
-      </Badge>
-      <Badge color="gray" size="sm">
-        Min: {getYLabel(min)}
-      </Badge>
-      <Badge color="green" size="sm">
-        Average: {getGradientLabel(average)}
-      </Badge>
-    </div>
-  );
-};
-
-type Row = { label: string; max: number; min: number; formatter: (value: number) => string };
-
-export const SalaryCard = ({ header, rows }: { header: string; rows: Row[] }) => {
-  const { classes } = rendererStyles();
+export const ExpectedSalaryCard = ({
+  header,
+  salaryProgression,
+}: {
+  header: string;
+  salaryProgression: SalaryProgression[];
+}) => {
+  const { classes } = expectedSalaryCardStyles();
+  const [finalMax] = salaryProgression[salaryProgression.length - 1].value;
+  const [startingMax, startingMin] = salaryProgression[0].value;
+  const rows = [
+    {
+      label: 'Starting Salary',
+      formatter: getYLabel,
+      max: startingMax,
+      min: startingMin,
+    },
+    {
+      label: 'Salary Progression',
+      formatter: getGradientLabel,
+      max: getGradient(finalMax, startingMax, salaryProgression),
+      min: getGradient(startingMax, startingMin, salaryProgression),
+    },
+  ];
   return (
     <Card>
       <Card.Section withBorder className={classes.cardHeader}>

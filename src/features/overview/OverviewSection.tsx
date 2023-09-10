@@ -1,9 +1,12 @@
-import { Card, createStyles, rem } from '@mantine/core';
+import { createStyles, rem } from '@mantine/core';
 import { TablerIconsProps } from '@tabler/icons-react';
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 const sectionStyles = createStyles((theme) => ({
   section: {
+    '.mantine-Card-root': {
+      borderRadius: rem(10),
+    },
     height: '50vh',
     paddingLeft: rem(20),
     ':nth-of-type(even)': {
@@ -30,7 +33,7 @@ const sectionStyles = createStyles((theme) => ({
     paddingRight: rem(20),
     display: 'flex',
     width: '100%',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-around',
     gap: rem(20),
   },
   card: {
@@ -42,10 +45,12 @@ export const OverviewSection = ({
   label,
   anchor,
   Icon,
+  children,
 }: {
   label: string;
   anchor: string;
   Icon: (props: TablerIconsProps) => JSX.Element;
+  children: ReactNode;
 }) => {
   const { classes } = sectionStyles();
   return (
@@ -54,14 +59,7 @@ export const OverviewSection = ({
         <Icon size={50} />
         <h2>{label}</h2>
       </div>
-      <div className={classes.body}>
-        <Card withBorder radius={5} className={classes.card}>
-          Item 1
-        </Card>
-        <Card withBorder radius={5} className={classes.card}>
-          Item 2
-        </Card>
-      </div>
+      <div className={classes.body}>{children}</div>
     </div>
   );
 };

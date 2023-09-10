@@ -38,6 +38,8 @@ module.exports = {
     'react/jsx-props-no-spreading': 0,
     'prettier/prettier': ['error', { ...prettierConfig }],
     '@typescript-eslint/no-var-requires': 0,
+    '@typescript-eslint/naming-convention': 0,
+    '@typescript-eslint/no-unused-vars': ['error', { varsIgnorePattern: '^_' }],
     'import/prefer-default-export': 0,
     'react/function-component-definition': 0,
     'react/no-array-index-key': 0,

@@ -4,9 +4,11 @@ import { useActiveNavScroll } from '@shared/hooks/useActiveNavScroll';
 import classNames from 'classnames';
 import { Shell } from '@shared/components/shell/Shell';
 import { HEADER_HEIGHT } from '@shared/components/pageHeader/pageHeaderStyles';
+import { overviewPageMock } from '@mocks/overviewMocks';
 
 import { OverviewSection } from './OverviewSection';
-import { careerLinks } from './config/overviewConstants';
+import { overviewLinks } from './config/overviewConstants';
+import { SalaryTile } from './tiles/SalaryTile';
 
 const NAVBAR_WIDTH = rem(250);
 
@@ -66,7 +68,7 @@ const overviewStyles = createStyles((theme) => ({
 }));
 
 export const OverviewPage = () => {
-  const { activeAnchor } = useActiveNavScroll({ navItems: careerLinks });
+  const { activeAnchor } = useActiveNavScroll({ navItems: overviewLinks });
   const { classes } = overviewStyles();
 
   return (
@@ -74,7 +76,7 @@ export const OverviewPage = () => {
       navbar={
         <Navbar height={400} p="xs" className={classes.navBar}>
           <Navbar.Section grow mt="md" className={classes.navLink}>
-            {careerLinks.map(({ label, Icon, anchor }) => (
+            {overviewLinks.map(({ label, Icon, anchor }) => (
               <a href={`#${anchor}`} key={`link-${label}`}>
                 <Button
                   className={classNames(classes.navButton, {
@@ -93,8 +95,12 @@ export const OverviewPage = () => {
       }
     >
       <div className={classes.content}>
-        {careerLinks.map(({ label, Icon, anchor }) => (
-          <OverviewSection label={label} Icon={Icon} anchor={anchor} key={`career-${label}`} />
+        {overviewLinks.map(({ label, Icon, anchor }) => (
+          <OverviewSection label={label} Icon={Icon} anchor={anchor} key={`career-${label}`}>
+            {label === 'Salary Expectation' && (
+              <SalaryTile salaryProgression={overviewPageMock.salaryProgression} />
+            )}
+          </OverviewSection>
         ))}
       </div>
     </Shell>

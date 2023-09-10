@@ -1,30 +1,69 @@
 import React from 'react';
-import { Navbar, Button } from '@mantine/core';
+import { Navbar, Button, createStyles, rem } from '@mantine/core';
 import { useActiveNavScroll } from '@shared/hooks/useActiveNavScroll';
 import classNames from 'classnames';
 import { Shell } from '@shared/components/shell/Shell';
-import {
-  IconAtom,
-  IconBuildingBank,
-  IconCalendarTime,
-  IconReportMoney,
-  IconReportSearch,
-  IconTrendingUp,
-  IconUsers,
-} from '@tabler/icons-react';
+import { HEADER_HEIGHT } from '@shared/components/pageHeader/pageHeaderStyles';
 
-import { overviewStyles } from './overviewStyles';
 import { OverviewSection } from './OverviewSection';
+import { careerLinks } from './config/overviewConstants';
 
-export const careerLinks = [
-  { label: 'Industry Insights', Icon: IconBuildingBank, anchor: 'industry' },
-  { label: 'Role Overview', Icon: IconReportSearch, anchor: 'role' },
-  { label: 'Salary Expecation', Icon: IconReportMoney, anchor: 'salary' },
-  { label: 'Top Employers', Icon: IconUsers, anchor: 'employers' },
-  { label: 'Career Progression', Icon: IconTrendingUp, anchor: 'progression' },
-  { label: 'Typical Skills', Icon: IconAtom, anchor: 'skill' },
-  { label: 'Application Timeline', Icon: IconCalendarTime, anchor: 'timeline' },
-];
+const NAVBAR_WIDTH = rem(250);
+
+const overviewStyles = createStyles((theme) => ({
+  content: {
+    height: '420vh',
+    flexDirection: 'column',
+    paddingLeft: `${NAVBAR_WIDTH} !important`,
+    paddingTop: HEADER_HEIGHT,
+  },
+  navBar: {
+    width: NAVBAR_WIDTH,
+    height: `calc(100% - ${HEADER_HEIGHT})`,
+  },
+
+  navLink: {
+    display: 'flex',
+    flexDirection: 'column',
+    '> a': {
+      textDecoration: 'none',
+      ':not(:first-child)': { paddingTop: rem(20) },
+      paddingLeft: rem(10),
+      paddingRight: rem(10),
+    },
+  },
+
+  navButton: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex',
+    alignItems: 'center',
+    width: '100%',
+    height: rem(60),
+    backgroundColor: 'white',
+    color: theme.colors.gray[9],
+    '&:hover': {
+      backgroundColor: theme.colors.blue[1],
+    },
+  },
+
+  active: {
+    backgroundColor: theme.colors.blue[6],
+    color: 'white',
+    '&:hover': {
+      backgroundColor: theme.colors.blue[4],
+    },
+  },
+
+  icon: {
+    paddingRight: rem(20),
+  },
+
+  subHeader: {
+    fontSize: rem(17),
+    color: theme.colors.gray[7],
+  },
+}));
 
 export const OverviewPage = () => {
   const { activeAnchor } = useActiveNavScroll({ navItems: careerLinks });

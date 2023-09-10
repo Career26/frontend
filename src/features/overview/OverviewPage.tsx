@@ -8,7 +8,7 @@ import { overviewPageMock } from '@mocks/overviewMocks';
 
 import { OverviewSection } from './OverviewSection';
 import { overviewLinks } from './config/overviewConstants';
-import { SalaryTile } from './tiles/SalaryTile';
+import { SalaryTile } from './tiles/salaryTile/SalaryTile';
 
 const NAVBAR_WIDTH = rem(250);
 

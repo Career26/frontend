@@ -66,13 +66,40 @@ const slaryStyles = createStyles((theme) => ({
 }));
 
 const getYLabel = (salary: number) => `£${salary / 1000}K`;
+const getGradientLabel = (gradient: number) => `£${gradient} / year`;
 
-const getSalaryGradient = (max: number, min: number, salaryProgression: SalaryProgression[]) => {
+const getGradient = (max: number, min: number, salaryProgression: SalaryProgression[]) => {
   const maxAge = Number(salaryProgression[salaryProgression.length - 1].age);
   const minAge = Number(salaryProgression[0].age);
   const years = maxAge - minAge;
-  const gradient = (max - min) / years;
-  return `£${gradient} / year`;
+  return (max - min) / years;
+};
+
+const BadgeItems = ({
+  min,
+  max,
+  size = 'md',
+  formatter = getYLabel,
+}: {
+  min: number;
+  max: number;
+  size?: string;
+  formatter?: (value: number) => string;
+}) => {
+  const average = (max + min) / 2;
+  return (
+    <>
+      <Badge color="pink" size={size}>
+        Max: {formatter(max)}
+      </Badge>
+      <Badge color="gray" size={size}>
+        Min: {formatter(min)}
+      </Badge>
+      <Badge color="green" size={size}>
+        Average: {formatter(average)}
+      </Badge>
+    </>
+  );
 };
 
 const getContent = ({ payload }: TooltipProps<ValueType, NameType>) => {
@@ -83,19 +110,10 @@ const getContent = ({ payload }: TooltipProps<ValueType, NameType>) => {
   }
   const { value, age } = item;
   const [max, min] = value;
-  const average = (max + min) / 2;
   return (
     <div className={classes.tooltip}>
       <Badge size="md">Age: {age}</Badge>
-      <Badge color="pink" size="md">
-        Max: {getYLabel(max)}
-      </Badge>
-      <Badge color="gray" size="md">
-        Min: {getYLabel(min)}
-      </Badge>
-      <Badge color="green" size="md">
-        Average: {getYLabel(average)}
-      </Badge>
+      <BadgeItems max={max} min={min} />
     </div>
   );
 };
@@ -104,10 +122,12 @@ const SalaryCard = ({
   header,
   max,
   min,
+  formatter,
 }: {
   header: string;
-  max: string | number;
-  min: string | number;
+  max: number;
+  min: number;
+  formatter?: (value: number) => string;
 }) => {
   const { classes } = slaryStyles();
   return (
@@ -116,12 +136,7 @@ const SalaryCard = ({
         {header}
       </Card.Section>
       <Group className={classes.cardBody}>
-        <Badge color="pink" size="lg">
-          Max: {max}
-        </Badge>
-        <Badge color="gray" size="lg">
-          Min: {min}
-        </Badge>
+        <BadgeItems max={max} min={min} size="lg" formatter={formatter} />
       </Group>
     </Card>
   );
@@ -135,21 +150,14 @@ export const SalaryTile = ({ salaryProgression }: SalaryTileProps) => {
     <>
       <div className={classes.leftContainer}>
         <div className={classes.rowContainer}>
-          <SalaryCard
-            header="Maximum Salaries"
-            max={getYLabel(finalMax)}
-            min={getYLabel(finalMin)}
-          />
-          <SalaryCard
-            header="Starting Salaries"
-            max={getYLabel(startingMax)}
-            min={getYLabel(startingMin)}
-          />
+          <SalaryCard header="Maximum Salaries" max={finalMax} min={finalMin} />
+          <SalaryCard header="Starting Salaries" max={startingMax} min={startingMin} />
         </div>
         <SalaryCard
           header="Salary Progression"
-          max={getSalaryGradient(finalMax, startingMax, salaryProgression)}
-          min={getSalaryGradient(startingMax, startingMin, salaryProgression)}
+          max={getGradient(finalMax, startingMax, salaryProgression)}
+          min={getGradient(startingMax, startingMin, salaryProgression)}
+          formatter={getGradientLabel}
         />
       </div>
       <div className={classes.graphContainer}>

@@ -11,29 +11,17 @@ import {
   CartesianGrid,
 } from 'recharts';
 
-import { TooltipContent } from '../salaryTile/TooltipContent';
-import { getYLabel } from '../salaryTile/salaryUtil';
+import { TooltipContent } from './TooltipContent';
+import { getVerticalFill, getYLabel } from './progressionUtil';
 
 const salaryChartStyles = createStyles({
   graphContainer: {
     width: '50%',
-    background: 'white',
+    background: '#f8f9fa',
     borderRadius: rem(10),
     padding: rem(10),
   },
 });
-
-const getVerticalFill = (
-  salaryProgression: SalaryProgression[],
-  minAge?: string,
-  maxAge?: string,
-) =>
-  salaryProgression.map(({ age }) => {
-    if (Number(age) >= Number(minAge) && Number(age) <= Number(maxAge)) {
-      return 'pink';
-    }
-    return 'none';
-  });
 
 export const SalaryChart = ({
   salaryProgression,

@@ -4,7 +4,7 @@ import React from 'react';
 import { TooltipProps } from 'recharts';
 import { NameType, ValueType } from 'recharts/types/component/DefaultTooltipContent';
 
-import { getGradientLabel, getYLabel } from './salaryUtil';
+import { getGradientLabel, getYLabel } from './progressionUtil';
 
 const tooltipStyles = createStyles((theme) => ({
   tooltip: {

@@ -1,11 +1,11 @@
 import { PromotionTimeline, SalaryProgression } from '@datatypes/overview';
 import { Badge, Card, Stepper, createStyles, rem } from '@mantine/core';
-import React, { ReactNode, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { IconEye } from '@tabler/icons-react';
 import classNames from 'classnames';
 
 import { SalaryChart } from './SalaryChart';
-import { getGradient, getGradientLabel, getYLabel } from '../salaryTile/salaryUtil';
+import { getGradient, getGradientLabel, getSelectedItem, getYLabel } from './progressionUtil';
 
 type CareerProgressionTileProps = {
   promotionTimeline: PromotionTimeline[];
@@ -44,13 +44,20 @@ const careerProgressionStyles = createStyles((theme) => ({
 const SalaryCard = ({
   header,
   active,
-  children,
+  startingMin,
+  startingMax,
+  finalMax,
+  salaryProgression,
 }: {
   header: string;
-  children: ReactNode;
   active?: boolean;
+  startingMin?: number;
+  startingMax?: number;
+  finalMax?: number;
+  salaryProgression: CareerProgressionTileProps['salaryProgression'];
 }) => {
   const { classes } = careerProgressionStyles();
+  const color = active ? 'pink' : 'blue';
   return (
     <Card className={classes.cardContainer}>
       <Card.Section
@@ -59,32 +66,18 @@ const SalaryCard = ({
       >
         {header}
       </Card.Section>
-      <div className={classes.cardBody}>{children}</div>
+      <div className={classes.cardBody}>
+        <Badge size="lg" color={color}>
+          Starting Salary: {getYLabel(startingMin)} - {getYLabel(startingMax)}
+        </Badge>
+        <Badge size="lg" color={color}>
+          Salary Increase:{' '}
+          {getGradientLabel(getGradient({ max: finalMax, min: startingMax, salaryProgression }))} -{' '}
+          {getGradientLabel(getGradient({ max: startingMax, min: startingMin, salaryProgression }))}
+        </Badge>
+      </div>
     </Card>
   );
-};
-
-const getSelectedItem = (
-  promotionTimeline: PromotionTimeline[],
-  salaryProgression: SalaryProgression[],
-  activeIndex?: number,
-) => {
-  if (activeIndex === undefined) {
-    return null;
-  }
-  const { title, age } = promotionTimeline[activeIndex];
-  const [minAge, maxAge] = age.split('-');
-  const minSalary = salaryProgression.find((item) => item.age === minAge);
-  const maxSalary = salaryProgression.find((item) => item.age === maxAge);
-  return {
-    startingMin: minSalary?.value?.[1],
-    startingMax: minSalary?.value?.[0],
-    finalMin: maxSalary?.value?.[1],
-    finalMax: maxSalary?.value?.[0],
-    title,
-    minAge,
-    maxAge,
-  };
 };
 
 export const CareerProgressionTile = ({
@@ -97,7 +90,7 @@ export const CareerProgressionTile = ({
   const [startingMax, startingMin] = salaryProgression[0].value;
 
   const selectedItem = useMemo(
-    () => getSelectedItem(promotionTimeline, salaryProgression, activeIndex),
+    () => getSelectedItem({ promotionTimeline, salaryProgression, activeIndex }),
     [activeIndex],
   );
 
@@ -129,33 +122,20 @@ export const CareerProgressionTile = ({
       />
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: rem(20) }}>
-        <SalaryCard header="Expected Salaries">
-          <Badge size="lg">
-            Starting Salary: {getYLabel(startingMin)} - {getYLabel(startingMax)}
-          </Badge>
-          <Badge size="lg">
-            Salary Increase:{' '}
-            {getGradientLabel(getGradient(finalMax, startingMax, salaryProgression))} -{' '}
-            {getGradientLabel(getGradient(startingMax, startingMin, salaryProgression))}
-          </Badge>
-        </SalaryCard>
+        <SalaryCard
+          header="Expected Salaries"
+          finalMax={finalMax}
+          startingMax={startingMax}
+          startingMin={startingMin}
+          salaryProgression={salaryProgression}
+        />
         {selectedItem && (
-          <SalaryCard header={selectedItem.title} active>
-            <Badge size="lg" color="pink">
-              Starting Salary: {getYLabel(selectedItem.startingMin)} -{' '}
-              {getYLabel(selectedItem.startingMax)}
-            </Badge>
-            <Badge size="lg" color="pink">
-              Salary Increase:{' '}
-              {getGradientLabel(
-                getGradient(selectedItem.finalMax, selectedItem.startingMax, salaryProgression),
-              )}{' '}
-              -{' '}
-              {getGradientLabel(
-                getGradient(selectedItem.startingMax, selectedItem.startingMin, salaryProgression),
-              )}
-            </Badge>
-          </SalaryCard>
+          <SalaryCard
+            header={selectedItem.title}
+            salaryProgression={salaryProgression}
+            active
+            {...selectedItem}
+          />
         )}
       </div>
     </>

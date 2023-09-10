@@ -4,7 +4,7 @@ import React from 'react';
 import { TooltipProps } from 'recharts';
 import { NameType, ValueType } from 'recharts/types/component/DefaultTooltipContent';
 
-import { getGradientLabel, getYLabel } from './progressionUtil';
+import { getYLabel } from './progressionUtil';
 
 const tooltipStyles = createStyles((theme) => ({
   tooltip: {
@@ -41,7 +41,7 @@ export const TooltipContent = ({ payload }: TooltipProps<ValueType, NameType>) =
         Min: {getYLabel(min)}
       </Badge>
       <Badge color="green" size="sm">
-        Average: {getGradientLabel(average)}
+        Average: {getYLabel(average)}
       </Badge>
     </div>
   );

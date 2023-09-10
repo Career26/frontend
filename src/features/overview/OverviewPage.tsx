@@ -10,6 +10,7 @@ import { OverviewSection } from './OverviewSection';
 import { overviewLinks } from './config/overviewConstants';
 import { CareerProgressionTile } from './tiles/careerProgressionTile/CareerProgressionTile';
 import { TopEmployersTile } from './tiles/TopEmployersTile';
+import { RoleOverviewTile } from './tiles/RoleOverviewTile';
 
 const NAVBAR_WIDTH = rem(250);
 
@@ -119,6 +120,9 @@ export const OverviewPage = () => {
               )}
               {label === 'Top Employers' && (
                 <TopEmployersTile employers={overviewPageMock.exampleEmployers} />
+              )}
+              {label === 'Role Overview' && (
+                <RoleOverviewTile roleSummary={overviewPageMock.roleSummary} />
               )}
             </OverviewSection>
           ))}

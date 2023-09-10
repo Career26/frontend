@@ -59,7 +59,7 @@ const SalaryCard = ({
   const { classes } = careerProgressionStyles();
   const color = active ? 'pink' : 'blue';
   return (
-    <Card className={classes.cardContainer} shadow="md">
+    <Card className={classes.cardContainer} shadow="md" withBorder>
       <Card.Section
         withBorder
         className={classNames(classes.cardHeader, { [classes.active]: active })}
@@ -96,7 +96,7 @@ export const CareerProgressionTile = ({
 
   return (
     <>
-      <Card className={classes.container} shadow="md">
+      <Card className={classes.container} shadow="md" withBorder>
         <Stepper
           onStepClick={setActiveIndex}
           active={promotionTimeline.length}

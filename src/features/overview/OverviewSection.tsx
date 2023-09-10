@@ -36,9 +36,6 @@ const sectionStyles = createStyles((theme) => ({
     justifyContent: 'space-around',
     gap: rem(20),
   },
-  card: {
-    width: '50%',
-  },
 }));
 
 export const OverviewSection = ({

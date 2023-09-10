@@ -13,6 +13,15 @@ import { SalaryTile } from './tiles/salaryTile/SalaryTile';
 const NAVBAR_WIDTH = rem(250);
 
 const overviewStyles = createStyles((theme) => ({
+  wrapper: {
+    '.mantine-AppShell-main': {
+      [theme.fn.smallerThan('md')]: {
+        '> div': {
+          paddingLeft: '0 !important',
+        },
+      },
+    },
+  },
   content: {
     height: '420vh',
     flexDirection: 'column',
@@ -75,37 +84,39 @@ export const OverviewPage = () => {
   const { classes } = overviewStyles();
 
   return (
-    <Shell
-      navbar={
-        <Navbar height={400} p="xs" className={classes.navBar}>
-          <Navbar.Section grow mt="md" className={classes.navLink}>
-            {overviewLinks.map(({ label, Icon, anchor }) => (
-              <a href={`#${anchor}`} key={`link-${label}`}>
-                <Button
-                  className={classNames(classes.navButton, {
-                    [classes.active]: activeAnchor === anchor,
-                  })}
-                >
-                  <div className={classes.icon}>
-                    <Icon />
-                  </div>
-                  {label}
-                </Button>
-              </a>
-            ))}
-          </Navbar.Section>
-        </Navbar>
-      }
-    >
-      <div className={classes.content}>
-        {overviewLinks.map(({ label, Icon, anchor }) => (
-          <OverviewSection label={label} Icon={Icon} anchor={anchor} key={`career-${label}`}>
-            {label === 'Salary Expectation' && (
-              <SalaryTile salaryProgression={overviewPageMock.salaryProgression} />
-            )}
-          </OverviewSection>
-        ))}
-      </div>
-    </Shell>
+    <div className={classes.wrapper}>
+      <Shell
+        navbar={
+          <Navbar height={400} p="xs" className={classes.navBar}>
+            <Navbar.Section grow mt="md" className={classes.navLink}>
+              {overviewLinks.map(({ label, Icon, anchor }) => (
+                <a href={`#${anchor}`} key={`link-${label}`}>
+                  <Button
+                    className={classNames(classes.navButton, {
+                      [classes.active]: activeAnchor === anchor,
+                    })}
+                  >
+                    <div className={classes.icon}>
+                      <Icon />
+                    </div>
+                    {label}
+                  </Button>
+                </a>
+              ))}
+            </Navbar.Section>
+          </Navbar>
+        }
+      >
+        <div className={classes.content}>
+          {overviewLinks.map(({ label, Icon, anchor }) => (
+            <OverviewSection label={label} Icon={Icon} anchor={anchor} key={`career-${label}`}>
+              {label === 'Salary Expectation' && (
+                <SalaryTile salaryProgression={overviewPageMock.salaryProgression} />
+              )}
+            </OverviewSection>
+          ))}
+        </div>
+      </Shell>
+    </div>
   );
 };

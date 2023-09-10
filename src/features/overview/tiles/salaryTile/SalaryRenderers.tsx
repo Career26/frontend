@@ -1,10 +1,10 @@
 import { SalaryProgression } from '@datatypes/overview';
-import { Badge, Card, Group, createStyles, rem } from '@mantine/core';
+import { Badge, Card, Group, createStyles, rem, Table } from '@mantine/core';
 import React from 'react';
 import { TooltipProps } from 'recharts';
 import { NameType, ValueType } from 'recharts/types/component/DefaultTooltipContent';
 
-import { getYLabel } from './salaryUtil';
+import { getGradientLabel, getYLabel } from './salaryUtil';
 
 const rendererStyles = createStyles((theme) => ({
   tooltip: {
@@ -35,33 +35,6 @@ const rendererStyles = createStyles((theme) => ({
   },
 }));
 
-export const BadgeItems = ({
-  min,
-  max,
-  size = 'md',
-  formatter = getYLabel,
-}: {
-  min: number;
-  max: number;
-  size?: string;
-  formatter?: (value: number) => string;
-}) => {
-  const average = (max + min) / 2;
-  return (
-    <>
-      <Badge color="pink" size={size}>
-        Max: {formatter(max)}
-      </Badge>
-      <Badge color="gray" size={size}>
-        Min: {formatter(min)}
-      </Badge>
-      <Badge color="green" size={size}>
-        Average: {formatter(average)}
-      </Badge>
-    </>
-  );
-};
-
 export const TooltipContent = ({ payload }: TooltipProps<ValueType, NameType>) => {
   const { classes } = rendererStyles();
   const item: SalaryProgression = payload?.[0]?.payload;
@@ -70,25 +43,26 @@ export const TooltipContent = ({ payload }: TooltipProps<ValueType, NameType>) =
   }
   const { value, age } = item;
   const [max, min] = value;
+  const average = (max + min) / 2;
   return (
     <div className={classes.tooltip}>
       <Badge size="md">Age: {age}</Badge>
-      <BadgeItems max={max} min={min} />
+      <Badge color="pink" size="sm">
+        Max: {getYLabel(max)}
+      </Badge>
+      <Badge color="gray" size="sm">
+        Min: {getYLabel(min)}
+      </Badge>
+      <Badge color="green" size="sm">
+        Average: {getGradientLabel(average)}
+      </Badge>
     </div>
   );
 };
 
-export const SalaryCard = ({
-  header,
-  max,
-  min,
-  formatter,
-}: {
-  header: string;
-  max: number;
-  min: number;
-  formatter?: (value: number) => string;
-}) => {
+type Row = { label: string; max: number; min: number; formatter: (value: number) => string };
+
+export const SalaryCard = ({ header, rows }: { header: string; rows: Row[] }) => {
   const { classes } = rendererStyles();
   return (
     <Card>
@@ -96,7 +70,38 @@ export const SalaryCard = ({
         {header}
       </Card.Section>
       <Group className={classes.cardBody}>
-        <BadgeItems max={max} min={min} size="lg" formatter={formatter} />
+        <Table>
+          <thead>
+            <tr>
+              <th> </th>
+              <th>Max</th>
+              <th>Min</th>
+              <th>Average</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row) => (
+              <tr key={row.label}>
+                <td>{row.label}</td>
+                <td>
+                  <Badge color="pink" size="md">
+                    {row.formatter(row.max)}
+                  </Badge>
+                </td>
+                <td>
+                  <Badge color="gray" size="md">
+                    {row.formatter(row.min)}
+                  </Badge>
+                </td>
+                <td>
+                  <Badge color="green" size="md">
+                    {row.formatter((row.max + row.min) / 2)}
+                  </Badge>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
       </Group>
     </Card>
   );

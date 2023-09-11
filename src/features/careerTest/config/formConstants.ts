@@ -44,7 +44,7 @@ export const initialProfileValues: CareerFormValues = {
   additionalDegrees: [],
   areasOfInterest: [],
   expectedSalary: { baseCurrency: 'GBP', city: 'London', expectedSalary: 40000 },
-  personalityType: { workLifeBalanceSacrifice: false, workStyle: WorkStyle.TEAM },
+  personalityType: { workLifeBalanceSacrifice: false, workStyle: WorkStyle.Team },
   latestDegree: initialUniversityValues,
   previousWorkExperience: [initialWorkExperienceValues],
   fullName: 'Test Student',

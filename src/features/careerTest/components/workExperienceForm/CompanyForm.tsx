@@ -8,19 +8,21 @@ export const CompanyForm = ({ form, baseKey }: { form: CareerFormProps; baseKey:
   return (
     <Container className={classes.questionContainer}>
       <TextInput
-        {...form.getInputProps(`${baseKey}.companyName`)}
         label="Company Name"
+        withAsterisk
         className={classes.questionInput}
+        {...form.getInputProps(`${baseKey}.companyName`)}
       />
       <TextInput
-        {...form.getInputProps(`${baseKey}.role`)}
         label="Role"
+        withAsterisk
         className={classes.questionInput}
+        {...form.getInputProps(`${baseKey}.role`)}
       />
       {/* Add an info tooltip as to how to rate something */}
       <Select
-        {...form.getInputProps(`${baseKey}.rating`)}
         label="Rating"
+        withAsterisk
         className={classes.questionInput}
         type="number"
         data={[...Array(5).keys()].map((value) => {
@@ -30,12 +32,14 @@ export const CompanyForm = ({ form, baseKey }: { form: CareerFormProps; baseKey:
             label: inputValue,
           };
         })}
+        {...form.getInputProps(`${baseKey}.rating`)}
       />
       <Textarea
-        {...form.getInputProps(`${baseKey}.ratingReason`)}
         label="Reason for rating"
         minRows={3}
+        withAsterisk
         className={classes.questionInput}
+        {...form.getInputProps(`${baseKey}.ratingReason`)}
       />
     </Container>
   );

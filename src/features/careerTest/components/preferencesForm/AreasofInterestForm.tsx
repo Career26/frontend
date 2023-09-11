@@ -14,6 +14,7 @@ export const AreasOfInterestForm = ({ form }: { form: CareerFormProps }) => {
           data={options}
           searchable
           clearable
+          withAsterisk
           placeholder="Select interests"
           creatable
           getCreateLabel={(query) => `+ Add ${query}`}

@@ -26,8 +26,9 @@ export const WorkStyleForm = ({ form }: { form: CareerFormProps }) => {
         <Select
           {...form.getInputProps('personalityType.workStyle')}
           label="What is your preferred working style?"
+          withAsterisk
           className={classes.questionInput}
-          data={Object.values(WorkStyle)}
+          data={Object.entries(WorkStyle).map(([label, value]) => ({ label, value }))}
         />
         <Checkbox
           className={classes.checkbox}
@@ -41,12 +42,14 @@ export const WorkStyleForm = ({ form }: { form: CareerFormProps }) => {
           label="City"
           className={classes.questionInput}
           data={exampleCities}
+          withAsterisk
           onChange={onSelectCity}
         />
         <NumberInput
           {...form.getInputProps('expectedSalary.expectedSalary')}
           label="What is your expected salary?"
           parser={(value) => value.replace(/[ $£€¥,]/gm, '')}
+          withAsterisk
           formatter={(value: string) =>
             !Number.isNaN(parseFloat(value))
               ? `${symbol} ${value}`.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',')

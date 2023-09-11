@@ -7,7 +7,7 @@ const sectionStyles = createStyles((theme) => ({
     '.mantine-Card-root': {
       borderRadius: rem(10),
     },
-    height: '50vh',
+    paddingBottom: rem(20),
     paddingLeft: rem(20),
     ':nth-of-type(even)': {
       '.mantine-Card-root': {

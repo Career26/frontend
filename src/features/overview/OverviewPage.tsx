@@ -8,7 +8,9 @@ import { overviewPageMock } from '@mocks/overviewMocks';
 
 import { OverviewSection } from './OverviewSection';
 import { overviewLinks } from './config/overviewConstants';
-import { SalaryTile } from './tiles/salaryTile/SalaryTile';
+import { CareerProgressionTile } from './tiles/careerProgressionTile/CareerProgressionTile';
+import { TopEmployersTile } from './tiles/TopEmployersTile';
+import { RoleOverviewTile } from './tiles/RoleOverviewTile';
 
 const NAVBAR_WIDTH = rem(250);
 
@@ -110,8 +112,17 @@ export const OverviewPage = () => {
         <div className={classes.content}>
           {overviewLinks.map(({ label, Icon, anchor }) => (
             <OverviewSection label={label} Icon={Icon} anchor={anchor} key={`career-${label}`}>
-              {label === 'Salary Expectation' && (
-                <SalaryTile salaryProgression={overviewPageMock.salaryProgression} />
+              {label === 'Career Progression' && (
+                <CareerProgressionTile
+                  promotionTimeline={overviewPageMock.promotionTimeline}
+                  salaryProgression={overviewPageMock.salaryProgression}
+                />
+              )}
+              {label === 'Top Employers' && (
+                <TopEmployersTile employers={overviewPageMock.exampleEmployers} />
+              )}
+              {label === 'Role Overview' && (
+                <RoleOverviewTile roleSummary={overviewPageMock.roleSummary} />
               )}
             </OverviewSection>
           ))}

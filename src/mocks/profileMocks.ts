@@ -10,7 +10,7 @@ export const generateProfileInputMock: Profile = {
   },
   personalityType: {
     workLifeBalanceSacrifice: true,
-    workStyle: WorkStyle.INDEPENDENT,
+    workStyle: WorkStyle.Independent,
   },
   latestDegree: {
     grade: 'Second Class Upper (2:1)',
@@ -69,7 +69,7 @@ export const profileResponseMock: UserProfile = {
     areasOfInterest: ['Finance', 'Education', 'Consulting'],
     personalityType: {
       workLifeBalanceSacrifice: true,
-      workStyle: WorkStyle.INDEPENDENT,
+      workStyle: WorkStyle.Independent,
     },
     expectedSalary: {
       expectedSalary: 75000,

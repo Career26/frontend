@@ -9,27 +9,31 @@ export const UniversityForm = ({ form, baseKey }: { form: CareerFormProps; baseK
   return (
     <Container className={classes.questionContainer}>
       <TextInput
-        {...form.getInputProps(`${baseKey}.university`)}
         label="University Name"
         className={classes.questionInput}
+        withAsterisk
+        {...form.getInputProps(`${baseKey}.university`)}
       />
       <TextInput
-        {...form.getInputProps(`${baseKey}.name`)}
         label="Course Name"
         className={classes.questionInput}
+        withAsterisk
+        {...form.getInputProps(`${baseKey}.name`)}
       />
       <div className={classes.row}>
         <Select
-          {...form.getInputProps(`${baseKey}.grade`)}
           label="Grade"
           className={classes.questionInput}
           data={Object.values(DegreeGrade).map((value) => ({ value, label: value }))}
+          withAsterisk
+          {...form.getInputProps(`${baseKey}.grade`)}
         />
         <Select
-          {...form.getInputProps(`${baseKey}.level`)}
           label="Level"
           className={classes.questionInput}
           data={Object.values(DegreeLevel).map((value) => ({ value, label: value }))}
+          withAsterisk
+          {...form.getInputProps(`${baseKey}.level`)}
         />
       </div>
     </Container>

@@ -15,8 +15,8 @@ export enum DegreeLevel {
 }
 
 export enum WorkStyle {
-  TEAM = 'TEAM',
-  INDEPENDENT = 'INDEPENDENT',
+  Team = 'TEAM',
+  Independent = 'INDEPENDENT',
 }
 
 export interface Degree {

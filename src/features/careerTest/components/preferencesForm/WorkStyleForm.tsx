@@ -8,8 +8,7 @@ import { CareerFormProps } from '@careerTest/careerTestTypes';
 export const WorkStyleForm = ({ form }: { form: CareerFormProps }) => {
   const { classes } = questionFormStyles();
 
-  const symbol = exampleCities.find((item) => item.value === form.values.expectedSalary.city)
-    ?.symbol;
+  const Icon = exampleCities.find((item) => item.value === form.values.expectedSalary.city)?.Icon;
 
   const onSelectCity = (value: string) => {
     const city = exampleCities.find((item) => item.value === value);
@@ -24,37 +23,38 @@ export const WorkStyleForm = ({ form }: { form: CareerFormProps }) => {
     <Container className={classes.questionContainer}>
       <div className={classes.row}>
         <Select
-          {...form.getInputProps('personalityType.workStyle')}
           label="What is your preferred working style?"
           withAsterisk
           className={classes.questionInput}
           data={Object.entries(WorkStyle).map(([label, value]) => ({ label, value }))}
+          {...form.getInputProps('personalityType.workStyle')}
         />
         <Checkbox
           className={classes.checkbox}
-          {...form.getInputProps('personalityType.workLifeBalanceSacrifice')}
           label="Would you sacrifice your work-life balance?"
+          {...form.getInputProps('personalityType.workLifeBalanceSacrifice')}
         />
       </div>
       <div className={classes.row}>
         <Select
-          {...form.getInputProps('expectedSalary.city')}
           label="City"
           className={classes.questionInput}
           data={exampleCities}
           withAsterisk
+          {...form.getInputProps('expectedSalary.city')}
           onChange={onSelectCity}
         />
         <NumberInput
-          {...form.getInputProps('expectedSalary.expectedSalary')}
           label="What is your expected salary?"
-          parser={(value) => value.replace(/[ $£€¥,]/gm, '')}
           withAsterisk
-          formatter={(value: string) =>
+          icon={Icon && <Icon color="gray" size={20} />}
+          parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
+          formatter={(value) =>
             !Number.isNaN(parseFloat(value))
-              ? `${symbol} ${value}`.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',')
-              : `${symbol} `
+              ? `${value}`.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',')
+              : ''
           }
+          {...form.getInputProps('expectedSalary.expectedSalary')}
         />
       </div>
     </Container>

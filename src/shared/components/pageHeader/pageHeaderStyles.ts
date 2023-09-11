@@ -39,6 +39,13 @@ export const pageHeaderStyles = createStyles((theme) => ({
       backgroundColor: theme.colors.gray[0],
     },
   },
+  active: {
+    backgroundColor: theme.colors.blue[6],
+    color: 'white',
+    '&:hover': {
+      backgroundColor: theme.colors.blue[4],
+    },
+  },
   mobileLink: {
     display: 'block',
     lineHeight: 1,

@@ -2,28 +2,63 @@ import React from 'react';
 import { Header, Group, Button, Burger, Text, Transition, Paper } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
+import classNames from 'classnames';
+import { urls } from '@shared/config/urlConstants';
+import { useAppSelector } from '@state/store';
+import { selectCareerPaths, selectSelectedCareerPathId } from '@slices/userSlice';
+import { CareerPath } from '@datatypes/career';
 
-import { pageHeaderStyles } from './pageHeaderStyles';
 import { LoginModal } from '../login/LoginModal';
+import { pageHeaderStyles } from './pageHeaderStyles';
 
-interface HeaderActionProps {
-  links?: { link: string; label: string }[];
-}
+type HeaderLink = { link: string; label: string; active?: boolean };
 
-export const PageHeader = ({ links }: HeaderActionProps) => {
+const getLinks = ({
+  basePath,
+  careerPaths,
+  selectedCareerPathId,
+}: {
+  basePath: string;
+  selectedCareerPathId?: string;
+  careerPaths?: { [key: string]: CareerPath };
+}): HeaderLink[] => {
+  if (new RegExp(urls.overview).test(basePath) && careerPaths) {
+    return Object.entries(careerPaths).map(([careerId, { title }]) => ({
+      label: title,
+      link: careerId,
+      active: selectedCareerPathId === careerId,
+    }));
+  }
+  return [
+    { label: 'Features', link: `#features` },
+    { label: 'Pricing', link: `#pricing` },
+  ];
+};
+
+export const PageHeader = () => {
   const { classes, cx } = pageHeaderStyles();
   const [opened, { toggle }] = useDisclosure(false);
   const { goToCareerTest, clickLogo } = usePageNavigation();
+  const { basePath } = usePageNavigation();
+  const careerPaths = useAppSelector(selectCareerPaths);
+  const selectedCareerPathId = useAppSelector(selectSelectedCareerPathId);
 
-  const MenuItems = links?.map((link) => (
-    <a key={link.label} href={link.link} className={cx(classes.mobileLink)} onClick={toggle}>
-      {link.label}
+  const links = getLinks({ basePath, careerPaths, selectedCareerPathId });
+
+  const MenuItems = links?.map(({ link, active, label }) => (
+    <a
+      key={label}
+      href={link}
+      className={classNames(cx(classes.mobileLink), { [classes.active]: active })}
+      onClick={toggle}
+    >
+      {label}
     </a>
   ));
 
-  const HeaderItems = links?.map((link) => (
-    <a key={link.label} className={classes.link} href={`#${link.link}`}>
-      {link.label}
+  const HeaderItems = links?.map(({ label, active, link }) => (
+    <a key={label} className={classNames(classes.link, { [classes.active]: active })} href={link}>
+      {label}
     </a>
   ));
 

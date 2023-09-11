@@ -43,7 +43,7 @@ const overviewStyles = createStyles((theme) => ({
     flexDirection: 'column',
     '> a': {
       textDecoration: 'none',
-      ':not(:first-child)': { paddingTop: rem(20) },
+      ':not(:first-of-type)': { paddingTop: rem(20) },
       paddingLeft: rem(10),
       paddingRight: rem(10),
     },

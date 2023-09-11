@@ -100,7 +100,7 @@ export const questionFormStyles = createStyles((theme) => ({
       backgroundColor: theme.colors.gray[0],
       color: 'black',
       maxWidth: '30vh',
-      'text-wrap': 'wrap',
+      textWrap: 'wrap',
     },
   },
 }));

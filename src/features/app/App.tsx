@@ -8,17 +8,11 @@ import { HomePage } from '../homePage/HomePage';
 import { LandingPage } from '../landingPage/LandingPage';
 import { CareerTest } from '../careerTest/CareerTest';
 import { OverviewPage } from '../overview/OverviewPage';
-import { featuresTag, pricingTag } from '../landingPage/config/landingPageConstants';
 
 export const App = () => (
   <BrowserRouter>
     <Suspense fallback={<LoadingPage />}>
-      <PageHeader
-        links={[
-          { label: 'Features', link: `#${featuresTag}` },
-          { label: 'Pricing', link: `#${pricingTag}` },
-        ]}
-      />
+      <PageHeader />
       <Switch>
         <Route path={urls.landingPage} exact component={LandingPage} />
         <Route path={urls.home} component={HomePage} />

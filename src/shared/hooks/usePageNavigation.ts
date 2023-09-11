@@ -7,8 +7,8 @@ import { useHistory } from 'react-router-dom';
 export const usePageNavigation = () => {
   const dispatch = useAppDispatch();
   const history = useHistory();
-  const basePath = history.location.pathname.replace(/([^/]+$)/gm, '');
-  const careerPathId = /([^/]+$)/gm.exec(history.location.pathname)?.[0];
+  const basePath = window.location.href.replace(/([^/]+$)/gm, '');
+  const careerPathId = /([^/]+$)/gm.exec(window.location.href)?.[0];
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
 
   const toggleCareerPath = (id: string) => {
@@ -33,7 +33,7 @@ export const usePageNavigation = () => {
 
   useEffect(() => {
     dispatch(setSelectedCareerPathId(careerPathId));
-  }, [careerPathId, dispatch]);
+  }, [basePath, careerPathId, dispatch]);
 
-  return { toggleCareerPath, goToCareerPath, goToCareerTest, clickLogo };
+  return { basePath, toggleCareerPath, goToCareerPath, goToCareerTest, clickLogo };
 };

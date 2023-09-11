@@ -86,4 +86,21 @@ export const questionFormStyles = createStyles((theme) => ({
     paddingTop: theme.spacing.md,
     paddingBottom: theme.spacing.md,
   },
+  ratingRow: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    '> div': {
+      width: '100%',
+    },
+    '> svg': {
+      marginLeft: '5%',
+    },
+    '.mantine-Tooltip-tooltip': {
+      backgroundColor: theme.colors.gray[0],
+      color: 'black',
+      maxWidth: '30vh',
+      'text-wrap': 'wrap',
+    },
+  },
 }));

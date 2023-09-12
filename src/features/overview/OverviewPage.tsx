@@ -11,6 +11,7 @@ import { overviewLinks } from './config/overviewConstants';
 import { CareerProgressionTile } from './tiles/careerProgressionTile/CareerProgressionTile';
 import { TopEmployersTile } from './tiles/TopEmployersTile';
 import { RoleOverviewTile } from './tiles/RoleOverviewTile';
+import { OverlapsTile } from './tiles/overlapsTile/OverlapsTile';
 
 const NAVBAR_WIDTH = rem(250);
 
@@ -112,17 +113,18 @@ export const OverviewPage = () => {
         <div className={classes.content}>
           {overviewLinks.map(({ label, Icon, anchor }) => (
             <OverviewSection label={label} Icon={Icon} anchor={anchor} key={`career-${label}`}>
-              {label === 'Career Progression' && (
+              {anchor === 'progression' && (
                 <CareerProgressionTile
                   promotionTimeline={overviewPageMock.promotionTimeline}
                   salaryProgression={overviewPageMock.salaryProgression}
                 />
               )}
-              {label === 'Top Employers' && (
+              {anchor === 'employers' && (
                 <TopEmployersTile employers={overviewPageMock.exampleEmployers} />
               )}
-              {label === 'Role Overview' && (
-                <RoleOverviewTile roleSummary={overviewPageMock.roleSummary} />
+              {anchor === 'role' && <RoleOverviewTile roleSummary={overviewPageMock.roleSummary} />}
+              {anchor === 'overlaps' && (
+                <OverlapsTile careerOverlaps={overviewPageMock.careerOverlaps} />
               )}
             </OverviewSection>
           ))}

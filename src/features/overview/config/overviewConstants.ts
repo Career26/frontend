@@ -9,7 +9,7 @@ import {
 
 export const overviewLinks = [
   { label: 'Role Overview', Icon: IconReportSearch, anchor: 'role' },
-  { label: 'Industry Insights', Icon: IconBuildingBank, anchor: 'industry' },
+  { label: 'Industry Overlaps', Icon: IconBuildingBank, anchor: 'overlaps' },
   { label: 'Top Employers', Icon: IconUsers, anchor: 'employers' },
   { label: 'Career Progression', Icon: IconTrendingUp, anchor: 'progression' },
   { label: 'Typical Skills', Icon: IconAtom, anchor: 'skill' },

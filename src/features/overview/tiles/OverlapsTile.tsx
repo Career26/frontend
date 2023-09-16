@@ -31,7 +31,7 @@ export const OverlapsTile = ({ careerOverlaps }: { careerOverlaps: CareerOverlap
     <Grid className={classes.gridContainer}>
       {careerOverlaps.map((item) => (
         <Card key={item.career} shadow="md" radius="md" p="md" withBorder>
-          <Card.Section component="div" className={classes.cardHeader} withBorder>
+          <Card.Section className={classes.cardHeader} withBorder>
             <Badge>{item.career}</Badge>
             <Badge color="pink">{item.industry}</Badge>
           </Card.Section>

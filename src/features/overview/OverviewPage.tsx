@@ -11,7 +11,8 @@ import { overviewLinks } from './config/overviewConstants';
 import { CareerProgressionTile } from './tiles/careerProgressionTile/CareerProgressionTile';
 import { TopEmployersTile } from './tiles/TopEmployersTile';
 import { RoleOverviewTile } from './tiles/RoleOverviewTile';
-import { OverlapsTile } from './tiles/overlapsTile/OverlapsTile';
+import { OverlapsTile } from './tiles/OverlapsTile';
+import { ApplicationTimelineTile } from './tiles/applicationTimelineTile/ApplicationTimelineTile';
 
 const NAVBAR_WIDTH = rem(250);
 
@@ -125,6 +126,9 @@ export const OverviewPage = () => {
               {anchor === 'role' && <RoleOverviewTile roleSummary={overviewPageMock.roleSummary} />}
               {anchor === 'overlaps' && (
                 <OverlapsTile careerOverlaps={overviewPageMock.careerOverlaps} />
+              )}
+              {anchor === 'timeline' && (
+                <ApplicationTimelineTile assessmentStages={overviewPageMock.assessmentStages} />
               )}
             </OverviewSection>
           ))}

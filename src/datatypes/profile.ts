@@ -24,7 +24,6 @@ export interface Degree {
   level: string;
   university: string;
   grade: string;
-  isPredictedGrade: boolean;
 }
 
 export interface WorkExperience {
@@ -61,21 +60,13 @@ export interface Profile extends WorkPreference {
 interface CareerPath {
   title: string;
   industry: string;
-  reason: string;
   startingSalary: string;
   role: string;
-  companies: string[];
-  skills: string[];
-}
-
-interface RejectedCareer {
-  title: string;
-  industry: string;
+  selected: boolean;
 }
 
 export interface UserProfile {
   identifier: string;
   profile: Profile;
   careerPaths: { [key: string]: CareerPath };
-  rejectedCareers: { [key: string]: RejectedCareer };
 }

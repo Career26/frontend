@@ -1,4 +1,4 @@
-import { Card, CardSection, Container, Stack, createStyles, rem } from '@mantine/core';
+import { Card, Container, Stack, createStyles, rem } from '@mantine/core';
 import { IconArrowBigDownLines } from '@tabler/icons-react';
 import React from 'react';
 
@@ -7,10 +7,17 @@ const useProgressionStyles = createStyles((theme) => ({
     display: 'flex',
     justifyContent: 'center',
     fontWeight: 'bold',
-    fontSize: '16px',
+    fontSize: '24px',
     padding: rem(10),
     background: theme.colors.blue[4],
     color: 'white',
+  },
+  cardContainer: {
+    width: '35vh',
+  },
+  cardDescription: {
+    padding: rem(10),
+    textAlign: 'left',
   },
 }));
 
@@ -24,12 +31,21 @@ export const ProgressionTile = ({ progressionList }: { progressionList: Progress
         {progressionList.map((item, index) => (
           <>
             {item.descriptions.map((description) => (
-              <Card shadow="md" radius="md" p="md" withBorder key={`preparation-${index}`}>
-                <CardSection className={classes.cardHeader}>{item.title}</CardSection>
-                {description}
+              <Card
+                className={classes.cardContainer}
+                shadow="md"
+                radius="md"
+                p="md"
+                withBorder
+                key={`preparation-${index}`}
+              >
+                <Card.Section className={classes.cardHeader} withBorder>
+                  {item.title}
+                </Card.Section>
+                <div className={classes.cardDescription}>{description}</div>
               </Card>
             ))}
-            {index !== progressionList.length - 1 && <IconArrowBigDownLines />}
+            {index !== progressionList.length - 1 && <IconArrowBigDownLines size={40} />}
           </>
         ))}
       </Stack>

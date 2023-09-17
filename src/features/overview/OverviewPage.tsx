@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import { Shell } from '@shared/components/shell/Shell';
 import { HEADER_HEIGHT } from '@shared/components/pageHeader/pageHeaderStyles';
 import { overviewPageMock } from '@mocks/overviewMocks';
+import { ProgressionTile } from '@shared/components/tiles/ProgressionTile';
 
 import { OverviewSection } from './OverviewSection';
 import { overviewLinks } from './config/overviewConstants';
@@ -12,8 +13,6 @@ import { CareerProgressionTile } from './tiles/careerProgressionTile/CareerProgr
 import { TopEmployersTile } from './tiles/TopEmployersTile';
 import { RoleOverviewTile } from './tiles/RoleOverviewTile';
 import { OverlapsTile } from './tiles/OverlapsTile';
-import { ApplicationTimelineTile } from './tiles/applicationTimelineTile/ApplicationTimelineTile';
-import { PreparationTile } from './tiles/PreparationTile';
 
 const NAVBAR_WIDTH = rem(250);
 
@@ -129,11 +128,19 @@ export const OverviewPage = () => {
                 <OverlapsTile careerOverlaps={overviewPageMock.careerOverlaps} />
               )}
               {anchor === 'timeline' && (
-                <ApplicationTimelineTile assessmentStages={overviewPageMock.assessmentStages} />
+                <ProgressionTile
+                  preparationList={overviewPageMock.assessmentStages.map((item, index) => ({
+                    title: `${index + 1} ${item.stage}`,
+                    description: item.description,
+                  }))}
+                />
               )}
               {anchor === 'preparation' && (
-                <PreparationTile
-                  supplementalExperiences={overviewPageMock.supplementalExperiences}
+                <ProgressionTile
+                  preparationList={overviewPageMock.supplementalExperiences.map((item) => ({
+                    title: `Year ${item.year}`,
+                    description: item.activity,
+                  }))}
                 />
               )}
             </OverviewSection>

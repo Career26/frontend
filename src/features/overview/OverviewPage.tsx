@@ -129,17 +129,17 @@ export const OverviewPage = () => {
               )}
               {anchor === 'timeline' && (
                 <ProgressionTile
-                  preparationList={overviewPageMock.assessmentStages.map((item, index) => ({
+                  progressionList={overviewPageMock.assessmentStages.map((item, index) => ({
                     title: `${index + 1} ${item.stage}`,
-                    description: item.description,
+                    descriptions: [item.description],
                   }))}
                 />
               )}
               {anchor === 'preparation' && (
                 <ProgressionTile
-                  preparationList={overviewPageMock.supplementalExperiences.map((item) => ({
+                  progressionList={overviewPageMock.supplementalExperiences.map((item) => ({
                     title: `Year ${item.year}`,
-                    description: item.activity,
+                    descriptions: [item.activity],
                   }))}
                 />
               )}

@@ -14,20 +14,22 @@ const useProgressionStyles = createStyles((theme) => ({
   },
 }));
 
-type PreparationItem = { title: string | JSX.Element; description: string };
+type ProgressionItem = { title: string; descriptions: string[] };
 
-export const ProgressionTile = ({ preparationList }: { preparationList: PreparationItem[] }) => {
+export const ProgressionTile = ({ progressionList }: { progressionList: ProgressionItem[] }) => {
   const { classes } = useProgressionStyles();
   return (
     <Container>
       <Stack align="center">
-        {preparationList.map((item, index) => (
+        {progressionList.map((item, index) => (
           <>
-            <Card shadow="md" radius="md" p="md" withBorder key={`preparation-${index}`}>
-              <CardSection className={classes.cardHeader}>{item.title}</CardSection>
-              {item.description}
-            </Card>
-            {index !== preparationList.length - 1 && <IconArrowBigDownLines />}
+            {item.descriptions.map((description) => (
+              <Card shadow="md" radius="md" p="md" withBorder key={`preparation-${index}`}>
+                <CardSection className={classes.cardHeader}>{item.title}</CardSection>
+                {description}
+              </Card>
+            ))}
+            {index !== progressionList.length - 1 && <IconArrowBigDownLines />}
           </>
         ))}
       </Stack>

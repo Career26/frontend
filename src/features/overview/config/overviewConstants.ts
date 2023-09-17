@@ -1,5 +1,5 @@
 import {
-  IconAtom,
+  IconBarbell,
   IconBuildingBank,
   IconCalendarTime,
   IconReportSearch,
@@ -12,6 +12,6 @@ export const overviewLinks = [
   { label: 'Career Overlaps', Icon: IconBuildingBank, anchor: 'overlaps' },
   { label: 'Top Employers', Icon: IconUsers, anchor: 'employers' },
   { label: 'Career Progression', Icon: IconTrendingUp, anchor: 'progression' },
-  { label: 'Typical Skills', Icon: IconAtom, anchor: 'skill' },
+  { label: 'Preparation', Icon: IconBarbell, anchor: 'preparation' },
   { label: 'Application Timeline', Icon: IconCalendarTime, anchor: 'timeline' },
 ];

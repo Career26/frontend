@@ -13,6 +13,7 @@ import { TopEmployersTile } from './tiles/TopEmployersTile';
 import { RoleOverviewTile } from './tiles/RoleOverviewTile';
 import { OverlapsTile } from './tiles/OverlapsTile';
 import { ApplicationTimelineTile } from './tiles/applicationTimelineTile/ApplicationTimelineTile';
+import { PreparationTile } from './tiles/PreparationTile';
 
 const NAVBAR_WIDTH = rem(250);
 
@@ -129,6 +130,11 @@ export const OverviewPage = () => {
               )}
               {anchor === 'timeline' && (
                 <ApplicationTimelineTile assessmentStages={overviewPageMock.assessmentStages} />
+              )}
+              {anchor === 'preparation' && (
+                <PreparationTile
+                  supplementalExperiences={overviewPageMock.supplementalExperiences}
+                />
               )}
             </OverviewSection>
           ))}

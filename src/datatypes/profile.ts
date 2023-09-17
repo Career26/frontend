@@ -1,3 +1,5 @@
+import { CareerPath } from './career';
+
 export enum DegreeGrade {
   FIRST = 'First Class (1st)',
   UPPER_SECOND = 'Second Class Upper (2:1)',
@@ -55,14 +57,6 @@ export interface Profile extends WorkPreference {
   latestDegree: Degree;
   additionalDegrees: Degree[];
   previousWorkExperience: WorkExperience[];
-}
-
-interface CareerPath {
-  title: string;
-  industry: string;
-  startingSalary: string;
-  role: string;
-  selected: boolean;
 }
 
 export interface UserProfile {

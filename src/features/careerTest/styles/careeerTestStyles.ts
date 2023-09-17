@@ -103,4 +103,10 @@ export const questionFormStyles = createStyles((theme) => ({
       textWrap: 'wrap',
     },
   },
+  subHeader: {
+    fontSize: rem(20),
+    fontWeight: 'bold',
+    color: theme.colors.gray[7],
+    paddingBottom: rem(10),
+  },
 }));

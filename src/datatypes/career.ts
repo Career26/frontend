@@ -1,14 +1,12 @@
-export type CareerPath = {
-  companies: string[];
-  industry: string;
-  reason: string;
-  role: string;
-  skills: string[];
-  startingSalary: string;
+export interface CareerPath {
   title: string;
-};
+  industry: string;
+  startingSalary: string;
+  role: string;
+  selected: boolean;
+}
 
-export type CareerResult = {
+export interface CareerResult {
   careerPaths: { [key: string]: CareerPath };
   identifier: string;
-};
+}

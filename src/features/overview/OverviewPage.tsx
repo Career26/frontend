@@ -5,13 +5,14 @@ import classNames from 'classnames';
 import { Shell } from '@shared/components/shell/Shell';
 import { HEADER_HEIGHT } from '@shared/components/pageHeader/pageHeaderStyles';
 import { overviewPageMock } from '@mocks/overviewMocks';
+import { ProgressionTile } from '@shared/components/tiles/ProgressionTile';
 
 import { OverviewSection } from './OverviewSection';
 import { overviewLinks } from './config/overviewConstants';
 import { CareerProgressionTile } from './tiles/careerProgressionTile/CareerProgressionTile';
 import { TopEmployersTile } from './tiles/TopEmployersTile';
 import { RoleOverviewTile } from './tiles/RoleOverviewTile';
-import { OverlapsTile } from './tiles/overlapsTile/OverlapsTile';
+import { OverlapsTile } from './tiles/OverlapsTile';
 
 const NAVBAR_WIDTH = rem(250);
 
@@ -125,6 +126,22 @@ export const OverviewPage = () => {
               {anchor === 'role' && <RoleOverviewTile roleSummary={overviewPageMock.roleSummary} />}
               {anchor === 'overlaps' && (
                 <OverlapsTile careerOverlaps={overviewPageMock.careerOverlaps} />
+              )}
+              {anchor === 'timeline' && (
+                <ProgressionTile
+                  progressionList={overviewPageMock.assessmentStages.map((item, index) => ({
+                    title: `${index + 1} ${item.stage}`,
+                    descriptions: [item.description],
+                  }))}
+                />
+              )}
+              {anchor === 'preparation' && (
+                <ProgressionTile
+                  progressionList={overviewPageMock.supplementalExperiences.map((item) => ({
+                    title: `Year ${item.year}`,
+                    descriptions: [item.activity],
+                  }))}
+                />
               )}
             </OverviewSection>
           ))}

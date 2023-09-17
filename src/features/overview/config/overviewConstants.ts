@@ -1,5 +1,5 @@
 import {
-  IconAtom,
+  IconBarbell,
   IconBuildingBank,
   IconCalendarTime,
   IconReportSearch,
@@ -8,10 +8,10 @@ import {
 } from '@tabler/icons-react';
 
 export const overviewLinks = [
-  { label: 'Role Overview', Icon: IconReportSearch, anchor: 'role' },
-  { label: 'Industry Overlaps', Icon: IconBuildingBank, anchor: 'overlaps' },
+  { label: 'Role Summary', Icon: IconReportSearch, anchor: 'role' },
   { label: 'Top Employers', Icon: IconUsers, anchor: 'employers' },
   { label: 'Career Progression', Icon: IconTrendingUp, anchor: 'progression' },
-  { label: 'Typical Skills', Icon: IconAtom, anchor: 'skill' },
+  { label: 'Preparation', Icon: IconBarbell, anchor: 'preparation' },
   { label: 'Application Timeline', Icon: IconCalendarTime, anchor: 'timeline' },
+  { label: 'Similar Roles', Icon: IconBuildingBank, anchor: 'overlaps' },
 ];

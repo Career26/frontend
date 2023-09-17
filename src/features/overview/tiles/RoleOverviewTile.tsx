@@ -34,10 +34,7 @@ export const RoleOverviewTile = ({ roleSummary }: { roleSummary: string }) => {
   const { classes } = roleStyles();
   return (
     <Grid className={classes.gridContainer}>
-      <GridItem header="Responsibilities">Responsibilities blah blah blah</GridItem>
-      <GridItem header="Team">Team information blah blah blah</GridItem>
-      <GridItem header="Skills">Skills blah blah blah</GridItem>
-      <GridItem header="Daily Work">Daily work blah blah blah</GridItem>
+      <GridItem header="Responsibilities">{roleSummary}</GridItem>
     </Grid>
   );
 };

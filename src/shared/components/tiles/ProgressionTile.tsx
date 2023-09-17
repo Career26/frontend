@@ -1,4 +1,4 @@
-import { Card, Container, Stack, createStyles, rem } from '@mantine/core';
+import { Badge, Card, Container, Stack, createStyles, rem } from '@mantine/core';
 import { IconArrowBigDownLines } from '@tabler/icons-react';
 import React from 'react';
 
@@ -19,33 +19,51 @@ const useProgressionStyles = createStyles((theme) => ({
     padding: rem(10),
     textAlign: 'left',
   },
+  descriptionsContainer: {
+    display: 'flex',
+    gap: '24px',
+  },
 }));
 
 type ProgressionItem = { title: string; descriptions: string[] };
 
 export const ProgressionTile = ({ progressionList }: { progressionList: ProgressionItem[] }) => {
   const { classes } = useProgressionStyles();
+  const mappedList = progressionList.reduce<ProgressionItem[]>((agg, item) => {
+    const existingYear = agg.find((aggItem) => aggItem.title === item.title);
+    if (!existingYear) {
+      return [...agg, item];
+    }
+    return agg.map((aggItem) =>
+      aggItem.title === existingYear.title
+        ? { ...aggItem, descriptions: [...existingYear.descriptions, ...item.descriptions] }
+        : aggItem,
+    );
+  }, []);
   return (
     <Container>
       <Stack align="center">
-        {progressionList.map((item, index) => (
+        {mappedList.map((item, index) => (
           <>
-            {item.descriptions.map((description) => (
-              <Card
-                className={classes.cardContainer}
-                shadow="md"
-                radius="md"
-                p="md"
-                withBorder
-                key={`preparation-${index}`}
-              >
-                <Card.Section className={classes.cardHeader} withBorder>
-                  {item.title}
-                </Card.Section>
-                <div className={classes.cardDescription}>{description}</div>
-              </Card>
-            ))}
-            {index !== progressionList.length - 1 && <IconArrowBigDownLines size={40} />}
+            <Badge variant="filled" size="xl">
+              {item.title}
+            </Badge>
+            <div className={classes.descriptionsContainer} key={`preparation-${index}`}>
+              {item.descriptions.map((description) => (
+                <Card
+                  className={classes.cardContainer}
+                  key={description}
+                  shadow="md"
+                  radius="md"
+                  p="md"
+                  withBorder
+                >
+                  <div className={classes.cardDescription}>{description}</div>
+                </Card>
+              ))}
+            </div>
+
+            {index !== mappedList.length - 1 && <IconArrowBigDownLines size={40} />}
           </>
         ))}
       </Stack>

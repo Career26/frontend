@@ -5,6 +5,7 @@ import { IconLayoutDashboard } from '@tabler/icons-react';
 import { useHistory } from 'react-router-dom';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 import { featureTiles } from '@shared/config/featureConstants';
+import classNames from 'classnames';
 
 const navigationStyles = createStyles((theme) => ({
   navItem: {
@@ -39,6 +40,11 @@ const navigationStyles = createStyles((theme) => ({
     },
     '.mantine-Modal-overlay': {
       opacity: 0.55,
+    },
+  },
+  disabled: {
+    '&:hover': {
+      cursor: 'not-allowed',
     },
   },
 }));
@@ -79,7 +85,7 @@ export const NavigationCenter = () => {
                   shadow="sm"
                   radius="lg"
                   withBorder
-                  className={classes.navItem}
+                  className={classNames(classes.navItem, { [classes.disabled]: disabled })}
                 >
                   <Icon size={80} />
                   {title}

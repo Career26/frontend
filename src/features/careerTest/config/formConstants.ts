@@ -31,7 +31,6 @@ export const initialUniversityValues: Degree = {
   level: DegreeLevel.BA,
   name: '',
   university: '',
-  isPredictedGrade: false,
 };
 
 export const initialWorkExperienceValues: WorkExperience = {

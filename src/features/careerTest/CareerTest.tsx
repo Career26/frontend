@@ -56,7 +56,7 @@ export const CareerTest = () => {
       return 'See Results';
     }
     if (activeStep === CareerStep.CAREER_PATHS) {
-      return 'Save Results';
+      return 'Save Choices';
     }
     return 'Next';
   }, [activeStep]);

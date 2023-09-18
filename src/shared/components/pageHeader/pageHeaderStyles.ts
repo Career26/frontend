@@ -11,55 +11,12 @@ export const pageHeaderStyles = createStyles((theme) => ({
     paddingLeft: rem(100),
     paddingRight: rem(100),
   },
-  links: {
-    [theme.fn.smallerThan('md')]: {
-      display: 'none',
-    },
-  },
-  burger: {
-    [theme.fn.largerThan('md')]: {
-      display: 'none',
-    },
-  },
   logo: {
     [theme.fn.smallerThan('md')]: {
       display: 'none',
     },
-  },
-  link: {
-    display: 'block',
-    lineHeight: 1,
-    padding: `${rem(8)} ${rem(12)}`,
-    borderRadius: theme.radius.sm,
-    textDecoration: 'none',
-    color: theme.colors.gray[7],
-    fontSize: theme.fontSizes.sm,
-    fontWeight: 500,
     '&:hover': {
-      backgroundColor: theme.colors.gray[0],
-    },
-  },
-  active: {
-    backgroundColor: theme.colors.blue[6],
-    color: 'white',
-    '&:hover': {
-      backgroundColor: theme.colors.blue[4],
-    },
-  },
-  mobileLink: {
-    display: 'block',
-    lineHeight: 1,
-    textDecoration: 'none',
-    color: theme.colors.gray[7],
-    fontSize: theme.fontSizes.md,
-    fontWeight: 500,
-    borderRadius: 0,
-    padding: theme.spacing.md,
-    '&:hover': {
-      backgroundColor: theme.colors.gray[0],
-    },
-    [theme.fn.largerThan('md')]: {
-      display: 'none',
+      cursor: 'pointer',
     },
   },
 }));

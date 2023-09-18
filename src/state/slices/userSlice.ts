@@ -52,7 +52,7 @@ export const selectProfileId = (state: RootState) => selectUser(state).profile?.
 export const selectIsLoggedIn = (state: RootState) => selectUser(state).isLoggedIn;
 export const selectCareerPaths = (state: RootState) => selectUser(state).profile?.careerPaths;
 export const selectSelectedCareerPathId = (state: RootState) =>
-  selectUser(state).selectedCareerPathId;
+  selectUser(state).selectedCareerPathId || Object.keys(selectCareerPaths(state) || {})[0];
 
 export const selectSelectedCareerPath = createSelector(
   [selectSelectedCareerPathId, selectCareerPaths],

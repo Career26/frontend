@@ -3,9 +3,9 @@ import { useDisclosure } from '@mantine/hooks';
 import { Modal, Grid, ActionIcon, Paper, createStyles, rem, Container } from '@mantine/core';
 import { IconLayoutDashboard } from '@tabler/icons-react';
 import { useHistory } from 'react-router-dom';
-import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 import { featureTiles } from '@shared/config/featureConstants';
 import classNames from 'classnames';
+import useCareerNavigation from '@shared/hooks/useCareerNavigation';
 
 const navigationStyles = createStyles((theme) => ({
   navItem: {
@@ -35,7 +35,7 @@ const navigationStyles = createStyles((theme) => ({
       fontWeight: 'bold',
     },
     '.mantine-Modal-body': {
-      paddingTop: rem(10),
+      paddingTop: rem(20),
       backgroundColor: theme.colors.gray[3],
     },
     '.mantine-Modal-overlay': {
@@ -54,11 +54,11 @@ export const NavigationCenter = () => {
   const [opened, { open, close }] = useDisclosure(false);
   const history = useHistory();
 
-  const { currentUrl } = usePageNavigation();
+  const { currentPathname } = useCareerNavigation();
 
   useEffect(() => {
     close();
-  }, [currentUrl]);
+  }, [currentPathname]);
 
   return (
     <>

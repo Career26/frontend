@@ -3,4 +3,6 @@ export const urls = {
   landingPage: '/',
   careersTest: '/career-test',
   overview: '/overview',
+  interviews: '/interviews',
+  mentors: '/mentors',
 };

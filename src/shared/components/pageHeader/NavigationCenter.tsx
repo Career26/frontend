@@ -41,11 +41,6 @@ const navigationStyles = createStyles((theme) => ({
       opacity: 0.55,
     },
   },
-  disabled: {
-    '&:hover': {
-      cursor: 'not-allowed',
-    },
-  },
 }));
 
 export const NavigationCenter = () => {

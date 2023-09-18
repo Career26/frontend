@@ -10,6 +10,7 @@ import { CareerPath } from '@datatypes/career';
 
 import { LoginModal } from '../login/LoginModal';
 import { pageHeaderStyles } from './pageHeaderStyles';
+import { NavigationCenter } from './NavigationCenter';
 
 type HeaderLink = { link: string; label: string; active?: boolean };
 
@@ -87,6 +88,7 @@ export const PageHeader = () => {
       )}
 
       <Group>
+        <NavigationCenter />
         <Button variant="default">Login</Button>
         <Button variant="gradient" gradient={{ from: 'blue', to: 'cyan' }} onClick={goToCareerTest}>
           Get Started

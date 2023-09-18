@@ -10,6 +10,7 @@ export const usePageNavigation = () => {
   const basePath = window.location.href.replace(/([^/]+$)/gm, '');
   const careerPathId = /([^/]+$)/gm.exec(window.location.href)?.[0];
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
+  const currentUrl = window.location.href;
 
   const toggleCareerPath = (id: string) => {
     history.push(`${basePath}${id}`);
@@ -35,5 +36,5 @@ export const usePageNavigation = () => {
     dispatch(setSelectedCareerPathId(careerPathId));
   }, [basePath, careerPathId, dispatch]);
 
-  return { basePath, toggleCareerPath, goToCareerPath, goToCareerTest, clickLogo };
+  return { basePath, toggleCareerPath, goToCareerPath, goToCareerTest, clickLogo, currentUrl };
 };

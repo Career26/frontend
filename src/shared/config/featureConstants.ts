@@ -1,10 +1,11 @@
-import { urls } from '@shared/config/urlConstants';
 import {
   IconCertificate,
   IconUsersGroup,
   IconWorldSearch,
   TablerIconsProps,
 } from '@tabler/icons-react';
+
+import { urls } from './urlConstants';
 
 export type FeatureTile = {
   title: string;

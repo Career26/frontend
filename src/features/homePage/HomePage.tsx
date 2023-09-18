@@ -4,8 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { Shell } from '@shared/components/shell/Shell';
 import { HEADER_HEIGHT } from '@shared/components/pageHeader/pageHeaderStyles';
 import classNames from 'classnames';
-
-import { FeatureTile, featureTiles } from './homePageConstants';
+import { FeatureTile, featureTiles } from '@shared/config/featureConstants';
 
 const homePageStyles = createStyles((theme) => ({
   container: {

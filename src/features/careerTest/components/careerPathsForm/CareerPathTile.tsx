@@ -38,6 +38,9 @@ const careerPathTileStyles = createStyles((theme) => ({
     flexDirection: 'column',
     justifyContent: 'space-between',
   },
+  actionIcon: {
+    '&:hover': { borderRadius: rem(20) },
+  },
 }));
 
 export const CareerPathTile = ({
@@ -47,7 +50,7 @@ export const CareerPathTile = ({
   industry,
   startingSalary,
   selected,
-}: CareerPath & { onClickAction: () => void }) => {
+}: CareerPath & { onClickAction?: () => void }) => {
   const { classes } = careerPathTileStyles();
   return (
     <Card shadow="sm" padding="lg" radius="md" withBorder className={classes.cardContainer}>
@@ -56,13 +59,15 @@ export const CareerPathTile = ({
           <Text weight={500} className={classes.title}>
             {title}
           </Text>
-          <ActionIcon onClick={onClickAction}>
-            {selected ? (
-              <IconCircleCheck size={50} fill="green" color="white" />
-            ) : (
-              <IconCirclePlus size={50} fill="gray" color="white" />
-            )}
-          </ActionIcon>
+          {onClickAction && (
+            <ActionIcon onClick={onClickAction} className={classes.actionIcon}>
+              {selected ? (
+                <IconCircleCheck size={50} fill="green" color="white" />
+              ) : (
+                <IconCirclePlus size={50} fill="gray" color="white" />
+              )}
+            </ActionIcon>
+          )}
         </Group>
       </Card.Section>
       <Group position="apart" mt="md" mb="xs" className={classes.industrySection}>

@@ -35,8 +35,9 @@ const navigationStyles = createStyles((theme) => ({
       fontWeight: 'bold',
     },
     '.mantine-Modal-body': {
-      paddingTop: rem(20),
+      paddingTop: rem(25),
       backgroundColor: theme.colors.gray[3],
+      paddingBottom: rem(25),
     },
     '.mantine-Modal-overlay': {
       opacity: 0.55,

@@ -1,6 +1,8 @@
 import React from 'react';
 import { Header, Group, Button, Text } from '@mantine/core';
 import useCareerNavigation from '@shared/hooks/useCareerNavigation';
+import { useAppDispatch } from '@state/store';
+import { setLoginModal } from '@slices/userSlice';
 
 import { LoginModal } from '../login/LoginModal';
 import { pageHeaderStyles } from './pageHeaderStyles';
@@ -8,8 +10,14 @@ import { NavigationCenter } from './NavigationCenter';
 import { CareerNavigation } from './CareerNavigation';
 
 export const PageHeader = () => {
+  const dispatch = useAppDispatch();
   const { classes } = pageHeaderStyles();
   const { clickCareersTest, clickLogo } = useCareerNavigation();
+
+  const onClickLogin = () => {
+    dispatch(setLoginModal({ open: true }));
+  };
+
   return (
     <Header
       height="auto"
@@ -29,7 +37,9 @@ export const PageHeader = () => {
 
       <Group>
         <NavigationCenter />
-        <Button variant="default">Login</Button>
+        <Button variant="default" onClick={onClickLogin}>
+          Login
+        </Button>
         <Button
           variant="gradient"
           gradient={{ from: 'blue', to: 'cyan' }}

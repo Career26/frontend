@@ -86,8 +86,6 @@ export const CareerProgressionTile = ({
 }: CareerProgressionTileProps) => {
   const { classes } = careerProgressionStyles();
   const [activeIndex, setActiveIndex] = useState<number>();
-  const [finalMax] = salaryProgression[salaryProgression.length - 1].value;
-  const [startingMax, startingMin] = salaryProgression[0].value;
 
   const selectedItem = useMemo(
     () => getSelectedItem({ promotionTimeline, salaryProgression, activeIndex }),
@@ -121,23 +119,16 @@ export const CareerProgressionTile = ({
         minAge={selectedItem?.minAge}
       />
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: rem(20) }}>
-        <SalaryCard
-          header="Expected Salaries"
-          finalMax={finalMax}
-          startingMax={startingMax}
-          startingMin={startingMin}
-          salaryProgression={salaryProgression}
-        />
-        {selectedItem && (
+      {selectedItem && (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: rem(20) }}>
           <SalaryCard
             header={selectedItem.title}
             salaryProgression={salaryProgression}
             active
             {...selectedItem}
           />
-        )}
-      </div>
+        </div>
+      )}
     </>
   );
 };

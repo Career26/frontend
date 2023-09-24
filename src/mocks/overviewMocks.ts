@@ -1,169 +1,207 @@
-export const overviewPageMock = {
+import { Overview } from '@datatypes/overview';
+
+export const overviewPageMock: Overview = {
   roleSummary:
-    'A Software Developer in the Technology industry is responsible for designing, coding, testing, and debugging software applications. They work closely with other members of the development team to understand project requirements and develop software solutions that meet those requirements. \n\nAs a Software Developer, you will be involved in all stages of the software development lifecycle, from initial concept and design to implementation and maintenance. You will use programming languages and tools to write code and develop software applications that solve specific problems or meet specific needs. \n\nIn addition to coding, a Software Developer is also responsible for testing and debugging software to ensure it functions correctly and meets quality standards. This may involve troubleshooting issues, identifying and fixing bugs, and optimizing software performance. \n\nAs a Software Developer, you will need strong problem-solving and analytical skills to understand complex problems and develop effective solutions. You will also need to have a good understanding of programming languages and software development tools, as well as the ability to learn new technologies quickly. \n\nIn the Technology industry, Software Developers are in high demand as companies continue to rely on software applications to run their businesses. This role offers excellent career prospects and opportunities for growth and advancement. It is a challenging and rewarding career path for individuals who are passionate about technology and enjoy problem-solving and creating innovative solutions.',
+    'A Quantitative Analyst, also known as a Quant, is a highly skilled professional who uses mathematical and statistical techniques to analyze financial markets and develop trading strategies. They work in the finance industry, typically for investment banks, hedge funds, or asset management firms.\n\nAs a Quantitative Analyst, your main responsibilities will include developing and implementing quantitative models and algorithms, conducting research and analysis on financial data, and identifying patterns and trends in the market. You will also be responsible for backtesting and optimizing trading strategies, as well as monitoring and managing risk.\n\nTo excel in this role, you will need a strong background in mathematics, statistics, and computer programming. Proficiency in programming languages such as Python, R, or MATLAB is essential, as you will be working with large datasets and complex algorithms.\n\nIn addition to technical skills, a successful Quantitative Analyst should possess strong problem-solving and critical-thinking abilities, as well as the ability to work under pressure and meet tight deadlines. Attention to detail and a strong understanding of financial markets and instruments are also crucial.\n\nA career as a Quantitative Analyst can be highly rewarding, both intellectually and financially. The demand for quantitative skills in the finance industry is growing rapidly, and there are ample opportunities for career advancement and high earning potential.\n\nTo pursue a career as a Quantitative Analyst, it is recommended to pursue a degree in a quantitative field such as mathematics, statistics, or finance. Additionally, gaining practical experience through internships or research projects in the finance industry can greatly enhance your chances of securing a job in this field.',
   salaryProgression: [
-    { age: '20', value: [30000, 20000] },
-    { age: '25', value: [40000, 25000] },
-    { age: '30', value: [50000, 30000] },
-    { age: '35', value: [60000, 35000] },
-    { age: '40', value: [70000, 40000] },
-    { age: '45', value: [80000, 45000] },
-    { age: '50', value: [90000, 50000] },
-    { age: '55', value: [100000, 55000] },
-    { age: '60', value: [110000, 60000] },
+    {
+      age: '20',
+      high: 60000,
+      low: 35000,
+    },
+    {
+      age: '25',
+      high: 80000,
+      low: 45000,
+    },
+    {
+      age: '30',
+      high: 100000,
+      low: 60000,
+    },
+    {
+      age: '35',
+      high: 120000,
+      low: 75000,
+    },
+    {
+      age: '40',
+      high: 140000,
+      low: 90000,
+    },
+    {
+      age: '45',
+      high: 160000,
+      low: 100000,
+    },
+    {
+      age: '50',
+      high: 180000,
+      low: 110000,
+    },
+    {
+      age: '55',
+      high: 200000,
+      low: 120000,
+    },
+    {
+      age: '60',
+      high: 220000,
+      low: 130000,
+    },
   ],
   exampleEmployers: [
-    'Google',
-    'Facebook',
-    'Amazon',
-    'Microsoft',
-    'Apple',
-    'IBM',
-    'Intel',
-    'Oracle',
-    'Cisco',
-    'Adobe',
-    'Salesforce',
-    'SAP',
-    'HP',
-    'Dell',
-    'Accenture',
-    'Capgemini',
-    'Deloitte',
-    'PwC',
-    'KPMG',
-    'EY',
-    'Bloomberg',
-    'Thomson Reuters',
-    'UBS',
-    'Credit Suisse',
-    'Barclays',
-    'HSBC',
-    'J.P. Morgan',
+    'JP Morgan',
     'Goldman Sachs',
     'Morgan Stanley',
-    'Citigroup',
+    'Citadel',
+    'BlackRock',
+    'Two Sigma',
+    'Bridgewater Associates',
+    'AQR Capital Management',
+    'Man Group',
+    'Winton Capital',
+    'BlueCrest Capital Management',
+    'Odey Asset Management',
+    'Millennium Management',
+    'Lansdowne Partners',
+    'Marshall Wace',
+    'GSA Capital',
+    'Aspect Capital',
+    'Capula Investment Management',
+    'Pictet Asset Management',
+    'Winton Capital',
+    'BlueBay Asset Management',
+    'Henderson Global Investors',
+    'Renaissance Technologies',
+    'Balyasny Asset Management',
+    'Arrowgrass Capital Partners',
+    'CQS',
+    'Egerton Capital',
+    'GLG Partners',
+    'H2O Asset Management',
+    'Hermes Investment Management',
   ],
   careerOverlaps: [
     {
       career: 'Data Scientist',
       industry: 'Technology',
       reason:
-        'Software developers often have strong analytical and problem-solving skills, making a transition to data science a natural fit. Both roles involve working with data and developing algorithms.',
+        'Quantitative Analysts possess strong analytical and programming skills, making it easier to transition into a data science role.',
     },
     {
-      career: 'Product Manager',
-      industry: 'Technology',
+      career: 'Risk Manager',
+      industry: 'Banking',
       reason:
-        'Software developers have a deep understanding of technology and user needs, which can be valuable in a product management role. They can leverage their technical expertise to drive product strategy and development.',
+        'Quantitative Analysts have a deep understanding of financial markets and risk analysis, which is valuable in the banking industry.',
     },
     {
-      career: 'Technical Writer',
-      industry: 'Technology',
+      career: 'Actuary',
+      industry: 'Insurance',
       reason:
-        'Software developers have the ability to explain complex technical concepts in a clear and concise manner. This skill is highly valuable in technical writing, where they can document software and create user guides.',
+        'Quantitative Analysts have a strong background in statistics and modeling, making them well-suited for actuarial roles in the insurance industry.',
     },
     {
-      career: 'UX Designer',
-      industry: 'Technology',
+      career: 'Operations Research Analyst',
+      industry: 'Logistics',
       reason:
-        'Software developers have a strong understanding of user interfaces and user experience. They can leverage their technical skills to design intuitive and user-friendly interfaces.',
+        'Quantitative Analysts are skilled in optimization and decision-making, which are essential in solving complex logistical problems.',
     },
     {
-      career: 'Project Manager',
-      industry: 'Technology',
+      career: 'Market Research Analyst',
+      industry: 'Marketing',
       reason:
-        'Software developers are often involved in project management tasks, such as planning, coordinating, and tracking progress. They can transition into a full-time project management role, leveraging their technical background.',
-    },
-    {
-      career: 'Cybersecurity Analyst',
-      industry: 'Technology',
-      reason:
-        'Software developers have a deep understanding of software vulnerabilities and can use their knowledge to identify and mitigate cybersecurity risks. They can transition into a cybersecurity analyst role to protect organizations from cyber threats.',
-    },
-    {
-      career: 'Technical Sales Engineer',
-      industry: 'Technology',
-      reason:
-        'Software developers have a strong technical background and can effectively communicate the value and benefits of complex software solutions. They can transition into a technical sales engineer role to bridge the gap between sales and technical teams.',
+        'Quantitative Analysts have expertise in data analysis and interpreting market trends, making them suitable for market research roles.',
     },
   ],
   promotionTimeline: [
-    { title: 'Junior Software Developer', age: '20-25' },
-    { title: 'Software Developer', age: '25-30' },
-    { title: 'Senior Software Developer', age: '30-40' },
-    { title: 'Lead Software Developer', age: '40-50' },
-    { title: 'Head of Software Development', age: '50-60' },
+    {
+      title: 'Junior Quantitative Analyst',
+      age: '20-25',
+    },
+    {
+      title: 'Quantitative Analyst',
+      age: '25-35',
+    },
+    {
+      title: 'Senior Quantitative Analyst',
+      age: '35-45',
+    },
+    {
+      title: 'Quantitative Analyst Manager',
+      age: '45-55',
+    },
+    {
+      title: 'Director of Quantitative Analysis',
+      age: '55-60',
+    },
   ],
   assessmentStages: [
     {
-      stage: 'Application',
+      stage: 'Online Application',
       description:
-        "The student submits their application, including their resume and cover letter, to the company's recruitment team.",
+        'The first stage involves submitting an online application form, which includes providing personal details, academic qualifications, and a CV.',
     },
     {
-      stage: 'Online Assessment',
+      stage: 'Numerical and Verbal Reasoning Tests',
       description:
-        'The student may be required to complete an online assessment, which could include technical questions and coding exercises to evaluate their software development skills.',
+        'Candidates who pass the initial screening are invited to complete online numerical and verbal reasoning tests to assess their analytical and problem-solving skills.',
     },
     {
-      stage: 'Phone Interview',
+      stage: 'Telephone Interview',
       description:
-        "If the student passes the online assessment, they may be invited for a phone interview. This interview is typically conducted by a recruiter or hiring manager and aims to assess the student's communication skills, motivation, and fit for the role.",
+        "Successful candidates from the previous stage are invited for a telephone interview. This interview focuses on assessing the candidate's motivation, interest in the role, and relevant skills.",
     },
     {
-      stage: 'Technical Interview',
+      stage: 'Assessment Center',
       description:
-        "If the student performs well in the phone interview, they may be invited for a technical interview. This interview is usually conducted by a senior software developer or technical lead and focuses on assessing the student's technical knowledge, problem-solving abilities, and coding skills.",
+        'Candidates who pass the telephone interview are invited to an assessment center. The assessment center typically includes a series of exercises and activities to evaluate various competencies, such as numerical analysis, logical reasoning, teamwork, and communication skills.',
     },
     {
       stage: 'Group Exercise',
       description:
-        "The student may be asked to participate in a group exercise, where they will work with other candidates to solve a problem or complete a task. This exercise aims to evaluate the student's teamwork, communication, and problem-solving skills.",
+        'One of the activities at the assessment center is a group exercise where candidates work together to solve a problem or complete a task. This exercise assesses their ability to collaborate, communicate, and contribute effectively in a team setting.',
     },
     {
-      stage: 'Presentation',
+      stage: 'Case Study',
       description:
-        "In some cases, the student may be required to prepare and deliver a presentation on a given topic. This stage assesses the student's presentation skills, ability to convey complex information, and confidence in public speaking.",
+        'Candidates may be given a case study related to the finance industry, where they are required to analyze data, make recommendations, and present their findings. This exercise evaluates their analytical thinking, problem-solving, and presentation skills.',
+    },
+    {
+      stage: 'Technical Interview',
+      description:
+        'Candidates who perform well in the previous stages are invited for a technical interview. This interview focuses on assessing their knowledge of quantitative analysis, financial markets, and programming languages commonly used in the industry.',
     },
     {
       stage: 'Final Interview',
       description:
-        "If the student successfully completes the previous stages, they may be invited for a final interview with senior members of the company, such as the hiring manager or director. This interview aims to assess the student's overall fit for the role and the company culture.",
+        "The final stage involves a face-to-face interview with senior members of the organization, such as hiring managers or senior quantitative analysts. This interview aims to assess the candidate's fit with the company culture, their long-term career goals, and their overall suitability for the role.",
     },
     {
       stage: 'Offer',
       description:
-        'If the student impresses the interviewers during the final interview, they may receive a job offer for the graduate software developer role in the technology industry in London.',
+        'Candidates who successfully complete all the stages and meet the required criteria may receive a job offer for the graduate role as a Quantitative Analyst in the Finance industry in London.',
     },
   ],
   supplementalExperiences: [
     {
       year: '1',
       activity:
-        'Participate in coding competitions or hackathons to gain practical experience and showcase your skills.',
+        'Take introductory courses in finance, mathematics, and computer science to build a strong foundation for quantitative analysis.',
     },
     {
       year: '2',
       activity:
-        'Internship at a technology company to gain hands-on experience in software development.',
-    },
-    {
-      year: '2',
-      activity:
-        'Contribute to open-source projects to demonstrate your ability to work in a collaborative coding environment.',
+        'Apply for internships at financial institutions or research organizations to gain practical experience in quantitative analysis.',
     },
     {
       year: '3',
       activity:
-        'Attend industry conferences and networking events to connect with professionals in the technology industry.',
-    },
-    {
-      year: '3',
-      activity:
-        'Complete a relevant certification or online course to enhance your technical skills and knowledge.',
+        'Participate in research projects or independent studies focused on quantitative finance to further develop skills and knowledge in the field.',
     },
   ],
   openMonths:
-    'Graduate roles as a Software Developer in the Technology industry typically open for application throughout the year, with peak hiring periods often occurring in the spring and fall.',
+    'Graduate roles as a Quantitative Analyst in the Finance industry typically open for application in the months of September and October.',
+  profileIdentifier: '609e26b8-9e6e-4600-96fb-d9ba5da0abf8',
+  careerIdentifier: 'cff12277-abe4-4f0a-a1ab-0223050c6dc0',
 };

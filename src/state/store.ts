@@ -3,8 +3,10 @@ import { profileApi } from '@apis/profile';
 import { overviewApi } from '@apis/overviewApi';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import user from '@slices/userSlice';
+import interview from '@slices/interviewSlice';
 
 export const rootReducer = combineReducers({
+  interview,
   user,
   [profileApi.reducerPath]: profileApi.reducer,
   [overviewApi.reducerPath]: overviewApi.reducer,
@@ -12,6 +14,7 @@ export const rootReducer = combineReducers({
 
 export const store = configureStore({
   reducer: {
+    interview,
     user,
     [profileApi.reducerPath]: profileApi.reducer,
     [overviewApi.reducerPath]: overviewApi.reducer,

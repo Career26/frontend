@@ -35,7 +35,7 @@ const navigationStyles = createStyles((theme) => ({
       fontWeight: 'bold',
     },
     '.mantine-Modal-body': {
-      paddingTop: rem(25),
+      paddingTop: `${rem(25)} !important`,
       backgroundColor: theme.colors.gray[3],
       paddingBottom: rem(25),
     },

@@ -50,7 +50,8 @@ export const CareerPathTile = ({
   industry,
   startingSalary,
   selected,
-}: CareerPath & { onClickAction?: () => void }) => {
+  loading,
+}: CareerPath & { loading?: boolean; onClickAction?: () => void }) => {
   const { classes } = careerPathTileStyles();
   return (
     <Card shadow="sm" padding="lg" radius="md" withBorder className={classes.cardContainer}>
@@ -60,7 +61,7 @@ export const CareerPathTile = ({
             {title}
           </Text>
           {onClickAction && (
-            <ActionIcon onClick={onClickAction} className={classes.actionIcon}>
+            <ActionIcon loading={loading} onClick={onClickAction} className={classes.actionIcon}>
               {selected ? (
                 <IconCircleCheck size={50} fill="green" color="white" />
               ) : (

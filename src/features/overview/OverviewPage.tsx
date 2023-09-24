@@ -4,8 +4,11 @@ import { useActiveNavScroll } from '@shared/hooks/useActiveNavScroll';
 import classNames from 'classnames';
 import { Shell } from '@shared/components/shell/Shell';
 import { HEADER_HEIGHT } from '@shared/components/pageHeader/pageHeaderStyles';
-import { overviewPageMock } from '@mocks/overviewMocks';
 import { ProgressionTile } from '@shared/components/tiles/ProgressionTile';
+import { useAppSelector } from '@state/store';
+import { selectProfileId, selectSelectedCareerPathId } from '@slices/userSlice';
+import { useGetCareerOverviewQuery } from '@apis/overviewApi';
+import { LoadingPage } from '@shared/components/LoadingPage';
 
 import { OverviewSection } from './OverviewSection';
 import { overviewLinks } from './config/overviewConstants';
@@ -86,6 +89,20 @@ const overviewStyles = createStyles((theme) => ({
 export const OverviewPage = () => {
   const { activeAnchor } = useActiveNavScroll({ navItems: overviewLinks });
   const { classes } = overviewStyles();
+  const profileId = useAppSelector(selectProfileId);
+  const careerId = useAppSelector(selectSelectedCareerPathId);
+  const { data, isFetching } = useGetCareerOverviewQuery(
+    { careerId, profileId },
+    { skip: !profileId || !careerId },
+  );
+
+  if (isFetching) {
+    return <LoadingPage />;
+  }
+
+  if (!data) {
+    return null;
+  }
 
   return (
     <div className={classes.wrapper}>
@@ -116,20 +133,16 @@ export const OverviewPage = () => {
             <OverviewSection label={label} Icon={Icon} anchor={anchor} key={`career-${label}`}>
               {anchor === 'progression' && (
                 <CareerProgressionTile
-                  promotionTimeline={overviewPageMock.promotionTimeline}
-                  salaryProgression={overviewPageMock.salaryProgression}
+                  promotionTimeline={data.promotionTimeline}
+                  salaryProgression={data.salaryProgression}
                 />
               )}
-              {anchor === 'employers' && (
-                <TopEmployersTile employers={overviewPageMock.exampleEmployers} />
-              )}
-              {anchor === 'role' && <RoleOverviewTile roleSummary={overviewPageMock.roleSummary} />}
-              {anchor === 'overlaps' && (
-                <OverlapsTile careerOverlaps={overviewPageMock.careerOverlaps} />
-              )}
+              {anchor === 'employers' && <TopEmployersTile employers={data.exampleEmployers} />}
+              {anchor === 'role' && <RoleOverviewTile roleSummary={data.roleSummary} />}
+              {anchor === 'overlaps' && <OverlapsTile careerOverlaps={data.careerOverlaps} />}
               {anchor === 'timeline' && (
                 <ProgressionTile
-                  progressionList={overviewPageMock.assessmentStages.map((item, index) => ({
+                  progressionList={data.assessmentStages.map((item, index) => ({
                     title: `${index + 1} ${item.stage}`,
                     descriptions: [item.description],
                   }))}
@@ -137,7 +150,7 @@ export const OverviewPage = () => {
               )}
               {anchor === 'preparation' && (
                 <ProgressionTile
-                  progressionList={overviewPageMock.supplementalExperiences.map((item) => ({
+                  progressionList={data.supplementalExperiences.map((item) => ({
                     title: `Year ${item.year}`,
                     descriptions: [item.activity],
                   }))}

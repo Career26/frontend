@@ -1,11 +1,11 @@
+import { SelectCareerInput } from '@datatypes/career';
 import { UserProfile, Profile } from '@datatypes/profile';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { baseUrl } from '@shared/config/urlConstants';
 
 export const profileApi = createApi({
   reducerPath: 'profile',
-  baseQuery: fetchBaseQuery({
-    baseUrl: 'https://qjop4yl84g.execute-api.eu-west-1.amazonaws.com/Prod',
-  }),
+  baseQuery: fetchBaseQuery({ baseUrl }),
   endpoints: (build) => ({
     generateProfile: build.mutation<UserProfile, Profile>({
       query: (body) => ({
@@ -14,13 +14,14 @@ export const profileApi = createApi({
         body,
       }),
     }),
-    rejectCareer: build.query<UserProfile['careerPaths'], { profileId: string; careerId: string }>({
-      query: ({ profileId, careerId }) => ({
-        url: `reject/${profileId}/${careerId}`,
-        method: 'GET',
+    selectCareer: build.mutation<boolean, SelectCareerInput>({
+      query: (body) => ({
+        url: 'select',
+        method: 'POST',
+        body,
       }),
     }),
   }),
 });
 
-export const { useGenerateProfileMutation, useLazyRejectCareerQuery } = profileApi;
+export const { useGenerateProfileMutation, useSelectCareerMutation } = profileApi;

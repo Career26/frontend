@@ -1,6 +1,8 @@
 import { UserProfile, Profile } from '@datatypes/profile';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
+type SelectCareerInput = { careerIdentifier: string; profileIdentifier: string; selected: boolean };
+
 export const profileApi = createApi({
   reducerPath: 'profile',
   baseQuery: fetchBaseQuery({
@@ -14,13 +16,14 @@ export const profileApi = createApi({
         body,
       }),
     }),
-    rejectCareer: build.query<UserProfile['careerPaths'], { profileId: string; careerId: string }>({
-      query: ({ profileId, careerId }) => ({
-        url: `reject/${profileId}/${careerId}`,
-        method: 'GET',
+    selectCareer: build.mutation<boolean, SelectCareerInput>({
+      query: (body) => ({
+        url: 'select',
+        method: 'POST',
+        body,
       }),
     }),
   }),
 });
 
-export const { useGenerateProfileMutation, useLazyRejectCareerQuery } = profileApi;
+export const { useGenerateProfileMutation, useSelectCareerMutation } = profileApi;

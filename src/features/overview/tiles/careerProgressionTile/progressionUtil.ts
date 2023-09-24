@@ -52,10 +52,10 @@ export const getSelectedItem = ({
   const minSalary = salaryProgression.find((item) => item.age === minAge);
   const maxSalary = salaryProgression.find((item) => item.age === maxAge);
   return {
-    startingMin: minSalary?.value?.[1],
-    startingMax: minSalary?.value?.[0],
-    finalMin: maxSalary?.value?.[1],
-    finalMax: maxSalary?.value?.[0],
+    startingMin: minSalary?.low,
+    startingMax: minSalary?.high,
+    finalMin: maxSalary?.low,
+    finalMax: maxSalary?.high,
     title,
     minAge,
     maxAge,

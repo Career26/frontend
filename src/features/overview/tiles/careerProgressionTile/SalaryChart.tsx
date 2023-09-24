@@ -39,7 +39,9 @@ export const SalaryChart = ({
   return (
     <div className={classes.graphContainer}>
       <ResponsiveContainer>
-        <AreaChart data={salaryProgression}>
+        <AreaChart
+          data={salaryProgression.map(({ age, high, low }) => ({ age, value: [high, low] }))}
+        >
           <CartesianGrid
             strokeDasharray="3 3"
             verticalFill={getVerticalFill(salaryProgression, minAge, maxAge)}

@@ -5,14 +5,17 @@ import { urls } from '@shared/config/urlConstants';
 import { PageHeader } from '@shared/components/pageHeader/PageHeader';
 import { useAppSelector } from '@state/store';
 import { selectSelectedCareerPathId } from '@slices/userSlice';
+import { selectSelectedInterviewId } from '@slices/interviewSlice';
 
 import { HomePage } from '../homePage/HomePage';
 import { LandingPage } from '../landingPage/LandingPage';
 import { CareerTest } from '../careerTest/CareerTest';
 import { OverviewPage } from '../overview/OverviewPage';
+import { InterviewPage } from '../interview/InterviewPage';
 
 export const App = () => {
   const defaultCareerId = useAppSelector(selectSelectedCareerPathId);
+  const defaultInterviewId = useAppSelector(selectSelectedInterviewId);
   return (
     <BrowserRouter>
       <Suspense fallback={<LoadingPage />}>
@@ -32,6 +35,22 @@ export const App = () => {
                 return <Redirect to={`${urls.overview}/${defaultCareerId}`} />;
               }
               return <OverviewPage />;
+            }}
+          />
+          <Route
+            path={`${urls.interviews}/:careerId?/:interviewId?`}
+            render={({
+              match: {
+                params: { careerId, interviewId },
+              },
+            }) => {
+              if (!careerId) {
+                return <Redirect to={`${urls.interviews}/${defaultCareerId}}`} />;
+              }
+              if (!interviewId) {
+                return <Redirect to={`${urls.interviews}/${careerId}/${defaultInterviewId}`} />;
+              }
+              return <InterviewPage />;
             }}
           />
         </Switch>

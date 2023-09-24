@@ -18,3 +18,8 @@ export type Overview = {
   supplementalExperiences: SupplementalExperience[];
   openMonths: string;
 };
+
+export interface CareerOverviewInput {
+  profileId: string;
+  careerId: string;
+}

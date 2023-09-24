@@ -48,7 +48,7 @@ export const { setLoginModal, setProfile, setCareerPaths, setSelectedCareerPathI
 const selectUser = (state: RootState) => state.user;
 export const selectLoginModal = (state: RootState) => selectUser(state).loginModal;
 export const selectProfile = (state: RootState) => selectUser(state).profile;
-export const selectProfileId = (state: RootState) => selectUser(state).profile?.identifier;
+export const selectProfileId = (state: RootState) => selectUser(state).profile?.identifier || '';
 export const selectIsLoggedIn = (state: RootState) => selectUser(state).isLoggedIn;
 export const selectCareerPaths = (state: RootState) => selectUser(state).profile?.careerPaths;
 export const selectSelectedCareerPathId = (state: RootState) =>

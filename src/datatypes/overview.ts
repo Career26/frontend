@@ -1,4 +1,4 @@
-export type SalaryProgression = { age: string; value: number[] };
+export type SalaryProgression = { age: string; high: number; low: number };
 
 export type CareerOverlap = { career: string; industry: string; reason: string };
 
@@ -17,6 +17,8 @@ export type Overview = {
   assessmentStages: AssessmentStage[];
   supplementalExperiences: SupplementalExperience[];
   openMonths: string;
+  profileIdentifier: string;
+  careerIdentifier: string;
 };
 
 export interface CareerOverviewInput {

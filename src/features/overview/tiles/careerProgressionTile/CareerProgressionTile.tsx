@@ -86,8 +86,8 @@ export const CareerProgressionTile = ({
 }: CareerProgressionTileProps) => {
   const { classes } = careerProgressionStyles();
   const [activeIndex, setActiveIndex] = useState<number>();
-  const [finalMax] = salaryProgression[salaryProgression.length - 1].value;
-  const [startingMax, startingMin] = salaryProgression[0].value;
+  const finalMax = salaryProgression[salaryProgression.length - 1].high;
+  const { high: startingMax, low: startingMin } = salaryProgression[0];
 
   const selectedItem = useMemo(
     () => getSelectedItem({ promotionTimeline, salaryProgression, activeIndex }),

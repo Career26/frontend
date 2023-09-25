@@ -4,6 +4,7 @@ import { UseFormReturnType, isEmail, matchesField, useForm } from '@mantine/form
 import { IconAt, IconLock, TablerIconsProps } from '@tabler/icons-react';
 import { useAppDispatch, useAppSelector } from '@state/store';
 import { selectLoginModal, setLoginModal } from '@slices/userSlice';
+import { Auth } from 'aws-amplify';
 
 import { loginStyles } from './loginStyles';
 
@@ -97,15 +98,33 @@ export const LoginModal = () => {
     return form.isValid();
   };
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     const isValid = checkIsValid();
     if (!isValid) {
       return;
     }
-    // handle log in endpoint
-    onClose();
-    if (onComplete) {
-      onComplete();
+    try {
+      if (hasAccount) {
+        await Auth.signIn({ username: form.values.email, password: form.values.password });
+      } else {
+        await Auth.signUp({
+          username: form.values.email,
+          password: form.values.password,
+          attributes: {
+            email: form.values.email,
+            name: form.values.firstName,
+            family_name: form.values.lastName,
+            gender: 'male',
+          },
+        });
+      }
+      onClose();
+      if (onComplete) {
+        onComplete();
+      }
+    } catch (error: unknown) {
+      // eslint-disable-next-line no-console
+      console.error(error);
     }
   };
 

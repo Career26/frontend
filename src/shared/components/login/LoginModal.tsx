@@ -67,9 +67,6 @@ export const LoginModal = () => {
   const [hasAccount, setHasAccount] = useState(false);
   const { open, onComplete } = useAppSelector(selectLoginModal);
   const dispatch = useAppDispatch();
-  const onClose = () => {
-    dispatch(setLoginModal({ open: false }));
-  };
 
   const form = useForm<LoginFormValues>({
     initialValues: {
@@ -89,6 +86,11 @@ export const LoginModal = () => {
       agreement: (value) => !value && 'You must agree to the terms and conditions',
     },
   });
+
+  const onClose = () => {
+    form.reset();
+    dispatch(setLoginModal({ open: false }));
+  };
 
   const checkIsValid = () => {
     form.validate();

@@ -17,18 +17,17 @@ import { InterviewPage } from '../interview/InterviewPage';
 export const App = () => {
   const defaultCareerId = useAppSelector(selectSelectedCareerPathId);
   const defaultInterviewId = useAppSelector(selectSelectedInterviewId);
-  const { loggedIn } = useSession();
+  const { user } = useSession();
 
   return (
     <BrowserRouter>
       <Suspense fallback={<LoadingPage />}>
         <PageHeader />
         <Switch>
-          <Route path={urls.landingPage} exact component={LandingPage} />
+          <Route path={urls.landingPage} exact component={!user ? LandingPage : HomePage} />
           <Route path={urls.careersTest} component={CareerTest} />
-          {loggedIn && (
+          {!!user && (
             <>
-              <Route path={urls.home} component={HomePage} />
               <Route
                 path={`${urls.overview}/:careerId?`}
                 render={({

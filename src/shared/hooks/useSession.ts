@@ -1,9 +1,9 @@
 import { useAuthenticator } from '@aws-amplify/ui-react';
 
 export const useSession = () => {
-  const { route } = useAuthenticator((context) => [context.route]);
-  const loggedIn = route !== 'authenticated';
+  const { user, signOut } = useAuthenticator((context) => [context.route]);
   return {
-    loggedIn,
+    user,
+    signOut,
   };
 };

@@ -39,7 +39,7 @@ const useCareerNavigation = () => {
   };
 
   const clickLogo = () => {
-    history.push(urls.home);
+    history.push(urls.landingPage);
   };
   const clickCareersTest = () => {
     history.push(urls.careersTest);

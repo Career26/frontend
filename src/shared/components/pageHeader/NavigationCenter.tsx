@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDisclosure } from '@mantine/hooks';
-import { Modal, Grid, ActionIcon, Paper, createStyles, rem, Container } from '@mantine/core';
+import { Modal, Grid, Paper, createStyles, rem, Container, Avatar } from '@mantine/core';
 import { IconLayoutDashboard } from '@tabler/icons-react';
 import { useHistory } from 'react-router-dom';
 import { featureTiles } from '@shared/config/featureConstants';
@@ -43,6 +43,15 @@ const navigationStyles = createStyles((theme) => ({
       opacity: 0.55,
     },
   },
+  navIcon: {
+    '&:hover': {
+      color: 'red',
+      cursor: 'pointer',
+      boxShadow:
+        '0 0.0625rem 0.1875rem rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05) 0 1.25rem 1.5625rem -0.3125rem, rgba(0, 0, 0, 0.04) 0 0.625rem 0.625rem -0.3125rem',
+    },
+  },
+
   disabled: {
     '&:hover': {
       cursor: 'not-allowed',
@@ -63,9 +72,9 @@ export const NavigationCenter = () => {
 
   return (
     <>
-      <ActionIcon>
-        <IconLayoutDashboard onClick={open} />
-      </ActionIcon>
+      <Avatar color="blue" radius="xl" onClick={open} className={classes.navIcon}>
+        <IconLayoutDashboard />
+      </Avatar>
       <Modal
         opened={opened}
         onClose={close}

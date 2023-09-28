@@ -26,39 +26,41 @@ export const App = () => {
         <Switch>
           <Route path={urls.landingPage} exact component={!user ? LandingPage : HomePage} />
           <Route path={urls.careersTest} component={CareerTest} />
-          {!!user && (
-            <>
-              <Route
-                path={`${urls.overview}/:careerId?`}
-                render={({
-                  match: {
-                    params: { careerId },
-                  },
-                }) => {
-                  if (!careerId) {
-                    return <Redirect to={`${urls.overview}/${defaultCareerId}`} />;
-                  }
-                  return <OverviewPage />;
-                }}
-              />
-              <Route
-                path={`${urls.interviews}/:careerId?/:interviewId?`}
-                render={({
-                  match: {
-                    params: { careerId, interviewId },
-                  },
-                }) => {
-                  if (!careerId) {
-                    return <Redirect to={`${urls.interviews}/${defaultCareerId}}`} />;
-                  }
-                  if (!interviewId) {
-                    return <Redirect to={`${urls.interviews}/${careerId}/${defaultInterviewId}`} />;
-                  }
-                  return <InterviewPage />;
-                }}
-              />
-            </>
-          )}
+          <Route
+            path={`${urls.overview}/:careerId?`}
+            render={({
+              match: {
+                params: { careerId },
+              },
+            }) => {
+              if (!user) {
+                return <Redirect to={urls.landingPage} />;
+              }
+              if (!careerId) {
+                return <Redirect to={`${urls.overview}/${defaultCareerId}`} />;
+              }
+              return <OverviewPage />;
+            }}
+          />
+          <Route
+            path={`${urls.interviews}/:careerId?/:interviewId?`}
+            render={({
+              match: {
+                params: { careerId, interviewId },
+              },
+            }) => {
+              if (!user) {
+                return <Redirect to={urls.landingPage} />;
+              }
+              if (!careerId) {
+                return <Redirect to={`${urls.interviews}/${defaultCareerId}}`} />;
+              }
+              if (!interviewId) {
+                return <Redirect to={`${urls.interviews}/${careerId}/${defaultInterviewId}`} />;
+              }
+              return <InterviewPage />;
+            }}
+          />
         </Switch>
       </Suspense>
     </BrowserRouter>

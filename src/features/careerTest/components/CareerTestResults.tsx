@@ -7,8 +7,9 @@ import careerPathsImg from '../../landingPage/assets/careerPaths.svg';
 
 export const CareerTestResults = () => {
   const history = useHistory();
+
   const goToHomepage = () => {
-    history.push(urls.home);
+    history.push(urls.landingPage);
   };
 
   return (

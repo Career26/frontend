@@ -74,6 +74,7 @@ export const Login = () => {
   const { classes } = loginStlyes();
   const dispatch = useAppDispatch();
   const { open } = useAppSelector(selectLoginModal);
+
   const onClose = () => {
     dispatch(setLoginModal({ open: false }));
   };

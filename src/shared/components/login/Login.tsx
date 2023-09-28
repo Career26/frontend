@@ -1,8 +1,20 @@
 import { Authenticator, Radio, RadioGroupField, useAuthenticator } from '@aws-amplify/ui-react';
-import { selectLoginModal } from '@slices/userSlice';
-import { useAppSelector } from '@state/store';
+import { selectLoginModal, setLoginModal } from '@slices/userSlice';
+import { useAppDispatch, useAppSelector } from '@state/store';
 import React from 'react';
+import { Modal, createStyles } from '@mantine/core';
 import '@aws-amplify/ui-react/styles.css';
+
+const loginStlyes = createStyles({
+  container: {
+    '.mantine-Modal-body': {
+      padding: 0,
+    },
+    '[data-amplify-authenticator] [data-amplify-container]': {
+      width: '100%',
+    },
+  },
+});
 
 const FormFields = () => {
   const { validationErrors } = useAuthenticator();
@@ -23,54 +35,65 @@ const FormFields = () => {
   );
 };
 
+const formFields = {
+  signUp: {
+    given_name: {
+      order: 1,
+      label: 'First Name',
+      isRequired: true,
+      placeholder: 'Enter your First Name',
+    },
+    family_name: {
+      order: 2,
+      label: 'Last Name',
+      isRequired: true,
+      placeholder: 'Enter your Last Name',
+    },
+    email: {
+      order: 3,
+      isRequired: true,
+    },
+    password: {
+      order: 4,
+      isRequired: true,
+    },
+    confirm_password: {
+      order: 5,
+      isRequired: true,
+    },
+  },
+};
+
+const components = {
+  SignUp: {
+    FormFields,
+  },
+};
+
 export const Login = () => {
+  const { classes } = loginStlyes();
+  const dispatch = useAppDispatch();
   const { open } = useAppSelector(selectLoginModal);
-  if (!open) {
-    return false;
-  }
-
-  const formFields = {
-    signUp: {
-      given_name: {
-        order: 1,
-        label: 'First Name',
-        isRequired: true,
-        placeholder: 'Enter your First Name',
-      },
-      family_name: {
-        order: 2,
-        label: 'Last Name',
-        isRequired: true,
-        placeholder: 'Enter your Last Name',
-      },
-      email: {
-        order: 3,
-        isRequired: true,
-      },
-      password: {
-        order: 4,
-        isRequired: true,
-      },
-      confirm_password: {
-        order: 5,
-        isRequired: true,
-      },
-    },
-  };
-
-  const components = {
-    SignUp: {
-      FormFields,
-    },
+  const onClose = () => {
+    dispatch(setLoginModal({ open: false }));
   };
 
   return (
-    <Authenticator
-      formFields={formFields}
-      loginMechanisms={['email']}
-      variation="modal"
-      components={components}
-      signUpAttributes={['email', 'family_name', 'given_name', 'gender']}
-    />
+    <Modal
+      onClose={onClose}
+      opened={open}
+      className={classes.container}
+      withCloseButton={false}
+      centered
+      radius={10}
+    >
+      <Authenticator
+        className={classes.container}
+        formFields={formFields}
+        loginMechanisms={['email']}
+        components={components}
+        signUpAttributes={['email', 'family_name', 'given_name', 'gender']}
+      />
+    </Modal>
   );
 };

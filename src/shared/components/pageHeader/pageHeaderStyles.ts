@@ -10,6 +10,7 @@ export const pageHeaderStyles = createStyles((theme) => ({
     alignItems: 'center',
     paddingLeft: rem(100),
     paddingRight: rem(100),
+    backgroundColor: theme.colors.gray[1],
   },
   logo: {
     [theme.fn.smallerThan('md')]: {

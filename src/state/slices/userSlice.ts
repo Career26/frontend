@@ -6,14 +6,16 @@ import { RootState } from '@state/store';
 
 type UserSlice = {
   profile?: UserProfile;
-  loginModal: { open: boolean; onComplete?: () => void };
-  isLoggedIn: boolean;
+  loginModal: {
+    open: boolean;
+    onComplete?: () => void;
+    initialState?: 'signIn' | 'signUp' | 'resetPassword';
+  };
   selectedCareerPathId?: string;
 };
 
 export const userInitialState: UserSlice = {
   profile: profileResponseMock,
-  isLoggedIn: true,
   loginModal: { open: false },
 };
 
@@ -49,7 +51,6 @@ const selectUser = (state: RootState) => state.user;
 export const selectLoginModal = (state: RootState) => selectUser(state).loginModal;
 export const selectProfile = (state: RootState) => selectUser(state).profile;
 export const selectProfileId = (state: RootState) => selectUser(state).profile?.identifier || '';
-export const selectIsLoggedIn = (state: RootState) => selectUser(state).isLoggedIn;
 export const selectCareerPaths = (state: RootState) => selectUser(state).profile?.careerPaths;
 export const selectSelectedCareerPathId = (state: RootState) =>
   selectUser(state).selectedCareerPathId || Object.keys(selectCareerPaths(state) || {})[0];

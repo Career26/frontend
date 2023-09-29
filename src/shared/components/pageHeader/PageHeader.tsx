@@ -22,7 +22,7 @@ export const PageHeader = ({
   const { clickCareersTest, clickLogo } = useCareerNavigation();
 
   const onClickLogin = () => {
-    dispatch(setLoginModal({ open: true }));
+    dispatch(setLoginModal({ open: true, initialState: 'signIn' }));
   };
 
   return (

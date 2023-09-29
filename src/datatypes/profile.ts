@@ -1,21 +1,5 @@
 import { CareerPath } from './career';
 
-export enum DegreeGrade {
-  FIRST = 'First Class (1st)',
-  UPPER_SECOND = 'Second Class Upper (2:1)',
-  LOWER_SECOND = 'Second Class Lower (2:2)',
-  THIRD = 'Third Class (3rd)',
-  PASS = 'Pass',
-}
-
-export enum DegreeLevel {
-  PHD = 'PhD',
-  MSC = 'MSc',
-  MA = 'MA',
-  BSC = 'BSc',
-  BA = 'BA',
-}
-
 export enum WorkStyle {
   Team = 'TEAM',
   Independent = 'INDEPENDENT',

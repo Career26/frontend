@@ -1,6 +1,10 @@
 import { CareerPath } from '@datatypes/career';
 import { ActionIcon, Badge, Card, Group, Text, createStyles, rem } from '@mantine/core';
-import { IconCircleCheck, IconCirclePlus } from '@tabler/icons-react';
+import {
+  IconCircleCheck,
+  IconSquareRoundedMinusFilled,
+  IconSquareRoundedPlusFilled,
+} from '@tabler/icons-react';
 import React from 'react';
 
 const careerPathTileStyles = createStyles((theme) => ({
@@ -15,6 +19,7 @@ const careerPathTileStyles = createStyles((theme) => ({
   title: {
     fontSize: rem(18),
     fontWeight: 800,
+    paddingBottom: '0 !important',
     lineHeight: 1.1,
     color: theme.colors.gray[9],
     textAlign: 'center',
@@ -38,8 +43,11 @@ const careerPathTileStyles = createStyles((theme) => ({
     flexDirection: 'column',
     justifyContent: 'space-between',
   },
-  actionIcon: {
-    '&:hover': { borderRadius: rem(20) },
+  headerButtons: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    gap: rem(10),
+    alignItems: 'center',
   },
 }));
 
@@ -51,7 +59,8 @@ export const CareerPathTile = ({
   startingSalary,
   selected,
   loading,
-}: CareerPath & { loading?: boolean; onClickAction?: () => void }) => {
+  color,
+}: CareerPath & { color?: string; loading?: boolean; onClickAction?: () => void }) => {
   const { classes } = careerPathTileStyles();
   return (
     <Card shadow="sm" padding="lg" radius="md" withBorder className={classes.cardContainer}>
@@ -61,19 +70,22 @@ export const CareerPathTile = ({
             {title}
           </Text>
           {onClickAction && (
-            <ActionIcon loading={loading} onClick={onClickAction} className={classes.actionIcon}>
-              {selected ? (
-                <IconCircleCheck size={50} fill="green" color="white" />
-              ) : (
-                <IconCirclePlus size={50} fill="gray" color="white" />
-              )}
-            </ActionIcon>
+            <div className={classes.headerButtons}>
+              {selected && <IconCircleCheck size={30} fill="green" color="white" />}
+              <ActionIcon
+                loading={loading}
+                onClick={onClickAction}
+                color={selected ? 'red' : 'gray'}
+              >
+                {selected ? <IconSquareRoundedMinusFilled /> : <IconSquareRoundedPlusFilled />}
+              </ActionIcon>
+            </div>
           )}
         </Group>
       </Card.Section>
       <Group position="apart" mt="md" mb="xs" className={classes.industrySection}>
         <Text weight={500}>{startingSalary}</Text>
-        <Badge color="pink" variant="light">
+        <Badge color={color} variant="light">
           {industry}
         </Badge>
       </Group>

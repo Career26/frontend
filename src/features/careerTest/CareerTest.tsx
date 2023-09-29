@@ -41,7 +41,13 @@ export const CareerTest = () => {
       generateProfile(form.values);
     }
     if (activeStep === CareerStep.CAREER_PATHS) {
-      dispatch(setLoginModal({ open: true, onComplete: () => setActiveStep(activeStep + 1) }));
+      dispatch(
+        setLoginModal({
+          open: true,
+          onComplete: () => setActiveStep(activeStep + 1),
+          initialState: 'signUp',
+        }),
+      );
     } else {
       setActiveStep(activeStep + 1);
     }
@@ -88,11 +94,17 @@ export const CareerTest = () => {
                     <Button
                       onClick={clickBack}
                       disabled={activeStep === CareerStep.EDUCATION || isLoading}
+                      variant="light"
                     >
                       Back
                     </Button>
                   )}
-                  <Button onClick={clickNext} disabled={isLoading} loading={isLoading}>
+                  <Button
+                    onClick={clickNext}
+                    disabled={isLoading}
+                    loading={isLoading}
+                    variant="outline"
+                  >
                     {nextLabel}
                   </Button>
                 </Group>

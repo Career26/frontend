@@ -17,14 +17,18 @@ import { InterviewPage } from '../interview/InterviewPage';
 export const App = () => {
   const defaultCareerId = useAppSelector(selectSelectedCareerPathId);
   const defaultInterviewId = useAppSelector(selectSelectedInterviewId);
-  const { user } = useSession();
+  const { authenticated, signOut } = useSession();
 
   return (
     <BrowserRouter>
       <Suspense fallback={<LoadingPage />}>
-        <PageHeader />
+        <PageHeader authenticated={authenticated} signOut={signOut} />
         <Switch>
-          <Route path={urls.landingPage} exact component={!user ? LandingPage : HomePage} />
+          <Route
+            path={urls.landingPage}
+            exact
+            component={!authenticated ? LandingPage : HomePage}
+          />
           <Route path={urls.careersTest} component={CareerTest} />
           <Route
             path={`${urls.overview}/:careerId?`}
@@ -33,7 +37,7 @@ export const App = () => {
                 params: { careerId },
               },
             }) => {
-              if (!user) {
+              if (!authenticated) {
                 return <Redirect to={urls.landingPage} />;
               }
               if (!careerId) {
@@ -49,7 +53,7 @@ export const App = () => {
                 params: { careerId, interviewId },
               },
             }) => {
-              if (!user) {
+              if (!authenticated) {
                 return <Redirect to={urls.landingPage} />;
               }
               if (!careerId) {

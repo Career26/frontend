@@ -3,7 +3,6 @@ import { Header, Group, Button, Text, Avatar, Menu } from '@mantine/core';
 import useCareerNavigation from '@shared/hooks/useCareerNavigation';
 import { useAppDispatch } from '@state/store';
 import { setLoginModal } from '@slices/userSlice';
-import { useSession } from '@shared/hooks/useSession';
 import { IconLogout } from '@tabler/icons-react';
 
 import { Login } from '../login/Login';
@@ -11,11 +10,16 @@ import { pageHeaderStyles } from './pageHeaderStyles';
 import { NavigationCenter } from './NavigationCenter';
 import { CareerNavigation } from './CareerNavigation';
 
-export const PageHeader = () => {
+export const PageHeader = ({
+  signOut,
+  authenticated,
+}: {
+  signOut: () => void;
+  authenticated: boolean;
+}) => {
   const dispatch = useAppDispatch();
   const { classes } = pageHeaderStyles();
   const { clickCareersTest, clickLogo } = useCareerNavigation();
-  const { user, signOut } = useSession();
 
   const onClickLogin = () => {
     dispatch(setLoginModal({ open: true }));
@@ -39,7 +43,7 @@ export const PageHeader = () => {
       <CareerNavigation />
 
       <Group>
-        {!user ? (
+        {!authenticated ? (
           <>
             <Button variant="default" onClick={onClickLogin}>
               Login
@@ -62,13 +66,7 @@ export const PageHeader = () => {
 
               <Menu.Dropdown>
                 <Menu.Label>Session</Menu.Label>
-                <Menu.Item
-                  onClick={() => {
-                    signOut();
-                    clickLogo();
-                  }}
-                  icon={<IconLogout className={classes.menuItemIcon} />}
-                >
+                <Menu.Item onClick={signOut} icon={<IconLogout className={classes.menuItemIcon} />}>
                   Logout
                 </Menu.Item>
               </Menu.Dropdown>

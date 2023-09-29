@@ -59,7 +59,8 @@ export const CareerPathTile = ({
   startingSalary,
   selected,
   loading,
-}: CareerPath & { loading?: boolean; onClickAction?: () => void }) => {
+  color,
+}: CareerPath & { color?: string; loading?: boolean; onClickAction?: () => void }) => {
   const { classes } = careerPathTileStyles();
   return (
     <Card shadow="sm" padding="lg" radius="md" withBorder className={classes.cardContainer}>
@@ -84,7 +85,7 @@ export const CareerPathTile = ({
       </Card.Section>
       <Group position="apart" mt="md" mb="xs" className={classes.industrySection}>
         <Text weight={500}>{startingSalary}</Text>
-        <Badge color="pink" variant="light">
+        <Badge color={color} variant="light">
           {industry}
         </Badge>
       </Group>

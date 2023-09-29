@@ -73,7 +73,7 @@ const components = {
 export const Login = () => {
   const { classes } = loginStlyes();
   const dispatch = useAppDispatch();
-  const { open } = useAppSelector(selectLoginModal);
+  const { open, initialState } = useAppSelector(selectLoginModal);
 
   const onClose = () => {
     dispatch(setLoginModal({ open: false }));
@@ -89,6 +89,7 @@ export const Login = () => {
       radius={10}
     >
       <Authenticator
+        initialState={initialState}
         className={classes.container}
         formFields={formFields}
         loginMechanisms={['email']}

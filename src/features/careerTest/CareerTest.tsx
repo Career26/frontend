@@ -41,7 +41,13 @@ export const CareerTest = () => {
       generateProfile(form.values);
     }
     if (activeStep === CareerStep.CAREER_PATHS) {
-      dispatch(setLoginModal({ open: true, onComplete: () => setActiveStep(activeStep + 1) }));
+      dispatch(
+        setLoginModal({
+          open: true,
+          onComplete: () => setActiveStep(activeStep + 1),
+          initialState: 'signUp',
+        }),
+      );
     } else {
       setActiveStep(activeStep + 1);
     }

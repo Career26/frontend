@@ -14,16 +14,19 @@ export const CareerPathsForm = () => {
   const [selectedCareers, setSelectedCareers] = useState<string[]>([]);
   const profileIdentifier = useAppSelector(selectProfileId);
   const [selectCareer] = useSelectCareerMutation();
+  const [loadingCareers, setLoadingCareers] = useState<string[]>([]);
 
   const toggleSelectedCareer = async (careerIdentifier: string) => {
     if (!profileIdentifier) {
       return;
     }
     const selected = selectedCareers.includes(careerIdentifier);
-    const response = await selectCareer({ careerIdentifier, profileIdentifier, selected });
-    if (!response) {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    const { error } = await selectCareer({ careerIdentifier, profileIdentifier, selected });
+    if (error) {
       // eslint-disable-next-line no-console
-      console.error(`select endpoint did not return data, response: ${response}`);
+      console.error(`select endpoint did not return data, response: ${error}`);
       return;
     }
     if (selected) {
@@ -37,15 +40,18 @@ export const CareerPathsForm = () => {
     <Shell>
       <Container className={classes.questionContainer}>
         <Text className={classes.questionTitle}>Career Paths</Text>
-        <Text align="center" className={classes.subHeader}>
-          Select the careers that you like
-        </Text>
+        <Text className={classes.subHeader}>Select the careers that you like</Text>
         <Grid>
           {Object.entries(careerPaths || {}).map(([careerId, careerPath]) => (
             <Grid.Col md={6} key={`career-path-${careerId}`}>
               <CareerPathTile
                 {...careerPath}
-                onClickAction={() => toggleSelectedCareer(careerId)}
+                loading={loadingCareers.includes(careerId)}
+                onClickAction={async () => {
+                  setLoadingCareers([...loadingCareers, careerId]);
+                  await toggleSelectedCareer(careerId);
+                  setLoadingCareers(loadingCareers.filter((id) => id !== careerId));
+                }}
                 selected={selectedCareers.includes(careerId)}
               />
             </Grid.Col>

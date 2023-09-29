@@ -88,8 +88,8 @@ export const questionFormStyles = createStyles((theme) => ({
   },
   subHeader: {
     fontSize: rem(20),
-    fontWeight: 'bold',
+    // fontWeight: 'bold',
     color: theme.colors.gray[7],
-    paddingBottom: rem(10),
+    paddingBottom: rem(40),
   },
 }));

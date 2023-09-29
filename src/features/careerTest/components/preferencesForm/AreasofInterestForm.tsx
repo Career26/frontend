@@ -15,14 +15,14 @@ export const AreasOfInterestForm = ({ form }: { form: CareerFormProps }) => {
           searchable
           clearable
           withAsterisk
-          placeholder="Select interests"
+          placeholder="Search for interest"
           creatable
           getCreateLabel={(query) => `+ Add ${query}`}
           onCreate={(query) => {
             setOptions([...options, query]);
             return query;
           }}
-          label="What are your areas of interest?"
+          label="What are your areas of interest? Choose up to 3"
           {...form.getInputProps('areasOfInterest')}
         />
       </div>

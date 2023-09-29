@@ -8,7 +8,7 @@ import { ProgressionTile } from '@shared/components/tiles/ProgressionTile';
 import { useAppSelector } from '@state/store';
 import { selectProfileId, selectSelectedCareerPathId } from '@slices/userSlice';
 import { useGetCareerOverviewQuery } from '@apis/overviewApi';
-import { LoadingPage } from '@shared/components/LoadingPage';
+import { LoadingScreen } from '@shared/components/loadingScreen/LoadingScreen';
 
 import { OverviewSection } from './OverviewSection';
 import { overviewLinks } from './config/overviewConstants';
@@ -97,7 +97,7 @@ export const OverviewPage = () => {
   );
 
   if (isFetching) {
-    return <LoadingPage />;
+    return <LoadingScreen />;
   }
 
   if (!data) {

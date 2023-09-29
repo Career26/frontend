@@ -1,5 +1,5 @@
 import { CareerFormValues } from '@careerTest/careerTestTypes';
-import { DegreeGrade, DegreeLevel, Degree, WorkExperience, WorkStyle } from '@datatypes/profile';
+import { Degree, WorkExperience, WorkStyle } from '@datatypes/profile';
 import { IconCurrencyDollar, IconCurrencyPound, IconCurrencyYen } from '@tabler/icons-react';
 
 export const exampleCities = [
@@ -34,9 +34,32 @@ export const ratingOptions = [
   { value: '5', label: '5 - I loved it!' },
 ];
 
+export const ukDegreeGrades = [
+  'First Class (1st)',
+  'Second Class Upper (2:1)',
+  'Second Class Lower (2:2)',
+  'Third Class (3rd)',
+  'Pass',
+];
+
+export const usDegreeGrades = [
+  'GPA 3.8 - 4.0',
+  'GPA 3.3 - 3.7',
+  'GPA 2.7 - 3.2',
+  'GPA 2.0 - 2.6',
+  'GPA 1.0 - 1.9',
+];
+
+export const degreeLevels = ['PhD', 'MSc', 'MA', 'BSc', 'BA', 'MEng', 'BEng'];
+
+export const degreeOptions = [
+  ...ukDegreeGrades.map((label) => ({ label, value: label, group: 'UK Grading' })),
+  ...usDegreeGrades.map((label) => ({ label, value: label, group: 'US Grading' })),
+];
+
 export const initialUniversityValues: Degree = {
-  grade: DegreeGrade.FIRST,
-  level: DegreeLevel.BA,
+  grade: ukDegreeGrades[0],
+  level: degreeLevels[0],
   name: '',
   university: '',
 };

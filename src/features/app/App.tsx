@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
-import { LoadingPage } from '@shared/components/LoadingPage';
+import { LoadingScreen } from '@shared/components/loadingScreen/LoadingScreen';
 import { urls } from '@shared/config/urlConstants';
 import { PageHeader } from '@shared/components/pageHeader/PageHeader';
 import { useAppSelector } from '@state/store';
@@ -21,7 +21,7 @@ export const App = () => {
 
   return (
     <BrowserRouter>
-      <Suspense fallback={<LoadingPage />}>
+      <Suspense fallback={<LoadingScreen />}>
         <PageHeader authenticated={authenticated} signOut={signOut} />
         <Switch>
           <Route

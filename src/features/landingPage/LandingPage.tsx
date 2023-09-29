@@ -11,6 +11,7 @@ import careerProgressImg from './assets/careerProgress.svg';
 import successImg from './assets/success.svg';
 import { landingPageStyles } from './landinPageStyles';
 import { featureList, featuresTag, pricingTag } from './config/landingPageConstants';
+import { LoadingScreen } from '@shared/components/loadingScreen/LoadingScreen';
 
 export const LandingPage = () => {
   const { classes } = landingPageStyles();
@@ -18,7 +19,7 @@ export const LandingPage = () => {
   const history = useHistory();
 
   const takeTest = () => history.push(urls.careersTest);
-
+  return <LoadingScreen />;
   return (
     <Shell>
       <>

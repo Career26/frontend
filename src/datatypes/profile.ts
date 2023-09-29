@@ -1,11 +1,11 @@
 import { CareerPath } from './career';
 
 export enum DegreeGrade {
-  FIRST = 'First Class (1st)',
-  UPPER_SECOND = 'Second Class Upper (2:1)',
-  LOWER_SECOND = 'Second Class Lower (2:2)',
-  THIRD = 'Third Class (3rd)',
-  PASS = 'Pass',
+  FIRST = 'First Class (1st) - GPA 4.0',
+  UPPER_SECOND = 'Second Class Upper (2:1) - GPA 3.3',
+  LOWER_SECOND = 'Second Class Lower (2:2) - GPA 2.7',
+  THIRD = 'Third Class (3rd) - GPA 2.0',
+  PASS = 'Pass - GPA 1.0',
 }
 
 export enum DegreeLevel {

@@ -88,11 +88,17 @@ export const CareerTest = () => {
                     <Button
                       onClick={clickBack}
                       disabled={activeStep === CareerStep.EDUCATION || isLoading}
+                      variant="light"
                     >
                       Back
                     </Button>
                   )}
-                  <Button onClick={clickNext} disabled={isLoading} loading={isLoading}>
+                  <Button
+                    onClick={clickNext}
+                    disabled={isLoading}
+                    loading={isLoading}
+                    variant="outline"
+                  >
                     {nextLabel}
                   </Button>
                 </Group>

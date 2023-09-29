@@ -1,19 +1,17 @@
 /* src/App.css */
 
-body {
+.container {
   margin: 0;
   padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  overflow: hidden;
 }
 
 .splash {
-  position: absolute;
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
 }
 
 .circle {

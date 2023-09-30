@@ -5,6 +5,7 @@ import { useGenerateProfileMutation } from '@apis/profileApi';
 import { setLoginModal, setProfile } from '@slices/userSlice';
 import { useAppDispatch } from '@state/store';
 import { formStyles } from '@shared/styles/formStyles';
+import { LoadingScreen } from '@shared/components/loadingScreen/LoadingScreen';
 
 import { EducationForm } from './components/educationForm/EducationForm';
 import { WorkExperienceForm } from './components/workExperienceForm/WorkExperienceForm';
@@ -12,7 +13,6 @@ import { PreferencesForm } from './components/preferencesForm/PreferencesForm';
 import { useProfileForm } from './hooks/useProfileForm';
 import { CareerPathsForm } from './components/careerPathsForm/CareerPathsForm';
 import { CareerTestHeader } from './components/CareerTestHeader';
-import { SplashPage } from './components/SlashPage';
 import { CareerStep } from './careerTestTypes';
 import { CareerTestResults } from './components/CareerTestResults';
 
@@ -81,7 +81,7 @@ export const CareerTest = () => {
 
         <Container>
           {isLoading ? (
-            <SplashPage />
+            <LoadingScreen />
           ) : (
             <>
               {activeStep === CareerStep.EDUCATION && <EducationForm form={form} />}

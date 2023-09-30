@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text } from '@mantine/core';
-import { questionFormStyles } from '@careerTest/styles/careeerTestStyles';
+import { questionFormStyles } from '@careerTest/styles/careerTestStyles';
 import { CareerFormProps } from '@careerTest/careerTestTypes';
 
 import { AreasOfInterestForm } from './AreasofInterestForm';

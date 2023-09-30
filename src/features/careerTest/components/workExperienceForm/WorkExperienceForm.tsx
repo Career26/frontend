@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Container, Divider, Group, Text } from '@mantine/core';
 import { IconPlus } from '@tabler/icons-react';
 import { initialWorkExperienceValues } from '@careerTest/config/formConstants';
-import { questionFormStyles } from '@careerTest/styles/careeerTestStyles';
+import { questionFormStyles } from '@careerTest/styles/careerTestStyles';
 import { CareerFormProps } from '@careerTest/careerTestTypes';
 
 import { CompanyForm } from './CompanyForm';

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Container, MultiSelect } from '@mantine/core';
 import { exampleAreasOfInterest } from '@careerTest/config/formConstants';
-import { questionFormStyles } from '@careerTest/styles/careeerTestStyles';
+import { questionFormStyles } from '@careerTest/styles/careerTestStyles';
 import { CareerFormProps } from '@careerTest/careerTestTypes';
 
 export const AreasOfInterestForm = ({ form }: { form: CareerFormProps }) => {

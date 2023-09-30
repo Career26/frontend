@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '@state/store';
 import { useMemo } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 
-const useCareerNavigation = () => {
+export const usePageNavigation = () => {
   const history = useHistory();
   const dispatch = useAppDispatch();
   const { pathname: currentPathname } = useLocation();
@@ -55,5 +55,3 @@ const useCareerNavigation = () => {
     currentPathname,
   };
 };
-
-export default useCareerNavigation;

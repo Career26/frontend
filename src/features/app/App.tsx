@@ -6,7 +6,7 @@ import { PageHeader } from '@shared/components/pageHeader/PageHeader';
 import { useAppSelector } from '@state/store';
 import { selectSelectedCareerPathId } from '@slices/userSlice';
 import { selectSelectedInterviewId } from '@slices/interviewSlice';
-import { useSession } from '@shared/hooks/useSession';
+import { useAuthUser } from '@shared/hooks/useAuthUser';
 
 import { HomePage } from '../homePage/HomePage';
 import { LandingPage } from '../landingPage/LandingPage';
@@ -17,7 +17,7 @@ import { InterviewPage } from '../interview/InterviewPage';
 export const App = () => {
   const defaultCareerId = useAppSelector(selectSelectedCareerPathId);
   const defaultInterviewId = useAppSelector(selectSelectedInterviewId);
-  const { authenticated, signOut } = useSession();
+  const { authenticated, signOut } = useAuthUser();
 
   return (
     <BrowserRouter>

@@ -27,7 +27,7 @@ export const App = () => {
     if (!careerPaths) {
       return;
     }
-    const industries = Object.keys(careerPaths);
+    const industries = Object.values(careerPaths).map(({ industry }) => industry);
     dispatch(addIndustryColors(industries));
   }, [careerPaths]);
 

@@ -19,7 +19,7 @@ export const App = () => {
   const dispatch = useAppDispatch();
   const defaultCareerId = useAppSelector(selectSelectedCareerPathId);
   const defaultInterviewId = useAppSelector(selectSelectedInterviewId);
-  const { authenticated, signOut } = useAuthUser();
+  const { authenticated, unauthenticated, signOut } = useAuthUser();
 
   const careerPaths = useAppSelector(selectCareerPaths);
 
@@ -39,7 +39,15 @@ export const App = () => {
           <Route
             path={urls.landingPage}
             exact
-            component={!authenticated ? LandingPage : HomePage}
+            render={() => {
+              if (authenticated) {
+                return <HomePage />;
+              }
+              if (unauthenticated) {
+                return <LandingPage />;
+              }
+              return <LoadingScreen />;
+            }}
           />
           <Route path={urls.careersTest} component={CareerTest} />
           <Route
@@ -49,8 +57,11 @@ export const App = () => {
                 params: { careerId },
               },
             }) => {
-              if (!authenticated) {
+              if (unauthenticated) {
                 return <Redirect to={urls.landingPage} />;
+              }
+              if (!authenticated) {
+                return <LoadingScreen />;
               }
               if (!careerId) {
                 return <Redirect to={`${urls.overview}/${defaultCareerId}`} />;
@@ -65,8 +76,11 @@ export const App = () => {
                 params: { careerId, interviewId },
               },
             }) => {
-              if (!authenticated) {
+              if (unauthenticated) {
                 return <Redirect to={urls.landingPage} />;
+              }
+              if (!authenticated) {
+                return <LoadingScreen />;
               }
               if (!careerId) {
                 return <Redirect to={`${urls.interviews}/${defaultCareerId}}`} />;

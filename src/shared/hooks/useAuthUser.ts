@@ -8,6 +8,7 @@ export const useAuthUser = () => {
   const { open } = useAppSelector(selectLoginModal);
   const { signOut, user, authStatus } = useAuthenticator((context) => [context.route]);
   const authenticated = authStatus === 'authenticated';
+  const unauthenticated = authStatus === 'unauthenticated';
 
   useEffect(() => {
     if (authenticated && open) {
@@ -16,6 +17,7 @@ export const useAuthUser = () => {
   }, [authenticated, signOut]);
 
   return {
+    unauthenticated,
     authenticated,
     user,
     signOut,

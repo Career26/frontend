@@ -3,13 +3,13 @@ import { Navbar, Button, createStyles, rem } from '@mantine/core';
 import { useActiveNavScroll } from '@shared/hooks/useActiveNavScroll';
 import classNames from 'classnames';
 import { Shell } from '@shared/components/shell/Shell';
-import { HEADER_HEIGHT } from '@shared/components/pageHeader/pageHeaderStyles';
 import { ProgressionTile } from '@shared/components/tiles/ProgressionTile';
 import { useAppSelector } from '@state/store';
 import { selectProfileId, selectSelectedCareerPathId } from '@slices/userSlice';
 import { useGetCareerOverviewQuery } from '@apis/overviewApi';
 import { LoadingScreen } from '@shared/components/loadingScreen/LoadingScreen';
 import { navStyles } from '@shared/styles/navStyles';
+import { featureStyles } from '@shared/styles/featureStyles';
 
 import { OverviewSection } from './OverviewSection';
 import { overviewLinks } from './config/overviewConstants';
@@ -18,24 +18,7 @@ import { TopEmployersTile } from './tiles/TopEmployersTile';
 import { RoleOverviewTile } from './tiles/RoleOverviewTile';
 import { OverlapsTile } from './tiles/OverlapsTile';
 
-const NAVBAR_WIDTH = rem(250);
-
 const overviewStyles = createStyles((theme) => ({
-  wrapper: {
-    '.mantine-AppShell-main': {
-      [theme.fn.smallerThan('md')]: {
-        '> div': {
-          paddingLeft: '0 !important',
-        },
-      },
-    },
-  },
-  content: {
-    height: '420vh',
-    flexDirection: 'column',
-    paddingLeft: `${NAVBAR_WIDTH} !important`,
-    paddingTop: HEADER_HEIGHT,
-  },
   icon: {
     paddingRight: rem(20),
   },
@@ -49,6 +32,7 @@ export const OverviewPage = () => {
   const { activeAnchor } = useActiveNavScroll({ navItems: overviewLinks });
   const { classes } = overviewStyles();
   const { classes: navClasses } = navStyles();
+  const { classes: featureClasses } = featureStyles();
   const profileId = useAppSelector(selectProfileId);
   const careerId = useAppSelector(selectSelectedCareerPathId);
   const { data, isFetching } = useGetCareerOverviewQuery(
@@ -65,7 +49,7 @@ export const OverviewPage = () => {
   }
 
   return (
-    <div className={classes.wrapper}>
+    <div className={featureClasses.wrapper}>
       <Shell
         navbar={
           <Navbar height={400} p="xs" className={navClasses.navBar}>
@@ -88,7 +72,7 @@ export const OverviewPage = () => {
           </Navbar>
         }
       >
-        <div className={classes.content}>
+        <div className={featureClasses.content}>
           {overviewLinks.map(({ label, Icon, anchor }) => (
             <OverviewSection label={label} Icon={Icon} anchor={anchor} key={`career-${label}`}>
               {anchor === 'progression' && (

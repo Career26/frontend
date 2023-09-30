@@ -1,44 +1,21 @@
-import { Button, Navbar, ScrollArea, createStyles, rem } from '@mantine/core';
+import { Button, Navbar, ScrollArea } from '@mantine/core';
 import { mockInterviewQuestions } from '@mocks/interviewMocks';
-import { HEADER_HEIGHT } from '@shared/components/pageHeader/pageHeaderStyles';
 import { Shell } from '@shared/components/shell/Shell';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
+import { featureStyles } from '@shared/styles/featureStyles';
 import { navStyles } from '@shared/styles/navStyles';
 import { selectSelectedInterviewId } from '@slices/interviewSlice';
 import { useAppSelector } from '@state/store';
 import classNames from 'classnames';
 import React from 'react';
 
-const NAVBAR_WIDTH = rem(250);
-
-const interviewPageStyles = createStyles((theme) => ({
-  wrapper: {
-    '.mantine-AppShell-main': {
-      [theme.fn.smallerThan('md')]: {
-        '> div': {
-          paddingLeft: '0 !important',
-        },
-      },
-    },
-  },
-  scrollArea: {
-    height: '100%',
-  },
-  content: {
-    height: '420vh',
-    flexDirection: 'column',
-    paddingLeft: `${NAVBAR_WIDTH} !important`,
-    paddingTop: HEADER_HEIGHT,
-  },
-}));
-
 export const InterviewPage = () => {
-  const { classes } = interviewPageStyles();
+  const { classes: featureClasses } = featureStyles();
   const { classes: navClasses } = navStyles();
   const { toggleInterviewId } = usePageNavigation();
   const selectedInterviewId = useAppSelector(selectSelectedInterviewId);
   return (
-    <div className={classes.wrapper}>
+    <div className={featureClasses.wrapper}>
       <Shell
         navbar={
           <Navbar p="xs" className={navClasses.navBar}>
@@ -60,7 +37,7 @@ export const InterviewPage = () => {
           </Navbar>
         }
       >
-        <div className={classes.content}>Hello</div>
+        <div className={featureClasses.content}>Hello</div>
       </Shell>
     </div>
   );

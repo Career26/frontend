@@ -5,10 +5,10 @@ import { urls } from '@shared/config/urlConstants';
 import { Shell } from '@shared/components/shell/Shell';
 import { Feature } from '@shared/components/feature/Feature';
 import { Hero } from '@shared/components/hero/Hero';
+import careerProgressImg from '@assets/careerProgress.svg';
+import successImg from '@assets/success.svg';
 
 import { PricingTile } from './components/PricingTile';
-import careerProgressImg from './assets/careerProgress.svg';
-import successImg from './assets/success.svg';
 import { landingPageStyles } from './landinPageStyles';
 import { featureList, featuresTag, pricingTag } from './config/landingPageConstants';
 

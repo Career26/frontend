@@ -1,7 +1,7 @@
-import cvImg from '../assets/cv.svg';
-import careerPathsImg from '../assets/careerPaths.svg';
-import interviewImg from '../assets/interview.svg';
-import networkImg from '../assets/network.svg';
+import cvImg from '@assets/cv.svg';
+import careerPathsImg from '@assets/careerPaths.svg';
+import interviewImg from '@assets/interview.svg';
+import networkImg from '@assets/network.svg';
 
 export const featuresTag = 'features';
 export const pricingTag = 'pricing';

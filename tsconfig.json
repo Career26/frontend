@@ -20,7 +20,9 @@
       "@state/*": ["./src/state/*"],
       "@shared/*": ["./src/shared/*"],
       "@mocks/*": ["./src/mocks/*"],
-      "@careerTest/*": ["./src/features/careerTest/*"]
+      "@assets/*": ["./src/assets/*"],
+      "@careerTest/*": ["./src/features/careerTest/*"],
+      "@features/*": ["./src/features/*"]
     }
   }
 }

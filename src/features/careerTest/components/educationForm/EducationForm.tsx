@@ -2,14 +2,14 @@ import React from 'react';
 import { Group, Button, Text, Divider, Container } from '@mantine/core';
 import { IconPlus } from '@tabler/icons-react';
 import { initialUniversityValues } from '@careerTest/config/formConstants';
-import { questionFormStyles } from '@careerTest/styles/careerTestStyles';
+import { formStyles } from '@shared/styles/formStyles';
 import { CareerFormProps } from '@careerTest/careerTestTypes';
 
 import { UniversityForm } from './UniversityForm';
 import { RemoveRowButton } from '../RemoveRowButton';
 
 export const EducationForm = ({ form }: { form: CareerFormProps }) => {
-  const { classes } = questionFormStyles();
+  const { classes } = formStyles();
 
   const additionalDegreesCount = form.values.additionalDegrees.length;
 

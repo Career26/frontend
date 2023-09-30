@@ -1,43 +1,20 @@
 import { Text, Grid, Container } from '@mantine/core';
-import React, { useState } from 'react';
-import { questionFormStyles } from '@careerTest/styles/careerTestStyles';
+import React from 'react';
+import { formStyles } from '@shared/styles/formStyles';
 import { useAppSelector } from '@state/store';
-import { selectCareerPaths, selectProfileId } from '@slices/userSlice';
+import { selectCareerPaths } from '@slices/userSlice';
 import { Shell } from '@shared/components/shell/Shell';
-import { useSelectCareerMutation } from '@apis/profileApi';
 import { CareerCard } from '@shared/components/cards/CareerCard';
 import { selectIndustryColors } from '@slices/careerSlice';
+import { useCareerSelection } from '@careerTest/hooks/useCareerSelection';
 
 import { CareerPathActions } from './CareerPathActions';
 
 export const CareerPathsForm = () => {
-  const { classes } = questionFormStyles();
+  const { classes } = formStyles();
   const careerPaths = useAppSelector(selectCareerPaths);
-  const [selectedCareers, setSelectedCareers] = useState<string[]>([]);
-  const profileIdentifier = useAppSelector(selectProfileId);
-  const [selectCareer] = useSelectCareerMutation();
-  const [loadingCareers, setLoadingCareers] = useState<string[]>([]);
   const industryColors = useAppSelector(selectIndustryColors);
-
-  const toggleSelectedCareer = async (careerIdentifier: string) => {
-    if (!profileIdentifier) {
-      return;
-    }
-    const selected = selectedCareers.includes(careerIdentifier);
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    const { error } = await selectCareer({ careerIdentifier, profileIdentifier, selected });
-    if (error) {
-      // eslint-disable-next-line no-console
-      console.error(`select endpoint did not return data, response: ${error}`);
-      return;
-    }
-    if (selected) {
-      setSelectedCareers(selectedCareers.filter((id) => id !== careerIdentifier));
-    } else {
-      setSelectedCareers([...selectedCareers, careerIdentifier]);
-    }
-  };
+  const { selectedCareers, toggleSelectedCareer, loadingCareers } = useCareerSelection();
 
   return (
     <Shell>
@@ -57,11 +34,7 @@ export const CareerPathsForm = () => {
                   <CareerPathActions
                     loading={loadingCareers.includes(careerId)}
                     selected={selectedCareers.includes(careerId)}
-                    onClickAction={async () => {
-                      setLoadingCareers([...loadingCareers, careerId]);
-                      await toggleSelectedCareer(careerId);
-                      setLoadingCareers(loadingCareers.filter((id) => id !== careerId));
-                    }}
+                    onClickAction={() => toggleSelectedCareer(careerId)}
                   />
                 }
               />

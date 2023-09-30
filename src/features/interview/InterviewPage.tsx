@@ -2,7 +2,7 @@ import { Button, Navbar, ScrollArea, createStyles, rem } from '@mantine/core';
 import { mockInterviewQuestions } from '@mocks/interviewMocks';
 import { HEADER_HEIGHT } from '@shared/components/pageHeader/pageHeaderStyles';
 import { Shell } from '@shared/components/shell/Shell';
-import useCareerNavigation from '@shared/hooks/useCareerNavigation';
+import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 import { selectSelectedInterviewId } from '@slices/interviewSlice';
 import { useAppSelector } from '@state/store';
 import classNames from 'classnames';
@@ -70,7 +70,7 @@ const interviewPageStyles = createStyles((theme) => ({
 
 export const InterviewPage = () => {
   const { classes } = interviewPageStyles();
-  const { toggleInterviewId } = useCareerNavigation();
+  const { toggleInterviewId } = usePageNavigation();
   const selectedInterviewId = useAppSelector(selectSelectedInterviewId);
   return (
     <div className={classes.wrapper}>

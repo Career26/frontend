@@ -1,5 +1,5 @@
 import { Select, createStyles } from '@mantine/core';
-import useCareerNavigation from '@shared/hooks/useCareerNavigation';
+import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 import { selectCareerPaths, selectSelectedCareerPathId } from '@slices/userSlice';
 import { useAppSelector } from '@state/store';
 import React from 'react';
@@ -15,7 +15,7 @@ const navigationStyles = createStyles({
 
 export const CareerNavigation = () => {
   const { classes } = navigationStyles();
-  const { toggleCareerId, showNavigation } = useCareerNavigation();
+  const { toggleCareerId, showNavigation } = usePageNavigation();
   const careerPaths = useAppSelector(selectCareerPaths);
   const selectedCareerPathId = useAppSelector(selectSelectedCareerPathId);
 

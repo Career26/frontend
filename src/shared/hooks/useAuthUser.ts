@@ -3,7 +3,7 @@ import { selectLoginModal, setLoginModal } from '@slices/userSlice';
 import { useAppDispatch, useAppSelector } from '@state/store';
 import { useEffect } from 'react';
 
-export const useSession = () => {
+export const useAuthUser = () => {
   const dispatch = useAppDispatch();
   const { open } = useAppSelector(selectLoginModal);
   const { signOut, user, authStatus } = useAuthenticator((context) => [context.route]);

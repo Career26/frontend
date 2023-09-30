@@ -1,6 +1,6 @@
 import React from 'react';
 import { Header, Group, Button, Text, Avatar, Menu } from '@mantine/core';
-import useCareerNavigation from '@shared/hooks/useCareerNavigation';
+import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 import { useAppDispatch } from '@state/store';
 import { setLoginModal } from '@slices/userSlice';
 import { IconLogout } from '@tabler/icons-react';
@@ -19,7 +19,7 @@ export const PageHeader = ({
 }) => {
   const dispatch = useAppDispatch();
   const { classes } = pageHeaderStyles();
-  const { clickCareersTest, clickLogo } = useCareerNavigation();
+  const { clickCareersTest, clickLogo } = usePageNavigation();
 
   const onClickLogin = () => {
     dispatch(setLoginModal({ open: true, initialState: 'signIn' }));

@@ -5,7 +5,7 @@ import { IconLayoutDashboard } from '@tabler/icons-react';
 import { useHistory } from 'react-router-dom';
 import { featureTiles } from '@shared/config/featureConstants';
 import classNames from 'classnames';
-import useCareerNavigation from '@shared/hooks/useCareerNavigation';
+import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 
 const navigationStyles = createStyles((theme) => ({
   navItem: {
@@ -64,7 +64,7 @@ export const NavigationCenter = () => {
   const [opened, { open, close }] = useDisclosure(false);
   const history = useHistory();
 
-  const { currentPathname } = useCareerNavigation();
+  const { currentPathname } = usePageNavigation();
 
   useEffect(() => {
     close();

@@ -1,6 +1,6 @@
 import { Text, Grid, Container } from '@mantine/core';
 import React, { useState } from 'react';
-import { questionFormStyles } from '@careerTest/styles/careerTestStyles';
+import { formStyles } from '@shared/styles/formStyles';
 import { useAppSelector } from '@state/store';
 import { selectCareerPaths, selectProfileId } from '@slices/userSlice';
 import { Shell } from '@shared/components/shell/Shell';
@@ -11,7 +11,7 @@ import { selectIndustryColors } from '@slices/careerSlice';
 import { CareerPathActions } from './CareerPathActions';
 
 export const CareerPathsForm = () => {
-  const { classes } = questionFormStyles();
+  const { classes } = formStyles();
   const careerPaths = useAppSelector(selectCareerPaths);
   const [selectedCareers, setSelectedCareers] = useState<string[]>([]);
   const profileIdentifier = useAppSelector(selectProfileId);

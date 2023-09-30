@@ -2,11 +2,11 @@ import React from 'react';
 import { Checkbox, Container, NumberInput, Select } from '@mantine/core';
 import { WorkStyle } from '@datatypes/profile';
 import { exampleCities } from '@careerTest/config/formConstants';
-import { questionFormStyles } from '@careerTest/styles/careerTestStyles';
+import { formStyles } from '@shared/styles/formStyles';
 import { CareerFormProps } from '@careerTest/careerTestTypes';
 
 export const WorkStyleForm = ({ form }: { form: CareerFormProps }) => {
-  const { classes } = questionFormStyles();
+  const { classes } = formStyles();
 
   const Icon = exampleCities.find((item) => item.value === form.values.expectedSalary.city)?.Icon;
 

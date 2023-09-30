@@ -1,6 +1,6 @@
 import { createStyles, rem } from '@mantine/core';
 
-export const questionFormStyles = createStyles((theme) => ({
+export const formStyles = createStyles((theme) => ({
   titleContainer: {
     paddingTop: rem(80),
     [theme.fn.smallerThan('md')]: {

@@ -4,13 +4,13 @@ import { Shell } from '@shared/components/shell/Shell';
 import { useGenerateProfileMutation } from '@apis/profileApi';
 import { setLoginModal, setProfile } from '@slices/userSlice';
 import { useAppDispatch } from '@state/store';
+import { formStyles } from '@shared/styles/formStyles';
 
 import { EducationForm } from './components/educationForm/EducationForm';
 import { WorkExperienceForm } from './components/workExperienceForm/WorkExperienceForm';
 import { PreferencesForm } from './components/preferencesForm/PreferencesForm';
 import { useProfileForm } from './hooks/useProfileForm';
 import { CareerPathsForm } from './components/careerPathsForm/CareerPathsForm';
-import { questionFormStyles } from './styles/careerTestStyles';
 import { CareerTestHeader } from './components/CareerTestHeader';
 import { SplashPage } from './components/SlashPage';
 import { CareerStep } from './careerTestTypes';
@@ -22,7 +22,7 @@ export const CareerTest = () => {
   const dispatch = useAppDispatch();
   const [activeStep, setActiveStep] = useState(CareerStep.EDUCATION);
   const [generateProfile, { data, isLoading }] = useGenerateProfileMutation();
-  const { classes } = questionFormStyles();
+  const { classes } = formStyles();
   const { form, checkFormIsValid } = useProfileForm({ activeStep });
 
   useEffect(() => {

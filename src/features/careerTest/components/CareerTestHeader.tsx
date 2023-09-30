@@ -2,8 +2,7 @@ import React from 'react';
 import { Container, Text } from '@mantine/core';
 import { IconWriting, IconRoute, IconTrophy } from '@tabler/icons-react';
 import { Tile } from '@shared/components/tiles/Tile';
-
-import { questionFormStyles } from '../styles/careerTestStyles';
+import { formStyles } from '@shared/styles/formStyles';
 
 const headerTiles = [
   {
@@ -27,7 +26,7 @@ const headerTiles = [
 ];
 
 export const CareerTestHeader = () => {
-  const { classes } = questionFormStyles();
+  const { classes } = formStyles();
   return (
     <Container className={classes.titleContainer}>
       <Text className={classes.titleText}>Free Career Path Test</Text>

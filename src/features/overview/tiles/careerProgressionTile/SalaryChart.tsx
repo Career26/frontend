@@ -10,6 +10,7 @@ import {
   ResponsiveContainer,
   CartesianGrid,
 } from 'recharts';
+import { boxShadow } from '@shared/styles/commonStyles';
 
 import { TooltipContent } from './TooltipContent';
 import { getVerticalFill, getYLabel } from './progressionUtil';
@@ -21,8 +22,7 @@ const salaryChartStyles = createStyles({
     borderRadius: rem(10),
     padding: rem(10),
     border: '0.0625rem solid #dee2e6',
-    boxShadow:
-      '0 0.0625rem 0.1875rem rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05) 0 1.25rem 1.5625rem -0.3125rem, rgba(0, 0, 0, 0.04) 0 0.625rem 0.625rem -0.3125rem',
+    boxShadow,
   },
 });
 

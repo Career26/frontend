@@ -20,14 +20,6 @@ export const pageHeaderStyles = createStyles((theme) => ({
       cursor: 'pointer',
     },
   },
-  userAvatar: {
-    '&:hover': {
-      color: 'red',
-      cursor: 'pointer',
-      boxShadow:
-        '0 0.0625rem 0.1875rem rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05) 0 1.25rem 1.5625rem -0.3125rem, rgba(0, 0, 0, 0.04) 0 0.625rem 0.625rem -0.3125rem',
-    },
-  },
   menuItemIcon: {
     width: rem(14),
     height: rem(14),

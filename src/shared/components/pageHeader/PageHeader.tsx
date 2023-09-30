@@ -4,6 +4,7 @@ import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 import { useAppDispatch } from '@state/store';
 import { setLoginModal } from '@slices/userSlice';
 import { IconLogout } from '@tabler/icons-react';
+import { commonStyles } from '@shared/styles/commonStyles';
 
 import { LoginModal } from '../login/LoginModal';
 import { pageHeaderStyles } from './pageHeaderStyles';
@@ -18,6 +19,7 @@ export const PageHeader = ({
   authenticated: boolean;
 }) => {
   const dispatch = useAppDispatch();
+  const { classes: commonClasses } = commonStyles();
   const { classes } = pageHeaderStyles();
   const { clickCareersTest, clickLogo } = usePageNavigation();
 
@@ -61,7 +63,7 @@ export const PageHeader = ({
             <NavigationCenter />
             <Menu shadow="md" width={200}>
               <Menu.Target>
-                <Avatar radius="xl" className={classes.userAvatar} />
+                <Avatar radius="xl" className={commonClasses.hoverIcon} />
               </Menu.Target>
 
               <Menu.Dropdown>

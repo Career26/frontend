@@ -4,7 +4,7 @@ import { questionFormStyles } from '@careerTest/styles/careerTestStyles';
 import { useAppSelector } from '@state/store';
 import { selectCareerPaths, selectProfileId } from '@slices/userSlice';
 import { Shell } from '@shared/components/shell/Shell';
-import { useSelectCareerMutation } from '@apis/profile';
+import { useSelectCareerMutation } from '@apis/profileApi';
 
 import { CareerPathTile } from './CareerPathTile';
 

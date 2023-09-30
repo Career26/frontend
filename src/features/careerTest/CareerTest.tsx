@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Container, Group, Button, Stepper } from '@mantine/core';
 import { Shell } from '@shared/components/shell/Shell';
-import { useGenerateProfileMutation } from '@apis/profile';
+import { useGenerateProfileMutation } from '@apis/profileApi';
 import { setLoginModal, setProfile } from '@slices/userSlice';
 import { useAppDispatch } from '@state/store';
 

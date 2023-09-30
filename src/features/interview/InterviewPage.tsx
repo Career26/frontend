@@ -3,6 +3,7 @@ import { mockInterviewQuestions } from '@mocks/interviewMocks';
 import { HEADER_HEIGHT } from '@shared/components/pageHeader/pageHeaderStyles';
 import { Shell } from '@shared/components/shell/Shell';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
+import { navStyles } from '@shared/styles/navStyles';
 import { selectSelectedInterviewId } from '@slices/interviewSlice';
 import { useAppSelector } from '@state/store';
 import classNames from 'classnames';
@@ -20,43 +21,6 @@ const interviewPageStyles = createStyles((theme) => ({
       },
     },
   },
-  navBar: {
-    width: NAVBAR_WIDTH,
-    height: `calc(100% - ${HEADER_HEIGHT})`,
-    [theme.fn.smallerThan('md')]: {
-      display: 'none',
-    },
-  },
-  navLink: {
-    display: 'flex',
-    flexDirection: 'column',
-    '> button': {
-      textDecoration: 'none',
-      ':not(:first-of-type)': { paddingTop: rem(20) },
-      paddingLeft: rem(10),
-      paddingRight: rem(10),
-    },
-  },
-  navButton: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'flex',
-    alignItems: 'center',
-    width: '100%',
-    height: rem(60),
-    backgroundColor: 'white',
-    color: theme.colors.gray[9],
-    '&:hover': {
-      backgroundColor: theme.colors.blue[1],
-    },
-  },
-  active: {
-    backgroundColor: theme.colors.blue[6],
-    color: 'white',
-    '&:hover': {
-      backgroundColor: theme.colors.blue[4],
-    },
-  },
   scrollArea: {
     height: '100%',
   },
@@ -70,21 +34,22 @@ const interviewPageStyles = createStyles((theme) => ({
 
 export const InterviewPage = () => {
   const { classes } = interviewPageStyles();
+  const { classes: navClasses } = navStyles();
   const { toggleInterviewId } = usePageNavigation();
   const selectedInterviewId = useAppSelector(selectSelectedInterviewId);
   return (
     <div className={classes.wrapper}>
       <Shell
         navbar={
-          <Navbar p="xs" className={classes.navBar}>
-            <Navbar.Section grow mt="md" className={classes.navLink}>
+          <Navbar p="xs" className={navClasses.navBar}>
+            <Navbar.Section grow mt="md" className={navClasses.navLink}>
               <ScrollArea h="80vh">
                 {Object.entries(mockInterviewQuestions).map(([id, { title }]) => (
                   <Button
                     onClick={() => toggleInterviewId(id)}
                     key={title}
-                    className={classNames(classes.navButton, {
-                      [classes.active]: selectedInterviewId === id,
+                    className={classNames(navClasses.navButton, navClasses.linkAction, {
+                      [navClasses.active]: selectedInterviewId === id,
                     })}
                   >
                     {title}

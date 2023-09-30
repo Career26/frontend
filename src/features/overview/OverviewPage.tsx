@@ -9,6 +9,7 @@ import { useAppSelector } from '@state/store';
 import { selectProfileId, selectSelectedCareerPathId } from '@slices/userSlice';
 import { useGetCareerOverviewQuery } from '@apis/overviewApi';
 import { LoadingScreen } from '@shared/components/loadingScreen/LoadingScreen';
+import { navStyles } from '@shared/styles/navStyles';
 
 import { OverviewSection } from './OverviewSection';
 import { overviewLinks } from './config/overviewConstants';
@@ -35,51 +36,9 @@ const overviewStyles = createStyles((theme) => ({
     paddingLeft: `${NAVBAR_WIDTH} !important`,
     paddingTop: HEADER_HEIGHT,
   },
-  navBar: {
-    width: NAVBAR_WIDTH,
-    height: `calc(100% - ${HEADER_HEIGHT})`,
-    [theme.fn.smallerThan('md')]: {
-      display: 'none',
-    },
-  },
-
-  navLink: {
-    display: 'flex',
-    flexDirection: 'column',
-    '> a': {
-      textDecoration: 'none',
-      ':not(:first-of-type)': { paddingTop: rem(20) },
-      paddingLeft: rem(10),
-      paddingRight: rem(10),
-    },
-  },
-
-  navButton: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'flex',
-    alignItems: 'center',
-    width: '100%',
-    height: rem(60),
-    backgroundColor: 'white',
-    color: theme.colors.gray[9],
-    '&:hover': {
-      backgroundColor: theme.colors.blue[1],
-    },
-  },
-
-  active: {
-    backgroundColor: theme.colors.blue[6],
-    color: 'white',
-    '&:hover': {
-      backgroundColor: theme.colors.blue[4],
-    },
-  },
-
   icon: {
     paddingRight: rem(20),
   },
-
   subHeader: {
     fontSize: rem(17),
     color: theme.colors.gray[7],
@@ -89,6 +48,7 @@ const overviewStyles = createStyles((theme) => ({
 export const OverviewPage = () => {
   const { activeAnchor } = useActiveNavScroll({ navItems: overviewLinks });
   const { classes } = overviewStyles();
+  const { classes: navClasses } = navStyles();
   const profileId = useAppSelector(selectProfileId);
   const careerId = useAppSelector(selectSelectedCareerPathId);
   const { data, isFetching } = useGetCareerOverviewQuery(
@@ -108,13 +68,13 @@ export const OverviewPage = () => {
     <div className={classes.wrapper}>
       <Shell
         navbar={
-          <Navbar height={400} p="xs" className={classes.navBar}>
-            <Navbar.Section grow mt="md" className={classes.navLink}>
+          <Navbar height={400} p="xs" className={navClasses.navBar}>
+            <Navbar.Section grow mt="md" className={navClasses.navLink}>
               {overviewLinks.map(({ label, Icon, anchor }) => (
-                <a href={`#${anchor}`} key={`link-${label}`}>
+                <a href={`#${anchor}`} key={`link-${label}`} className={navClasses.linkAction}>
                   <Button
-                    className={classNames(classes.navButton, {
-                      [classes.active]: activeAnchor === anchor,
+                    className={classNames(navClasses.navButton, {
+                      [navClasses.active]: activeAnchor === anchor,
                     })}
                   >
                     <div className={classes.icon}>

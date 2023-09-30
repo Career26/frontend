@@ -11,6 +11,7 @@ export const AreasOfInterestForm = ({ form }: { form: CareerFormProps }) => {
     <Container className={classes.questionContainer}>
       <div className={classes.questionInput}>
         <MultiSelect
+          {...form.getInputProps('areasOfInterest')}
           data={options}
           searchable
           clearable
@@ -23,7 +24,6 @@ export const AreasOfInterestForm = ({ form }: { form: CareerFormProps }) => {
             return query;
           }}
           label="What are your areas of interest? Choose up to 3"
-          {...form.getInputProps('areasOfInterest')}
         />
       </div>
     </Container>

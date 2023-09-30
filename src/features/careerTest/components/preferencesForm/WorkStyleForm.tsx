@@ -23,28 +23,29 @@ export const WorkStyleForm = ({ form }: { form: CareerFormProps }) => {
     <Container className={classes.questionContainer}>
       <div className={classes.row}>
         <Select
+          {...form.getInputProps('personalityType.workStyle')}
           label="What is your preferred working style?"
           withAsterisk
           className={classes.questionInput}
           data={Object.entries(WorkStyle).map(([label, value]) => ({ label, value }))}
-          {...form.getInputProps('personalityType.workStyle')}
         />
         <Checkbox
+          {...form.getInputProps('personalityType.workLifeBalanceSacrifice')}
           className={classes.checkbox}
           label="Would you sacrifice your work-life balance?"
-          {...form.getInputProps('personalityType.workLifeBalanceSacrifice')}
         />
       </div>
       <div className={classes.row}>
         <Select
+          {...form.getInputProps('expectedSalary.city')}
           label="City"
           className={classes.questionInput}
           data={exampleCities}
           withAsterisk
-          {...form.getInputProps('expectedSalary.city')}
           onChange={onSelectCity}
         />
         <NumberInput
+          {...form.getInputProps('expectedSalary.expectedSalary')}
           label="What is your expected salary?"
           withAsterisk
           icon={Icon && <Icon color="gray" size={20} />}
@@ -54,7 +55,6 @@ export const WorkStyleForm = ({ form }: { form: CareerFormProps }) => {
               ? `${value}`.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',')
               : ''
           }
-          {...form.getInputProps('expectedSalary.expectedSalary')}
         />
       </div>
     </Container>

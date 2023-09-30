@@ -3,6 +3,7 @@ import { Badge, Card, Stepper, createStyles, rem } from '@mantine/core';
 import React, { useMemo, useState } from 'react';
 import { IconEye } from '@tabler/icons-react';
 import classNames from 'classnames';
+import { cardStyles } from '@shared/styles/cardStyles';
 
 import { SalaryChart } from './SalaryChart';
 import { getGradient, getGradientLabel, getSelectedItem, getYLabel } from './progressionUtil';
@@ -15,25 +16,6 @@ type CareerProgressionTileProps = {
 const careerProgressionStyles = createStyles((theme) => ({
   container: {
     width: '20%',
-  },
-  cardContainer: {
-    height: '50%',
-  },
-  cardHeader: {
-    display: 'flex',
-    justifyContent: 'center',
-    fontWeight: 'bold',
-    fontSize: '16px',
-    padding: rem(10),
-    background: theme.colors.blue[4],
-    color: 'white',
-  },
-  cardBody: {
-    paddingTop: rem(10),
-    display: 'flex',
-    justifyContent: 'center',
-    flexDirection: 'column',
-    gap: rem(20),
   },
   active: {
     background: theme.colors.pink[3],
@@ -57,16 +39,17 @@ const SalaryCard = ({
   salaryProgression: CareerProgressionTileProps['salaryProgression'];
 }) => {
   const { classes } = careerProgressionStyles();
+  const { classes: cardClasses } = cardStyles();
   const color = active ? 'pink' : 'blue';
   return (
-    <Card className={classes.cardContainer} shadow="md" withBorder>
+    <Card className={cardClasses.cardContainer} shadow="md" withBorder>
       <Card.Section
         withBorder
-        className={classNames(classes.cardHeader, { [classes.active]: active })}
+        className={classNames(cardClasses.cardHeader, { [classes.active]: active })}
       >
         {header}
       </Card.Section>
-      <div className={classes.cardBody}>
+      <div className={cardClasses.cardBody}>
         <Badge size="lg" color={color}>
           Starting Salary: {getYLabel(startingMin)} - {getYLabel(startingMax)}
         </Badge>

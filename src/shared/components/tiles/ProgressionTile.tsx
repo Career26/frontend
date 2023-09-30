@@ -2,16 +2,7 @@ import { Badge, Card, Container, Stack, createStyles, rem } from '@mantine/core'
 import { IconArrowBigDownLines } from '@tabler/icons-react';
 import React from 'react';
 
-const useProgressionStyles = createStyles((theme) => ({
-  cardHeader: {
-    display: 'flex',
-    justifyContent: 'center',
-    fontWeight: 'bold',
-    fontSize: '24px',
-    padding: rem(10),
-    background: theme.colors.blue[4],
-    color: 'white',
-  },
+const useProgressionStyles = createStyles({
   cardContainer: {
     width: '35vh',
   },
@@ -23,7 +14,7 @@ const useProgressionStyles = createStyles((theme) => ({
     display: 'flex',
     gap: '24px',
   },
-}));
+});
 
 type ProgressionItem = { title: string; descriptions: string[] };
 

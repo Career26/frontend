@@ -2,8 +2,7 @@ import React from 'react';
 import { Hero } from '@shared/components/hero/Hero';
 import { useHistory } from 'react-router-dom';
 import { urls } from '@shared/config/urlConstants';
-
-import careerPathsImg from '../../landingPage/assets/careerPaths.svg';
+import careerPathsImg from '@assets/careerPaths.svg';
 
 export const CareerTestResults = () => {
   const history = useHistory();

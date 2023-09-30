@@ -1,7 +1,6 @@
 import React from 'react';
 import { Image } from '@mantine/core';
-
-import magnifyingGlass from './magnifying-glass.svg';
+import magnifyingGlass from '@assets/magnifyingGlass.svg';
 
 import './loadingScreen.scss';
 

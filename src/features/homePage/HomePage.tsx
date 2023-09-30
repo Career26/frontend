@@ -2,9 +2,10 @@ import { Container, Grid, Group, Paper, Text, Tooltip, createStyles, rem } from 
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Shell } from '@shared/components/shell/Shell';
-import { HEADER_HEIGHT } from '@shared/components/pageHeader/pageHeaderStyles';
+import { HEADER_HEIGHT } from '@shared/styles/headerStyles';
 import classNames from 'classnames';
 import { featureTiles } from '@shared/config/featureConstants';
+import { commonStyles } from '@shared/styles/commonStyles';
 
 const homePageStyles = createStyles((theme) => ({
   container: {
@@ -16,16 +17,6 @@ const homePageStyles = createStyles((theme) => ({
   },
   navItem: {
     paddingTop: rem(10),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    textAlign: 'center',
-    fontSize: rem(15),
-    '&:hover': {
-      boxShadow: '0 3px 10px rgba(0,0,0,.2)',
-      transform: 'translate3d(0,-2px,0)',
-      cursor: 'pointer',
-    },
   },
   disabled: {
     '&:hover': {
@@ -40,6 +31,7 @@ const homePageStyles = createStyles((theme) => ({
 
 export const HomePage = () => {
   const { classes } = homePageStyles();
+  const { classes: commonClasses } = commonStyles();
   const history = useHistory();
   return (
     <Shell>
@@ -60,7 +52,9 @@ export const HomePage = () => {
                     shadow="sm"
                     radius="lg"
                     withBorder
-                    className={classNames(classes.navItem, { [classes.disabled]: disabled })}
+                    className={classNames(commonClasses.hoverItem, classes.navItem, {
+                      [classes.disabled]: disabled,
+                    })}
                   >
                     <Group>
                       <Icon size={80} />

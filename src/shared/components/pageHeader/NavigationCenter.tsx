@@ -6,20 +6,9 @@ import { useHistory } from 'react-router-dom';
 import { featureTiles } from '@shared/config/featureConstants';
 import classNames from 'classnames';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
+import { commonStyles } from '@shared/styles/commonStyles';
 
 const navigationStyles = createStyles((theme) => ({
-  navItem: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    textAlign: 'center',
-    fontSize: rem(15),
-    '&:hover': {
-      boxShadow: '0 3px 10px rgba(0,0,0,.2)',
-      transform: 'translate3d(0,-2px,0)',
-      cursor: 'pointer',
-    },
-  },
   gridContainer: {
     display: 'flex',
     justifyContent: 'center',
@@ -43,15 +32,6 @@ const navigationStyles = createStyles((theme) => ({
       opacity: 0.55,
     },
   },
-  navIcon: {
-    '&:hover': {
-      color: 'red',
-      cursor: 'pointer',
-      boxShadow:
-        '0 0.0625rem 0.1875rem rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05) 0 1.25rem 1.5625rem -0.3125rem, rgba(0, 0, 0, 0.04) 0 0.625rem 0.625rem -0.3125rem',
-    },
-  },
-
   disabled: {
     '&:hover': {
       cursor: 'not-allowed',
@@ -61,6 +41,7 @@ const navigationStyles = createStyles((theme) => ({
 
 export const NavigationCenter = () => {
   const { classes } = navigationStyles();
+  const { classes: commonClasses } = commonStyles();
   const [opened, { open, close }] = useDisclosure(false);
   const history = useHistory();
 
@@ -72,7 +53,7 @@ export const NavigationCenter = () => {
 
   return (
     <>
-      <Avatar color="blue" radius="xl" onClick={open} className={classes.navIcon}>
+      <Avatar color="blue" radius="xl" onClick={open} className={commonClasses.hoverIcon}>
         <IconLayoutDashboard />
       </Avatar>
       <Modal
@@ -95,7 +76,7 @@ export const NavigationCenter = () => {
                   shadow="sm"
                   radius="lg"
                   withBorder
-                  className={classNames(classes.navItem, { [classes.disabled]: disabled })}
+                  className={classNames(commonClasses.hoverItem, { [classes.disabled]: disabled })}
                 >
                   <Icon size={80} />
                   {title}

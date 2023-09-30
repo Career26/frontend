@@ -1,42 +1,42 @@
-import React from 'react';
-import { createStyles, rem, Card, Grid, Badge } from '@mantine/core';
+import React, { useEffect } from 'react';
+import { createStyles, Grid } from '@mantine/core';
 import { CareerOverlap } from '@datatypes/overview';
+import { CareerCard } from '@shared/components/cards/CareerCard';
+import { addIndustryColors, selectIndustryColors } from '@slices/careerSlice';
+import { useAppDispatch, useAppSelector } from '@state/store';
 
-const overlapsStyles = createStyles((theme) => ({
+const overlapsStyles = createStyles({
   gridContainer: {
     gap: '16px',
     justifyContent: 'center',
     display: 'flex',
   },
-  cardHeader: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    fontWeight: 'bold',
-    fontSize: '16px',
-    padding: rem(10),
-    background: theme.colors.gray[4],
-    color: 'white',
+  cardContainer: {
+    width: '50vh',
   },
-  reasonSection: {
-    marginTop: '10px',
-    width: '30vh',
-    height: '20vh',
-    padding: 0,
-  },
-}));
+});
 
 export const OverlapsTile = ({ careerOverlaps }: { careerOverlaps: CareerOverlap[] }) => {
+  const dispatch = useAppDispatch();
   const { classes } = overlapsStyles();
+  const industryColors = useAppSelector(selectIndustryColors);
+
+  useEffect(() => {
+    const industries = careerOverlaps.map(({ industry }) => industry);
+    dispatch(addIndustryColors(industries));
+  }, [careerOverlaps]);
+
   return (
     <Grid className={classes.gridContainer}>
       {careerOverlaps.map((item) => (
-        <Card key={item.career} shadow="md" radius="md" p="md" withBorder>
-          <Card.Section className={classes.cardHeader} withBorder>
-            <Badge>{item.career}</Badge>
-            <Badge color="pink">{item.industry}</Badge>
-          </Card.Section>
-          <div className={classes.reasonSection}>{item.reason}</div>
-        </Card>
+        <div className={classes.cardContainer} key={item.career}>
+          <CareerCard
+            color={industryColors[item.industry]}
+            title={item.career}
+            badge={item.industry}
+            content={item.reason}
+          />
+        </div>
       ))}
     </Grid>
   );

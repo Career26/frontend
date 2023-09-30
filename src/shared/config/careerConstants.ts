@@ -1,0 +1,16 @@
+export const careerColors = [
+  'pink',
+  'orange',
+  'green',
+  'dark',
+  'red',
+  'purple',
+  'yellow',
+  'blue',
+  'teal',
+  'grape',
+  'violet',
+  'indigo',
+  'cyan',
+  'lime',
+];

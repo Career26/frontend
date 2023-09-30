@@ -10,7 +10,7 @@ import { WorkExperienceForm } from './components/workExperienceForm/WorkExperien
 import { PreferencesForm } from './components/preferencesForm/PreferencesForm';
 import { useProfileForm } from './hooks/useProfileForm';
 import { CareerPathsForm } from './components/careerPathsForm/CareerPathsForm';
-import { questionFormStyles } from './styles/careeerTestStyles';
+import { questionFormStyles } from './styles/careerTestStyles';
 import { CareerTestHeader } from './components/CareerTestHeader';
 import { SplashPage } from './components/SlashPage';
 import { CareerStep } from './careerTestTypes';

@@ -3,7 +3,7 @@ import { Container, Text } from '@mantine/core';
 import { IconWriting, IconRoute, IconTrophy } from '@tabler/icons-react';
 import { Tile } from '@shared/components/tiles/Tile';
 
-import { questionFormStyles } from '../styles/careeerTestStyles';
+import { questionFormStyles } from '../styles/careerTestStyles';
 
 const headerTiles = [
   {

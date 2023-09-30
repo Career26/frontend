@@ -1,6 +1,6 @@
 import { Text, Grid, Container } from '@mantine/core';
 import React, { useEffect, useState } from 'react';
-import { questionFormStyles } from '@careerTest/styles/careeerTestStyles';
+import { questionFormStyles } from '@careerTest/styles/careerTestStyles';
 import { useAppSelector } from '@state/store';
 import { selectCareerPaths, selectProfileId } from '@slices/userSlice';
 import { Shell } from '@shared/components/shell/Shell';

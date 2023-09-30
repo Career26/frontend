@@ -2,7 +2,7 @@ import React from 'react';
 import { Checkbox, Container, NumberInput, Select } from '@mantine/core';
 import { WorkStyle } from '@datatypes/profile';
 import { exampleCities } from '@careerTest/config/formConstants';
-import { questionFormStyles } from '@careerTest/styles/careeerTestStyles';
+import { questionFormStyles } from '@careerTest/styles/careerTestStyles';
 import { CareerFormProps } from '@careerTest/careerTestTypes';
 
 export const WorkStyleForm = ({ form }: { form: CareerFormProps }) => {

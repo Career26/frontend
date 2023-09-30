@@ -28,17 +28,16 @@ export const TooltipContent = ({ payload }: TooltipProps<ValueType, NameType>) =
   if (!item) {
     return null;
   }
-  const { value, age } = item;
-  const [max, min] = value;
-  const average = (max + min) / 2;
+  const { high, low, age } = item;
+  const average = (high + low) / 2;
   return (
     <div className={classes.tooltip}>
       <Badge size="md">Age: {age}</Badge>
       <Badge color="pink" size="sm">
-        Max: {getYLabel(max)}
+        Max: {getYLabel(high)}
       </Badge>
       <Badge color="gray" size="sm">
-        Min: {getYLabel(min)}
+        Min: {getYLabel(low)}
       </Badge>
       <Badge color="green" size="sm">
         Average: {getYLabel(average)}

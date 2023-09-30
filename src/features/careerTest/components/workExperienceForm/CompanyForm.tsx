@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Select, TextInput, Textarea } from '@mantine/core';
-import { questionFormStyles } from '@careerTest/styles/careeerTestStyles';
+import { questionFormStyles } from '@careerTest/styles/careerTestStyles';
 import { CareerFormProps } from '@careerTest/careerTestTypes';
 import { ratingOptions } from '@careerTest/config/formConstants';
 

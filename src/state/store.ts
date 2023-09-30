@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { profileApi } from '@apis/profile';
+import { profileApi } from '@apis/profileApi';
 import { overviewApi } from '@apis/overviewApi';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import user from '@slices/userSlice';

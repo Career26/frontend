@@ -70,7 +70,7 @@ const components = {
   },
 };
 
-export const Login = () => {
+export const LoginModal = () => {
   const { classes } = loginStlyes();
   const dispatch = useAppDispatch();
   const { open, initialState } = useAppSelector(selectLoginModal);

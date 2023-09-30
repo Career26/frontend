@@ -5,7 +5,7 @@ import { useAppDispatch } from '@state/store';
 import { setLoginModal } from '@slices/userSlice';
 import { IconLogout } from '@tabler/icons-react';
 
-import { Login } from '../login/Login';
+import { LoginModal } from '../login/LoginModal';
 import { pageHeaderStyles } from './pageHeaderStyles';
 import { NavigationCenter } from './NavigationCenter';
 import { CareerNavigation } from './CareerNavigation';
@@ -33,7 +33,7 @@ export const PageHeader = ({
       style={{ position: 'fixed' }}
       className={classes.inner}
     >
-      <Login />
+      <LoginModal />
       <Group>
         <Text className={classes.logo} onClick={clickLogo}>
           LOGO HERE

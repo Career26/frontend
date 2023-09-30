@@ -1,16 +1,11 @@
-import { Badge, Card, Container, Stack, createStyles, rem } from '@mantine/core';
+import { Badge, Container, Stack, createStyles } from '@mantine/core';
 import { IconArrowBigDownLines } from '@tabler/icons-react';
 import React from 'react';
 
+import { TextCard } from '../cards/TextCard';
+
 const useProgressionStyles = createStyles({
-  cardContainer: {
-    width: '35vh',
-  },
-  cardDescription: {
-    padding: rem(10),
-    textAlign: 'left',
-  },
-  descriptionsContainer: {
+  container: {
     display: 'flex',
     gap: '24px',
   },
@@ -39,18 +34,9 @@ export const ProgressionTile = ({ progressionList }: { progressionList: Progress
             <Badge variant="filled" size="xl">
               {item.title}
             </Badge>
-            <div className={classes.descriptionsContainer} key={`preparation-${index}`}>
+            <div className={classes.container} key={`preparation-${index}`}>
               {item.descriptions.map((description) => (
-                <Card
-                  className={classes.cardContainer}
-                  key={description}
-                  shadow="md"
-                  radius="md"
-                  p="md"
-                  withBorder
-                >
-                  <div className={classes.cardDescription}>{description}</div>
-                </Card>
+                <TextCard content={description} key={description} />
               ))}
             </div>
 

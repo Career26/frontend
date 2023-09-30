@@ -1,9 +1,8 @@
 import { PromotionTimeline, SalaryProgression } from '@datatypes/overview';
-import { Badge, Card, Stepper, createStyles, rem } from '@mantine/core';
+import { Card, Divider, Stepper, createStyles, rem } from '@mantine/core';
 import React, { useMemo, useState } from 'react';
 import { IconEye } from '@tabler/icons-react';
-import classNames from 'classnames';
-import { cardStyles } from '@shared/styles/cardStyles';
+import { TextCard } from '@shared/components/cards/TextCard';
 
 import { SalaryChart } from './SalaryChart';
 import { getGradient, getGradientLabel, getSelectedItem, getYLabel } from './progressionUtil';
@@ -21,45 +20,48 @@ const careerProgressionStyles = createStyles((theme) => ({
     background: theme.colors.pink[3],
     color: 'white',
   },
+  cardContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: rem(20),
+  },
+  divider: {
+    marginTop: rem(20),
+    marginBottom: rem(20),
+  },
 }));
 
 const SalaryCard = ({
-  header,
-  active,
   startingMin,
   startingMax,
   finalMax,
   salaryProgression,
 }: {
-  header: string;
-  active?: boolean;
   startingMin?: number;
   startingMax?: number;
   finalMax?: number;
   salaryProgression: CareerProgressionTileProps['salaryProgression'];
 }) => {
   const { classes } = careerProgressionStyles();
-  const { classes: cardClasses } = cardStyles();
-  const color = active ? 'pink' : 'blue';
   return (
-    <Card className={cardClasses.cardContainer} shadow="md" withBorder>
-      <Card.Section
-        withBorder
-        className={classNames(cardClasses.cardHeader, { [classes.active]: active })}
-      >
-        {header}
-      </Card.Section>
-      <div className={cardClasses.cardBody}>
-        <Badge size="lg" color={color}>
-          Starting Salary: {getYLabel(startingMin)} - {getYLabel(startingMax)}
-        </Badge>
-        <Badge size="lg" color={color}>
-          Salary Increase:{' '}
-          {getGradientLabel(getGradient({ max: finalMax, min: startingMax, salaryProgression }))} -{' '}
-          {getGradientLabel(getGradient({ max: startingMax, min: startingMin, salaryProgression }))}
-        </Badge>
-      </div>
-    </Card>
+    <div className={classes.cardContainer}>
+      <TextCard
+        content={
+          <>
+            Starting Salary: {getYLabel(startingMin)} - {getYLabel(startingMax)}
+            <Divider className={classes.divider} />
+            Salary Increase:{' '}
+            {getGradientLabel(
+              getGradient({ max: finalMax, min: startingMax, salaryProgression }),
+            )}{' '}
+            -{' '}
+            {getGradientLabel(
+              getGradient({ max: startingMax, min: startingMin, salaryProgression }),
+            )}
+          </>
+        }
+      />
+    </div>
   );
 };
 
@@ -102,16 +104,7 @@ export const CareerProgressionTile = ({
         minAge={selectedItem?.minAge}
       />
 
-      {selectedItem && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: rem(20) }}>
-          <SalaryCard
-            header={selectedItem.title}
-            salaryProgression={salaryProgression}
-            active
-            {...selectedItem}
-          />
-        </div>
-      )}
+      {selectedItem && <SalaryCard salaryProgression={salaryProgression} {...selectedItem} />}
     </>
   );
 };

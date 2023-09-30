@@ -5,8 +5,9 @@ import { useAppSelector } from '@state/store';
 import { selectCareerPaths, selectProfileId } from '@slices/userSlice';
 import { Shell } from '@shared/components/shell/Shell';
 import { useSelectCareerMutation } from '@apis/profileApi';
+import { CareerCard } from '@shared/components/cards/CareerCard';
 
-import { CareerPathTile } from './CareerPathTile';
+import { CareerPathActions } from './CareerPathActions';
 
 const colors = [
   'pink',
@@ -72,16 +73,23 @@ export const CareerPathsForm = () => {
         <Grid>
           {Object.entries(careerPaths || {}).map(([careerId, careerPath]) => (
             <Grid.Col md={6} key={`career-path-${careerId}`}>
-              <CareerPathTile
-                {...careerPath}
-                loading={loadingCareers.includes(careerId)}
-                onClickAction={async () => {
-                  setLoadingCareers([...loadingCareers, careerId]);
-                  await toggleSelectedCareer(careerId);
-                  setLoadingCareers(loadingCareers.filter((id) => id !== careerId));
-                }}
+              <CareerCard
+                title={careerPath.title}
+                subTitle={careerPath.startingSalary}
+                badge={careerPath.industry}
                 color={industryColors[careerPath.industry]}
-                selected={selectedCareers.includes(careerId)}
+                content={careerPath.role}
+                Actions={
+                  <CareerPathActions
+                    loading={loadingCareers.includes(careerId)}
+                    selected={selectedCareers.includes(careerId)}
+                    onClickAction={async () => {
+                      setLoadingCareers([...loadingCareers, careerId]);
+                      await toggleSelectedCareer(careerId);
+                      setLoadingCareers(loadingCareers.filter((id) => id !== careerId));
+                    }}
+                  />
+                }
               />
             </Grid.Col>
           ))}

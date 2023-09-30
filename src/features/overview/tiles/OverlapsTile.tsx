@@ -2,6 +2,8 @@ import React from 'react';
 import { createStyles, Grid } from '@mantine/core';
 import { CareerOverlap } from '@datatypes/overview';
 import { CareerCard } from '@shared/components/cards/CareerCard';
+import { selectIndustryColors } from '@slices/careerSlice';
+import { useAppSelector } from '@state/store';
 
 const overlapsStyles = createStyles({
   gridContainer: {
@@ -16,11 +18,17 @@ const overlapsStyles = createStyles({
 
 export const OverlapsTile = ({ careerOverlaps }: { careerOverlaps: CareerOverlap[] }) => {
   const { classes } = overlapsStyles();
+  const industryColors = useAppSelector(selectIndustryColors);
   return (
     <Grid className={classes.gridContainer}>
       {careerOverlaps.map((item) => (
         <div className={classes.cardContainer} key={item.career}>
-          <CareerCard title={item.career} badge={item.industry} content={item.reason} />
+          <CareerCard
+            color={industryColors[item.industry]}
+            title={item.career}
+            badge={item.industry}
+            content={item.reason}
+          />
         </div>
       ))}
     </Grid>

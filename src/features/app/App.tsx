@@ -1,12 +1,13 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { LoadingScreen } from '@shared/components/loadingScreen/LoadingScreen';
 import { urls } from '@shared/config/urlConstants';
 import { PageHeader } from '@shared/components/pageHeader/PageHeader';
-import { useAppSelector } from '@state/store';
-import { selectSelectedCareerPathId } from '@slices/userSlice';
+import { useAppDispatch, useAppSelector } from '@state/store';
+import { selectCareerPaths, selectSelectedCareerPathId } from '@slices/userSlice';
 import { selectSelectedInterviewId } from '@slices/interviewSlice';
 import { useAuthUser } from '@shared/hooks/useAuthUser';
+import { addIndustryColors } from '@slices/careerSlice';
 
 import { HomePage } from '../homePage/HomePage';
 import { LandingPage } from '../landingPage/LandingPage';
@@ -15,9 +16,20 @@ import { OverviewPage } from '../overview/OverviewPage';
 import { InterviewPage } from '../interview/InterviewPage';
 
 export const App = () => {
+  const dispatch = useAppDispatch();
   const defaultCareerId = useAppSelector(selectSelectedCareerPathId);
   const defaultInterviewId = useAppSelector(selectSelectedInterviewId);
   const { authenticated, signOut } = useAuthUser();
+
+  const careerPaths = useAppSelector(selectCareerPaths);
+
+  useEffect(() => {
+    if (!careerPaths) {
+      return;
+    }
+    const industries = Object.keys(careerPaths);
+    dispatch(addIndustryColors(industries));
+  }, [careerPaths]);
 
   return (
     <BrowserRouter>

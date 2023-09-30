@@ -1,26 +1,14 @@
 import { Text, Grid, Container } from '@mantine/core';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { questionFormStyles } from '@careerTest/styles/careerTestStyles';
 import { useAppSelector } from '@state/store';
 import { selectCareerPaths, selectProfileId } from '@slices/userSlice';
 import { Shell } from '@shared/components/shell/Shell';
 import { useSelectCareerMutation } from '@apis/profileApi';
 import { CareerCard } from '@shared/components/cards/CareerCard';
+import { selectIndustryColors } from '@slices/careerSlice';
 
 import { CareerPathActions } from './CareerPathActions';
-
-const colors = [
-  'pink',
-  'orange',
-  'green',
-  'dark',
-  'red',
-  'gray',
-  'purple',
-  'dark',
-  'yellow',
-  'blue',
-];
 
 export const CareerPathsForm = () => {
   const { classes } = questionFormStyles();
@@ -29,7 +17,7 @@ export const CareerPathsForm = () => {
   const profileIdentifier = useAppSelector(selectProfileId);
   const [selectCareer] = useSelectCareerMutation();
   const [loadingCareers, setLoadingCareers] = useState<string[]>([]);
-  const [industryColors, setIndustryColors] = useState<{ [key: string]: string }>({});
+  const industryColors = useAppSelector(selectIndustryColors);
 
   const toggleSelectedCareer = async (careerIdentifier: string) => {
     if (!profileIdentifier) {
@@ -50,20 +38,6 @@ export const CareerPathsForm = () => {
       setSelectedCareers([...selectedCareers, careerIdentifier]);
     }
   };
-
-  useEffect(() => {
-    const newColors = Object.values(careerPaths || {}).reduce<{ [key: string]: string }>(
-      (agg, { industry }) => {
-        if (agg[industry]) {
-          return agg;
-        }
-        const newColor = colors[Object.keys(agg).length];
-        return { ...agg, [industry]: newColor };
-      },
-      {},
-    );
-    setIndustryColors(newColors);
-  }, [careerPaths]);
 
   return (
     <Shell>

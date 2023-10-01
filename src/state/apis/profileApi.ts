@@ -7,7 +7,7 @@ export const profileApi = createApi({
   reducerPath: 'profile',
   baseQuery: fetchBaseQuery({ baseUrl }),
   endpoints: (build) => ({
-    generateProfile: build.mutation<UserProfile, Profile>({
+    createProfile: build.mutation<UserProfile, Profile>({
       query: (body) => ({
         url: 'profile',
         method: 'POST',
@@ -30,5 +30,5 @@ export const profileApi = createApi({
   }),
 });
 
-export const { useLazyGetProfileQuery, useGenerateProfileMutation, useSelectCareerMutation } =
+export const { useLazyGetProfileQuery, useCreateProfileMutation, useSelectCareerMutation } =
   profileApi;

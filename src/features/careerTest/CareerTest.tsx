@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Container, Group, Button, Stepper } from '@mantine/core';
 import { Shell } from '@shared/components/shell/Shell';
-import { useGenerateProfileMutation } from '@apis/profileApi';
+import { useCreateProfileMutation } from '@apis/profileApi';
 import { setLoginModal, setProfile } from '@slices/userSlice';
 import { useAppDispatch } from '@state/store';
 import { formStyles } from '@shared/styles/formStyles';
@@ -21,7 +21,7 @@ const stepperLabels = ['Education', 'Experience', 'Preferences', 'Career Paths']
 export const CareerTest = () => {
   const dispatch = useAppDispatch();
   const [activeStep, setActiveStep] = useState(CareerStep.EDUCATION);
-  const [generateProfile, { data, isLoading }] = useGenerateProfileMutation();
+  const [createProfile, { data, isLoading }] = useCreateProfileMutation();
   const { classes } = formStyles();
   const { form, checkFormIsValid } = useProfileForm({ activeStep });
 
@@ -38,7 +38,7 @@ export const CareerTest = () => {
     }
     form.clearErrors();
     if (activeStep === CareerStep.PREFERENCES) {
-      generateProfile(form.values);
+      createProfile(form.values);
     }
     if (activeStep === CareerStep.CAREER_PATHS) {
       dispatch(

@@ -8,6 +8,7 @@ import { selectCareerPaths, selectSelectedCareerPathId } from '@slices/userSlice
 import { selectSelectedInterviewId } from '@slices/interviewSlice';
 import { useAuthUser } from '@shared/hooks/useAuthUser';
 import { addIndustryColors } from '@slices/careerSlice';
+import { useLazyGetProfileQuery } from '@apis/profileApi';
 
 import { HomePage } from '../homePage/HomePage';
 import { LandingPage } from '../landingPage/LandingPage';
@@ -20,7 +21,7 @@ export const App = () => {
   const defaultCareerId = useAppSelector(selectSelectedCareerPathId);
   const defaultInterviewId = useAppSelector(selectSelectedInterviewId);
   const { authenticated, unauthenticated, signOut } = useAuthUser();
-
+  const [fetchProfile, { isFetching }] = useLazyGetProfileQuery();
   const careerPaths = useAppSelector(selectCareerPaths);
 
   useEffect(() => {
@@ -30,6 +31,16 @@ export const App = () => {
     const industries = Object.values(careerPaths).map(({ industry }) => industry);
     dispatch(addIndustryColors(industries));
   }, [careerPaths]);
+
+  useEffect(() => {
+    if (authenticated) {
+      fetchProfile();
+    }
+  }, [authenticated]);
+
+  if (isFetching) {
+    return <LoadingScreen />;
+  }
 
   return (
     <BrowserRouter>

@@ -21,7 +21,14 @@ export const profileApi = createApi({
         body,
       }),
     }),
+    getProfile: build.query({
+      query: () => 'profile',
+    }),
+    associateProfile: build.query<boolean, string>({
+      query: (profileId) => `associate/${profileId}`,
+    }),
   }),
 });
 
-export const { useGenerateProfileMutation, useSelectCareerMutation } = profileApi;
+export const { useLazyGetProfileQuery, useGenerateProfileMutation, useSelectCareerMutation } =
+  profileApi;

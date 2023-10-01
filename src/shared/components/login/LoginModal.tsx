@@ -39,15 +39,9 @@ const formFields = {
   signUp: {
     name: {
       order: 1,
-      label: 'First Name',
+      label: 'Name',
       isRequired: true,
-      placeholder: 'Enter your First Name',
-    },
-    family_name: {
-      order: 2,
-      label: 'Last Name',
-      isRequired: true,
-      placeholder: 'Enter your Last Name',
+      placeholder: 'Enter your Name',
     },
     email: {
       order: 3,
@@ -94,7 +88,7 @@ export const LoginModal = () => {
         formFields={formFields}
         loginMechanisms={['email']}
         components={components}
-        signUpAttributes={['email', 'family_name', 'name', 'gender']}
+        signUpAttributes={['email', 'name', 'gender']}
       />
     </Modal>
   );

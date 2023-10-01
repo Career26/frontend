@@ -32,11 +32,11 @@ export const App = () => {
     dispatch(addIndustryColors(industries));
   }, [careerPaths]);
 
-  useEffect(() => {
-    if (authenticated) {
-      fetchProfile(undefined, false);
-    }
-  }, [authenticated]);
+  // useEffect(() => {
+  //   if (authenticated) {
+  //     fetchProfile(undefined, false);
+  //   }
+  // }, [authenticated]);
 
   if (isFetching) {
     return <LoadingScreen />;

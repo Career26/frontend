@@ -37,7 +37,7 @@ const FormFields = () => {
 
 const formFields = {
   signUp: {
-    given_name: {
+    name: {
       order: 1,
       label: 'First Name',
       isRequired: true,
@@ -94,7 +94,7 @@ export const LoginModal = () => {
         formFields={formFields}
         loginMechanisms={['email']}
         components={components}
-        signUpAttributes={['email', 'family_name', 'given_name', 'gender']}
+        signUpAttributes={['email', 'family_name', 'name', 'gender']}
       />
     </Modal>
   );

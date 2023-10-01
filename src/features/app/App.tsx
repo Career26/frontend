@@ -34,7 +34,7 @@ export const App = () => {
 
   useEffect(() => {
     if (authenticated) {
-      fetchProfile();
+      fetchProfile(undefined, false);
     }
   }, [authenticated]);
 

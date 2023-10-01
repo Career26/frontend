@@ -44,7 +44,7 @@ export const CareerTest = () => {
       dispatch(
         setLoginModal({
           open: true,
-          onComplete: () => setActiveStep(activeStep + 1),
+          associateProfileId: data?.identifier,
           initialState: 'signUp',
         }),
       );

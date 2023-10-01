@@ -8,7 +8,7 @@ type UserSlice = {
   profile?: UserProfile;
   loginModal: {
     open: boolean;
-    onComplete?: () => void;
+    associateProfileId?: string;
     initialState?: 'signIn' | 'signUp' | 'resetPassword';
   };
   selectedCareerPathId?: string;

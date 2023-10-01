@@ -30,5 +30,9 @@ export const profileApi = createApi({
   }),
 });
 
-export const { useLazyGetProfileQuery, useCreateProfileMutation, useSelectCareerMutation } =
-  profileApi;
+export const {
+  useLazyGetProfileQuery,
+  useCreateProfileMutation,
+  useSelectCareerMutation,
+  useLazyAssociateProfileQuery,
+} = profileApi;

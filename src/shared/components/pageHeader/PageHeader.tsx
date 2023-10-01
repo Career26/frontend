@@ -21,7 +21,7 @@ export const PageHeader = ({
   const dispatch = useAppDispatch();
   const { classes: commonClasses } = commonStyles();
   const { classes } = pageHeaderStyles();
-  const { clickCareersTest, clickLogo } = usePageNavigation();
+  const { clickCareersTest, goToHomepage } = usePageNavigation();
 
   const onClickLogin = () => {
     dispatch(setLoginModal({ open: true, initialState: 'signIn' }));
@@ -37,7 +37,7 @@ export const PageHeader = ({
     >
       <LoginModal />
       <Group>
-        <Text className={classes.logo} onClick={clickLogo}>
+        <Text className={classes.logo} onClick={goToHomepage}>
           LOGO HERE
         </Text>
       </Group>

@@ -37,7 +37,6 @@ export interface WorkPreference {
 }
 
 export interface Profile extends WorkPreference {
-  fullName: string;
   latestDegree: Degree;
   additionalDegrees: Degree[];
   previousWorkExperience: WorkExperience[];

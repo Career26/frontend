@@ -38,7 +38,7 @@ export const usePageNavigation = () => {
     dispatch(setSelectedInterviewId(newInterviewId));
   };
 
-  const clickLogo = () => {
+  const goToHomepage = () => {
     history.push(urls.landingPage);
   };
   const clickCareersTest = () => {
@@ -46,7 +46,7 @@ export const usePageNavigation = () => {
   };
 
   return {
-    clickLogo,
+    goToHomepage,
     clickCareersTest,
     toggleCareerId,
     toggleInterviewId,

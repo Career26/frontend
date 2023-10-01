@@ -4,6 +4,9 @@ import { useAppDispatch, useAppSelector } from '@state/store';
 import React from 'react';
 import { Modal, createStyles } from '@mantine/core';
 import '@aws-amplify/ui-react/styles.css';
+import { Auth } from 'aws-amplify';
+import { useLazyAssociateProfileQuery } from '@apis/profileApi';
+import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 
 const loginStlyes = createStyles({
   container: {
@@ -67,10 +70,25 @@ const components = {
 export const LoginModal = () => {
   const { classes } = loginStlyes();
   const dispatch = useAppDispatch();
-  const { open, initialState } = useAppSelector(selectLoginModal);
+  const { open, initialState, associateProfileId } = useAppSelector(selectLoginModal);
+  const [associateProfile] = useLazyAssociateProfileQuery();
+  const { goToHomepage } = usePageNavigation();
 
   const onClose = () => {
     dispatch(setLoginModal({ open: false }));
+  };
+
+  const handleConfirmSignUp = async ({ username, code }: { username: string; code: string }) => {
+    try {
+      await Auth.confirmSignUp(username, code);
+      if (associateProfileId) {
+        await associateProfile(associateProfileId);
+      }
+      goToHomepage();
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error(`signUp error: ${error}`);
+    }
   };
 
   return (
@@ -83,6 +101,7 @@ export const LoginModal = () => {
       radius={10}
     >
       <Authenticator
+        services={{ handleConfirmSignUp }}
         initialState={initialState}
         className={classes.container}
         formFields={formFields}

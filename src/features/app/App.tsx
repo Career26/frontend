@@ -30,10 +30,6 @@ export const App = () => {
     dispatch(addIndustryColors(industries));
   }, [careerPaths]);
 
-  if (isFetching) {
-    return <LoadingScreen />;
-  }
-
   return (
     <BrowserRouter>
       <Suspense fallback={<LoadingScreen />}>

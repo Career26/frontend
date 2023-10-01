@@ -29,7 +29,7 @@ export const profileApi = createApi({
         body,
       }),
     }),
-    getProfile: build.query({
+    getProfile: build.query<UserProfile, void>({
       query: () => 'profile',
     }),
     associateProfile: build.query<boolean, string>({

@@ -1,14 +1,4 @@
-import {
-  Button,
-  Container,
-  Grid,
-  Group,
-  Paper,
-  Text,
-  Tooltip,
-  createStyles,
-  rem,
-} from '@mantine/core';
+import { Container, Grid, Group, Paper, Text, Tooltip, createStyles, rem } from '@mantine/core';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Shell } from '@shared/components/shell/Shell';
@@ -16,8 +6,6 @@ import { HEADER_HEIGHT } from '@shared/styles/headerStyles';
 import classNames from 'classnames';
 import { featureTiles } from '@shared/config/featureConstants';
 import { commonStyles } from '@shared/styles/commonStyles';
-import { useLazyAssociateProfileQuery } from '@apis/profileApi';
-import { profileResponseMock } from '@mocks/profileMocks';
 
 const homePageStyles = createStyles((theme) => ({
   container: {
@@ -45,12 +33,11 @@ export const HomePage = () => {
   const { classes } = homePageStyles();
   const { classes: commonClasses } = commonStyles();
   const history = useHistory();
-  const [associateProfile] = useLazyAssociateProfileQuery();
+
   return (
     <Shell>
       <div className={classes.container}>
         <Container>
-          <Button onClick={() => associateProfile(profileResponseMock.identifier)}>Dave</Button>
           <Grid gutter={50} justify="center">
             {featureTiles.map(({ title, Icon, link, description, disabled }) => (
               <Tooltip

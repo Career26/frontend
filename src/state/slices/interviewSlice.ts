@@ -8,7 +8,7 @@ type InterviewSlice = {
   selectedInterviewId?: string;
 };
 
-export const interviewInitialState: InterviewSlice = {
+export const initialInterviewState: InterviewSlice = {
   interviewQuestions: Object.keys(profileResponseMock.careerPaths).reduce(
     (agg, id) => ({ ...agg, [id]: { mockInterviewQuestions } }),
     {},
@@ -18,7 +18,7 @@ export const interviewInitialState: InterviewSlice = {
 
 export const interviewSlice = createSlice({
   name: 'interview',
-  initialState: interviewInitialState,
+  initialState: initialInterviewState,
   reducers: {
     setSelectedInterviewId: (
       state,
@@ -26,10 +26,11 @@ export const interviewSlice = createSlice({
     ) => {
       state.selectedInterviewId = payload;
     },
+    resetInterviews: () => initialInterviewState,
   },
 });
 
-export const { setSelectedInterviewId } = interviewSlice.actions;
+export const { setSelectedInterviewId, resetInterviews } = interviewSlice.actions;
 
 const selectInterview = (state: RootState) => state.interview;
 export const selectInterviewQuestions = (state: RootState) =>

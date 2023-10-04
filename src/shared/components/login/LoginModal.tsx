@@ -1,12 +1,13 @@
 import { Authenticator, Radio, RadioGroupField, useAuthenticator } from '@aws-amplify/ui-react';
 import { selectLoginModal, setLoginModal } from '@slices/userSlice';
 import { useAppDispatch, useAppSelector } from '@state/store';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Modal, createStyles } from '@mantine/core';
 import '@aws-amplify/ui-react/styles.css';
 import { Auth } from 'aws-amplify';
 import { useLazyAssociateProfileQuery } from '@apis/profileApi';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
+import { useAuthUser } from '@shared/hooks/useAuthUser';
 
 const loginStlyes = createStyles({
   container: {
@@ -71,8 +72,9 @@ export const LoginModal = () => {
   const { classes } = loginStlyes();
   const dispatch = useAppDispatch();
   const { open, initialState, associateProfileId } = useAppSelector(selectLoginModal);
-  const [associateProfile] = useLazyAssociateProfileQuery();
   const { goToHomepage } = usePageNavigation();
+  const [associateProfile] = useLazyAssociateProfileQuery();
+  const { authenticated } = useAuthUser();
 
   const onClose = () => {
     dispatch(setLoginModal({ open: false }));
@@ -81,15 +83,18 @@ export const LoginModal = () => {
   const handleConfirmSignUp = async ({ username, code }: { username: string; code: string }) => {
     try {
       await Auth.confirmSignUp(username, code);
-      if (associateProfileId) {
-        await associateProfile(associateProfileId);
-      }
       goToHomepage();
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error(`signUp error: ${error}`);
     }
   };
+
+  useEffect(() => {
+    if (!!associateProfileId && authenticated) {
+      associateProfile(associateProfileId);
+    }
+  }, [authenticated, associateProfileId]);
 
   return (
     <Modal

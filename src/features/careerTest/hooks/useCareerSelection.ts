@@ -1,5 +1,4 @@
-import { useSelectCareerMutation } from '@apis/profileApi';
-import { selectProfileId } from '@slices/userSlice';
+import { selectProfileId, useSelectCareerMutation } from '@apis/profileApi';
 import { useAppSelector } from '@state/store';
 import { useState } from 'react';
 

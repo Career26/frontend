@@ -21,10 +21,11 @@ export const careerSlice = createSlice({
       });
       state.industryColors = industryColors;
     },
+    resetCareers: () => initialCareerState,
   },
 });
 
-export const { addIndustryColors } = careerSlice.actions;
+export const { addIndustryColors, resetCareers } = careerSlice.actions;
 
 const selectCareerSlice = (state: RootState) => state.career;
 export const selectIndustryColors = (state: RootState) => selectCareerSlice(state).industryColors;

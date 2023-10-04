@@ -1,4 +1,4 @@
-import { CareerResult } from '@datatypes/career';
+import { selectCareerPaths } from '@apis/profileApi';
 import { UserProfile } from '@datatypes/profile';
 import { PayloadAction, createSelector, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '@state/store';
@@ -13,14 +13,14 @@ type UserSlice = {
   selectedCareerPathId?: string;
 };
 
-export const userInitialState: UserSlice = {
+export const initialUserState: UserSlice = {
   profile: undefined,
   loginModal: { open: false },
 };
 
 export const userSlice = createSlice({
   name: 'user',
-  initialState: userInitialState,
+  initialState: initialUserState,
   reducers: {
     setProfile: (state, { payload }: PayloadAction<UserSlice['profile']>) => {
       state.profile = payload;
@@ -28,29 +28,20 @@ export const userSlice = createSlice({
     setLoginModal: (state, { payload }: PayloadAction<UserSlice['loginModal']>) => {
       state.loginModal = payload;
     },
-    setCareerPaths: (state, { payload }: PayloadAction<CareerResult['careerPaths']>) => {
-      if (!state.profile) {
-        return;
-      }
-      state.profile = { ...state.profile, careerPaths: payload };
-    },
     setSelectedCareerPathId: (
       state,
       { payload }: PayloadAction<UserSlice['selectedCareerPathId']>,
     ) => {
       state.selectedCareerPathId = payload;
     },
+    resetUser: () => initialUserState,
   },
 });
 
-export const { setLoginModal, setProfile, setCareerPaths, setSelectedCareerPathId } =
-  userSlice.actions;
+export const { setLoginModal, setProfile, setSelectedCareerPathId, resetUser } = userSlice.actions;
 
 const selectUser = (state: RootState) => state.user;
 export const selectLoginModal = (state: RootState) => selectUser(state).loginModal;
-export const selectProfile = (state: RootState) => selectUser(state).profile;
-export const selectProfileId = (state: RootState) => selectUser(state).profile?.identifier || '';
-export const selectCareerPaths = (state: RootState) => selectUser(state).profile?.careerPaths;
 export const selectSelectedCareerPathId = (state: RootState) =>
   selectUser(state).selectedCareerPathId || Object.keys(selectCareerPaths(state) || {})[0];
 

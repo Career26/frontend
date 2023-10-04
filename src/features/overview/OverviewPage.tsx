@@ -5,11 +5,12 @@ import classNames from 'classnames';
 import { Shell } from '@shared/components/shell/Shell';
 import { ProgressionTile } from '@shared/components/tiles/ProgressionTile';
 import { useAppSelector } from '@state/store';
-import { selectProfileId, selectSelectedCareerPathId } from '@slices/userSlice';
+import { selectSelectedCareerPathId } from '@slices/userSlice';
 import { useGetCareerOverviewQuery } from '@apis/overviewApi';
 import { LoadingScreen } from '@shared/components/loadingScreen/LoadingScreen';
 import { navStyles } from '@shared/styles/navStyles';
 import { featureStyles } from '@shared/styles/featureStyles';
+import { selectProfileId } from '@apis/profileApi';
 
 import { OverviewSection } from './OverviewSection';
 import { overviewLinks } from './config/overviewConstants';
@@ -33,7 +34,7 @@ export const OverviewPage = () => {
   const { classes } = overviewStyles();
   const { classes: navClasses } = navStyles();
   const { classes: featureClasses } = featureStyles();
-  const profileId = useAppSelector(selectProfileId);
+  const profileId = useAppSelector(selectProfileId) || '';
   const careerId = useAppSelector(selectSelectedCareerPathId);
   const { data, isFetching } = useGetCareerOverviewQuery(
     { careerId, profileId },

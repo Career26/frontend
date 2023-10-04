@@ -1,9 +1,13 @@
 import { Authenticator, Radio, RadioGroupField, useAuthenticator } from '@aws-amplify/ui-react';
-import { selectLoginModal, setLoginModal } from '@slices/userSlice';
+import { selectLoginModal, setLoginModal } from '@slices/sessionSlice';
 import { useAppDispatch, useAppSelector } from '@state/store';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Modal, createStyles } from '@mantine/core';
 import '@aws-amplify/ui-react/styles.css';
+import { Auth } from 'aws-amplify';
+import { useLazyAssociateProfileQuery } from '@apis/profileApi';
+import { usePageNavigation } from '@shared/hooks/usePageNavigation';
+import { useAuthUser } from '@shared/hooks/useAuthUser';
 
 const loginStlyes = createStyles({
   container: {
@@ -37,17 +41,11 @@ const FormFields = () => {
 
 const formFields = {
   signUp: {
-    given_name: {
+    name: {
       order: 1,
-      label: 'First Name',
+      label: 'Name',
       isRequired: true,
-      placeholder: 'Enter your First Name',
-    },
-    family_name: {
-      order: 2,
-      label: 'Last Name',
-      isRequired: true,
-      placeholder: 'Enter your Last Name',
+      placeholder: 'Enter your Name',
     },
     email: {
       order: 3,
@@ -73,11 +71,30 @@ const components = {
 export const LoginModal = () => {
   const { classes } = loginStlyes();
   const dispatch = useAppDispatch();
-  const { open, initialState } = useAppSelector(selectLoginModal);
+  const { open, initialState, associateProfileId } = useAppSelector(selectLoginModal);
+  const { goToHomepage } = usePageNavigation();
+  const [associateProfile] = useLazyAssociateProfileQuery();
+  const { authenticated } = useAuthUser();
 
   const onClose = () => {
     dispatch(setLoginModal({ open: false }));
   };
+
+  const handleConfirmSignUp = async ({ username, code }: { username: string; code: string }) => {
+    try {
+      await Auth.confirmSignUp(username, code);
+      goToHomepage();
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error(`signUp error: ${error}`);
+    }
+  };
+
+  useEffect(() => {
+    if (!!associateProfileId && authenticated) {
+      associateProfile(associateProfileId);
+    }
+  }, [authenticated, associateProfileId]);
 
   return (
     <Modal
@@ -89,12 +106,13 @@ export const LoginModal = () => {
       radius={10}
     >
       <Authenticator
+        services={{ handleConfirmSignUp }}
         initialState={initialState}
         className={classes.container}
         formFields={formFields}
         loginMechanisms={['email']}
         components={components}
-        signUpAttributes={['email', 'family_name', 'given_name', 'gender']}
+        signUpAttributes={['email', 'name', 'gender']}
       />
     </Modal>
   );

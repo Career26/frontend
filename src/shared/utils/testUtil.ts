@@ -1,5 +1,5 @@
-import { userInitialState } from '@slices/userSlice';
+import { initialSessionState } from '@slices/sessionSlice';
 
 export const testState = {
-  user: { ...userInitialState },
+  user: { ...initialSessionState },
 };

@@ -1,5 +1,5 @@
 import { useAuthenticator } from '@aws-amplify/ui-react';
-import { selectLoginModal, setLoginModal } from '@slices/userSlice';
+import { selectLoginModal, setLoginModal } from '@slices/sessionSlice';
 import { useAppDispatch, useAppSelector } from '@state/store';
 import { useEffect } from 'react';
 

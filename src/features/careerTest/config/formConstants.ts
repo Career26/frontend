@@ -78,5 +78,4 @@ export const initialProfileValues: CareerFormValues = {
   personalityType: { workLifeBalanceSacrifice: false, workStyle: WorkStyle.Team },
   latestDegree: initialUniversityValues,
   previousWorkExperience: [initialWorkExperienceValues],
-  fullName: 'Test Student',
 };

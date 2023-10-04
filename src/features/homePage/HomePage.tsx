@@ -33,6 +33,7 @@ export const HomePage = () => {
   const { classes } = homePageStyles();
   const { classes: commonClasses } = commonStyles();
   const history = useHistory();
+
   return (
     <Shell>
       <div className={classes.container}>

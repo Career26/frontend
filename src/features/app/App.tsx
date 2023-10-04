@@ -4,10 +4,10 @@ import { LoadingScreen } from '@shared/components/loadingScreen/LoadingScreen';
 import { urls } from '@shared/config/urlConstants';
 import { PageHeader } from '@shared/components/pageHeader/PageHeader';
 import { useAppDispatch, useAppSelector } from '@state/store';
-import { selectCareerPaths, selectSelectedCareerPathId } from '@slices/userSlice';
-import { selectSelectedInterviewId } from '@slices/interviewSlice';
+import { resetInterviews, selectSelectedInterviewId } from '@slices/interviewSlice';
 import { useAuthUser } from '@shared/hooks/useAuthUser';
-import { addIndustryColors } from '@slices/careerSlice';
+import { addIndustryColors, resetSession, selectSelectedCareerPathId } from '@slices/sessionSlice';
+import { selectCareerPaths, selectProfileId, useLazyGetProfileQuery } from '@apis/profileApi';
 
 import { HomePage } from '../homePage/HomePage';
 import { LandingPage } from '../landingPage/LandingPage';
@@ -20,8 +20,9 @@ export const App = () => {
   const defaultCareerId = useAppSelector(selectSelectedCareerPathId);
   const defaultInterviewId = useAppSelector(selectSelectedInterviewId);
   const { authenticated, unauthenticated, signOut } = useAuthUser();
-
   const careerPaths = useAppSelector(selectCareerPaths);
+  const profileId = useAppSelector(selectProfileId);
+  const [getProfile, { isFetching }] = useLazyGetProfileQuery();
 
   useEffect(() => {
     if (!careerPaths) {
@@ -31,10 +32,27 @@ export const App = () => {
     dispatch(addIndustryColors(industries));
   }, [careerPaths]);
 
+  useEffect(() => {
+    if (authenticated && !profileId) {
+      getProfile();
+    }
+  }, [authenticated, profileId]);
+
+  if (isFetching) {
+    return <LoadingScreen />;
+  }
+
   return (
     <BrowserRouter>
       <Suspense fallback={<LoadingScreen />}>
-        <PageHeader authenticated={authenticated} signOut={signOut} />
+        <PageHeader
+          authenticated={authenticated}
+          signOut={() => {
+            dispatch(resetInterviews());
+            dispatch(resetSession());
+            signOut();
+          }}
+        />
         <Switch>
           <Route
             path={urls.landingPage}

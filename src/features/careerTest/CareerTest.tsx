@@ -1,8 +1,8 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Container, Group, Button, Stepper } from '@mantine/core';
 import { Shell } from '@shared/components/shell/Shell';
-import { useGenerateProfileMutation } from '@apis/profileApi';
-import { setLoginModal, setProfile } from '@slices/userSlice';
+import { useCreateProfileMutation } from '@apis/profileApi';
+import { setLoginModal } from '@slices/sessionSlice';
 import { useAppDispatch } from '@state/store';
 import { formStyles } from '@shared/styles/formStyles';
 import { LoadingScreen } from '@shared/components/loadingScreen/LoadingScreen';
@@ -21,15 +21,9 @@ const stepperLabels = ['Education', 'Experience', 'Preferences', 'Career Paths']
 export const CareerTest = () => {
   const dispatch = useAppDispatch();
   const [activeStep, setActiveStep] = useState(CareerStep.EDUCATION);
-  const [generateProfile, { data, isLoading }] = useGenerateProfileMutation();
+  const [createProfile, { data, isLoading }] = useCreateProfileMutation();
   const { classes } = formStyles();
   const { form, checkFormIsValid } = useProfileForm({ activeStep });
-
-  useEffect(() => {
-    if (data) {
-      dispatch(setProfile(data));
-    }
-  }, [data]);
 
   const clickNext = async () => {
     const formIsvalid = checkFormIsValid();
@@ -38,13 +32,13 @@ export const CareerTest = () => {
     }
     form.clearErrors();
     if (activeStep === CareerStep.PREFERENCES) {
-      generateProfile(form.values);
+      createProfile(form.values);
     }
     if (activeStep === CareerStep.CAREER_PATHS) {
       dispatch(
         setLoginModal({
           open: true,
-          onComplete: () => setActiveStep(activeStep + 1),
+          associateProfileId: data?.identifier,
           initialState: 'signUp',
         }),
       );

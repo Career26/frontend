@@ -2,11 +2,11 @@ import { Text, Grid, Container } from '@mantine/core';
 import React from 'react';
 import { formStyles } from '@shared/styles/formStyles';
 import { useAppSelector } from '@state/store';
-import { selectCareerPaths } from '@slices/userSlice';
 import { Shell } from '@shared/components/shell/Shell';
 import { CareerCard } from '@shared/components/cards/CareerCard';
-import { selectIndustryColors } from '@slices/careerSlice';
+import { selectIndustryColors } from '@slices/sessionSlice';
 import { useCareerSelection } from '@careerTest/hooks/useCareerSelection';
+import { selectCareerPaths } from '@apis/profileApi';
 
 import { CareerPathActions } from './CareerPathActions';
 

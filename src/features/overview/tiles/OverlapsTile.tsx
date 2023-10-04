@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { createStyles, Grid } from '@mantine/core';
 import { CareerOverlap } from '@datatypes/overview';
 import { CareerCard } from '@shared/components/cards/CareerCard';
-import { addIndustryColors, selectIndustryColors } from '@slices/careerSlice';
+import { addIndustryColors, selectIndustryColors } from '@slices/sessionSlice';
 import { useAppDispatch, useAppSelector } from '@state/store';
 
 const overlapsStyles = createStyles({

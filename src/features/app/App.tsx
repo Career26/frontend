@@ -22,7 +22,7 @@ export const App = () => {
   const { authenticated, unauthenticated, signOut } = useAuthUser();
   const careerPaths = useAppSelector(selectCareerPaths);
   const profileId = useAppSelector(selectProfileId);
-  const [getProfile] = useLazyGetProfileQuery();
+  const [getProfile, { isFetching }] = useLazyGetProfileQuery();
 
   useEffect(() => {
     if (!careerPaths) {
@@ -37,6 +37,10 @@ export const App = () => {
       getProfile();
     }
   }, [authenticated, profileId]);
+
+  if (isFetching) {
+    return <LoadingScreen />;
+  }
 
   return (
     <BrowserRouter>

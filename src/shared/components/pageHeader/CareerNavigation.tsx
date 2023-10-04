@@ -1,7 +1,7 @@
 import { selectCareerPaths } from '@apis/profileApi';
 import { Select, createStyles } from '@mantine/core';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
-import { selectSelectedCareerPathId } from '@slices/userSlice';
+import { selectSelectedCareerPathId } from '@slices/sessionSlice';
 import { useAppSelector } from '@state/store';
 import React from 'react';
 

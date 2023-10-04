@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { Shell } from '@shared/components/shell/Shell';
 import { ProgressionTile } from '@shared/components/tiles/ProgressionTile';
 import { useAppSelector } from '@state/store';
-import { selectSelectedCareerPathId } from '@slices/userSlice';
+import { selectSelectedCareerPathId } from '@slices/sessionSlice';
 import { useGetCareerOverviewQuery } from '@apis/overviewApi';
 import { LoadingScreen } from '@shared/components/loadingScreen/LoadingScreen';
 import { navStyles } from '@shared/styles/navStyles';

@@ -1,5 +1,5 @@
 import { Authenticator, Radio, RadioGroupField, useAuthenticator } from '@aws-amplify/ui-react';
-import { selectLoginModal, setLoginModal } from '@slices/userSlice';
+import { selectLoginModal, setLoginModal } from '@slices/sessionSlice';
 import { useAppDispatch, useAppSelector } from '@state/store';
 import React, { useEffect } from 'react';
 import { Modal, createStyles } from '@mantine/core';

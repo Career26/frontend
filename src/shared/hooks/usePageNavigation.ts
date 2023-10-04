@@ -1,6 +1,6 @@
 import { urls } from '@shared/config/urlConstants';
 import { setSelectedInterviewId } from '@slices/interviewSlice';
-import { selectSelectedCareerPathId, setSelectedCareerPathId } from '@slices/userSlice';
+import { selectSelectedCareerPathId, setSelectedCareerPathId } from '@slices/sessionSlice';
 import { useAppDispatch, useAppSelector } from '@state/store';
 import { useMemo } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';

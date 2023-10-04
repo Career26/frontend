@@ -4,10 +4,9 @@ import { LoadingScreen } from '@shared/components/loadingScreen/LoadingScreen';
 import { urls } from '@shared/config/urlConstants';
 import { PageHeader } from '@shared/components/pageHeader/PageHeader';
 import { useAppDispatch, useAppSelector } from '@state/store';
-import { resetUser, selectSelectedCareerPathId } from '@slices/userSlice';
 import { resetInterviews, selectSelectedInterviewId } from '@slices/interviewSlice';
 import { useAuthUser } from '@shared/hooks/useAuthUser';
-import { addIndustryColors, resetCareers } from '@slices/careerSlice';
+import { addIndustryColors, resetSession, selectSelectedCareerPathId } from '@slices/sessionSlice';
 import { selectCareerPaths, selectProfileId, useLazyGetProfileQuery } from '@apis/profileApi';
 
 import { HomePage } from '../homePage/HomePage';
@@ -45,9 +44,8 @@ export const App = () => {
         <PageHeader
           authenticated={authenticated}
           signOut={() => {
-            dispatch(resetUser());
             dispatch(resetInterviews());
-            dispatch(resetCareers());
+            dispatch(resetSession());
             signOut();
           }}
         />

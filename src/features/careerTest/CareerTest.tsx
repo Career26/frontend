@@ -1,8 +1,8 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Container, Group, Button, Stepper } from '@mantine/core';
 import { Shell } from '@shared/components/shell/Shell';
 import { useCreateProfileMutation } from '@apis/profileApi';
-import { setLoginModal, setProfile } from '@slices/userSlice';
+import { setLoginModal } from '@slices/sessionSlice';
 import { useAppDispatch } from '@state/store';
 import { formStyles } from '@shared/styles/formStyles';
 import { LoadingScreen } from '@shared/components/loadingScreen/LoadingScreen';
@@ -24,12 +24,6 @@ export const CareerTest = () => {
   const [createProfile, { data, isLoading }] = useCreateProfileMutation();
   const { classes } = formStyles();
   const { form, checkFormIsValid } = useProfileForm({ activeStep });
-
-  useEffect(() => {
-    if (data) {
-      dispatch(setProfile(data));
-    }
-  }, [data]);
 
   const clickNext = async () => {
     const formIsvalid = checkFormIsValid();

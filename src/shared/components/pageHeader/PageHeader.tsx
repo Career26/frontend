@@ -2,7 +2,7 @@ import React from 'react';
 import { Header, Group, Button, Text, Avatar, Menu } from '@mantine/core';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 import { useAppDispatch } from '@state/store';
-import { setLoginModal } from '@slices/userSlice';
+import { setLoginModal } from '@slices/sessionSlice';
 import { IconLogout } from '@tabler/icons-react';
 import { commonStyles } from '@shared/styles/commonStyles';
 

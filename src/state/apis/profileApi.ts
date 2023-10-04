@@ -9,7 +9,7 @@ export const profileApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl,
     prepareHeaders: async (headers) => {
-      const token = (await Auth.currentSession()).getAccessToken().getJwtToken();
+      const token = (await Auth.currentSession()).getIdToken().getJwtToken();
       headers.set('Authorization', token);
       return headers;
     },

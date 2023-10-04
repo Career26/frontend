@@ -1,6 +1,5 @@
 import { CareerResult } from '@datatypes/career';
 import { UserProfile } from '@datatypes/profile';
-import { profileResponseMock } from '@mocks/profileMocks';
 import { PayloadAction, createSelector, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '@state/store';
 
@@ -15,7 +14,7 @@ type UserSlice = {
 };
 
 export const userInitialState: UserSlice = {
-  profile: profileResponseMock,
+  profile: undefined,
   loginModal: { open: false },
 };
 

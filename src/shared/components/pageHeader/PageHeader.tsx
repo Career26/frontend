@@ -1,15 +1,40 @@
 import React from 'react';
-import { Header, Group, Button, Text, Avatar, Menu } from '@mantine/core';
+import { Header, Group, Button, Text, Avatar, Menu, createStyles, rem } from '@mantine/core';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 import { useAppDispatch } from '@state/store';
-import { setLoginModal } from '@slices/sessionSlice';
-import { IconLogout } from '@tabler/icons-react';
+import { setDeleteAccountModal, setLoginModal } from '@slices/sessionSlice';
+import { IconLogout, IconTrash } from '@tabler/icons-react';
 import { commonStyles } from '@shared/styles/commonStyles';
+import { HEADER_HEIGHT } from '@shared/styles/headerStyles';
 
 import { LoginModal } from '../login/LoginModal';
-import { pageHeaderStyles } from './pageHeaderStyles';
 import { NavigationCenter } from './NavigationCenter';
 import { CareerNavigation } from './CareerNavigation';
+import { DeleteAccountModal } from '../login/DeleteAccountModal';
+
+const pageHeaderStyles = createStyles((theme) => ({
+  inner: {
+    height: HEADER_HEIGHT,
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingLeft: rem(100),
+    paddingRight: rem(100),
+    backgroundColor: theme.colors.gray[1],
+  },
+  logo: {
+    [theme.fn.smallerThan('md')]: {
+      display: 'none',
+    },
+    '&:hover': {
+      cursor: 'pointer',
+    },
+  },
+  menuItemIcon: {
+    width: rem(14),
+    height: rem(14),
+  },
+}));
 
 export const PageHeader = ({
   signOut,
@@ -36,6 +61,7 @@ export const PageHeader = ({
       className={classes.inner}
     >
       <LoginModal />
+      <DeleteAccountModal />
       <Group>
         <Text className={classes.logo} onClick={goToHomepage}>
           LOGO HERE
@@ -71,6 +97,14 @@ export const PageHeader = ({
                 <Menu.Item onClick={signOut} icon={<IconLogout className={classes.menuItemIcon} />}>
                   Logout
                 </Menu.Item>
+                <Menu.Item
+                  color="red"
+                  onClick={() => dispatch(setDeleteAccountModal({ open: true }))}
+                  icon={<IconTrash className={classes.menuItemIcon} />}
+                >
+                  Delete Account
+                </Menu.Item>
+                <DeleteAccountModal />
               </Menu.Dropdown>
             </Menu>
           </>

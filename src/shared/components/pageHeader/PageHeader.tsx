@@ -7,10 +7,10 @@ import { IconLogout, IconSettings, IconTrash } from '@tabler/icons-react';
 import { commonStyles } from '@shared/styles/commonStyles';
 import { HEADER_HEIGHT } from '@shared/styles/headerStyles';
 
-import { LoginModal } from '../login/LoginModal';
+import { LoginModal } from '../account/LoginModal';
 import { NavigationCenter } from './NavigationCenter';
 import { CareerNavigation } from './CareerNavigation';
-import { DeleteAccountModal } from '../login/DeleteAccountModal';
+import { DeleteAccountModal } from '../account/DeleteAccountModal';
 
 const pageHeaderStyles = createStyles((theme) => ({
   inner: {

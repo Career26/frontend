@@ -52,6 +52,10 @@ export const PageHeader = ({
     dispatch(setLoginModal({ open: true, initialState: 'signIn' }));
   };
 
+  const onClickDelete = () => {
+    dispatch(setDeleteAccountModal({ open: true }));
+  };
+
   return (
     <Header
       height="auto"
@@ -81,7 +85,7 @@ export const PageHeader = ({
               gradient={{ from: 'blue', to: 'cyan' }}
               onClick={clickCareersTest}
             >
-              Get Started
+              Take the Test
             </Button>
           </>
         ) : (
@@ -99,7 +103,7 @@ export const PageHeader = ({
                 </Menu.Item>
                 <Menu.Item
                   color="red"
-                  onClick={() => dispatch(setDeleteAccountModal({ open: true }))}
+                  onClick={onClickDelete}
                   icon={<IconTrash className={classes.menuItemIcon} />}
                 >
                   Delete Account

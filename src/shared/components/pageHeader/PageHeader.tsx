@@ -3,7 +3,7 @@ import { Header, Group, Button, Text, Avatar, Menu, createStyles, rem } from '@m
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 import { useAppDispatch } from '@state/store';
 import { setDeleteAccountModal, setLoginModal } from '@slices/sessionSlice';
-import { IconLogout, IconTrash } from '@tabler/icons-react';
+import { IconLogout, IconSettings, IconTrash } from '@tabler/icons-react';
 import { commonStyles } from '@shared/styles/commonStyles';
 import { HEADER_HEIGHT } from '@shared/styles/headerStyles';
 
@@ -100,6 +100,9 @@ export const PageHeader = ({
                 <Menu.Label>Session</Menu.Label>
                 <Menu.Item onClick={signOut} icon={<IconLogout className={classes.menuItemIcon} />}>
                   Logout
+                </Menu.Item>
+                <Menu.Item icon={<IconSettings className={classes.menuItemIcon} />}>
+                  Account Settings
                 </Menu.Item>
                 <Menu.Item
                   color="red"

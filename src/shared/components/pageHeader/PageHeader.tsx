@@ -46,7 +46,7 @@ export const PageHeader = ({
   const dispatch = useAppDispatch();
   const { classes: commonClasses } = commonStyles();
   const { classes } = pageHeaderStyles();
-  const { clickCareersTest, goToHomepage } = usePageNavigation();
+  const { clickCareersTest, goToHomepage, goToSettings } = usePageNavigation();
 
   const onClickLogin = () => {
     dispatch(setLoginModal({ open: true, initialState: 'signIn' }));
@@ -101,7 +101,10 @@ export const PageHeader = ({
                 <Menu.Item onClick={signOut} icon={<IconLogout className={classes.menuItemIcon} />}>
                   Logout
                 </Menu.Item>
-                <Menu.Item icon={<IconSettings className={classes.menuItemIcon} />}>
+                <Menu.Item
+                  onClick={goToSettings}
+                  icon={<IconSettings className={classes.menuItemIcon} />}
+                >
                   Account Settings
                 </Menu.Item>
                 <Menu.Item

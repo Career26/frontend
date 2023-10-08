@@ -15,6 +15,8 @@ import { CareerTest } from '../careerTest/CareerTest';
 import { OverviewPage } from '../overview/OverviewPage';
 import { InterviewPage } from '../interview/InterviewPage';
 
+// TODO: add profile page where users can update their settings, see: https://docs.amplify.aws/lib/auth/manageusers/q/platform/js/#update-user-attributes
+
 export const App = () => {
   const dispatch = useAppDispatch();
   const defaultCareerId = useAppSelector(selectSelectedCareerPathId);

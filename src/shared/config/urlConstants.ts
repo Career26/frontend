@@ -4,6 +4,7 @@ export const urls = {
   overview: '/overview',
   interviews: '/interviews',
   mentors: '/mentors',
+  settings: '/settings',
 };
 
 export const baseUrl = 'https://qjop4yl84g.execute-api.eu-west-1.amazonaws.com/Prod';

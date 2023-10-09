@@ -44,9 +44,13 @@ export const usePageNavigation = () => {
   const clickCareersTest = () => {
     history.push(urls.careersTest);
   };
+  const goToSettings = () => {
+    history.push(urls.settings);
+  };
 
   return {
     goToHomepage,
+    goToSettings,
     clickCareersTest,
     toggleCareerId,
     toggleInterviewId,

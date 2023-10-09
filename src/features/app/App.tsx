@@ -8,6 +8,7 @@ import { resetInterviews, selectSelectedInterviewId } from '@slices/interviewSli
 import { useAuthUser } from '@shared/hooks/useAuthUser';
 import { addIndustryColors, resetSession, selectSelectedCareerPathId } from '@slices/sessionSlice';
 import { selectCareerPaths, selectProfileId, useLazyGetProfileQuery } from '@apis/profileApi';
+import { SettingsPage } from '@features/settings/SettingsPage';
 
 import { HomePage } from '../homePage/HomePage';
 import { LandingPage } from '../landingPage/LandingPage';
@@ -109,6 +110,18 @@ export const App = () => {
                 return <Redirect to={`${urls.interviews}/${careerId}/${defaultInterviewId}`} />;
               }
               return <InterviewPage />;
+            }}
+          />
+          <Route
+            path={urls.settings}
+            render={() => {
+              if (unauthenticated) {
+                return <Redirect to={urls.landingPage} />;
+              }
+              if (!authenticated) {
+                return <LoadingScreen />;
+              }
+              return <SettingsPage />;
             }}
           />
         </Switch>

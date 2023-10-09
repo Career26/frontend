@@ -11,9 +11,6 @@ type SessionSlice = {
     associateProfileId?: string;
     initialState?: 'signIn' | 'signUp' | 'resetPassword';
   };
-  deleteAccountModal: {
-    open: boolean;
-  };
   industryColors: { [key: string]: string };
   selectedCareerPathId?: string;
 };
@@ -22,7 +19,6 @@ export const initialSessionState: SessionSlice = {
   profile: undefined,
   industryColors: {},
   loginModal: { open: false },
-  deleteAccountModal: { open: false },
 };
 
 export const sessionSlice = createSlice({
@@ -34,12 +30,6 @@ export const sessionSlice = createSlice({
     },
     setLoginModal: (state, { payload }: PayloadAction<SessionSlice['loginModal']>) => {
       state.loginModal = payload;
-    },
-    setDeleteAccountModal: (
-      state,
-      { payload }: PayloadAction<SessionSlice['deleteAccountModal']>,
-    ) => {
-      state.deleteAccountModal = payload;
     },
     setSelectedCareerPathId: (
       state,
@@ -60,7 +50,6 @@ export const sessionSlice = createSlice({
 
 export const {
   setLoginModal,
-  setDeleteAccountModal,
   setProfile,
   setSelectedCareerPathId,
   resetSession,
@@ -69,8 +58,6 @@ export const {
 
 const selectSession = (state: RootState) => state.session;
 export const selectLoginModal = (state: RootState) => selectSession(state).loginModal;
-export const selectDeleteAccountModal = (state: RootState) =>
-  selectSession(state).deleteAccountModal;
 export const selectSelectedCareerPathId = (state: RootState) =>
   selectSession(state).selectedCareerPathId || Object.keys(selectCareerPaths(state) || {})[0];
 

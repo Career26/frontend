@@ -47,3 +47,9 @@ export interface UserProfile {
   profile: Profile;
   careerPaths: { [key: string]: CareerPath };
 }
+
+export interface UserDetails {
+  name: string;
+  gender: string;
+  email: string;
+}

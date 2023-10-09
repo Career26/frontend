@@ -18,7 +18,6 @@ export const navStyles = createStyles((theme) => ({
   },
   linkAction: {
     textDecoration: 'none',
-    ':not(:first-of-type)': { paddingTop: rem(20) },
     paddingLeft: rem(10),
     paddingRight: rem(10),
   },

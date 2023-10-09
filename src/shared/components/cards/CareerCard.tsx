@@ -50,7 +50,7 @@ type CareerCardProps = {
   subTitle?: string;
   badge?: string;
   color?: string;
-  content: string;
+  content: React.ReactNode;
   Actions?: React.ReactNode;
 };
 

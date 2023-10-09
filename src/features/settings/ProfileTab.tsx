@@ -59,7 +59,7 @@ export const ProfileTab = () => {
         content={
           <>
             <TextInput {...form.getInputProps('email')} label="Email" disabled />
-            <TextInput {...form.getInputProps('name')} label="Name" />
+            <TextInput {...form.getInputProps('name')} label="Name" disabled />
             <Radio.Group
               name="Gender"
               label="Gender"

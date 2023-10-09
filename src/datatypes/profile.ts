@@ -49,7 +49,7 @@ export interface UserProfile {
 }
 
 export interface UserDetails {
-  name?: string;
-  gender?: string;
-  email?: string;
+  name: string;
+  gender: string;
+  email: string;
 }

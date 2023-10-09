@@ -1,28 +1,59 @@
 import { selectProfile } from '@apis/profileApi';
 import { Profile } from '@datatypes/profile';
-import { Tabs, TextInput } from '@mantine/core';
+import { Paper, Tabs, TextInput, createStyles, rem } from '@mantine/core';
 import { useAppSelector } from '@state/store';
 import React from 'react';
 
+const userTabStyles = createStyles({
+  paper: {
+    gap: rem(20),
+    display: 'flex',
+    flexDirection: 'column',
+  },
+});
+
 const UniversitiesTab = ({ profile }: { profile: Profile }) => {
+  const { classes } = userTabStyles();
   const universities = [profile.latestDegree, ...profile.additionalDegrees];
-  return universities.map((university) => (
-    <div key={`university-${university.university}`}>
-      <TextInput label="University Name" value={university.university} disabled />
-      <TextInput label="Course Name" value={university.name} disabled />
-      <TextInput label="Grade" value={university.grade} disabled />
-      <TextInput label="Level" value={university.level} disabled />
+  return (
+    <div className={classes.paper}>
+      {universities.map((university) => (
+        <Paper
+          key={`experience-${university.university}`}
+          shadow="md"
+          radius="md"
+          p="md"
+          withBorder
+        >
+          <TextInput label="University Name" value={university.university} disabled />
+          <TextInput label="Course Name" value={university.name} disabled />
+          <TextInput label="Grade" value={university.grade} disabled />
+          <TextInput label="Level" value={university.level} disabled />
+        </Paper>
+      ))}
     </div>
-  ));
+  );
 };
 
-const ExperiencesTab = ({ profile }: { profile: Profile }) =>
-  profile.previousWorkExperience.map((experience) => (
-    <div key={`experience-${experience.companyName}`}>
-      <TextInput label="Company Name" value={experience.companyName} disabled />
-      <TextInput label="Role" value={experience.role} disabled />
+const ExperiencesTab = ({ profile }: { profile: Profile }) => {
+  const { classes } = userTabStyles();
+  return (
+    <div className={classes.paper}>
+      {profile.previousWorkExperience.map((experience) => (
+        <Paper
+          key={`experience-${experience.companyName}`}
+          shadow="md"
+          radius="md"
+          p="md"
+          withBorder
+        >
+          <TextInput label="Company Name" value={experience.companyName} disabled />
+          <TextInput label="Role" value={experience.role} disabled />
+        </Paper>
+      ))}
     </div>
-  ));
+  );
+};
 
 const tabs = [
   { label: 'Universities', Component: UniversitiesTab },

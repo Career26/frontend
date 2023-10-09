@@ -3,12 +3,18 @@ import { isEmail, useForm } from '@mantine/form';
 import { useAuthUser } from '@shared/hooks/useAuthUser';
 import React, { useMemo, useState } from 'react';
 import { UserDetails } from '@datatypes/profile';
+import { IconExclamationCircle } from '@tabler/icons-react';
 
 const profileTabStyles = createStyles({
   buttons: {
     marginTop: rem(20),
     display: 'flex',
     alignItems: 'self-end',
+  },
+  iconText: {
+    display: 'flex',
+    justifyContent: 'flex-start',
+    gap: rem(20),
   },
 });
 
@@ -39,7 +45,7 @@ const DetailsTab = () => {
   return (
     <div>
       <TextInput label="Email" value={form.values.email} disabled />
-      <TextInput {...form.getInputProps(form.values.name)} label="Name" />
+      <TextInput {...form.getInputProps('name')} label="Name" />
       <Radio.Group name="Gender" label="Gender" value={form.values.gender}>
         <Group mt="xs">
           <Radio value="male" label="Male" />
@@ -67,7 +73,8 @@ const AccountTab = () => {
   const { classes } = profileTabStyles();
   return (
     <div>
-      <Text>
+      <Text className={classes.iconText}>
+        <IconExclamationCircle color="red" />
         Delting your account will remove your saved careers, interview quesitons, and mentor
         network.
       </Text>

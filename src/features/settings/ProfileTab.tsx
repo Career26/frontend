@@ -46,7 +46,12 @@ const DetailsTab = () => {
     <div>
       <TextInput label="Email" value={form.values.email} disabled />
       <TextInput {...form.getInputProps('name')} label="Name" />
-      <Radio.Group name="Gender" label="Gender" value={form.values.gender}>
+      <Radio.Group
+        name="Gender"
+        label="Gender"
+        value={form.values.gender}
+        onChange={(value) => form.setFieldValue('gender', value)}
+      >
         <Group mt="xs">
           <Radio value="male" label="Male" />
           <Radio value="female" label="Female" />

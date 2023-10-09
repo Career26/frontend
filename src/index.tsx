@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { MantineProvider } from '@mantine/core';
 import { Authenticator } from '@aws-amplify/ui-react';
 import { Amplify } from 'aws-amplify';
+import { Notifications } from '@mantine/notifications';
 
 import awsExports from './awsExports';
 import { App } from './features/app/App';
@@ -39,6 +40,7 @@ root.render(
           }}
         >
           <Authenticator.Provider>
+            <Notifications />
             <App />
           </Authenticator.Provider>
         </MantineProvider>

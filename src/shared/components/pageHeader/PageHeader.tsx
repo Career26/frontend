@@ -2,15 +2,14 @@ import React from 'react';
 import { Header, Group, Button, Text, Avatar, Menu, createStyles, rem } from '@mantine/core';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 import { useAppDispatch } from '@state/store';
-import { setDeleteAccountModal, setLoginModal } from '@slices/sessionSlice';
-import { IconLogout, IconSettings, IconTrash } from '@tabler/icons-react';
+import { setLoginModal } from '@slices/sessionSlice';
+import { IconLogout, IconSettings } from '@tabler/icons-react';
 import { commonStyles } from '@shared/styles/commonStyles';
 import { HEADER_HEIGHT } from '@shared/styles/headerStyles';
 
 import { LoginModal } from '../account/LoginModal';
 import { NavigationCenter } from './NavigationCenter';
 import { CareerNavigation } from './CareerNavigation';
-import { DeleteAccountModal } from '../account/DeleteAccountModal';
 
 const pageHeaderStyles = createStyles((theme) => ({
   inner: {
@@ -52,10 +51,6 @@ export const PageHeader = ({
     dispatch(setLoginModal({ open: true, initialState: 'signIn' }));
   };
 
-  const onClickDelete = () => {
-    dispatch(setDeleteAccountModal({ open: true }));
-  };
-
   return (
     <Header
       height="auto"
@@ -65,7 +60,6 @@ export const PageHeader = ({
       className={classes.inner}
     >
       <LoginModal />
-      <DeleteAccountModal />
       <Group>
         <Text className={classes.logo} onClick={goToHomepage}>
           LOGO HERE
@@ -107,14 +101,6 @@ export const PageHeader = ({
                 >
                   Account Settings
                 </Menu.Item>
-                <Menu.Item
-                  color="red"
-                  onClick={onClickDelete}
-                  icon={<IconTrash className={classes.menuItemIcon} />}
-                >
-                  Delete Account
-                </Menu.Item>
-                <DeleteAccountModal />
               </Menu.Dropdown>
             </Menu>
           </>

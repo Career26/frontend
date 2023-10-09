@@ -1,12 +1,9 @@
-import { Button, Navbar } from '@mantine/core';
+import { Button, Container, Navbar, createStyles, rem } from '@mantine/core';
 import { Shell } from '@shared/components/shell/Shell';
 import { featureStyles } from '@shared/styles/featureStyles';
 import { navStyles } from '@shared/styles/navStyles';
 import classNames from 'classnames';
 import React, { useState } from 'react';
-import { useAuthUser } from '@shared/hooks/useAuthUser';
-import { useAppSelector } from '@state/store';
-import { selectProfile } from '@apis/profileApi';
 
 import { ProfileTab } from './ProfileTab';
 import { UserInfoTab } from './UserInfoTab';
@@ -16,15 +13,19 @@ const profileLinks = [
   { label: 'User Info', Component: UserInfoTab },
 ];
 
+const settingsPageStyles = createStyles({
+  container: {
+    marginTop: rem(20),
+    marginLeft: 0,
+  },
+});
+
 export const SettingsPage = () => {
   const [activeTab, setActiveTab] = useState(0);
+  const { classes } = settingsPageStyles();
   const { classes: featureClasses } = featureStyles();
   const { classes: navClasses } = navStyles();
   const { Component } = profileLinks[activeTab];
-  const profile = useAppSelector(selectProfile);
-  const {
-    user: { attributes },
-  } = useAuthUser();
 
   return (
     <div className={featureClasses.wrapper}>
@@ -48,7 +49,9 @@ export const SettingsPage = () => {
         }
       >
         <div className={featureClasses.content}>
-          <Component />
+          <Container className={classes.container}>
+            <Component />
+          </Container>
         </div>
       </Shell>
     </div>

@@ -1,21 +1,35 @@
-import { Button, Container, Group, Radio, TextInput } from '@mantine/core';
-import { useForm } from '@mantine/form';
+import { Button, Group, Radio, Text, TextInput, createStyles, rem } from '@mantine/core';
+import { isEmail, useForm } from '@mantine/form';
 import { useAuthUser } from '@shared/hooks/useAuthUser';
-import { setDeleteAccountModal } from '@slices/sessionSlice';
-import { useAppDispatch } from '@state/store';
-import React, { useEffect, useMemo } from 'react';
-import { Auth } from 'aws-amplify';
-import { notifications } from '@mantine/notifications';
+import React, { useMemo, useState } from 'react';
+import { CareerCard } from '@shared/components/cards/CareerCard';
+import { UserDetails } from '@datatypes/profile';
 
-type ProfileForm = {
-  name?: string;
-  gender?: string;
-  email?: string;
-};
+const profileTabStyles = createStyles((theme) => ({
+  container: {
+    gap: rem(20),
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  buttons: {
+    marginTop: rem(20),
+    display: 'flex',
+    alignItems: 'self-end',
+  },
+  deleteAccount: {
+    '.mantine-Card-cardSection': {
+      backgroundColor: theme.colors.red[3],
+      '.mantine-Text-root': {
+        color: 'white',
+      },
+    },
+  },
+}));
 
 export const ProfileTab = () => {
-  const dispatch = useAppDispatch();
-  const { user } = useAuthUser();
+  const [deleteText, setDeleteText] = useState('');
+  const { user, loading, updateUserAttributes, deleteAccount } = useAuthUser();
+  const { classes } = profileTabStyles();
 
   const initialValues = {
     name: user.attributes?.name,
@@ -23,31 +37,13 @@ export const ProfileTab = () => {
     email: user.attributes?.email,
   };
 
-  const form = useForm<ProfileForm>({
+  const form = useForm<UserDetails>({
     initialValues,
     validate: {
       name: (input) => !input && 'Name is required',
+      email: isEmail('Must be a valid email'),
     },
   });
-
-  const onClickUpdate = async () => {
-    try {
-      await Auth.currentAuthenticatedUser();
-      await Auth.updateUserAttributes(user, { name: form.values.name, gender: form.values.gender });
-      notifications.show({
-        title: 'Updated profile',
-        message: 'Successfully updated profile',
-        color: 'green',
-      });
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error(`update account error - ${error}`);
-    }
-  };
-
-  const onClickDelete = () => {
-    dispatch(setDeleteAccountModal({ open: true }));
-  };
 
   const canUpdate = useMemo(() => {
     if (form.values.name === initialValues.name && form.values.gender === initialValues.gender) {
@@ -56,36 +52,69 @@ export const ProfileTab = () => {
     return form.isValid();
   }, [form.values, initialValues]);
 
-  useEffect(() => {
-    form.setValues(initialValues);
-  }, [initialValues]);
-
   return (
-    <div>
-      <Container>
-        <TextInput {...form.getInputProps('email')} label="Email" disabled />
-        <TextInput {...form.getInputProps('name')} label="Name" />
-        <Radio.Group
-          name="Gender"
-          label="Gender"
-          value={form.values.gender}
-          onChange={(value) => form.setFieldValue('gender', value)}
-        >
-          <Group mt="xs">
-            <Radio value="male" label="Male" />
-            <Radio value="female" label="Female" />
-            <Radio value="preferNotToSay" label="Prefer not to say" />
-          </Group>
-        </Radio.Group>
-      </Container>
-      <Group>
-        <Button onClick={onClickUpdate} disabled={!canUpdate}>
-          Update Profile
-        </Button>
-        <Button onClick={onClickDelete} color="red">
-          Delete Account
-        </Button>
-      </Group>
+    <div className={classes.container}>
+      <CareerCard
+        title="User Details"
+        content={
+          <>
+            <TextInput {...form.getInputProps('email')} label="Email" disabled />
+            <TextInput {...form.getInputProps('name')} label="Name" />
+            <Radio.Group
+              name="Gender"
+              label="Gender"
+              value={form.values.gender}
+              onChange={(value) => form.setFieldValue('gender', value)}
+            >
+              <Group mt="xs">
+                <Radio value="male" label="Male" />
+                <Radio value="female" label="Female" />
+                <Radio value="preferNotToSay" label="Prefer not to say" />
+              </Group>
+            </Radio.Group>
+
+            <Group className={classes.buttons}>
+              <Button
+                variant="outline"
+                onClick={() => updateUserAttributes(form.values)}
+                disabled={!canUpdate || loading}
+                loading={loading}
+              >
+                Update Profile
+              </Button>
+            </Group>
+          </>
+        }
+      />
+      <div className={classes.deleteAccount}>
+        <CareerCard
+          title="Delete Account"
+          content={
+            <>
+              <Text>
+                Delting your account will remove your saved careers, interview quesitons, and mentor
+                network.
+              </Text>
+              <Group className={classes.buttons}>
+                <TextInput
+                  value={deleteText}
+                  label="Type DELETE to confirm"
+                  onChange={({ target: { value } }) => setDeleteText(value)}
+                />
+                <Button
+                  color="red"
+                  disabled={deleteText !== 'DELETE' || loading}
+                  variant="outline"
+                  onClick={deleteAccount}
+                  loading={loading}
+                >
+                  Delete Profile
+                </Button>
+              </Group>
+            </>
+          }
+        />
+      </div>
     </div>
   );
 };

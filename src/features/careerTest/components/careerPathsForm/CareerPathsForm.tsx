@@ -1,21 +1,25 @@
 import { Text, Grid, Container } from '@mantine/core';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { formStyles } from '@shared/styles/formStyles';
-import { useAppSelector } from '@state/store';
+import { useAppDispatch, useAppSelector } from '@state/store';
 import { Shell } from '@shared/components/shell/Shell';
 import { CareerCard } from '@shared/components/cards/CareerCard';
-import { selectIndustryColors } from '@slices/sessionSlice';
+import { addIndustryColors, selectIndustryColors } from '@slices/sessionSlice';
 import { useCareerSelection } from '@careerTest/hooks/useCareerSelection';
-import { selectCareerPaths } from '@apis/profileApi';
+import { UserProfile } from '@datatypes/profile';
 
 import { CareerPathActions } from './CareerPathActions';
 
-export const CareerPathsForm = () => {
+export const CareerPathsForm = ({ careerPaths }: { careerPaths?: UserProfile['careerPaths'] }) => {
   const { classes } = formStyles();
-  const careerPaths = useAppSelector(selectCareerPaths);
   const industryColors = useAppSelector(selectIndustryColors);
   const { selectedCareers, toggleSelectedCareer, loadingCareers } = useCareerSelection();
+  const dispatch = useAppDispatch();
 
+  useEffect(() => {
+    const industries = Object.values(careerPaths || {}).map((item) => item.industry);
+    dispatch(addIndustryColors(industries));
+  }, [careerPaths]);
   return (
     <Shell>
       <Container className={classes.questionContainer}>

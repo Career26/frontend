@@ -1,4 +1,4 @@
-import { Button, Container, Navbar, Paper, ScrollArea, createStyles } from '@mantine/core';
+import { Button, Container, Navbar, Paper, ScrollArea, createStyles, rem } from '@mantine/core';
 import { mockInterviewQuestions } from '@mocks/interviewMocks';
 import { Shell } from '@shared/components/shell/Shell';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
@@ -11,14 +11,16 @@ import React from 'react';
 
 const interviewStyles = createStyles({
   container: {
-    // display: 'flex',
-    // flexDirection: 'column',
-    // justifyContent: 'center',
-    // marginRight: 0,
-    // marginLeft: 0,
-  },
-  paper: {
+    flexDirection: 'column',
+    marginTop: rem(20),
+    display: 'flex',
+    gap: rem(20),
     width: '100%',
+  },
+  buttons: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    gap: rem(20),
   },
 });
 
@@ -52,19 +54,23 @@ export const InterviewPage = () => {
         }
       >
         <div className={featureClasses.content}>
-          <Container m={0} className={classes.container}>
-            <Paper className={classes.paper} shadow="md" radius="md" p="md" withBorder>
+          <Container className={classes.container}>
+            <Paper h={200} shadow="md" radius="md" p="md" withBorder>
               QUESTION
             </Paper>
-            <Paper className={classes.paper} shadow="md" radius="md" p="md" withBorder>
+            <Paper h={200} shadow="md" radius="md" p="md" withBorder>
               Answer
             </Paper>
-            <Button>Submit</Button>
-            <Paper className={classes.paper} shadow="md" radius="md" p="md" withBorder>
+            <div className={classes.buttons}>
+              <Button variant="outline">Submit</Button>
+            </div>
+            <Paper h={200} shadow="md" radius="md" p="md" withBorder>
               Rating and feedback
             </Paper>
-            <Button>Retry</Button>
-            <Button>Next</Button>
+            <div className={classes.buttons}>
+              <Button variant="light">Retry</Button>
+              <Button variant="outline">Next</Button>
+            </div>
           </Container>
         </div>
       </Shell>

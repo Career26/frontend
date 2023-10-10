@@ -11,13 +11,11 @@ import React from 'react';
 
 const interviewStyles = createStyles({
   container: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    // alignItems: 'center',
-    height: '100vh !important',
-    marginRight: 0,
-    marginLeft: 0,
+    // display: 'flex',
+    // flexDirection: 'column',
+    // justifyContent: 'center',
+    // marginRight: 0,
+    // marginLeft: 0,
   },
   paper: {
     width: '100%',
@@ -53,7 +51,7 @@ export const InterviewPage = () => {
           </Navbar>
         }
       >
-        <div className={classNames(featureClasses.content)}>
+        <div className={featureClasses.content}>
           <Container m={0} className={classes.container}>
             <Paper className={classes.paper} shadow="md" radius="md" p="md" withBorder>
               QUESTION

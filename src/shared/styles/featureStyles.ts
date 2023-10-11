@@ -14,7 +14,6 @@ export const featureStyles = createStyles((theme) => ({
     },
   },
   content: {
-    height: '420vh',
     flexDirection: 'column',
     paddingLeft: `${NAVBAR_WIDTH} !important`,
     paddingTop: HEADER_HEIGHT,

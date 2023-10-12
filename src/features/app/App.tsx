@@ -27,23 +27,23 @@ export const App = () => {
   const profileId = useAppSelector(selectProfileId);
   const [getProfile, { isFetching }] = useLazyGetProfileQuery();
 
-  useEffect(() => {
-    if (!careerPaths) {
-      return;
-    }
-    const industries = Object.values(careerPaths).map(({ industry }) => industry);
-    dispatch(addIndustryColors(industries));
-  }, [careerPaths]);
+  // useEffect(() => {
+  //   if (!careerPaths) {
+  //     return;
+  //   }
+  //   const industries = Object.values(careerPaths).map(({ industry }) => industry);
+  //   dispatch(addIndustryColors(industries));
+  // }, [careerPaths]);
 
-  useEffect(() => {
-    if (authenticated && !profileId) {
-      getProfile();
-    }
-  }, [authenticated, profileId]);
+  // useEffect(() => {
+  //   if (authenticated && !profileId) {
+  //     getProfile();
+  //   }
+  // }, [authenticated, profileId]);
 
-  if (isFetching) {
-    return <LoadingScreen />;
-  }
+  // if (isFetching) {
+  return <LoadingScreen />;
+  // }
 
   return (
     <BrowserRouter>

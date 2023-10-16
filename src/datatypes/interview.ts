@@ -19,3 +19,9 @@ export interface RatingResponse {
   exampleAnswer: string;
   suggestedImprovements: string;
 }
+
+export interface SuggestionResponse {
+  sampleAnswer: string;
+  suggestedFormat: string;
+  whySuitable: string;
+}

@@ -1,9 +1,15 @@
-import { useGetInterviewQuestionsQuery, useRateAnswerMutation } from '@apis/interviewApi';
 import {
+  useGetInterviewQuestionsQuery,
+  useGetSuggestionMutation,
+  useRateAnswerMutation,
+} from '@apis/interviewApi';
+import {
+  Accordion,
   Badge,
   Button,
   Container,
   Divider,
+  Loader,
   Navbar,
   Paper,
   ScrollArea,
@@ -25,7 +31,7 @@ import {
 } from '@slices/sessionSlice';
 import { useAppSelector } from '@state/store';
 import classNames from 'classnames';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const interviewStyles = createStyles({
   container: {
@@ -49,15 +55,26 @@ export const InterviewPage = () => {
   const { toggleQuestionId } = usePageNavigation();
   const selectedQuestion = useAppSelector(selectSelectedQuestion);
   const selectedQuestionId = useAppSelector(selectSelectedQuestionId);
-  const { data, isFetching } = useGetInterviewQuestionsQuery();
-  const [rateAnswer, { data: rating, isLoading: ratingLoading }] = useRateAnswerMutation();
+  const { data: questions, isFetching } = useGetInterviewQuestionsQuery();
+  const [rateAnswer, { data: rating, isLoading: ratingLoading, reset: resetRating }] =
+    useRateAnswerMutation();
   const careerPathId = useAppSelector(selectSelectedCareerPathId);
   const form = useForm<{ answer: string }>({
     initialValues: { answer: '' },
     validate: { answer: hasLength({ min: 10, max: 300 }, 'Answer must be 10-300 characters long') },
   });
-
-  console.log(rating);
+  const [getSuggestion, { data: suggestion, isLoading: suggestionLoading }] =
+    useGetSuggestionMutation();
+  const clickReset = () => {
+    form.reset();
+    resetRating();
+  };
+  useEffect(() => {
+    if (!selectedQuestion) {
+      return;
+    }
+    getSuggestion({ careerPathId, question: selectedQuestion.question });
+  }, [selectedQuestion]);
 
   if (isFetching) {
     return <LoadingScreen />;
@@ -74,7 +91,7 @@ export const InterviewPage = () => {
           <Navbar p="xs" className={navClasses.navBar}>
             <Navbar.Section grow mt="md" className={navClasses.navLink}>
               <ScrollArea h="80vh">
-                {data?.map(({ question, category }, index) => (
+                {questions?.map(({ question, category }, index) => (
                   <Button
                     onClick={() => toggleQuestionId(index)}
                     key={`question-${index}`}
@@ -97,6 +114,24 @@ export const InterviewPage = () => {
               <Text>Question {selectedQuestionId}</Text>
               <Divider />
               {selectedQuestion.question}
+            </Paper>
+            <Paper h="auto" shadow="md" radius="md" p="md" withBorder>
+              <Accordion>
+                <Accordion.Item value="suggestion">
+                  <Accordion.Control>Show Suggestion</Accordion.Control>
+                  <Accordion.Panel>
+                    {suggestionLoading ? (
+                      <Loader />
+                    ) : (
+                      <>
+                        Example Format: {suggestion?.suggestedFormat}
+                        Sample Answer: {suggestion?.sampleAnswer}
+                        Why is this Suitable?: {suggestion?.whySuitable}
+                      </>
+                    )}
+                  </Accordion.Panel>
+                </Accordion.Item>
+              </Accordion>
             </Paper>
             <Paper h="auto" shadow="md" radius="md" p="md" withBorder>
               <Textarea
@@ -135,8 +170,16 @@ export const InterviewPage = () => {
                   Example: {rating.exampleAnswer}
                 </Paper>
                 <div className={classes.buttons}>
-                  <Button variant="light">Retry</Button>
-                  <Button variant="outline">Next</Button>
+                  <Button variant="light" onClick={clickReset}>
+                    Retry
+                  </Button>
+                  <Button
+                    variant="outline"
+                    disabled={questions && selectedQuestionId === questions.length - 1}
+                    onClick={() => toggleQuestionId(selectedQuestionId + 1)}
+                  >
+                    Next
+                  </Button>
                 </div>
               </>
             )}

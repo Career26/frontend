@@ -6,12 +6,14 @@ import { Shell } from '@shared/components/shell/Shell';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 import { featureStyles } from '@shared/styles/featureStyles';
 import {
+  addQuestionColors,
+  selectQuestionColors,
   selectSelectedCareerPathId,
   selectSelectedQuestion,
   selectSelectedQuestionId,
 } from '@slices/sessionSlice';
-import { useAppSelector } from '@state/store';
-import React from 'react';
+import { useAppDispatch, useAppSelector } from '@state/store';
+import React, { useEffect } from 'react';
 import { CareerCard } from '@shared/components/cards/CareerCard';
 
 import { QuestionSuggestion } from './QuestionSuggestion';
@@ -34,6 +36,7 @@ const interviewStyles = createStyles({
 });
 
 export const InterviewPage = () => {
+  const dispatch = useAppDispatch();
   const { classes } = interviewStyles();
   const { classes: featureClasses } = featureStyles();
   const { toggleQuestionId } = usePageNavigation();
@@ -43,6 +46,7 @@ export const InterviewPage = () => {
   const { data: questions, isFetching } = useGetInterviewQuestionsQuery();
   const [rateAnswer, { data: rating, isLoading: ratingLoading, reset: resetRating }] =
     useRateAnswerMutation();
+  const questionColors = useAppSelector(selectQuestionColors);
 
   const form = useForm<{ answer: string }>({
     initialValues: { answer: '' },
@@ -53,6 +57,14 @@ export const InterviewPage = () => {
     form.reset();
     resetRating();
   };
+
+  useEffect(() => {
+    if (!questions) {
+      return;
+    }
+    const categoies = questions.map(({ category }) => category);
+    dispatch(addQuestionColors(categoies));
+  }, [questions]);
 
   if (isFetching) {
     return <LoadingScreen />;
@@ -73,6 +85,7 @@ export const InterviewPage = () => {
               title={`Question ${selectedQuestionId + 1}`}
               subTitle={selectedQuestion.question}
               badge={selectedQuestion.category}
+              color={questionColors[selectedQuestion.category]}
             />
             <QuestionSuggestion />
             <Textarea

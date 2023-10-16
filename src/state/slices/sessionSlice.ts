@@ -14,12 +14,14 @@ type SessionSlice = {
   };
   selectedQuestionId?: number;
   industryColors: { [key: string]: string };
+  questionColors: { [key: string]: string };
   selectedCareerPathId?: string;
 };
 
 export const initialSessionState: SessionSlice = {
   profile: undefined,
   industryColors: {},
+  questionColors: {},
   selectedQuestionId: undefined,
   loginModal: { open: false },
 };
@@ -53,6 +55,13 @@ export const sessionSlice = createSlice({
       });
       state.industryColors = industryColors;
     },
+    addQuestionColors: (state, { payload: categories }: PayloadAction<string[]>) => {
+      const questionColors = getIndustryColors({
+        initialColors: { ...state.questionColors },
+        industries: categories,
+      });
+      state.questionColors = questionColors;
+    },
     resetSession: () => initialSessionState,
   },
 });
@@ -63,6 +72,7 @@ export const {
   setSelectedCareerPathId,
   resetSession,
   addIndustryColors,
+  addQuestionColors,
   setSelectedQuestionId,
 } = sessionSlice.actions;
 
@@ -89,5 +99,6 @@ export const selectSelectedCareerPath = createSelector(
 );
 
 export const selectIndustryColors = (state: RootState) => selectSession(state).industryColors;
+export const selectQuestionColors = (state: RootState) => selectSession(state).questionColors;
 
 export default sessionSlice.reducer;

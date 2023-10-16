@@ -1,5 +1,5 @@
 import { Question } from '@datatypes/interview';
-import { Badge, Button, Navbar, ScrollArea, createStyles, rem } from '@mantine/core';
+import { Button, Navbar, ScrollArea, createStyles, rem } from '@mantine/core';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 import { navStyles } from '@shared/styles/navStyles';
 import classNames from 'classnames';
@@ -27,7 +27,7 @@ export const QuestionNavBar = ({ selectedQuestionId, questions }: QuestionNavBar
     <Navbar p="xs" className={navClasses.navBar}>
       <Navbar.Section grow mt="md" className={navClasses.navLink}>
         <ScrollArea h="80vh">
-          {questions?.map(({ category }, index) => (
+          {questions?.map((_, index) => (
             <Button
               onClick={() => toggleQuestionId(index)}
               key={`question-${index}`}
@@ -35,10 +35,7 @@ export const QuestionNavBar = ({ selectedQuestionId, questions }: QuestionNavBar
                 [navClasses.active]: selectedQuestionId === index,
               })}
             >
-              <div className={classes.button}>
-                <div>Question {index + 1}</div>
-                <Badge left={0}>{category}</Badge>
-              </div>
+              <div className={classes.button}>Question {index + 1}</div>
             </Button>
           ))}
         </ScrollArea>

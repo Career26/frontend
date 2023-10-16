@@ -31,7 +31,7 @@ import {
 } from '@slices/sessionSlice';
 import { useAppSelector } from '@state/store';
 import classNames from 'classnames';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const interviewStyles = createStyles({
   container: {
@@ -49,6 +49,7 @@ const interviewStyles = createStyles({
 });
 
 export const InterviewPage = () => {
+  const [value, setValue] = useState<string | null>(null);
   const { classes } = interviewStyles();
   const { classes: featureClasses } = featureStyles();
   const { classes: navClasses } = navStyles();
@@ -63,8 +64,10 @@ export const InterviewPage = () => {
     initialValues: { answer: '' },
     validate: { answer: hasLength({ min: 10, max: 300 }, 'Answer must be 10-300 characters long') },
   });
+
   const [getSuggestion, { data: suggestion, isLoading: suggestionLoading }] =
     useGetSuggestionMutation();
+
   const clickReset = () => {
     form.reset();
     resetRating();
@@ -93,7 +96,10 @@ export const InterviewPage = () => {
               <ScrollArea h="80vh">
                 {questions?.map(({ question, category }, index) => (
                   <Button
-                    onClick={() => toggleQuestionId(index)}
+                    onClick={() => {
+                      setValue(null);
+                      toggleQuestionId(index);
+                    }}
                     key={`question-${index}`}
                     className={classNames(navClasses.navButton, navClasses.linkAction, {
                       [navClasses.active]: selectedQuestionId === index,
@@ -116,7 +122,7 @@ export const InterviewPage = () => {
               {selectedQuestion.question}
             </Paper>
             <Paper h="auto" shadow="md" radius="md" p="md" withBorder>
-              <Accordion>
+              <Accordion value={value} onChange={setValue}>
                 <Accordion.Item value="suggestion">
                   <Accordion.Control>Show Suggestion</Accordion.Control>
                   <Accordion.Panel>

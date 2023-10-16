@@ -4,7 +4,7 @@ import {
   RatingResponse,
   SuggestionInput,
   SuggestionResponse,
-} from '@datatypes/interview';
+} from '@datatypes/question';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { baseUrl } from '@shared/config/urlConstants';
 import { RootState } from '@state/store';

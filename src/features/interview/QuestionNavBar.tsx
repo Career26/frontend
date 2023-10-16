@@ -1,4 +1,4 @@
-import { Question } from '@datatypes/interview';
+import { Question } from '@datatypes/question';
 import { Button, Navbar, ScrollArea, createStyles, rem } from '@mantine/core';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 import { navStyles } from '@shared/styles/navStyles';

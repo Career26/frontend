@@ -15,8 +15,8 @@ export const usePageNavigation = () => {
   const careerId = useAppSelector(selectSelectedCareerPathId);
 
   const featureUrl = useMemo(() => {
-    if (new RegExp(urls.interviews).test(currentPathname)) {
-      return urls.interviews;
+    if (new RegExp(urls.questionss).test(currentPathname)) {
+      return urls.questionss;
     }
     if (new RegExp(urls.overview).test(currentPathname)) {
       return urls.overview;

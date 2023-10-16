@@ -1,4 +1,4 @@
-import { RatingResponse } from '@datatypes/interview';
+import { RatingResponse } from '@datatypes/question';
 import { Accordion, Button, Paper, Text, createStyles, rem } from '@mantine/core';
 import React, { useState } from 'react';
 import { IconChecklist, IconCircleCheck, IconInfoCircle } from '@tabler/icons-react';

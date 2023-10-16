@@ -104,10 +104,12 @@ export const App = () => {
               if (!authenticated) {
                 return <LoadingScreen />;
               }
-              if (!careerId) {
-                return <Redirect to={`${urls.interviews}/${defaultCareerId}}`} />;
+              if (!careerId && !!defaultCareerId) {
+                return (
+                  <Redirect to={`${urls.interviews}/${defaultCareerId}/${defaultQuestionId}`} />
+                );
               }
-              if (!interviewId) {
+              if (!interviewId && !!careerId) {
                 return <Redirect to={`${urls.interviews}/${careerId}/${defaultQuestionId}`} />;
               }
               return <InterviewPage />;

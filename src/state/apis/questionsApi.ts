@@ -10,8 +10,8 @@ import { baseUrl } from '@shared/config/urlConstants';
 import { RootState } from '@state/store';
 import { Auth } from 'aws-amplify';
 
-export const interviewApi = createApi({
-  reducerPath: 'interview',
+export const questionsApi = createApi({
+  reducerPath: 'questions',
   baseQuery: fetchBaseQuery({
     baseUrl,
     prepareHeaders: async (headers) => {
@@ -21,7 +21,7 @@ export const interviewApi = createApi({
     },
   }),
   endpoints: (build) => ({
-    getInterviewQuestions: build.query<Question[], void>({
+    getQuestions: build.query<Question[], void>({
       query: () => 'questions',
     }),
     getSuggestion: build.mutation<SuggestionResponse, SuggestionInput>({
@@ -41,8 +41,8 @@ export const interviewApi = createApi({
   }),
 });
 
-export const { useGetInterviewQuestionsQuery, useRateAnswerMutation, useGetSuggestionMutation } =
-  interviewApi;
+export const { useGetQuestionsQuery, useRateAnswerMutation, useGetSuggestionMutation } =
+  questionsApi;
 
 export const selectInterviewQuestions = (state: RootState) =>
-  interviewApi.endpoints.getInterviewQuestions.select()(state).data;
+  questionsApi.endpoints.getQuestions.select()(state).data;

@@ -5,7 +5,6 @@ import { Auth } from 'aws-amplify';
 import { useEffect, useState } from 'react';
 import { notifications } from '@mantine/notifications';
 import { UserDetails } from '@datatypes/profile';
-import { resetInterviews } from '@slices/interviewSlice';
 
 import { usePageNavigation } from './usePageNavigation';
 
@@ -56,7 +55,6 @@ export const useAuthUser = () => {
         color: 'green',
       });
       goToHomepage();
-      dispatch(resetInterviews());
       dispatch(resetSession());
     } catch (error) {
       // eslint-disable-next-line no-console

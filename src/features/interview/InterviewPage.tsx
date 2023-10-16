@@ -1,4 +1,4 @@
-import { useGetInterviewQuestionsQuery, useRateAnswerMutation } from '@apis/interviewApi';
+import { useGetQuestionsQuery, useRateAnswerMutation } from '@apis/questionsApi';
 import { Button, Container, Textarea, createStyles, rem } from '@mantine/core';
 import { hasLength, useForm } from '@mantine/form';
 import { LoadingScreen } from '@shared/components/loadingScreen/LoadingScreen';
@@ -43,7 +43,7 @@ export const InterviewPage = () => {
   const careerPathId = useAppSelector(selectSelectedCareerPathId);
   const selectedQuestion = useAppSelector(selectSelectedQuestion);
   const selectedQuestionId = useAppSelector(selectSelectedQuestionId);
-  const { data: questions, isFetching } = useGetInterviewQuestionsQuery();
+  const { data: questions, isFetching } = useGetQuestionsQuery();
   const [rateAnswer, { data: rating, isLoading: ratingLoading, reset: resetRating }] =
     useRateAnswerMutation();
   const questionColors = useAppSelector(selectQuestionColors);

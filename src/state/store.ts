@@ -3,12 +3,11 @@ import { profileApi } from '@apis/profileApi';
 import { overviewApi } from '@apis/overviewApi';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import session from '@slices/sessionSlice';
-// import interview from '@slices/interviewSlice';
-import { interviewApi } from '@apis/interviewApi';
+import { questionsApi } from '@apis/questionsApi';
 
 export const rootReducer = combineReducers({
   session,
-  [interviewApi.reducerPath]: interviewApi.reducer,
+  [questionsApi.reducerPath]: questionsApi.reducer,
   [profileApi.reducerPath]: profileApi.reducer,
   [overviewApi.reducerPath]: overviewApi.reducer,
 });
@@ -16,13 +15,13 @@ export const rootReducer = combineReducers({
 export const store = configureStore({
   reducer: {
     session,
-    [interviewApi.reducerPath]: interviewApi.reducer,
+    [questionsApi.reducerPath]: questionsApi.reducer,
     [profileApi.reducerPath]: profileApi.reducer,
     [overviewApi.reducerPath]: overviewApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }).concat([
-      interviewApi.middleware,
+      questionsApi.middleware,
       profileApi.middleware,
       overviewApi.middleware,
     ]),

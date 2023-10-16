@@ -1,4 +1,4 @@
-import { selectInterviewQuestions } from '@apis/interviewApi';
+import { selectInterviewQuestions } from '@apis/questionsApi';
 import { selectCareerPaths } from '@apis/profileApi';
 import { UserProfile } from '@datatypes/profile';
 import { PayloadAction, createSelector, createSlice } from '@reduxjs/toolkit';

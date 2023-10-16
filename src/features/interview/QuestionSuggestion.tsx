@@ -1,4 +1,4 @@
-import { useGetSuggestionMutation } from '@apis/interviewApi';
+import { useGetSuggestionMutation } from '@apis/questionsApi';
 import { Accordion, List, Loader, Paper, Text, ThemeIcon, createStyles, rem } from '@mantine/core';
 import { selectSelectedCareerPathId, selectSelectedQuestion } from '@slices/sessionSlice';
 import { useAppSelector } from '@state/store';

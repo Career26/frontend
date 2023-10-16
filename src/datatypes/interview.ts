@@ -6,4 +6,16 @@ export interface Question {
 export interface RateAnswerInput {
   answer: string;
   question: string;
+  careerPathId: string;
+}
+
+export interface SuggestionInput {
+  question: string;
+  careerPathId: string;
+}
+
+export interface RatingResponse {
+  answerPositives: string;
+  exampleAnswer: string;
+  suggestedImprovements: string;
 }

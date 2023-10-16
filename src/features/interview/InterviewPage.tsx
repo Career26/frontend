@@ -18,7 +18,11 @@ import { Shell } from '@shared/components/shell/Shell';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 import { featureStyles } from '@shared/styles/featureStyles';
 import { navStyles } from '@shared/styles/navStyles';
-import { selectSelectedQuestion, selectSelectedQuestionId } from '@slices/sessionSlice';
+import {
+  selectSelectedCareerPathId,
+  selectSelectedQuestion,
+  selectSelectedQuestionId,
+} from '@slices/sessionSlice';
 import { useAppSelector } from '@state/store';
 import classNames from 'classnames';
 import React from 'react';
@@ -47,7 +51,7 @@ export const InterviewPage = () => {
   const selectedQuestionId = useAppSelector(selectSelectedQuestionId);
   const { data, isFetching } = useGetInterviewQuestionsQuery();
   const [rateAnswer, { data: rating, isLoading: ratingLoading }] = useRateAnswerMutation();
-
+  const careerPathId = useAppSelector(selectSelectedCareerPathId);
   const form = useForm<{ answer: string }>({
     initialValues: { answer: '' },
     validate: { answer: hasLength({ min: 10, max: 300 }, 'Answer must be 10-300 characters long') },
@@ -101,30 +105,41 @@ export const InterviewPage = () => {
                 placeholder="Enter your response here"
                 variant="filled"
                 withAsterisk
-                minRows={10}
+                minRows={5}
               />
             </Paper>
+
             <div className={classes.buttons}>
               <Button
                 variant="outline"
                 disabled={!form.isValid() || ratingLoading}
                 loading={ratingLoading}
                 onClick={() =>
-                  rateAnswer({ question: selectedQuestion.question, answer: form.values.answer })
+                  rateAnswer({
+                    question: selectedQuestion.question,
+                    answer: form.values.answer,
+                    careerPathId,
+                  })
                 }
               >
                 Submit
               </Button>
             </div>
-            <Paper h={200} shadow="md" radius="md" p="md" withBorder>
-              <Text>Rating and feedback</Text>
-              <Divider />
-              {rating}
-            </Paper>
-            <div className={classes.buttons}>
-              <Button variant="light">Retry</Button>
-              <Button variant="outline">Next</Button>
-            </div>
+            {rating && (
+              <>
+                <Paper h="auto" shadow="md" radius="md" p="md" withBorder>
+                  <Text>Rating and feedback</Text>
+                  <Divider />
+                  Positives: {rating.answerPositives}
+                  Improvements: {rating.suggestedImprovements}
+                  Example: {rating.exampleAnswer}
+                </Paper>
+                <div className={classes.buttons}>
+                  <Button variant="light">Retry</Button>
+                  <Button variant="outline">Next</Button>
+                </div>
+              </>
+            )}
           </Container>
         </div>
       </Shell>

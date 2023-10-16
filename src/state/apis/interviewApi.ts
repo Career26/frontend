@@ -1,4 +1,4 @@
-import { Question, RateAnswerInput } from '@datatypes/interview';
+import { Question, RateAnswerInput, RatingResponse } from '@datatypes/interview';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { baseUrl } from '@shared/config/urlConstants';
 import { RootState } from '@state/store';
@@ -18,7 +18,14 @@ export const interviewApi = createApi({
     getInterviewQuestions: build.query<Question[], void>({
       query: () => 'questions',
     }),
-    rateAnswer: build.mutation<any, RateAnswerInput>({
+    getSuggestion: build.mutation<any, string>({
+      query: (body) => ({
+        url: 'suggestion',
+        method: 'POST',
+        body,
+      }),
+    }),
+    rateAnswer: build.mutation<RatingResponse, RateAnswerInput>({
       query: (body) => ({
         url: 'rate',
         method: 'POST',
@@ -28,7 +35,8 @@ export const interviewApi = createApi({
   }),
 });
 
-export const { useGetInterviewQuestionsQuery, useRateAnswerMutation } = interviewApi;
+export const { useGetInterviewQuestionsQuery, useRateAnswerMutation, useGetSuggestionMutation } =
+  interviewApi;
 
 export const selectInterviewQuestions = (state: RootState) =>
   interviewApi.endpoints.getInterviewQuestions.select()(state).data;

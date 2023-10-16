@@ -50,7 +50,7 @@ type CareerCardProps = {
   subTitle?: string;
   badge?: string;
   color?: string;
-  content: React.ReactNode;
+  content?: React.ReactNode;
   Actions?: React.ReactNode;
 };
 
@@ -81,9 +81,11 @@ export const CareerCard = ({
           </Badge>
         )}
       </Group>
-      <Text size="sm" className={classes.careerSection} lineClamp={5}>
-        {content}
-      </Text>
+      {content && (
+        <Text size="sm" className={classes.careerSection} lineClamp={5}>
+          {content}
+        </Text>
+      )}
     </Card>
   );
 };

@@ -1,37 +1,22 @@
-import {
-  useGetInterviewQuestionsQuery,
-  useGetSuggestionMutation,
-  useRateAnswerMutation,
-} from '@apis/interviewApi';
-import {
-  Accordion,
-  Badge,
-  Button,
-  Container,
-  Divider,
-  Loader,
-  Navbar,
-  Paper,
-  ScrollArea,
-  Text,
-  Textarea,
-  createStyles,
-  rem,
-} from '@mantine/core';
+import { useGetInterviewQuestionsQuery, useRateAnswerMutation } from '@apis/interviewApi';
+import { Button, Container, Textarea, createStyles, rem } from '@mantine/core';
 import { hasLength, useForm } from '@mantine/form';
 import { LoadingScreen } from '@shared/components/loadingScreen/LoadingScreen';
 import { Shell } from '@shared/components/shell/Shell';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 import { featureStyles } from '@shared/styles/featureStyles';
-import { navStyles } from '@shared/styles/navStyles';
 import {
   selectSelectedCareerPathId,
   selectSelectedQuestion,
   selectSelectedQuestionId,
 } from '@slices/sessionSlice';
 import { useAppSelector } from '@state/store';
-import classNames from 'classnames';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { CareerCard } from '@shared/components/cards/CareerCard';
+
+import { QuestionSuggestion } from './QuestionSuggestion';
+import { QuestionNavBar } from './QuestionNavBar';
+import { QuestionRating } from './QuestionRating';
 
 const interviewStyles = createStyles({
   container: {
@@ -49,35 +34,25 @@ const interviewStyles = createStyles({
 });
 
 export const InterviewPage = () => {
-  const [value, setValue] = useState<string | null>(null);
   const { classes } = interviewStyles();
   const { classes: featureClasses } = featureStyles();
-  const { classes: navClasses } = navStyles();
   const { toggleQuestionId } = usePageNavigation();
+  const careerPathId = useAppSelector(selectSelectedCareerPathId);
   const selectedQuestion = useAppSelector(selectSelectedQuestion);
   const selectedQuestionId = useAppSelector(selectSelectedQuestionId);
   const { data: questions, isFetching } = useGetInterviewQuestionsQuery();
   const [rateAnswer, { data: rating, isLoading: ratingLoading, reset: resetRating }] =
     useRateAnswerMutation();
-  const careerPathId = useAppSelector(selectSelectedCareerPathId);
+
   const form = useForm<{ answer: string }>({
     initialValues: { answer: '' },
     validate: { answer: hasLength({ min: 10, max: 300 }, 'Answer must be 10-300 characters long') },
   });
 
-  const [getSuggestion, { data: suggestion, isLoading: suggestionLoading }] =
-    useGetSuggestionMutation();
-
-  const clickReset = () => {
+  const onClickReset = () => {
     form.reset();
     resetRating();
   };
-  useEffect(() => {
-    if (!selectedQuestion) {
-      return;
-    }
-    getSuggestion({ careerPathId, question: selectedQuestion.question });
-  }, [selectedQuestion]);
 
   if (isFetching) {
     return <LoadingScreen />;
@@ -90,65 +65,24 @@ export const InterviewPage = () => {
   return (
     <div className={featureClasses.wrapper}>
       <Shell
-        navbar={
-          <Navbar p="xs" className={navClasses.navBar}>
-            <Navbar.Section grow mt="md" className={navClasses.navLink}>
-              <ScrollArea h="80vh">
-                {questions?.map(({ question, category }, index) => (
-                  <Button
-                    onClick={() => {
-                      setValue(null);
-                      toggleQuestionId(index);
-                    }}
-                    key={`question-${index}`}
-                    className={classNames(navClasses.navButton, navClasses.linkAction, {
-                      [navClasses.active]: selectedQuestionId === index,
-                    })}
-                  >
-                    {question}
-                    <Badge>{category}</Badge>
-                  </Button>
-                ))}
-              </ScrollArea>
-            </Navbar.Section>
-          </Navbar>
-        }
+        navbar={<QuestionNavBar selectedQuestionId={selectedQuestionId} questions={questions} />}
       >
         <div className={featureClasses.content}>
           <Container className={classes.container}>
-            <Paper h="auto" shadow="md" radius="md" p="md" withBorder>
-              <Text>Question {selectedQuestionId}</Text>
-              <Divider />
-              {selectedQuestion.question}
-            </Paper>
-            <Paper h="auto" shadow="md" radius="md" p="md" withBorder>
-              <Accordion value={value} onChange={setValue}>
-                <Accordion.Item value="suggestion">
-                  <Accordion.Control>Show Suggestion</Accordion.Control>
-                  <Accordion.Panel>
-                    {suggestionLoading ? (
-                      <Loader />
-                    ) : (
-                      <>
-                        Example Format: {suggestion?.suggestedFormat}
-                        Sample Answer: {suggestion?.sampleAnswer}
-                        Why is this Suitable?: {suggestion?.whySuitable}
-                      </>
-                    )}
-                  </Accordion.Panel>
-                </Accordion.Item>
-              </Accordion>
-            </Paper>
-            <Paper h="auto" shadow="md" radius="md" p="md" withBorder>
-              <Textarea
-                {...form.getInputProps('answer')}
-                label="Answer"
-                placeholder="Enter your response here"
-                variant="filled"
-                withAsterisk
-                minRows={5}
-              />
-            </Paper>
+            <CareerCard
+              title={`Question ${selectedQuestionId + 1}`}
+              subTitle={selectedQuestion.question}
+              badge={selectedQuestion.category}
+            />
+            <QuestionSuggestion />
+            <Textarea
+              {...form.getInputProps('answer')}
+              label="Answer"
+              placeholder="Enter your response here"
+              variant="filled"
+              withAsterisk
+              minRows={5}
+            />
 
             <div className={classes.buttons}>
               <Button
@@ -166,29 +100,12 @@ export const InterviewPage = () => {
                 Submit
               </Button>
             </div>
-            {rating && (
-              <>
-                <Paper h="auto" shadow="md" radius="md" p="md" withBorder>
-                  <Text>Rating and feedback</Text>
-                  <Divider />
-                  Positives: {rating.answerPositives}
-                  Improvements: {rating.suggestedImprovements}
-                  Example: {rating.exampleAnswer}
-                </Paper>
-                <div className={classes.buttons}>
-                  <Button variant="light" onClick={clickReset}>
-                    Retry
-                  </Button>
-                  <Button
-                    variant="outline"
-                    disabled={questions && selectedQuestionId === questions.length - 1}
-                    onClick={() => toggleQuestionId(selectedQuestionId + 1)}
-                  >
-                    Next
-                  </Button>
-                </div>
-              </>
-            )}
+            <QuestionRating
+              rating={rating}
+              onClickNext={() => toggleQuestionId(selectedQuestionId + 1)}
+              onClickReset={onClickReset}
+              nextDisabled={questions && selectedQuestionId === questions.length - 1}
+            />
           </Container>
         </div>
       </Shell>

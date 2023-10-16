@@ -1,6 +1,9 @@
 import { urls } from '@shared/config/urlConstants';
-import { setSelectedInterviewId } from '@slices/interviewSlice';
-import { selectSelectedCareerPathId, setSelectedCareerPathId } from '@slices/sessionSlice';
+import {
+  selectSelectedCareerPathId,
+  setSelectedCareerPathId,
+  setSelectedQuestionId,
+} from '@slices/sessionSlice';
 import { useAppDispatch, useAppSelector } from '@state/store';
 import { useMemo } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
@@ -29,13 +32,13 @@ export const usePageNavigation = () => {
     history.push(newPathname);
     dispatch(setSelectedCareerPathId(newCareerId));
   };
-  const toggleInterviewId = (newInterviewId: string) => {
+  const toggleQuestionId = (newQuestionId: number) => {
     const newPathname = currentPathname.replace(
       new RegExp(`${featureUrl}/${careerId}/(.*)`),
-      `${featureUrl}/${careerId}/${newInterviewId}`,
+      `${featureUrl}/${careerId}/${newQuestionId}`,
     );
     history.push(newPathname);
-    dispatch(setSelectedInterviewId(newInterviewId));
+    dispatch(setSelectedQuestionId(newQuestionId));
   };
 
   const goToHomepage = () => {
@@ -53,7 +56,7 @@ export const usePageNavigation = () => {
     goToSettings,
     clickCareersTest,
     toggleCareerId,
-    toggleInterviewId,
+    toggleQuestionId,
     showNavigation: !!featureUrl,
     featureUrl,
     currentPathname,

@@ -3,24 +3,26 @@ import { profileApi } from '@apis/profileApi';
 import { overviewApi } from '@apis/overviewApi';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import session from '@slices/sessionSlice';
-import interview from '@slices/interviewSlice';
+// import interview from '@slices/interviewSlice';
+import { interviewApi } from '@apis/interviewApi';
 
 export const rootReducer = combineReducers({
-  interview,
   session,
+  [interviewApi.reducerPath]: interviewApi.reducer,
   [profileApi.reducerPath]: profileApi.reducer,
   [overviewApi.reducerPath]: overviewApi.reducer,
 });
 
 export const store = configureStore({
   reducer: {
-    interview,
     session,
+    [interviewApi.reducerPath]: interviewApi.reducer,
     [profileApi.reducerPath]: profileApi.reducer,
     [overviewApi.reducerPath]: overviewApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }).concat([
+      interviewApi.middleware,
       profileApi.middleware,
       overviewApi.middleware,
     ]),

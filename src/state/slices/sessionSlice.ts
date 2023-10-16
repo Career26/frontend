@@ -1,3 +1,4 @@
+import { selectInterviewQuestions } from '@apis/interviewApi';
 import { selectCareerPaths } from '@apis/profileApi';
 import { UserProfile } from '@datatypes/profile';
 import { PayloadAction, createSelector, createSlice } from '@reduxjs/toolkit';
@@ -11,6 +12,7 @@ type SessionSlice = {
     associateProfileId?: string;
     initialState?: 'signIn' | 'signUp' | 'resetPassword';
   };
+  selectedQuestionId?: number;
   industryColors: { [key: string]: string };
   selectedCareerPathId?: string;
 };
@@ -18,6 +20,7 @@ type SessionSlice = {
 export const initialSessionState: SessionSlice = {
   profile: undefined,
   industryColors: {},
+  selectedQuestionId: undefined,
   loginModal: { open: false },
 };
 
@@ -37,6 +40,12 @@ export const sessionSlice = createSlice({
     ) => {
       state.selectedCareerPathId = payload;
     },
+    setSelectedQuestionId: (
+      state,
+      { payload }: PayloadAction<SessionSlice['selectedQuestionId']>,
+    ) => {
+      state.selectedQuestionId = payload;
+    },
     addIndustryColors: (state, { payload: industries }: PayloadAction<string[]>) => {
       const industryColors = getIndustryColors({
         initialColors: { ...state.industryColors },
@@ -54,9 +63,17 @@ export const {
   setSelectedCareerPathId,
   resetSession,
   addIndustryColors,
+  setSelectedQuestionId,
 } = sessionSlice.actions;
 
 const selectSession = (state: RootState) => state.session;
+export const selectSelectedQuestionId = (state: RootState) =>
+  selectSession(state).selectedQuestionId || 0;
+export const selectSelectedQuestion = (state: RootState) => {
+  const questions = selectInterviewQuestions(state);
+  const id = selectSelectedQuestionId(state);
+  return questions?.[id];
+};
 export const selectLoginModal = (state: RootState) => selectSession(state).loginModal;
 export const selectSelectedCareerPathId = (state: RootState) =>
   selectSession(state).selectedCareerPathId || Object.keys(selectCareerPaths(state) || {})[0];

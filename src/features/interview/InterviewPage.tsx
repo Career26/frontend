@@ -1,10 +1,24 @@
-import { Button, Container, Navbar, Paper, ScrollArea, createStyles, rem } from '@mantine/core';
-import { mockInterviewQuestions } from '@mocks/interviewMocks';
+import { useGetInterviewQuestionsQuery, useRateAnswerMutation } from '@apis/interviewApi';
+import {
+  Badge,
+  Button,
+  Container,
+  Divider,
+  Navbar,
+  Paper,
+  ScrollArea,
+  Text,
+  Textarea,
+  createStyles,
+  rem,
+} from '@mantine/core';
+import { hasLength, useForm } from '@mantine/form';
+import { LoadingScreen } from '@shared/components/loadingScreen/LoadingScreen';
 import { Shell } from '@shared/components/shell/Shell';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 import { featureStyles } from '@shared/styles/featureStyles';
 import { navStyles } from '@shared/styles/navStyles';
-import { selectSelectedInterviewId } from '@slices/interviewSlice';
+import { selectSelectedQuestion, selectSelectedQuestionId } from '@slices/sessionSlice';
 import { useAppSelector } from '@state/store';
 import classNames from 'classnames';
 import React from 'react';
@@ -28,8 +42,27 @@ export const InterviewPage = () => {
   const { classes } = interviewStyles();
   const { classes: featureClasses } = featureStyles();
   const { classes: navClasses } = navStyles();
-  const { toggleInterviewId } = usePageNavigation();
-  const selectedInterviewId = useAppSelector(selectSelectedInterviewId);
+  const { toggleQuestionId } = usePageNavigation();
+  const selectedQuestion = useAppSelector(selectSelectedQuestion);
+  const selectedQuestionId = useAppSelector(selectSelectedQuestionId);
+  const { data, isFetching } = useGetInterviewQuestionsQuery();
+  const [rateAnswer, { data: rating, isLoading: ratingLoading }] = useRateAnswerMutation();
+
+  const form = useForm<{ answer: string }>({
+    initialValues: { answer: '' },
+    validate: { answer: hasLength({ min: 10, max: 300 }, 'Answer must be 10-300 characters long') },
+  });
+
+  console.log(rating);
+
+  if (isFetching) {
+    return <LoadingScreen />;
+  }
+
+  if (!selectedQuestion) {
+    return null;
+  }
+
   return (
     <div className={featureClasses.wrapper}>
       <Shell
@@ -37,15 +70,16 @@ export const InterviewPage = () => {
           <Navbar p="xs" className={navClasses.navBar}>
             <Navbar.Section grow mt="md" className={navClasses.navLink}>
               <ScrollArea h="80vh">
-                {Object.entries(mockInterviewQuestions).map(([id, { title }]) => (
+                {data?.map(({ question, category }, index) => (
                   <Button
-                    onClick={() => toggleInterviewId(id)}
-                    key={title}
+                    onClick={() => toggleQuestionId(index)}
+                    key={`question-${index}`}
                     className={classNames(navClasses.navButton, navClasses.linkAction, {
-                      [navClasses.active]: selectedInterviewId === id,
+                      [navClasses.active]: selectedQuestionId === index,
                     })}
                   >
-                    {title}
+                    {question}
+                    <Badge>{category}</Badge>
                   </Button>
                 ))}
               </ScrollArea>
@@ -55,17 +89,37 @@ export const InterviewPage = () => {
       >
         <div className={featureClasses.content}>
           <Container className={classes.container}>
-            <Paper h={200} shadow="md" radius="md" p="md" withBorder>
-              QUESTION
+            <Paper h="auto" shadow="md" radius="md" p="md" withBorder>
+              <Text>Question {selectedQuestionId}</Text>
+              <Divider />
+              {selectedQuestion.question}
             </Paper>
-            <Paper h={200} shadow="md" radius="md" p="md" withBorder>
-              Answer
+            <Paper h="auto" shadow="md" radius="md" p="md" withBorder>
+              <Textarea
+                {...form.getInputProps('answer')}
+                label="Answer"
+                placeholder="Enter your response here"
+                variant="filled"
+                withAsterisk
+                minRows={10}
+              />
             </Paper>
             <div className={classes.buttons}>
-              <Button variant="outline">Submit</Button>
+              <Button
+                variant="outline"
+                disabled={!form.isValid() || ratingLoading}
+                loading={ratingLoading}
+                onClick={() =>
+                  rateAnswer({ question: selectedQuestion.question, answer: form.values.answer })
+                }
+              >
+                Submit
+              </Button>
             </div>
             <Paper h={200} shadow="md" radius="md" p="md" withBorder>
-              Rating and feedback
+              <Text>Rating and feedback</Text>
+              <Divider />
+              {rating}
             </Paper>
             <div className={classes.buttons}>
               <Button variant="light">Retry</Button>

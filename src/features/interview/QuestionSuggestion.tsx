@@ -1,5 +1,5 @@
 import { useGetSuggestionMutation } from '@apis/interviewApi';
-import { Accordion, Loader, Paper, createStyles } from '@mantine/core';
+import { Accordion, List, Loader, Paper, Text, ThemeIcon, createStyles, rem } from '@mantine/core';
 import { selectSelectedCareerPathId, selectSelectedQuestion } from '@slices/sessionSlice';
 import { useAppSelector } from '@state/store';
 import classNames from 'classnames';
@@ -14,8 +14,39 @@ const suggestionStyles = createStyles({
   suggestion: {
     display: 'flex',
     flexDirection: 'column',
+    gap: rem(20),
+  },
+  list: {
+    paddingTop: rem(10),
   },
 });
+
+const SuggestedFormat = ({ suggestedFormat }: { suggestedFormat: string }) => {
+  const { classes } = suggestionStyles();
+  const items = suggestedFormat.split(/(\\n)?\d\. /gm).filter(Boolean);
+  return (
+    <div>
+      <Text weight="bold">Suggested Format:</Text>
+      <List spacing="md" center className={classes.list}>
+        {items.map((item, index) => (
+          <List.Item
+            key={`suggestion-${item}`}
+            icon={<ThemeIcon radius="xl">{index + 1}</ThemeIcon>}
+          >
+            {item}
+          </List.Item>
+        ))}
+      </List>
+    </div>
+  );
+};
+
+const TextBlock = ({ title, content }: { title: string; content: string }) => (
+  <div>
+    <Text weight="bold">{title}</Text>
+    {content}
+  </div>
+);
 
 export const QuestionSuggestion = () => {
   const { classes } = suggestionStyles();
@@ -42,11 +73,13 @@ export const QuestionSuggestion = () => {
             {suggestionLoading ? (
               <Loader />
             ) : (
-              <div className={classes.suggestion}>
-                <div>Example Format: {suggestion?.suggestedFormat}</div>
-                <div>Sample Answer: {suggestion?.sampleAnswer}</div>
-                <div>Why is this Suitable?: {suggestion?.whySuitable}</div>
-              </div>
+              suggestion && (
+                <div className={classes.suggestion}>
+                  <SuggestedFormat suggestedFormat={suggestion.suggestedFormat} />
+                  <TextBlock title="Sample Answer" content={suggestion.sampleAnswer} />
+                  <TextBlock title="Reasoning" content={suggestion.whySuitable} />
+                </div>
+              )
             )}
           </Accordion.Panel>
         </Accordion.Item>

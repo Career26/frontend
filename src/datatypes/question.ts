@@ -1,18 +1,27 @@
-export interface CareerPath {
-  title: string;
-  industry: string;
-  startingSalary: string;
-  role: string;
-  selected: boolean;
+export interface Question {
+  category: string;
+  question: string;
 }
 
-export interface CareerResult {
-  careerPaths: { [key: string]: CareerPath };
-  identifier: string;
+export interface RateAnswerInput {
+  answer: string;
+  question: string;
+  careerPathId: string;
 }
 
-export interface SelectCareerInput {
-  careerIdentifier: string;
-  profileIdentifier: string;
-  selected: boolean;
+export interface SuggestionInput {
+  question: string;
+  careerPathId: string;
+}
+
+export interface RatingResponse {
+  answerPositives: string;
+  exampleAnswer: string;
+  suggestedImprovements: string;
+}
+
+export interface SuggestionResponse {
+  sampleAnswer: string;
+  suggestedFormat: string;
+  whySuitable: string;
 }

@@ -46,3 +46,6 @@ export const { useGetQuestionsQuery, useRateAnswerMutation, useGetSuggestionMuta
 
 export const selectInterviewQuestions = (state: RootState) =>
   questionsApi.endpoints.getQuestions.select()(state).data;
+
+export const selectSuggestion = (state: RootState, fixedCacheKey?: string) =>
+  questionsApi.endpoints.getSuggestion.select({ fixedCacheKey, requestId: undefined })(state).data;

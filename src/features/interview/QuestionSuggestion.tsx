@@ -1,4 +1,4 @@
-import { useGetSuggestionMutation } from '@apis/questionsApi';
+import { selectSuggestion, useGetSuggestionMutation } from '@apis/questionsApi';
 import { Accordion, Badge, List, Loader, Paper, ThemeIcon, createStyles, rem } from '@mantine/core';
 import { selectSelectedCareerPathId, selectSelectedQuestion } from '@slices/sessionSlice';
 import { useAppSelector } from '@state/store';
@@ -68,15 +68,21 @@ export const QuestionSuggestion = () => {
   const [value, setValue] = useState<string | null>(null);
   const careerPathId = useAppSelector(selectSelectedCareerPathId);
   const selectedQuestion = useAppSelector(selectSelectedQuestion);
-  const [getSuggestion, { data: suggestion, isLoading: suggestionLoading }] =
-    useGetSuggestionMutation();
+  const fixedCacheKey = `suggestion-${careerPathId}-${selectedQuestion?.question}`;
+  const [getSuggestion, { isLoading: suggestionLoading }] = useGetSuggestionMutation({
+    fixedCacheKey,
+  });
+  const suggestion = useAppSelector((state) => selectSuggestion(state, fixedCacheKey));
 
   useEffect(() => {
-    if (!selectedQuestion || !value) {
+    if (!selectedQuestion || !value || !careerPathId) {
+      return;
+    }
+    if (suggestion) {
       return;
     }
     getSuggestion({ question: selectedQuestion.question, careerPathId });
-  }, [value, selectedQuestion]);
+  }, [value, selectedQuestion, careerPathId]);
 
   useEffect(() => {
     setValue(null);

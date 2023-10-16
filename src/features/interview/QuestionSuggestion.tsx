@@ -11,7 +11,7 @@ const suggestionStyles = createStyles({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  suggestion: {
+  container: {
     display: 'flex',
     flexDirection: 'column',
     gap: rem(20),
@@ -74,7 +74,7 @@ export const QuestionSuggestion = () => {
               <Loader />
             ) : (
               suggestion && (
-                <div className={classes.suggestion}>
+                <div className={classes.container}>
                   <SuggestedFormat suggestedFormat={suggestion.suggestedFormat} />
                   <TextBlock title="Sample Answer" content={suggestion.sampleAnswer} />
                   <TextBlock title="Reasoning" content={suggestion.whySuitable} />

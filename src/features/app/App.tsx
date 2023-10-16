@@ -92,7 +92,7 @@ export const App = () => {
             }}
           />
           <Route
-            path={`${urls.questionss}/:careerId?/:interviewId?`}
+            path={`${urls.questions}/:careerId?/:interviewId?`}
             render={({
               match: {
                 params: { careerId, interviewId },
@@ -106,11 +106,11 @@ export const App = () => {
               }
               if (!careerId && !!defaultCareerId) {
                 return (
-                  <Redirect to={`${urls.questionss}/${defaultCareerId}/${defaultQuestionId}`} />
+                  <Redirect to={`${urls.questions}/${defaultCareerId}/${defaultQuestionId}`} />
                 );
               }
               if (!interviewId && !!careerId) {
-                return <Redirect to={`${urls.questionss}/${careerId}/${defaultQuestionId}`} />;
+                return <Redirect to={`${urls.questions}/${careerId}/${defaultQuestionId}`} />;
               }
               return <InterviewPage />;
             }}

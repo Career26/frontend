@@ -27,7 +27,7 @@ export const featureTiles: FeatureTile[] = [
     description:
       'Practice interview questions and get instant feedback with our interactive assessor',
     Icon: IconCertificate,
-    link: urls.questionss,
+    link: urls.questions,
   },
   {
     title: 'Mentor Network',

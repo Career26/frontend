@@ -2,7 +2,7 @@ export const urls = {
   landingPage: '/',
   careersTest: '/career-test',
   overview: '/overview',
-  interviews: '/interviews',
+  questions: '/questions',
   mentors: '/mentors',
   settings: '/settings',
 };

@@ -1,19 +1,12 @@
 import { useGetSuggestionMutation } from '@apis/questionsApi';
-import {
-  Accordion,
-  Badge,
-  List,
-  Loader,
-  Paper,
-  Text,
-  ThemeIcon,
-  createStyles,
-  rem,
-} from '@mantine/core';
+import { Accordion, Badge, List, Loader, Paper, ThemeIcon, createStyles, rem } from '@mantine/core';
 import { selectSelectedCareerPathId, selectSelectedQuestion } from '@slices/sessionSlice';
 import { useAppSelector } from '@state/store';
 import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
+import { IconBulb, IconQuestionMark, IconStar } from '@tabler/icons-react';
+
+import { TextWithIconBlock } from './TextWithIconBlock';
 
 const suggestionStyles = createStyles({
   loader: {
@@ -64,21 +57,11 @@ const SuggestedFormat = ({ suggestedFormat }: { suggestedFormat: string }) => {
   const starMap = getStarMap(suggestedFormat);
   const numberedItems = suggestedFormat.split(/(\\n)?\d\. /gm).filter(Boolean);
   return (
-    <div>
-      <Text weight="bold">Suggested Format:</Text>
-      <List spacing="md" center className={classes.list}>
-        {starMap ? <StarList starMap={starMap} /> : <NumberedList items={numberedItems} />}
-      </List>
-    </div>
+    <List spacing="md" center className={classes.list}>
+      {starMap ? <StarList starMap={starMap} /> : <NumberedList items={numberedItems} />}
+    </List>
   );
 };
-
-const TextBlock = ({ title, content }: { title: string; content: string }) => (
-  <div>
-    <Text weight="bold">{title}</Text>
-    {content}
-  </div>
-);
 
 export const QuestionSuggestion = () => {
   const { classes } = suggestionStyles();
@@ -110,9 +93,21 @@ export const QuestionSuggestion = () => {
             ) : (
               suggestion && (
                 <div className={classes.container}>
-                  <SuggestedFormat suggestedFormat={suggestion?.suggestedFormat} />
-                  <TextBlock title="Sample Answer" content={suggestion?.sampleAnswer} />
-                  <TextBlock title="Reasoning" content={suggestion?.whySuitable} />
+                  <TextWithIconBlock
+                    title="Suggested Format"
+                    content={<SuggestedFormat suggestedFormat={suggestion?.suggestedFormat} />}
+                    Icon={<IconStar fill="yellow" />}
+                  />
+                  <TextWithIconBlock
+                    title="Sample Answer"
+                    content={suggestion?.sampleAnswer}
+                    Icon={<IconBulb fill="yellow" />}
+                  />
+                  <TextWithIconBlock
+                    title="Reasoning"
+                    content={suggestion?.whySuitable}
+                    Icon={<IconQuestionMark />}
+                  />
                 </div>
               )
             )}

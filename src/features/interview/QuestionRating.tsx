@@ -1,8 +1,9 @@
 import { RatingResponse } from '@datatypes/question';
-import { Accordion, Button, Paper, Text, createStyles, rem } from '@mantine/core';
+import { Accordion, Button, Paper, createStyles, rem } from '@mantine/core';
 import React, { useState } from 'react';
 import { IconChecklist, IconCircleCheck, IconInfoCircle } from '@tabler/icons-react';
-import classNames from 'classnames';
+
+import { TextWithIconBlock } from './TextWithIconBlock';
 
 type QuestionRatingProps = {
   onClickReset: () => void;
@@ -22,35 +23,12 @@ const ratingStyles = createStyles({
     justifyContent: 'flex-end',
     gap: rem(20),
   },
-  textIcon: {
+  column: {
+    flexDirection: 'column',
     display: 'flex',
     gap: rem(10),
   },
-  column: {
-    flexDirection: 'column',
-  },
 });
-
-const TextWithIconBlock = ({
-  title,
-  content,
-  Icon,
-}: {
-  title: string;
-  content: string;
-  Icon: React.ReactNode;
-}) => {
-  const { classes } = ratingStyles();
-  return (
-    <div>
-      <div className={classes.textIcon}>
-        {Icon}
-        <Text weight="bold">{title}</Text>
-      </div>
-      {content}
-    </div>
-  );
-};
 
 export const QuestionRating = ({
   onClickReset,
@@ -64,7 +42,7 @@ export const QuestionRating = ({
     return null;
   }
   return (
-    <div className={classNames(classes.textIcon, classes.column)}>
+    <div className={classes.column}>
       <Paper h="auto" withBorder shadow="md">
         <Accordion value={value} onChange={setValue}>
           <Accordion.Item value="rating">

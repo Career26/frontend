@@ -89,6 +89,7 @@ export const formStyles = createStyles((theme) => ({
   subHeader: {
     fontSize: rem(18),
     fontWeight: 'bold',
+    textAlign: 'center',
     color: 'black',
     paddingBottom: rem(40),
   },

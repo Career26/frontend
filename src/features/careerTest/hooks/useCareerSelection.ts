@@ -4,7 +4,7 @@ import { useState } from 'react';
 export const useCareerSelection = () => {
   const [selectedCareers, setSelectedCareers] = useState<string[]>([]);
   const [selectCareer] = useSelectCareerMutation();
-  const [loadingCareers, setLoadingCareers] = useState<string[]>([]);
+  const [loadingCareers, setLoadingCareers] = useState<{ [key: string]: boolean }>({});
 
   const handleSelection = async (careerIdentifier: string, profileIdentifier?: string) => {
     if (!profileIdentifier) {
@@ -27,9 +27,15 @@ export const useCareerSelection = () => {
   };
 
   const toggleSelectedCareer = async (careerId: string, profileIdentifier?: string) => {
-    setLoadingCareers([...loadingCareers, careerId]);
+    setLoadingCareers((prevLoadingCareers) => ({
+      ...prevLoadingCareers,
+      [careerId]: true,
+    }));
     await handleSelection(careerId, profileIdentifier);
-    setLoadingCareers(loadingCareers.filter((id) => id !== careerId));
+    setLoadingCareers((prevLoadingCareers) => ({
+      ...prevLoadingCareers,
+      [careerId]: false,
+    }));
   };
 
   return { toggleSelectedCareer, selectedCareers, loadingCareers };

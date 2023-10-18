@@ -1,7 +1,6 @@
 import { useGetQuestionsQuery, useRateAnswerMutation } from '@apis/questionsApi';
 import { Button, Container, Textarea, createStyles, rem } from '@mantine/core';
 import { hasLength, useForm } from '@mantine/form';
-import { LoadingScreen } from '@shared/components/loadingScreen/LoadingScreen';
 import { Shell } from '@shared/components/shell/Shell';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 import { featureStyles } from '@shared/styles/featureStyles';
@@ -15,6 +14,7 @@ import {
 import { useAppDispatch, useAppSelector } from '@state/store';
 import React, { useEffect } from 'react';
 import { CareerCard } from '@shared/components/cards/CareerCard';
+import { LoadingLens } from '@shared/components/loadingScreen/LoadingLens';
 
 import { QuestionSuggestion } from './QuestionSuggestion';
 import { QuestionNavBar } from './QuestionNavBar';
@@ -67,7 +67,7 @@ export const InterviewPage = () => {
   }, [questions]);
 
   if (isFetching) {
-    return <LoadingScreen />;
+    return <LoadingLens />;
   }
 
   if (!selectedQuestion) {

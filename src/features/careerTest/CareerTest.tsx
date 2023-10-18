@@ -85,7 +85,11 @@ export const CareerTest = () => {
               <Stepper.Step
                 label={label}
                 key={`stepper-${label}`}
-                disabled={index > activeStep || activeStep === CareerStep.CAREER_PATHS}
+                disabled={
+                  index > activeStep ||
+                  activeStep === CareerStep.CAREER_PATHS ||
+                  activeStep === CareerStep.COMPLETE
+                }
               />
             ))}
           </Stepper>
@@ -102,27 +106,25 @@ export const CareerTest = () => {
               {(activeStep === CareerStep.CAREER_PATHS || activeStep === CareerStep.COMPLETE) && (
                 <CareerPathsForm careerPaths={data?.careerPaths || getCareerPaths()} />
               )}
-              {activeStep !== CareerStep.COMPLETE && (
-                <Group position="center">
-                  {activeStep !== CareerStep.CAREER_PATHS && (
-                    <Button
-                      onClick={clickBack}
-                      disabled={activeStep === CareerStep.EDUCATION || isLoading}
-                      variant="light"
-                    >
-                      Back
-                    </Button>
-                  )}
+              <Group position="center">
+                {activeStep !== CareerStep.CAREER_PATHS && activeStep !== CareerStep.COMPLETE && (
                   <Button
-                    onClick={clickNext}
-                    disabled={isLoading}
-                    loading={isLoading}
-                    variant="outline"
+                    onClick={clickBack}
+                    disabled={activeStep === CareerStep.EDUCATION || isLoading}
+                    variant="light"
                   >
-                    {nextLabel}
+                    Back
                   </Button>
-                </Group>
-              )}
+                )}
+                <Button
+                  onClick={clickNext}
+                  disabled={isLoading}
+                  loading={isLoading}
+                  variant="outline"
+                >
+                  {nextLabel}
+                </Button>
+              </Group>
             </>
           )}
         </Container>

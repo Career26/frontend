@@ -3,7 +3,7 @@ import React from 'react';
 
 const careerCardStyles = createStyles((theme) => ({
   cardHeader: {
-    background: theme.colors.blue[0],
+    background: theme.colors.gray[0],
     alignItems: 'center',
     paddint: rem(10),
     height: '50px',
@@ -34,6 +34,7 @@ const careerCardStyles = createStyles((theme) => ({
   cardContainer: {
     height: '100%',
     display: 'flex',
+    width: 'fit-content',
     flexDirection: 'column',
     justifyContent: 'space-between',
   },
@@ -50,7 +51,7 @@ type CareerCardProps = {
   subTitle?: string;
   badge?: string;
   color?: string;
-  content: React.ReactNode;
+  content?: React.ReactNode;
   Actions?: React.ReactNode;
 };
 
@@ -81,9 +82,11 @@ export const CareerCard = ({
           </Badge>
         )}
       </Group>
-      <Text size="sm" className={classes.careerSection} lineClamp={5}>
-        {content}
-      </Text>
+      {content && (
+        <Text size="sm" className={classes.careerSection} lineClamp={5}>
+          {content}
+        </Text>
+      )}
     </Card>
   );
 };

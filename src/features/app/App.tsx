@@ -4,9 +4,13 @@ import { LoadingScreen } from '@shared/components/loadingScreen/LoadingScreen';
 import { urls } from '@shared/config/urlConstants';
 import { PageHeader } from '@shared/components/pageHeader/PageHeader';
 import { useAppDispatch, useAppSelector } from '@state/store';
-import { resetInterviews, selectSelectedInterviewId } from '@slices/interviewSlice';
 import { useAuthUser } from '@shared/hooks/useAuthUser';
-import { addIndustryColors, resetSession, selectSelectedCareerPathId } from '@slices/sessionSlice';
+import {
+  addIndustryColors,
+  resetSession,
+  selectSelectedCareerPathId,
+  selectSelectedQuestionId,
+} from '@slices/sessionSlice';
 import { selectCareerPaths, selectProfileId, useLazyGetProfileQuery } from '@apis/profileApi';
 import { SettingsPage } from '@features/settings/SettingsPage';
 
@@ -16,12 +20,10 @@ import { CareerTest } from '../careerTest/CareerTest';
 import { OverviewPage } from '../overview/OverviewPage';
 import { InterviewPage } from '../interview/InterviewPage';
 
-// TODO: add profile page where users can update their settings, see: https://docs.amplify.aws/lib/auth/manageusers/q/platform/js/#update-user-attributes
-
 export const App = () => {
   const dispatch = useAppDispatch();
   const defaultCareerId = useAppSelector(selectSelectedCareerPathId);
-  const defaultInterviewId = useAppSelector(selectSelectedInterviewId);
+  const defaultQuestionId = useAppSelector(selectSelectedQuestionId);
   const { authenticated, unauthenticated, signOut } = useAuthUser();
   const careerPaths = useAppSelector(selectCareerPaths);
   const profileId = useAppSelector(selectProfileId);
@@ -51,7 +53,6 @@ export const App = () => {
         <PageHeader
           authenticated={authenticated}
           signOut={() => {
-            dispatch(resetInterviews());
             dispatch(resetSession());
             signOut();
           }}
@@ -91,7 +92,7 @@ export const App = () => {
             }}
           />
           <Route
-            path={`${urls.interviews}/:careerId?/:interviewId?`}
+            path={`${urls.questions}/:careerId?/:interviewId?`}
             render={({
               match: {
                 params: { careerId, interviewId },
@@ -103,11 +104,13 @@ export const App = () => {
               if (!authenticated) {
                 return <LoadingScreen />;
               }
-              if (!careerId) {
-                return <Redirect to={`${urls.interviews}/${defaultCareerId}}`} />;
+              if (!careerId && !!defaultCareerId) {
+                return (
+                  <Redirect to={`${urls.questions}/${defaultCareerId}/${defaultQuestionId}`} />
+                );
               }
-              if (!interviewId) {
-                return <Redirect to={`${urls.interviews}/${careerId}/${defaultInterviewId}`} />;
+              if (!interviewId && !!careerId) {
+                return <Redirect to={`${urls.questions}/${careerId}/${defaultQuestionId}`} />;
               }
               return <InterviewPage />;
             }}

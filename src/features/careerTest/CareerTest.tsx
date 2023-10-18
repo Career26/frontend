@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Container, Group, Button, Stepper } from '@mantine/core';
 import { Shell } from '@shared/components/shell/Shell';
 import { useCreateProfileMutation } from '@apis/profileApi';
@@ -15,18 +15,32 @@ import { CareerPathsForm } from './components/careerPathsForm/CareerPathsForm';
 import { CareerTestHeader } from './components/CareerTestHeader';
 import { CareerStep } from './careerTestTypes';
 import { CareerTestResults } from './components/CareerTestResults';
+import { useCareerTestStorage } from './hooks/useCareerTestStorage';
 
 const stepperLabels = ['Education', 'Experience', 'Preferences', 'Career Paths'];
 
 export const CareerTest = () => {
   const dispatch = useAppDispatch();
-  const [activeStep, setActiveStep] = useState(CareerStep.EDUCATION);
   const [createProfile, { data, isLoading }] = useCreateProfileMutation();
   const { classes } = formStyles();
+  const { storeFormValues, storeCareerPaths, storeStep, getStep, getCareerPaths } =
+    useCareerTestStorage();
+  const [activeStep, setActiveStep] = useState(getStep());
   const { form, checkFormIsValid } = useProfileForm({ activeStep });
+
+  useEffect(() => {
+    if (data?.careerPaths) {
+      storeCareerPaths(data.careerPaths);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    storeStep(activeStep);
+  }, [activeStep]);
 
   const clickNext = async () => {
     const formIsvalid = checkFormIsValid();
+    storeFormValues(form.values);
     if (!formIsvalid) {
       return;
     }
@@ -67,8 +81,12 @@ export const CareerTest = () => {
         <CareerTestHeader />
         <Container className={classes.steppers}>
           <Stepper active={activeStep} onStepClick={setActiveStep} breakpoint="sm">
-            {stepperLabels.map((label) => (
-              <Stepper.Step label={label} key={`stepper-${label}`} />
+            {stepperLabels.map((label, index) => (
+              <Stepper.Step
+                label={label}
+                key={`stepper-${label}`}
+                disabled={index > activeStep || activeStep === CareerStep.CAREER_PATHS}
+              />
             ))}
           </Stepper>
         </Container>
@@ -82,7 +100,7 @@ export const CareerTest = () => {
               {activeStep === CareerStep.WORK_EXPERIENCE && <WorkExperienceForm form={form} />}
               {activeStep === CareerStep.PREFERENCES && <PreferencesForm form={form} />}
               {activeStep === CareerStep.CAREER_PATHS && (
-                <CareerPathsForm careerPaths={data?.careerPaths} />
+                <CareerPathsForm careerPaths={getCareerPaths()} />
               )}
               {activeStep !== CareerStep.COMPLETE && (
                 <Group position="center">

@@ -9,8 +9,8 @@ export const Typewriter = ({
 }: {
   text: string;
   textDelay: number;
-  repeatDelay: number;
-  deleteDelay: number;
+  repeatDelay?: number;
+  deleteDelay?: number;
   onComplete?: () => void;
 }) => {
   const [currentText, setCurrentText] = useState('');

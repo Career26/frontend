@@ -5,7 +5,7 @@ import { useCreateProfileMutation } from '@apis/profileApi';
 import { setLoginModal } from '@slices/sessionSlice';
 import { useAppDispatch } from '@state/store';
 import { formStyles } from '@shared/styles/formStyles';
-import { LoadingScreen } from '@shared/components/loadingScreen/LoadingScreen';
+import { LoadingLens } from '@shared/components/loadingScreen/LoadingLens';
 
 import { EducationForm } from './components/educationForm/EducationForm';
 import { WorkExperienceForm } from './components/workExperienceForm/WorkExperienceForm';
@@ -97,7 +97,7 @@ export const CareerTest = () => {
 
         <Container>
           {isLoading ? (
-            <LoadingScreen />
+            <LoadingLens />
           ) : (
             <>
               {activeStep === CareerStep.EDUCATION && <EducationForm form={form} />}

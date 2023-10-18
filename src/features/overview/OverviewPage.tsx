@@ -7,10 +7,10 @@ import { ProgressionTile } from '@shared/components/tiles/ProgressionTile';
 import { useAppSelector } from '@state/store';
 import { selectSelectedCareerPathId } from '@slices/sessionSlice';
 import { useGetCareerOverviewQuery } from '@apis/overviewApi';
-import { LoadingScreen } from '@shared/components/loadingScreen/LoadingScreen';
 import { navStyles } from '@shared/styles/navStyles';
 import { featureStyles } from '@shared/styles/featureStyles';
 import { selectProfileId } from '@apis/profileApi';
+import { LoadingLens } from '@shared/components/loadingScreen/LoadingLens';
 
 import { OverviewSection } from './OverviewSection';
 import { overviewLinks } from './config/overviewConstants';
@@ -42,7 +42,7 @@ export const OverviewPage = () => {
   );
 
   if (isFetching) {
-    return <LoadingScreen />;
+    return <LoadingLens />;
   }
 
   if (!data) {

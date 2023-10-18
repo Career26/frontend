@@ -1,6 +1,5 @@
 import React, { Suspense, useEffect } from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
-import { LoadingScreen } from '@shared/components/loadingScreen/LoadingScreen';
 import { urls } from '@shared/config/urlConstants';
 import { PageHeader } from '@shared/components/pageHeader/PageHeader';
 import { useAppDispatch, useAppSelector } from '@state/store';
@@ -13,6 +12,7 @@ import {
 } from '@slices/sessionSlice';
 import { selectCareerPaths, selectProfileId, useLazyGetProfileQuery } from '@apis/profileApi';
 import { SettingsPage } from '@features/settings/SettingsPage';
+import { LoadingLens } from '@shared/components/loadingScreen/LoadingLens';
 
 import { HomePage } from '../homePage/HomePage';
 import { LandingPage } from '../landingPage/LandingPage';
@@ -29,27 +29,27 @@ export const App = () => {
   const profileId = useAppSelector(selectProfileId);
   const [getProfile, { isFetching }] = useLazyGetProfileQuery();
 
-  // useEffect(() => {
-  //   if (!careerPaths) {
-  //     return;
-  //   }
-  //   const industries = Object.values(careerPaths).map(({ industry }) => industry);
-  //   dispatch(addIndustryColors(industries));
-  // }, [careerPaths]);
+  useEffect(() => {
+    if (!careerPaths) {
+      return;
+    }
+    const industries = Object.values(careerPaths).map(({ industry }) => industry);
+    dispatch(addIndustryColors(industries));
+  }, [careerPaths]);
 
-  // useEffect(() => {
-  //   if (authenticated && !profileId) {
-  //     getProfile();
-  //   }
-  // }, [authenticated, profileId]);
+  useEffect(() => {
+    if (authenticated && !profileId) {
+      getProfile();
+    }
+  }, [authenticated, profileId]);
 
-  // if (isFetching) {
-  return <LoadingScreen />;
-  // }
+  if (isFetching) {
+    return <LoadingLens />;
+  }
 
   return (
     <BrowserRouter>
-      <Suspense fallback={<LoadingScreen />}>
+      <Suspense fallback={<LoadingLens />}>
         <PageHeader
           authenticated={authenticated}
           signOut={() => {
@@ -68,7 +68,7 @@ export const App = () => {
               if (unauthenticated) {
                 return <LandingPage />;
               }
-              return <LoadingScreen />;
+              return <LoadingLens />;
             }}
           />
           <Route path={urls.careersTest} component={CareerTest} />
@@ -83,7 +83,7 @@ export const App = () => {
                 return <Redirect to={urls.landingPage} />;
               }
               if (!authenticated) {
-                return <LoadingScreen />;
+                return <LoadingLens />;
               }
               if (!careerId) {
                 return <Redirect to={`${urls.overview}/${defaultCareerId}`} />;
@@ -102,7 +102,7 @@ export const App = () => {
                 return <Redirect to={urls.landingPage} />;
               }
               if (!authenticated) {
-                return <LoadingScreen />;
+                return <LoadingLens />;
               }
               if (!careerId && !!defaultCareerId) {
                 return (
@@ -122,7 +122,7 @@ export const App = () => {
                 return <Redirect to={urls.landingPage} />;
               }
               if (!authenticated) {
-                return <LoadingScreen />;
+                return <LoadingLens />;
               }
               return <SettingsPage />;
             }}

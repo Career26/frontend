@@ -4,13 +4,31 @@ import './loadingScreen.scss';
 import './bounce.css';
 import { Typewriter } from './TypeWriter';
 
-export const LoadingScreen = () => {
-  const lines = ['line 1...', 'item 2...', 'dave...'];
+type LoadingScreenText = {
+  text: string;
+  textDelay: number;
+  deleteDelay?: number;
+  repeatDelay?: number;
+};
+
+export const LoadingScreenWithText = ({
+  text,
+  repeatSequence,
+}: {
+  repeatSequence?: boolean;
+  text: LoadingScreenText[];
+}) => {
   const [lineIndex, setLineIndex] = useState(0);
 
   const onComplete = () => {
-    setLineIndex(lineIndex + 1);
+    if (lineIndex === text.length - 1 && repeatSequence) {
+      setLineIndex(0);
+    } else {
+      setLineIndex(lineIndex + 1);
+    }
   };
+
+  const selectedText = text[lineIndex];
 
   return (
     <div className="container">
@@ -18,15 +36,17 @@ export const LoadingScreen = () => {
         <div className="logo">LOGO HERE</div>
         <div className="shadow" />
 
-        <h1>
-          <Typewriter
-            text={lines[lineIndex] || ''}
-            textDelay={50}
-            repeatDelay={1000}
-            deleteDelay={3000}
-            onComplete={onComplete}
-          />
-        </h1>
+        {selectedText && (
+          <h1>
+            <Typewriter
+              text={selectedText.text}
+              textDelay={selectedText.textDelay}
+              repeatDelay={selectedText.repeatDelay}
+              deleteDelay={selectedText.deleteDelay}
+              onComplete={onComplete}
+            />
+          </h1>
+        )}
       </div>
     </div>
   );

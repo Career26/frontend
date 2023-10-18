@@ -101,22 +101,22 @@ export const CareerTest = () => {
               repeatSequence
               text={[
                 {
-                  text: 'Generating your personalised career suggestions',
-                  textDelay: 50,
+                  text: 'Generating your personalised career suggestions...',
+                  textDelay: 40,
                   repeatDelay: 1000,
-                  deleteDelay: 3000,
+                  deleteDelay: 2000,
                 },
                 {
-                  text: 'This may take up to 30 seconds',
-                  textDelay: 50,
+                  text: 'This may take up to 30 seconds...',
+                  textDelay: 40,
                   repeatDelay: 1000,
-                  deleteDelay: 3000,
+                  deleteDelay: 2000,
                 },
                 {
-                  text: "You're almost there",
-                  textDelay: 50,
+                  text: "You're almost there...",
+                  textDelay: 40,
                   repeatDelay: 1000,
-                  deleteDelay: 3000,
+                  deleteDelay: 2000,
                 },
               ]}
             />

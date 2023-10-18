@@ -5,7 +5,7 @@ import { useCreateProfileMutation } from '@apis/profileApi';
 import { setLoginModal } from '@slices/sessionSlice';
 import { useAppDispatch } from '@state/store';
 import { formStyles } from '@shared/styles/formStyles';
-import { LoadingLens } from '@shared/components/loadingScreen/LoadingLens';
+import { LoadingScreenWithText } from '@shared/components/loadingScreen/LoadingScreen';
 
 import { EducationForm } from './components/educationForm/EducationForm';
 import { WorkExperienceForm } from './components/workExperienceForm/WorkExperienceForm';
@@ -97,7 +97,29 @@ export const CareerTest = () => {
 
         <Container>
           {isLoading ? (
-            <LoadingLens />
+            <LoadingScreenWithText
+              repeatSequence
+              text={[
+                {
+                  text: 'Generating your personalised career suggestions',
+                  textDelay: 50,
+                  repeatDelay: 1000,
+                  deleteDelay: 3000,
+                },
+                {
+                  text: 'This may take up to 30 seconds',
+                  textDelay: 50,
+                  repeatDelay: 1000,
+                  deleteDelay: 3000,
+                },
+                {
+                  text: "You're almost there",
+                  textDelay: 50,
+                  repeatDelay: 1000,
+                  deleteDelay: 3000,
+                },
+              ]}
+            />
           ) : (
             <>
               {activeStep === CareerStep.EDUCATION && <EducationForm form={form} />}

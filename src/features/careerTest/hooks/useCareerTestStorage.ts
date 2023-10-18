@@ -46,7 +46,15 @@ export const useCareerTestStorage = () => {
     return careerPaths ? JSON.parse(careerPaths) : undefined;
   };
 
+  const storeProfileId = (profileId: string) => {
+    storeItem({ key: 'profileId', value: profileId });
+  };
+
+  const getProfileId = () => getItem('profileId') || '';
+
   return {
+    storeProfileId,
+    getProfileId,
     storeFormValues,
     getFormValues,
     storeCareerPaths,

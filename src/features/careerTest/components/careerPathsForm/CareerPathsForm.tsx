@@ -10,7 +10,13 @@ import { UserProfile } from '@datatypes/profile';
 
 import { CareerPathActions } from './CareerPathActions';
 
-export const CareerPathsForm = ({ careerPaths }: { careerPaths?: UserProfile['careerPaths'] }) => {
+export const CareerPathsForm = ({
+  careerPaths,
+  profileId,
+}: {
+  profileId?: string;
+  careerPaths?: UserProfile['careerPaths'];
+}) => {
   const { classes } = formStyles();
   const industryColors = useAppSelector(selectIndustryColors);
   const { selectedCareers, toggleSelectedCareer, loadingCareers } = useCareerSelection();
@@ -39,7 +45,7 @@ export const CareerPathsForm = ({ careerPaths }: { careerPaths?: UserProfile['ca
                   <CareerPathActions
                     loading={loadingCareers.includes(careerId)}
                     selected={selectedCareers.includes(careerId)}
-                    onClickAction={() => toggleSelectedCareer(careerId)}
+                    onClickAction={() => toggleSelectedCareer(careerId, profileId)}
                   />
                 }
               />

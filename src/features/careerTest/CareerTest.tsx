@@ -22,13 +22,21 @@ export const CareerTest = () => {
   const dispatch = useAppDispatch();
   const [createProfile, { data, isLoading }] = useCreateProfileMutation();
   const { classes } = formStyles();
-  const { storeFormValues, storeCareerPaths, storeStep, getStep, getCareerPaths } =
-    useCareerTestStorage();
+  const {
+    storeFormValues,
+    storeProfileId,
+    storeCareerPaths,
+    storeStep,
+    getStep,
+    getCareerPaths,
+    getProfileId,
+  } = useCareerTestStorage();
   const [activeStep, setActiveStep] = useState(getStep());
   const { form, checkFormIsValid } = useProfileForm({ activeStep });
 
   useEffect(() => {
     if (data?.careerPaths) {
+      storeProfileId(data.identifier);
       storeCareerPaths(data.careerPaths);
       setActiveStep(activeStep + 1);
     }
@@ -85,11 +93,11 @@ export const CareerTest = () => {
               <Stepper.Step
                 label={label}
                 key={`stepper-${label}`}
-                disabled={
-                  index > activeStep ||
-                  activeStep === CareerStep.CAREER_PATHS ||
-                  activeStep === CareerStep.COMPLETE
-                }
+                // disabled={
+                //   index > activeStep ||
+                //   activeStep === CareerStep.CAREER_PATHS ||
+                //   activeStep === CareerStep.COMPLETE
+                // }
               />
             ))}
           </Stepper>
@@ -104,7 +112,10 @@ export const CareerTest = () => {
               {activeStep === CareerStep.WORK_EXPERIENCE && <WorkExperienceForm form={form} />}
               {activeStep === CareerStep.PREFERENCES && <PreferencesForm form={form} />}
               {(activeStep === CareerStep.CAREER_PATHS || activeStep === CareerStep.COMPLETE) && (
-                <CareerPathsForm careerPaths={data?.careerPaths || getCareerPaths()} />
+                <CareerPathsForm
+                  careerPaths={data?.careerPaths || getCareerPaths()}
+                  profileId={data?.identifier || getProfileId()}
+                />
               )}
               <Group position="center">
                 {activeStep !== CareerStep.CAREER_PATHS && activeStep !== CareerStep.COMPLETE && (

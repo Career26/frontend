@@ -1,14 +1,12 @@
-import { selectProfileId, useSelectCareerMutation } from '@apis/profileApi';
-import { useAppSelector } from '@state/store';
+import { useSelectCareerMutation } from '@apis/profileApi';
 import { useState } from 'react';
 
 export const useCareerSelection = () => {
   const [selectedCareers, setSelectedCareers] = useState<string[]>([]);
-  const profileIdentifier = useAppSelector(selectProfileId);
   const [selectCareer] = useSelectCareerMutation();
   const [loadingCareers, setLoadingCareers] = useState<string[]>([]);
 
-  const handleSelection = async (careerIdentifier: string) => {
+  const handleSelection = async (careerIdentifier: string, profileIdentifier?: string) => {
     if (!profileIdentifier) {
       return;
     }
@@ -28,9 +26,9 @@ export const useCareerSelection = () => {
     }
   };
 
-  const toggleSelectedCareer = async (careerId: string) => {
+  const toggleSelectedCareer = async (careerId: string, profileIdentifier?: string) => {
     setLoadingCareers([...loadingCareers, careerId]);
-    await handleSelection(careerId);
+    await handleSelection(careerId, profileIdentifier);
     setLoadingCareers(loadingCareers.filter((id) => id !== careerId));
   };
 

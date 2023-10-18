@@ -1,16 +1,35 @@
 import { useSelectCareerMutation } from '@apis/profileApi';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { UserProfile } from '@datatypes/profile';
+
+import { useCareerTestStorage } from './useCareerTestStorage';
+
+const getSelectedCareers = (careerPaths?: UserProfile['careerPaths']) =>
+  Object.entries(careerPaths || {}).reduce(
+    (agg, [careerId, { selected }]) => (selected ? { ...agg, [careerId]: true } : agg),
+    {},
+  );
 
 export const useCareerSelection = () => {
-  const [selectedCareers, setSelectedCareers] = useState<string[]>([]);
   const [selectCareer] = useSelectCareerMutation();
   const [loadingCareers, setLoadingCareers] = useState<{ [key: string]: boolean }>({});
+  const {
+    storeTestValues,
+    careerTestStorage: { careerPaths },
+  } = useCareerTestStorage();
+  const [selectedCareers, setSelectedCareers] = useState<{ [key: string]: boolean }>(
+    getSelectedCareers(careerPaths),
+  );
 
-  const handleSelection = async (careerIdentifier: string, profileIdentifier?: string) => {
-    if (!profileIdentifier) {
-      return;
-    }
-    const selected = selectedCareers.includes(careerIdentifier);
+  const handleSelection = async ({
+    careerIdentifier,
+    profileIdentifier,
+    selected,
+  }: {
+    careerIdentifier: string;
+    profileIdentifier: string;
+    selected: boolean;
+  }) => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     const { error } = await selectCareer({ careerIdentifier, profileIdentifier, selected });
@@ -19,24 +38,42 @@ export const useCareerSelection = () => {
       console.error(`select endpoint did not return data, response: ${error}`);
       return;
     }
-    if (selected) {
-      setSelectedCareers(selectedCareers.filter((id) => id !== careerIdentifier));
-    } else {
-      setSelectedCareers([...selectedCareers, careerIdentifier]);
-    }
+    setSelectedCareers((prevSelectedCareers) => ({
+      ...prevSelectedCareers,
+      [careerIdentifier]: !selected,
+    }));
   };
 
-  const toggleSelectedCareer = async (careerId: string, profileIdentifier?: string) => {
+  const toggleSelectedCareer = async (careerIdentifier: string, profileIdentifier?: string) => {
+    if (!careerPaths || !profileIdentifier) {
+      return;
+    }
+    const { selected } = careerPaths[careerIdentifier];
     setLoadingCareers((prevLoadingCareers) => ({
       ...prevLoadingCareers,
-      [careerId]: true,
+      [careerIdentifier]: true,
     }));
-    await handleSelection(careerId, profileIdentifier);
+    await handleSelection({ careerIdentifier, profileIdentifier, selected });
     setLoadingCareers((prevLoadingCareers) => ({
       ...prevLoadingCareers,
-      [careerId]: false,
+      [careerIdentifier]: false,
     }));
   };
+
+  useEffect(() => {
+    if (!careerPaths) {
+      return;
+    }
+
+    const newCareerPaths = Object.entries(careerPaths).reduce(
+      (agg, [careerId, careerPath]) => ({
+        ...agg,
+        [careerId]: { ...careerPath, selected: !!selectedCareers[careerId] },
+      }),
+      {},
+    );
+    storeTestValues({ key: 'careerPaths', value: newCareerPaths });
+  }, [selectedCareers]);
 
   return { toggleSelectedCareer, selectedCareers, loadingCareers };
 };

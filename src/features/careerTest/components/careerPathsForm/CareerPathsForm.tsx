@@ -51,7 +51,7 @@ export const CareerPathsForm = ({
                 Actions={
                   <CareerPathActions
                     loading={loadingCareers[careerId]}
-                    selected={selectedCareers.includes(careerId)}
+                    selected={selectedCareers[careerId]}
                     onClickAction={() => toggleSelectedCareer(careerId, profileId)}
                   />
                 }

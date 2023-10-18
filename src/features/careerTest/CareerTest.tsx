@@ -22,33 +22,25 @@ export const CareerTest = () => {
   const dispatch = useAppDispatch();
   const [createProfile, { data, isLoading }] = useCreateProfileMutation();
   const { classes } = formStyles();
-  const {
-    storeFormValues,
-    storeProfileId,
-    storeCareerPaths,
-    storeStep,
-    getStep,
-    getCareerPaths,
-    getProfileId,
-  } = useCareerTestStorage();
-  const [activeStep, setActiveStep] = useState(getStep());
+  const { storeTestValues, careerTestStorage } = useCareerTestStorage();
+  const [activeStep, setActiveStep] = useState(careerTestStorage.step);
   const { form, checkFormIsValid } = useProfileForm({ activeStep });
 
   useEffect(() => {
     if (data?.careerPaths) {
-      storeProfileId(data.identifier);
-      storeCareerPaths(data.careerPaths);
+      storeTestValues({ key: 'profileId', value: data.identifier });
+      storeTestValues({ key: 'careerPaths', value: data.careerPaths });
       setActiveStep(activeStep + 1);
     }
   }, [data]);
 
   useEffect(() => {
-    storeStep(activeStep);
+    storeTestValues({ key: 'step', value: activeStep });
   }, [activeStep]);
 
   const clickNext = async () => {
     const formIsvalid = checkFormIsValid();
-    storeFormValues(form.values);
+    storeTestValues({ key: 'formValues', value: form.values });
     if (!formIsvalid) {
       return;
     }
@@ -77,7 +69,7 @@ export const CareerTest = () => {
     if (activeStep === CareerStep.PREFERENCES) {
       return 'See Results';
     }
-    if (activeStep === CareerStep.CAREER_PATHS) {
+    if (activeStep === CareerStep.COMPLETE) {
       return 'Save Choices';
     }
     return 'Next';
@@ -93,11 +85,11 @@ export const CareerTest = () => {
               <Stepper.Step
                 label={label}
                 key={`stepper-${label}`}
-                // disabled={
-                //   index > activeStep ||
-                //   activeStep === CareerStep.CAREER_PATHS ||
-                //   activeStep === CareerStep.COMPLETE
-                // }
+                disabled={
+                  index > activeStep ||
+                  activeStep === CareerStep.CAREER_PATHS ||
+                  activeStep === CareerStep.COMPLETE
+                }
               />
             ))}
           </Stepper>
@@ -113,8 +105,8 @@ export const CareerTest = () => {
               {activeStep === CareerStep.PREFERENCES && <PreferencesForm form={form} />}
               {(activeStep === CareerStep.CAREER_PATHS || activeStep === CareerStep.COMPLETE) && (
                 <CareerPathsForm
-                  careerPaths={data?.careerPaths || getCareerPaths()}
-                  profileId={data?.identifier || getProfileId()}
+                  careerPaths={careerTestStorage.careerPaths}
+                  profileId={careerTestStorage.profileId}
                 />
               )}
               <Group position="center">

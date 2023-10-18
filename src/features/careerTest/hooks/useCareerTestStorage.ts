@@ -2,64 +2,38 @@ import { CareerFormValues, CareerStep } from '@careerTest/careerTestTypes';
 import { initialProfileValues } from '@careerTest/config/formConstants';
 import { UserProfile } from '@datatypes/profile';
 
-const baseKey = 'careerTest#';
+const baseKey = 'careerTest';
+
+type CareerTestStorage = {
+  step: CareerStep;
+  formValues: CareerFormValues;
+  profileId?: string;
+  careerPaths?: UserProfile['careerPaths'];
+};
+
+type ValueForKey<T, K extends keyof T> = K extends keyof T ? T[K] : never;
 
 export const useCareerTestStorage = () => {
-  const storeItem = ({ key, value }: { key: string; value: string }) => {
-    localStorage.setItem(`${baseKey}${key}`, value);
+  const getValues = (): CareerTestStorage => {
+    const storedValues = localStorage.getItem(baseKey);
+    return storedValues
+      ? JSON.parse(storedValues)
+      : { step: CareerStep.EDUCATION, formValues: initialProfileValues };
   };
 
-  const getItem = (key: string) => localStorage.getItem(`${baseKey}${key}`);
-
-  const storeFormValues = (formValues: CareerFormValues) => {
-    const value = JSON.stringify(formValues);
-    storeItem({ key: 'inputValues', value });
+  const storeTestValues = <K extends keyof CareerTestStorage>({
+    key,
+    value,
+  }: {
+    key: K;
+    value: ValueForKey<CareerTestStorage, K>;
+  }) => {
+    const newValues = { ...getValues(), [key]: value };
+    localStorage.setItem(baseKey, JSON.stringify(newValues));
   };
-
-  const getFormValues = () => {
-    const storedValues = getItem('inputValues');
-    if (!storedValues) {
-      return initialProfileValues;
-    }
-    return JSON.parse(storedValues);
-  };
-
-  const storeStep = (step: CareerStep) => {
-    storeItem({ key: 'step', value: String(step) });
-  };
-
-  const getStep = (): CareerStep => {
-    const step = getItem('step');
-    if (!step) {
-      return CareerStep.EDUCATION;
-    }
-    return Number(step);
-  };
-
-  const storeCareerPaths = (careerPaths: UserProfile['careerPaths']) => {
-    const value = JSON.stringify(careerPaths);
-    storeItem({ key: 'careerPaths', value });
-  };
-
-  const getCareerPaths = () => {
-    const careerPaths = getItem('careerPaths');
-    return careerPaths ? JSON.parse(careerPaths) : undefined;
-  };
-
-  const storeProfileId = (profileId: string) => {
-    storeItem({ key: 'profileId', value: profileId });
-  };
-
-  const getProfileId = () => getItem('profileId') || '';
 
   return {
-    storeProfileId,
-    getProfileId,
-    storeFormValues,
-    getFormValues,
-    storeCareerPaths,
-    storeStep,
-    getCareerPaths,
-    getStep,
+    storeTestValues,
+    careerTestStorage: getValues(),
   };
 };

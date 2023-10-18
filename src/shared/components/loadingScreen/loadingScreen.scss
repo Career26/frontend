@@ -2,40 +2,12 @@
 // magnifying glass from <a target="_blank" href="https://icons8.com/icon/12773/search">Magnifying Glass</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
 
 .container {
-  margin: 0;
-  padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  flex-direction: column;
 }
 
-.splash {
-  width: 150px;
-  height: 150px;
-}
-
-.circle {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  animation: rotate 3s linear infinite;
-}
-
-.magnifying-glass {
-  width: 40px;
-  height: 40px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-@keyframes rotate {
-  0% {
-    transform: translate(-50%, -50%) rotate(0deg) translateX(80px) rotate(0deg);
-  }
-  100% {
-    transform: translate(-50%, -50%) rotate(360deg) translateX(80px) rotate(-360deg);
-  }
+.typeWriter {
+  margin-bottom: 20px;
 }

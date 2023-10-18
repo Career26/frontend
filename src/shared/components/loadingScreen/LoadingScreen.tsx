@@ -35,8 +35,9 @@ export const LoadingScreenWithText = ({
       <div className="bounceContainer">
         <div className="logo">LOGO HERE</div>
         <div className="shadow" />
-
-        {selectedText && (
+      </div>
+      {selectedText && (
+        <div className="typeWriter">
           <h1>
             <Typewriter
               text={selectedText.text}
@@ -46,8 +47,8 @@ export const LoadingScreenWithText = ({
               onComplete={onComplete}
             />
           </h1>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };

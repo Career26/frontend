@@ -20,6 +20,7 @@ export const CareerPathsForm = ({ careerPaths }: { careerPaths?: UserProfile['ca
     const industries = Object.values(careerPaths || {}).map((item) => item.industry);
     dispatch(addIndustryColors(industries));
   }, [careerPaths]);
+
   return (
     <Shell>
       <Container className={classes.questionContainer}>

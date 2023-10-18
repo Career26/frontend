@@ -1,10 +1,12 @@
 import { useMemo } from 'react';
 import { FORM_INDEX, useForm } from '@mantine/form';
 
-import { initialProfileValues } from '../config/formConstants';
 import { CareerFormValues } from '../careerTestTypes';
+import { useCareerTestStorage } from './useCareerTestStorage';
 
 export const useProfileForm = ({ activeStep }: { activeStep: number }) => {
+  const { getFormValues } = useCareerTestStorage();
+
   const fieldsToCheck = useMemo(() => {
     if (activeStep === 0) {
       return ['latestDegree', 'additionalDegrees', `additionalDegrees.${FORM_INDEX}`];
@@ -19,7 +21,7 @@ export const useProfileForm = ({ activeStep }: { activeStep: number }) => {
   }, [activeStep]);
 
   const form = useForm<CareerFormValues>({
-    initialValues: initialProfileValues,
+    initialValues: getFormValues(),
     validateInputOnChange: true,
     validate: {
       latestDegree: {

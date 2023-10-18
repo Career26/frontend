@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Container, Group, Button, Stepper } from '@mantine/core';
 import { Shell } from '@shared/components/shell/Shell';
 import { useCreateProfileMutation } from '@apis/profileApi';
@@ -14,19 +14,33 @@ import { useProfileForm } from './hooks/useProfileForm';
 import { CareerPathsForm } from './components/careerPathsForm/CareerPathsForm';
 import { CareerTestHeader } from './components/CareerTestHeader';
 import { CareerStep } from './careerTestTypes';
-import { CareerTestResults } from './components/CareerTestResults';
+import { useCareerTestStorage } from './hooks/useCareerTestStorage';
 
 const stepperLabels = ['Education', 'Experience', 'Preferences', 'Career Paths'];
 
 export const CareerTest = () => {
   const dispatch = useAppDispatch();
-  const [activeStep, setActiveStep] = useState(CareerStep.EDUCATION);
   const [createProfile, { data, isLoading }] = useCreateProfileMutation();
   const { classes } = formStyles();
+  const { storeFormValues, storeCareerPaths, storeStep, getStep, getCareerPaths } =
+    useCareerTestStorage();
+  const [activeStep, setActiveStep] = useState(getStep());
   const { form, checkFormIsValid } = useProfileForm({ activeStep });
+
+  useEffect(() => {
+    if (data?.careerPaths) {
+      storeCareerPaths(data.careerPaths);
+      setActiveStep(activeStep + 1);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    storeStep(activeStep);
+  }, [activeStep]);
 
   const clickNext = async () => {
     const formIsvalid = checkFormIsValid();
+    storeFormValues(form.values);
     if (!formIsvalid) {
       return;
     }
@@ -67,8 +81,16 @@ export const CareerTest = () => {
         <CareerTestHeader />
         <Container className={classes.steppers}>
           <Stepper active={activeStep} onStepClick={setActiveStep} breakpoint="sm">
-            {stepperLabels.map((label) => (
-              <Stepper.Step label={label} key={`stepper-${label}`} />
+            {stepperLabels.map((label, index) => (
+              <Stepper.Step
+                label={label}
+                key={`stepper-${label}`}
+                disabled={
+                  index > activeStep ||
+                  activeStep === CareerStep.CAREER_PATHS ||
+                  activeStep === CareerStep.COMPLETE
+                }
+              />
             ))}
           </Stepper>
         </Container>
@@ -81,34 +103,31 @@ export const CareerTest = () => {
               {activeStep === CareerStep.EDUCATION && <EducationForm form={form} />}
               {activeStep === CareerStep.WORK_EXPERIENCE && <WorkExperienceForm form={form} />}
               {activeStep === CareerStep.PREFERENCES && <PreferencesForm form={form} />}
-              {activeStep === CareerStep.CAREER_PATHS && (
-                <CareerPathsForm careerPaths={data?.careerPaths} />
+              {(activeStep === CareerStep.CAREER_PATHS || activeStep === CareerStep.COMPLETE) && (
+                <CareerPathsForm careerPaths={data?.careerPaths || getCareerPaths()} />
               )}
-              {activeStep !== CareerStep.COMPLETE && (
-                <Group position="center">
-                  {activeStep !== CareerStep.CAREER_PATHS && (
-                    <Button
-                      onClick={clickBack}
-                      disabled={activeStep === CareerStep.EDUCATION || isLoading}
-                      variant="light"
-                    >
-                      Back
-                    </Button>
-                  )}
+              <Group position="center">
+                {activeStep !== CareerStep.CAREER_PATHS && activeStep !== CareerStep.COMPLETE && (
                   <Button
-                    onClick={clickNext}
-                    disabled={isLoading}
-                    loading={isLoading}
-                    variant="outline"
+                    onClick={clickBack}
+                    disabled={activeStep === CareerStep.EDUCATION || isLoading}
+                    variant="light"
                   >
-                    {nextLabel}
+                    Back
                   </Button>
-                </Group>
-              )}
+                )}
+                <Button
+                  onClick={clickNext}
+                  disabled={isLoading}
+                  loading={isLoading}
+                  variant="outline"
+                >
+                  {nextLabel}
+                </Button>
+              </Group>
             </>
           )}
         </Container>
-        {activeStep === CareerStep.COMPLETE && <CareerTestResults />}
       </>
     </Shell>
   );

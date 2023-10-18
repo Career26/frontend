@@ -22,25 +22,25 @@ export const CareerTest = () => {
   const dispatch = useAppDispatch();
   const [createProfile, { data, isLoading }] = useCreateProfileMutation();
   const { classes } = formStyles();
-  const { storeFormValues, storeCareerPaths, storeStep, getStep, getCareerPaths } =
-    useCareerTestStorage();
-  const [activeStep, setActiveStep] = useState(getStep());
+  const { storeTestValues, careerTestStorage } = useCareerTestStorage();
+  const [activeStep, setActiveStep] = useState(careerTestStorage.step);
   const { form, checkFormIsValid } = useProfileForm({ activeStep });
 
   useEffect(() => {
     if (data?.careerPaths) {
-      storeCareerPaths(data.careerPaths);
+      storeTestValues({ key: 'profileId', value: data.identifier });
+      storeTestValues({ key: 'careerPaths', value: data.careerPaths });
       setActiveStep(activeStep + 1);
     }
   }, [data]);
 
   useEffect(() => {
-    storeStep(activeStep);
+    storeTestValues({ key: 'step', value: activeStep });
   }, [activeStep]);
 
   const clickNext = async () => {
     const formIsvalid = checkFormIsValid();
-    storeFormValues(form.values);
+    storeTestValues({ key: 'formValues', value: form.values });
     if (!formIsvalid) {
       return;
     }
@@ -69,7 +69,7 @@ export const CareerTest = () => {
     if (activeStep === CareerStep.PREFERENCES) {
       return 'See Results';
     }
-    if (activeStep === CareerStep.CAREER_PATHS) {
+    if (activeStep === CareerStep.COMPLETE) {
       return 'Save Choices';
     }
     return 'Next';
@@ -104,7 +104,10 @@ export const CareerTest = () => {
               {activeStep === CareerStep.WORK_EXPERIENCE && <WorkExperienceForm form={form} />}
               {activeStep === CareerStep.PREFERENCES && <PreferencesForm form={form} />}
               {(activeStep === CareerStep.CAREER_PATHS || activeStep === CareerStep.COMPLETE) && (
-                <CareerPathsForm careerPaths={data?.careerPaths || getCareerPaths()} />
+                <CareerPathsForm
+                  careerPaths={careerTestStorage.careerPaths}
+                  profileId={careerTestStorage.profileId}
+                />
               )}
               <Group position="center">
                 {activeStep !== CareerStep.CAREER_PATHS && activeStep !== CareerStep.COMPLETE && (

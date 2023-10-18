@@ -1,4 +1,4 @@
-import { Text, Grid, Container } from '@mantine/core';
+import { Text, Grid, Container, createStyles } from '@mantine/core';
 import React, { useEffect } from 'react';
 import { formStyles } from '@shared/styles/formStyles';
 import { useAppDispatch, useAppSelector } from '@state/store';
@@ -10,8 +10,21 @@ import { UserProfile } from '@datatypes/profile';
 
 import { CareerPathActions } from './CareerPathActions';
 
-export const CareerPathsForm = ({ careerPaths }: { careerPaths?: UserProfile['careerPaths'] }) => {
-  const { classes } = formStyles();
+const careerPathsStyles = createStyles({
+  tile: {
+    width: '100vh',
+  },
+});
+
+export const CareerPathsForm = ({
+  careerPaths,
+  profileId,
+}: {
+  profileId?: string;
+  careerPaths?: UserProfile['careerPaths'];
+}) => {
+  const { classes } = careerPathsStyles();
+  const { classes: formClasses } = formStyles();
   const industryColors = useAppSelector(selectIndustryColors);
   const { selectedCareers, toggleSelectedCareer, loadingCareers } = useCareerSelection();
   const dispatch = useAppDispatch();
@@ -23,12 +36,12 @@ export const CareerPathsForm = ({ careerPaths }: { careerPaths?: UserProfile['ca
 
   return (
     <Shell>
-      <Container className={classes.questionContainer}>
-        <Text className={classes.questionTitle}>Career Paths</Text>
-        <Text className={classes.subHeader}>Select the careers that you like</Text>
+      <Container className={formClasses.questionContainer}>
+        <Text className={formClasses.questionTitle}>Career Paths</Text>
+        <Text className={formClasses.subHeader}>Select the careers that you like</Text>
         <Grid>
           {Object.entries(careerPaths || {}).map(([careerId, careerPath]) => (
-            <Grid.Col md={6} key={`career-path-${careerId}`}>
+            <Grid.Col md={6} key={`career-path-${careerId}`} className={classes.tile}>
               <CareerCard
                 title={careerPath.title}
                 subTitle={careerPath.startingSalary}
@@ -37,9 +50,9 @@ export const CareerPathsForm = ({ careerPaths }: { careerPaths?: UserProfile['ca
                 content={careerPath.role}
                 Actions={
                   <CareerPathActions
-                    loading={loadingCareers.includes(careerId)}
-                    selected={selectedCareers.includes(careerId)}
-                    onClickAction={() => toggleSelectedCareer(careerId)}
+                    loading={loadingCareers[careerId]}
+                    selected={selectedCareers[careerId]}
+                    onClickAction={() => toggleSelectedCareer(careerId, profileId)}
                   />
                 }
               />

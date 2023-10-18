@@ -5,7 +5,9 @@ import { CareerFormValues } from '../careerTestTypes';
 import { useCareerTestStorage } from './useCareerTestStorage';
 
 export const useProfileForm = ({ activeStep }: { activeStep: number }) => {
-  const { getFormValues } = useCareerTestStorage();
+  const {
+    careerTestStorage: { formValues },
+  } = useCareerTestStorage();
 
   const fieldsToCheck = useMemo(() => {
     if (activeStep === 0) {
@@ -21,7 +23,7 @@ export const useProfileForm = ({ activeStep }: { activeStep: number }) => {
   }, [activeStep]);
 
   const form = useForm<CareerFormValues>({
-    initialValues: getFormValues(),
+    initialValues: formValues,
     validateInputOnChange: true,
     validate: {
       latestDegree: {

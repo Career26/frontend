@@ -1,9 +1,5 @@
-import { ActionIcon } from '@mantine/core';
-import {
-  IconCircleCheck,
-  IconSquareRoundedMinusFilled,
-  IconSquareRoundedPlusFilled,
-} from '@tabler/icons-react';
+import { IconMinus, IconPlus } from '@tabler/icons-react';
+import { Button } from '@mantine/core';
 import React from 'react';
 
 type CareerPathActionsProps = {
@@ -12,11 +8,30 @@ type CareerPathActionsProps = {
   onClickAction?: () => void;
 };
 
-export const CareerPathActions = ({ onClickAction, selected, loading }: CareerPathActionsProps) => (
-  <div>
-    {selected && <IconCircleCheck size={30} fill="green" color="white" />}
-    <ActionIcon loading={loading} onClick={onClickAction} color={selected ? 'red' : 'gray'}>
-      {selected ? <IconSquareRoundedMinusFilled /> : <IconSquareRoundedPlusFilled />}
-    </ActionIcon>
-  </div>
-);
+export const CareerPathActions = ({ onClickAction, selected, loading }: CareerPathActionsProps) => {
+  if (selected) {
+    return (
+      <Button
+        onClick={onClickAction}
+        variant="outline"
+        loading={loading}
+        size="xs"
+        color="red"
+        leftIcon={<IconMinus />}
+      >
+        Remove
+      </Button>
+    );
+  }
+  return (
+    <Button
+      onClick={onClickAction}
+      variant="outline"
+      loading={loading}
+      size="xs"
+      leftIcon={<IconPlus />}
+    >
+      Select
+    </Button>
+  );
+};

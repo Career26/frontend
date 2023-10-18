@@ -14,7 +14,6 @@ import { useProfileForm } from './hooks/useProfileForm';
 import { CareerPathsForm } from './components/careerPathsForm/CareerPathsForm';
 import { CareerTestHeader } from './components/CareerTestHeader';
 import { CareerStep } from './careerTestTypes';
-import { CareerTestResults } from './components/CareerTestResults';
 import { useCareerTestStorage } from './hooks/useCareerTestStorage';
 
 const stepperLabels = ['Education', 'Experience', 'Preferences', 'Career Paths'];
@@ -31,6 +30,7 @@ export const CareerTest = () => {
   useEffect(() => {
     if (data?.careerPaths) {
       storeCareerPaths(data.careerPaths);
+      setActiveStep(activeStep + 1);
     }
   }, [data]);
 
@@ -99,7 +99,7 @@ export const CareerTest = () => {
               {activeStep === CareerStep.EDUCATION && <EducationForm form={form} />}
               {activeStep === CareerStep.WORK_EXPERIENCE && <WorkExperienceForm form={form} />}
               {activeStep === CareerStep.PREFERENCES && <PreferencesForm form={form} />}
-              {activeStep === CareerStep.CAREER_PATHS && (
+              {(activeStep === CareerStep.CAREER_PATHS || activeStep === CareerStep.COMPLETE) && (
                 <CareerPathsForm careerPaths={data?.careerPaths || getCareerPaths()} />
               )}
               {activeStep !== CareerStep.COMPLETE && (
@@ -126,7 +126,6 @@ export const CareerTest = () => {
             </>
           )}
         </Container>
-        {activeStep === CareerStep.COMPLETE && <CareerTestResults />}
       </>
     </Shell>
   );

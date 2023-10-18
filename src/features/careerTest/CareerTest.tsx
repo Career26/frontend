@@ -100,7 +100,7 @@ export const CareerTest = () => {
               {activeStep === CareerStep.WORK_EXPERIENCE && <WorkExperienceForm form={form} />}
               {activeStep === CareerStep.PREFERENCES && <PreferencesForm form={form} />}
               {activeStep === CareerStep.CAREER_PATHS && (
-                <CareerPathsForm careerPaths={getCareerPaths()} />
+                <CareerPathsForm careerPaths={data?.careerPaths || getCareerPaths()} />
               )}
               {activeStep !== CareerStep.COMPLETE && (
                 <Group position="center">

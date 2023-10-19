@@ -1,7 +1,7 @@
 import { SelectCareerInput } from '@datatypes/career';
 import { UserProfile, Profile } from '@datatypes/profile';
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { getAuthorisedBaseQuery, getProfileWithFilteredCareerPaths } from '@shared/config/apiUtil';
+import { getAuthorisedBaseQuery } from '@shared/config/apiUtil';
 import { RootState } from '@state/store';
 
 const unauthorisedEndpoints = ['selectCareer', 'createProfile', 'associateProfile'];
@@ -26,7 +26,6 @@ export const profileApi = createApi({
     }),
     getProfile: build.query<UserProfile, void>({
       query: () => 'profile',
-      transformResponse: getProfileWithFilteredCareerPaths,
     }),
     associateProfile: build.query<boolean, string>({
       query: (profileId) => `associate/${profileId}`,

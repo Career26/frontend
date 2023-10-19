@@ -5,21 +5,13 @@ import {
   SuggestionInput,
   SuggestionResponse,
 } from '@datatypes/question';
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { baseUrl } from '@shared/config/urlConstants';
+import { createApi } from '@reduxjs/toolkit/query/react';
+import { getAuthorisedBaseQuery } from '@shared/config/apiUtil';
 import { RootState } from '@state/store';
-import { Auth } from 'aws-amplify';
 
 export const questionsApi = createApi({
   reducerPath: 'questions',
-  baseQuery: fetchBaseQuery({
-    baseUrl,
-    prepareHeaders: async (headers) => {
-      const token = (await Auth.currentSession()).getIdToken().getJwtToken();
-      headers.set('Authorization', token);
-      return headers;
-    },
-  }),
+  baseQuery: getAuthorisedBaseQuery(),
   endpoints: (build) => ({
     getQuestions: build.query<Question[], void>({
       query: () => 'questions',

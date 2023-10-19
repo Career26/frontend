@@ -28,6 +28,7 @@ export const CompanyForm = ({ form, baseKey }: { form: CareerFormProps; baseKey:
         label="Rating"
         className={classes.questionInput}
         data={ratingOptions}
+        placeholder="Select a rating"
       />
 
       <Textarea

@@ -29,6 +29,8 @@ export const useProfileForm = ({ activeStep }: { activeStep: number }) => {
       latestDegree: {
         name: (value) => !value && 'Course name is required',
         university: (value) => !value && 'University is required',
+        grade: (value) => !value && 'Grade is required',
+        level: (value) => !value && 'Level is required',
       },
       additionalDegrees: {
         name: (value) => !value && 'Course name is required',
@@ -46,15 +48,7 @@ export const useProfileForm = ({ activeStep }: { activeStep: number }) => {
           }
           return null;
         },
-        rating: (value) => {
-          if (!value) {
-            return 'Rating is required';
-          }
-          if (Number.isNaN(value)) {
-            return 'Expected salary must be a number';
-          }
-          return null;
-        },
+        rating: (value) => !value && 'Rating is required',
       },
       areasOfInterest: (value) => {
         if (!value.length) {

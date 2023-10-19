@@ -27,11 +27,11 @@ export const exampleAreasOfInterest = [
 ];
 
 export const ratingOptions = [
-  { value: '1', label: '1 - I hated it!' },
-  { value: '2', label: '2 - I disliked it' },
-  { value: '3', label: '3 - I neither liked or disliked it' },
-  { value: '4', label: '4 - I liked it' },
-  { value: '5', label: '5 - I loved it!' },
+  { value: '1', label: 'I hated it!' },
+  { value: '2', label: 'I disliked it' },
+  { value: '3', label: 'I neither liked or disliked it' },
+  { value: '4', label: 'I liked it' },
+  { value: '5', label: 'I loved it!' },
 ];
 
 export const ukDegreeGrades = [
@@ -58,8 +58,8 @@ export const degreeOptions = [
 ];
 
 export const initialUniversityValues: Degree = {
-  grade: ukDegreeGrades[0],
-  level: degreeLevels[0],
+  grade: '',
+  level: '',
   name: '',
   university: '',
 };

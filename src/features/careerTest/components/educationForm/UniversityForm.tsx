@@ -27,6 +27,7 @@ export const UniversityForm = ({ form, baseKey }: { form: CareerFormProps; baseK
           className={classes.questionInput}
           data={degreeOptions}
           withAsterisk
+          placeholder="Select a grade"
         />
         <Select
           {...form.getInputProps(`${baseKey}.level`)}
@@ -34,6 +35,7 @@ export const UniversityForm = ({ form, baseKey }: { form: CareerFormProps; baseK
           className={classes.questionInput}
           data={degreeLevels}
           withAsterisk
+          placeholder="Select a level"
         />
       </div>
     </Container>

@@ -1,25 +1,14 @@
 import { SelectCareerInput } from '@datatypes/career';
 import { UserProfile, Profile } from '@datatypes/profile';
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { baseUrl } from '@shared/config/urlConstants';
+import { createApi } from '@reduxjs/toolkit/query/react';
+import { getAuthorisedBaseQuery } from '@shared/config/apiUtil';
 import { RootState } from '@state/store';
-import { Auth } from 'aws-amplify';
 
-const authedEndpoints = ['getProfile', 'associateProfile'];
+const unauthorisedEndpoints = ['selectCareer', 'createProfile', 'associateProfile'];
 
 export const profileApi = createApi({
   reducerPath: 'profile',
-  baseQuery: fetchBaseQuery({
-    baseUrl,
-    prepareHeaders: async (headers, api) => {
-      if (!authedEndpoints.includes(api.endpoint)) {
-        return headers;
-      }
-      const token = (await Auth.currentSession()).getIdToken().getJwtToken();
-      headers.set('Authorization', token);
-      return headers;
-    },
-  }),
+  baseQuery: getAuthorisedBaseQuery(unauthorisedEndpoints),
   endpoints: (build) => ({
     createProfile: build.mutation<UserProfile, Profile>({
       query: (body) => ({

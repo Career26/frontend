@@ -4,7 +4,7 @@ import { Paper, Tabs, TextInput } from '@mantine/core';
 import { useAppSelector } from '@state/store';
 import React from 'react';
 
-import styles from './settingsStyles.module.scss';
+import styles from './settingStyles.module.scss';
 
 const UniversitiesTab = ({ profile }: { profile: Profile }) => {
   const universities = [profile.latestDegree, ...profile.additionalDegrees];

@@ -5,7 +5,7 @@ import React, { useMemo, useState } from 'react';
 import { UserDetails } from '@datatypes/profile';
 import { IconExclamationCircle } from '@tabler/icons-react';
 
-import styles from './settingsStyles.module.scss';
+import styles from './settingStyles.module.scss';
 
 const DetailsTab = () => {
   const { user, loading, updateUserAttributes } = useAuthUser();

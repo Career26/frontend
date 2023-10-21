@@ -7,7 +7,7 @@ import React, { useState } from 'react';
 
 import { ProfileTab } from './ProfileTab';
 import { UserInfoTab } from './UserInfoTab';
-import styles from './settingsStyles.module.scss';
+import styles from './settingStyles.module.scss';
 
 const profileLinks = [
   { label: 'Profile', Component: ProfileTab },

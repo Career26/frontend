@@ -1,24 +1,26 @@
 import React from 'react';
-import { Container, Select, TextInput } from '@mantine/core';
+import { Select, TextInput } from '@mantine/core';
 import formStyles from '@shared/styles/formStyles.module.scss';
 import { CareerFormProps } from '@careerTest/careerTestTypes';
 import { degreeLevels, degreeOptions } from '@careerTest/config/formConstants';
 
 export const UniversityForm = ({ form, baseKey }: { form: CareerFormProps; baseKey: string }) => (
-  <Container className={formStyles.questionContainer}>
+  <div>
     <TextInput
       {...form.getInputProps(`${baseKey}.university`)}
       label="University Name"
       className={formStyles.questionInput}
       withAsterisk
+      py="xs"
     />
     <TextInput
       {...form.getInputProps(`${baseKey}.name`)}
       label="Course Name"
       className={formStyles.questionInput}
       withAsterisk
+      py="xs"
     />
-    <div className={formStyles.row}>
+    <div>
       <Select
         {...form.getInputProps(`${baseKey}.grade`)}
         label="Grade"
@@ -26,6 +28,7 @@ export const UniversityForm = ({ form, baseKey }: { form: CareerFormProps; baseK
         data={degreeOptions}
         withAsterisk
         placeholder="Select a grade"
+        py="xs"
       />
       <Select
         {...form.getInputProps(`${baseKey}.level`)}
@@ -34,7 +37,8 @@ export const UniversityForm = ({ form, baseKey }: { form: CareerFormProps; baseK
         data={degreeLevels}
         withAsterisk
         placeholder="Select a level"
+        py="xs"
       />
     </div>
-  </Container>
+  </div>
 );

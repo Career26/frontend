@@ -12,7 +12,7 @@ import { WorkExperienceForm } from './components/workExperienceForm/WorkExperien
 import { PreferencesForm } from './components/preferencesForm/PreferencesForm';
 import { useProfileForm } from './hooks/useProfileForm';
 import { CareerPathsForm } from './components/careerPathsForm/CareerPathsForm';
-import { CareerTestHeader } from './components/CareerTestHeader';
+import { CareerTestHeader } from './components/careerTestHeader/CareerTestHeader';
 import { CareerStep } from './careerTestTypes';
 import { useCareerTestStorage } from './hooks/useCareerTestStorage';
 
@@ -79,7 +79,7 @@ export const CareerTest = () => {
       <>
         <CareerTestHeader />
         <Container className={formStyles.steppers}>
-          <Stepper active={activeStep} onStepClick={setActiveStep}>
+          <Stepper active={activeStep} onStepClick={setActiveStep} py="md">
             {stepperLabels.map((label, index) => (
               <Stepper.Step
                 label={label}

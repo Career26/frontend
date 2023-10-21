@@ -11,6 +11,8 @@ import awsExports from './awsExports';
 import { App } from './features/app/App';
 import { store } from './state/store';
 
+import '@mantine/core/styles.css';
+
 Amplify.configure({
   Auth: {
     region: awsExports.REGION,

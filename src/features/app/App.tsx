@@ -1,12 +1,10 @@
 import React, { Suspense, useEffect } from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { urls } from '@shared/config/urlConstants';
-import { PageHeader } from '@shared/components/pageHeader/PageHeader';
 import { useAppDispatch, useAppSelector } from '@state/store';
 import { useAuthUser } from '@shared/hooks/useAuthUser';
 import {
   addIndustryColors,
-  resetSession,
   selectSelectedCareerPathId,
   selectSelectedQuestionId,
 } from '@slices/sessionSlice';
@@ -24,7 +22,7 @@ export const App = () => {
   const dispatch = useAppDispatch();
   const defaultCareerId = useAppSelector(selectSelectedCareerPathId);
   const defaultQuestionId = useAppSelector(selectSelectedQuestionId);
-  const { authenticated, unauthenticated, signOut } = useAuthUser();
+  const { authenticated, unauthenticated } = useAuthUser();
   const careerPaths = useAppSelector(selectCareerPaths);
   const profileId = useAppSelector(selectProfileId);
   const [getProfile, { isFetching }] = useLazyGetProfileQuery();
@@ -50,13 +48,6 @@ export const App = () => {
   return (
     <BrowserRouter>
       <Suspense fallback={<LoadingLens />}>
-        <PageHeader
-          authenticated={authenticated}
-          signOut={() => {
-            dispatch(resetSession());
-            signOut();
-          }}
-        />
         <Switch>
           <Route
             path={urls.landingPage}

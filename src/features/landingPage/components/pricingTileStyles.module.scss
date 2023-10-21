@@ -9,7 +9,6 @@
 
 .card {
   background: var(--mantine-color-blue-0);
-  // width: 330rem;
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
@@ -17,14 +16,8 @@
 }
 
 .priceText {
-  // font-size: 28rem;
   font-weight: bold;
-  // line-height: 1.1;
   color: var(--mantine-color-gray-9);
-}
-
-.benefitText {
-  // font-size: 17rem;
 }
 
 .benefitsContainer {

@@ -31,7 +31,7 @@ export const SettingsPage = () => {
           </div>
         }
       >
-        <Container>
+        <Container py="md">
           <Component />
         </Container>
       </Shell>

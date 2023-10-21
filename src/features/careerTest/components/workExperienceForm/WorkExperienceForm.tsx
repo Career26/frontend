@@ -26,8 +26,10 @@ export const WorkExperienceForm = ({ form }: { form: CareerFormProps }) => {
   };
 
   return (
-    <>
-      <Text className={formStyles.questionTitle}>Experience</Text>
+    <Container py="md">
+      <Group justify="center">
+        <Text fw="bold">Experience</Text>
+      </Group>
       {[...Array(workExperienceCount).keys()].map((key) => {
         const baseKey = `previousWorkExperience.${key}`;
         return (
@@ -35,26 +37,23 @@ export const WorkExperienceForm = ({ form }: { form: CareerFormProps }) => {
             {key > 0 && <Divider size="lg" className={formStyles.divider} />}
             <CompanyForm form={form} baseKey={baseKey} key={baseKey} />
             {key > 0 && key + 1 !== workExperienceCount && (
-              <Container className={formStyles.removeButton}>
-                <RemoveRowButton onClick={() => onClickRemoveExperience(key)} label="Experience" />
-              </Container>
+              <RemoveRowButton onClick={() => onClickRemoveExperience(key)} label="Experience" />
             )}
           </div>
         );
       })}
-      <Container>
-        <Group className={formStyles.row}>
-          <Button leftSection={<IconPlus />} onClick={onClickAddExperience}>
-            Add Another Experience
-          </Button>
-          {workExperienceCount > 1 && (
-            <RemoveRowButton
-              label="Experience"
-              onClick={() => onClickRemoveExperience(workExperienceCount - 1)}
-            />
-          )}
-        </Group>
-      </Container>
-    </>
+
+      <Group py="md" justify={workExperienceCount > 1 ? 'space-between' : 'flex-end'}>
+        {workExperienceCount > 1 && (
+          <RemoveRowButton
+            label="Experience"
+            onClick={() => onClickRemoveExperience(workExperienceCount - 1)}
+          />
+        )}
+        <Button leftSection={<IconPlus />} onClick={onClickAddExperience}>
+          Add Another Experience
+        </Button>
+      </Group>
+    </Container>
   );
 };

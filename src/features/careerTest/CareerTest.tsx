@@ -94,7 +94,7 @@ export const CareerTest = () => {
           </Stepper>
         </Container>
 
-        <Container>
+        <Container py="md">
           {isLoading ? (
             <LoadingScreenWithText
               repeatSequence

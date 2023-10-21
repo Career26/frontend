@@ -1,0 +1,24 @@
+@import 'src/shared/styles/headerStyles.module.scss';
+
+.container {
+  padding-top: calc(--header-height + 40rem);
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  align-items: center;
+}
+
+.navItem {
+  padding-top: 10rem;
+}
+
+.disabled {
+  &:hover {
+    cursor: not-allowed;
+  }
+}
+
+.description {
+  color: var(--mantine-color-gray-9);
+  font-size: 18rem;
+}

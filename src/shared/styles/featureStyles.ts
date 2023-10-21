@@ -14,8 +14,8 @@ export const featureStyles = createStyles((theme) => ({
     },
   },
   content: {
-    flexDirection: 'column',
+    flex-direction: column;
     paddingLeft: `${NAVBAR_WIDTH} !important`,
-    paddingTop: HEADER_HEIGHT,
+    padding-top: HEADER_HEIGHT,
   },
 }));

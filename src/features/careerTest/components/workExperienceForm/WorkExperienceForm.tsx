@@ -46,7 +46,7 @@ export const WorkExperienceForm = ({ form }: { form: CareerFormProps }) => {
       })}
       <Container>
         <Group className={classes.row}>
-          <Button leftIcon={<IconPlus />} onClick={onClickAddExperience}>
+          <Button leftSection={<IconPlus />} onClick={onClickAddExperience}>
             Add Another Experience
           </Button>
           {workExperienceCount > 1 && (

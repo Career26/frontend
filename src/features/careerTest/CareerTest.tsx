@@ -131,7 +131,7 @@ export const CareerTest = () => {
                   profileId={careerTestStorage.profileId}
                 />
               )}
-              <Group position="center">
+              <Group justify="center">
                 {activeStep !== CareerStep.CAREER_PATHS && activeStep !== CareerStep.COMPLETE && (
                   <Button
                     onClick={clickBack}

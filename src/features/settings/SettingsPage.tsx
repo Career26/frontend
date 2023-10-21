@@ -1,4 +1,4 @@
-import { Button, Container, Navbar, createStyles, rem } from '@mantine/core';
+import { AppShell, Button, Container, createStyles, rem } from '@mantine/core';
 import { Shell } from '@shared/components/shell/Shell';
 import { featureStyles } from '@shared/styles/featureStyles';
 import { navStyles } from '@shared/styles/navStyles';
@@ -31,8 +31,8 @@ export const SettingsPage = () => {
     <div className={featureClasses.wrapper}>
       <Shell
         navbar={
-          <Navbar height={400} p="xs" className={navClasses.navBar}>
-            <Navbar.Section grow mt="md" className={navClasses.navLink}>
+          <AppShell.Navbar h={400} p="xs" className={navClasses.navBar}>
+            <AppShell.Section grow mt="md" className={navClasses.navLink}>
               {profileLinks.map(({ label }, index) => (
                 <Button
                   onClick={() => setActiveTab(index)}
@@ -44,8 +44,8 @@ export const SettingsPage = () => {
                   {label}
                 </Button>
               ))}
-            </Navbar.Section>
-          </Navbar>
+            </AppShell.Section>
+          </AppShell.Navbar>
         }
       >
         <div className={featureClasses.content}>

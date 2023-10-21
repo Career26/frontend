@@ -16,10 +16,10 @@ export const Shell = ({ header, children, navbar }: ShellProps) => (
         minHeight: 'auto',
       },
     }}
-    header={header}
-    navbar={navbar}
-    navbarOffsetBreakpoint="sm"
+    navbar={{ width: 300, breakpoint: 'sm' }}
   >
+    <AppShell.Header>{header}</AppShell.Header>
+    <AppShell.Navbar>{navbar}</AppShell.Navbar>
     {children}
   </AppShell>
 );

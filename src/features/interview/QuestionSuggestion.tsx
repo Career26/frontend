@@ -1,5 +1,5 @@
 import { selectSuggestion, useGetSuggestionMutation } from '@apis/questionsApi';
-import { Accordion, Badge, List, Loader, Paper, ThemeIcon, createStyles, rem } from '@mantine/core';
+import { Accordion, Badge, List, Loader, Paper, ThemeIcon } from '@mantine/core';
 import { selectSelectedCareerPathId, selectSelectedQuestion } from '@slices/sessionSlice';
 import { useAppSelector } from '@state/store';
 import classNames from 'classnames';
@@ -7,22 +7,7 @@ import React, { useEffect, useState } from 'react';
 import { IconBulb, IconQuestionMark, IconStar } from '@tabler/icons-react';
 
 import { TextWithIconBlock } from './TextWithIconBlock';
-
-const suggestionStyles = createStyles({
-  loader: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: rem(20),
-  },
-  list: {
-    paddingTop: rem(10),
-  },
-});
+import styles from './interviewStyles.module.scss';
 
 const NumberedList = ({ items }: { items: string[] }) =>
   items.map((item, index) => (
@@ -53,18 +38,16 @@ const getStarMap = (suggestedFormat: string) => {
 };
 
 const SuggestedFormat = ({ suggestedFormat }: { suggestedFormat: string }) => {
-  const { classes } = suggestionStyles();
   const starMap = getStarMap(suggestedFormat);
   const numberedItems = suggestedFormat.split(/(\\n)?\d\. /gm).filter(Boolean);
   return (
-    <List spacing="md" center className={classes.list}>
+    <List spacing="md" center className={styles.list}>
       {starMap ? <StarList starMap={starMap} /> : <NumberedList items={numberedItems} />}
     </List>
   );
 };
 
 export const QuestionSuggestion = () => {
-  const { classes } = suggestionStyles();
   const [value, setValue] = useState<string | null>(null);
   const careerPathId = useAppSelector(selectSelectedCareerPathId);
   const selectedQuestion = useAppSelector(selectSelectedQuestion);
@@ -93,12 +76,12 @@ export const QuestionSuggestion = () => {
       <Accordion value={value} onChange={setValue}>
         <Accordion.Item value="suggestion">
           <Accordion.Control>Show Suggestion</Accordion.Control>
-          <Accordion.Panel className={classNames({ [classes.loader]: suggestionLoading })}>
+          <Accordion.Panel className={classNames({ [styles.loader]: suggestionLoading })}>
             {suggestionLoading ? (
               <Loader />
             ) : (
               suggestion && (
-                <div className={classes.container}>
+                <div className={styles.questionContainer}>
                   <TextWithIconBlock
                     title="Suggested Format"
                     content={<SuggestedFormat suggestedFormat={suggestion?.suggestedFormat} />}

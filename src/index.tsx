@@ -27,8 +27,6 @@ root.render(
     <Provider store={store}>
       <BrowserRouter>
         <MantineProvider
-          withGlobalStyles
-          withNormalizeCSS
           theme={{
             breakpoints: {
               xs: '30em',

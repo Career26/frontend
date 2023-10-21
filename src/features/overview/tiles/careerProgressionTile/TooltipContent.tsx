@@ -8,11 +8,11 @@ import { getYLabel } from './progressionUtil';
 
 const tooltipStyles = createStyles((theme) => ({
   tooltip: {
-    display: 'flex',
+    display: flex;
     fontSize: '14px',
     width: '100%',
     alignContent: 'center',
-    flexDirection: 'column',
+    flex-direction: column;
     justifyContent: 'flex-start',
     border: `1px solid ${theme.colors.gray[9]}`,
     backgroundColor: 'white',

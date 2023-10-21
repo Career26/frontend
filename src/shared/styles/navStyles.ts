@@ -13,8 +13,8 @@ export const navStyles = createStyles((theme) => ({
     },
   },
   navLink: {
-    display: 'flex',
-    flexDirection: 'column',
+    display: flex;
+    flex-direction: column;
   },
   linkAction: {
     textDecoration: 'none',
@@ -22,14 +22,14 @@ export const navStyles = createStyles((theme) => ({
     paddingRight: rem(10),
   },
   navButton: {
-    display: 'flex',
-    flexDirection: 'row',
+    display: flex;
+    flex-direction: 'row',
     justifyContent: 'flex',
-    alignItems: 'center',
+    align-items: center;
     width: '100%',
     height: rem(60),
     backgroundColor: 'white',
-    color: theme.colors.gray[9],
+    color: var(--mantine-color-gray-9);
     '&:hover': {
       backgroundColor: theme.colors.blue[1],
     },

@@ -1,5 +1,14 @@
 import React from 'react';
-import { Header, Group, Button, Text, Avatar, Menu, createStyles, rem } from '@mantine/core';
+import {
+  Group,
+  Button,
+  Text,
+  Avatar,
+  Menu,
+  createStyles,
+  rem,
+  AppShellHeader,
+} from '@mantine/core';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 import { useAppDispatch } from '@state/store';
 import { setLoginModal } from '@slices/sessionSlice';
@@ -14,9 +23,9 @@ import { CareerNavigation } from './CareerNavigation';
 const pageHeaderStyles = createStyles((theme) => ({
   inner: {
     height: HEADER_HEIGHT,
-    display: 'flex',
+    display: flex;
     justifyContent: 'space-between',
-    alignItems: 'center',
+    align-items: center;
     paddingLeft: rem(100),
     paddingRight: rem(100),
     backgroundColor: theme.colors.gray[1],
@@ -52,8 +61,8 @@ export const PageHeader = ({
   };
 
   return (
-    <Header
-      height="auto"
+    <AppShellHeader
+      h="auto"
       py="xs"
       withBorder
       style={{ position: 'fixed' }}
@@ -92,12 +101,15 @@ export const PageHeader = ({
 
               <Menu.Dropdown>
                 <Menu.Label>Session</Menu.Label>
-                <Menu.Item onClick={signOut} icon={<IconLogout className={classes.menuItemIcon} />}>
+                <Menu.Item
+                  onClick={signOut}
+                  leftSection={<IconLogout className={classes.menuItemIcon} />}
+                >
                   Logout
                 </Menu.Item>
                 <Menu.Item
                   onClick={goToSettings}
-                  icon={<IconSettings className={classes.menuItemIcon} />}
+                  leftSection={<IconSettings className={classes.menuItemIcon} />}
                 >
                   Account Settings
                 </Menu.Item>
@@ -106,6 +118,6 @@ export const PageHeader = ({
           </>
         )}
       </Group>
-    </Header>
+    </AppShellHeader>
   );
 };

@@ -1,12 +1,7 @@
-import { Text, createStyles, rem } from '@mantine/core';
+import { Text } from '@mantine/core';
 import React from 'react';
 
-const ratingStyles = createStyles({
-  textIcon: {
-    display: 'flex',
-    gap: rem(10),
-  },
-});
+import styles from './interviewStyles.module.scss';
 
 export const TextWithIconBlock = ({
   title,
@@ -16,15 +11,12 @@ export const TextWithIconBlock = ({
   title: string;
   content: React.ReactNode;
   Icon: React.ReactNode;
-}) => {
-  const { classes } = ratingStyles();
-  return (
-    <div>
-      <div className={classes.textIcon}>
-        {Icon}
-        <Text weight="bold">{title}</Text>
-      </div>
-      {content}
+}) => (
+  <div>
+    <div className={styles.textIcon}>
+      {Icon}
+      <Text fw={800}>{title}</Text>
     </div>
-  );
-};
+    {content}
+  </div>
+);

@@ -23,7 +23,10 @@ export const CareerNavigation = () => {
   if (!careerPaths || !showNavigation) {
     return null;
   }
-  const onChange = (careerId: string) => {
+  const onChange = (careerId: string | null) => {
+    if (!careerId) {
+      return;
+    }
     toggleCareerId(careerId);
   };
   return (

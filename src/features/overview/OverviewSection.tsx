@@ -7,7 +7,7 @@ const sectionStyles = createStyles((theme) => ({
     '.mantine-Card-root': {
       borderRadius: rem(10),
     },
-    paddingBottom: rem(20),
+    padding-bottom: rem(20),
     paddingLeft: rem(20),
     ':nth-of-type(even)': {
       '.mantine-Card-root': {
@@ -19,19 +19,19 @@ const sectionStyles = createStyles((theme) => ({
     },
   },
   header: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
+    display: flex;
+    flex-direction: 'row',
+    align-items: center;
     justifyContent: 'flex-start',
     fontSize: rem(24),
     fontWeight: 800,
     lineHeight: 1.1,
-    color: theme.colors.gray[9],
+    color: var(--mantine-color-gray-9);
     gap: rem(10),
   },
   body: {
     paddingRight: rem(20),
-    display: 'flex',
+    display: flex;
     width: '100%',
     justifyContent: 'space-around',
     gap: rem(20),

@@ -9,7 +9,7 @@ const overlapsStyles = createStyles({
   gridContainer: {
     gap: '16px',
     justifyContent: 'center',
-    display: 'flex',
+    display: flex;
   },
   cardContainer: {
     width: '50vh',

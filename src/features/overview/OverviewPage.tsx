@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navbar, Button, createStyles, rem } from '@mantine/core';
+import { Navbar, Button, createStyles, rem, AppShell } from '@mantine/core';
 import { useActiveNavScroll } from '@shared/hooks/useActiveNavScroll';
 import classNames from 'classnames';
 import { Shell } from '@shared/components/shell/Shell';
@@ -53,8 +53,8 @@ export const OverviewPage = () => {
     <div className={featureClasses.wrapper}>
       <Shell
         navbar={
-          <Navbar height={400} p="xs" className={navClasses.navBar}>
-            <Navbar.Section grow mt="md" className={navClasses.navLink}>
+          <AppShell.Navbar h={400} p="xs" className={navClasses.navBar}>
+            <AppShell.Section grow mt="md" className={navClasses.navLink}>
               {overviewLinks.map(({ label, Icon, anchor }) => (
                 <a href={`#${anchor}`} key={`link-${label}`} className={navClasses.linkAction}>
                   <Button
@@ -69,8 +69,8 @@ export const OverviewPage = () => {
                   </Button>
                 </a>
               ))}
-            </Navbar.Section>
-          </Navbar>
+            </AppShell.Section>
+          </AppShell.Navbar>
         }
       >
         <div className={featureClasses.content}>

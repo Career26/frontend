@@ -9,14 +9,11 @@ import careerProgressImg from '@assets/careerProgress.svg';
 import successImg from '@assets/success.svg';
 
 import { PricingTile } from './components/PricingTile';
-import { landingPageStyles } from './landinPageStyles';
 import { featureList, featuresTag, pricingTag } from './config/landingPageConstants';
+import styles from './landingPageStyles.module.scss';
 
 export const LandingPage = () => {
-  const { classes } = landingPageStyles();
-
   const history = useHistory();
-
   const takeTest = () => history.push(urls.careersTest);
 
   return (
@@ -33,8 +30,8 @@ export const LandingPage = () => {
           grayBackground={false}
         />
 
-        <Container className={classes.featuresContainer} id={featuresTag}>
-          <Text className={classes.pricingText}>Your All-In-One Career Platform</Text>
+        <Container className={styles.featuresContainer} id={featuresTag}>
+          <Text className={styles.pricingText}>Your All-In-One Career Platform</Text>
           {featureList.map((item) => (
             <Feature
               title={item.title}
@@ -45,14 +42,14 @@ export const LandingPage = () => {
           ))}
         </Container>
 
-        <Container className={classes.pricingContainer} id={pricingTag}>
+        <Container className={styles.pricingContainer} id={pricingTag}>
           <Badge size="xl" radius="sm" variant="light">
             Pricing
           </Badge>
 
-          <Text className={classes.pricingText}>Invest in Your Future. Start For Free!</Text>
+          <Text className={styles.pricingText}>Invest in Your Future. Start For Free!</Text>
 
-          <Container className={classes.pricingTierContainer}>
+          <Container className={styles.pricingTierContainer}>
             <PricingTile
               title="Free Tier"
               amount="£0"
@@ -65,7 +62,7 @@ export const LandingPage = () => {
               ]}
               onClick={takeTest}
             />
-            <Space className={classes.pricingMargin} />
+            <Space className={styles.pricingMargin} />
             <PricingTile
               title="Premium Tier"
               amount="£19"

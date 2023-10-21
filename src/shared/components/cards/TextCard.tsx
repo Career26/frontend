@@ -7,10 +7,10 @@ const textCardStyles = createStyles({
   },
   cardDescription: {
     padding: rem(10),
-    textAlign: 'left',
+    text-align: 'left',
   },
   descriptionsContainer: {
-    display: 'flex',
+    display: flex;
     gap: '24px',
   },
 });

@@ -8,17 +8,17 @@ interface ThemeProps {
 export const tileStyles = createStyles((theme, { withSpacing, withBottomPadding }: ThemeProps) => ({
   card: {
     background: theme.colors.blue[0],
-    display: 'flex',
-    alignItems: 'center',
-    flexDirection: 'column',
+    display: flex;
+    align-items: center;
+    flex-direction: column;
     marginLeft: withSpacing ? theme.spacing.lg : 0,
     marginRight: withSpacing ? theme.spacing.lg : 0,
     flex: 1,
     [theme.fn.smallerThan('md')]: {
-      marginBottom: withBottomPadding ? theme.spacing.xl : 0,
-      flexDirection: 'row',
+      marginBottom: withBottomPadding ? var(--mantine-spacing-xl); : 0,
+      flex-direction: 'row',
       width: '100%',
-      alignItems: 'center',
+      align-items: center;
       marginLeft: 0,
       marginRight: 0,
     },
@@ -29,7 +29,7 @@ export const tileStyles = createStyles((theme, { withSpacing, withBottomPadding 
     paddingRight: `calc(${theme.spacing.sm} * 2)`,
   },
   textContainer: {
-    paddingTop: theme.spacing.sm,
+    padding-top: theme.spacing.sm,
     [theme.fn.smallerThan('md')]: {
       marginLeft: 0,
       marginRight: 0,
@@ -37,23 +37,23 @@ export const tileStyles = createStyles((theme, { withSpacing, withBottomPadding 
     },
   },
   title: {
-    paddingBottom: theme.spacing.sm,
+    padding-bottom: theme.spacing.sm,
     fontSize: rem(18),
     fontWeight: 800,
     lineHeight: 1.1,
-    color: theme.colors.gray[9],
-    textAlign: 'center',
+    color: var(--mantine-color-gray-9);
+    text-align: 'center',
 
     [theme.fn.smallerThan('md')]: {
-      textAlign: 'left',
-      paddingBottom: theme.spacing.xs,
+      text-align: 'left',
+      padding-bottom: theme.spacing.xs,
     },
   },
   description: {
     fontSize: rem(15),
-    textAlign: 'center',
+    text-align: 'center',
     [theme.fn.smallerThan('md')]: {
-      textAlign: 'left',
+      text-align: 'left',
     },
   },
 }));

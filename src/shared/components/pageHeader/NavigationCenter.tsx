@@ -10,12 +10,12 @@ import { commonStyles } from '@shared/styles/commonStyles';
 
 const navigationStyles = createStyles((theme) => ({
   gridContainer: {
-    display: 'flex',
+    display: flex;
     justifyContent: 'center',
   },
   modalContainer: {
     '.mantine-Modal-header': {
-      display: 'flex',
+      display: flex;
       justifyContent: 'center',
       borderBottom: '1px solid black',
     },
@@ -24,9 +24,9 @@ const navigationStyles = createStyles((theme) => ({
       fontWeight: 'bold',
     },
     '.mantine-Modal-body': {
-      paddingTop: `${rem(25)} !important`,
+      padding-top: `${rem(25)} !important`,
       backgroundColor: theme.colors.gray[3],
-      paddingBottom: rem(25),
+      padding-bottom: rem(25),
     },
     '.mantine-Modal-overlay': {
       opacity: 0.55,
@@ -70,7 +70,7 @@ export const NavigationCenter = () => {
         <Container>
           <Grid gutter={20} justify="center">
             {featureTiles.map(({ title, Icon, disabled, link }) => (
-              <Grid.Col key={title} md={6}>
+              <Grid.Col key={title} span={{ md: 6 }}>
                 <Paper
                   onClick={() => !disabled && history.push(link)}
                   shadow="sm"

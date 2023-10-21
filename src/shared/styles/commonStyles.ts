@@ -5,10 +5,10 @@ export const boxShadow =
 
 export const commonStyles = createStyles({
   hoverItem: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    textAlign: 'center',
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: 'center',
     fontSize: rem(15),
     '&:hover': {
       boxShadow: '0 3px 10px rgba(0,0,0,.2)',

@@ -1,5 +1,5 @@
 import { useGetQuestionsQuery, useRateAnswerMutation } from '@apis/questionsApi';
-import { Button, Container, Textarea, createStyles, rem } from '@mantine/core';
+import { Button, Container, Textarea } from '@mantine/core';
 import { hasLength, useForm } from '@mantine/form';
 import { Shell } from '@shared/components/shell/Shell';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
@@ -19,25 +19,10 @@ import { LoadingLens } from '@shared/components/loadingScreen/LoadingLens';
 import { QuestionSuggestion } from './QuestionSuggestion';
 import { QuestionNavBar } from './QuestionNavBar';
 import { QuestionRating } from './QuestionRating';
-
-const interviewStyles = createStyles({
-  container: {
-    flexDirection: 'column',
-    marginTop: rem(20),
-    display: 'flex',
-    gap: rem(20),
-    width: '100%',
-  },
-  buttons: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-    gap: rem(20),
-  },
-});
+import styles from './interviewStyles.module.scss';
 
 export const InterviewPage = () => {
   const dispatch = useAppDispatch();
-  const { classes } = interviewStyles();
   const { classes: featureClasses } = featureStyles();
   const { toggleQuestionId } = usePageNavigation();
   const careerPathId = useAppSelector(selectSelectedCareerPathId);
@@ -80,7 +65,7 @@ export const InterviewPage = () => {
         navbar={<QuestionNavBar selectedQuestionId={selectedQuestionId} questions={questions} />}
       >
         <div className={featureClasses.content}>
-          <Container className={classes.container}>
+          <Container className={styles.container}>
             <CareerCard
               title={`Question ${selectedQuestionId + 1}`}
               subTitle={selectedQuestion.question}
@@ -97,7 +82,7 @@ export const InterviewPage = () => {
               minRows={5}
             />
 
-            <div className={classes.buttons}>
+            <div className={styles.buttons}>
               <Button
                 variant="outline"
                 disabled={!form.isValid() || ratingLoading}

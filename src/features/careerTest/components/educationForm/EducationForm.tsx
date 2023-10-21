@@ -47,7 +47,7 @@ export const EducationForm = ({ form }: { form: CareerFormProps }) => {
       })}
       <Container>
         <Group className={classes.row}>
-          <Button leftIcon={<IconPlus />} onClick={onClickAddUniversity}>
+          <Button leftSection={<IconPlus />} onClick={onClickAddUniversity}>
             Add Another University
           </Button>
           {additionalDegreesCount && (

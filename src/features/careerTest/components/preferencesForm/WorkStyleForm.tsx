@@ -10,7 +10,7 @@ export const WorkStyleForm = ({ form }: { form: CareerFormProps }) => {
 
   const Icon = exampleCities.find((item) => item.value === form.values.expectedSalary.city)?.Icon;
 
-  const onSelectCity = (value: string) => {
+  const onSelectCity = (value: string | null) => {
     const city = exampleCities.find((item) => item.value === value);
     if (!city) {
       return;
@@ -48,13 +48,8 @@ export const WorkStyleForm = ({ form }: { form: CareerFormProps }) => {
           {...form.getInputProps('expectedSalary.expectedSalary')}
           label="What is your expected salary?"
           withAsterisk
-          icon={Icon && <Icon color="gray" size={20} />}
-          parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
-          formatter={(value) =>
-            !Number.isNaN(parseFloat(value))
-              ? `${value}`.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',')
-              : ''
-          }
+          thousandSeparator=","
+          leftSection={Icon && <Icon color="gray" size={20} />}
         />
       </div>
     </Container>

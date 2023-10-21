@@ -6,7 +6,7 @@ import { TextCard } from '../cards/TextCard';
 
 const useProgressionStyles = createStyles({
   container: {
-    display: 'flex',
+    display: flex;
     gap: '24px',
   },
 });

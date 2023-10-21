@@ -1,4 +1,4 @@
-import { Text, Grid, Container, createStyles } from '@mantine/core';
+import { Text, Grid, Container } from '@mantine/core';
 import React, { useEffect } from 'react';
 import { formStyles } from '@shared/styles/formStyles';
 import { useAppDispatch, useAppSelector } from '@state/store';
@@ -10,11 +10,11 @@ import { UserProfile } from '@datatypes/profile';
 
 import { CareerPathActions } from './CareerPathActions';
 
-const careerPathsStyles = createStyles({
+const careerPathsStyles = {
   tile: {
     width: '100vh',
   },
-});
+};
 
 export const CareerPathsForm = ({
   careerPaths,
@@ -23,7 +23,6 @@ export const CareerPathsForm = ({
   profileId?: string;
   careerPaths?: UserProfile['careerPaths'];
 }) => {
-  const { classes } = careerPathsStyles();
   const { classes: formClasses } = formStyles();
   const industryColors = useAppSelector(selectIndustryColors);
   const { selectedCareers, toggleSelectedCareer, loadingCareers } = useCareerSelection();
@@ -41,7 +40,11 @@ export const CareerPathsForm = ({
         <Text className={formClasses.subHeader}>Select the careers that you like</Text>
         <Grid>
           {Object.entries(careerPaths || {}).map(([careerId, careerPath]) => (
-            <Grid.Col md={6} key={`career-path-${careerId}`} className={classes.tile}>
+            <Grid.Col
+              span={{ md: 6 }}
+              key={`career-path-${careerId}`}
+              style={careerPathsStyles.tile}
+            >
               <CareerCard
                 title={careerPath.title}
                 subTitle={careerPath.startingSalary}

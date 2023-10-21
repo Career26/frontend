@@ -2,48 +2,48 @@ import { createStyles, rem } from '@mantine/core';
 
 export const formStyles = createStyles((theme) => ({
   titleContainer: {
-    paddingTop: rem(80),
+    padding-top: rem(80),
     [theme.fn.smallerThan('md')]: {
-      paddingTop: rem(60),
+      padding-top: rem(60),
     },
   },
   divider: {
-    paddingBottom: theme.spacing.lg,
+    padding-bottom: theme.spacing.lg,
   },
   titleText: {
-    fontSize: rem(36),
+    font-size: 36rem;
     fontWeight: 800,
     lineHeight: 1.1,
     margin: 0,
     padding: 0,
-    color: theme.colors.gray[9],
-    textAlign: 'center',
+    color: var(--mantine-color-gray-9);
+    text-align: 'center',
   },
   testInfoContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    paddingTop: `calc(${theme.spacing.xl} * 2)`,
-    paddingBottom: `calc(${theme.spacing.xl} * 2)`,
+    display: flex;
+    flex-direction: 'row',
+    padding-top: `calc(${var(--mantine-spacing-xl);} * 2)`,
+    padding-bottom: `calc(${var(--mantine-spacing-xl);} * 2)`,
     paddingLeft: 0,
     paddingRight: 0,
     [theme.fn.smallerThan('md')]: {
-      flexDirection: 'column',
+      flex-direction: column;
     },
   },
   row: {
-    display: 'flex',
+    display: flex;
     justifyContent: 'space-between',
     '> div': {
       width: '48%',
     },
   },
   progressContainer: {
-    paddingTop: 0,
-    paddingBottom: `calc(${theme.spacing.xl} * 2)`,
+    padding-top: 0,
+    padding-bottom: `calc(${var(--mantine-spacing-xl);} * 2)`,
   },
   questionContainer: {
-    paddingTop: 0,
-    paddingBottom: theme.spacing.xl,
+    padding-top: 0,
+    padding-bottom: var(--mantine-spacing-xl);,
   },
   questionTitle: {
     fontSize: rem(30),
@@ -51,27 +51,27 @@ export const formStyles = createStyles((theme) => ({
     lineHeight: 1.1,
     margin: 0,
     padding: 0,
-    color: theme.colors.gray[9],
-    textAlign: 'center',
-    paddingTop: theme.spacing.xl,
-    paddingBottom: theme.spacing.xl,
+    color: var(--mantine-color-gray-9);
+    text-align: 'center',
+    padding-top: var(--mantine-spacing-xl);,
+    padding-bottom: var(--mantine-spacing-xl);,
   },
   questionInput: {
-    paddingBottom: theme.spacing.xl,
+    padding-bottom: var(--mantine-spacing-xl);,
   },
   removeButton: {
-    display: 'flex',
+    display: flex;
     justifyContent: 'right',
-    paddingBottom: theme.spacing.xl,
+    padding-bottom: var(--mantine-spacing-xl);,
   },
   checkbox: {
     alignContent: 'center',
-    display: 'flex',
+    display: flex;
     flexWrap: 'wrap',
   },
   chip: {
-    display: 'flex',
-    alignItems: 'center',
+    display: flex;
+    align-items: center;
     background: theme.colors.blue[0],
     button: {
       '&:hover': {
@@ -80,17 +80,17 @@ export const formStyles = createStyles((theme) => ({
     },
   },
   chipSelectionRow: {
-    paddingTop: theme.spacing.md,
+    padding-top: theme.spacing.md,
   },
   steppers: {
-    paddingTop: theme.spacing.md,
-    paddingBottom: theme.spacing.md,
+    padding-top: theme.spacing.md,
+    padding-bottom: theme.spacing.md,
   },
   subHeader: {
     fontSize: rem(18),
     fontWeight: 'bold',
-    textAlign: 'center',
+    text-align: 'center',
     color: 'black',
-    paddingBottom: rem(40),
+    padding-bottom: rem(40),
   },
 }));

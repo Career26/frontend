@@ -9,16 +9,16 @@ interface FeatureComponentProps {
 
 const featureStyles = createStyles((theme) => ({
   main: {
-    display: 'flex',
-    flexDirection: 'row',
+    display: flex;
+    flex-direction: 'row',
     flex: 1,
-    alignItems: 'center',
+    align-items: center;
     padding: 0,
-    paddingTop: theme.spacing.xl,
-    paddingBottom: theme.spacing.xl,
+    padding-top: var(--mantine-spacing-xl);,
+    padding-bottom: var(--mantine-spacing-xl);,
 
     [theme.fn.smallerThan('md')]: {
-      flexDirection: 'column',
+      flex-direction: column;
     },
   },
 
@@ -28,14 +28,14 @@ const featureStyles = createStyles((theme) => ({
   },
 
   titleText: {
-    paddingBottom: theme.spacing.sm,
+    padding-bottom: theme.spacing.sm,
     fontSize: rem(24),
     fontWeight: 800,
     lineHeight: 1.1,
-    color: theme.colors.gray[9],
+    color: var(--mantine-color-gray-9);
 
     [theme.fn.smallerThan('md')]: {
-      textAlign: 'center',
+      text-align: 'center',
     },
   },
 
@@ -44,18 +44,18 @@ const featureStyles = createStyles((theme) => ({
     color: theme.colors.gray[7],
 
     [theme.fn.smallerThan('md')]: {
-      textAlign: 'center',
+      text-align: 'center',
     },
   },
 
   image: {
     flex: 1,
-    paddingLeft: `calc(${theme.spacing.xl} * 2)`,
-    paddingRight: `calc(${theme.spacing.xl} * 2)`,
+    paddingLeft: `calc(${var(--mantine-spacing-xl);} * 2)`,
+    paddingRight: `calc(${var(--mantine-spacing-xl);} * 2)`,
 
     [theme.fn.smallerThan('md')]: {
       maxWidth: rem(300),
-      paddingBottom: theme.spacing.xl,
+      padding-bottom: var(--mantine-spacing-xl);,
     },
   },
 }));

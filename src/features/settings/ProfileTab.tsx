@@ -8,11 +8,11 @@ import { IconExclamationCircle } from '@tabler/icons-react';
 const profileTabStyles = createStyles({
   buttons: {
     marginTop: rem(20),
-    display: 'flex',
+    display: flex;
     alignItems: 'self-end',
   },
   iconText: {
-    display: 'flex',
+    display: flex;
     justifyContent: 'flex-start',
     gap: rem(20),
   },

@@ -21,8 +21,8 @@ const careerProgressionStyles = createStyles((theme) => ({
     color: 'white',
   },
   cardContainer: {
-    display: 'flex',
-    flexDirection: 'column',
+    display: flex;
+    flex-direction: column;
     gap: rem(20),
   },
   divider: {
@@ -83,7 +83,6 @@ export const CareerProgressionTile = ({
         <Stepper
           onStepClick={setActiveIndex}
           active={promotionTimeline.length}
-          breakpoint="lg"
           orientation="vertical"
           completedIcon={<IconEye size="1rem" />}
         >

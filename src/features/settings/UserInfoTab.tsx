@@ -7,8 +7,8 @@ import React from 'react';
 const userTabStyles = createStyles({
   paper: {
     gap: rem(20),
-    display: 'flex',
-    flexDirection: 'column',
+    display: flex;
+    flex-direction: column;
   },
 });
 

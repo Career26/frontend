@@ -17,7 +17,7 @@ export const CareerPathActions = ({ onClickAction, selected, loading }: CareerPa
         loading={loading}
         size="xs"
         color="red"
-        leftIcon={<IconMinus />}
+        leftSection={<IconMinus />}
       >
         Remove
       </Button>
@@ -29,7 +29,7 @@ export const CareerPathActions = ({ onClickAction, selected, loading }: CareerPa
       variant="outline"
       loading={loading}
       size="xs"
-      leftIcon={<IconPlus />}
+      leftSection={<IconPlus />}
     >
       Select
     </Button>

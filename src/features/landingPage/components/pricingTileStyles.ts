@@ -2,10 +2,10 @@ import { createStyles, rem } from '@mantine/core';
 
 export const pricingTileStyles = createStyles((theme) => ({
   main: {
-    display: 'flex',
-    flexDirection: 'row',
+    display: flex;
+    flex-direction: 'row',
     justifyContent: 'center',
-    alignItems: 'center',
+    align-items: center;
     alignContent: 'center',
     padding: 0,
   },
@@ -14,9 +14,9 @@ export const pricingTileStyles = createStyles((theme) => ({
     background: theme.colors.blue[0],
     width: rem(330),
     borderRadius: 'sm',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     [theme.fn.smallerThan('sm')]: {
       width: rem(300),
@@ -27,7 +27,7 @@ export const pricingTileStyles = createStyles((theme) => ({
     fontSize: rem(28),
     fontWeight: 800,
     lineHeight: 1.1,
-    color: theme.colors.gray[9],
+    color: var(--mantine-color-gray-9);
   },
 
   benefitText: {
@@ -40,14 +40,14 @@ export const pricingTileStyles = createStyles((theme) => ({
 
   benefitsContainer: {
     padding: 0,
-    paddingTop: theme.spacing.xs,
-    paddingBottom: theme.spacing.xs,
+    padding-top: theme.spacing.xs,
+    padding-bottom: theme.spacing.xs,
   },
 
   benefitContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
+    display: flex;
+    flex-direction: 'row',
+    align-items: center;
     paddingLeft: 0,
     paddingRight: 0,
   },

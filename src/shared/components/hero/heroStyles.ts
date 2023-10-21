@@ -2,25 +2,25 @@ import { createStyles, rem } from '@mantine/core';
 
 export const heroStyles = createStyles((theme, grayBackground?: boolean) => ({
   main: {
-    padding: theme.spacing.xl,
-    paddingTop: rem(80),
-    paddingBottom: rem(80),
+    padding: var(--mantine-spacing-xl);
+    padding-top: rem(80),
+    padding-bottom: rem(80),
     maxWidth: 'none',
     background: grayBackground ? theme.colors.gray[0] : theme.white,
 
     [theme.fn.smallerThan('sm')]: {
-      paddingBottom: rem(40),
-      paddingTop: rem(40),
+      padding-bottom: rem(40),
+      padding-top: rem(40),
     },
   },
 
   innerContainer: {
-    display: 'flex',
-    flexDirection: 'row',
+    display: flex;
+    flex-direction: 'row',
     flex: 1,
     padding: 0,
     [theme.fn.smallerThan('sm')]: {
-      flexDirection: 'column-reverse',
+      flex-direction: 'column-reverse',
     },
   },
 
@@ -45,7 +45,7 @@ export const heroStyles = createStyles((theme, grayBackground?: boolean) => ({
   },
 
   description: {
-    marginTop: theme.spacing.xl,
+    marginTop: var(--mantine-spacing-xl);,
     fontSize: rem(20),
 
     [theme.fn.smallerThan('sm')]: {
@@ -56,8 +56,8 @@ export const heroStyles = createStyles((theme, grayBackground?: boolean) => ({
   image: {
     flex: 1,
     alignSelf: 'center',
-    paddingLeft: `calc(${theme.spacing.xl} * 2)`,
-    paddingRight: `calc(${theme.spacing.xl} * 2)`,
+    paddingLeft: `calc(${var(--mantine-spacing-xl);} * 2)`,
+    paddingRight: `calc(${var(--mantine-spacing-xl);} * 2)`,
 
     [theme.fn.smallerThan('sm')]: {
       display: 'none',
@@ -71,13 +71,13 @@ export const heroStyles = createStyles((theme, grayBackground?: boolean) => ({
   },
 
   imageMobile: {
-    display: 'flex',
+    display: flex;
     flex: 1,
     alignSelf: 'center',
 
     [theme.fn.smallerThan('sm')]: {
-      marginTop: `calc(${theme.spacing.xl} * 2)`,
-      marginBottom: `calc(${theme.spacing.xl} * 2)`,
+      marginTop: `calc(${var(--mantine-spacing-xl);} * 2)`,
+      marginBottom: `calc(${var(--mantine-spacing-xl);} * 2)`,
       maxWidth: rem(350),
     },
 
@@ -91,7 +91,7 @@ export const heroStyles = createStyles((theme, grayBackground?: boolean) => ({
   },
 
   controlContainer: {
-    marginTop: `calc(${theme.spacing.xl} * 2)`,
+    marginTop: `calc(${var(--mantine-spacing-xl);} * 2)`,
 
     [theme.fn.smallerThan('sm')]: {
       marginTop: 0,

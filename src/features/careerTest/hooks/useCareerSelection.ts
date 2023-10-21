@@ -40,11 +40,17 @@ export const useCareerSelection = () => {
     }
     setSelectedCareers((prevSelectedCareers) => ({
       ...prevSelectedCareers,
-      [careerIdentifier]: !selected,
+      [careerIdentifier]: selected,
     }));
   };
 
-  const toggleSelectedCareer = async (careerIdentifier: string, profileIdentifier?: string) => {
+  const toggleSelectedCareer = async ({
+    careerIdentifier,
+    profileIdentifier,
+  }: {
+    careerIdentifier: string;
+    profileIdentifier?: string;
+  }) => {
     if (!careerPaths || !profileIdentifier) {
       return;
     }
@@ -53,7 +59,7 @@ export const useCareerSelection = () => {
       ...prevLoadingCareers,
       [careerIdentifier]: true,
     }));
-    await handleSelection({ careerIdentifier, profileIdentifier, selected });
+    await handleSelection({ careerIdentifier, profileIdentifier, selected: !selected });
     setLoadingCareers((prevLoadingCareers) => ({
       ...prevLoadingCareers,
       [careerIdentifier]: false,

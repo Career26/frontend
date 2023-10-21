@@ -1,20 +1,12 @@
-import { Text, Grid, Container } from '@mantine/core';
+import { Text, Grid, Container, Group } from '@mantine/core';
 import React, { useEffect } from 'react';
-import formStyles from '@shared/styles/formStyles.module.scss';
 import { useAppDispatch, useAppSelector } from '@state/store';
-import { Shell } from '@shared/components/shell/Shell';
-import { CareerCard } from '@shared/components/cards/CareerCard';
 import { addIndustryColors, selectIndustryColors } from '@slices/sessionSlice';
 import { useCareerSelection } from '@careerTest/hooks/useCareerSelection';
 import { UserProfile } from '@datatypes/profile';
+import styles from '@careerTest/careerTestStyles.module.scss';
 
-import { CareerPathActions } from './CareerPathActions';
-
-const careerPathsStyles = {
-  tile: {
-    width: '100vh',
-  },
-};
+import { ResultCard } from './ResultCard';
 
 export const CareerPathsForm = ({
   careerPaths,
@@ -33,35 +25,33 @@ export const CareerPathsForm = ({
   }, [careerPaths]);
 
   return (
-    <Shell>
-      <Container className={formStyles.questionContainer}>
-        <Text className={formStyles.questionTitle}>Career Paths</Text>
-        <Text className={formStyles.subHeader}>Select the careers that you like</Text>
-        <Grid>
-          {Object.entries(careerPaths || {}).map(([careerId, careerPath]) => (
-            <Grid.Col
-              span={{ md: 6 }}
-              key={`career-path-${careerId}`}
-              style={careerPathsStyles.tile}
-            >
-              <CareerCard
-                title={careerPath.title}
-                subTitle={careerPath.startingSalary}
-                badge={careerPath.industry}
-                color={industryColors[careerPath.industry]}
-                content={careerPath.role}
-                Actions={
-                  <CareerPathActions
-                    loading={loadingCareers[careerId]}
-                    selected={selectedCareers[careerId]}
-                    onClickAction={() => toggleSelectedCareer(careerId, profileId)}
-                  />
+    <Container py="md">
+      <Group justify="center">
+        <Text fw="bold">Career Paths</Text>
+      </Group>
+      <Group justify="center">
+        <Text>Select the careers that you like</Text>
+      </Group>
+      <Grid py="lg" grow>
+        {Object.entries(careerPaths || {}).map(
+          ([careerId, { title, startingSalary, industry, role }]) => (
+            <Grid.Col span={{ md: 6 }} key={`career-path-${careerId}`} className={styles.result}>
+              <ResultCard
+                salary={startingSalary}
+                loading={loadingCareers[careerId]}
+                role={role}
+                selected={selectedCareers[careerId]}
+                industry={industry}
+                title={title}
+                color={industryColors[industry]}
+                onClick={() =>
+                  toggleSelectedCareer({ careerIdentifier: careerId, profileIdentifier: profileId })
                 }
               />
             </Grid.Col>
-          ))}
-        </Grid>
-      </Container>
-    </Shell>
+          ),
+        )}
+      </Grid>
+    </Container>
   );
 };

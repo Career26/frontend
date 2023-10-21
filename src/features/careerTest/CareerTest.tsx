@@ -34,7 +34,9 @@ export const CareerTest = () => {
   }, [data]);
 
   useEffect(() => {
-    storeTestValues({ key: 'step', value: activeStep });
+    if (activeStep !== CareerStep.COMPLETE) {
+      storeTestValues({ key: 'step', value: activeStep });
+    }
   }, [activeStep]);
 
   const clickNext = async () => {
@@ -47,7 +49,7 @@ export const CareerTest = () => {
     if (activeStep === CareerStep.PREFERENCES) {
       createProfile(form.values);
     }
-    if (activeStep === CareerStep.CAREER_PATHS) {
+    if (activeStep === CareerStep.COMPLETE) {
       dispatch(
         setLoginModal({
           open: true,

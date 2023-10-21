@@ -1,15 +1,16 @@
 import React from 'react';
-import { Text } from '@mantine/core';
-import formStyles from '@shared/styles/formStyles.module.scss';
+import { Container, Group, Text } from '@mantine/core';
 import { CareerFormProps } from '@careerTest/careerTestTypes';
 
 import { AreasOfInterestForm } from './AreasofInterestForm';
 import { WorkStyleForm } from './WorkStyleForm';
 
 export const PreferencesForm = ({ form }: { form: CareerFormProps }) => (
-  <>
-    <Text className={formStyles.questionTitle}>Preferences</Text>
+  <Container py="md">
+    <Group justify="center">
+      <Text fw="bold">Preferences</Text>
+    </Group>
     <AreasOfInterestForm form={form} />
     <WorkStyleForm form={form} />
-  </>
+  </Container>
 );

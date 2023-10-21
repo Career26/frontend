@@ -1,9 +1,10 @@
 import React from 'react';
-import { Checkbox, Container, NumberInput, Select } from '@mantine/core';
+import { Checkbox, NumberInput, Select } from '@mantine/core';
 import { WorkStyle } from '@datatypes/profile';
 import { exampleCities } from '@careerTest/config/formConstants';
-import formStyles from '@shared/styles/formStyles.module.scss';
 import { CareerFormProps } from '@careerTest/careerTestTypes';
+import commonStyles from '@shared/styles/commonStyles.module.scss';
+import styles from '@careerTest/careerTestStyles.module.scss';
 
 export const WorkStyleForm = ({ form }: { form: CareerFormProps }) => {
   const Icon = exampleCities.find((item) => item.value === form.values.expectedSalary.city)?.Icon;
@@ -18,29 +19,30 @@ export const WorkStyleForm = ({ form }: { form: CareerFormProps }) => {
   };
 
   return (
-    <Container className={formStyles.questionContainer}>
-      <div className={formStyles.row}>
+    <div>
+      <div className={commonStyles.row}>
         <Select
           {...form.getInputProps('personalityType.workStyle')}
           label="What is your preferred working style?"
           withAsterisk
-          className={formStyles.questionInput}
           data={Object.entries(WorkStyle).map(([label, value]) => ({ label, value }))}
+          w="50%"
         />
         <Checkbox
           {...form.getInputProps('personalityType.workLifeBalanceSacrifice')}
-          className={formStyles.checkbox}
+          className={styles.workLifeCheckbox}
           label="Would you sacrifice your work-life balance?"
         />
       </div>
-      <div className={formStyles.row}>
+
+      <div className={commonStyles.row}>
         <Select
           {...form.getInputProps('expectedSalary.city')}
           label="City"
-          className={formStyles.questionInput}
           data={exampleCities}
           withAsterisk
           onChange={onSelectCity}
+          w="50%"
         />
         <NumberInput
           {...form.getInputProps('expectedSalary.expectedSalary')}
@@ -48,8 +50,9 @@ export const WorkStyleForm = ({ form }: { form: CareerFormProps }) => {
           withAsterisk
           thousandSeparator=","
           leftSection={Icon && <Icon color="gray" size={20} />}
+          w="50%"
         />
       </div>
-    </Container>
+    </div>
   );
 };

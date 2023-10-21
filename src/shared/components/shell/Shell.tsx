@@ -41,7 +41,7 @@ export const Shell = ({ children, navbar }: ShellProps) => {
           {navbar}
         </AppShell.Section>
       </AppShell.Navbar>
-      {children}
+      <AppShell.Main>{children}</AppShell.Main>
     </AppShell>
   );
 };

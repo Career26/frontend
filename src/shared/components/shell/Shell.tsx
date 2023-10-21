@@ -11,7 +11,7 @@ interface ShellProps {
   navbar?: ReactElement;
 }
 
-const navWidth = 300;
+const navWidth = 200;
 const headerHeight = rem(80);
 
 export const Shell = ({ children, navbar }: ShellProps) => {

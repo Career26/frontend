@@ -2,7 +2,6 @@ import { Container, Grid, Group, Paper, Text, Tooltip } from '@mantine/core';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Shell } from '@shared/components/shell/Shell';
-import classNames from 'classnames';
 import { featureTiles } from '@shared/config/featureConstants';
 import commonStyles from '@shared/styles/commonStyles.module.scss';
 
@@ -13,43 +12,39 @@ export const HomePage = () => {
 
   return (
     <Shell>
-      <div className={styles.container}>
-        <Container>
-          <Grid gutter={50} justify="center">
-            {featureTiles.map(({ title, Icon, link, description, disabled }) => (
-              <Tooltip
-                label="Mentor network coming soon"
-                position="right"
-                openDelay={500}
-                key={title}
-                disabled={!disabled}
-              >
-                <Grid.Col span={{ md: 6 }}>
-                  <Paper
-                    onClick={() => !disabled && history.push(link)}
-                    shadow="sm"
-                    radius="lg"
-                    withBorder
-                    className={classNames(commonStyles.hoverItem, styles.navItem, {
-                      [styles.disabled]: disabled,
-                    })}
-                  >
-                    <Group>
-                      <Icon size={80} />
-                      <Text size="lg" fw={800} p="md">
-                        {title}
-                      </Text>
-                    </Group>
-                    <Text size="sm" color="dimmed" p="sm" className={styles.description}>
-                      {description}
-                    </Text>
-                  </Paper>
-                </Grid.Col>
-              </Tooltip>
-            ))}
-          </Grid>
-        </Container>
-      </div>
+      <Container className={styles.container}>
+        <Grid>
+          {featureTiles.map(({ title, Icon, link, description, disabled }) => (
+            <Tooltip
+              label="Mentor network coming soon"
+              openDelay={500}
+              key={title}
+              disabled={!disabled}
+            >
+              <Grid.Col>
+                <Paper
+                  onClick={() => !disabled && history.push(link)}
+                  withBorder
+                  radius="xl"
+                  p="md"
+                  h={150}
+                  w="100%"
+                  display="flex"
+                  className={commonStyles.hoverItem}
+                >
+                  <Group className={styles.left} display="flex" align="center" justify="center">
+                    <Icon size={100} />
+                  </Group>
+                  <Group className={styles.right} display="flex" align="center" justify="center">
+                    <Text fw="bold">{title}</Text>
+                    <Text>{description}</Text>
+                  </Group>
+                </Paper>
+              </Grid.Col>
+            </Tooltip>
+          ))}
+        </Grid>
+      </Container>
     </Shell>
   );
 };

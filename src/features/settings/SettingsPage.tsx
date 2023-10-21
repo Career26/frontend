@@ -1,13 +1,10 @@
-import { AppShell, Button, Container } from '@mantine/core';
+import { Container, NavLink } from '@mantine/core';
 import { Shell } from '@shared/components/shell/Shell';
 import featureStyles from '@shared/styles/featureStyles.module.scss';
-import navStyles from '@shared/styles/navStyles.module.scss';
-import classNames from 'classnames';
 import React, { useState } from 'react';
 
 import { ProfileTab } from './ProfileTab';
 import { UserInfoTab } from './UserInfoTab';
-import styles from './settingStyles.module.scss';
 
 const profileLinks = [
   { label: 'Profile', Component: ProfileTab },
@@ -22,28 +19,21 @@ export const SettingsPage = () => {
     <div className={featureStyles.wrapper}>
       <Shell
         navbar={
-          <AppShell.Navbar h={400} p="xs" className={navStyles.navBar}>
-            <AppShell.Section grow mt="md" className={navStyles.navLink}>
-              {profileLinks.map(({ label }, index) => (
-                <Button
-                  onClick={() => setActiveTab(index)}
-                  key={`link-${label}`}
-                  className={classNames(navStyles.navButton, navStyles.linkAction, {
-                    [navStyles.active]: activeTab === index,
-                  })}
-                >
-                  {label}
-                </Button>
-              ))}
-            </AppShell.Section>
-          </AppShell.Navbar>
+          <div>
+            {profileLinks.map(({ label }, index) => (
+              <NavLink
+                key={`link-${label}`}
+                label={label}
+                active={activeTab === index}
+                onClick={() => setActiveTab(index)}
+              />
+            ))}
+          </div>
         }
       >
-        <div className={featureStyles.content}>
-          <Container className={styles.container}>
-            <Component />
-          </Container>
-        </div>
+        <Container>
+          <Component />
+        </Container>
       </Shell>
     </div>
   );

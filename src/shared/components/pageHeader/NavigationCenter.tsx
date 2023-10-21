@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDisclosure } from '@mantine/hooks';
-import { Modal, Grid, Paper, Container, Avatar } from '@mantine/core';
+import { Modal, Grid, Paper, Container, Avatar, Group, Text } from '@mantine/core';
 import { IconLayoutDashboard } from '@tabler/icons-react';
 import { useHistory } from 'react-router-dom';
 import { featureTiles } from '@shared/config/featureConstants';
-import classNames from 'classnames';
-import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 import commonStyles from '@shared/styles/commonStyles.module.scss';
+import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 
 import styles from './pageHeaderStyles.module.scss';
 
@@ -22,13 +21,12 @@ export const NavigationCenter = () => {
 
   return (
     <>
-      <Avatar color="blue" radius="xl" onClick={open} className={commonStyles.hoverIcon}>
+      <Avatar radius="xl" onClick={open} className={commonStyles.hoverItem}>
         <IconLayoutDashboard />
       </Avatar>
       <Modal
         opened={opened}
         onClose={close}
-        title="Navigation Center"
         centered
         withCloseButton={false}
         size="md"
@@ -37,18 +35,23 @@ export const NavigationCenter = () => {
         className={styles.modalContainer}
       >
         <Container>
-          <Grid gutter={20} justify="center">
+          <Grid justify="center">
             {featureTiles.map(({ title, Icon, disabled, link }) => (
-              <Grid.Col key={title} span={{ md: 6 }}>
+              <Grid.Col key={title}>
                 <Paper
                   onClick={() => !disabled && history.push(link)}
-                  shadow="sm"
-                  radius="lg"
                   withBorder
-                  className={classNames(commonStyles.hoverItem, { [styles.disabled]: disabled })}
+                  radius="xl"
+                  p="md"
+                  h={150}
+                  w="100%"
+                  display="flex"
+                  className={commonStyles.hoverItem}
                 >
-                  <Icon size={80} />
-                  {title}
+                  <Group display="flex" align="center" justify="space-between">
+                    <Icon size={100} />
+                    <Text>{title}</Text>
+                  </Group>
                 </Paper>
               </Grid.Col>
             ))}

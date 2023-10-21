@@ -2,12 +2,10 @@ import { selectSuggestion, useGetSuggestionMutation } from '@apis/questionsApi';
 import { Accordion, Badge, List, Loader, Paper, ThemeIcon } from '@mantine/core';
 import { selectSelectedCareerPathId, selectSelectedQuestion } from '@slices/sessionSlice';
 import { useAppSelector } from '@state/store';
-import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
 import { IconBulb, IconQuestionMark, IconStar } from '@tabler/icons-react';
 
 import { TextWithIconBlock } from './TextWithIconBlock';
-import styles from './interviewStyles.module.scss';
 
 const NumberedList = ({ items }: { items: string[] }) =>
   items.map((item, index) => (
@@ -41,7 +39,7 @@ const SuggestedFormat = ({ suggestedFormat }: { suggestedFormat: string }) => {
   const starMap = getStarMap(suggestedFormat);
   const numberedItems = suggestedFormat.split(/(\\n)?\d\. /gm).filter(Boolean);
   return (
-    <List spacing="md" center className={styles.list}>
+    <List spacing="md" center>
       {starMap ? <StarList starMap={starMap} /> : <NumberedList items={numberedItems} />}
     </List>
   );
@@ -76,12 +74,12 @@ export const QuestionSuggestion = () => {
       <Accordion value={value} onChange={setValue}>
         <Accordion.Item value="suggestion">
           <Accordion.Control>Show Suggestion</Accordion.Control>
-          <Accordion.Panel className={classNames({ [styles.loader]: suggestionLoading })}>
+          <Accordion.Panel>
             {suggestionLoading ? (
               <Loader />
             ) : (
               suggestion && (
-                <div className={styles.questionContainer}>
+                <>
                   <TextWithIconBlock
                     title="Suggested Format"
                     content={<SuggestedFormat suggestedFormat={suggestion?.suggestedFormat} />}
@@ -97,7 +95,7 @@ export const QuestionSuggestion = () => {
                     content={suggestion?.whySuitable}
                     Icon={<IconQuestionMark />}
                   />
-                </div>
+                </>
               )
             )}
           </Accordion.Panel>

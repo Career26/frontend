@@ -1,18 +1,18 @@
-@import 'src/shared/styles/headerStyles.module.scss';
-@import 'src/shared/styles/navStyles.module.scss';
+// @import 'src/shared/styles/headerStyles.module.scss';
+// @import 'src/shared/styles/navStyles.module.scss';
 
-.wrapper {
-  .mantine-AppShell-main {
-    --mantine-fn-smaller-than-md {
-      > div {
-        padding-left: 0 !important;
-      }
-    }
-  }
-}
+// .wrapper {
+//   .mantine-AppShell-main {
+//     --mantine-fn-smaller-than-md {
+//       > div {
+//         padding-left: 0 !important;
+//       }
+//     }
+//   }
+// }
 
-.content {
-  flex-direction: column;
-  padding-left: var(--navbar-width) !important;
-  padding-top: var(--header-height);
-}
+// .content {
+//   flex-direction: column;
+//   padding-left: var(--navbar-width) !important;
+//   padding-top: var(--header-height);
+// }

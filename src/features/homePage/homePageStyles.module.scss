@@ -1,24 +1,18 @@
-@import 'src/shared/styles/headerStyles.module.scss';
+@import 'src/shared/styles/commonStyles.module.scss';
 
 .container {
-  padding-top: calc(--header-height + 40rem);
   display: flex;
   justify-content: center;
-  height: 100vh;
+  height: calc(100vh - var(--app-shell-header-height));
   align-items: center;
 }
 
-.navItem {
-  padding-top: 10rem;
+.left {
+  width: 50%;
 }
 
-.disabled {
-  &:hover {
-    cursor: not-allowed;
-  }
-}
-
-.description {
-  color: var(--mantine-color-gray-9);
-  font-size: 18rem;
+.right {
+  width: 50%;
+  flex-direction: column;
+  text-align: center;
 }

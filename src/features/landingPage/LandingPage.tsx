@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { Container, Badge, Text, Space } from '@mantine/core';
+import { Container, Badge, Text, Space, Group } from '@mantine/core';
 import { urls } from '@shared/config/urlConstants';
 import { Shell } from '@shared/components/shell/Shell';
 import { Feature } from '@shared/components/feature/Feature';
@@ -50,31 +50,33 @@ export const LandingPage = () => {
           <Text className={styles.pricingText}>Invest in Your Future. Start For Free!</Text>
 
           <Container className={styles.pricingTierContainer}>
-            <PricingTile
-              title="Free Tier"
-              amount="£0"
-              peroid="Month"
-              buttonText="Try For Free"
-              benefits={[
-                'Personalised Career Paths',
-                'Limited Interview Questions',
-                'Basic CV Enhancement',
-              ]}
-              onClick={takeTest}
-            />
-            <Space className={styles.pricingMargin} />
-            <PricingTile
-              title="Premium Tier"
-              amount="£19"
-              peroid="Month"
-              buttonText="Get Started"
-              benefits={[
-                'Personalised Career Paths',
-                'Extensive Interview Questions',
-                'Advanced CV Enhancement',
-              ]}
-              onClick={takeTest}
-            />
+            <Group display="flex">
+              <PricingTile
+                title="Free Tier"
+                amount="£0"
+                peroid="Month"
+                buttonText="Try For Free"
+                benefits={[
+                  'Personalised Career Paths',
+                  'Limited Interview Questions',
+                  'Basic CV Enhancement',
+                ]}
+                onClick={takeTest}
+              />
+
+              <PricingTile
+                title="Premium Tier"
+                amount="£19"
+                peroid="Month"
+                buttonText="Get Started"
+                benefits={[
+                  'Personalised Career Paths',
+                  'Extensive Interview Questions',
+                  'Advanced CV Enhancement',
+                ]}
+                onClick={takeTest}
+              />
+            </Group>
           </Container>
         </Container>
 

@@ -5,8 +5,6 @@ import React, { useMemo, useState } from 'react';
 import { UserDetails } from '@datatypes/profile';
 import { IconExclamationCircle } from '@tabler/icons-react';
 
-import styles from './settingStyles.module.scss';
-
 const DetailsTab = () => {
   const { user, loading, updateUserAttributes } = useAuthUser();
   const initialValues = {
@@ -45,7 +43,7 @@ const DetailsTab = () => {
           <Radio value="preferNotToSay" label="Prefer not to say" />
         </Group>
       </Radio.Group>
-      <Group className={styles.buttons}>
+      <Group py="lg" display="flex" justify="flex-start">
         <Button
           variant="outline"
           onClick={() => updateUserAttributes(form.values)}
@@ -64,12 +62,14 @@ const AccountTab = () => {
   const [deleteText, setDeleteText] = useState('');
   return (
     <div>
-      <Text className={styles.iconText}>
-        <IconExclamationCircle color="red" />
-        Delting your account will remove your saved careers, interview quesitons, and mentor
-        network.
-      </Text>
-      <Group className={styles.buttons}>
+      <Group display="flex" justify="flex-start" py="sm">
+        <IconExclamationCircle color="red" size={20} />
+        <Text fw="bold">
+          Deleting your account will remove your saved careers, interview quesitons, and mentor
+          network.
+        </Text>
+      </Group>
+      <Group py="lg" display="flex" justify="flex-start" align="flex-end">
         <TextInput
           value={deleteText}
           label="Type DELETE to confirm"

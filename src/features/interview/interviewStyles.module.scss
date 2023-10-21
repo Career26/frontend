@@ -1,47 +1,5 @@
 .container {
-  flex-direction: column;
-  margin-top: 20rem;
-  display: flex;
-  gap: 20rem;
-  width: 100%;
-}
-
-.buttons {
-  display: flex;
-  justify-content: flex-end;
-  gap: 20rem;
-}
-
-.navButton {
+  gap: 8px;
   display: flex;
   flex-direction: column;
-  gap: 5rem;
-  justify-content: flex-start;
-}
-
-.questionContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 20rem;
-}
-
-.column {
-  flex-direction: column;
-  display: flex;
-  gap: 10rem;
-}
-
-.loader {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.list {
-  padding-top: 10rem;
-}
-
-.textIcon {
-  display: flex;
-  gap: 10rem;
 }

@@ -1,10 +1,8 @@
 import { Badge, Card, Group, Text } from '@mantine/core';
 import React from 'react';
 
-import styles from './cardStyles.module.scss';
-
 type CareerCardProps = {
-  title: string;
+  title: React.ReactNode;
   subTitle?: string;
   badge?: string;
   color?: string;
@@ -20,16 +18,12 @@ export const CareerCard = ({
   content,
   Actions,
 }: CareerCardProps) => (
-  <Card shadow="sm" padding="lg" radius="md" withBorder className={styles.cardContainer}>
-    <Card.Section withBorder className={styles.cardHeader} inheritPadding>
-      <Group justify="apart">
-        <Text fw={800} className={styles.title}>
-          {title}
-        </Text>
-        {Actions && <div className={styles.headerButtons}>{Actions}</div>}
-      </Group>
+  <Card shadow="sm" padding="lg" radius="md" withBorder>
+    <Card.Section withBorder w="100%" inheritPadding>
+      {title}
+      {Actions}
     </Card.Section>
-    <Group justify="apart" mt="md" mb="xs" className={styles.industrySection}>
+    <Group justify="apart" mt="md" mb="xs" w="100%">
       {subTitle && <Text fw={800}>{subTitle}</Text>}
       {badge && (
         <Badge color={color} variant="light">
@@ -38,7 +32,7 @@ export const CareerCard = ({
       )}
     </Group>
     {content && (
-      <Text size="sm" className={styles.careerSection} lineClamp={5}>
+      <Text size="sm" lineClamp={5}>
         {content}
       </Text>
     )}

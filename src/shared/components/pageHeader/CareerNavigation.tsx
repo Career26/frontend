@@ -22,7 +22,7 @@ export const CareerNavigation = () => {
     toggleCareerId(careerId);
   };
   return (
-    <div className={styles.selector}>
+    <div className={styles.careerSelector}>
       <Select
         placeholder="Select Career"
         value={selectedCareerPathId}

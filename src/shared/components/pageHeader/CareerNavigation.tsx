@@ -1,21 +1,13 @@
 import { selectCareerPaths } from '@apis/profileApi';
-import { Select, createStyles } from '@mantine/core';
+import { Select } from '@mantine/core';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 import { selectSelectedCareerPathId } from '@slices/sessionSlice';
 import { useAppSelector } from '@state/store';
 import React from 'react';
 
-const navigationStyles = createStyles({
-  selector: {
-    width: '35%',
-    ':&hover': {
-      cursor: 'pointer',
-    },
-  },
-});
+import styles from './pageHeaderStyles.module.scss';
 
 export const CareerNavigation = () => {
-  const { classes } = navigationStyles();
   const { toggleCareerId, showNavigation } = usePageNavigation();
   const careerPaths = useAppSelector(selectCareerPaths);
   const selectedCareerPathId = useAppSelector(selectSelectedCareerPathId);
@@ -30,7 +22,7 @@ export const CareerNavigation = () => {
     toggleCareerId(careerId);
   };
   return (
-    <div className={classes.selector}>
+    <div className={styles.selector}>
       <Select
         placeholder="Select Career"
         value={selectedCareerPathId}

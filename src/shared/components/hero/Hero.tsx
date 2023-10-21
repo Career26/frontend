@@ -1,7 +1,8 @@
 import React from 'react';
 import { Container, Text, Button, Group, Image, Title, Center } from '@mantine/core';
+import classNames from 'classnames';
 
-import { heroStyles } from './heroStyles';
+import styles from './heroStyles.module.scss';
 
 interface HeroComponentProps {
   actionButtonText: string;
@@ -21,44 +22,35 @@ export const Hero = ({
   colorHeadingText,
   grayBackground,
   onClick,
-}: HeroComponentProps) => {
-  const { classes } = heroStyles(grayBackground);
-
-  return (
-    <Container className={classes.main}>
-      <Container className={classes.innerContainer}>
-        <Container className={classes.titleContainer}>
-          <Title className={classes.title}>
-            {headingText}{' '}
-            <Text
-              component="span"
-              variant="gradient"
-              gradient={{ from: 'blue', to: 'cyan' }}
-              inherit
-            >
-              {colorHeadingText}
-            </Text>
-          </Title>
-          <Text className={classes.description} color="dimmed">
-            {subheadingText}
+}: HeroComponentProps) => (
+  <Container className={classNames(styles.main, { [styles.grayBackground]: grayBackground })}>
+    <Container className={styles.innerContainer}>
+      <Container className={styles.titleContainer}>
+        <Title className={styles.title}>
+          {headingText}{' '}
+          <Text component="span" variant="gradient" gradient={{ from: 'blue', to: 'cyan' }} inherit>
+            {colorHeadingText}
           </Text>
-          <Center className={classes.imageMobileContainer}>
-            <Image src={image} className={classes.imageMobile} />
-          </Center>
-          <Group className={classes.controlContainer}>
-            <Button
-              size="xl"
-              className={classes.button}
-              variant="gradient"
-              gradient={{ from: 'blue', to: 'cyan' }}
-              onClick={onClick}
-            >
-              {actionButtonText}
-            </Button>
-          </Group>
-        </Container>
-        <Image src={image} className={classes.image} />
+        </Title>
+        <Text className={styles.description} color="dimmed">
+          {subheadingText}
+        </Text>
+        <Center className={styles.imageMobileContainer}>
+          <Image src={image} className={styles.imageMobile} />
+        </Center>
+        <Group className={styles.controlContainer}>
+          <Button
+            size="xl"
+            className={styles.button}
+            variant="gradient"
+            gradient={{ from: 'blue', to: 'cyan' }}
+            onClick={onClick}
+          >
+            {actionButtonText}
+          </Button>
+        </Group>
       </Container>
+      <Image src={image} className={styles.image} />
     </Container>
-  );
-};
+  </Container>
+);

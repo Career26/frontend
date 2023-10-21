@@ -3,7 +3,7 @@ import { Button, Container, Textarea } from '@mantine/core';
 import { hasLength, useForm } from '@mantine/form';
 import { Shell } from '@shared/components/shell/Shell';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
-import { featureStyles } from '@shared/styles/featureStyles';
+import featureStyles from '@shared/styles/featureStyles.module.scss';
 import {
   addQuestionColors,
   selectQuestionColors,
@@ -23,7 +23,6 @@ import styles from './interviewStyles.module.scss';
 
 export const InterviewPage = () => {
   const dispatch = useAppDispatch();
-  const { classes: featureClasses } = featureStyles();
   const { toggleQuestionId } = usePageNavigation();
   const careerPathId = useAppSelector(selectSelectedCareerPathId);
   const selectedQuestion = useAppSelector(selectSelectedQuestion);
@@ -60,11 +59,11 @@ export const InterviewPage = () => {
   }
 
   return (
-    <div className={featureClasses.wrapper}>
+    <div className={featureStyles.wrapper}>
       <Shell
         navbar={<QuestionNavBar selectedQuestionId={selectedQuestionId} questions={questions} />}
       >
-        <div className={featureClasses.content}>
+        <div className={featureStyles.content}>
           <Container className={styles.container}>
             <CareerCard
               title={`Question ${selectedQuestionId + 1}`}

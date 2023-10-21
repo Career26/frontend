@@ -4,7 +4,7 @@ import { Shell } from '@shared/components/shell/Shell';
 import { useCreateProfileMutation } from '@apis/profileApi';
 import { setLoginModal } from '@slices/sessionSlice';
 import { useAppDispatch } from '@state/store';
-import { formStyles } from '@shared/styles/formStyles';
+import formStyles from '@shared/styles/formStyles.module.scss';
 import { LoadingScreenWithText } from '@shared/components/loadingScreen/LoadingScreen';
 
 import { EducationForm } from './components/educationForm/EducationForm';
@@ -21,7 +21,6 @@ const stepperLabels = ['Education', 'Experience', 'Preferences', 'Career Paths']
 export const CareerTest = () => {
   const dispatch = useAppDispatch();
   const [createProfile, { data, isLoading }] = useCreateProfileMutation();
-  const { classes } = formStyles();
   const { storeTestValues, careerTestStorage } = useCareerTestStorage();
   const [activeStep, setActiveStep] = useState(careerTestStorage.step);
   const { form, checkFormIsValid } = useProfileForm({ activeStep });
@@ -79,8 +78,8 @@ export const CareerTest = () => {
     <Shell>
       <>
         <CareerTestHeader />
-        <Container className={classes.steppers}>
-          <Stepper active={activeStep} onStepClick={setActiveStep} breakpoint="sm">
+        <Container className={formStyles.steppers}>
+          <Stepper active={activeStep} onStepClick={setActiveStep}>
             {stepperLabels.map((label, index) => (
               <Stepper.Step
                 label={label}

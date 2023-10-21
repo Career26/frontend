@@ -1,0 +1,54 @@
+.icon {
+  padding-right: rem(20);
+}
+
+.subHeader {
+  font-size: 17rem;
+  color: var(--mantine-colors-gray-7);
+}
+
+.section {
+  .mantine-Card-root {
+    border-radius: 10rem;
+  }
+  padding-bottom: 20rem;
+  padding-left: 20rem;
+  :nth-of-type(even) {
+    .mantine-Card-root {
+      background-color: var(--mantine-colors-gray-0);
+    }
+  }
+  :nth-of-type(odd) {
+    background-color: var(--mantine-colors-gray-0);
+  }
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 24rem;
+  font-weight: bold;
+  line-height: 1.1;
+  color: var(--mantine-color-gray-9);
+  gap: 10rem;
+}
+
+.body {
+  padding-right: 20rem;
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  gap: 20rem;
+}
+
+.gridContainer {
+  gap: 16px;
+  justify-content: center;
+  display: flex;
+}
+
+.cardContainer {
+  width: 50vh;
+}

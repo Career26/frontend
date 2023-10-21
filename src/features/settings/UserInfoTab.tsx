@@ -1,22 +1,15 @@
 import { selectProfile } from '@apis/profileApi';
 import { Profile } from '@datatypes/profile';
-import { Paper, Tabs, TextInput, createStyles, rem } from '@mantine/core';
+import { Paper, Tabs, TextInput } from '@mantine/core';
 import { useAppSelector } from '@state/store';
 import React from 'react';
 
-const userTabStyles = createStyles({
-  paper: {
-    gap: rem(20),
-    display: flex;
-    flex-direction: column;
-  },
-});
+import styles from './settingsStyles.module.scss';
 
 const UniversitiesTab = ({ profile }: { profile: Profile }) => {
-  const { classes } = userTabStyles();
   const universities = [profile.latestDegree, ...profile.additionalDegrees];
   return (
-    <div className={classes.paper}>
+    <div className={styles.paper}>
       {universities.map((university) => (
         <Paper
           key={`experience-${university.university}`}
@@ -35,25 +28,16 @@ const UniversitiesTab = ({ profile }: { profile: Profile }) => {
   );
 };
 
-const ExperiencesTab = ({ profile }: { profile: Profile }) => {
-  const { classes } = userTabStyles();
-  return (
-    <div className={classes.paper}>
-      {profile.previousWorkExperience.map((experience) => (
-        <Paper
-          key={`experience-${experience.companyName}`}
-          shadow="md"
-          radius="md"
-          p="md"
-          withBorder
-        >
-          <TextInput label="Company Name" value={experience.companyName} disabled />
-          <TextInput label="Role" value={experience.role} disabled />
-        </Paper>
-      ))}
-    </div>
-  );
-};
+const ExperiencesTab = ({ profile }: { profile: Profile }) => (
+  <div className={styles.paper}>
+    {profile.previousWorkExperience.map((experience) => (
+      <Paper key={`experience-${experience.companyName}`} shadow="md" radius="md" p="md" withBorder>
+        <TextInput label="Company Name" value={experience.companyName} disabled />
+        <TextInput label="Role" value={experience.role} disabled />
+      </Paper>
+    ))}
+  </div>
+);
 
 const tabs = [
   { label: 'Universities', Component: UniversitiesTab },

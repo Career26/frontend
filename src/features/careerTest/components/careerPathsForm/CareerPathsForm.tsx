@@ -1,6 +1,6 @@
 import { Text, Grid, Container } from '@mantine/core';
 import React, { useEffect } from 'react';
-import { formStyles } from '@shared/styles/formStyles';
+import formStyles from '@shared/styles/formStyles.module.scss';
 import { useAppDispatch, useAppSelector } from '@state/store';
 import { Shell } from '@shared/components/shell/Shell';
 import { CareerCard } from '@shared/components/cards/CareerCard';
@@ -23,7 +23,6 @@ export const CareerPathsForm = ({
   profileId?: string;
   careerPaths?: UserProfile['careerPaths'];
 }) => {
-  const { classes: formClasses } = formStyles();
   const industryColors = useAppSelector(selectIndustryColors);
   const { selectedCareers, toggleSelectedCareer, loadingCareers } = useCareerSelection();
   const dispatch = useAppDispatch();
@@ -35,9 +34,9 @@ export const CareerPathsForm = ({
 
   return (
     <Shell>
-      <Container className={formClasses.questionContainer}>
-        <Text className={formClasses.questionTitle}>Career Paths</Text>
-        <Text className={formClasses.subHeader}>Select the careers that you like</Text>
+      <Container className={formStyles.questionContainer}>
+        <Text className={formStyles.questionTitle}>Career Paths</Text>
+        <Text className={formStyles.subHeader}>Select the careers that you like</Text>
         <Grid>
           {Object.entries(careerPaths || {}).map(([careerId, careerPath]) => (
             <Grid.Col

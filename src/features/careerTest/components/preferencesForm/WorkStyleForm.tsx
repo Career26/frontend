@@ -2,12 +2,10 @@ import React from 'react';
 import { Checkbox, Container, NumberInput, Select } from '@mantine/core';
 import { WorkStyle } from '@datatypes/profile';
 import { exampleCities } from '@careerTest/config/formConstants';
-import { formStyles } from '@shared/styles/formStyles';
+import formStyles from '@shared/styles/formStyles.module.scss';
 import { CareerFormProps } from '@careerTest/careerTestTypes';
 
 export const WorkStyleForm = ({ form }: { form: CareerFormProps }) => {
-  const { classes } = formStyles();
-
   const Icon = exampleCities.find((item) => item.value === form.values.expectedSalary.city)?.Icon;
 
   const onSelectCity = (value: string | null) => {
@@ -20,26 +18,26 @@ export const WorkStyleForm = ({ form }: { form: CareerFormProps }) => {
   };
 
   return (
-    <Container className={classes.questionContainer}>
-      <div className={classes.row}>
+    <Container className={formStyles.questionContainer}>
+      <div className={formStyles.row}>
         <Select
           {...form.getInputProps('personalityType.workStyle')}
           label="What is your preferred working style?"
           withAsterisk
-          className={classes.questionInput}
+          className={formStyles.questionInput}
           data={Object.entries(WorkStyle).map(([label, value]) => ({ label, value }))}
         />
         <Checkbox
           {...form.getInputProps('personalityType.workLifeBalanceSacrifice')}
-          className={classes.checkbox}
+          className={formStyles.checkbox}
           label="Would you sacrifice your work-life balance?"
         />
       </div>
-      <div className={classes.row}>
+      <div className={formStyles.row}>
         <Select
           {...form.getInputProps('expectedSalary.city')}
           label="City"
-          className={classes.questionInput}
+          className={formStyles.questionInput}
           data={exampleCities}
           withAsterisk
           onChange={onSelectCity}

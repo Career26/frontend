@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Text, Button, Card, Badge } from '@mantine/core';
 import { IconCircleCheck } from '@tabler/icons-react';
 
-import { pricingTileStyles } from './pricingTileStyles';
+import styles from './pricingTileStyles.module.scss';
 
 interface PricingComponentProps {
   title: string;
@@ -20,42 +20,38 @@ export const PricingTile = ({
   benefits,
   buttonText,
   onClick,
-}: PricingComponentProps) => {
-  const { classes } = pricingTileStyles();
+}: PricingComponentProps) => (
+  <Container className={styles.main}>
+    <Card className={styles.card}>
+      <Badge size="xl" radius="sm" variant="light">
+        {title}
+      </Badge>
 
-  return (
-    <Container className={classes.main}>
-      <Card className={classes.card}>
-        <Badge size="xl" radius="sm" variant="light">
-          {title}
-        </Badge>
-
-        <Text className={classes.priceText}>
-          {amount}{' '}
-          <Text inherit component="span">
-            / {peroid}
-          </Text>
+      <Text className={styles.priceText}>
+        {amount}{' '}
+        <Text inherit component="span">
+          / {peroid}
         </Text>
+      </Text>
 
-        <Container my="sm" className={classes.benefitsContainer}>
-          {benefits.map((benefit, index) => (
-            <Container
-              key={index}
-              className={classes.benefitContainer}
-              py={index % 2 === 0 ? 0 : 'sm'}
-            >
-              <IconCircleCheck />
-              <Text pl="xs" className={classes.benefitText} color="dimmed">
-                {benefit}
-              </Text>
-            </Container>
-          ))}
-        </Container>
+      <Container my="sm" className={styles.benefitsContainer}>
+        {benefits.map((benefit, index) => (
+          <Container
+            key={index}
+            className={styles.benefitContainer}
+            py={index % 2 === 0 ? 0 : 'sm'}
+          >
+            <IconCircleCheck />
+            <Text pl="xs" className={styles.benefitText} color="dimmed">
+              {benefit}
+            </Text>
+          </Container>
+        ))}
+      </Container>
 
-        <Button size="md" mb="sm" onClick={onClick}>
-          {buttonText}
-        </Button>
-      </Card>
-    </Container>
-  );
-};
+      <Button size="md" mb="sm" onClick={onClick}>
+        {buttonText}
+      </Button>
+    </Card>
+  </Container>
+);

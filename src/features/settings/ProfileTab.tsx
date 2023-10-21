@@ -1,27 +1,14 @@
-import { Button, Group, Radio, Tabs, Text, TextInput, createStyles, rem } from '@mantine/core';
+import { Button, Group, Radio, Tabs, Text, TextInput } from '@mantine/core';
 import { isEmail, useForm } from '@mantine/form';
 import { useAuthUser } from '@shared/hooks/useAuthUser';
 import React, { useMemo, useState } from 'react';
 import { UserDetails } from '@datatypes/profile';
 import { IconExclamationCircle } from '@tabler/icons-react';
 
-const profileTabStyles = createStyles({
-  buttons: {
-    marginTop: rem(20),
-    display: flex;
-    alignItems: 'self-end',
-  },
-  iconText: {
-    display: flex;
-    justifyContent: 'flex-start',
-    gap: rem(20),
-  },
-});
+import styles from './settingsStyles.module.scss';
 
 const DetailsTab = () => {
   const { user, loading, updateUserAttributes } = useAuthUser();
-  const { classes } = profileTabStyles();
-
   const initialValues = {
     name: user.attributes?.name || '',
     gender: user.attributes?.gender || '',
@@ -58,7 +45,7 @@ const DetailsTab = () => {
           <Radio value="preferNotToSay" label="Prefer not to say" />
         </Group>
       </Radio.Group>
-      <Group className={classes.buttons}>
+      <Group className={styles.buttons}>
         <Button
           variant="outline"
           onClick={() => updateUserAttributes(form.values)}
@@ -75,15 +62,14 @@ const DetailsTab = () => {
 const AccountTab = () => {
   const { loading, deleteAccount } = useAuthUser();
   const [deleteText, setDeleteText] = useState('');
-  const { classes } = profileTabStyles();
   return (
     <div>
-      <Text className={classes.iconText}>
+      <Text className={styles.iconText}>
         <IconExclamationCircle color="red" />
         Delting your account will remove your saved careers, interview quesitons, and mentor
         network.
       </Text>
-      <Group className={classes.buttons}>
+      <Group className={styles.buttons}>
         <TextInput
           value={deleteText}
           label="Type DELETE to confirm"

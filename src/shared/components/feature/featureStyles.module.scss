@@ -1,0 +1,49 @@
+.main {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  align-items: center;
+  padding: 0;
+  padding-top: var(--mantine-spacing-xl);
+  padding-bottom: var(--mantine-spacing-xl);
+  --mantine-fn-smaller-than-md {
+    flex-direction: column;
+  }
+}
+
+.textContainer {
+  flex: 3;
+  padding: 0;
+}
+
+.titleText {
+  padding-bottom: var(--mantine-spacing-sm);
+  font-size: 24rem;
+  font-weight: bold;
+  line-height: 1.1;
+  color: var(--mantine-color-gray-9);
+
+  --mantine-fn-smaller-than-md {
+    text-align: center;
+  }
+}
+
+.descriptionText {
+  font-size: 17rem;
+  color: var(--mantine-colors-gray-7);
+
+  --mantine-fn-smaller-than-md {
+    text-align: center;
+  }
+}
+
+.image {
+  flex: 1;
+  padding-left: calc(var(--mantine-spacing-xl) * 2);
+  padding-right: calc(var(--mantine-spacing-xl) * 2);
+
+  --mantine-fn-smaller-than-md {
+    max-width: 300rem;
+    padding-bottom: var(--mantine-spacing-xl);
+  }
+}

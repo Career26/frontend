@@ -1,44 +1,35 @@
-import { AppShell, Button, Container, createStyles, rem } from '@mantine/core';
+import { AppShell, Button, Container } from '@mantine/core';
 import { Shell } from '@shared/components/shell/Shell';
-import { featureStyles } from '@shared/styles/featureStyles';
-import { navStyles } from '@shared/styles/navStyles';
+import featureStyles from '@shared/styles/featureStyles.module.scss';
+import navStyles from '@shared/styles/navStyles.module.scss';
 import classNames from 'classnames';
 import React, { useState } from 'react';
 
 import { ProfileTab } from './ProfileTab';
 import { UserInfoTab } from './UserInfoTab';
+import styles from './settingsStyles.module.scss';
 
 const profileLinks = [
   { label: 'Profile', Component: ProfileTab },
   { label: 'User Info', Component: UserInfoTab },
 ];
 
-const settingsPageStyles = createStyles({
-  container: {
-    marginTop: rem(20),
-    marginLeft: 0,
-  },
-});
-
 export const SettingsPage = () => {
   const [activeTab, setActiveTab] = useState(0);
-  const { classes } = settingsPageStyles();
-  const { classes: featureClasses } = featureStyles();
-  const { classes: navClasses } = navStyles();
   const { Component } = profileLinks[activeTab];
 
   return (
-    <div className={featureClasses.wrapper}>
+    <div className={featureStyles.wrapper}>
       <Shell
         navbar={
-          <AppShell.Navbar h={400} p="xs" className={navClasses.navBar}>
-            <AppShell.Section grow mt="md" className={navClasses.navLink}>
+          <AppShell.Navbar h={400} p="xs" className={navStyles.navBar}>
+            <AppShell.Section grow mt="md" className={navStyles.navLink}>
               {profileLinks.map(({ label }, index) => (
                 <Button
                   onClick={() => setActiveTab(index)}
                   key={`link-${label}`}
-                  className={classNames(navClasses.navButton, navClasses.linkAction, {
-                    [navClasses.active]: activeTab === index,
+                  className={classNames(navStyles.navButton, navStyles.linkAction, {
+                    [navStyles.active]: activeTab === index,
                   })}
                 >
                   {label}
@@ -48,8 +39,8 @@ export const SettingsPage = () => {
           </AppShell.Navbar>
         }
       >
-        <div className={featureClasses.content}>
-          <Container className={classes.container}>
+        <div className={featureStyles.content}>
+          <Container className={styles.container}>
             <Component />
           </Container>
         </div>

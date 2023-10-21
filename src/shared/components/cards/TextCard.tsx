@@ -1,25 +1,10 @@
-import { Card, createStyles, rem } from '@mantine/core';
+import { Card } from '@mantine/core';
 import React from 'react';
 
-const textCardStyles = createStyles({
-  cardContainer: {
-    width: '35vh',
-  },
-  cardDescription: {
-    padding: rem(10),
-    text-align: 'left',
-  },
-  descriptionsContainer: {
-    display: flex;
-    gap: '24px',
-  },
-});
+import styles from './cardStyles.module.scss';
 
-export const TextCard = ({ content }: { content: React.ReactNode }) => {
-  const { classes } = textCardStyles();
-  return (
-    <Card className={classes.cardContainer} shadow="md" radius="md" p="md" withBorder>
-      <div className={classes.cardDescription}>{content}</div>
-    </Card>
-  );
-};
+export const TextCard = ({ content }: { content: React.ReactNode }) => (
+  <Card className={styles.cardContainer} shadow="md" radius="md" p="md" withBorder>
+    <div className={styles.cardDescription}>{content}</div>
+  </Card>
+);

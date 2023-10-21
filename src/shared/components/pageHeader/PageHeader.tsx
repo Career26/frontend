@@ -1,48 +1,15 @@
 import React from 'react';
-import {
-  Group,
-  Button,
-  Text,
-  Avatar,
-  Menu,
-  createStyles,
-  rem,
-  AppShellHeader,
-} from '@mantine/core';
+import { Group, Button, Text, Avatar, Menu, AppShellHeader } from '@mantine/core';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 import { useAppDispatch } from '@state/store';
 import { setLoginModal } from '@slices/sessionSlice';
 import { IconLogout, IconSettings } from '@tabler/icons-react';
-import { commonStyles } from '@shared/styles/commonStyles';
-import { HEADER_HEIGHT } from '@shared/styles/headerStyles';
+import commonStyles from '@shared/styles/commonStyles.module.scss';
 
 import { LoginModal } from '../account/LoginModal';
 import { NavigationCenter } from './NavigationCenter';
 import { CareerNavigation } from './CareerNavigation';
-
-const pageHeaderStyles = createStyles((theme) => ({
-  inner: {
-    height: HEADER_HEIGHT,
-    display: flex;
-    justifyContent: 'space-between',
-    align-items: center;
-    paddingLeft: rem(100),
-    paddingRight: rem(100),
-    backgroundColor: theme.colors.gray[1],
-  },
-  logo: {
-    [theme.fn.smallerThan('md')]: {
-      display: 'none',
-    },
-    '&:hover': {
-      cursor: 'pointer',
-    },
-  },
-  menuItemIcon: {
-    width: rem(14),
-    height: rem(14),
-  },
-}));
+import styles from './pageHeaderStyles.module.scss';
 
 export const PageHeader = ({
   signOut,
@@ -52,8 +19,7 @@ export const PageHeader = ({
   authenticated: boolean;
 }) => {
   const dispatch = useAppDispatch();
-  const { classes: commonClasses } = commonStyles();
-  const { classes } = pageHeaderStyles();
+
   const { clickCareersTest, goToHomepage, goToSettings } = usePageNavigation();
 
   const onClickLogin = () => {
@@ -66,11 +32,11 @@ export const PageHeader = ({
       py="xs"
       withBorder
       style={{ position: 'fixed' }}
-      className={classes.inner}
+      className={styles.inner}
     >
       <LoginModal />
       <Group>
-        <Text className={classes.logo} onClick={goToHomepage}>
+        <Text className={styles.logo} onClick={goToHomepage}>
           LOGO HERE
         </Text>
       </Group>
@@ -96,20 +62,20 @@ export const PageHeader = ({
             <NavigationCenter />
             <Menu shadow="md" width={200}>
               <Menu.Target>
-                <Avatar radius="xl" className={commonClasses.hoverIcon} />
+                <Avatar radius="xl" className={commonStyles.hoverIcon} />
               </Menu.Target>
 
               <Menu.Dropdown>
                 <Menu.Label>Session</Menu.Label>
                 <Menu.Item
                   onClick={signOut}
-                  leftSection={<IconLogout className={classes.menuItemIcon} />}
+                  leftSection={<IconLogout className={styles.menuItemIcon} />}
                 >
                   Logout
                 </Menu.Item>
                 <Menu.Item
                   onClick={goToSettings}
-                  leftSection={<IconSettings className={classes.menuItemIcon} />}
+                  leftSection={<IconSettings className={styles.menuItemIcon} />}
                 >
                   Account Settings
                 </Menu.Item>

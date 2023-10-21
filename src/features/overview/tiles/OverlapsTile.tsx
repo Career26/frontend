@@ -1,24 +1,14 @@
 import React, { useEffect } from 'react';
-import { createStyles, Grid } from '@mantine/core';
+import { Grid } from '@mantine/core';
 import { CareerOverlap } from '@datatypes/overview';
 import { CareerCard } from '@shared/components/cards/CareerCard';
 import { addIndustryColors, selectIndustryColors } from '@slices/sessionSlice';
 import { useAppDispatch, useAppSelector } from '@state/store';
 
-const overlapsStyles = createStyles({
-  gridContainer: {
-    gap: '16px',
-    justifyContent: 'center',
-    display: flex;
-  },
-  cardContainer: {
-    width: '50vh',
-  },
-});
+import styles from '../overviewStyles.module.scss';
 
 export const OverlapsTile = ({ careerOverlaps }: { careerOverlaps: CareerOverlap[] }) => {
   const dispatch = useAppDispatch();
-  const { classes } = overlapsStyles();
   const industryColors = useAppSelector(selectIndustryColors);
 
   useEffect(() => {
@@ -27,9 +17,9 @@ export const OverlapsTile = ({ careerOverlaps }: { careerOverlaps: CareerOverlap
   }, [careerOverlaps]);
 
   return (
-    <Grid className={classes.gridContainer}>
+    <Grid className={styles.gridContainer}>
       {careerOverlaps.map((item) => (
-        <div className={classes.cardContainer} key={item.career}>
+        <div className={styles.cardContainer} key={item.career}>
           <CareerCard
             color={industryColors[item.industry]}
             title={item.career}

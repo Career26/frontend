@@ -1,0 +1,61 @@
+.cardHeader {
+  background: var(--mantine-color-gray-0);
+  align-items: center;
+  padding: 10rem;
+  height: 50px;
+  padding-top: var(--mantine-spacing-sm);
+  padding-bottom: var(--mantine-spacing-sm);
+}
+
+.title {
+  font-size: 18rem;
+  font-weight: bold;
+  padding-bottom: 0 !important;
+  line-height: 1.1;
+  color: var(--mantine-color-gray-9);
+  text-align: center;
+  --mantine-gn-smaller-than-lg {
+    text-align: left;
+    padding-bottom: var(--mantine-spacing-xs);
+  }
+}
+
+.industrySection {
+  display: flex;
+  place-content: center;
+  justify-content: space-between;
+}
+
+.careerSection {
+  overflow: hidden;
+  padding-bottom: var(--mantine-spacing-md);
+}
+
+.cardContainer {
+  height: 100%;
+  display: flex;
+  width: fit-content;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.headerButtons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10rem;
+  align-items: center;
+}
+
+.cardContainer {
+  width: 35vh;
+}
+
+.cardDescription {
+  padding: 10rem;
+  text-align: left;
+}
+
+.descriptionsContainer {
+  display: flex;
+  gap: 24px;
+}

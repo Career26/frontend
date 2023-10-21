@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Text } from '@mantine/core';
 import { IconWriting, IconRoute, IconTrophy } from '@tabler/icons-react';
 import { Tile } from '@shared/components/tiles/Tile';
-import { formStyles } from '@shared/styles/formStyles';
+import formStyles from '@shared/styles/formStyles.module.scss';
 
 const headerTiles = [
   {
@@ -25,23 +25,20 @@ const headerTiles = [
   },
 ];
 
-export const CareerTestHeader = () => {
-  const { classes } = formStyles();
-  return (
-    <Container className={classes.titleContainer}>
-      <Text className={classes.titleText}>Free Career Path Test</Text>
-      <Container className={classes.testInfoContainer}>
-        {headerTiles.map((item, index) => (
-          <Tile
-            withSpacing={index % 2 !== 0}
-            withBottomPadding={index + 1 !== headerTiles.length}
-            key={index}
-            title={item.title}
-            description={item.description}
-            icon={item.icon}
-          />
-        ))}
-      </Container>
+export const CareerTestHeader = () => (
+  <Container className={formStyles.titleContainer}>
+    <Text className={formStyles.titleText}>Free Career Path Test</Text>
+    <Container className={formStyles.testInfoContainer}>
+      {headerTiles.map((item, index) => (
+        <Tile
+          withSpacing={index % 2 !== 0}
+          withBottomPadding={index + 1 !== headerTiles.length}
+          key={index}
+          title={item.title}
+          description={item.description}
+          icon={item.icon}
+        />
+      ))}
     </Container>
-  );
-};
+  </Container>
+);

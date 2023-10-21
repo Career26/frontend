@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navbar, Button, createStyles, rem, AppShell } from '@mantine/core';
+import { Button, AppShell } from '@mantine/core';
 import { useActiveNavScroll } from '@shared/hooks/useActiveNavScroll';
 import classNames from 'classnames';
 import { Shell } from '@shared/components/shell/Shell';
@@ -7,8 +7,8 @@ import { ProgressionTile } from '@shared/components/tiles/ProgressionTile';
 import { useAppSelector } from '@state/store';
 import { selectSelectedCareerPathId } from '@slices/sessionSlice';
 import { useGetCareerOverviewQuery } from '@apis/overviewApi';
-import { navStyles } from '@shared/styles/navStyles';
-import { featureStyles } from '@shared/styles/featureStyles';
+import navStyles from '@shared/styles/navStyles.module.scss';
+import featureStyles from '@shared/styles/featureStyles.module.scss';
 import { selectProfileId } from '@apis/profileApi';
 import { LoadingLens } from '@shared/components/loadingScreen/LoadingLens';
 
@@ -18,22 +18,10 @@ import { CareerProgressionTile } from './tiles/careerProgressionTile/CareerProgr
 import { TopEmployersTile } from './tiles/TopEmployersTile';
 import { RoleOverviewTile } from './tiles/RoleOverviewTile';
 import { OverlapsTile } from './tiles/OverlapsTile';
-
-const overviewStyles = createStyles((theme) => ({
-  icon: {
-    paddingRight: rem(20),
-  },
-  subHeader: {
-    fontSize: rem(17),
-    color: theme.colors.gray[7],
-  },
-}));
+import styles from './overviewStyles.module.scss';
 
 export const OverviewPage = () => {
   const { activeAnchor } = useActiveNavScroll({ navItems: overviewLinks });
-  const { classes } = overviewStyles();
-  const { classes: navClasses } = navStyles();
-  const { classes: featureClasses } = featureStyles();
   const profileId = useAppSelector(selectProfileId) || '';
   const careerId = useAppSelector(selectSelectedCareerPathId);
   const { data, isFetching } = useGetCareerOverviewQuery(
@@ -50,19 +38,19 @@ export const OverviewPage = () => {
   }
 
   return (
-    <div className={featureClasses.wrapper}>
+    <div className={featureStyles.wrapper}>
       <Shell
         navbar={
-          <AppShell.Navbar h={400} p="xs" className={navClasses.navBar}>
-            <AppShell.Section grow mt="md" className={navClasses.navLink}>
+          <AppShell.Navbar h={400} p="xs" className={navStyles.navBar}>
+            <AppShell.Section grow mt="md" className={navStyles.navLink}>
               {overviewLinks.map(({ label, Icon, anchor }) => (
-                <a href={`#${anchor}`} key={`link-${label}`} className={navClasses.linkAction}>
+                <a href={`#${anchor}`} key={`link-${label}`} className={navStyles.linkAction}>
                   <Button
-                    className={classNames(navClasses.navButton, {
-                      [navClasses.active]: activeAnchor === anchor,
+                    className={classNames(navStyles.navButton, {
+                      [navStyles.active]: activeAnchor === anchor,
                     })}
                   >
-                    <div className={classes.icon}>
+                    <div className={styles.icon}>
                       <Icon />
                     </div>
                     {label}
@@ -73,7 +61,7 @@ export const OverviewPage = () => {
           </AppShell.Navbar>
         }
       >
-        <div className={featureClasses.content}>
+        <div className={featureStyles.content}>
           {overviewLinks.map(({ label, Icon, anchor }) => (
             <OverviewSection label={label} Icon={Icon} anchor={anchor} key={`career-${label}`}>
               {anchor === 'progression' && (

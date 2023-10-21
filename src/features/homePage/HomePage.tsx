@@ -4,12 +4,11 @@ import { useHistory } from 'react-router-dom';
 import { Shell } from '@shared/components/shell/Shell';
 import classNames from 'classnames';
 import { featureTiles } from '@shared/config/featureConstants';
-import { commonStyles } from '@shared/styles/commonStyles';
+import commonStyles from '@shared/styles/commonStyles.module.scss';
 
 import styles from './homePageStyles.module.scss';
 
 export const HomePage = () => {
-  const { classes: commonClasses } = commonStyles();
   const history = useHistory();
 
   return (
@@ -31,7 +30,7 @@ export const HomePage = () => {
                     shadow="sm"
                     radius="lg"
                     withBorder
-                    className={classNames(commonClasses.hoverItem, styles.navItem, {
+                    className={classNames(commonStyles.hoverItem, styles.navItem, {
                       [styles.disabled]: disabled,
                     })}
                   >

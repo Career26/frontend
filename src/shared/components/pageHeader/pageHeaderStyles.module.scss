@@ -1,0 +1,66 @@
+@import 'src/shared/styles/headerStyles.module.scss';
+
+.inner {
+  height: var(--header-height);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 100rem;
+  padding-right: 100rem;
+  background-color: var(--mantine-colors-gray-1);
+}
+
+.logo {
+  --mantine-fn-smaller-than-md {
+    display: none;
+  }
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.menuItemIcon {
+  width: 14rem;
+  height: 14rem;
+}
+
+.gridContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.modalContainer {
+  .mantine-Modal-header {
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid black;
+  }
+
+  .mantine-Modal-title {
+    font-size: 20rem;
+    font-weight: bold;
+  }
+
+  .mantine-Modal-body {
+    padding-top: 25rem !important;
+    background-color: var(--mantine-colors-gray-3);
+    padding-bottom: 25rem;
+  }
+
+  .mantine-Modal-overlay {
+    opacity: 0.55;
+  }
+}
+
+.disabled {
+  &:hover {
+    cursor: not-allowed;
+  }
+}
+
+.selector {
+  width: 35%;
+  &:hover {
+    cursor: pointer;
+  }
+}

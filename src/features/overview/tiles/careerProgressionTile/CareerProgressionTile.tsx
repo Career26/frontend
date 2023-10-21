@@ -1,35 +1,17 @@
 import { PromotionTimeline, SalaryProgression } from '@datatypes/overview';
-import { Card, Divider, Stepper, createStyles, rem } from '@mantine/core';
+import { Card, Divider, Stepper } from '@mantine/core';
 import React, { useMemo, useState } from 'react';
 import { IconEye } from '@tabler/icons-react';
 import { TextCard } from '@shared/components/cards/TextCard';
 
 import { SalaryChart } from './SalaryChart';
 import { getGradient, getGradientLabel, getSelectedItem, getYLabel } from './progressionUtil';
+import styles from './careerProgressionStyles.module.scss';
 
 type CareerProgressionTileProps = {
   promotionTimeline: PromotionTimeline[];
   salaryProgression: SalaryProgression[];
 };
-
-const careerProgressionStyles = createStyles((theme) => ({
-  container: {
-    width: '20%',
-  },
-  active: {
-    background: theme.colors.pink[3],
-    color: 'white',
-  },
-  cardContainer: {
-    display: flex;
-    flex-direction: column;
-    gap: rem(20),
-  },
-  divider: {
-    marginTop: rem(20),
-    marginBottom: rem(20),
-  },
-}));
 
 const SalaryCard = ({
   startingMin,
@@ -41,35 +23,28 @@ const SalaryCard = ({
   startingMax?: number;
   finalMax?: number;
   salaryProgression: CareerProgressionTileProps['salaryProgression'];
-}) => {
-  const { classes } = careerProgressionStyles();
-  return (
-    <div className={classes.cardContainer}>
-      <TextCard
-        content={
-          <>
-            Starting Salary: {getYLabel(startingMin)} - {getYLabel(startingMax)}
-            <Divider className={classes.divider} />
-            Salary Increase:{' '}
-            {getGradientLabel(
-              getGradient({ max: finalMax, min: startingMax, salaryProgression }),
-            )}{' '}
-            -{' '}
-            {getGradientLabel(
-              getGradient({ max: startingMax, min: startingMin, salaryProgression }),
-            )}
-          </>
-        }
-      />
-    </div>
-  );
-};
+}) => (
+  <div className={styles.cardContainer}>
+    <TextCard
+      content={
+        <>
+          Starting Salary: {getYLabel(startingMin)} - {getYLabel(startingMax)}
+          <Divider className={styles.divider} />
+          Salary Increase:{' '}
+          {getGradientLabel(
+            getGradient({ max: finalMax, min: startingMax, salaryProgression }),
+          )} -{' '}
+          {getGradientLabel(getGradient({ max: startingMax, min: startingMin, salaryProgression }))}
+        </>
+      }
+    />
+  </div>
+);
 
 export const CareerProgressionTile = ({
   promotionTimeline,
   salaryProgression,
 }: CareerProgressionTileProps) => {
-  const { classes } = careerProgressionStyles();
   const [activeIndex, setActiveIndex] = useState<number>();
 
   const selectedItem = useMemo(
@@ -79,7 +54,7 @@ export const CareerProgressionTile = ({
 
   return (
     <>
-      <Card className={classes.container} shadow="md" withBorder>
+      <Card className={styles.container} shadow="md" withBorder>
         <Stepper
           onStepClick={setActiveIndex}
           active={promotionTimeline.length}

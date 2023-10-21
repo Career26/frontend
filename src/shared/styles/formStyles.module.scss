@@ -1,0 +1,101 @@
+.titleContainer {
+  padding-top: 80rem;
+  --mantine-fn-smaller-than-md {
+    padding-top: 60rem;
+  }
+}
+
+.divider {
+  padding-bottom: var(--mantine-spacing-lg);
+}
+
+.titleText {
+  font-size: 36rem;
+  font-weight: bold;
+  line-height: 1.1;
+  margin: 0;
+  padding: 0;
+  color: var(--mantine-color-gray-9);
+  text-align: center;
+}
+
+.testInfoContainer {
+  display: flex;
+  flex-direction: row;
+  padding-top: calc(var(--mantine-spacing-xl) * 2);
+  padding-bottom: calc(var(--mantine-spacing-xl) * 2);
+  padding-left: 0;
+  padding-right: 0;
+  --mantine-fn-smaller-than-md {
+    flex-direction: column;
+  }
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  > div {
+    width: 48%;
+  }
+}
+
+.progressContainer {
+  padding-top: 0;
+  padding-bottom: calc(var(--mantine-spacing-xl) * 2);
+}
+
+.questionContainer {
+  padding-top: 0;
+  padding-bottom: var(--mantine-spacing-xl);
+}
+
+.questionTitle {
+  font-size: 30rem;
+  font-weight: bold;
+  line-height: 1.1;
+  margin: 0;
+  padding: 0;
+  color: var(--mantine-color-gray-9);
+  text-align: center;
+  padding-top: var(--mantine-spacing-xl);
+  padding-bottom: var(--mantine-spacing-xl);
+}
+
+.questionInput {
+  padding-bottom: var(--mantine-spacing-xl);
+}
+
+.removeButton {
+  display: flex;
+  justify-content: right;
+  padding-bottom: var(--mantine-spacing-xl);
+}
+
+.checkbox {
+  align-content: center;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+  background: var(--mantine-color-blue-0);
+}
+
+.chipSelectionRow {
+  padding-top: var(--mantine-spacing-md);
+}
+
+.steppers {
+  padding-top: var(--mantine-spacing-md);
+  padding-bottom: var(--mantine-spacing-md);
+}
+
+.subHeader {
+  font-size: 18rem;
+  font-weight: bold;
+  text-align: center;
+  color: black;
+  padding-bottom: 40rem;
+}

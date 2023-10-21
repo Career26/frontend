@@ -1,0 +1,48 @@
+main {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  padding: 0;
+}
+
+.card {
+  background: var(--mantine-color-blue-0);
+  width: 330rem;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  --mantine-fn-smaller-than-sm {
+    width: 300rem;
+  }
+}
+
+.priceText {
+  font-size: 28rem;
+  font-weight: bold;
+  line-height: 1.1;
+  color: var(--mantine-color-gray-9);
+}
+
+.benefitText {
+  font-size: 17rem;
+  --mantine-fn-smaller-than-sm {
+    font-size: 15rem;
+  }
+}
+
+.benefitsContainer {
+  padding: 0;
+  padding-top: var(--mantine-spacing-xs);
+  padding-bottom: var(--mantine-spacing-xs);
+}
+
+.benefitContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 0;
+  padding-right: 0;
+}

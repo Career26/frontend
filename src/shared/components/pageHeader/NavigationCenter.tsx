@@ -1,47 +1,16 @@
 import React, { useEffect } from 'react';
 import { useDisclosure } from '@mantine/hooks';
-import { Modal, Grid, Paper, createStyles, rem, Container, Avatar } from '@mantine/core';
+import { Modal, Grid, Paper, Container, Avatar } from '@mantine/core';
 import { IconLayoutDashboard } from '@tabler/icons-react';
 import { useHistory } from 'react-router-dom';
 import { featureTiles } from '@shared/config/featureConstants';
 import classNames from 'classnames';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
-import { commonStyles } from '@shared/styles/commonStyles';
+import commonStyles from '@shared/styles/commonStyles.module.scss';
 
-const navigationStyles = createStyles((theme) => ({
-  gridContainer: {
-    display: flex;
-    justifyContent: 'center',
-  },
-  modalContainer: {
-    '.mantine-Modal-header': {
-      display: flex;
-      justifyContent: 'center',
-      borderBottom: '1px solid black',
-    },
-    '.mantine-Modal-title': {
-      fontSize: rem(20),
-      fontWeight: 'bold',
-    },
-    '.mantine-Modal-body': {
-      padding-top: `${rem(25)} !important`,
-      backgroundColor: theme.colors.gray[3],
-      padding-bottom: rem(25),
-    },
-    '.mantine-Modal-overlay': {
-      opacity: 0.55,
-    },
-  },
-  disabled: {
-    '&:hover': {
-      cursor: 'not-allowed',
-    },
-  },
-}));
+import styles from './pageHeaderStyles.module.scss';
 
 export const NavigationCenter = () => {
-  const { classes } = navigationStyles();
-  const { classes: commonClasses } = commonStyles();
   const [opened, { open, close }] = useDisclosure(false);
   const history = useHistory();
 
@@ -53,7 +22,7 @@ export const NavigationCenter = () => {
 
   return (
     <>
-      <Avatar color="blue" radius="xl" onClick={open} className={commonClasses.hoverIcon}>
+      <Avatar color="blue" radius="xl" onClick={open} className={commonStyles.hoverIcon}>
         <IconLayoutDashboard />
       </Avatar>
       <Modal
@@ -65,7 +34,7 @@ export const NavigationCenter = () => {
         size="md"
         radius={20}
         overlayProps={{ blur: 3 }}
-        className={classes.modalContainer}
+        className={styles.modalContainer}
       >
         <Container>
           <Grid gutter={20} justify="center">
@@ -76,7 +45,7 @@ export const NavigationCenter = () => {
                   shadow="sm"
                   radius="lg"
                   withBorder
-                  className={classNames(commonClasses.hoverItem, { [classes.disabled]: disabled })}
+                  className={classNames(commonStyles.hoverItem, { [styles.disabled]: disabled })}
                 >
                   <Icon size={80} />
                   {title}

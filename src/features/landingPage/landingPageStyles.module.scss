@@ -1,47 +1,38 @@
-// .featuresContainer {
-//   display: flex;
-//   flex-direction: column;
-//   flex: 1;
-//   background: var(--mantine-color-gray-0);
-//   padding: var(--mantine-spacing-xl);
-//   max-width: none;
-// }
+.featuresContainer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background: var(--mantine-color-gray-0);
+  padding: var(--mantine-spacing-xl);
+  max-width: none !important;
+}
 
-// .pricingContainer {
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   padding: var(--mantine-spacing-xl);
-//   padding-top: calc(var(--mantine-spacing-xl) * 2);
-//   padding-bottom: calc(var(--mantine-spacing-xl) * 2);
-// }
+.pricingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--mantine-spacing-xl);
+  padding-top: calc(var(--mantine-spacing-xl) * 2);
+  padding-bottom: calc(var(--mantine-spacing-xl) * 2);
+}
 
-// .pricingText {
-//   font-size: 36rem;
-//   font-weight: bold;
-//   line-height: 1.1;
-//   margin: 0;
-//   padding: 0;
-//   color: var(--mantine-color-gray-9);
-//   padding-top: var(--mantine-spacing-xl);
-//   padding-bottom: var(--mantine-spacing-xl);
-//   text-align: center;
-//   --mantine-fn-smaller-than-sm {
-//     font-size: 30rem;
-//   }
-// }
+.pricingText {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+  color: var(--mantine-color-gray-9);
+  padding-top: var(--mantine-spacing-xl);
+  padding-bottom: var(--mantine-spacing-xl);
+  text-align: center;
+}
 
-// .pricingTierContainer {
-//   display: flex;
-//   flex-direction: row;
-//   padding: 0;
-//   --mantine-fn-smaller-than-sm {
-//     flex-direction: column;
-//   }
-// }
+.pricingTierContainer {
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+}
 
-// .pricingMargin {
-//   padding-bottom: calc(var(--mantine-spacing-xl) * 2) --mantine-fn-larger-than-md {
-//     padding-right: calc(var(--mantine-spacing-xl) * 2);
-//   }
-// }
+.pricingMargin {
+  padding-bottom: calc(var(--mantine-spacing-xl) * 2);
+}

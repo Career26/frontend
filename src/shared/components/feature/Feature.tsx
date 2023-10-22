@@ -11,7 +11,7 @@ interface FeatureComponentProps {
 
 export const Feature = ({ title, description, image }: FeatureComponentProps) => (
   <Container className={styles.main}>
-    {image && <Image src={image} className={styles.image} />}
+    {image && <Image src={image} className={styles.image} w="50%" />}
     <Container className={styles.textContainer}>
       <Text className={styles.titleText}>{title}</Text>
       <Text className={styles.descriptionText}>{description}</Text>

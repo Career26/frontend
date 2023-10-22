@@ -1,9 +1,10 @@
 .main {
   background: white;
+  max-width: none !important;
 }
 
 .grayBackground {
-  background: (--mantine-colors-gray-0);
+  background: var(--mantine-color-gray-0);
 }
 
 .innerContainer {

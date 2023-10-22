@@ -3,6 +3,7 @@ import { AppShell, ScrollArea, rem } from '@mantine/core';
 import { useAppDispatch } from '@state/store';
 import { useAuthUser } from '@shared/hooks/useAuthUser';
 import { resetSession } from '@slices/sessionSlice';
+import { useCareerTestStorage } from '@careerTest/hooks/useCareerTestStorage';
 
 import { PageHeader } from '../pageHeader/PageHeader';
 
@@ -17,7 +18,12 @@ const headerHeight = rem(80);
 export const Shell = ({ children, navbar }: ShellProps) => {
   const dispatch = useAppDispatch();
   const { authenticated, signOut } = useAuthUser();
-
+  const { resetValues } = useCareerTestStorage();
+  const onSignOut = () => {
+    resetValues();
+    dispatch(resetSession());
+    signOut();
+  };
   return (
     <AppShell
       styles={{
@@ -32,13 +38,7 @@ export const Shell = ({ children, navbar }: ShellProps) => {
       navbar={{ width: navWidth, breakpoint: 'sm' }}
     >
       <AppShell.Header>
-        <PageHeader
-          authenticated={authenticated}
-          signOut={() => {
-            dispatch(resetSession());
-            signOut();
-          }}
-        />
+        <PageHeader authenticated={authenticated} signOut={onSignOut} />
       </AppShell.Header>
       <AppShell.Navbar display={!navbar ? 'none' : 'flex'}>
         <AppShell.Section>

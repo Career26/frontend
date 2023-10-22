@@ -5,6 +5,7 @@ import { Auth } from 'aws-amplify';
 import { useEffect, useState } from 'react';
 import { notifications } from '@mantine/notifications';
 import { UserDetails } from '@datatypes/profile';
+import { useCareerTestStorage } from '@careerTest/hooks/useCareerTestStorage';
 
 import { usePageNavigation } from './usePageNavigation';
 
@@ -13,6 +14,7 @@ export const useAuthUser = () => {
   const dispatch = useAppDispatch();
   const { goToHomepage } = usePageNavigation();
   const { open } = useAppSelector(selectLoginModal);
+  const { resetValues } = useCareerTestStorage();
   const { signOut, user, authStatus } = useAuthenticator((context) => [context.route]);
   const authenticated = authStatus === 'authenticated';
   const unauthenticated = authStatus === 'unauthenticated';
@@ -54,6 +56,7 @@ export const useAuthUser = () => {
         message: 'Successfully deleted profile',
         color: 'green',
       });
+      resetValues();
       goToHomepage();
       dispatch(resetSession());
     } catch (error) {

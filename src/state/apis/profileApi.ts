@@ -4,7 +4,7 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 import { getAuthorisedBaseQuery } from '@shared/config/apiUtil';
 import { RootState } from '@state/store';
 
-const unauthorisedEndpoints = ['selectCareer', 'createProfile', 'associateProfile'];
+const unauthorisedEndpoints = ['selectCareer', 'createProfile'];
 
 export const profileApi = createApi({
   reducerPath: 'profile',

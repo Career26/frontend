@@ -29,13 +29,13 @@ export const Hero = ({
   >
     <Container className={styles.innerContainer}>
       <Container>
-        <Title className={styles.title}>
+        <Title fw="bold" size="3.5rem" className={styles.title}>
           {headingText}{' '}
           <Text component="span" variant="gradient" gradient={{ from: 'blue', to: 'cyan' }} inherit>
             {colorHeadingText}
           </Text>
         </Title>
-        <Text c="dimmed" py="md">
+        <Text c="dimmed" py="md" size="lg">
           {subheadingText}
         </Text>
       </Container>

@@ -31,7 +31,9 @@ export const LandingPage = () => {
         />
 
         <Container className={styles.featuresContainer} id={featuresTag}>
-          <Text className={styles.pricingText}>Your All-In-One Career Platform</Text>
+          <Text fw="bold" className={styles.pricingText}>
+            Your All-In-One Career Platform
+          </Text>
           {featureList.map((item) => (
             <Feature
               title={item.title}
@@ -47,7 +49,9 @@ export const LandingPage = () => {
             Pricing
           </Badge>
 
-          <Text className={styles.pricingText}>Invest in Your Future. Start For Free!</Text>
+          <Text fw="bold" className={styles.pricingText}>
+            Invest in Your Future. Start For Free!
+          </Text>
 
           <Container className={styles.pricingTierContainer}>
             <Group display="flex">

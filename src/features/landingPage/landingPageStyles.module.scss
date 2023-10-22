@@ -17,13 +17,12 @@
 }
 
 .pricingText {
-  font-size: 1.5rem;
-  font-weight: bold;
+  font-size: 2rem !important;
   margin: 0;
   padding: 0;
   color: var(--mantine-color-gray-9);
-  padding-top: var(--mantine-spacing-xl);
-  padding-bottom: var(--mantine-spacing-xl);
+  padding-top: var(--mantine-spacing-xl) !important;
+  padding-bottom: var(--mantine-spacing-xl) !important;
   text-align: center;
 }
 

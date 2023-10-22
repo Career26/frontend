@@ -1,20 +1,18 @@
 import React from 'react';
 import { Shell } from '@shared/components/shell/Shell';
-import { ProgressionTile } from '@shared/components/tiles/ProgressionTile';
 import { useAppSelector } from '@state/store';
 import { selectSelectedCareerPathId } from '@slices/sessionSlice';
 import { useGetCareerOverviewQuery } from '@apis/overviewApi';
-import featureStyles from '@shared/styles/featureStyles.module.scss';
 import { selectProfileId } from '@apis/profileApi';
 import { LoadingLens } from '@shared/components/loadingScreen/LoadingLens';
+import { Card, Container, Group, Text } from '@mantine/core';
 
-import { OverviewSection } from './OverviewSection';
 import { overviewLinks } from './config/overviewConstants';
 import { CareerProgressionTile } from './tiles/careerProgressionTile/CareerProgressionTile';
 import { TopEmployersTile } from './tiles/TopEmployersTile';
-import { RoleOverviewTile } from './tiles/RoleOverviewTile';
 import { OverlapsTile } from './tiles/OverlapsTile';
 import { OverviewNavBar } from './OverviewNavBar';
+import { ProgressionTile } from './tiles/ProgressionTile';
 
 export const OverviewPage = () => {
   const profileId = useAppSelector(selectProfileId) || '';
@@ -33,26 +31,25 @@ export const OverviewPage = () => {
   }
 
   return (
-    <div className={featureStyles.wrapper}>
-      <Shell navbar={<OverviewNavBar />}>
-        <div className={featureStyles.content}>
-          {overviewLinks.map(({ label, Icon, anchor }) => (
-            <OverviewSection label={label} Icon={Icon} anchor={anchor} key={`career-${label}`}>
+    <Shell navbar={<OverviewNavBar />}>
+      <>
+        {overviewLinks.map(({ label, Icon, anchor }) => (
+          <Container py="md" key={`career-${label}`}>
+            <Card shadow="sm" padding="lg" radius="md" withBorder>
+              <Card.Section withBorder inheritPadding py="xs">
+                <Group>
+                  <Icon size={50} />
+                  <Text fw="bold" size="2rem">
+                    {label}
+                  </Text>
+                </Group>
+              </Card.Section>
+              {anchor === 'role' && <Text py="md">{data.roleSummary}</Text>}
+              {anchor === 'employers' && <TopEmployersTile employers={data.exampleEmployers} />}
               {anchor === 'progression' && (
                 <CareerProgressionTile
                   promotionTimeline={data.promotionTimeline}
                   salaryProgression={data.salaryProgression}
-                />
-              )}
-              {anchor === 'employers' && <TopEmployersTile employers={data.exampleEmployers} />}
-              {anchor === 'role' && <RoleOverviewTile roleSummary={data.roleSummary} />}
-              {anchor === 'overlaps' && <OverlapsTile careerOverlaps={data.careerOverlaps} />}
-              {anchor === 'timeline' && (
-                <ProgressionTile
-                  progressionList={data.assessmentStages.map((item, index) => ({
-                    title: `${index + 1} ${item.stage}`,
-                    descriptions: [item.description],
-                  }))}
                 />
               )}
               {anchor === 'preparation' && (
@@ -63,10 +60,19 @@ export const OverviewPage = () => {
                   }))}
                 />
               )}
-            </OverviewSection>
-          ))}
-        </div>
-      </Shell>
-    </div>
+              {anchor === 'overlaps' && <OverlapsTile careerOverlaps={data.careerOverlaps} />}
+              {anchor === 'timeline' && (
+                <ProgressionTile
+                  progressionList={data.assessmentStages.map((item, index) => ({
+                    title: `${index + 1} ${item.stage}`,
+                    descriptions: [item.description],
+                  }))}
+                />
+              )}
+            </Card>
+          </Container>
+        ))}
+      </>
+    </Shell>
   );
 };

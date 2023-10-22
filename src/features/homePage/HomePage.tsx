@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { Shell } from '@shared/components/shell/Shell';
 import { featureTiles } from '@shared/config/featureConstants';
 import commonStyles from '@shared/styles/commonStyles.module.scss';
+import classNames from 'classnames';
 
 import styles from './homePageStyles.module.scss';
 
@@ -16,7 +17,7 @@ export const HomePage = () => {
         <Grid>
           {featureTiles.map(({ title, Icon, link, description, disabled }) => (
             <Tooltip
-              label="Mentor network coming soon"
+              label={`${title} Coming Soon`}
               openDelay={500}
               key={title}
               disabled={!disabled}
@@ -30,7 +31,7 @@ export const HomePage = () => {
                   h={150}
                   w="100%"
                   display="flex"
-                  className={commonStyles.hoverItem}
+                  className={classNames(commonStyles.hoverItem, { [styles.disabled]: disabled })}
                 >
                   <Group className={styles.left} display="flex" align="center" justify="center">
                     <Icon size={100} />

@@ -4,12 +4,10 @@ import { Paper, Tabs, TextInput } from '@mantine/core';
 import { useAppSelector } from '@state/store';
 import React from 'react';
 
-import styles from './settingStyles.module.scss';
-
 const UniversitiesTab = ({ profile }: { profile: Profile }) => {
   const universities = [profile.latestDegree, ...profile.additionalDegrees];
   return (
-    <div className={styles.paper}>
+    <div>
       {universities.map((university) => (
         <Paper
           key={`experience-${university.university}`}
@@ -29,7 +27,7 @@ const UniversitiesTab = ({ profile }: { profile: Profile }) => {
 };
 
 const ExperiencesTab = ({ profile }: { profile: Profile }) => (
-  <div className={styles.paper}>
+  <div>
     {profile.previousWorkExperience.map((experience) => (
       <Paper key={`experience-${experience.companyName}`} shadow="md" radius="md" p="md" withBorder>
         <TextInput label="Company Name" value={experience.companyName} disabled />

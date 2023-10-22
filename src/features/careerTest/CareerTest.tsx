@@ -4,7 +4,6 @@ import { Shell } from '@shared/components/shell/Shell';
 import { useCreateProfileMutation } from '@apis/profileApi';
 import { setLoginModal } from '@slices/sessionSlice';
 import { useAppDispatch } from '@state/store';
-import formStyles from '@shared/styles/formStyles.module.scss';
 import { LoadingScreenWithText } from '@shared/components/loadingScreen/LoadingScreen';
 
 import { EducationForm } from './components/educationForm/EducationForm';
@@ -80,7 +79,7 @@ export const CareerTest = () => {
     <Shell>
       <>
         <CareerTestHeader />
-        <Container className={formStyles.steppers}>
+        <Container>
           <Stepper active={activeStep} onStepClick={setActiveStep} py="md">
             {stepperLabels.map((label, index) => (
               <Stepper.Step

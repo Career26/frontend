@@ -1,6 +1,5 @@
 import { Container, NavLink } from '@mantine/core';
 import { Shell } from '@shared/components/shell/Shell';
-import featureStyles from '@shared/styles/featureStyles.module.scss';
 import React, { useState } from 'react';
 
 import { ProfileTab } from './ProfileTab';
@@ -16,25 +15,23 @@ export const SettingsPage = () => {
   const { Component } = profileLinks[activeTab];
 
   return (
-    <div className={featureStyles.wrapper}>
-      <Shell
-        navbar={
-          <div>
-            {profileLinks.map(({ label }, index) => (
-              <NavLink
-                key={`link-${label}`}
-                label={label}
-                active={activeTab === index}
-                onClick={() => setActiveTab(index)}
-              />
-            ))}
-          </div>
-        }
-      >
-        <Container py="md">
-          <Component />
-        </Container>
-      </Shell>
-    </div>
+    <Shell
+      navbar={
+        <div>
+          {profileLinks.map(({ label }, index) => (
+            <NavLink
+              key={`link-${label}`}
+              label={label}
+              active={activeTab === index}
+              onClick={() => setActiveTab(index)}
+            />
+          ))}
+        </div>
+      }
+    >
+      <Container py="md">
+        <Component />
+      </Container>
+    </Shell>
   );
 };

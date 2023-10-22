@@ -2,7 +2,6 @@ import React from 'react';
 import { Button, Container, Divider, Group, Text } from '@mantine/core';
 import { IconPlus } from '@tabler/icons-react';
 import { initialWorkExperienceValues } from '@careerTest/config/formConstants';
-import formStyles from '@shared/styles/formStyles.module.scss';
 import { CareerFormProps } from '@careerTest/careerTestTypes';
 
 import { CompanyForm } from './CompanyForm';
@@ -36,7 +35,7 @@ export const WorkExperienceForm = ({ form }: { form: CareerFormProps }) => {
         const baseKey = `previousWorkExperience.${key}`;
         return (
           <div key={baseKey}>
-            {key > 0 && <Divider size="lg" className={formStyles.divider} />}
+            {key > 0 && <Divider size="lg" />}
             <CompanyForm form={form} baseKey={baseKey} key={baseKey} />
             {key > 0 && key + 1 !== workExperienceCount && (
               <RemoveRowButton onClick={() => onClickRemoveExperience(key)} label="Experience" />

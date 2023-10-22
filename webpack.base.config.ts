@@ -41,6 +41,10 @@ const config: Configuration = {
         test: /\.svg$/,
         use: ['svg-url-loader'],
       },
+      {
+        test: /\.png$/,
+        use: ['file-loader'],
+      },
     ],
   },
 };

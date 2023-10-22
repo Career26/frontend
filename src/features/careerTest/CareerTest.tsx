@@ -48,7 +48,7 @@ export const CareerTest = () => {
     if (activeStep === CareerStep.PREFERENCES) {
       createProfile(form.values);
     }
-    if (activeStep === CareerStep.CAREER_PATHS) {
+    if (activeStep === CareerStep.COMPLETE) {
       dispatch(
         setLoginModal({
           open: true,

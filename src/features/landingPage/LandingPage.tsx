@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { Container, Badge, Text, Space, Group } from '@mantine/core';
+import { Container, Badge, Text, Group } from '@mantine/core';
 import { urls } from '@shared/config/urlConstants';
 import { Shell } from '@shared/components/shell/Shell';
 import { Feature } from '@shared/components/feature/Feature';

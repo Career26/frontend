@@ -1,6 +1,4 @@
 .main {
-  padding: var(--mantine-spacing-xl);
-  max-width: none;
   background: white;
 }
 
@@ -17,20 +15,20 @@
 
 .titleContainer {
   flex: 1;
+  width: 50%;
   padding-left: 0;
   padding-right: 0;
+  display: flex;
 }
 
 .title {
   font-weight: bold;
-  // line-height: 1.1;
   margin: 0;
   padding: 0;
   color: black;
-}
-
-.description {
-  margin-top: var(--mantine-spacing-xl);
+  font-size: 3.5rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .image {
@@ -48,8 +46,4 @@
   --mantine-fn-larger-than-sm {
     display: none;
   }
-}
-
-.controlContainer {
-  margin-top: calc(var(--mantine-spacing-xl) * 2);
 }

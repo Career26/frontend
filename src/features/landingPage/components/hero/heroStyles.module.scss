@@ -1,0 +1,48 @@
+.main {
+  background: white;
+  max-width: none !important;
+}
+
+.grayBackground {
+  background: var(--mantine-color-gray-0);
+}
+
+.innerContainer {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  padding: 0;
+}
+
+.titleContainer {
+  flex: 1;
+  width: 50%;
+  padding-left: 0;
+  padding-right: 0;
+  display: flex;
+}
+
+.title {
+  margin: 0;
+  padding: 0;
+  color: black;
+  display: flex;
+  flex-direction: column;
+}
+
+.image {
+  flex: 1;
+  align-self: center;
+  padding-left: calc(var(--mantine-spacing-xl) * 2);
+  padding-right: calc(var(--mantine-spacing-xl) * 2);
+}
+
+.imageMobile {
+  display: flex;
+  flex: 1;
+  align-self: center;
+
+  --mantine-fn-larger-than-sm {
+    display: none;
+  }
+}

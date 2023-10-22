@@ -1,0 +1,24 @@
+@import 'src/shared/styles/commonStyles.module.scss';
+
+.container {
+  display: flex;
+  justify-content: center;
+  height: calc(100vh - var(--app-shell-header-height));
+  align-items: center;
+}
+
+.left {
+  width: 50%;
+}
+
+.right {
+  width: 50%;
+  flex-direction: column;
+  text-align: center;
+}
+
+.disabled {
+  &:hover {
+    cursor: not-allowed;
+  }
+}

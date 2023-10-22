@@ -1,9 +1,8 @@
 import { useGetQuestionsQuery, useRateAnswerMutation } from '@apis/questionsApi';
-import { Button, Container, Textarea, createStyles, rem } from '@mantine/core';
+import { Button, Container, Group, Textarea } from '@mantine/core';
 import { hasLength, useForm } from '@mantine/form';
 import { Shell } from '@shared/components/shell/Shell';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
-import { featureStyles } from '@shared/styles/featureStyles';
 import {
   addQuestionColors,
   selectQuestionColors,
@@ -13,32 +12,16 @@ import {
 } from '@slices/sessionSlice';
 import { useAppDispatch, useAppSelector } from '@state/store';
 import React, { useEffect } from 'react';
-import { CareerCard } from '@shared/components/cards/CareerCard';
 import { LoadingLens } from '@shared/components/loadingScreen/LoadingLens';
 
 import { QuestionSuggestion } from './QuestionSuggestion';
 import { QuestionNavBar } from './QuestionNavBar';
 import { QuestionRating } from './QuestionRating';
-
-const interviewStyles = createStyles({
-  container: {
-    flexDirection: 'column',
-    marginTop: rem(20),
-    display: 'flex',
-    gap: rem(20),
-    width: '100%',
-  },
-  buttons: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-    gap: rem(20),
-  },
-});
+import styles from './interviewStyles.module.scss';
+import { QuestionCard } from './QuestionCard';
 
 export const InterviewPage = () => {
   const dispatch = useAppDispatch();
-  const { classes } = interviewStyles();
-  const { classes: featureClasses } = featureStyles();
   const { toggleQuestionId } = usePageNavigation();
   const careerPathId = useAppSelector(selectSelectedCareerPathId);
   const selectedQuestion = useAppSelector(selectSelectedQuestion);
@@ -75,53 +58,53 @@ export const InterviewPage = () => {
   }
 
   return (
-    <div className={featureClasses.wrapper}>
-      <Shell
-        navbar={<QuestionNavBar selectedQuestionId={selectedQuestionId} questions={questions} />}
-      >
-        <div className={featureClasses.content}>
-          <Container className={classes.container}>
-            <CareerCard
-              title={`Question ${selectedQuestionId + 1}`}
-              subTitle={selectedQuestion.question}
-              badge={selectedQuestion.category}
-              color={questionColors[selectedQuestion.category]}
-            />
-            <QuestionSuggestion />
-            <Textarea
-              {...form.getInputProps('answer')}
-              label="Answer"
-              placeholder="Enter your response here"
-              variant="filled"
-              withAsterisk
-              minRows={5}
-            />
+    <Shell
+      navbar={<QuestionNavBar selectedQuestionId={selectedQuestionId} questions={questions} />}
+    >
+      <Container py="md" className={styles.container}>
+        <QuestionCard
+          title={`Question ${selectedQuestionId + 1}`}
+          question={selectedQuestion.question}
+          category={selectedQuestion.category}
+          color={questionColors[selectedQuestion.category]}
+        />
+        <QuestionSuggestion />
 
-            <div className={classes.buttons}>
-              <Button
-                variant="outline"
-                disabled={!form.isValid() || ratingLoading}
-                loading={ratingLoading}
-                onClick={() =>
-                  rateAnswer({
-                    question: selectedQuestion.question,
-                    answer: form.values.answer,
-                    careerPathId,
-                  })
-                }
-              >
-                Submit
-              </Button>
-            </div>
-            <QuestionRating
-              rating={rating}
-              onClickNext={() => toggleQuestionId(selectedQuestionId + 1)}
-              onClickReset={onClickReset}
-              nextDisabled={questions && selectedQuestionId === questions.length - 1}
-            />
-          </Container>
-        </div>
-      </Shell>
-    </div>
+        <Textarea
+          {...form.getInputProps('answer')}
+          label="Answer"
+          placeholder="Enter your response here"
+          variant="filled"
+          withAsterisk
+          minRows={5}
+          maxRows={10}
+          autosize
+        />
+        <Group justify="flex-end">
+          <Button
+            variant="outline"
+            disabled={!form.isValid() || ratingLoading}
+            loading={ratingLoading}
+            w="20%"
+            onClick={() =>
+              rateAnswer({
+                question: selectedQuestion.question,
+                answer: form.values.answer,
+                careerPathId,
+              })
+            }
+          >
+            Submit
+          </Button>
+        </Group>
+
+        <QuestionRating
+          rating={rating}
+          onClickNext={() => toggleQuestionId(selectedQuestionId + 1)}
+          onClickReset={onClickReset}
+          nextDisabled={questions && selectedQuestionId === questions.length - 1}
+        />
+      </Container>
+    </Shell>
   );
 };

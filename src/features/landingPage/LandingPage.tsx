@@ -1,22 +1,19 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { Container, Badge, Text, Space } from '@mantine/core';
+import { Container, Badge, Text, Group } from '@mantine/core';
 import { urls } from '@shared/config/urlConstants';
 import { Shell } from '@shared/components/shell/Shell';
-import { Feature } from '@shared/components/feature/Feature';
-import { Hero } from '@shared/components/hero/Hero';
 import careerProgressImg from '@assets/careerProgress.svg';
 import successImg from '@assets/success.svg';
 
-import { PricingTile } from './components/PricingTile';
-import { landingPageStyles } from './landinPageStyles';
+import { Feature } from './components/feature/Feature';
+import { PricingTile } from './components/pricingTile/PricingTile';
 import { featureList, featuresTag, pricingTag } from './config/landingPageConstants';
+import styles from './landingPageStyles.module.scss';
+import { Hero } from './components/hero/Hero';
 
 export const LandingPage = () => {
-  const { classes } = landingPageStyles();
-
   const history = useHistory();
-
   const takeTest = () => history.push(urls.careersTest);
 
   return (
@@ -33,8 +30,10 @@ export const LandingPage = () => {
           grayBackground={false}
         />
 
-        <Container className={classes.featuresContainer} id={featuresTag}>
-          <Text className={classes.pricingText}>Your All-In-One Career Platform</Text>
+        <Container className={styles.featuresContainer} id={featuresTag}>
+          <Text fw="bold" className={styles.pricingText}>
+            Your All-In-One Career Platform
+          </Text>
           {featureList.map((item) => (
             <Feature
               title={item.title}
@@ -45,39 +44,43 @@ export const LandingPage = () => {
           ))}
         </Container>
 
-        <Container className={classes.pricingContainer} id={pricingTag}>
+        <Container className={styles.pricingContainer} id={pricingTag}>
           <Badge size="xl" radius="sm" variant="light">
             Pricing
           </Badge>
 
-          <Text className={classes.pricingText}>Invest in Your Future. Start For Free!</Text>
+          <Text fw="bold" className={styles.pricingText}>
+            Invest in Your Future. Start For Free!
+          </Text>
 
-          <Container className={classes.pricingTierContainer}>
-            <PricingTile
-              title="Free Tier"
-              amount="£0"
-              peroid="Month"
-              buttonText="Try For Free"
-              benefits={[
-                'Personalised Career Paths',
-                'Limited Interview Questions',
-                'Basic CV Enhancement',
-              ]}
-              onClick={takeTest}
-            />
-            <Space className={classes.pricingMargin} />
-            <PricingTile
-              title="Premium Tier"
-              amount="£19"
-              peroid="Month"
-              buttonText="Get Started"
-              benefits={[
-                'Personalised Career Paths',
-                'Extensive Interview Questions',
-                'Advanced CV Enhancement',
-              ]}
-              onClick={takeTest}
-            />
+          <Container className={styles.pricingTierContainer}>
+            <Group display="flex">
+              <PricingTile
+                title="Free Tier"
+                amount="£0"
+                peroid="Month"
+                buttonText="Try For Free"
+                benefits={[
+                  'Personalised Career Paths',
+                  'Limited Interview Questions',
+                  'Basic CV Enhancement',
+                ]}
+                onClick={takeTest}
+              />
+
+              <PricingTile
+                title="Premium Tier"
+                amount="£19"
+                peroid="Month"
+                buttonText="Get Started"
+                benefits={[
+                  'Personalised Career Paths',
+                  'Extensive Interview Questions',
+                  'Advanced CV Enhancement',
+                ]}
+                onClick={takeTest}
+              />
+            </Group>
           </Container>
         </Container>
 

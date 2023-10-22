@@ -1,24 +1,11 @@
 import React, { useEffect } from 'react';
-import { createStyles, Grid } from '@mantine/core';
+import { Badge, Card, Grid, Group, Text } from '@mantine/core';
 import { CareerOverlap } from '@datatypes/overview';
-import { CareerCard } from '@shared/components/cards/CareerCard';
 import { addIndustryColors, selectIndustryColors } from '@slices/sessionSlice';
 import { useAppDispatch, useAppSelector } from '@state/store';
 
-const overlapsStyles = createStyles({
-  gridContainer: {
-    gap: '16px',
-    justifyContent: 'center',
-    display: 'flex',
-  },
-  cardContainer: {
-    width: '50vh',
-  },
-});
-
 export const OverlapsTile = ({ careerOverlaps }: { careerOverlaps: CareerOverlap[] }) => {
   const dispatch = useAppDispatch();
-  const { classes } = overlapsStyles();
   const industryColors = useAppSelector(selectIndustryColors);
 
   useEffect(() => {
@@ -27,16 +14,19 @@ export const OverlapsTile = ({ careerOverlaps }: { careerOverlaps: CareerOverlap
   }, [careerOverlaps]);
 
   return (
-    <Grid className={classes.gridContainer}>
+    <Grid py="sm" grow id="overlaps">
       {careerOverlaps.map((item) => (
-        <div className={classes.cardContainer} key={item.career}>
-          <CareerCard
-            color={industryColors[item.industry]}
-            title={item.career}
-            badge={item.industry}
-            content={item.reason}
-          />
-        </div>
+        <Grid.Col span={{ md: 6 }} key={`overlap-${item.career}`}>
+          <Card shadow="sm" padding="lg" radius="md" withBorder h="100%">
+            <Card.Section withBorder inheritPadding py="xs">
+              <Group justify="space-between">
+                <Text fw="bold">{item.career}</Text>
+                <Badge color={industryColors[item.industry]}>{item.industry}</Badge>
+              </Group>
+            </Card.Section>
+            <Text py="sm">{item.reason}</Text>
+          </Card>
+        </Grid.Col>
       ))}
     </Grid>
   );

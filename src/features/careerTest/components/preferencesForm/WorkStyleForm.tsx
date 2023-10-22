@@ -1,16 +1,15 @@
 import React from 'react';
-import { Checkbox, Container, NumberInput, Select } from '@mantine/core';
+import { Checkbox, NumberInput, Select } from '@mantine/core';
 import { WorkStyle } from '@datatypes/profile';
 import { exampleCities } from '@careerTest/config/formConstants';
-import { formStyles } from '@shared/styles/formStyles';
 import { CareerFormProps } from '@careerTest/careerTestTypes';
+import commonStyles from '@shared/styles/commonStyles.module.scss';
+import styles from '@careerTest/careerTestStyles.module.scss';
 
 export const WorkStyleForm = ({ form }: { form: CareerFormProps }) => {
-  const { classes } = formStyles();
-
   const Icon = exampleCities.find((item) => item.value === form.values.expectedSalary.city)?.Icon;
 
-  const onSelectCity = (value: string) => {
+  const onSelectCity = (value: string | null) => {
     const city = exampleCities.find((item) => item.value === value);
     if (!city) {
       return;
@@ -20,43 +19,40 @@ export const WorkStyleForm = ({ form }: { form: CareerFormProps }) => {
   };
 
   return (
-    <Container className={classes.questionContainer}>
-      <div className={classes.row}>
+    <div>
+      <div className={commonStyles.row}>
         <Select
           {...form.getInputProps('personalityType.workStyle')}
           label="What is your preferred working style?"
           withAsterisk
-          className={classes.questionInput}
           data={Object.entries(WorkStyle).map(([label, value]) => ({ label, value }))}
+          w="50%"
         />
         <Checkbox
           {...form.getInputProps('personalityType.workLifeBalanceSacrifice')}
-          className={classes.checkbox}
+          className={styles.workLifeCheckbox}
           label="Would you sacrifice your work-life balance?"
         />
       </div>
-      <div className={classes.row}>
+
+      <div className={commonStyles.row}>
         <Select
           {...form.getInputProps('expectedSalary.city')}
           label="City"
-          className={classes.questionInput}
           data={exampleCities}
           withAsterisk
           onChange={onSelectCity}
+          w="50%"
         />
         <NumberInput
           {...form.getInputProps('expectedSalary.expectedSalary')}
           label="What is your expected salary?"
           withAsterisk
-          icon={Icon && <Icon color="gray" size={20} />}
-          parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
-          formatter={(value) =>
-            !Number.isNaN(parseFloat(value))
-              ? `${value}`.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',')
-              : ''
-          }
+          thousandSeparator=","
+          leftSection={Icon && <Icon color="gray" size={20} />}
+          w="50%"
         />
       </div>
-    </Container>
+    </div>
   );
 };

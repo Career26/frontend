@@ -2,23 +2,14 @@ import { Authenticator, Radio, RadioGroupField, useAuthenticator } from '@aws-am
 import { selectLoginModal, setLoginModal } from '@slices/sessionSlice';
 import { useAppDispatch, useAppSelector } from '@state/store';
 import React, { useEffect } from 'react';
-import { Modal, createStyles } from '@mantine/core';
+import { Modal } from '@mantine/core';
 import '@aws-amplify/ui-react/styles.css';
 import { Auth } from 'aws-amplify';
 import { useLazyAssociateProfileQuery } from '@apis/profileApi';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 import { useAuthUser } from '@shared/hooks/useAuthUser';
 
-const loginStlyes = createStyles({
-  container: {
-    '.mantine-Modal-body': {
-      padding: 0,
-    },
-    '[data-amplify-authenticator] [data-amplify-container]': {
-      width: '100%',
-    },
-  },
-});
+import styles from './accountStyles.module.scss';
 
 const FormFields = () => {
   const { validationErrors } = useAuthenticator();
@@ -69,7 +60,6 @@ const components = {
 };
 
 export const LoginModal = () => {
-  const { classes } = loginStlyes();
   const dispatch = useAppDispatch();
   const { open, initialState, associateProfileId } = useAppSelector(selectLoginModal);
   const { goToHomepage } = usePageNavigation();
@@ -100,7 +90,7 @@ export const LoginModal = () => {
     <Modal
       onClose={onClose}
       opened={open}
-      className={classes.container}
+      className={styles.container}
       withCloseButton={false}
       centered
       radius={10}
@@ -108,7 +98,7 @@ export const LoginModal = () => {
       <Authenticator
         services={{ handleConfirmSignUp }}
         initialState={initialState}
-        className={classes.container}
+        className={styles.container}
         formFields={formFields}
         loginMechanisms={['email']}
         components={components}

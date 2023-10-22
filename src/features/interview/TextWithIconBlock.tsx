@@ -1,12 +1,6 @@
-import { Text, createStyles, rem } from '@mantine/core';
+import { Group, Text } from '@mantine/core';
 import React from 'react';
-
-const ratingStyles = createStyles({
-  textIcon: {
-    display: 'flex',
-    gap: rem(10),
-  },
-});
+import commonStyles from '@shared/styles/commonStyles.module.scss';
 
 export const TextWithIconBlock = ({
   title,
@@ -16,15 +10,12 @@ export const TextWithIconBlock = ({
   title: string;
   content: React.ReactNode;
   Icon: React.ReactNode;
-}) => {
-  const { classes } = ratingStyles();
-  return (
-    <div>
-      <div className={classes.textIcon}>
-        {Icon}
-        <Text weight="bold">{title}</Text>
-      </div>
-      {content}
-    </div>
-  );
-};
+}) => (
+  <div>
+    <Group className={commonStyles.row}>
+      {Icon}
+      <Text fw={800}>{title}</Text>
+    </Group>
+    {content}
+  </div>
+);

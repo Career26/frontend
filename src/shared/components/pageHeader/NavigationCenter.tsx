@@ -1,47 +1,13 @@
 import React, { useEffect } from 'react';
 import { useDisclosure } from '@mantine/hooks';
-import { Modal, Grid, Paper, createStyles, rem, Container, Avatar } from '@mantine/core';
+import { Modal, Grid, Paper, Container, Avatar, Group, Text } from '@mantine/core';
 import { IconLayoutDashboard } from '@tabler/icons-react';
 import { useHistory } from 'react-router-dom';
 import { featureTiles } from '@shared/config/featureConstants';
-import classNames from 'classnames';
+import commonStyles from '@shared/styles/commonStyles.module.scss';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
-import { commonStyles } from '@shared/styles/commonStyles';
-
-const navigationStyles = createStyles((theme) => ({
-  gridContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-  },
-  modalContainer: {
-    '.mantine-Modal-header': {
-      display: 'flex',
-      justifyContent: 'center',
-      borderBottom: '1px solid black',
-    },
-    '.mantine-Modal-title': {
-      fontSize: rem(20),
-      fontWeight: 'bold',
-    },
-    '.mantine-Modal-body': {
-      paddingTop: `${rem(25)} !important`,
-      backgroundColor: theme.colors.gray[3],
-      paddingBottom: rem(25),
-    },
-    '.mantine-Modal-overlay': {
-      opacity: 0.55,
-    },
-  },
-  disabled: {
-    '&:hover': {
-      cursor: 'not-allowed',
-    },
-  },
-}));
 
 export const NavigationCenter = () => {
-  const { classes } = navigationStyles();
-  const { classes: commonClasses } = commonStyles();
   const [opened, { open, close }] = useDisclosure(false);
   const history = useHistory();
 
@@ -53,33 +19,36 @@ export const NavigationCenter = () => {
 
   return (
     <>
-      <Avatar color="blue" radius="xl" onClick={open} className={commonClasses.hoverIcon}>
+      <Avatar radius="xl" onClick={open} className={commonStyles.hoverItem}>
         <IconLayoutDashboard />
       </Avatar>
       <Modal
         opened={opened}
         onClose={close}
-        title="Navigation Center"
         centered
         withCloseButton={false}
         size="md"
         radius={20}
         overlayProps={{ blur: 3 }}
-        className={classes.modalContainer}
       >
         <Container>
-          <Grid gutter={20} justify="center">
+          <Grid justify="center">
             {featureTiles.map(({ title, Icon, disabled, link }) => (
-              <Grid.Col key={title} md={6}>
+              <Grid.Col key={title}>
                 <Paper
                   onClick={() => !disabled && history.push(link)}
-                  shadow="sm"
-                  radius="lg"
                   withBorder
-                  className={classNames(commonClasses.hoverItem, { [classes.disabled]: disabled })}
+                  radius="xl"
+                  p="md"
+                  h={150}
+                  w="100%"
+                  display="flex"
+                  className={commonStyles.hoverItem}
                 >
-                  <Icon size={80} />
-                  {title}
+                  <Group display="flex" align="center" justify="space-between">
+                    <Icon size={100} />
+                    <Text>{title}</Text>
+                  </Group>
                 </Paper>
               </Grid.Col>
             ))}

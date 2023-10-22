@@ -1,0 +1,35 @@
+.main {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  padding: 0;
+}
+
+.card {
+  background: var(--mantine-color-blue-0) !important;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.priceText {
+  font-weight: bold;
+  color: var(--mantine-color-gray-9);
+}
+
+.benefitsContainer {
+  padding: 0;
+  padding-top: var(--mantine-spacing-xs);
+  padding-bottom: var(--mantine-spacing-xs);
+}
+
+.benefitContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 0;
+  padding-right: 0;
+}

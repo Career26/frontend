@@ -23,6 +23,7 @@
       "@assets/*": ["./src/assets/*"],
       "@careerTest/*": ["./src/features/careerTest/*"],
       "@features/*": ["./src/features/*"]
-    }
+    },
+    "plugins": [{ "name": "typescript-plugin-css-modules" }]
   }
 }

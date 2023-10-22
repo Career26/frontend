@@ -1,0 +1,23 @@
+.main {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  align-items: center;
+  padding: 0;
+  padding-top: var(--mantine-spacing-xl);
+  padding-bottom: var(--mantine-spacing-xl);
+  gap: 2rem;
+  & > img {
+    width: 20vh;
+  }
+}
+
+.descriptionText {
+  color: var(--mantine-colors-gray-7);
+}
+
+.image {
+  flex: 1;
+  padding-left: calc(var(--mantine-spacing-xl) * 2);
+  padding-right: calc(var(--mantine-spacing-xl) * 2);
+}

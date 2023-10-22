@@ -53,8 +53,8 @@ export const usDegreeGrades = [
 export const degreeLevels = ['PhD', 'MSc', 'MA', 'BSc', 'BA', 'MEng', 'BEng'];
 
 export const degreeOptions = [
-  ...ukDegreeGrades.map((label) => ({ label, value: label, group: 'UK Grading' })),
-  ...usDegreeGrades.map((label) => ({ label, value: label, group: 'US Grading' })),
+  { group: 'UK Grading', items: ukDegreeGrades },
+  { group: 'US Grading', items: usDegreeGrades },
 ];
 
 export const initialUniversityValues: Degree = {

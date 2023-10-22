@@ -1,43 +1,39 @@
 import React from 'react';
-import { Container, Select, TextInput } from '@mantine/core';
-import { formStyles } from '@shared/styles/formStyles';
+import { Select, TextInput } from '@mantine/core';
 import { CareerFormProps } from '@careerTest/careerTestTypes';
 import { degreeLevels, degreeOptions } from '@careerTest/config/formConstants';
 
-export const UniversityForm = ({ form, baseKey }: { form: CareerFormProps; baseKey: string }) => {
-  const { classes } = formStyles();
-  return (
-    <Container className={classes.questionContainer}>
-      <TextInput
-        {...form.getInputProps(`${baseKey}.university`)}
-        label="University Name"
-        className={classes.questionInput}
+export const UniversityForm = ({ form, baseKey }: { form: CareerFormProps; baseKey: string }) => (
+  <div>
+    <TextInput
+      {...form.getInputProps(`${baseKey}.university`)}
+      label="University Name"
+      withAsterisk
+      py="xs"
+    />
+    <TextInput
+      {...form.getInputProps(`${baseKey}.name`)}
+      label="Course Name"
+      withAsterisk
+      py="xs"
+    />
+    <div>
+      <Select
+        {...form.getInputProps(`${baseKey}.grade`)}
+        label="Grade"
+        data={degreeOptions}
         withAsterisk
+        placeholder="Select a grade"
+        py="xs"
       />
-      <TextInput
-        {...form.getInputProps(`${baseKey}.name`)}
-        label="Course Name"
-        className={classes.questionInput}
+      <Select
+        {...form.getInputProps(`${baseKey}.level`)}
+        label="Level"
+        data={degreeLevels}
         withAsterisk
+        placeholder="Select a level"
+        py="xs"
       />
-      <div className={classes.row}>
-        <Select
-          {...form.getInputProps(`${baseKey}.grade`)}
-          label="Grade"
-          className={classes.questionInput}
-          data={degreeOptions}
-          withAsterisk
-          placeholder="Select a grade"
-        />
-        <Select
-          {...form.getInputProps(`${baseKey}.level`)}
-          label="Level"
-          className={classes.questionInput}
-          data={degreeLevels}
-          withAsterisk
-          placeholder="Select a level"
-        />
-      </div>
-    </Container>
-  );
-};
+    </div>
+  </div>
+);

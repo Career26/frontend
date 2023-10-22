@@ -4,6 +4,8 @@ import { UserProfile } from '@datatypes/profile';
 
 const baseKey = 'careerTest';
 
+const initialStoredValues = { step: CareerStep.EDUCATION, formValues: initialProfileValues };
+
 type CareerTestStorage = {
   step: CareerStep;
   formValues: CareerFormValues;
@@ -16,9 +18,7 @@ type ValueForKey<T, K extends keyof T> = K extends keyof T ? T[K] : never;
 export const useCareerTestStorage = () => {
   const getValues = (): CareerTestStorage => {
     const storedValues = localStorage.getItem(baseKey);
-    return storedValues
-      ? JSON.parse(storedValues)
-      : { step: CareerStep.EDUCATION, formValues: initialProfileValues };
+    return storedValues ? JSON.parse(storedValues) : initialStoredValues;
   };
 
   const storeTestValues = <K extends keyof CareerTestStorage>({
@@ -32,7 +32,12 @@ export const useCareerTestStorage = () => {
     localStorage.setItem(baseKey, JSON.stringify(newValues));
   };
 
+  const resetValues = () => {
+    localStorage.setItem(baseKey, JSON.stringify(initialStoredValues));
+  };
+
   return {
+    resetValues,
     storeTestValues,
     careerTestStorage: getValues(),
   };

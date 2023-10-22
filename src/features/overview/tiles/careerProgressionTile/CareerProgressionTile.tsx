@@ -1,75 +1,22 @@
 import { PromotionTimeline, SalaryProgression } from '@datatypes/overview';
-import { Card, Divider, Stepper, createStyles, rem } from '@mantine/core';
+import { Group, Stepper } from '@mantine/core';
 import React, { useMemo, useState } from 'react';
 import { IconEye } from '@tabler/icons-react';
-import { TextCard } from '@shared/components/cards/TextCard';
+import commonStyles from '@shared/styles/commonStyles.module.scss';
 
 import { SalaryChart } from './SalaryChart';
-import { getGradient, getGradientLabel, getSelectedItem, getYLabel } from './progressionUtil';
+import { getSelectedItem } from './progressionUtil';
+import { SalaryCard } from './SalaryCard';
 
 type CareerProgressionTileProps = {
   promotionTimeline: PromotionTimeline[];
   salaryProgression: SalaryProgression[];
 };
 
-const careerProgressionStyles = createStyles((theme) => ({
-  container: {
-    width: '20%',
-  },
-  active: {
-    background: theme.colors.pink[3],
-    color: 'white',
-  },
-  cardContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: rem(20),
-  },
-  divider: {
-    marginTop: rem(20),
-    marginBottom: rem(20),
-  },
-}));
-
-const SalaryCard = ({
-  startingMin,
-  startingMax,
-  finalMax,
-  salaryProgression,
-}: {
-  startingMin?: number;
-  startingMax?: number;
-  finalMax?: number;
-  salaryProgression: CareerProgressionTileProps['salaryProgression'];
-}) => {
-  const { classes } = careerProgressionStyles();
-  return (
-    <div className={classes.cardContainer}>
-      <TextCard
-        content={
-          <>
-            Starting Salary: {getYLabel(startingMin)} - {getYLabel(startingMax)}
-            <Divider className={classes.divider} />
-            Salary Increase:{' '}
-            {getGradientLabel(
-              getGradient({ max: finalMax, min: startingMax, salaryProgression }),
-            )}{' '}
-            -{' '}
-            {getGradientLabel(
-              getGradient({ max: startingMax, min: startingMin, salaryProgression }),
-            )}
-          </>
-        }
-      />
-    </div>
-  );
-};
-
 export const CareerProgressionTile = ({
   promotionTimeline,
   salaryProgression,
 }: CareerProgressionTileProps) => {
-  const { classes } = careerProgressionStyles();
   const [activeIndex, setActiveIndex] = useState<number>();
 
   const selectedItem = useMemo(
@@ -78,33 +25,36 @@ export const CareerProgressionTile = ({
   );
 
   return (
-    <>
-      <Card className={classes.container} shadow="md" withBorder>
-        <Stepper
-          onStepClick={setActiveIndex}
-          active={promotionTimeline.length}
-          breakpoint="lg"
-          orientation="vertical"
-          completedIcon={<IconEye size="1rem" />}
-        >
-          {promotionTimeline.map((item, index) => (
-            <Stepper.Step
-              icon={<IconEye size="1rem" />}
-              key={`promotion-${item.age}`}
-              label={item.age}
-              description={item.title}
-              color={activeIndex === index ? '#faa2c1' : '#228be6'}
-            />
-          ))}
-        </Stepper>
-      </Card>
-      <SalaryChart
-        salaryProgression={salaryProgression}
-        maxAge={selectedItem?.maxAge}
-        minAge={selectedItem?.minAge}
-      />
+    <div id="progression">
+      <div className={commonStyles.row}>
+        <Group py="md">
+          <Stepper
+            iconSize={32}
+            orientation="vertical"
+            onStepClick={setActiveIndex}
+            active={promotionTimeline.length}
+            completedIcon={<IconEye />}
+          >
+            {promotionTimeline.map((item, index) => (
+              <Stepper.Step
+                icon={<IconEye size="1rem" />}
+                key={`promotion-${item.age}`}
+                label={item.age}
+                description={item.title}
+                color={activeIndex === index ? '#faa2c1' : '#228be6'}
+              />
+            ))}
+          </Stepper>
+        </Group>
+
+        <SalaryChart
+          salaryProgression={salaryProgression}
+          maxAge={selectedItem?.maxAge}
+          minAge={selectedItem?.minAge}
+        />
+      </div>
 
       {selectedItem && <SalaryCard salaryProgression={salaryProgression} {...selectedItem} />}
-    </>
+    </div>
   );
 };

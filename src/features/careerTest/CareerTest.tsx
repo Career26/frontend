@@ -4,7 +4,6 @@ import { Shell } from '@shared/components/shell/Shell';
 import { useCreateProfileMutation } from '@apis/profileApi';
 import { setLoginModal } from '@slices/sessionSlice';
 import { useAppDispatch } from '@state/store';
-import { formStyles } from '@shared/styles/formStyles';
 import { LoadingScreenWithText } from '@shared/components/loadingScreen/LoadingScreen';
 
 import { EducationForm } from './components/educationForm/EducationForm';
@@ -12,7 +11,7 @@ import { WorkExperienceForm } from './components/workExperienceForm/WorkExperien
 import { PreferencesForm } from './components/preferencesForm/PreferencesForm';
 import { useProfileForm } from './hooks/useProfileForm';
 import { CareerPathsForm } from './components/careerPathsForm/CareerPathsForm';
-import { CareerTestHeader } from './components/CareerTestHeader';
+import { CareerTestHeader } from './components/careerTestHeader/CareerTestHeader';
 import { CareerStep } from './careerTestTypes';
 import { useCareerTestStorage } from './hooks/useCareerTestStorage';
 
@@ -21,7 +20,6 @@ const stepperLabels = ['Education', 'Experience', 'Preferences', 'Career Paths']
 export const CareerTest = () => {
   const dispatch = useAppDispatch();
   const [createProfile, { data, isLoading }] = useCreateProfileMutation();
-  const { classes } = formStyles();
   const { storeTestValues, careerTestStorage } = useCareerTestStorage();
   const [activeStep, setActiveStep] = useState(careerTestStorage.step);
   const { form, checkFormIsValid } = useProfileForm({ activeStep });
@@ -35,7 +33,9 @@ export const CareerTest = () => {
   }, [data]);
 
   useEffect(() => {
-    storeTestValues({ key: 'step', value: activeStep });
+    if (activeStep !== CareerStep.COMPLETE) {
+      storeTestValues({ key: 'step', value: activeStep });
+    }
   }, [activeStep]);
 
   const clickNext = async () => {
@@ -79,8 +79,8 @@ export const CareerTest = () => {
     <Shell>
       <>
         <CareerTestHeader />
-        <Container className={classes.steppers}>
-          <Stepper active={activeStep} onStepClick={setActiveStep} breakpoint="sm">
+        <Container>
+          <Stepper active={activeStep} onStepClick={setActiveStep} py="md">
             {stepperLabels.map((label, index) => (
               <Stepper.Step
                 label={label}
@@ -95,7 +95,7 @@ export const CareerTest = () => {
           </Stepper>
         </Container>
 
-        <Container>
+        <Container py="md">
           {isLoading ? (
             <LoadingScreenWithText
               repeatSequence
@@ -131,7 +131,7 @@ export const CareerTest = () => {
                   profileId={careerTestStorage.profileId}
                 />
               )}
-              <Group position="center">
+              <Group justify="center">
                 {activeStep !== CareerStep.CAREER_PATHS && activeStep !== CareerStep.COMPLETE && (
                   <Button
                     onClick={clickBack}

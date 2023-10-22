@@ -1,4 +1,3 @@
-import { SalaryProgression } from '@datatypes/overview';
 import { Badge } from '@mantine/core';
 import React from 'react';
 import { TooltipProps } from 'recharts';
@@ -8,11 +7,14 @@ import { getYLabel } from './progressionUtil';
 import styles from './careerProgressionStyles.module.scss';
 
 export const TooltipContent = ({ payload }: TooltipProps<ValueType, NameType>) => {
-  const item: SalaryProgression = payload?.[0]?.payload;
+  const item = payload?.[0]?.payload;
   if (!item) {
     return null;
   }
-  const { high, low, age } = item;
+  const {
+    age,
+    value: [high, low],
+  } = item;
   const average = (high + low) / 2;
   return (
     <div className={styles.tooltip}>

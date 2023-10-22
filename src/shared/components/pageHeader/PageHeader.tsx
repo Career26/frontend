@@ -1,10 +1,11 @@
 import React from 'react';
-import { Group, Button, Text, Avatar, Menu, Container } from '@mantine/core';
+import { Group, Button, Avatar, Menu, Container, Image } from '@mantine/core';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 import { useAppDispatch } from '@state/store';
 import { setLoginModal } from '@slices/sessionSlice';
 import { IconLogout, IconSettings } from '@tabler/icons-react';
 import commonStyles from '@shared/styles/commonStyles.module.scss';
+import logo from '@assets/trans-bkg-navy-logo.png';
 
 import { LoginModal } from '../account/LoginModal';
 import { NavigationCenter } from './NavigationCenter';
@@ -26,14 +27,10 @@ export const PageHeader = ({
   };
 
   return (
-    <Container>
-      <Group justify="space-between" align="center" p="lg">
-        <LoginModal />
-        <Group>
-          <Text className={commonStyles.hoverItem} onClick={goToHomepage}>
-            LOGO HERE
-          </Text>
-        </Group>
+    <Container p={0}>
+      <LoginModal />
+      <Group justify="space-between" align="center" p={0}>
+        <Image src={logo} h="10vh" w="auto" fit="contain" onClick={goToHomepage} />
 
         <CareerNavigation />
 

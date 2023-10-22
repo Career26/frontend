@@ -7,8 +7,6 @@ import { featureTiles } from '@shared/config/featureConstants';
 import commonStyles from '@shared/styles/commonStyles.module.scss';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 
-import styles from './pageHeaderStyles.module.scss';
-
 export const NavigationCenter = () => {
   const [opened, { open, close }] = useDisclosure(false);
   const history = useHistory();
@@ -32,7 +30,6 @@ export const NavigationCenter = () => {
         size="md"
         radius={20}
         overlayProps={{ blur: 3 }}
-        className={styles.modalContainer}
       >
         <Container>
           <Grid justify="center">

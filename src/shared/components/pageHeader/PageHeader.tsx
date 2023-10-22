@@ -9,7 +9,6 @@ import commonStyles from '@shared/styles/commonStyles.module.scss';
 import { LoginModal } from '../account/LoginModal';
 import { NavigationCenter } from './NavigationCenter';
 import { CareerNavigation } from './CareerNavigation';
-import styles from './pageHeaderStyles.module.scss';
 
 export const PageHeader = ({
   signOut,
@@ -58,16 +57,10 @@ export const PageHeader = ({
 
                 <Menu.Dropdown>
                   <Menu.Label>Session</Menu.Label>
-                  <Menu.Item
-                    onClick={signOut}
-                    leftSection={<IconLogout className={styles.menuItemIcon} />}
-                  >
+                  <Menu.Item onClick={signOut} leftSection={<IconLogout />}>
                     Logout
                   </Menu.Item>
-                  <Menu.Item
-                    onClick={goToSettings}
-                    leftSection={<IconSettings className={styles.menuItemIcon} />}
-                  >
+                  <Menu.Item onClick={goToSettings} leftSection={<IconSettings />}>
                     Account Settings
                   </Menu.Item>
                 </Menu.Dropdown>

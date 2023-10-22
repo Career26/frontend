@@ -5,8 +5,6 @@ import { selectSelectedCareerPathId } from '@slices/sessionSlice';
 import { useAppSelector } from '@state/store';
 import React from 'react';
 
-import styles from './pageHeaderStyles.module.scss';
-
 export const CareerNavigation = () => {
   const { toggleCareerId, showNavigation } = usePageNavigation();
   const careerPaths = useAppSelector(selectCareerPaths);
@@ -22,16 +20,15 @@ export const CareerNavigation = () => {
     toggleCareerId(careerId);
   };
   return (
-    <div className={styles.careerSelector}>
-      <Select
-        placeholder="Select Career"
-        value={selectedCareerPathId}
-        data={Object.entries(careerPaths).map(([careerId, { title }]) => ({
-          label: title,
-          value: careerId,
-        }))}
-        onChange={onChange}
-      />
-    </div>
+    <Select
+      w="50%"
+      placeholder="Select Career"
+      value={selectedCareerPathId}
+      data={Object.entries(careerPaths).map(([careerId, { title }]) => ({
+        label: title,
+        value: careerId,
+      }))}
+      onChange={onChange}
+    />
   );
 };

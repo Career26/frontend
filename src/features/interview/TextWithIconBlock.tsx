@@ -1,7 +1,6 @@
-import { Text } from '@mantine/core';
+import { Group, Text } from '@mantine/core';
 import React from 'react';
-
-import styles from './interviewStyles.module.scss';
+import commonStyles from '@shared/styles/commonStyles.module.scss';
 
 export const TextWithIconBlock = ({
   title,
@@ -13,10 +12,10 @@ export const TextWithIconBlock = ({
   Icon: React.ReactNode;
 }) => (
   <div>
-    <div className={styles.textIcon}>
+    <Group className={commonStyles.row}>
       {Icon}
       <Text fw={800}>{title}</Text>
-    </div>
+    </Group>
     {content}
   </div>
 );

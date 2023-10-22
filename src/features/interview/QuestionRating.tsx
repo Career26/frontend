@@ -2,9 +2,9 @@ import { RatingResponse } from '@datatypes/question';
 import { Accordion, Button, Paper } from '@mantine/core';
 import React, { useState } from 'react';
 import { IconChecklist, IconCircleCheck, IconInfoCircle } from '@tabler/icons-react';
+import commonStyles from '@shared/styles/commonStyles.module.scss';
 
 import { TextWithIconBlock } from './TextWithIconBlock';
-import styles from './interviewStyles.module.scss';
 
 type QuestionRatingProps = {
   onClickReset: () => void;
@@ -24,13 +24,13 @@ export const QuestionRating = ({
     return null;
   }
   return (
-    <div className={styles.column}>
+    <>
       <Paper h="auto" withBorder shadow="md">
         <Accordion value={value} onChange={setValue}>
           <Accordion.Item value="rating">
             <Accordion.Control>Answer Rating</Accordion.Control>
             <Accordion.Panel>
-              <div className={styles.questionContainer}>
+              <>
                 <TextWithIconBlock
                   Icon={<IconCircleCheck color="green" />}
                   title="Positives"
@@ -46,12 +46,12 @@ export const QuestionRating = ({
                   title="Example Answer"
                   content={rating.exampleAnswer}
                 />
-              </div>
+              </>
             </Accordion.Panel>
           </Accordion.Item>
         </Accordion>
       </Paper>
-      <div className={styles.buttons}>
+      <div className={commonStyles.row}>
         <Button variant="light" onClick={onClickReset}>
           Retry
         </Button>
@@ -59,6 +59,6 @@ export const QuestionRating = ({
           Next
         </Button>
       </div>
-    </div>
+    </>
   );
 };

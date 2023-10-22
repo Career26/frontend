@@ -60,7 +60,6 @@ export const OverviewPage = () => {
                   }))}
                 />
               )}
-              {anchor === 'overlaps' && <OverlapsTile careerOverlaps={data.careerOverlaps} />}
               {anchor === 'timeline' && (
                 <ProgressionTile
                   progressionList={data.assessmentStages.map((item, index) => ({
@@ -69,6 +68,7 @@ export const OverviewPage = () => {
                   }))}
                 />
               )}
+              {anchor === 'overlaps' && <OverlapsTile careerOverlaps={data.careerOverlaps} />}
             </Card>
           </Container>
         ))}

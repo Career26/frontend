@@ -4,13 +4,13 @@ import { Container, Badge, Text, Group } from '@mantine/core';
 import { urls } from '@shared/config/urlConstants';
 import { Shell } from '@shared/components/shell/Shell';
 import { Feature } from '@shared/components/feature/Feature';
-import { Hero } from '@shared/components/hero/Hero';
 import careerProgressImg from '@assets/careerProgress.svg';
 import successImg from '@assets/success.svg';
 
-import { PricingTile } from './components/PricingTile';
+import { PricingTile } from './components/pricingTile/PricingTile';
 import { featureList, featuresTag, pricingTag } from './config/landingPageConstants';
 import styles from './landingPageStyles.module.scss';
+import { Hero } from './components/hero/Hero';
 
 export const LandingPage = () => {
   const history = useHistory();

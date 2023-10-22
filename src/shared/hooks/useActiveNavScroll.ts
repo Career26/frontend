@@ -5,7 +5,7 @@ type NavScrollProps<T> = T & {
   headerHeight?: number;
 };
 
-export const useActiveNavScroll = <T>({ navItems, headerHeight = 60 }: NavScrollProps<T>) => {
+export const useActiveNavScroll = <T>({ navItems, headerHeight = 150 }: NavScrollProps<T>) => {
   const [activeAnchor, setActiveAnchor] = useState<null | string>(navItems[0].anchor);
   const handleScroll = () => {
     const activeSection = navItems.reduce<{ anchor: string; top?: number }>(

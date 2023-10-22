@@ -18,10 +18,16 @@ const getMappedList = (progressionList: ProgressionItem[]) =>
     );
   }, []);
 
-export const ProgressionTile = ({ progressionList }: { progressionList: ProgressionItem[] }) => {
+export const ProgressionTile = ({
+  progressionList,
+  id,
+}: {
+  id: string;
+  progressionList: ProgressionItem[];
+}) => {
   const mappedList = getMappedList(progressionList);
   return (
-    <Group py="md">
+    <Group py="md" id={id}>
       {mappedList.map((item, index) => (
         <Group justify="center" display="flex" key={`progression-${item.title}`}>
           <Card shadow="sm" padding="lg" radius="md" withBorder>

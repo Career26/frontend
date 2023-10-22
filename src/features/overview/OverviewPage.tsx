@@ -44,7 +44,11 @@ export const OverviewPage = () => {
                   </Text>
                 </Group>
               </Card.Section>
-              {anchor === 'role' && <Text py="md">{data.roleSummary}</Text>}
+              {anchor === 'role' && (
+                <Text py="md" id="role">
+                  {data.roleSummary}
+                </Text>
+              )}
               {anchor === 'employers' && <TopEmployersTile employers={data.exampleEmployers} />}
               {anchor === 'progression' && (
                 <CareerProgressionTile
@@ -58,6 +62,7 @@ export const OverviewPage = () => {
                     title: `Year ${item.year}`,
                     descriptions: [item.activity],
                   }))}
+                  id="preparation"
                 />
               )}
               {anchor === 'timeline' && (
@@ -66,6 +71,7 @@ export const OverviewPage = () => {
                     title: `${index + 1} ${item.stage}`,
                     descriptions: [item.description],
                   }))}
+                  id="timeline"
                 />
               )}
               {anchor === 'overlaps' && <OverlapsTile careerOverlaps={data.careerOverlaps} />}

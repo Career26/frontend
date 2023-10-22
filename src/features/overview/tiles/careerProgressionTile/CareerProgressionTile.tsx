@@ -53,7 +53,7 @@ export const CareerProgressionTile = ({
   );
 
   return (
-    <>
+    <div id="progression">
       <Card className={styles.container} shadow="md" withBorder>
         <Stepper
           onStepClick={setActiveIndex}
@@ -79,6 +79,6 @@ export const CareerProgressionTile = ({
       />
 
       {selectedItem && <SalaryCard salaryProgression={salaryProgression} {...selectedItem} />}
-    </>
+    </div>
   );
 };

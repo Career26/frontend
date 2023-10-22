@@ -8,7 +8,9 @@ import { WorkStyleForm } from './WorkStyleForm';
 export const PreferencesForm = ({ form }: { form: CareerFormProps }) => (
   <Container py="md">
     <Group justify="center">
-      <Text fw="bold">Preferences</Text>
+      <Text fw="bold" size="1.5rem">
+        Preferences
+      </Text>
     </Group>
     <AreasOfInterestForm form={form} />
     <WorkStyleForm form={form} />

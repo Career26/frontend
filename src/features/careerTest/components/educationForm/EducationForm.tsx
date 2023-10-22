@@ -27,7 +27,9 @@ export const EducationForm = ({ form }: { form: CareerFormProps }) => {
   return (
     <Container py="md">
       <Group justify="center">
-        <Text fw="bold">Education</Text>
+        <Text fw="bold" size="1.5rem">
+          Education
+        </Text>
       </Group>
       <UniversityForm form={form} baseKey="latestDegree" />
       {[...Array(additionalDegreesCount).keys()].map((key) => {

@@ -27,7 +27,9 @@ export const CareerPathsForm = ({
   return (
     <Container py="md">
       <Group justify="center">
-        <Text fw="bold">Career Paths</Text>
+        <Text fw="bold" size="1.5rem">
+          Career Paths
+        </Text>
       </Group>
       <Group justify="center">
         <Text>Select the careers that you like</Text>

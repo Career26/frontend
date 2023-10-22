@@ -28,7 +28,9 @@ export const WorkExperienceForm = ({ form }: { form: CareerFormProps }) => {
   return (
     <Container py="md">
       <Group justify="center">
-        <Text fw="bold">Experience</Text>
+        <Text fw="bold" size="1.5rem">
+          Experience
+        </Text>
       </Group>
       {[...Array(workExperienceCount).keys()].map((key) => {
         const baseKey = `previousWorkExperience.${key}`;

@@ -1,11 +1,12 @@
 import React from 'react';
-import { Group, Button, Avatar, Menu, Container, Image } from '@mantine/core';
+import { Group, Button, Avatar, Menu, Image } from '@mantine/core';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 import { useAppDispatch } from '@state/store';
 import { setLoginModal } from '@slices/sessionSlice';
 import { IconLogout, IconSettings } from '@tabler/icons-react';
 import commonStyles from '@shared/styles/commonStyles.module.scss';
-import logo from '@assets/trans-bkg-navy-logo.png';
+import logo from '@assets/logo.png';
+import c26 from '@assets/career-26.png';
 
 import { LoginModal } from '../account/LoginModal';
 import { NavigationCenter } from './NavigationCenter';
@@ -28,18 +29,14 @@ export const PageHeader = ({
   };
 
   return (
-    <Container p={0}>
+    <>
       <LoginModal />
-      <Group justify="space-between" align="center">
-        <Image
-          src={logo}
-          h={80}
-          w="auto"
-          fit="contain"
-          onClick={goToHomepage}
-          className={styles.logo}
-        />
-        <CareerNavigation />
+      <Group onClick={goToHomepage} className={styles.logo}>
+        <Image src={logo} h={35} />
+        <Image src={c26} h={30} />
+      </Group>
+      <CareerNavigation />
+      <Group justify="space-between" align="center" display="flex">
         <Group>
           {!authenticated ? (
             <>
@@ -72,6 +69,6 @@ export const PageHeader = ({
           )}
         </Group>
       </Group>
-    </Container>
+    </>
   );
 };

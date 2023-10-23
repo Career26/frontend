@@ -6,6 +6,7 @@ import { resetSession } from '@slices/sessionSlice';
 import { useCareerTestStorage } from '@careerTest/hooks/useCareerTestStorage';
 
 import { PageHeader } from '../pageHeader/PageHeader';
+import styles from './shellStyles.module.scss';
 
 interface ShellProps {
   children: ReactElement;
@@ -37,7 +38,7 @@ export const Shell = ({ children, navbar }: ShellProps) => {
       header={{ height: headerHeight }}
       navbar={{ width: navWidth, breakpoint: 'sm' }}
     >
-      <AppShell.Header>
+      <AppShell.Header className={styles.header}>
         <PageHeader authenticated={authenticated} signOut={onSignOut} />
       </AppShell.Header>
       <AppShell.Navbar display={!navbar ? 'none' : 'flex'}>

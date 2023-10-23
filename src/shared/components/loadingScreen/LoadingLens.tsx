@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '@assets/trans-bkg-navy-logo.png';
+import logo from '@assets/logo.png';
 import './bounce.css';
 import { Image } from '@mantine/core';
 

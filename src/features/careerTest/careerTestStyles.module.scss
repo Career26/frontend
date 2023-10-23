@@ -11,3 +11,11 @@
 .result {
   width: 100vh;
 }
+
+.loader {
+  justify-content: center;
+  display: flex;
+  position: fixed;
+  bottom: 25rem;
+  width: 100%;
+}

@@ -4,7 +4,6 @@ import { Shell } from '@shared/components/shell/Shell';
 import { useCreateProfileMutation } from '@apis/profileApi';
 import { setLoginModal } from '@slices/sessionSlice';
 import { useAppDispatch } from '@state/store';
-import { LoadingScreenWithText } from '@shared/components/loadingScreen/LoadingScreen';
 
 import { EducationForm } from './components/educationForm/EducationForm';
 import { WorkExperienceForm } from './components/workExperienceForm/WorkExperienceForm';
@@ -14,6 +13,7 @@ import { CareerPathsForm } from './components/careerPathsForm/CareerPathsForm';
 import { CareerTestHeader } from './components/careerTestHeader/CareerTestHeader';
 import { CareerStep } from './careerTestTypes';
 import { useCareerTestStorage } from './hooks/useCareerTestStorage';
+import { CareerLoader } from './CareerLoader';
 
 const stepperLabels = ['Education', 'Experience', 'Preferences', 'Career Paths'];
 
@@ -97,29 +97,7 @@ export const CareerTest = () => {
 
         <Container py="md">
           {isLoading ? (
-            <LoadingScreenWithText
-              repeatSequence
-              text={[
-                {
-                  text: 'Generating your personalised career suggestions...',
-                  textDelay: 40,
-                  repeatDelay: 1000,
-                  deleteDelay: 2000,
-                },
-                {
-                  text: 'This may take up to 30 seconds...',
-                  textDelay: 40,
-                  repeatDelay: 1000,
-                  deleteDelay: 2000,
-                },
-                {
-                  text: "You're almost there...",
-                  textDelay: 40,
-                  repeatDelay: 1000,
-                  deleteDelay: 2000,
-                },
-              ]}
-            />
+            <CareerLoader />
           ) : (
             <>
               {activeStep === CareerStep.EDUCATION && <EducationForm form={form} />}

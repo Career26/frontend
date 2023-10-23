@@ -10,6 +10,7 @@ import logo from '@assets/trans-bkg-navy-logo.png';
 import { LoginModal } from '../account/LoginModal';
 import { NavigationCenter } from './NavigationCenter';
 import { CareerNavigation } from './CareerNavigation';
+import styles from './headerStyles.module.scss';
 
 export const PageHeader = ({
   signOut,
@@ -29,11 +30,16 @@ export const PageHeader = ({
   return (
     <Container p={0}>
       <LoginModal />
-      <Group justify="space-between" align="center" p={0}>
-        <Image src={logo} h="10vh" w="auto" fit="contain" onClick={goToHomepage} />
-
+      <Group justify="space-between" align="center">
+        <Image
+          src={logo}
+          h={80}
+          w="auto"
+          fit="contain"
+          onClick={goToHomepage}
+          className={styles.logo}
+        />
         <CareerNavigation />
-
         <Group>
           {!authenticated ? (
             <>

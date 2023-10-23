@@ -33,7 +33,9 @@ export const InterviewPage = () => {
 
   const form = useForm<{ answer: string }>({
     initialValues: { answer: '' },
-    validate: { answer: hasLength({ min: 10, max: 300 }, 'Answer must be 10-300 characters long') },
+    validate: {
+      answer: hasLength({ min: 10, max: 1000 }, 'Answer must be 10-1000 characters long'),
+    },
   });
 
   const onClickReset = () => {

@@ -8,9 +8,9 @@ import { IconExclamationCircle } from '@tabler/icons-react';
 const DetailsTab = () => {
   const { user, loading, updateUserAttributes } = useAuthUser();
   const initialValues = {
-    name: user.attributes?.name || '',
-    gender: user.attributes?.gender || '',
-    email: user.attributes?.email || '',
+    name: user?.attributes?.name || '',
+    gender: user?.attributes?.gender || '',
+    email: user?.attributes?.email || '',
   };
 
   const form = useForm<UserDetails>({

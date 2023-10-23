@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
 
-import logo from '@assets/trans-bkg-navy-logo.png';
-
 import { Typewriter } from './TypeWriter';
+import { LoadingLens } from './LoadingLens';
 import './loadingScreen.scss';
-import './bounce.css';
-import { Image } from '@mantine/core';
 
 type LoadingScreenText = {
   text: string;
@@ -35,12 +32,7 @@ export const LoadingScreenWithText = ({
 
   return (
     <div className="container">
-      <div className="bounceContainer">
-        <div className="logo">
-          <Image src={logo} />
-        </div>
-        <div className="shadow" />
-      </div>
+      <LoadingLens />
       {selectedText && (
         <div className="typeWriter">
           <h1>

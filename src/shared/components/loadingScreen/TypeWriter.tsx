@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from 'react';
 
-export const Typewriter = ({
+type LoadingScreenText = {
+  text: string;
+  textDelay: number;
+  deleteDelay?: number;
+  repeatDelay?: number;
+};
+
+const Type = ({
   text,
   textDelay,
   repeatDelay,
@@ -55,4 +62,42 @@ export const Typewriter = ({
   }, [currentIndex, repeatDelay, textDelay, text, isComplete, deleteDelay]);
 
   return <span>{currentText}</span>;
+};
+
+export const TypeWriter = ({
+  text,
+  repeatSequence,
+}: {
+  repeatSequence?: boolean;
+  text: LoadingScreenText[];
+}) => {
+  const [lineIndex, setLineIndex] = useState(0);
+
+  const onComplete = () => {
+    if (lineIndex === text.length - 1 && repeatSequence) {
+      setLineIndex(0);
+    } else {
+      setLineIndex(lineIndex + 1);
+    }
+  };
+
+  const selectedText = text[lineIndex];
+
+  return (
+    <div className="container">
+      {selectedText && (
+        <div className="typeWriter">
+          <h1>
+            <Type
+              text={selectedText.text}
+              textDelay={selectedText.textDelay}
+              repeatDelay={selectedText.repeatDelay}
+              deleteDelay={selectedText.deleteDelay}
+              onComplete={onComplete}
+            />
+          </h1>
+        </div>
+      )}
+    </div>
+  );
 };

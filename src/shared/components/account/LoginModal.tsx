@@ -90,15 +90,14 @@ export const LoginModal = () => {
     <Modal
       onClose={onClose}
       opened={open}
-      className={styles.container}
       withCloseButton={false}
       centered
       radius={10}
+      className={styles.loginContainer}
     >
       <Authenticator
         services={{ handleConfirmSignUp }}
         initialState={initialState}
-        className={styles.container}
         formFields={formFields}
         loginMechanisms={['email']}
         components={components}

@@ -1,7 +1,19 @@
-.container {
-  .mantine-Modal-body {
-    padding: 0;
-  }
+:root {
+  --amplify-components-button-primary-background-color: #042a4a;
+  --amplify-components-tabs-item-active-color: #042a4a;
+  --amplify-components-tabs-item-active-border-color: #042a4a;
+  --amplify-components-text-error-color: red;
+  --amplify-components-fieldcontrol-error-border-color: red;
+  --amplify-components-fieldcontrol-focus-border-color: #042a4a;
+  --amplify-components-radio-button-checked-color: #042a4a;
+  --amplify-components-button-link-color: #042a4a;
+  --amplify-components-button-link-active-background-color: #f1f7ff;
+  --amplify-internal-button-background-color: #f1f7ff;
+  --amplify-components-button-active-background-color: #f1f7ff;
+  --amplify-components-tabs-item-hover-color: #0b356e;
+}
+
+.loginContainer {
   [data-amplify-authenticator] [data-amplify-container] {
     width: 100%;
   }

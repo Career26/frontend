@@ -31,7 +31,7 @@ export const Hero = ({
       <Container>
         <Title fw="bold" size="3.5rem" className={styles.title}>
           {headingText}{' '}
-          <Text component="span" variant="gradient" gradient={{ from: 'blue', to: 'cyan' }} inherit>
+          <Text component="span" c="navy" inherit>
             {colorHeadingText}
           </Text>
         </Title>
@@ -46,12 +46,7 @@ export const Hero = ({
 
     <Container>
       <Group py="md" px="sm">
-        <Button
-          size="xl"
-          variant="gradient"
-          gradient={{ from: 'blue', to: 'cyan' }}
-          onClick={onClick}
-        >
+        <Button size="xl" color="navy" onClick={onClick}>
           {actionButtonText}
         </Button>
       </Group>

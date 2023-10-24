@@ -33,7 +33,7 @@ export const CareerTest = () => {
   }, [data]);
 
   useEffect(() => {
-    if (activeStep !== CareerStep.COMPLETE) {
+    if (activeStep >= CareerStep.COMPLETE) {
       storeTestValues({ key: 'step', value: activeStep });
     }
   }, [activeStep]);

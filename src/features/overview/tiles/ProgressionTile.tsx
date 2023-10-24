@@ -31,7 +31,14 @@ export const ProgressionTile = ({
       {mappedList.map((item, index) => (
         <Group justify="center" display="flex" key={`progression-${item.title}`}>
           <Card shadow="sm" padding="lg" radius="md" withBorder>
-            <Card.Section withBorder inheritPadding py="xs" fw="bold">
+            <Card.Section
+              withBorder
+              inheritPadding
+              py="xs"
+              fw="bold"
+              variant="light"
+              className={commonStyles.lightNavyBg}
+            >
               {item.title}
             </Card.Section>
             <div className={commonStyles.row}>
@@ -42,7 +49,7 @@ export const ProgressionTile = ({
               ))}
             </div>
           </Card>
-          {index !== mappedList.length - 1 && <IconArrowBigDownLines size={40} />}
+          {index !== mappedList.length - 1 && <IconArrowBigDownLines size={40} color="navy" />}
         </Group>
       ))}
     </Group>

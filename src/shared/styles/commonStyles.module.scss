@@ -18,3 +18,30 @@
   padding-top: var(--mantine-spacing-md);
   padding-bottom: var(--mantine-spacing-md);
 }
+
+.lightNavyBg {
+  background-color: var(--mantine-color-navy-0) !important;
+  > span {
+    color: black;
+  }
+}
+
+.navyBg {
+  background-color: var(--mantine-color-navy-5) !important;
+  > span {
+    color: white;
+  }
+}
+
+.disabled {
+  &:hover {
+    cursor: not-allowed;
+  }
+}
+
+.navTile {
+  &:hover {
+    background-color: var(--mantine-color-navy-5) !important;
+    color: white;
+  }
+}

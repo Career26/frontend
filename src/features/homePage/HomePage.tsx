@@ -31,13 +31,22 @@ export const HomePage = () => {
                   h={150}
                   w="100%"
                   display="flex"
-                  className={classNames(commonStyles.hoverItem, { [styles.disabled]: disabled })}
+                  className={classNames(
+                    commonStyles.lightNavyBg,
+                    commonStyles.hoverItem,
+                    commonStyles.navTile,
+                    {
+                      [commonStyles.disabled]: disabled,
+                    },
+                  )}
                 >
                   <Group className={styles.left} display="flex" align="center" justify="center">
                     <Icon size={100} />
                   </Group>
                   <Group className={styles.right} display="flex" align="center" justify="center">
-                    <Text fw="bold">{title}</Text>
+                    <Text fw="bold" size="2rem">
+                      {title}
+                    </Text>
                     <Text>{description}</Text>
                   </Group>
                 </Paper>

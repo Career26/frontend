@@ -3,8 +3,18 @@ import { Select, TextInput } from '@mantine/core';
 import { CareerFormProps } from '@careerTest/careerTestTypes';
 import { degreeLevels, degreeOptions } from '@careerTest/config/formConstants';
 
-export const UniversityForm = ({ form, baseKey }: { form: CareerFormProps; baseKey: string }) => (
-  <div>
+import { FormContent } from '../FormContent';
+
+export const UniversityForm = ({
+  form,
+  baseKey,
+  title,
+}: {
+  title?: string;
+  form: CareerFormProps;
+  baseKey: string;
+}) => (
+  <FormContent title={title}>
     <TextInput
       {...form.getInputProps(`${baseKey}.university`)}
       label="University Name"
@@ -35,5 +45,5 @@ export const UniversityForm = ({ form, baseKey }: { form: CareerFormProps; baseK
         py="xs"
       />
     </div>
-  </div>
+  </FormContent>
 );

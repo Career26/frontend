@@ -10,7 +10,7 @@ export const LoadingLens = () => (
     <div className="logoContainer">
       <Image src={logo} h={70} w="auto" fit="contain" className="logo" />
       <Image src={c26} h={80} w="auto" fit="contain" className="title" />
-      <Loader color="blue" type="dots" className="dots" size="xl" />
+      <Loader type="dots" className="dots" size="xl" />
     </div>
   </div>
 );

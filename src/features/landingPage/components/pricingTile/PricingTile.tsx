@@ -23,18 +23,18 @@ export const PricingTile = ({
 }: PricingComponentProps) => (
   <Container className={styles.main}>
     <Card className={styles.card}>
-      <Badge size="xl" radius="sm" variant="light">
+      <Badge size="xl" radius="sm" variant="outline" py="md">
         {title}
       </Badge>
 
-      <Text className={styles.priceText}>
+      <Text className={styles.priceText} py="sm">
         {amount}{' '}
         <Text inherit component="span">
           / {peroid}
         </Text>
       </Text>
 
-      <Container my="sm" className={styles.benefitsContainer}>
+      <Container className={styles.benefitsContainer} py="md">
         {benefits.map((benefit, index) => (
           <Container
             key={index}
@@ -42,7 +42,7 @@ export const PricingTile = ({
             py={index % 2 === 0 ? 0 : 'sm'}
           >
             <IconCircleCheck />
-            <Text pl="xs" className={styles.benefitText} color="dimmed">
+            <Text pl="xs" className={styles.benefitText}>
               {benefit}
             </Text>
           </Container>

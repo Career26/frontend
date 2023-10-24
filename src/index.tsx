@@ -37,6 +37,25 @@ root.render(
               lg: '74em',
               xl: '90em',
             },
+            primaryColor: 'navy',
+            primaryShade: 5,
+            colors: {
+              navy: [
+                '#f1f7ff',
+                '#7e9bcd',
+                '#7595c7',
+                '#6c8ec1',
+                '#0d3978',
+                '#0b356e',
+                '#093364',
+                '#07305a',
+                '#052d50',
+                '#042a4a',
+              ],
+            },
+            fontFamily: 'Verdana, sans-serif',
+            fontFamilyMonospace: 'Monaco, Courier, monospace',
+            headings: { fontFamily: 'Greycliff CF, sans-serif' },
           }}
         >
           <Authenticator.Provider>

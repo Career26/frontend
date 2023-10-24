@@ -7,6 +7,7 @@ import { IconLogout, IconSettings } from '@tabler/icons-react';
 import commonStyles from '@shared/styles/commonStyles.module.scss';
 import logo from '@assets/logo.png';
 import c26 from '@assets/career-26.png';
+import classNames from 'classnames';
 
 import { LoginModal } from '../account/LoginModal';
 import { NavigationCenter } from './NavigationCenter';
@@ -40,19 +41,21 @@ export const PageHeader = ({
         <Group>
           {!authenticated ? (
             <>
-              <Button variant="default" onClick={onClickLogin}>
+              <Button variant="outline" onClick={onClickLogin}>
                 Login
               </Button>
-              <Button variant="gradient" onClick={clickCareersTest}>
-                Take the Test
-              </Button>
+              <Button onClick={clickCareersTest}>Take the Test</Button>
             </>
           ) : (
             <>
               <NavigationCenter />
-              <Menu shadow="md" width={200}>
+              <Menu shadow="sm" width={200}>
                 <Menu.Target>
-                  <Avatar radius="xl" className={commonStyles.hoverItem} />
+                  <Avatar
+                    radius="xl"
+                    className={classNames(commonStyles.hoverItem, commonStyles.navyBg)}
+                    color="white"
+                  />
                 </Menu.Target>
 
                 <Menu.Dropdown>

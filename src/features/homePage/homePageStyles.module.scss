@@ -8,17 +8,11 @@
 }
 
 .left {
-  width: 50%;
+  width: 30%;
 }
 
 .right {
-  width: 50%;
+  width: 70%;
   flex-direction: column;
   text-align: center;
-}
-
-.disabled {
-  &:hover {
-    cursor: not-allowed;
-  }
 }

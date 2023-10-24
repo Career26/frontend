@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { featureTiles } from '@shared/config/featureConstants';
 import commonStyles from '@shared/styles/commonStyles.module.scss';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
+import classNames from 'classnames';
 
 export const NavigationCenter = () => {
   const [opened, { open, close }] = useDisclosure(false);
@@ -19,7 +20,12 @@ export const NavigationCenter = () => {
 
   return (
     <>
-      <Avatar radius="xl" onClick={open} className={commonStyles.hoverItem}>
+      <Avatar
+        radius="xl"
+        onClick={open}
+        className={classNames(commonStyles.hoverItem, commonStyles.navyBg)}
+        color="white"
+      >
         <IconLayoutDashboard />
       </Avatar>
       <Modal
@@ -43,7 +49,14 @@ export const NavigationCenter = () => {
                   h={150}
                   w="100%"
                   display="flex"
-                  className={commonStyles.hoverItem}
+                  className={classNames(
+                    commonStyles.lightNavyBg,
+                    commonStyles.hoverItem,
+                    commonStyles.navTile,
+                    {
+                      [commonStyles.disabled]: disabled,
+                    },
+                  )}
                 >
                   <Group display="flex" align="center" justify="space-between">
                     <Icon size={100} />

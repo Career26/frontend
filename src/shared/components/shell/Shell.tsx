@@ -4,6 +4,8 @@ import { useAppDispatch } from '@state/store';
 import { useAuthUser } from '@shared/hooks/useAuthUser';
 import { resetSession } from '@slices/sessionSlice';
 import { useCareerTestStorage } from '@careerTest/hooks/useCareerTestStorage';
+import commonStyles from '@shared/styles/commonStyles.module.scss';
+import classNames from 'classnames';
 
 import { PageHeader } from '../pageHeader/PageHeader';
 import styles from './shellStyles.module.scss';
@@ -38,7 +40,7 @@ export const Shell = ({ children, navbar }: ShellProps) => {
       header={{ height: headerHeight }}
       navbar={{ width: navWidth, breakpoint: 'sm' }}
     >
-      <AppShell.Header className={styles.header}>
+      <AppShell.Header className={classNames(styles.header, commonStyles.lightNavyBg)}>
         <PageHeader authenticated={authenticated} signOut={onSignOut} />
       </AppShell.Header>
       <AppShell.Navbar display={!navbar ? 'none' : 'flex'}>

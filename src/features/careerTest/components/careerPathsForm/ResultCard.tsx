@@ -1,6 +1,7 @@
 import { Badge, Button, Card, Group, Text } from '@mantine/core';
 import { IconMinus, IconPlus } from '@tabler/icons-react';
 import React from 'react';
+import commonStyles from '@shared/styles/commonStyles.module.scss';
 
 type CareerPathActionsProps = {
   loading?: boolean;
@@ -27,7 +28,7 @@ export const ResultCard = ({
   onClick,
 }: ResultCardProps) => (
   <Card shadow="sm" padding="lg" radius="md" withBorder h="100%">
-    <Card.Section withBorder inheritPadding py="xs">
+    <Card.Section withBorder inheritPadding py="xs" className={commonStyles.lightNavyBg}>
       <Group justify="space-between">
         <Text fw="bold">{title}</Text>
         <Button

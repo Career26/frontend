@@ -76,7 +76,6 @@ export const InterviewPage = () => {
           {...form.getInputProps('answer')}
           label="Answer"
           placeholder="Enter your response here"
-          variant="filled"
           withAsterisk
           minRows={5}
           maxRows={10}

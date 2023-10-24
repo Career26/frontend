@@ -41,7 +41,7 @@ root.render(
             primaryShade: 5,
             colors: {
               navy: [
-                '#cedaed',
+                '#f1f7ff',
                 '#7e9bcd',
                 '#7595c7',
                 '#6c8ec1',

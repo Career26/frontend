@@ -5,7 +5,6 @@ import { useAppDispatch } from '@state/store';
 import { setLoginModal } from '@slices/sessionSlice';
 import { IconLogout, IconSettings } from '@tabler/icons-react';
 import commonStyles from '@shared/styles/commonStyles.module.scss';
-import logo from '@assets/logo.png';
 import c26 from '@assets/career-26.png';
 import classNames from 'classnames';
 
@@ -33,8 +32,7 @@ export const PageHeader = ({
     <>
       <LoginModal />
       <Group onClick={goToHomepage} className={styles.logo}>
-        <Image src={logo} h={35} />
-        <Image src={c26} h={30} />
+        <Image src={c26} h={25} />
       </Group>
       <CareerNavigation />
       <Group justify="space-between" align="center" display="flex">

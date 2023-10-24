@@ -41,7 +41,7 @@ export const CareerProgressionTile = ({
                 key={`promotion-${item.age}`}
                 label={item.age}
                 description={item.title}
-                color={activeIndex === index ? '#faa2c1' : '#228be6'}
+                color={activeIndex === index ? '#faa2c1' : 'navy'}
               />
             ))}
           </Stepper>

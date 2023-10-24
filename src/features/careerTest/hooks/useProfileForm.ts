@@ -43,7 +43,7 @@ export const useProfileForm = ({ activeStep }: { activeStep: number }) => {
           if (!value) {
             return 'You must provide a reason for the rating';
           }
-          if (value.length > 300) {
+          if (value.length > 500) {
             return 'Maximum character length is 300';
           }
           return null;

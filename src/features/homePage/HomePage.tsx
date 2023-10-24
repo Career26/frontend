@@ -44,7 +44,7 @@ export const HomePage = () => {
                     <Icon size={100} />
                   </Group>
                   <Group className={styles.right} display="flex" align="center" justify="center">
-                    <Text fw="bold" size="3rem">
+                    <Text fw="bold" size="2rem">
                       {title}
                     </Text>
                     <Text>{description}</Text>

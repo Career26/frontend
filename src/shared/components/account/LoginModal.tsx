@@ -9,7 +9,7 @@ import { useLazyAssociateProfileQuery } from '@apis/profileApi';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 import { useAuthUser } from '@shared/hooks/useAuthUser';
 
-import './accountStyles.scss';
+import styles from './accountStyles.module.scss';
 
 const FormFields = () => {
   const { validationErrors } = useAuthenticator();
@@ -90,15 +90,14 @@ export const LoginModal = () => {
     <Modal
       onClose={onClose}
       opened={open}
-      className="loginContainer"
       withCloseButton={false}
       centered
       radius={10}
+      className={styles.loginContainer}
     >
       <Authenticator
         services={{ handleConfirmSignUp }}
         initialState={initialState}
-        className="loginContainer"
         formFields={formFields}
         loginMechanisms={['email']}
         components={components}

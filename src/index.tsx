@@ -37,6 +37,22 @@ root.render(
               lg: '74em',
               xl: '90em',
             },
+            primaryColor: 'navy',
+            primaryShade: 5,
+            colors: {
+              navy: [
+                '#1545a0',
+                '#134296',
+                '#113f8c',
+                '#0f3c82',
+                '#0d3978',
+                '#0b356e',
+                '#093364',
+                '#07305a',
+                '#052d50',
+                '#042a4a',
+              ],
+            },
           }}
         >
           <Authenticator.Provider>

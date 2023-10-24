@@ -45,7 +45,7 @@ export const LandingPage = () => {
         </Container>
 
         <Container className={styles.pricingContainer} id={pricingTag}>
-          <Badge size="xl" radius="sm" variant="light">
+          <Badge size="xl" radius="sm" variant="outline">
             Pricing
           </Badge>
 

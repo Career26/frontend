@@ -40,12 +40,10 @@ export const PageHeader = ({
         <Group>
           {!authenticated ? (
             <>
-              <Button variant="default" onClick={onClickLogin}>
+              <Button variant="outline" onClick={onClickLogin}>
                 Login
               </Button>
-              <Button variant="gradient" onClick={clickCareersTest}>
-                Take the Test
-              </Button>
+              <Button onClick={clickCareersTest}>Take the Test</Button>
             </>
           ) : (
             <>

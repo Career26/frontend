@@ -30,7 +30,7 @@ export const CareerLoader = () => (
       ]}
     />
     <div className={styles.loader}>
-      <Loader color="blue" type="dots" size="xl" />
+      <Loader type="dots" size="xl" />
     </div>
   </>
 );

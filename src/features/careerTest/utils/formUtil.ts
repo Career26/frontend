@@ -1,14 +1,19 @@
-export const getRatingLabel = (rating: string) => {
+const getPrefix = (rating: string) => {
   switch (rating) {
-    case '1':
+    case 'I hated it':
       return 'Why did you hate it?';
-    case '2':
+    case 'I disliked it':
       return 'Why did you dislike it?';
-    case '4':
+    case 'I liked it':
       return 'Why did you like it?';
-    case '5':
+    case 'I loved it':
       return 'Why did you love it?';
     default:
       return 'Provide a reason for this rating';
   }
+};
+
+export const getRatingLabel = (rating: string, answerLength: number) => {
+  const prefix = getPrefix(rating);
+  return `${prefix} (${500 - answerLength} characters remaining)`;
 };

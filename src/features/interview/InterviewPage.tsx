@@ -74,7 +74,7 @@ export const InterviewPage = () => {
 
         <Textarea
           {...form.getInputProps('answer')}
-          label="Answer"
+          label={`Answer (${1000 - form.values.answer.length} characters remaining)`}
           placeholder="Enter your response here"
           withAsterisk
           minRows={5}

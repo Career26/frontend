@@ -32,8 +32,8 @@ export const PageHeader = ({
     <>
       <LoginModal />
       <Group onClick={goToHomepage} className={styles.logo}>
-        <Image src={logo} h={35} />
-        <Image src={c26} h={30} />
+        {/* <Image src={logo} h={20} /> */}
+        <Image src={c26} h={25} />
       </Group>
       <CareerNavigation />
       <Group justify="space-between" align="center" display="flex">

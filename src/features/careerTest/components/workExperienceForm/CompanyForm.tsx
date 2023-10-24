@@ -16,6 +16,7 @@ export const CompanyForm = ({
   baseKey: string;
 }) => {
   const rating = form.getInputProps(`${baseKey}.rating`).value;
+  const ratingReason = form.getInputProps(`${baseKey}.ratingReason`).value;
   return (
     <FormContent title={title}>
       <TextInput
@@ -36,7 +37,7 @@ export const CompanyForm = ({
 
       <Textarea
         {...form.getInputProps(`${baseKey}.ratingReason`)}
-        label={getRatingLabel(rating)}
+        label={getRatingLabel(rating, ratingReason.length)}
         minRows={3}
         autosize
         withAsterisk

@@ -1,11 +1,11 @@
 import React from 'react';
 import { Shell } from '@shared/components/shell/Shell';
 import { useAppSelector } from '@state/store';
-import { selectSelectedCareerPathId } from '@slices/sessionSlice';
+import { selectSelectedCareerPath, selectSelectedCareerPathId } from '@slices/sessionSlice';
 import { useGetCareerOverviewQuery } from '@apis/overviewApi';
 import { selectProfileId } from '@apis/profileApi';
-import { LoadingLens } from '@shared/components/loadingScreen/LoadingLens';
 import { Card, Container, Group, Text } from '@mantine/core';
+import { LoaderWithText } from '@shared/components/loadingScreen/LoaderWithText';
 
 import { overviewLinks } from './config/overviewConstants';
 import { CareerProgressionTile } from './tiles/careerProgressionTile/CareerProgressionTile';
@@ -17,13 +17,33 @@ import { ProgressionTile } from './tiles/ProgressionTile';
 export const OverviewPage = () => {
   const profileId = useAppSelector(selectProfileId) || '';
   const careerId = useAppSelector(selectSelectedCareerPathId);
+  const careerPath = useAppSelector(selectSelectedCareerPath);
   const { data, isFetching } = useGetCareerOverviewQuery(
     { careerId, profileId },
     { skip: !profileId || !careerId },
   );
 
   if (isFetching) {
-    return <LoadingLens />;
+    return (
+      <Shell navbar={<OverviewNavBar />}>
+        <LoaderWithText
+          text={[
+            {
+              text: `Fetching insights for ${careerPath?.title}...`,
+              textDelay: 40,
+              repeatDelay: 1000,
+              deleteDelay: 2000,
+            },
+            {
+              text: `This can take up to 10 seconds...`,
+              textDelay: 40,
+              repeatDelay: 1000,
+              deleteDelay: 2000,
+            },
+          ]}
+        />
+      </Shell>
+    );
   }
 
   if (!data) {

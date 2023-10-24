@@ -4,6 +4,7 @@ import { Shell } from '@shared/components/shell/Shell';
 import { useCreateProfileMutation } from '@apis/profileApi';
 import { setLoginModal } from '@slices/sessionSlice';
 import { useAppDispatch } from '@state/store';
+import { LoaderWithText } from '@shared/components/loadingScreen/LoaderWithText';
 
 import { EducationForm } from './components/educationForm/EducationForm';
 import { WorkExperienceForm } from './components/workExperienceForm/WorkExperienceForm';
@@ -13,7 +14,7 @@ import { CareerPathsForm } from './components/careerPathsForm/CareerPathsForm';
 import { CareerTestHeader } from './components/careerTestHeader/CareerTestHeader';
 import { CareerStep } from './careerTestTypes';
 import { useCareerTestStorage } from './hooks/useCareerTestStorage';
-import { CareerLoader } from './CareerLoader';
+import { careerLoadingText } from './config/formConstants';
 
 const stepperLabels = ['Education', 'Experience', 'Preferences', 'Career Paths'];
 
@@ -97,7 +98,7 @@ export const CareerTest = () => {
 
         <Container py="md">
           {isLoading ? (
-            <CareerLoader />
+            <LoaderWithText text={careerLoadingText} />
           ) : (
             <>
               {activeStep === CareerStep.EDUCATION && <EducationForm form={form} />}

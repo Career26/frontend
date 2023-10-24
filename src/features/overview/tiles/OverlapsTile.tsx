@@ -3,6 +3,7 @@ import { Badge, Card, Grid, Group, Text } from '@mantine/core';
 import { CareerOverlap } from '@datatypes/overview';
 import { addIndustryColors, selectIndustryColors } from '@slices/sessionSlice';
 import { useAppDispatch, useAppSelector } from '@state/store';
+import commonStyles from '@shared/styles/commonStyles.module.scss';
 
 export const OverlapsTile = ({ careerOverlaps }: { careerOverlaps: CareerOverlap[] }) => {
   const dispatch = useAppDispatch();
@@ -18,7 +19,7 @@ export const OverlapsTile = ({ careerOverlaps }: { careerOverlaps: CareerOverlap
       {careerOverlaps.map((item) => (
         <Grid.Col span={{ md: 6 }} key={`overlap-${item.career}`}>
           <Card shadow="sm" padding="lg" radius="md" withBorder h="100%">
-            <Card.Section withBorder inheritPadding py="xs">
+            <Card.Section withBorder inheritPadding py="xs" className={commonStyles.lightNavyBg}>
               <Group justify="space-between">
                 <Text fw="bold">{item.career}</Text>
                 <Badge color={industryColors[item.industry]}>{item.industry}</Badge>

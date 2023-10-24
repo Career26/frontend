@@ -18,3 +18,10 @@
   padding-top: var(--mantine-spacing-md);
   padding-bottom: var(--mantine-spacing-md);
 }
+
+.lightNavyBg {
+  background-color: var(--mantine-color-navy-0) !important;
+  > span {
+    color: black;
+  }
+}

@@ -12,12 +12,14 @@
   width: 100vh;
 }
 
+.typeWriter {
+  height: 10vh;
+}
+
 .loader {
   justify-content: center;
   display: flex;
-  position: fixed;
   bottom: 25rem;
-  width: 100%;
 }
 
 .container {

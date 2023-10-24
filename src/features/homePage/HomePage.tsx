@@ -34,9 +34,9 @@ export const HomePage = () => {
                   className={classNames(
                     commonStyles.lightNavyBg,
                     commonStyles.hoverItem,
-                    styles.navTile,
+                    commonStyles.navTile,
                     {
-                      [styles.disabled]: disabled,
+                      [commonStyles.disabled]: disabled,
                     },
                   )}
                 >

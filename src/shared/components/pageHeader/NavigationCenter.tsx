@@ -49,7 +49,14 @@ export const NavigationCenter = () => {
                   h={150}
                   w="100%"
                   display="flex"
-                  className={commonStyles.hoverItem}
+                  className={classNames(
+                    commonStyles.lightNavyBg,
+                    commonStyles.hoverItem,
+                    commonStyles.navTile,
+                    {
+                      [commonStyles.disabled]: disabled,
+                    },
+                  )}
                 >
                   <Group display="flex" align="center" justify="space-between">
                     <Icon size={100} />

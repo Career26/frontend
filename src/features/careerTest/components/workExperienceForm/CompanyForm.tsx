@@ -4,10 +4,20 @@ import { CareerFormProps } from '@careerTest/careerTestTypes';
 import { ratingOptions } from '@careerTest/config/formConstants';
 import { getRatingLabel } from '@careerTest/utils/formUtil';
 
-export const CompanyForm = ({ form, baseKey }: { form: CareerFormProps; baseKey: string }) => {
+import { FormContent } from '../FormContent';
+
+export const CompanyForm = ({
+  form,
+  baseKey,
+  title,
+}: {
+  title?: string;
+  form: CareerFormProps;
+  baseKey: string;
+}) => {
   const rating = form.getInputProps(`${baseKey}.rating`).value;
   return (
-    <div>
+    <FormContent title={title}>
       <TextInput
         {...form.getInputProps(`${baseKey}.companyName`)}
         label="Company Name"
@@ -32,6 +42,6 @@ export const CompanyForm = ({ form, baseKey }: { form: CareerFormProps; baseKey:
         withAsterisk
         py="xs"
       />
-    </div>
+    </FormContent>
   );
 };

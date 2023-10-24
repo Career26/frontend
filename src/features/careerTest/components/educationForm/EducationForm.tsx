@@ -1,5 +1,5 @@
 import React from 'react';
-import { Group, Button, Text, Container } from '@mantine/core';
+import { Group, Button, Container } from '@mantine/core';
 import { IconPlus } from '@tabler/icons-react';
 import { initialUniversityValues } from '@careerTest/config/formConstants';
 import { CareerFormProps } from '@careerTest/careerTestTypes';
@@ -27,12 +27,7 @@ export const EducationForm = ({ form }: { form: CareerFormProps }) => {
 
   return (
     <Container py="md" className={styles.container}>
-      <Group justify="center">
-        <Text fw="bold" size="1.5rem">
-          Education
-        </Text>
-      </Group>
-      <UniversityForm form={form} baseKey="latestDegree" />
+      <UniversityForm form={form} baseKey="latestDegree" title="Education" />
       {[...Array(additionalDegreesCount).keys()].map((key) => {
         const baseKey = `additionalDegrees.${key}`;
         return (

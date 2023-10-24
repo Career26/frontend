@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
-type LoadingScreenText = {
-  text: string;
-  textDelay: number;
-  deleteDelay?: number;
-  repeatDelay?: number;
-};
+import styles from './loadingScreen.module.scss';
+import { LoadingScreenText } from './loadingTypes';
 
 const Type = ({
   text,
@@ -84,9 +80,9 @@ export const TypeWriter = ({
   const selectedText = text[lineIndex];
 
   return (
-    <div className="container">
+    <div className={styles.container}>
       {selectedText && (
-        <div className="typeWriter">
+        <div className={styles.typeWriter}>
           <h1>
             <Type
               text={selectedText.text}

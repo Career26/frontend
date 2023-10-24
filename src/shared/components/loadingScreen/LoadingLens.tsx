@@ -3,14 +3,14 @@ import logo from '@assets/logo.png';
 import c26 from '@assets/career-26.png';
 import { Image, Loader } from '@mantine/core';
 
-import './loadingScreen.scss';
+import styles from './loadingScreen.module.scss';
 
 export const LoadingLens = () => (
-  <div className="lensContainer">
-    <div className="logoContainer">
-      <Image src={logo} h={70} w="auto" fit="contain" className="logo" />
-      <Image src={c26} h={80} w="auto" fit="contain" className="title" />
-      <Loader type="dots" className="dots" size="xl" />
+  <div className={styles.lensContainer}>
+    <div className={styles.logoContainer}>
+      <Image src={logo} h={70} w="auto" fit="contain" className={styles.logo} />
+      <Image src={c26} h={80} w="auto" fit="contain" className={styles.title} />
+      <Loader type="dots" className={styles.dots} size="xl" />
     </div>
   </div>
 );

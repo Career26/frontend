@@ -1,11 +1,12 @@
 import React from 'react';
-import { Group, Button, Text, Divider, Container } from '@mantine/core';
+import { Group, Button, Text, Container } from '@mantine/core';
 import { IconPlus } from '@tabler/icons-react';
 import { initialUniversityValues } from '@careerTest/config/formConstants';
 import { CareerFormProps } from '@careerTest/careerTestTypes';
 
 import { UniversityForm } from './UniversityForm';
 import { RemoveRowButton } from '../RemoveRowButton';
+import styles from '../../careerTestStyles.module.scss';
 
 export const EducationForm = ({ form }: { form: CareerFormProps }) => {
   const additionalDegreesCount = form.values.additionalDegrees.length;
@@ -25,7 +26,7 @@ export const EducationForm = ({ form }: { form: CareerFormProps }) => {
   };
 
   return (
-    <Container py="md">
+    <Container py="md" className={styles.container}>
       <Group justify="center">
         <Text fw="bold" size="1.5rem">
           Education
@@ -36,7 +37,6 @@ export const EducationForm = ({ form }: { form: CareerFormProps }) => {
         const baseKey = `additionalDegrees.${key}`;
         return (
           <div key={baseKey}>
-            <Divider size="lg" />
             <UniversityForm form={form} baseKey={baseKey} />
             {key + 1 !== additionalDegreesCount && (
               <RemoveRowButton onClick={() => onClickRemoveUniversity(key)} label="University" />

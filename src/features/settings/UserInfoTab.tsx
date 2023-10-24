@@ -11,7 +11,7 @@ const UniversitiesTab = ({ profile }: { profile: Profile }) => {
       {universities.map((university) => (
         <Paper
           key={`experience-${university.university}`}
-          shadow="md"
+          shadow="sm"
           radius="md"
           p="md"
           withBorder
@@ -29,7 +29,7 @@ const UniversitiesTab = ({ profile }: { profile: Profile }) => {
 const ExperiencesTab = ({ profile }: { profile: Profile }) => (
   <div>
     {profile.previousWorkExperience.map((experience) => (
-      <Paper key={`experience-${experience.companyName}`} shadow="md" radius="md" p="md" withBorder>
+      <Paper key={`experience-${experience.companyName}`} shadow="sm" radius="md" p="md" withBorder>
         <TextInput label="Company Name" value={experience.companyName} disabled />
         <TextInput label="Role" value={experience.role} disabled />
       </Paper>

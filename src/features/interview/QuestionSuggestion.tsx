@@ -70,7 +70,7 @@ export const QuestionSuggestion = () => {
   }, [selectedQuestion, careerPathId]);
 
   return (
-    <Paper h="auto" withBorder shadow="md">
+    <Paper h="auto" withBorder shadow="sm">
       <Accordion value={value} onChange={setValue}>
         <Accordion.Item value="suggestion">
           <Accordion.Control>Show Suggestion</Accordion.Control>

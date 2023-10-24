@@ -1,10 +1,10 @@
 import React from 'react';
-import { Select, TextInput } from '@mantine/core';
+import { Paper, Select, TextInput } from '@mantine/core';
 import { CareerFormProps } from '@careerTest/careerTestTypes';
 import { degreeLevels, degreeOptions } from '@careerTest/config/formConstants';
 
 export const UniversityForm = ({ form, baseKey }: { form: CareerFormProps; baseKey: string }) => (
-  <div>
+  <Paper shadow="sm" radius="md" p="md" withBorder>
     <TextInput
       {...form.getInputProps(`${baseKey}.university`)}
       label="University Name"
@@ -35,5 +35,5 @@ export const UniversityForm = ({ form, baseKey }: { form: CareerFormProps; baseK
         py="xs"
       />
     </div>
-  </div>
+  </Paper>
 );

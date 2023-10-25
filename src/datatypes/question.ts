@@ -15,7 +15,7 @@ export interface SuggestionInput {
 }
 
 export interface RatingResponse {
-  answerPositives: string;
+  generalFeedback: string;
   exampleAnswer: string;
   suggestedImprovements: string;
 }

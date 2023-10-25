@@ -1,7 +1,7 @@
 import { RatingResponse } from '@datatypes/question';
 import { Accordion, Button, Paper } from '@mantine/core';
 import React, { useState } from 'react';
-import { IconChecklist, IconCircleCheck, IconInfoCircle } from '@tabler/icons-react';
+import { IconChecklist, IconSpeakerphone, IconWriting } from '@tabler/icons-react';
 import commonStyles from '@shared/styles/commonStyles.module.scss';
 
 import { TextWithIconBlock } from './TextWithIconBlock';
@@ -32,17 +32,17 @@ export const QuestionRating = ({
             <Accordion.Panel>
               <>
                 <TextWithIconBlock
-                  Icon={<IconCircleCheck color="green" />}
-                  title="Positives"
-                  content={rating.answerPositives}
+                  Icon={<IconSpeakerphone color="orange" />}
+                  title="General Feedback"
+                  content={rating.generalFeedback}
                 />
                 <TextWithIconBlock
-                  Icon={<IconInfoCircle color="orange" />}
+                  Icon={<IconChecklist color="green" />}
                   title="Improvements"
                   content={rating.suggestedImprovements}
                 />
                 <TextWithIconBlock
-                  Icon={<IconChecklist />}
+                  Icon={<IconWriting />}
                   title="Example Answer"
                   content={rating.exampleAnswer}
                 />

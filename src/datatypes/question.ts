@@ -20,8 +20,15 @@ export interface RatingResponse {
   suggestedImprovements: string;
 }
 
+export interface SampleAnswerFormat {
+  situation: string;
+  task: string;
+  action: string;
+  response: string;
+}
+
 export interface SuggestionResponse {
   sampleAnswer: string;
-  suggestedFormat: string;
+  suggestedFormat: SampleAnswerFormat;
   whySuitable: string;
 }

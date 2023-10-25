@@ -7,13 +7,6 @@ import { IconBulb, IconQuestionMark, IconStar } from '@tabler/icons-react';
 
 import { TextWithIconBlock } from './TextWithIconBlock';
 
-const NumberedList = ({ items }: { items: string[] }) =>
-  items.map((item, index) => (
-    <List.Item key={`suggestion-${item}`} icon={<ThemeIcon radius="xl">{index + 1}</ThemeIcon>}>
-      {item}
-    </List.Item>
-  ));
-
 const StarList = ({ starMap }: { starMap: { [key: string]: string } }) =>
   Object.entries(starMap).map(([key, value]) => (
     <List.Item key={`suggestion-${key}`} icon={<Badge>{key}</Badge>}>
@@ -21,26 +14,14 @@ const StarList = ({ starMap }: { starMap: { [key: string]: string } }) =>
     </List.Item>
   ));
 
-const getStarMap = (suggestedFormat: string) => {
-  const regex = /Situation: (.*?) Task: (.*?) Action: (.*?) Result: (.*?)$/;
-  const match = suggestedFormat.match(regex);
-  if (!match) {
-    return undefined;
-  }
-  return {
-    Situation: match![1].trim(),
-    Task: match![2].trim(),
-    Action: match![3].trim(),
-    Result: match![4].trim(),
-  };
-};
-
 const SuggestedFormat = ({ suggestedFormat }: { suggestedFormat: string }) => {
-  const starMap = getStarMap(suggestedFormat);
-  const numberedItems = suggestedFormat.split(/(\\n)?\d\. /gm).filter(Boolean);
   return (
     <List spacing="md" center>
-      {starMap ? <StarList starMap={starMap} /> : <NumberedList items={numberedItems} />}
+      {Object.entries(suggestedFormat).map(([key, value]) => (
+        <List.Item key={`suggestion-${key}`} icon={<Badge>{key}</Badge>}>
+          {value}
+        </List.Item>
+      ))}
     </List>
   );
 };

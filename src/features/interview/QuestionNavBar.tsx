@@ -10,12 +10,12 @@ type QuestionNavBarProps = {
 
 export const QuestionNavBar = ({ selectedQuestionId, questions }: QuestionNavBarProps) => {
   const { toggleQuestionId } = usePageNavigation();
-  return questions?.map((_, index) => (
+  return questions?.map(({ question }, index) => (
     <NavLink
       active={selectedQuestionId === index}
       onClick={() => toggleQuestionId(index)}
       key={`question-${index}`}
-      label={`Question ${index + 1}`}
+      label={`${index + 1}. ${question}`}
     />
   ));
 };

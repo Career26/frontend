@@ -2,6 +2,8 @@ import { Badge, Card, Group, Text } from '@mantine/core';
 import React from 'react';
 import commonStyles from '@shared/styles/commonStyles.module.scss';
 
+import styles from './interviewStyles.module.scss';
+
 export const QuestionCard = ({
   title,
   category,
@@ -13,7 +15,7 @@ export const QuestionCard = ({
   question: string;
   color: string;
 }) => (
-  <Card shadow="sm" padding="lg" radius="md" withBorder>
+  <Card shadow="sm" padding="lg" radius="md" withBorder className={styles.questionCard}>
     <Card.Section withBorder inheritPadding py="xs" className={commonStyles.lightNavyBg}>
       <Group justify="space-between">
         <Text fw="bold">{title}</Text>

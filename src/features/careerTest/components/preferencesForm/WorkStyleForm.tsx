@@ -46,7 +46,7 @@ export const WorkStyleForm = ({ form }: { form: CareerFormProps }) => {
         />
         <NumberInput
           {...form.getInputProps('expectedSalary.expectedSalary')}
-          label="What is your expected salary?"
+          label="What is your expected starting salary?"
           withAsterisk
           thousandSeparator=","
           leftSection={Icon && <Icon color="gray" size={20} />}

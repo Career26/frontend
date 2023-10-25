@@ -1,8 +1,9 @@
 import { CareerPath } from './career';
 
 export enum WorkStyle {
-  Team = 'TEAM',
-  Independent = 'INDEPENDENT',
+  'I prefer working in a team' = 'TEAM',
+  'I prefer working independently' = 'INDEPENDENT',
+  'I have no preference' = 'BOTH',
 }
 
 export interface Degree {

@@ -1,30 +1,22 @@
 import { selectSuggestion, useGetSuggestionMutation } from '@apis/questionsApi';
-import { Accordion, Badge, List, Loader, Paper, ThemeIcon } from '@mantine/core';
+import { Accordion, Badge, List, Loader, Paper } from '@mantine/core';
 import { selectSelectedCareerPathId, selectSelectedQuestion } from '@slices/sessionSlice';
 import { useAppSelector } from '@state/store';
 import React, { useEffect, useState } from 'react';
 import { IconBulb, IconQuestionMark, IconStar } from '@tabler/icons-react';
+import { SampleAnswerFormat } from '@datatypes/question';
 
 import { TextWithIconBlock } from './TextWithIconBlock';
 
-const StarList = ({ starMap }: { starMap: { [key: string]: string } }) =>
-  Object.entries(starMap).map(([key, value]) => (
-    <List.Item key={`suggestion-${key}`} icon={<Badge>{key}</Badge>}>
-      {value}
-    </List.Item>
-  ));
-
-const SuggestedFormat = ({ suggestedFormat }: { suggestedFormat: string }) => {
-  return (
-    <List spacing="md" center>
-      {Object.entries(suggestedFormat).map(([key, value]) => (
-        <List.Item key={`suggestion-${key}`} icon={<Badge>{key}</Badge>}>
-          {value}
-        </List.Item>
-      ))}
-    </List>
-  );
-};
+const SuggestedFormat = ({ suggestedFormat }: { suggestedFormat: SampleAnswerFormat }) => (
+  <List spacing="md" center>
+    {Object.entries(suggestedFormat).map(([key, value]) => (
+      <List.Item key={`suggestion-${key}`} icon={<Badge>{key}</Badge>}>
+        {value}
+      </List.Item>
+    ))}
+  </List>
+);
 
 export const QuestionSuggestion = () => {
   const [value, setValue] = useState<string | null>(null);

@@ -29,8 +29,8 @@ export const ProgressionTile = ({
   return (
     <Group py="md" id={id}>
       {mappedList.map((item, index) => (
-        <Group justify="center" display="flex" key={`progression-${item.title}`}>
-          <Card padding="lg" radius="md" withBorder>
+        <Group justify="center" display="flex" key={`progression-${item.title}`} w="100%">
+          <Card shadow="sm" padding="lg" radius="md" withBorder w="100%">
             <Card.Section
               withBorder
               inheritPadding

@@ -54,9 +54,9 @@ root.render(
                 '#042a4a',
               ],
             },
-            fontFamily: 'Verdana, sans-serif',
-            fontFamilyMonospace: 'Monaco, Courier, monospace',
-            headings: { fontFamily: 'Greycliff CF, sans-serif' },
+            // fontFamily: 'Verdana, sans-serif',
+            // fontFamilyMonospace: 'Monaco, Courier, monospace',
+            // headings: { fontFamily: 'Greycliff CF, sans-serif' },
           }}
         >
           <Authenticator.Provider>

@@ -25,7 +25,7 @@ export const CareerNavigation = () => {
   }
 
   return (
-    <Menu opened={open} onClose={() => setOpen(false)}>
+    <Menu opened={open} closeOnItemClick={false} onClose={() => setOpen(false)}>
       <Menu.Target>
         <Button variant="outline" className={styles.careerNav} onClick={() => setOpen(!open)}>
           {selectedCareerPath.title}
@@ -61,7 +61,6 @@ export const CareerNavigation = () => {
               <Text
                 onClick={() => {
                   toggleCareerId(careerIdentifier);
-                  setOpen(false);
                 }}
               >
                 {title}

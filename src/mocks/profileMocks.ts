@@ -29,7 +29,7 @@ export const profileResponseMock: UserProfile = {
     areasOfInterest: ['Finance', 'Technology', 'Art and Creative Work'],
     personalityType: {
       workLifeBalanceSacrifice: true,
-      workStyle: WorkStyle.Independent,
+      workStyle: WorkStyle['I prefer working in a team'],
     },
     expectedSalary: {
       expectedSalary: 70000.0,

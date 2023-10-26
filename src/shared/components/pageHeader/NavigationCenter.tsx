@@ -34,7 +34,6 @@ export const NavigationCenter = () => {
         centered
         withCloseButton={false}
         size="md"
-        radius={20}
         overlayProps={{ blur: 3 }}
       >
         <Container>
@@ -44,7 +43,6 @@ export const NavigationCenter = () => {
                 <Paper
                   onClick={() => !disabled && history.push(link)}
                   withBorder
-                  radius="xl"
                   p="md"
                   h={150}
                   w="100%"
@@ -59,7 +57,7 @@ export const NavigationCenter = () => {
                   )}
                 >
                   <Group display="flex" align="center" justify="space-between">
-                    <Icon size={100} />
+                    <Icon size={50} stroke={1} />
                     <Text>{title}</Text>
                   </Group>
                 </Paper>

@@ -3,7 +3,7 @@ import React from 'react';
 import commonStyles from '@shared/styles/commonStyles.module.scss';
 
 export const TopEmployersTile = ({ employers }: { employers: string[] }) => (
-  <Grid py="md" gutter="md" grow id="employers">
+  <Grid py="md" gutter="md" id="employers">
     {employers.map((employer) => (
       <Grid.Col key={employer} span={2}>
         <Badge size="lg" className={commonStyles.lightNavyBg}>

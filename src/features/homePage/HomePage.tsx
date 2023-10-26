@@ -16,17 +16,11 @@ export const HomePage = () => {
       <Container className={styles.container}>
         <Grid>
           {featureTiles.map(({ title, Icon, link, description, disabled }) => (
-            <Tooltip
-              label={`${title} Coming Soon`}
-              openDelay={500}
-              key={title}
-              disabled={!disabled}
-            >
+            <Tooltip label={`${title} Coming Soon`} key={title} disabled={!disabled}>
               <Grid.Col>
                 <Paper
                   onClick={() => !disabled && history.push(link)}
                   withBorder
-                  radius="xl"
                   p="md"
                   h={150}
                   w="100%"
@@ -40,11 +34,11 @@ export const HomePage = () => {
                     },
                   )}
                 >
-                  <Group className={styles.left} display="flex" align="center" justify="center">
-                    <Icon size={100} />
+                  <Group className={styles.left}>
+                    <Icon className={styles.icon} stroke={1} />
                   </Group>
-                  <Group className={styles.right} display="flex" align="center" justify="center">
-                    <Text fw="bold" size="2rem">
+                  <Group className={styles.right}>
+                    <Text fw="bold" size={'xl'} ta="left">
                       {title}
                     </Text>
                     <Text>{description}</Text>

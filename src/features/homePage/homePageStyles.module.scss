@@ -3,16 +3,24 @@
 .container {
   display: flex;
   justify-content: center;
-  height: calc(100vh - var(--app-shell-header-height));
+  padding-top: calc(var(--app-shell-header-height) * 3);
   align-items: center;
 }
 
 .left {
-  width: 30%;
+  flex: 1;
+  justify-content: center !important;
 }
 
 .right {
-  width: 70%;
-  flex-direction: column;
-  text-align: center;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: flex-start !important;
+  flex: 4;
+}
+
+.icon {
+  width: 60px;
+  height: 60px;
 }

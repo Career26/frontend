@@ -7,7 +7,7 @@
 .row {
   display: flex;
   justify-content: space-between;
-  gap: 16px;
+  gap: var(--mantine-spacing-md);
   padding-top: var(--mantine-spacing-md);
   padding-bottom: var(--mantine-spacing-md);
 }

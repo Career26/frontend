@@ -27,7 +27,7 @@ export const ResultCard = ({
   role,
   onClick,
 }: ResultCardProps) => (
-  <Card padding="lg" radius="md" withBorder h="100%">
+  <Card padding="lg" withBorder h="100%">
     <Card.Section withBorder inheritPadding py="xs" className={commonStyles.lightNavyBg}>
       <Group justify="space-between">
         <Text fw="bold">{title}</Text>

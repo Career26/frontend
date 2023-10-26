@@ -6,7 +6,7 @@ export const FormContent = ({ title, children }: { title?: string; children: Rea
     {title && (
       <Card.Section withBorder inheritPadding py="xs" bg="navy" c="white">
         <Group justify="center">
-          <Text fw="bold" size="1.5rem">
+          <Text fw="bold" size="lg">
             {title}
           </Text>
         </Group>

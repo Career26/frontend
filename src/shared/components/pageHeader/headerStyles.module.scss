@@ -11,3 +11,15 @@
   display: flex;
   justify-content: space-between;
 }
+
+.careerNav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: calc(30% + var(--mantine-spacing-md)) !important;
+  span {
+    width: 100%;
+    justify-content: space-between;
+    display: flex;
+  }
+}

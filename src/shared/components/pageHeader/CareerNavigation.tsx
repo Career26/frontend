@@ -1,10 +1,13 @@
 import { selectCareerPaths } from '@apis/profileApi';
 import { UserProfile } from '@datatypes/profile';
-import { ComboboxItem, Select } from '@mantine/core';
+import { ActionIcon, Button, ComboboxItem, Group, Menu, Select, Text } from '@mantine/core';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
-import { selectSelectedCareerPathId } from '@slices/sessionSlice';
+import { selectSelectedCareerPath, selectSelectedCareerPathId } from '@slices/sessionSlice';
 import { useAppSelector } from '@state/store';
-import React from 'react';
+import { IconArrowDown, IconChevronDown, IconChevronUp, IconHeart } from '@tabler/icons-react';
+import React, { useState } from 'react';
+
+import styles from './headerStyles.module.scss';
 
 const getItems = (careerPaths: UserProfile['careerPaths'], checkSelected: boolean) =>
   Object.entries(careerPaths).reduce<ComboboxItem[]>((agg, [careerId, { title, selected }]) => {
@@ -13,37 +16,44 @@ const getItems = (careerPaths: UserProfile['careerPaths'], checkSelected: boolea
   }, []);
 
 export const CareerNavigation = () => {
+  const [open, setOpen] = useState(false);
   const { toggleCareerId, showNavigation } = usePageNavigation();
   const careerPaths = useAppSelector(selectCareerPaths);
   const selectedCareerPathId = useAppSelector(selectSelectedCareerPathId);
+  const selectedCareerPath = useAppSelector(selectSelectedCareerPath);
 
-  if (!careerPaths || !showNavigation) {
+  if (!careerPaths || !showNavigation || !selectedCareerPath) {
     return null;
   }
-  const onChange = (careerId: string | null) => {
-    if (!careerId) {
-      return;
-    }
-    toggleCareerId(careerId);
-  };
-  const careerOptions = [
-    {
-      group: 'Favourites',
-      items: getItems(careerPaths, true),
-    },
-    {
-      group: ' ',
-      items: getItems(careerPaths, false),
-    },
-  ];
 
   return (
-    <Select
-      w="50%"
-      placeholder="Select Career"
-      value={selectedCareerPathId}
-      data={careerOptions}
-      onChange={onChange}
-    />
+    <Menu opened={open} onChange={setOpen}>
+      <Menu.Target>
+        <Button variant="outline" className={styles.careerNav}>
+          {selectedCareerPath.title}
+          {open ? <IconChevronUp /> : <IconChevronDown />}
+        </Button>
+      </Menu.Target>
+      <Menu.Dropdown w="30%" px="sm">
+        {Object.entries(careerPaths)
+          .sort(([_, a]) => (a.selected ? -1 : 1))
+          .map(([careerId, { title, selected }]) => (
+            <Menu.Item
+              key={`select-${careerId}`}
+              rightSection={
+                <ActionIcon variant="transparent" onClick={() => {}}>
+                  <IconHeart
+                    size={30}
+                    fill={selected ? 'red' : 'transparent'}
+                    color={selected ? 'red' : 'navy'}
+                  />
+                </ActionIcon>
+              }
+            >
+              <Text onClick={() => toggleCareerId(careerId)}>{title}</Text>
+            </Menu.Item>
+          ))}
+      </Menu.Dropdown>
+    </Menu>
   );
 };

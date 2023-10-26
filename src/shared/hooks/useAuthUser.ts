@@ -5,7 +5,7 @@ import { Auth } from 'aws-amplify';
 import { useEffect, useState } from 'react';
 import { notifications } from '@mantine/notifications';
 import { UserDetails } from '@datatypes/profile';
-import { useCareerTestStorage } from '@careerTest/hooks/useCareerTestStorage';
+import { useCareerTestStorage } from '@shared/hooks/useCareerTestStorage';
 
 import { usePageNavigation } from './usePageNavigation';
 

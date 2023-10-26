@@ -11,7 +11,7 @@ import {
 import { selectCareerPaths, selectProfileId, useLazyGetProfileQuery } from '@apis/profileApi';
 import { SettingsPage } from '@features/settings/SettingsPage';
 import { LoadingLens } from '@shared/components/loadingScreen/LoadingLens';
-import { useCareerTestStorage } from '@careerTest/hooks/useCareerTestStorage';
+import { useCareerTestStorage } from '@shared/hooks/useCareerTestStorage';
 
 import { HomePage } from '../homePage/HomePage';
 import { LandingPage } from '../landingPage/LandingPage';

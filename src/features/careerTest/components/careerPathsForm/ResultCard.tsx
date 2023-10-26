@@ -1,5 +1,5 @@
-import { Badge, Button, Card, Group, Text } from '@mantine/core';
-import { IconMinus, IconPlus } from '@tabler/icons-react';
+import { ActionIcon, Badge, Card, Group, Text } from '@mantine/core';
+import { IconHeart } from '@tabler/icons-react';
 import React from 'react';
 import commonStyles from '@shared/styles/commonStyles.module.scss';
 
@@ -31,16 +31,13 @@ export const ResultCard = ({
     <Card.Section withBorder inheritPadding py="xs" className={commonStyles.lightNavyBg}>
       <Group justify="space-between">
         <Text fw="bold">{title}</Text>
-        <Button
-          onClick={onClick}
-          loading={loading}
-          size="xs"
-          variant="outline"
-          leftSection={selected ? <IconMinus /> : <IconPlus />}
-          color={selected ? 'red' : undefined}
-        >
-          {selected ? 'Remove' : 'Select'}
-        </Button>
+        <ActionIcon loading={loading} onClick={onClick} variant="transparent">
+          <IconHeart
+            size={50}
+            fill={selected ? 'red' : 'transparent'}
+            color={selected ? 'red' : 'navy'}
+          />
+        </ActionIcon>
       </Group>
     </Card.Section>
     <Group justify="space-between" py="sm">

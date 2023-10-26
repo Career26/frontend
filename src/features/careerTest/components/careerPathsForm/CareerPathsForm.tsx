@@ -27,7 +27,7 @@ export const CareerPathsForm = ({
 
   return (
     <Container py="md">
-      <FormContent title="Select Your Career Paths">
+      <FormContent title="Select Your Favourite Career Paths">
         <Grid py="lg" grow>
           {Object.entries(careerPaths || {}).map(
             ([careerId, { title, startingSalary, industry, role }]) => (

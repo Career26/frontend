@@ -25,7 +25,7 @@ export const CareerNavigation = () => {
   }
 
   return (
-    <Menu opened={open}>
+    <Menu opened={open} onClose={() => setOpen(false)}>
       <Menu.Target>
         <Button variant="outline" className={styles.careerNav} onClick={() => setOpen(!open)}>
           {selectedCareerPath.title}
@@ -42,13 +42,13 @@ export const CareerNavigation = () => {
                 <ActionIcon
                   loading={loadingCareers[careerIdentifier]}
                   variant="transparent"
-                  onClick={() => {
+                  onClick={() =>
                     toggleSelectedCareer({
                       selected: !selected,
                       careerIdentifier,
                       profileIdentifier,
-                    });
-                  }}
+                    })
+                  }
                 >
                   <IconHeart
                     size={30}
@@ -61,7 +61,7 @@ export const CareerNavigation = () => {
               <Text
                 onClick={() => {
                   toggleCareerId(careerIdentifier);
-                  // setOpen(false);
+                  setOpen(false);
                 }}
               >
                 {title}

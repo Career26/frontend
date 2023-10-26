@@ -44,7 +44,7 @@ export const LandingPage = () => {
           ))}
         </Container>
 
-        <Container className={styles.pricingContainer} id={pricingTag}>
+        {/* <Container className={styles.pricingContainer} id={pricingTag}>
           <Badge size="xl" radius="sm" variant="outline">
             Pricing
           </Badge>
@@ -82,7 +82,7 @@ export const LandingPage = () => {
               />
             </Group>
           </Container>
-        </Container>
+        </Container> */}
 
         <Hero
           image={successImg}

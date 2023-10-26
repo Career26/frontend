@@ -28,8 +28,8 @@ export const Hero = ({
     className={classNames(styles.main, { [styles.grayBackground]: grayBackground })}
   >
     <Container className={styles.innerContainer}>
-      <Container>
-        <Title fw="bold" size="3.5rem" className={styles.title}>
+      <Container className={styles.titleContainer}>
+        <Title className={styles.title}>
           {headingText}{' '}
           <Text component="span" c="navy" inherit>
             {colorHeadingText}
@@ -39,8 +39,8 @@ export const Hero = ({
           {subheadingText}
         </Text>
       </Container>
-      <Center className={styles.imageMobileContainer}>
-        <Image src={image} className={styles.imageMobile} />
+      <Center className={styles.imageContainer}>
+        <Image src={image} className={styles.image} />
       </Center>
     </Container>
 

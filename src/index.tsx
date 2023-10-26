@@ -12,6 +12,7 @@ import { App } from './features/app/App';
 import { store } from './state/store';
 
 import '@mantine/core/styles.css';
+import '@mantine/notifications/styles.css';
 
 Amplify.configure({
   Auth: {

@@ -3,11 +3,11 @@ import { selectLoginModal, setLoginModal } from '@slices/sessionSlice';
 import { useAppDispatch, useAppSelector } from '@state/store';
 import React, { useEffect } from 'react';
 import { Modal } from '@mantine/core';
-import '@aws-amplify/ui-react/styles.css';
-import { Auth } from 'aws-amplify';
 import { useLazyAssociateProfileQuery } from '@apis/profileApi';
-import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 import { useAuthUser } from '@shared/hooks/useAuthUser';
+import { usePageNavigation } from '@shared/hooks/usePageNavigation';
+import { notifications } from '@mantine/notifications';
+import '@aws-amplify/ui-react/styles.css';
 
 import styles from './accountStyles.module.scss';
 
@@ -62,27 +62,32 @@ const components = {
 export const LoginModal = () => {
   const dispatch = useAppDispatch();
   const { open, initialState, associateProfileId } = useAppSelector(selectLoginModal);
-  const { goToHomepage } = usePageNavigation();
   const [associateProfile] = useLazyAssociateProfileQuery();
   const { authenticated } = useAuthUser();
+  const { goToHomepage } = usePageNavigation();
 
   const onClose = () => {
     dispatch(setLoginModal({ open: false }));
   };
 
-  const handleConfirmSignUp = async ({ username, code }: { username: string; code: string }) => {
+  const handleAssociate = async (profileId: string) => {
     try {
-      await Auth.confirmSignUp(username, code);
+      await associateProfile(profileId);
+      notifications.show({
+        title: 'Created Account',
+        message: 'Successfully created account',
+        color: 'green',
+      });
       goToHomepage();
     } catch (error) {
       // eslint-disable-next-line no-console
-      console.error(`signUp error: ${error}`);
+      console.error(`associate account error - ${error}`);
     }
   };
 
   useEffect(() => {
     if (!!associateProfileId && authenticated) {
-      associateProfile(associateProfileId);
+      handleAssociate(associateProfileId);
     }
   }, [authenticated, associateProfileId]);
 
@@ -96,7 +101,6 @@ export const LoginModal = () => {
       className={styles.loginContainer}
     >
       <Authenticator
-        services={{ handleConfirmSignUp }}
         initialState={initialState}
         formFields={formFields}
         loginMechanisms={['email']}

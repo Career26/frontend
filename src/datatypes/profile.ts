@@ -16,7 +16,7 @@ export interface Degree {
 export interface WorkExperience {
   companyName: string;
   role: string;
-  rating: number;
+  rating: string;
   ratingReason: string;
 }
 

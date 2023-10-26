@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
 import { FORM_INDEX, useForm } from '@mantine/form';
+import { useCareerTestStorage } from '@shared/hooks/useCareerTestStorage';
 
 import { CareerFormValues } from '../careerTestTypes';
-import { useCareerTestStorage } from './useCareerTestStorage';
 
 export const useProfileForm = ({ activeStep }: { activeStep: number }) => {
   const {

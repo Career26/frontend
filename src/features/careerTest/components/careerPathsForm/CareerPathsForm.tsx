@@ -2,7 +2,7 @@ import { Grid, Container } from '@mantine/core';
 import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@state/store';
 import { addIndustryColors, selectIndustryColors } from '@slices/sessionSlice';
-import { useCareerSelection } from '@careerTest/hooks/useCareerSelection';
+import { useCareerSelection } from '@shared/hooks/useCareerSelection';
 import { UserProfile } from '@datatypes/profile';
 import styles from '@careerTest/careerTestStyles.module.scss';
 

@@ -5,8 +5,8 @@ import { selectSelectedCareerPath } from '@slices/sessionSlice';
 import { useAppSelector } from '@state/store';
 import { IconChevronDown, IconChevronUp, IconHeart } from '@tabler/icons-react';
 import React, { useState } from 'react';
-import { useCareerSelection } from '@careerTest/hooks/useCareerSelection';
-import { useCareerTestStorage } from '@careerTest/hooks/useCareerTestStorage';
+import { useCareerSelection } from '@shared/hooks/useCareerSelection';
+import { useCareerTestStorage } from '@shared/hooks/useCareerTestStorage';
 
 import styles from './headerStyles.module.scss';
 

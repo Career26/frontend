@@ -3,7 +3,7 @@ import { AppShell, ScrollArea, rem } from '@mantine/core';
 import { useAppDispatch } from '@state/store';
 import { useAuthUser } from '@shared/hooks/useAuthUser';
 import { resetSession } from '@slices/sessionSlice';
-import { useCareerTestStorage } from '@careerTest/hooks/useCareerTestStorage';
+import { useCareerTestStorage } from '@shared/hooks/useCareerTestStorage';
 
 import { PageHeader } from '../pageHeader/PageHeader';
 import styles from './shellStyles.module.scss';

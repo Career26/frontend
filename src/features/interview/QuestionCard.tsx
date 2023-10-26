@@ -15,7 +15,7 @@ export const QuestionCard = ({
   question: string;
   color: string;
 }) => (
-  <Card shadow="sm" padding="lg" radius="md" withBorder className={styles.questionCard}>
+  <Card padding="lg" radius="md" withBorder className={styles.questionCard}>
     <Card.Section withBorder inheritPadding py="xs" className={commonStyles.lightNavyBg}>
       <Group justify="space-between">
         <Text fw="bold">{title}</Text>

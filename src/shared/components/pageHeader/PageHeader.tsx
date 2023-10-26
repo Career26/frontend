@@ -47,7 +47,7 @@ export const PageHeader = ({
           ) : (
             <>
               <NavigationCenter />
-              <Menu shadow="sm" width={200}>
+              <Menu width={200}>
                 <Menu.Target>
                   <Avatar
                     radius="xl"

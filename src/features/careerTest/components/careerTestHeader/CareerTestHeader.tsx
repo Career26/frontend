@@ -30,7 +30,7 @@ export const CareerTestHeader = () => (
       <Text fw="bold">Free Career Path Test</Text>
       <Container display="flex" className={styles.testHeader}>
         {headerTiles.map(({ title, description, Icon }) => (
-          <Card shadow="sm" padding="sm" withBorder key={`career-header-${title}`}>
+          <Card padding="sm" withBorder key={`career-header-${title}`}>
             <Group display="flex" align="center" justify="center">
               <Group display="flex" justify="space-between">
                 {Icon}

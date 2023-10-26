@@ -30,7 +30,7 @@ export const ProgressionTile = ({
     <Group py="md" id={id}>
       {mappedList.map((item, index) => (
         <Group justify="center" display="flex" key={`progression-${item.title}`}>
-          <Card shadow="sm" padding="lg" radius="md" withBorder>
+          <Card padding="lg" radius="md" withBorder>
             <Card.Section
               withBorder
               inheritPadding

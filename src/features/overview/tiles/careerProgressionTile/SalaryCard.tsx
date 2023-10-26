@@ -18,7 +18,7 @@ export const SalaryCard = ({
   finalMax,
   salaryProgression,
 }: SalaryCardProps) => (
-  <Card shadow="sm" padding="lg" radius="md" withBorder>
+  <Card padding="lg" radius="md" withBorder>
     <Card.Section withBorder inheritPadding py="xs">
       <div className={commonStyles.row}>
         <Text fw="bold">Starting Salary: </Text>

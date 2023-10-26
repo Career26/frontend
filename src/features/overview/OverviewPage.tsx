@@ -55,7 +55,7 @@ export const OverviewPage = () => {
       <>
         {overviewLinks.map(({ label, Icon, anchor }) => (
           <Container py="md" key={`career-${label}`}>
-            <Card padding="lg" radius="md" withBorder shadow="sm">
+            <Card padding="lg" radius="md" withBorder>
               <Card.Section withBorder inheritPadding py="xs" bg="navy" c="white">
                 <Group>
                   <Icon size={50} />

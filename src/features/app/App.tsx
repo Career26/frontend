@@ -11,6 +11,7 @@ import {
 import { selectCareerPaths, selectProfileId, useLazyGetProfileQuery } from '@apis/profileApi';
 import { SettingsPage } from '@features/settings/SettingsPage';
 import { LoadingLens } from '@shared/components/loadingScreen/LoadingLens';
+import { useCareerTestStorage } from '@careerTest/hooks/useCareerTestStorage';
 
 import { HomePage } from '../homePage/HomePage';
 import { LandingPage } from '../landingPage/LandingPage';
@@ -26,6 +27,7 @@ export const App = () => {
   const careerPaths = useAppSelector(selectCareerPaths);
   const profileId = useAppSelector(selectProfileId);
   const [getProfile, { isFetching }] = useLazyGetProfileQuery();
+  const { storeTestValues } = useCareerTestStorage();
 
   useEffect(() => {
     if (!careerPaths) {
@@ -33,6 +35,7 @@ export const App = () => {
     }
     const industries = Object.values(careerPaths).map(({ industry }) => industry);
     dispatch(addIndustryColors(industries));
+    storeTestValues({ key: 'careerPaths', value: careerPaths });
   }, [careerPaths]);
 
   useEffect(() => {

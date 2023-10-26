@@ -1,3 +1,4 @@
+import { ratingOptions } from '@careerTest/config/formConstants';
 import { UserProfile, WorkStyle } from '@datatypes/profile';
 
 export const profileResponseMock: UserProfile = {
@@ -14,14 +15,14 @@ export const profileResponseMock: UserProfile = {
       {
         companyName: 'Schroders',
         role: 'Software Engineeer',
-        rating: 5,
+        rating: ratingOptions[4],
         ratingReason:
           'I enjoy solving complex financial and technical challenges and working closely with the front office to understand the product needs, build it, and demo it back to them',
       },
       {
         companyName: 'BP',
         role: 'Software Engineer',
-        rating: 3,
+        rating: ratingOptions[2],
         ratingReason:
           'I learnt a lot of coding practices and DevOps but did not enjoy how separate I was from the business',
       },

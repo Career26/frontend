@@ -17,7 +17,7 @@ export const CareerPathsForm = ({
   careerPaths?: UserProfile['careerPaths'];
 }) => {
   const industryColors = useAppSelector(selectIndustryColors);
-  const { selectedCareers, toggleSelectedCareer, loadingCareers } = useCareerSelection();
+  const { toggleSelectedCareer, selectedCareers, loadingCareers } = useCareerSelection();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -30,25 +30,33 @@ export const CareerPathsForm = ({
       <FormContent title="Select Your Favourite Career Paths">
         <Grid py="lg" grow>
           {Object.entries(careerPaths || {}).map(
-            ([careerId, { title, startingSalary, industry, role }]) => (
-              <Grid.Col span={{ md: 6 }} key={`career-path-${careerId}`} className={styles.result}>
-                <ResultCard
-                  salary={startingSalary}
-                  loading={loadingCareers[careerId]}
-                  role={role}
-                  selected={selectedCareers[careerId]}
-                  industry={industry}
-                  title={title}
-                  color={industryColors[industry]}
-                  onClick={() =>
-                    toggleSelectedCareer({
-                      careerIdentifier: careerId,
-                      profileIdentifier: profileId,
-                    })
-                  }
-                />
-              </Grid.Col>
-            ),
+            ([careerIdentifier, { title, startingSalary, industry, role }]) => {
+              const selected = selectedCareers[careerIdentifier];
+              return (
+                <Grid.Col
+                  span={{ md: 6 }}
+                  key={`career-path-${careerIdentifier}`}
+                  className={styles.result}
+                >
+                  <ResultCard
+                    salary={startingSalary}
+                    loading={loadingCareers[careerIdentifier]}
+                    role={role}
+                    selected={selected}
+                    industry={industry}
+                    title={title}
+                    color={industryColors[industry]}
+                    onClick={() =>
+                      toggleSelectedCareer({
+                        careerIdentifier,
+                        profileIdentifier: profileId,
+                        selected: !selected,
+                      })
+                    }
+                  />
+                </Grid.Col>
+              );
+            },
           )}
         </Grid>
       </FormContent>

@@ -47,19 +47,20 @@ export const useCareerSelection = () => {
   const toggleSelectedCareer = async ({
     careerIdentifier,
     profileIdentifier,
+    selected,
   }: {
+    selected: boolean;
     careerIdentifier: string;
     profileIdentifier?: string;
   }) => {
     if (!careerPaths || !profileIdentifier) {
       return;
     }
-    const { selected } = careerPaths[careerIdentifier];
     setLoadingCareers((prevLoadingCareers) => ({
       ...prevLoadingCareers,
       [careerIdentifier]: true,
     }));
-    await handleSelection({ careerIdentifier, profileIdentifier, selected: !selected });
+    await handleSelection({ careerIdentifier, profileIdentifier, selected });
     setLoadingCareers((prevLoadingCareers) => ({
       ...prevLoadingCareers,
       [careerIdentifier]: false,

@@ -35,7 +35,7 @@ export const OverviewPage = () => {
               deleteDelay: 2000,
             },
             {
-              text: `This can take up to 15 seconds...`,
+              text: `This can take up to 30 seconds...`,
               textDelay: 40,
               repeatDelay: 1000,
               deleteDelay: 2000,

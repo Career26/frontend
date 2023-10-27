@@ -3,7 +3,7 @@
 .container {
   display: flex;
   justify-content: center;
-  padding-top: calc(var(--app-shell-header-height) * 3);
+  height: calc(100vh - var(--app-shell-header-height));
   align-items: center;
 }
 

@@ -32,7 +32,7 @@ export const WorkExperienceForm = ({ form }: { form: CareerFormProps }) => {
         return (
           <div key={baseKey}>
             <CompanyForm
-              title={key === 0 ? 'Experiences' : undefined}
+              title={key === 0 ? 'Your Previous Experience' : undefined}
               form={form}
               baseKey={baseKey}
               key={baseKey}

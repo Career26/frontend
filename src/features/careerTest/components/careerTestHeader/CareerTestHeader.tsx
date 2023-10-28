@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Container, Group, Text } from '@mantine/core';
 import { IconWriting, IconRoute, IconTrophy } from '@tabler/icons-react';
-import styles from '@careerTest/careerTestStyles.module.scss';
+import styles from '@careerTest/components/careerTestHeader/careerTestHeader.module.scss';
 
 const headerTiles = [
   {
@@ -19,28 +19,28 @@ const headerTiles = [
   {
     title: 'Unlock Your Potential',
     description:
-      'Elevate your interview skills, refine your CV, and connect with professionals to accelerate your career growth.',
+      'Improve your interview skills, enhance your CV, and build a network to accelerate your career.',
     Icon: <IconTrophy />,
   },
 ];
 
 export const CareerTestHeader = () => (
-  <Container py="md">
-    <Group justify="center">
-      <Text fw="bold">Free Career Path Test</Text>
-      <Container display="flex" className={styles.testHeader}>
-        {headerTiles.map(({ title, description, Icon }) => (
-          <Card shadow="sm" padding="sm" withBorder key={`career-header-${title}`}>
-            <Group display="flex" align="center" justify="center">
-              <Group display="flex" justify="space-between">
-                {Icon}
-                <Text fw="bold">{title}</Text>
-              </Group>
-              <Text>{description}</Text>
+  <Container py="md" className={styles.headerContainer}>
+    <Text fw="bold" className={styles.titleText}>
+      Career Path Test
+    </Text>
+    <Container display="flex">
+      {headerTiles.map(({ title, description, Icon }) => (
+        <Card w="400" padding="sm" mx="sm" withBorder key={`career-header-${title}`}>
+          <Group className={styles.cardGroup}>
+            <Group>
+              {Icon}
+              <Text fw="bold">{title}</Text>
             </Group>
-          </Card>
-        ))}
-      </Container>
-    </Group>
+            <Text>{description}</Text>
+          </Group>
+        </Card>
+      ))}
+    </Container>
   </Container>
 );

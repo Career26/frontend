@@ -25,7 +25,7 @@ export const QuestionRating = ({
   }
   return (
     <>
-      <Paper withBorder shadow="sm">
+      <Paper withBorder>
         <Accordion value={value} onChange={setValue}>
           <Accordion.Item value="rating">
             <Accordion.Control>Answer Rating</Accordion.Control>

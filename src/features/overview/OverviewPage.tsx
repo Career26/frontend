@@ -35,7 +35,7 @@ export const OverviewPage = () => {
               deleteDelay: 2000,
             },
             {
-              text: `This can take up to 10 seconds...`,
+              text: `This can take up to 30 seconds...`,
               textDelay: 40,
               repeatDelay: 1000,
               deleteDelay: 2000,
@@ -55,11 +55,11 @@ export const OverviewPage = () => {
       <>
         {overviewLinks.map(({ label, Icon, anchor }) => (
           <Container py="md" key={`career-${label}`}>
-            <Card padding="lg" radius="md" withBorder shadow="sm">
+            <Card padding="lg" radius="md" withBorder>
               <Card.Section withBorder inheritPadding py="xs" bg="navy" c="white">
                 <Group>
-                  <Icon size={50} />
-                  <Text fw="bold" size="2rem">
+                  <Icon size={35} stroke={1} />
+                  <Text fw="bold" size="xl">
                     {label}
                   </Text>
                 </Group>

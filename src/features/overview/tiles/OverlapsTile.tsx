@@ -18,7 +18,7 @@ export const OverlapsTile = ({ careerOverlaps }: { careerOverlaps: CareerOverlap
     <Grid py="sm" grow id="overlaps">
       {careerOverlaps.map((item) => (
         <Grid.Col span={{ md: 6 }} key={`overlap-${item.career}`}>
-          <Card shadow="sm" padding="lg" radius="md" withBorder h="100%">
+          <Card padding="lg" radius="md" withBorder h="100%">
             <Card.Section withBorder inheritPadding py="xs" className={commonStyles.lightNavyBg}>
               <Group justify="space-between">
                 <Text fw="bold">{item.career}</Text>

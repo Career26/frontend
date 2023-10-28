@@ -1,14 +1,13 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { Container, Badge, Text, Group } from '@mantine/core';
+import { Container, Text } from '@mantine/core';
 import { urls } from '@shared/config/urlConstants';
 import { Shell } from '@shared/components/shell/Shell';
 import careerProgressImg from '@assets/careerProgress.svg';
 import successImg from '@assets/success.svg';
 
 import { Feature } from './components/feature/Feature';
-import { PricingTile } from './components/pricingTile/PricingTile';
-import { featureList, featuresTag, pricingTag } from './config/landingPageConstants';
+import { featureList, featuresTag } from './config/landingPageConstants';
 import styles from './landingPageStyles.module.scss';
 import { Hero } from './components/hero/Hero';
 
@@ -42,46 +41,6 @@ export const LandingPage = () => {
               description={item.description}
             />
           ))}
-        </Container>
-
-        <Container className={styles.pricingContainer} id={pricingTag}>
-          <Badge size="xl" radius="sm" variant="outline">
-            Pricing
-          </Badge>
-
-          <Text fw="bold" className={styles.pricingText}>
-            Invest in Your Future. Start For Free!
-          </Text>
-
-          <Container className={styles.pricingTierContainer}>
-            <Group display="flex">
-              <PricingTile
-                title="Free Tier"
-                amount="£0"
-                peroid="Month"
-                buttonText="Try For Free"
-                benefits={[
-                  'Personalised Career Paths',
-                  'Limited Interview Questions',
-                  'Basic CV Enhancement',
-                ]}
-                onClick={takeTest}
-              />
-
-              <PricingTile
-                title="Premium Tier"
-                amount="£19"
-                peroid="Month"
-                buttonText="Get Started"
-                benefits={[
-                  'Personalised Career Paths',
-                  'Extensive Interview Questions',
-                  'Advanced CV Enhancement',
-                ]}
-                onClick={takeTest}
-              />
-            </Group>
-          </Container>
         </Container>
 
         <Hero

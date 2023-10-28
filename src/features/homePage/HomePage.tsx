@@ -38,7 +38,7 @@ export const HomePage = () => {
                     <Icon className={styles.icon} stroke={1} />
                   </Group>
                   <Group className={styles.right}>
-                    <Text fw="bold" size={'xl'} ta="left">
+                    <Text fw="bold" size="xl" ta="left">
                       {title}
                     </Text>
                     <Text>{description}</Text>

@@ -19,6 +19,8 @@ export interface Degree {
   level: string;
   university: string;
   grade: string;
+  rating?: string;
+  ratingReason?: string;
 }
 
 export interface Experience {

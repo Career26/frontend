@@ -41,3 +41,5 @@ export const selectInterviewQuestions = (state: RootState) =>
 
 export const selectSuggestion = (state: RootState, fixedCacheKey?: string) =>
   questionsApi.endpoints.getSuggestion.select({ fixedCacheKey, requestId: undefined })(state).data;
+
+export default questionsApi.reducer;

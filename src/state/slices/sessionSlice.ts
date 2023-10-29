@@ -1,12 +1,10 @@
 import { selectInterviewQuestions } from '@apis/questionsApi';
 import { selectCareerPaths } from '@apis/profileApi';
-import { UserProfile } from '@datatypes/profile';
 import { PayloadAction, createSelector, createSlice } from '@reduxjs/toolkit';
 import { getIndustryColors } from '@shared/utils/careerUtil';
 import { RootState } from '@state/store';
 
 type SessionSlice = {
-  profile?: UserProfile;
   loginModal: {
     open: boolean;
     associateProfileId?: string;
@@ -19,7 +17,6 @@ type SessionSlice = {
 };
 
 export const initialSessionState: SessionSlice = {
-  profile: undefined,
   industryColors: {},
   questionColors: {},
   selectedQuestionId: undefined,
@@ -30,9 +27,6 @@ export const sessionSlice = createSlice({
   name: 'session',
   initialState: initialSessionState,
   reducers: {
-    setProfile: (state, { payload }: PayloadAction<SessionSlice['profile']>) => {
-      state.profile = payload;
-    },
     setLoginModal: (state, { payload }: PayloadAction<SessionSlice['loginModal']>) => {
       state.loginModal = payload;
     },
@@ -68,7 +62,6 @@ export const sessionSlice = createSlice({
 
 export const {
   setLoginModal,
-  setProfile,
   setSelectedCareerPathId,
   resetSession,
   addIndustryColors,

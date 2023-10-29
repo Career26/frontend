@@ -34,7 +34,7 @@ module.exports = {
   globals: { document: true, __dirname: true },
   overrides: [
     {
-      files: ['**/*.test.*'],
+      files: ['**/*.test.*', '**/testUtil.tsx'],
       rules: {
         'import/no-extraneous-dependencies': 0,
       },

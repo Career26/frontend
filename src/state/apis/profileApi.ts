@@ -48,3 +48,5 @@ export const selectProfile = (state: RootState) => selectProfileState(state)?.pr
 export const selectCareerPaths = (state: RootState) => selectProfileState(state)?.careerPaths;
 
 export const selectProfileId = (state: RootState) => selectProfileState(state)?.identifier;
+
+export default profileApi.reducer;

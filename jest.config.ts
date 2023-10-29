@@ -22,10 +22,7 @@ export default {
   transform: {
     '\\.[jt]sx?$': ['esbuild-jest', { sourcemap: true, target: 'es2017' }],
   },
-  transformIgnorePatterns: [
-    '[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|cjs|ts|tsx)$',
-    '^.+\\.module\\.(css|sass|scss)$',
-  ],
+  transformIgnorePatterns: ['^.+\\.module\\.(css|sass|scss)$'],
   coverageReporters: ['html'],
   coverageThreshold: {
     global: { branches: 0, functions: 0, lines: 0, statements: 0 },

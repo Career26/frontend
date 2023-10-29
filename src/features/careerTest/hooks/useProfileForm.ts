@@ -38,7 +38,8 @@ export const useProfileForm = ({ activeStep }: { activeStep: number }) => {
       },
       previousWorkExperience: {
         role: (value) => !value && 'Role is required',
-        companyName: (value) => !value && 'Company name is required',
+        experienceName: (value) => !value && 'Experience name is required',
+        experienceType: (value) => !value && 'Experience type is required',
         ratingReason: (value) => {
           if (!value) {
             return 'You must provide a reason for the rating';

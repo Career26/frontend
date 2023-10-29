@@ -1,5 +1,5 @@
 import { CareerFormValues } from '@careerTest/careerTestTypes';
-import { Degree, WorkExperience, WorkStyle } from '@datatypes/profile';
+import { Degree, Experience, ExperienceType, WorkStyle } from '@datatypes/profile';
 import { IconCurrencyDollar, IconCurrencyPound, IconCurrencyYen } from '@tabler/icons-react';
 
 export const exampleCities = [
@@ -25,6 +25,11 @@ export const exampleAreasOfInterest = [
   'Public Services',
   'Academia / Research',
 ];
+
+export const experienceOptions = Object.entries(ExperienceType).map(([label, value]) => ({
+  label,
+  value,
+}));
 
 export const ratingOptions = [
   'I hated it',
@@ -64,8 +69,9 @@ export const initialUniversityValues: Degree = {
   university: '',
 };
 
-export const initialWorkExperienceValues: WorkExperience = {
-  companyName: '',
+export const initialWorkExperienceValues: Experience = {
+  experienceName: '',
+  experienceType: ExperienceType.Work,
   rating: '',
   ratingReason: '',
   role: '',

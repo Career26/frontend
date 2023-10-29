@@ -4,7 +4,7 @@ import { IconPlus } from '@tabler/icons-react';
 import { initialWorkExperienceValues } from '@careerTest/config/formConstants';
 import { CareerFormProps } from '@careerTest/careerTestTypes';
 
-import { CompanyForm } from './CompanyForm';
+import { ExperienceForm } from './CompanyForm';
 import { RemoveRowButton } from '../RemoveRowButton';
 import styles from '../../careerTestStyles.module.scss';
 
@@ -31,7 +31,7 @@ export const WorkExperienceForm = ({ form }: { form: CareerFormProps }) => {
         const baseKey = `previousWorkExperience.${key}`;
         return (
           <div key={baseKey}>
-            <CompanyForm
+            <ExperienceForm
               title={key === 0 ? 'Your Previous Experience' : undefined}
               form={form}
               baseKey={baseKey}

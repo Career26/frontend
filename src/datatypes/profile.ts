@@ -6,6 +6,12 @@ export enum WorkStyle {
   'I have no preference' = 'BOTH',
 }
 
+export enum ExperienceType {
+  'Work' = 'WORK',
+  'Project' = 'PROJECT',
+  'Society' = 'SOCIETY',
+}
+
 export interface Degree {
   name: string;
   level: string;
@@ -13,8 +19,9 @@ export interface Degree {
   grade: string;
 }
 
-export interface WorkExperience {
-  companyName: string;
+export interface Experience {
+  experienceName: string;
+  experienceType: ExperienceType;
   role: string;
   rating: string;
   ratingReason: string;
@@ -40,7 +47,7 @@ export interface WorkPreference {
 export interface Profile extends WorkPreference {
   latestDegree: Degree;
   additionalDegrees: Degree[];
-  previousWorkExperience: WorkExperience[];
+  previousWorkExperience: Experience[];
 }
 
 export interface UserProfile {

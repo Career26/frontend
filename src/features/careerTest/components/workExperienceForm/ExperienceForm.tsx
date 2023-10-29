@@ -9,10 +9,17 @@ import { ExperienceType } from '@datatypes/profile';
 import { FormContent } from '../FormContent';
 
 const getNameLabel = (experienceType: ExperienceType) => {
-  if (experienceType === ExperienceType.Work) {
-    return 'Company';
+  const label = experienceOptions.find((item) => item.value === experienceType)?.label;
+  switch (experienceType) {
+    case ExperienceType.Work:
+      return 'Company';
+    case ExperienceType.Volunteering:
+      return 'Organisation';
+    case ExperienceType.Other:
+      return '';
+    default:
+      return label;
   }
-  return experienceOptions.find((item) => item.value === experienceType)?.label;
 };
 
 export const ExperienceForm = ({

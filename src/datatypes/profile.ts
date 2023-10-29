@@ -10,6 +10,8 @@ export enum ExperienceType {
   'Work' = 'WORK',
   'Project' = 'PROJECT',
   'Society' = 'SOCIETY',
+  'Volunteering' = 'VOLUNTEERING',
+  'Other' = 'OTHER',
 }
 
 export interface Degree {

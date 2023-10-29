@@ -86,6 +86,7 @@ export const CareerTest = () => {
               <Stepper.Step
                 label={label}
                 key={`stepper-${label}`}
+                loading={index === CareerStep.CAREER_PATHS && isLoading}
                 disabled={
                   index > activeStep ||
                   activeStep === CareerStep.CAREER_PATHS ||

@@ -4,7 +4,7 @@ import { IconPlus } from '@tabler/icons-react';
 import { initialWorkExperienceValues } from '@careerTest/config/formConstants';
 import { CareerFormProps } from '@careerTest/careerTestTypes';
 
-import { ExperienceForm } from './CompanyForm';
+import { ExperienceForm } from './ExperienceForm';
 import { RemoveRowButton } from '../RemoveRowButton';
 import styles from '../../careerTestStyles.module.scss';
 

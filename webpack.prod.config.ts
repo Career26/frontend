@@ -9,7 +9,7 @@ const config: Configuration = {
   output: {
     ...baseWebpackConfig.output,
     path: path.resolve(__dirname, 'build'),
-    filename: '[name].[contenthash].js',
+    filename: 'bundle.js',
   },
   optimization: { minimize: true },
   plugins: [

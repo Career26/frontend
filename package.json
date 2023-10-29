@@ -1,11 +1,12 @@
 {
   "homepage": "https://career26.com",
   "name": "career-builder",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Career Builder UI",
-  "main": "index.js",
+  "main": "build/bundle.js",
+  "private": true,
   "scripts": {
-    "build": "webpack --config webpack.prod.config.ts",
+    "build": "webpack --config webpack.prod.config.ts && cp public/index.html build/index.html",
     "start": "webpack serve --config webpack.dev.config.ts",
     "lint": "tsc --noEmit && eslint . --ext .js,.jsx,.ts,.tsx",
     "test": "jest",

@@ -1,7 +1,7 @@
 import { selectInterviewQuestions } from '@apis/questionsApi';
 import { selectCareerPaths } from '@apis/profileApi';
 import { PayloadAction, createSelector, createSlice } from '@reduxjs/toolkit';
-import { getIndustryColors } from '@shared/utils/careerUtil';
+import { getColorsObject } from '@shared/utils/colorUtil';
 import { RootState } from '@state/store';
 
 type SessionSlice = {
@@ -43,14 +43,14 @@ export const sessionSlice = createSlice({
       state.selectedQuestionId = payload;
     },
     addIndustryColors: (state, { payload: industries }: PayloadAction<string[]>) => {
-      const industryColors = getIndustryColors({
+      const industryColors = getColorsObject({
         initialColors: { ...state.industryColors },
         industries,
       });
       state.industryColors = industryColors;
     },
     addQuestionColors: (state, { payload: categories }: PayloadAction<string[]>) => {
-      const questionColors = getIndustryColors({
+      const questionColors = getColorsObject({
         initialColors: { ...state.questionColors },
         industries: categories,
       });

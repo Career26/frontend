@@ -7,7 +7,7 @@ import overview, { overviewApi } from '@apis/overviewApi';
 import profile, { profileApi } from '@apis/profileApi';
 import questions, { questionsApi } from '@apis/questionsApi';
 import session, { initialSessionState } from '@slices/sessionSlice';
-import { AppStore, RootState } from '@state/store';
+import { AppStore, RootState, store as stateStore } from '@state/store';
 
 export const testState: RootState = {
   session: initialSessionState,
@@ -21,6 +21,10 @@ interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
   store?: AppStore;
 }
 
+export const Wrapper = ({ children }: PropsWithChildren) => (
+  <Provider store={stateStore}>{children}</Provider>
+);
+
 export const renderWithProviders = (
   ui: React.ReactElement,
   {
@@ -30,9 +34,9 @@ export const renderWithProviders = (
     ...renderOptions
   }: ExtendedRenderOptions = {},
 ) => {
-  const Wrapper = ({ children }: PropsWithChildren): JSX.Element => (
+  const SubWrapper = ({ children }: PropsWithChildren): JSX.Element => (
     <Provider store={store}>{children}</Provider>
   );
   // Return an object with the store and all of RTL's query functions
-  return { store, ...render(ui, { wrapper: Wrapper, ...renderOptions }) };
+  return { store, ...render(ui, { wrapper: SubWrapper, ...renderOptions }) };
 };

@@ -35,6 +35,7 @@ export const profileApi = createApi({
 
 export const {
   useLazyGetProfileQuery,
+  useGetProfileQuery,
   useCreateProfileMutation,
   useSelectCareerMutation,
   useLazyAssociateProfileQuery,

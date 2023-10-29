@@ -11,13 +11,13 @@ export default {
   coverageDirectory: 'coverage',
   roots: ['<rootDir>/src'],
   collectCoverageFrom: ['src/**/*.{js,jsx,ts,tsx}', '!src/shared/**/testUtil.ts'],
-  setupFiles: ['react-app-polyfill/jsdom'],
+  setupFiles: ['react-app-polyfill/jsdom', '<rootDir>/jest.polyfills.js'],
   testMatch: ['<rootDir>/src/**/*.test.{js,jsx,ts,tsx}'],
   moduleNameMapper: {
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
     ...alias,
   },
-  setupFilesAfterEnv: ['<rootDir>/jestSetup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/jestSetupAfterEnv.ts'],
   moduleDirectories: ['node_modules', '<rootDir>/src'],
   transform: {
     '\\.[jt]sx?$': ['esbuild-jest', { sourcemap: true, target: 'es2017' }],
@@ -26,6 +26,9 @@ export default {
   coverageReporters: ['html'],
   coverageThreshold: {
     global: { branches: 0, functions: 0, lines: 0, statements: 0 },
+  },
+  testEnvironmentOptions: {
+    customExportConditions: [''],
   },
   testEnvironment: 'jsdom',
   resetMocks: true,

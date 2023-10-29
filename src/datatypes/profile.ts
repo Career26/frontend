@@ -6,6 +6,12 @@ export enum WorkStyle {
   'I have no preference' = 'BOTH',
 }
 
+export enum WorkValue {
+  'Higher salary' = 'SALARY',
+  'Work-life balance' = 'BALANCE',
+  'I have no preference' = 'ANY',
+}
+
 export enum ExperienceType {
   'Work' = 'WORK',
   'Project' = 'PROJECT',
@@ -32,7 +38,7 @@ export interface Experience {
 }
 
 interface PersonalityType {
-  workLifeBalanceSacrifice: boolean;
+  workValue: WorkValue;
   workStyle: WorkStyle;
 }
 

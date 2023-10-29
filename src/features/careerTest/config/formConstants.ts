@@ -1,5 +1,5 @@
 import { CareerFormValues } from '@careerTest/careerTestTypes';
-import { Degree, Experience, ExperienceType, WorkStyle } from '@datatypes/profile';
+import { Degree, Experience, ExperienceType, WorkValue, WorkStyle } from '@datatypes/profile';
 import { IconCurrencyDollar, IconCurrencyPound, IconCurrencyYen } from '@tabler/icons-react';
 
 export const exampleCities = [
@@ -27,6 +27,16 @@ export const exampleAreasOfInterest = [
 ];
 
 export const experienceOptions = Object.entries(ExperienceType).map(([label, value]) => ({
+  label,
+  value,
+}));
+
+export const workStyleOptions = Object.entries(WorkStyle).map(([label, value]) => ({
+  label,
+  value,
+}));
+
+export const workLifeOptions = Object.entries(WorkValue).map(([label, value]) => ({
   label,
   value,
 }));
@@ -82,7 +92,7 @@ export const initialProfileValues: CareerFormValues = {
   areasOfInterest: [],
   expectedSalary: { baseCurrency: 'GBP', city: 'London', expectedSalary: 40000 },
   personalityType: {
-    workLifeBalanceSacrifice: false,
+    workValue: WorkValue['Higher salary'],
     workStyle: WorkStyle['I prefer working independently'],
   },
   latestDegree: initialUniversityValues,

@@ -60,6 +60,10 @@ export const useProfileForm = ({ activeStep }: { activeStep: number }) => {
         }
         return null;
       },
+      personalityType: {
+        workValue: (value) => !value && 'You must provide a preferred career value',
+        workStyle: (value) => !value && 'You must provide a preferred work style',
+      },
       expectedSalary: {
         expectedSalary: (value) => {
           if (!value) {

@@ -4,6 +4,6 @@ import { baseUrl } from '@shared/config/urlConstants';
 
 import { mockUserProfile } from './profileMocks';
 
-export const handlers = [http.get(`${baseUrl}/profile`, () => HttpResponse.json(mockUserProfile))];
+export const handlers = [http.get(/profile/, () => HttpResponse.json(mockUserProfile))];
 
 export const server = setupServer(...handlers);

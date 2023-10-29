@@ -22,6 +22,9 @@ const mockToken = 'my-token';
 
 beforeAll(() => server.listen());
 beforeEach(() => {
+  server.events.on('request:start', () => {
+    console.log('here');
+  });
   jest.spyOn(Auth, 'currentSession').mockResolvedValue({
     // @ts-ignore
     getIdToken: () => ({ getJwtToken: () => mockToken }),
@@ -31,7 +34,3 @@ beforeEach(() => {
 });
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
-
-server.events.on('request:start', ({ request }) => {
-  console.log('MSW intercepted:', request.method, request.url);
-});

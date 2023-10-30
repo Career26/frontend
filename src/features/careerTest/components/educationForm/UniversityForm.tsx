@@ -58,6 +58,7 @@ export const UniversityForm = ({
         data={ratingOptions}
         placeholder="Select a rating"
         py="xs"
+        withAsterisk
       />
       <Textarea
         {...form.getInputProps(`${baseKey}.ratingReason`)}
@@ -65,7 +66,7 @@ export const UniversityForm = ({
         minRows={3}
         autosize
         py="xs"
-        disabled={!rating}
+        withAsterisk
       />
     </FormContent>
   );

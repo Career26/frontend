@@ -31,6 +31,16 @@ export const useProfileForm = ({ activeStep }: { activeStep: number }) => {
         university: (value) => !value && 'University is required',
         grade: (value) => !value && 'Grade is required',
         level: (value) => !value && 'Level is required',
+        rating: (value) => !value && 'Rating is required',
+        ratingReason: (value) => {
+          if (!value) {
+            return 'You must provide a reason for the rating';
+          }
+          if (value.length > 500) {
+            return 'Maximum character length is 300';
+          }
+          return null;
+        },
       },
       additionalDegrees: {
         name: (value) => !value && 'Course name is required',

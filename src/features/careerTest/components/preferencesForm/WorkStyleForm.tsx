@@ -27,7 +27,7 @@ export const WorkStyleForm = ({ form }: { form: CareerFormProps }) => {
           w="50%"
         />
         <Select
-          {...form.getInputProps('personalityType.workLife')}
+          {...form.getInputProps('personalityType.workValue')}
           label="What do you value the most in a career?"
           withAsterisk
           data={workLifeOptions}

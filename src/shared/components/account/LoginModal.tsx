@@ -78,6 +78,7 @@ export const LoginModal = () => {
         message: 'Successfully created account',
         color: 'green',
       });
+      onClose();
       goToHomepage();
     } catch (error) {
       // eslint-disable-next-line no-console

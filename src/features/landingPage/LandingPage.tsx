@@ -3,8 +3,8 @@ import { useHistory } from 'react-router-dom';
 import { Container, Text } from '@mantine/core';
 import { urls } from '@shared/config/urlConstants';
 import { Shell } from '@shared/components/shell/Shell';
-import careerProgressImg from '@assets/careerProgress.svg';
-import successImg from '@assets/success.svg';
+import careerProgressImg from '@assets/careerProgress.png';
+import successImg from '@assets/success.png';
 
 import { Feature } from './components/feature/Feature';
 import { featureList, featuresTag } from './config/landingPageConstants';

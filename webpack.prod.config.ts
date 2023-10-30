@@ -1,5 +1,5 @@
 import path from 'path';
-import { Configuration } from 'webpack';
+import { Configuration, DefinePlugin } from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import baseWebpackConfig from './webpack.base.config';
 
@@ -9,12 +9,15 @@ const config: Configuration = {
   output: {
     ...baseWebpackConfig.output,
     path: path.resolve(__dirname, 'build'),
-    filename: '[name].[contenthash].js',
+    filename: 'bundle.js',
   },
   optimization: { minimize: true },
   plugins: [
     ...(baseWebpackConfig.plugins || []),
     new MiniCssExtractPlugin({ filename: 'style.[contenthash].css' }),
+    new DefinePlugin({
+      'process.env.PROD': 'production',
+    }),
   ],
 };
 

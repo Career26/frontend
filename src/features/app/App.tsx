@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '@state/store';
 import { useAuthUser } from '@shared/hooks/useAuthUser';
 import {
   addIndustryColors,
+  selectLoginModal,
   selectSelectedCareerPathId,
   selectSelectedQuestionId,
 } from '@slices/sessionSlice';
@@ -28,6 +29,7 @@ export const App = () => {
   const profileId = useAppSelector(selectProfileId);
   const [getProfile, { isFetching }] = useLazyGetProfileQuery();
   const { storeTestValues } = useCareerTestStorage();
+  const { open: loginOpen } = useAppSelector(selectLoginModal);
 
   useEffect(() => {
     if (!careerPaths) {
@@ -39,10 +41,10 @@ export const App = () => {
   }, [careerPaths]);
 
   useEffect(() => {
-    if (authenticated && !profileId) {
+    if (authenticated && !profileId && !loginOpen) {
       getProfile();
     }
-  }, [authenticated, profileId]);
+  }, [authenticated, profileId, loginOpen]);
 
   if (isFetching) {
     return <LoadingLens />;

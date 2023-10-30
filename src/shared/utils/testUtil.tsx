@@ -8,6 +8,7 @@ import { profileApi } from '@apis/profileApi';
 import { questionsApi } from '@apis/questionsApi';
 import { initialSessionState } from '@slices/sessionSlice';
 import { AppStore, RootState, store as stateStore } from '@state/store';
+import { setupListeners } from '@reduxjs/toolkit/query';
 
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
   preloadedState?: PreloadedState<RootState>;
@@ -32,6 +33,7 @@ export const renderWithProviders = (
   const SubWrapper = ({ children }: PropsWithChildren): JSX.Element => (
     <Provider store={stateStore}>{children}</Provider>
   );
+  setupListeners(stateStore.dispatch);
   // Return an object with the store and all of RTL's query functions
   return { store: stateStore, ...render(ui, { wrapper: SubWrapper, ...renderOptions }) };
 };

@@ -20,7 +20,7 @@ jest.mock('@apis/questionsApi', () => ({
 
 const mockToken = 'my-token';
 
-beforeAll(() => server.listen());
+beforeAll(() => server.listen({ onUnhandledRequest: 'bypass', cors: true }));
 beforeEach(() => {
   server.events.on('request:start', () => {
     console.log('here');

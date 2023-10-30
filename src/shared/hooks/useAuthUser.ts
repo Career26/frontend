@@ -13,17 +13,17 @@ export const useAuthUser = () => {
   const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
   const { goToHomepage } = usePageNavigation();
-  const { open } = useAppSelector(selectLoginModal);
+  const { open, associateProfileId } = useAppSelector(selectLoginModal);
   const { resetValues } = useCareerTestStorage();
   const { signOut, user, authStatus } = useAuthenticator((context) => [context.route]);
   const authenticated = authStatus === 'authenticated';
   const unauthenticated = authStatus === 'unauthenticated';
 
   useEffect(() => {
-    if (authenticated && open) {
+    if (authenticated && open && !associateProfileId) {
       dispatch(setLoginModal({ open: false }));
     }
-  }, [authenticated, signOut]);
+  }, [authenticated, open, associateProfileId]);
 
   const updateUserAttributes = async (attributes: UserDetails) => {
     setLoading(true);

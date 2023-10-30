@@ -1,7 +1,7 @@
 import { SelectCareerInput } from '@datatypes/career';
 import { UserProfile, Profile } from '@datatypes/profile';
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { getAuthorisedBaseQuery } from '@shared/config/apiUtil';
+import { getAuthorisedBaseQuery } from '@shared/utils/apiUtil';
 import { RootState } from '@state/store';
 
 const unauthorisedEndpoints = ['selectCareer', 'createProfile'];

@@ -6,7 +6,7 @@ import {
   SuggestionResponse,
 } from '@datatypes/question';
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { getAuthorisedBaseQuery } from '@shared/config/apiUtil';
+import { getAuthorisedBaseQuery } from '@shared/utils/apiUtil';
 import { RootState } from '@state/store';
 
 export const questionsApi = createApi({

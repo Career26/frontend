@@ -10,7 +10,7 @@
     "start": "webpack serve --config webpack.dev.config.ts",
     "lint": "tsc --noEmit && eslint . --ext .js,.jsx,.ts,.tsx",
     "test": "jest",
-    "predeploy": "npm run build",
+    "predeploy": "NODE_ENV=production npm run build",
     "deploy": "gh-pages -d build"
   },
   "author": "",

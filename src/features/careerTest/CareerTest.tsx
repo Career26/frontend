@@ -6,6 +6,7 @@ import { setLoginModal } from '@slices/sessionSlice';
 import { useAppDispatch } from '@state/store';
 import { LoaderWithText } from '@shared/components/loadingScreen/LoaderWithText';
 import { useCareerTestStorage } from '@shared/hooks/useCareerTestStorage';
+import { notifications } from '@mantine/notifications';
 
 import { EducationForm } from './components/educationForm/EducationForm';
 import { WorkExperienceForm } from './components/workExperienceForm/WorkExperienceForm';
@@ -20,22 +21,33 @@ const stepperLabels = ['Education', 'Experience', 'Preferences', 'Career Paths']
 
 export const CareerTest = () => {
   const dispatch = useAppDispatch();
-  const [createProfile, { data, isLoading }] = useCreateProfileMutation();
+  const [createProfile, { data, isLoading, error }] = useCreateProfileMutation();
   const { storeTestValues, careerTestStorage } = useCareerTestStorage();
   const [activeStep, setActiveStep] = useState(careerTestStorage.step);
   const { form, checkFormIsValid } = useProfileForm({ activeStep });
 
   useEffect(() => {
+    if (error) {
+      // eslint-disable-next-line no-console
+      console.error(`create profile error - ${error}`);
+      notifications.show({
+        title: 'Profile Generation Error',
+        message: 'Could not create profile, please try again later',
+        color: 'red',
+      });
+      storeTestValues({ key: 'step', value: CareerStep.PREFERENCES });
+      return;
+    }
     if (data?.careerPaths) {
       storeTestValues({ key: 'profileId', value: data.identifier });
       storeTestValues({ key: 'careerPaths', value: data.careerPaths });
       setActiveStep(activeStep + 1);
     }
-  }, [data]);
+  }, [data, error]);
 
   useEffect(() => {
     if (activeStep >= CareerStep.COMPLETE) {
-      storeTestValues({ key: 'step', value: activeStep });
+      storeTestValues({ key: 'step', value: CareerStep.COMPLETE });
     }
   }, [activeStep]);
 

@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect } from 'react';
-import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import { urls } from '@shared/config/urlConstants';
 import { useAppDispatch, useAppSelector } from '@state/store';
 import { useAuthUser } from '@shared/hooks/useAuthUser';
@@ -51,80 +51,76 @@ export const App = () => {
   }
 
   return (
-    <BrowserRouter>
-      <Suspense fallback={<LoadingLens />}>
-        <Switch>
-          <Route
-            path={urls.landingPage}
-            exact
-            render={() => {
-              if (authenticated) {
-                return <HomePage />;
-              }
-              if (unauthenticated) {
-                return <LandingPage />;
-              }
+    <Suspense fallback={<LoadingLens />}>
+      <Switch>
+        <Route
+          path={urls.landingPage}
+          exact
+          render={() => {
+            if (authenticated) {
+              return <HomePage />;
+            }
+            if (unauthenticated) {
+              return <LandingPage />;
+            }
+            return <LoadingLens />;
+          }}
+        />
+        <Route path={urls.careersTest} component={CareerTest} />
+        <Route
+          path={`${urls.overview}/:careerId?`}
+          render={({
+            match: {
+              params: { careerId },
+            },
+          }) => {
+            if (unauthenticated) {
+              return <Redirect to={urls.landingPage} />;
+            }
+            if (!authenticated) {
               return <LoadingLens />;
-            }}
-          />
-          <Route path={urls.careersTest} component={CareerTest} />
-          <Route
-            path={`${urls.overview}/:careerId?`}
-            render={({
-              match: {
-                params: { careerId },
-              },
-            }) => {
-              if (unauthenticated) {
-                return <Redirect to={urls.landingPage} />;
-              }
-              if (!authenticated) {
-                return <LoadingLens />;
-              }
-              if (!careerId) {
-                return <Redirect to={`${urls.overview}/${defaultCareerId}`} />;
-              }
-              return <OverviewPage />;
-            }}
-          />
-          <Route
-            path={`${urls.questions}/:careerId?/:interviewId?`}
-            render={({
-              match: {
-                params: { careerId, interviewId },
-              },
-            }) => {
-              if (unauthenticated) {
-                return <Redirect to={urls.landingPage} />;
-              }
-              if (!authenticated) {
-                return <LoadingLens />;
-              }
-              if (!careerId && !!defaultCareerId) {
-                return (
-                  <Redirect to={`${urls.questions}/${defaultCareerId}/${defaultQuestionId}`} />
-                );
-              }
-              if (!interviewId && !!careerId) {
-                return <Redirect to={`${urls.questions}/${careerId}/${defaultQuestionId}`} />;
-              }
-              return <InterviewPage />;
-            }}
-          />
-          <Route
-            path={urls.settings}
-            render={() => {
-              if (unauthenticated) {
-                return <Redirect to={urls.landingPage} />;
-              }
-              if (!authenticated) {
-                return <LoadingLens />;
-              }
-              return <SettingsPage />;
-            }}
-          />
-        </Switch>
-      </Suspense>
-    </BrowserRouter>
+            }
+            if (!careerId) {
+              return <Redirect to={`${urls.overview}/${defaultCareerId}`} />;
+            }
+            return <OverviewPage />;
+          }}
+        />
+        <Route
+          path={`${urls.questions}/:careerId?/:interviewId?`}
+          render={({
+            match: {
+              params: { careerId, interviewId },
+            },
+          }) => {
+            if (unauthenticated) {
+              return <Redirect to={urls.landingPage} />;
+            }
+            if (!authenticated) {
+              return <LoadingLens />;
+            }
+            if (!careerId && !!defaultCareerId) {
+              return <Redirect to={`${urls.questions}/${defaultCareerId}/${defaultQuestionId}`} />;
+            }
+            if (!interviewId && !!careerId) {
+              return <Redirect to={`${urls.questions}/${careerId}/${defaultQuestionId}`} />;
+            }
+            return <InterviewPage />;
+          }}
+        />
+        <Route
+          path={urls.settings}
+          render={() => {
+            if (unauthenticated) {
+              return <Redirect to={urls.landingPage} />;
+            }
+            if (!authenticated) {
+              return <LoadingLens />;
+            }
+            return <SettingsPage />;
+          }}
+        />
+      </Switch>
+    </Suspense>
   );
 };

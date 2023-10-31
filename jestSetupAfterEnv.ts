@@ -20,11 +20,8 @@ jest.mock('@apis/questionsApi', () => ({
 
 const mockToken = 'my-token';
 
-beforeAll(() => server.listen({ onUnhandledRequest: 'bypass', cors: true }));
+beforeAll(() => server.listen({ onUnhandledRequest: 'warn' }));
 beforeEach(() => {
-  server.events.on('request:start', () => {
-    console.log('here');
-  });
   jest.spyOn(Auth, 'currentSession').mockResolvedValue({
     // @ts-ignore
     getIdToken: () => ({ getJwtToken: () => mockToken }),

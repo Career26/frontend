@@ -49,7 +49,7 @@ export const QuestionSuggestion = () => {
           <Accordion.Control>Show Suggestion</Accordion.Control>
           <Accordion.Panel>
             {suggestionLoading ? (
-              <Loader />
+              <Loader type="dots" />
             ) : (
               suggestion && (
                 <>

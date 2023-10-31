@@ -1,7 +1,7 @@
 import { ratingOptions } from '@careerTest/config/formConstants';
 import { UserProfile, WorkStyle } from '@datatypes/profile';
 
-export const profileResponseMock: UserProfile = {
+export const mockUserProfile: UserProfile = {
   identifier: '11458feb-6aca-47b6-b392-b5223ad569f4',
   profile: {
     latestDegree: {

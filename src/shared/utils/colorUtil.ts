@@ -1,6 +1,6 @@
 import { careerColors } from '@shared/config/careerConstants';
 
-export const getIndustryColors = ({
+export const getColorsObject = ({
   initialColors,
   industries,
 }: {

@@ -1,5 +1,5 @@
 import { ratingOptions } from '@careerTest/config/formConstants';
-import { UserProfile, WorkStyle } from '@datatypes/profile';
+import { ExperienceType, UserProfile, WorkStyle, WorkValue } from '@datatypes/profile';
 
 export const mockUserProfile: UserProfile = {
   identifier: '11458feb-6aca-47b6-b392-b5223ad569f4',
@@ -9,18 +9,23 @@ export const mockUserProfile: UserProfile = {
       level: 'MEng',
       university: 'University of Oxford',
       grade: 'First Class (1st)',
+      rating: ratingOptions[4],
+      ratingReason:
+        'I loved the theoretical side of engineering and applying maths and science to solve challenges',
     },
     additionalDegrees: [],
     previousWorkExperience: [
       {
-        companyName: 'Schroders',
+        experienceName: 'Schroders',
+        experienceType: ExperienceType.Work,
         role: 'Software Engineeer',
         rating: ratingOptions[4],
         ratingReason:
           'I enjoy solving complex financial and technical challenges and working closely with the front office to understand the product needs, build it, and demo it back to them',
       },
       {
-        companyName: 'BP',
+        experienceName: 'BP',
+        experienceType: ExperienceType.Work,
         role: 'Software Engineer',
         rating: ratingOptions[2],
         ratingReason:
@@ -29,7 +34,7 @@ export const mockUserProfile: UserProfile = {
     ],
     areasOfInterest: ['Finance', 'Technology', 'Art and Creative Work'],
     personalityType: {
-      workLifeBalanceSacrifice: true,
+      workValue: WorkValue['Higher salary'],
       workStyle: WorkStyle['I prefer working in a team'],
     },
     expectedSalary: {

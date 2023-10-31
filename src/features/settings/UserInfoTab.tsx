@@ -1,6 +1,6 @@
 import { selectProfile } from '@apis/profileApi';
 import { Profile } from '@datatypes/profile';
-import { Paper, Tabs, TextInput } from '@mantine/core';
+import { Paper, Select, Tabs, TextInput } from '@mantine/core';
 import { useAppSelector } from '@state/store';
 import React from 'react';
 
@@ -23,8 +23,9 @@ const UniversitiesTab = ({ profile }: { profile: Profile }) => {
 const ExperiencesTab = ({ profile }: { profile: Profile }) => (
   <div>
     {profile.previousWorkExperience.map((experience) => (
-      <Paper key={`experience-${experience.companyName}`} radius="md" p="md" withBorder>
-        <TextInput label="Company Name" value={experience.companyName} disabled />
+      <Paper key={`experience-${experience.experienceName}`} radius="md" p="md" withBorder>
+        <TextInput label="Company Name" value={experience.experienceName} disabled />
+        <Select label="Experience Type" value={experience.experienceType} disabled />
         <TextInput label="Role" value={experience.role} disabled />
       </Paper>
     ))}

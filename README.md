@@ -13,8 +13,6 @@ Welcome to the Career26 UI Application README. Here, you'll find all the informa
 
 ## About Career26
 
-**Application Name:** Career26
-
 Whether you're a student, recently graduated, or looking for your next career move, Career26 is the one-stop-shop for career advice.
 
 ## Technologies Used

@@ -1,7 +1,7 @@
 import { SelectCareerInput } from '@datatypes/career';
 import { UserProfile, Profile } from '@datatypes/profile';
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { getAuthorisedBaseQuery } from '@shared/config/apiUtil';
+import { getAuthorisedBaseQuery } from '@shared/utils/apiUtil';
 import { RootState } from '@state/store';
 
 const unauthorisedEndpoints = ['selectCareer', 'createProfile'];
@@ -35,6 +35,7 @@ export const profileApi = createApi({
 
 export const {
   useLazyGetProfileQuery,
+  useGetProfileQuery,
   useCreateProfileMutation,
   useSelectCareerMutation,
   useLazyAssociateProfileQuery,
@@ -48,3 +49,5 @@ export const selectProfile = (state: RootState) => selectProfileState(state)?.pr
 export const selectCareerPaths = (state: RootState) => selectProfileState(state)?.careerPaths;
 
 export const selectProfileId = (state: RootState) => selectProfileState(state)?.identifier;
+
+export default profileApi.reducer;

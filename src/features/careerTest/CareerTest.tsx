@@ -36,6 +36,7 @@ export const CareerTest = () => {
         color: 'red',
       });
       storeTestValues({ key: 'step', value: CareerStep.PREFERENCES });
+      setActiveStep(CareerStep.PREFERENCES);
       return;
     }
     if (data?.careerPaths) {

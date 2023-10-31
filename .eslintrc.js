@@ -28,13 +28,14 @@ module.exports = {
     'webpack**',
     'jest**',
     'postcss.config.js',
+    'testEnv.js',
   ],
   plugins: ['react', 'jest', 'sonarjs', 'prettier'],
   root: true,
   globals: { document: true, __dirname: true },
   overrides: [
     {
-      files: ['**/*.test.*'],
+      files: ['**/*.test.*', '**/testUtil.tsx', '**/handlers.ts'],
       rules: {
         'import/no-extraneous-dependencies': 0,
       },

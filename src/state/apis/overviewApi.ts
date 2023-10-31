@@ -13,3 +13,5 @@ export const overviewApi = createApi({
 });
 
 export const { useGetCareerOverviewQuery } = overviewApi;
+
+export default overviewApi.reducer;

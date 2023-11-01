@@ -1,6 +1,6 @@
-import { Configuration } from 'webpack';
+import { Configuration, DefinePlugin } from 'webpack';
 import path from 'path';
-
+import Dotenv from 'dotenv-webpack';
 const tsConfig = require('./tsconfig.json');
 
 export const alias = Object.keys(tsConfig.compilerOptions.paths).reduce((agg, jsPath) => {
@@ -42,6 +42,11 @@ const config: Configuration = {
       },
     ],
   },
+  plugins: [
+    new Dotenv({
+      path: './.env',
+    }),
+  ],
 };
 
 export default config;

@@ -14,7 +14,9 @@ export default {
   setupFiles: ['react-app-polyfill/jsdom', '<rootDir>/jest.polyfills.js'],
   testMatch: ['<rootDir>/src/**/*.test.{js,jsx,ts,tsx}'],
   moduleNameMapper: {
-    '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
+    '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
+      '<rootDir>/src/mocks/fileMock.js',
+    '\\.(scss|css|less)$': '<rootDir>/src/mocks/styleMock.js',
     ...alias,
   },
   setupFilesAfterEnv: ['<rootDir>/jestSetupAfterEnv.ts'],
@@ -22,7 +24,7 @@ export default {
   transform: {
     '\\.[jt]sx?$': ['esbuild-jest', { sourcemap: true, target: 'es2017' }],
   },
-  transformIgnorePatterns: ['^.+\\.module\\.(css|sass|scss)$'],
+  transformIgnorePatterns: ['^.+\\.module\\.(css|sass|scss)$', '^.(png)$'],
   coverageReporters: ['html'],
   coverageThreshold: {
     global: { branches: 0, functions: 0, lines: 0, statements: 0 },

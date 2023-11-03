@@ -9,6 +9,7 @@ import { questionsApi } from '@apis/questionsApi';
 import { initialSessionState } from '@slices/sessionSlice';
 import { AppStore, RootState, store as stateStore } from '@state/store';
 import { setupListeners } from '@reduxjs/toolkit/query';
+import { MantineProvider } from '@mantine/core';
 
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
   preloadedState?: PreloadedState<RootState>;
@@ -23,7 +24,9 @@ export const testState: RootState = {
 };
 
 export const Wrapper = ({ children }: PropsWithChildren) => (
-  <Provider store={stateStore}>{children}</Provider>
+  <MantineProvider>
+    <Provider store={stateStore}>{children}</Provider>
+  </MantineProvider>
 );
 
 export const renderWithProviders = (
@@ -31,9 +34,16 @@ export const renderWithProviders = (
   renderOptions: ExtendedRenderOptions = {},
 ) => {
   const SubWrapper = ({ children }: PropsWithChildren): JSX.Element => (
-    <Provider store={stateStore}>{children}</Provider>
+    <Provider store={stateStore}>
+      <MantineProvider>{children}</MantineProvider>
+    </Provider>
   );
   setupListeners(stateStore.dispatch);
   // Return an object with the store and all of RTL's query functions
-  return { store: stateStore, ...render(ui, { wrapper: SubWrapper, ...renderOptions }) };
+  return render(ui, { wrapper: SubWrapper, ...renderOptions });
 };
+
+// export const renderWithProviders = (ui: React.ReactNode) =>
+//   render(<>{ui}</>, {
+//     wrapper: Wrapper,
+//   });

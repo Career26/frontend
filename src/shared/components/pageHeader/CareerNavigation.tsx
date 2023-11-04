@@ -40,6 +40,7 @@ export const CareerNavigation = () => {
               key={`select-${careerIdentifier}`}
               rightSection={
                 <ActionIcon
+                  aria-label={`favourite-icon-${careerIdentifier}`}
                   loading={loadingCareers[careerIdentifier]}
                   variant="transparent"
                   onClick={() =>
@@ -59,6 +60,7 @@ export const CareerNavigation = () => {
               }
             >
               <Text
+                aria-label={title}
                 onClick={() => {
                   toggleCareerId(careerIdentifier);
                 }}

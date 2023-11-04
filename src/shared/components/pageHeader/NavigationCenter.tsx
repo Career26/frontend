@@ -25,6 +25,7 @@ export const NavigationCenter = () => {
         onClick={open}
         className={classNames(commonStyles.hoverItem, commonStyles.navyBg)}
         color="white"
+        aria-label="navigation-center"
       >
         <IconLayoutDashboard />
       </Avatar>

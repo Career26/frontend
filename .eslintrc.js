@@ -39,6 +39,7 @@ module.exports = {
       rules: {
         'import/no-extraneous-dependencies': 0,
         '@typescript-eslint/ban-ts-comment': 0,
+        'sonarjs/no-duplicate-string': 0,
       },
     },
     { files: ['**/*Style*', '**/*Mock*'], rules: { 'sonarjs/no-duplicate-string': 0 } },

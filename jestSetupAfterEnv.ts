@@ -5,7 +5,6 @@ import * as profileApi from './src/state/apis/profileApi';
 import * as questionsApi from './src/state/apis/questionsApi';
 import { server } from './src/mocks/handlers';
 import { Auth } from 'aws-amplify';
-import * as sessionSlice from './src/state/slices/sessionSlice';
 
 const { getComputedStyle } = window;
 window.getComputedStyle = (elt) => getComputedStyle(elt);
@@ -38,11 +37,6 @@ jest.mock('@apis/questionsApi', () => ({
   ...jest.requireActual('@apis/questionsApi'),
 }));
 
-jest.mock('@slices/sessionSlice', () => ({
-  __esModule: true,
-  ...jest.requireActual('@slices/sessionSlice'),
-}));
-
 const mockSignOut = jest.fn();
 const mockUser = {};
 jest.mock('@aws-amplify/ui-react', () => ({
@@ -63,8 +57,8 @@ global.console = {
     const message = args[0];
     if (
       typeof message === 'string' &&
-      (message.includes('Error: Amplify has not been configured correctly') ||
-        message.includes('validateDOMNesting'))
+      (message.includes('Error: Amplify has not been configured correctly') || // ignore amplify config for testing
+        message.includes('validateDOMNesting')) // ignore button within button for testing career navigation
     ) {
       return true;
     }
@@ -78,8 +72,6 @@ beforeEach(() => {
     // @ts-ignore
     getIdToken: () => ({ getJwtToken: () => 'my-token' }),
   });
-  jest.spyOn(sessionSlice, 'selectSelectedCareerPath').mockReturnValue(initialCareerPath);
-  jest.spyOn(sessionSlice, 'selectSelectedCareerPathId').mockReturnValue(initialCareerId);
   jest.spyOn(profileApi, 'selectCareerPaths').mockReturnValue(mockUserProfile.careerPaths);
   jest.spyOn(profileApi, 'selectProfileId').mockReturnValue(mockUserProfile.identifier);
   jest.spyOn(questionsApi, 'selectInterviewQuestions').mockReturnValue(mockInterviewQuestions);

@@ -4,8 +4,14 @@ import { screen } from '@testing-library/react';
 import { mockUserProfile } from '@mocks/profileMocks';
 import { renderWithProviders } from '@shared/utils/testUtil';
 import userEvent from '@testing-library/user-event';
+import * as sessionSlice from '@slices/sessionSlice';
 
 import { CareerNavigation } from '../CareerNavigation';
+
+jest.mock('@slices/sessionSlice', () => ({
+  __esModule: true,
+  ...jest.requireActual('@slices/sessionSlice'),
+}));
 
 jest.mock('@shared/hooks/useCareerTestStorage', () => ({
   useCareerTestStorage: () => ({
@@ -38,6 +44,10 @@ const [[initialCareerId, initialCareerPath], [nextCareerId, nextCareerPath]] = O
 );
 
 describe('CareerNavigation', () => {
+  beforeEach(() => {
+    jest.spyOn(sessionSlice, 'selectSelectedCareerPath').mockReturnValue(initialCareerPath);
+    jest.spyOn(sessionSlice, 'selectSelectedCareerPathId').mockReturnValue(initialCareerId);
+  });
   it('Should not render navigation when showNavigation=false', () => {
     // @ts-ignore - only need to mock showNavigation, do not need to mock anything else
     jest.spyOn(pageNav, 'usePageNavigation').mockReturnValue({ showNavigation: false });

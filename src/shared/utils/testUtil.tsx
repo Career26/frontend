@@ -33,17 +33,6 @@ export const renderWithProviders = (
   ui: React.ReactElement,
   renderOptions: ExtendedRenderOptions = {},
 ) => {
-  const SubWrapper = ({ children }: PropsWithChildren): JSX.Element => (
-    <Provider store={stateStore}>
-      <MantineProvider>{children}</MantineProvider>
-    </Provider>
-  );
   setupListeners(stateStore.dispatch);
-  // Return an object with the store and all of RTL's query functions
-  return render(ui, { wrapper: SubWrapper, ...renderOptions });
+  return render(ui, { wrapper: Wrapper, ...renderOptions });
 };
-
-// export const renderWithProviders = (ui: React.ReactNode) =>
-//   render(<>{ui}</>, {
-//     wrapper: Wrapper,
-//   });

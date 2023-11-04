@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom/extend-expect';
 import { Auth } from 'aws-amplify';
+import failOnConsole from 'jest-fail-on-console';
 import { mockUserProfile } from '../src/mocks/profileMocks';
 import { mockInterviewQuestions } from '../src/mocks/interviewMocks';
 import * as profileApi from '../src/state/apis/profileApi';
@@ -50,21 +51,20 @@ jest.mock('@aws-amplify/ui-react', () => ({
   }),
 }));
 
-// const originalConsole = global.console;
-// global.console = {
-//   ...global.console,
-//   error: (...args) => {
-//     const message = args[0];
-//     if (
-//       typeof message === 'string' &&
-//       (message.includes('Error: Amplify has not been configured correctly') || // ignore amplify config for testing
-//         message.includes('validateDOMNesting')) // ignore button within button for testing career navigation
-//     ) {
-//       return true;
-//     }
-//     originalConsole.error(...args);
-//   },
-// };
+failOnConsole({
+  shouldFailOnWarn: false,
+  silenceMessage: (errorMessage) => {
+    // ignore amplify config for testing
+    if (/Error: Amplify has not been configured correctly/.test(errorMessage)) {
+      return true;
+    }
+    // ignore button within button for testing career navigation
+    if (/validateDOMNesting/.test(errorMessage)) {
+      return true;
+    }
+    return false;
+  },
+});
 
 beforeAll(() => server.listen({ onUnhandledRequest: 'warn' }));
 beforeEach(() => {

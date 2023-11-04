@@ -32,7 +32,7 @@ export const PageHeader = ({
   return (
     <>
       <LoginModal />
-      <Group onClick={goToHomepage} className={styles.logo}>
+      <Group onClick={goToHomepage} className={styles.logo} aria-label="logo-icon">
         <Image src={logo} h={35} />
         <Image src={c26} h={25} />
       </Group>

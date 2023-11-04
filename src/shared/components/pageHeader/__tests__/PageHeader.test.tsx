@@ -48,6 +48,11 @@ describe('PageHeader', () => {
       await userEvent.click(screen.getByText('Take the Test'));
       expect(mockClickCareersTest).toHaveBeenCalled();
     });
+    test('Clicking the logo takes the user to home page', async () => {
+      renderHeader(false);
+      await userEvent.click(screen.getByLabelText('logo-icon'));
+      expect(mockGoToHomepage).toHaveBeenCalled();
+    });
   });
 
   describe('Authenticated', () => {
@@ -57,7 +62,7 @@ describe('PageHeader', () => {
       await userEvent.click(screen.getByText('Logout'));
       expect(mockSignOut).toHaveBeenCalled();
     });
-    it('Clicking account settings should take the user to settings page', async () => {
+    test('Clicking account settings should take the user to settings page', async () => {
       renderHeader(true);
       await userEvent.click(screen.getByTestId('user-menu'));
       await userEvent.click(screen.getByText('Account Settings'));

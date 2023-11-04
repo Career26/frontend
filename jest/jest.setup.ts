@@ -1,10 +1,10 @@
 import '@testing-library/jest-dom/extend-expect';
-import { mockUserProfile } from './src/mocks/profileMocks';
-import { mockInterviewQuestions } from './src/mocks/interviewMocks';
-import * as profileApi from './src/state/apis/profileApi';
-import * as questionsApi from './src/state/apis/questionsApi';
-import { server } from './src/mocks/handlers';
 import { Auth } from 'aws-amplify';
+import { mockUserProfile } from '../src/mocks/profileMocks';
+import { mockInterviewQuestions } from '../src/mocks/interviewMocks';
+import * as profileApi from '../src/state/apis/profileApi';
+import * as questionsApi from '../src/state/apis/questionsApi';
+import { server } from '../src/mocks/handlers';
 
 const { getComputedStyle } = window;
 window.getComputedStyle = (elt) => getComputedStyle(elt);
@@ -50,21 +50,21 @@ jest.mock('@aws-amplify/ui-react', () => ({
   }),
 }));
 
-const originalConsole = global.console;
-global.console = {
-  ...global.console,
-  error: (...args) => {
-    const message = args[0];
-    if (
-      typeof message === 'string' &&
-      (message.includes('Error: Amplify has not been configured correctly') || // ignore amplify config for testing
-        message.includes('validateDOMNesting')) // ignore button within button for testing career navigation
-    ) {
-      return true;
-    }
-    originalConsole.error(...args);
-  },
-};
+// const originalConsole = global.console;
+// global.console = {
+//   ...global.console,
+//   error: (...args) => {
+//     const message = args[0];
+//     if (
+//       typeof message === 'string' &&
+//       (message.includes('Error: Amplify has not been configured correctly') || // ignore amplify config for testing
+//         message.includes('validateDOMNesting')) // ignore button within button for testing career navigation
+//     ) {
+//       return true;
+//     }
+//     originalConsole.error(...args);
+//   },
+// };
 
 beforeAll(() => server.listen({ onUnhandledRequest: 'warn' }));
 beforeEach(() => {

@@ -39,6 +39,7 @@ const [[initialCareerId, initialCareerPath], [nextCareerId, nextCareerPath]] = O
 
 describe('CareerNavigation', () => {
   it('Should not render navigation when showNavigation=false', () => {
+    // @ts-ignore - only need to mock showNavigation, do not need to mock anything else
     jest.spyOn(pageNav, 'usePageNavigation').mockReturnValue({ showNavigation: false });
     renderWithProviders(<CareerNavigation />);
     expect(screen.queryByText(initialCareerPath.title)).not.toBeInTheDocument();

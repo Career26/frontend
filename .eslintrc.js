@@ -38,6 +38,7 @@ module.exports = {
       files: ['**/*.test.*', '**/testUtil.tsx', '**/handlers.ts'],
       rules: {
         'import/no-extraneous-dependencies': 0,
+        '@typescript-eslint/ban-ts-comment': 0,
       },
     },
     { files: ['**/*Style*', '**/*Mock*'], rules: { 'sonarjs/no-duplicate-string': 0 } },

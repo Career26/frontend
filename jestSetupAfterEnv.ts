@@ -5,10 +5,10 @@ import * as profileApi from './src/state/apis/profileApi';
 import * as questionsApi from './src/state/apis/questionsApi';
 import { server } from './src/mocks/handlers';
 import { Auth } from 'aws-amplify';
+import * as sessionSlice from './src/state/slices/sessionSlice';
 
 const { getComputedStyle } = window;
 window.getComputedStyle = (elt) => getComputedStyle(elt);
-
 window.matchMedia = (query) => ({
   matches: false,
   media: query,
@@ -19,14 +19,14 @@ window.matchMedia = (query) => ({
   removeEventListener: jest.fn(),
   dispatchEvent: jest.fn(),
 });
-
 class ResizeObserver {
   observe() {}
   unobserve() {}
   disconnect() {}
 }
-
 window.ResizeObserver = ResizeObserver;
+
+const [[initialCareerId, initialCareerPath]] = Object.entries(mockUserProfile.careerPaths);
 
 jest.mock('@apis/profileApi', () => ({
   __esModule: true,
@@ -36,6 +36,11 @@ jest.mock('@apis/profileApi', () => ({
 jest.mock('@apis/questionsApi', () => ({
   __esModule: true,
   ...jest.requireActual('@apis/questionsApi'),
+}));
+
+jest.mock('@slices/sessionSlice', () => ({
+  __esModule: true,
+  ...jest.requireActual('@slices/sessionSlice'),
 }));
 
 const mockSignOut = jest.fn();
@@ -57,8 +62,10 @@ beforeEach(() => {
     // @ts-ignore
     getIdToken: () => ({ getJwtToken: () => 'my-token' }),
   });
+  jest.spyOn(sessionSlice, 'selectSelectedCareerPath').mockReturnValue(initialCareerPath);
+  jest.spyOn(sessionSlice, 'selectSelectedCareerPathId').mockReturnValue(initialCareerId);
   jest.spyOn(profileApi, 'selectCareerPaths').mockReturnValue(mockUserProfile.careerPaths);
-  jest.spyOn(questionsApi, 'selectInterviewQuestions').mockReturnValue(mockInterviewQuestions);
+  jest.spyOn(profileApi, 'selectProfileId').mockReturnValue(mockUserProfile.identifier);
   jest.spyOn(questionsApi, 'selectInterviewQuestions').mockReturnValue(mockInterviewQuestions);
 });
 afterEach(() => server.resetHandlers());

@@ -49,7 +49,7 @@ export const PageHeader = ({
           ) : (
             <>
               <NavigationCenter />
-              <Menu width={200}>
+              <Menu width={200} data-testid="user-menu">
                 <Menu.Target>
                   <Avatar
                     radius="xl"

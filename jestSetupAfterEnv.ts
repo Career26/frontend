@@ -56,6 +56,22 @@ jest.mock('@aws-amplify/ui-react', () => ({
   }),
 }));
 
+const originalConsole = global.console;
+global.console = {
+  ...global.console,
+  error: (...args) => {
+    const message = args[0];
+    if (
+      typeof message === 'string' &&
+      (message.includes('Error: Amplify has not been configured correctly') ||
+        message.includes('validateDOMNesting'))
+    ) {
+      return true;
+    }
+    originalConsole.error(...args);
+  },
+};
+
 beforeAll(() => server.listen({ onUnhandledRequest: 'warn' }));
 beforeEach(() => {
   jest.spyOn(Auth, 'currentSession').mockResolvedValue({

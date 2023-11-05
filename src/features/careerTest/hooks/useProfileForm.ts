@@ -62,13 +62,13 @@ export const useProfileForm = ({ activeStep }: { activeStep: number }) => {
       expectedSalary: {
         expectedSalary: (value) => {
           if (!value) {
-            return 'Expected salary is required';
+            return 'Expected starting salary is required';
           }
           if (Number.isNaN(value)) {
-            return 'Expected salary must be a number';
+            return 'Expected starting salary must be a number';
           }
           if (value < 0) {
-            return 'Expected salary cannot be negative';
+            return 'Expected starting salary cannot be negative';
           }
           return null;
         },

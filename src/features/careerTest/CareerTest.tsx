@@ -7,6 +7,7 @@ import { useAppDispatch } from '@state/store';
 import { LoaderWithText } from '@shared/components/loadingScreen/LoaderWithText';
 import { useCareerTestStorage } from '@shared/hooks/useCareerTestStorage';
 import { notifications } from '@mantine/notifications';
+import { useAuthUser } from '@shared/hooks/useAuthUser';
 
 import { EducationForm } from './components/educationForm/EducationForm';
 import { WorkExperienceForm } from './components/workExperienceForm/WorkExperienceForm';
@@ -21,6 +22,7 @@ const stepperLabels = ['Education', 'Experience', 'Preferences', 'Career Paths']
 
 export const CareerTest = () => {
   const dispatch = useAppDispatch();
+  const { authenticated } = useAuthUser();
   const [createProfile, { data, isLoading, error }] = useCreateProfileMutation();
   const { storeTestValues, careerTestStorage } = useCareerTestStorage();
   const [activeStep, setActiveStep] = useState(careerTestStorage.step);
@@ -65,7 +67,7 @@ export const CareerTest = () => {
     if (activeStep === CareerStep.COMPLETE) {
       dispatch(
         setLoginModal({
-          open: true,
+          open: !authenticated,
           associateProfileId: data?.identifier,
           initialState: 'signUp',
         }),

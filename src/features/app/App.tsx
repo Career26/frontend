@@ -58,6 +58,9 @@ export const App = () => {
           exact
           render={() => {
             if (authenticated) {
+              if (!profileId) {
+                return <CareerTest />;
+              }
               return <HomePage />;
             }
             if (unauthenticated) {
@@ -88,6 +91,9 @@ export const App = () => {
             if (!authenticated) {
               return <LoadingLens />;
             }
+            if (authenticated && !profileId) {
+              return <CareerTest />;
+            }
             if (!careerId) {
               return <Redirect to={`${urls.overview}/${defaultCareerId}`} />;
             }
@@ -106,6 +112,9 @@ export const App = () => {
             }
             if (!authenticated) {
               return <LoadingLens />;
+            }
+            if (authenticated && !profileId) {
+              return <CareerTest />;
             }
             if (!careerId && !!defaultCareerId) {
               return <Redirect to={`${urls.questions}/${defaultCareerId}/${defaultQuestionId}`} />;

@@ -66,7 +66,15 @@ export const App = () => {
             return <LoadingLens />;
           }}
         />
-        <Route path={urls.careersTest} component={CareerTest} />
+        <Route
+          path={urls.careersTest}
+          render={() => {
+            if (authenticated && !!profileId) {
+              return <Redirect to={urls.landingPage} />;
+            }
+            return <CareerTest />;
+          }}
+        />
         <Route
           path={`${urls.overview}/:careerId?`}
           render={({

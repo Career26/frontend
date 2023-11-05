@@ -39,7 +39,6 @@ export const ukDegreeGrades = [
   'Second Class Upper (2:1)',
   'Second Class Lower (2:2)',
   'Third Class (3rd)',
-  'Pass',
 ];
 
 export const usDegreeGrades = [
@@ -50,11 +49,14 @@ export const usDegreeGrades = [
   'GPA 1.0 - 1.9',
 ];
 
+export const otherGrades = ['Distinction', 'Merit', 'Pass', 'N/A'];
+
 export const degreeLevels = ['PhD', 'MSc', 'MA', 'BSc', 'BA', 'MEng', 'BEng'];
 
 export const degreeOptions = [
   { group: 'UK Grading', items: ukDegreeGrades },
   { group: 'US Grading', items: usDegreeGrades },
+  { group: 'Other', items: otherGrades },
 ];
 
 export const initialUniversityValues: Degree = {

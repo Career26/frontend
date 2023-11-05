@@ -29,7 +29,7 @@ export const CompanyForm = ({
       <Select
         {...form.getInputProps(`${baseKey}.rating`)}
         withAsterisk
-        label="Rating"
+        label="What did you think of this role?"
         data={ratingOptions}
         placeholder="Select a rating"
         py="xs"

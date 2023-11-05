@@ -1,10 +1,8 @@
 import React from 'react';
-import { Checkbox, NumberInput, Select } from '@mantine/core';
-import { WorkStyle } from '@datatypes/profile';
-import { exampleCities } from '@careerTest/config/formConstants';
+import { NumberInput, Select } from '@mantine/core';
+import { exampleCities, workLifeOptions, workStyleOptions } from '@careerTest/config/formConstants';
 import { CareerFormProps } from '@careerTest/careerTestTypes';
 import commonStyles from '@shared/styles/commonStyles.module.scss';
-import styles from '@careerTest/careerTestStyles.module.scss';
 
 export const WorkStyleForm = ({ form }: { form: CareerFormProps }) => {
   const Icon = exampleCities.find((item) => item.value === form.values.expectedSalary.city)?.Icon;
@@ -25,13 +23,15 @@ export const WorkStyleForm = ({ form }: { form: CareerFormProps }) => {
           {...form.getInputProps('personalityType.workStyle')}
           label="What is your preferred working style?"
           withAsterisk
-          data={Object.entries(WorkStyle).map(([label, value]) => ({ label, value }))}
+          data={workStyleOptions}
           w="50%"
         />
-        <Checkbox
-          {...form.getInputProps('personalityType.workLifeBalanceSacrifice')}
-          className={styles.workLifeCheckbox}
-          label="Would you sacrifice your work-life balance?"
+        <Select
+          {...form.getInputProps('personalityType.workValue')}
+          label="What do you value the most in a career?"
+          withAsterisk
+          data={workLifeOptions}
+          w="50%"
         />
       </div>
 

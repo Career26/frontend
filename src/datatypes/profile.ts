@@ -6,22 +6,39 @@ export enum WorkStyle {
   'I have no preference' = 'BOTH',
 }
 
+export enum WorkValue {
+  'Higher salary' = 'SALARY',
+  'Work-life balance' = 'BALANCE',
+  'I have no preference' = 'ANY',
+}
+
+export enum ExperienceType {
+  'Company' = 'COMPANY',
+  'Project' = 'PROJECT',
+  'Society' = 'SOCIETY',
+  'Volunteering' = 'VOLUNTEERING',
+  'Other' = 'OTHER',
+}
+
 export interface Degree {
   name: string;
   level: string;
   university: string;
   grade: string;
+  rating: string;
+  ratingReason: string;
 }
 
-export interface WorkExperience {
-  companyName: string;
+export interface Experience {
+  experienceName: string;
+  experienceType: ExperienceType;
   role: string;
   rating: string;
   ratingReason: string;
 }
 
 interface PersonalityType {
-  workLifeBalanceSacrifice: boolean;
+  workValue: WorkValue;
   workStyle: WorkStyle;
 }
 
@@ -40,7 +57,7 @@ export interface WorkPreference {
 export interface Profile extends WorkPreference {
   latestDegree: Degree;
   additionalDegrees: Degree[];
-  previousWorkExperience: WorkExperience[];
+  previousWorkExperience: Experience[];
 }
 
 export interface UserProfile {

@@ -11,8 +11,9 @@ export const AreasOfInterestForm = ({ form }: { form: CareerFormProps }) => (
       data={exampleAreasOfInterest}
       clearable
       withAsterisk
-      placeholder="Add interest"
-      label="What are your areas of interest? Choose up to 3"
+      placeholder="Enter interest"
+      label="Press Enter to add an interest"
+      description="Add up to 3 interests"
     />
   </div>
 );

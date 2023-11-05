@@ -31,6 +31,16 @@ export const useProfileForm = ({ activeStep }: { activeStep: number }) => {
         university: (value) => !value && 'University is required',
         grade: (value) => !value && 'Grade is required',
         level: (value) => !value && 'Level is required',
+        rating: (value) => !value && 'Rating is required',
+        ratingReason: (value) => {
+          if (!value) {
+            return 'You must provide a reason for the rating';
+          }
+          if (value.length > 500) {
+            return 'Maximum character length is 300';
+          }
+          return null;
+        },
       },
       additionalDegrees: {
         name: (value) => !value && 'Course name is required',
@@ -38,7 +48,8 @@ export const useProfileForm = ({ activeStep }: { activeStep: number }) => {
       },
       previousWorkExperience: {
         role: (value) => !value && 'Role is required',
-        companyName: (value) => !value && 'Company name is required',
+        experienceName: (value) => !value && 'Experience name is required',
+        experienceType: (value) => !value && 'Experience type is required',
         ratingReason: (value) => {
           if (!value) {
             return 'You must provide a reason for the rating';
@@ -58,6 +69,10 @@ export const useProfileForm = ({ activeStep }: { activeStep: number }) => {
           return 'You can only choose up to three areas of interest';
         }
         return null;
+      },
+      personalityType: {
+        workValue: (value) => !value && 'You must provide a preferred career value',
+        workStyle: (value) => !value && 'You must provide a preferred work style',
       },
       expectedSalary: {
         expectedSalary: (value) => {

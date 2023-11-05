@@ -37,7 +37,7 @@ export const UniversityForm = ({
       <div className={commonStyles.row}>
         <Select
           {...form.getInputProps(`${baseKey}.grade`)}
-          label="Grade"
+          label="Achieved/Expected Grade"
           data={degreeOptions}
           withAsterisk
           placeholder="Select a grade"

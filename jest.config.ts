@@ -11,18 +11,20 @@ export default {
   coverageDirectory: 'coverage',
   roots: ['<rootDir>/src'],
   collectCoverageFrom: ['src/**/*.{js,jsx,ts,tsx}', '!src/shared/**/testUtil.ts'],
-  setupFiles: ['react-app-polyfill/jsdom', '<rootDir>/jest.polyfills.js'],
+  setupFiles: ['react-app-polyfill/jsdom', '<rootDir>/jest/jest.polyfills.js'],
   testMatch: ['<rootDir>/src/**/*.test.{js,jsx,ts,tsx}'],
   moduleNameMapper: {
-    '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
+    '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
+      '<rootDir>/jest/fileMock.ts',
+    '\\.(scss|css|less)$': '<rootDir>/jest/styleMock.ts',
     ...alias,
   },
-  setupFilesAfterEnv: ['<rootDir>/jestSetupAfterEnv.ts'],
+  setupFilesAfterEnv: ['<rootDir>/jest/jest.setup.ts'],
   moduleDirectories: ['node_modules', '<rootDir>/src'],
   transform: {
     '\\.[jt]sx?$': ['esbuild-jest', { sourcemap: true, target: 'es2017' }],
   },
-  transformIgnorePatterns: ['^.+\\.module\\.(css|sass|scss)$'],
+  transformIgnorePatterns: ['^.+\\.module\\.(css|sass|scss)$', '^.(png)$'],
   coverageReporters: ['html'],
   coverageThreshold: {
     global: { branches: 0, functions: 0, lines: 0, statements: 0 },

@@ -11,11 +11,10 @@ import { FormContent } from '../FormContent';
 const getNameLabel = (experienceType: ExperienceType) => {
   const label = experienceOptions.find((item) => item.value === experienceType)?.label;
   switch (experienceType) {
-    case ExperienceType.Work:
-      return 'Company';
     case ExperienceType.Volunteering:
       return 'Organisation';
     case ExperienceType.Other:
+    case undefined:
       return '';
     default:
       return label;

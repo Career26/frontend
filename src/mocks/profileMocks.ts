@@ -17,7 +17,7 @@ export const mockUserProfile: UserProfile = {
     previousWorkExperience: [
       {
         experienceName: 'Schroders',
-        experienceType: ExperienceType.Work,
+        experienceType: ExperienceType.Company,
         role: 'Software Engineeer',
         rating: ratingOptions[4],
         ratingReason:
@@ -25,7 +25,7 @@ export const mockUserProfile: UserProfile = {
       },
       {
         experienceName: 'BP',
-        experienceType: ExperienceType.Work,
+        experienceType: ExperienceType.Company,
         role: 'Software Engineer',
         rating: ratingOptions[2],
         ratingReason:

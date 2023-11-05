@@ -1,8 +1,10 @@
 import { selectProfile } from '@apis/profileApi';
+import { experienceOptions } from '@careerTest/config/formConstants';
 import { Profile } from '@datatypes/profile';
-import { Paper, Tabs, TextInput } from '@mantine/core';
+import { Paper, Select, Tabs, TextInput, Textarea } from '@mantine/core';
 import { useAppSelector } from '@state/store';
 import React from 'react';
+import commonStyles from '@shared/styles/commonStyles.module.scss';
 
 const UniversitiesTab = ({ profile }: { profile: Profile }) => {
   const universities = [profile.latestDegree, ...profile.additionalDegrees];
@@ -10,10 +12,15 @@ const UniversitiesTab = ({ profile }: { profile: Profile }) => {
     <div>
       {universities.map((university) => (
         <Paper key={`experience-${university.university}`} radius="md" p="md" withBorder>
-          <TextInput label="University Name" value={university.university} disabled />
-          <TextInput label="Course Name" value={university.name} disabled />
-          <TextInput label="Grade" value={university.grade} disabled />
-          <TextInput label="Level" value={university.level} disabled />
+          <div className={commonStyles.row}>
+            <TextInput w="50%" label="University Name" value={university.university} disabled />
+            <TextInput w="50%" label="Course Name" value={university.name} disabled />
+          </div>
+          <div className={commonStyles.row}>
+            <TextInput w="50%" label="Achieve/Expected Grade" value={university.grade} disabled />
+            <TextInput w="50%" label="Level" value={university.level} disabled />
+          </div>
+          <TextInput label="Course Summary" value={university.ratingReason} disabled />
         </Paper>
       ))}
     </div>
@@ -23,9 +30,16 @@ const UniversitiesTab = ({ profile }: { profile: Profile }) => {
 const ExperiencesTab = ({ profile }: { profile: Profile }) => (
   <div>
     {profile.previousWorkExperience.map((experience) => (
-      <Paper key={`experience-${experience.companyName}`} radius="md" p="md" withBorder>
-        <TextInput label="Company Name" value={experience.companyName} disabled />
+      <Paper key={`experience-${experience.experienceName}`} radius="md" p="md" withBorder>
+        <TextInput label="Company Name" value={experience.experienceName} disabled />
+        <Select
+          label="Experience Type"
+          value={experience.experienceType}
+          data={experienceOptions}
+          disabled
+        />
         <TextInput label="Role" value={experience.role} disabled />
+        <Textarea label="Experience summaey" value={experience.ratingReason} disabled />
       </Paper>
     ))}
   </div>

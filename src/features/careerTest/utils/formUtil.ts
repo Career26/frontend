@@ -13,7 +13,7 @@ const getPrefix = (rating: string) => {
   }
 };
 
-export const getRatingLabel = (rating: string, answerLength: number) => {
+export const getRatingLabel = (rating: string, answerLength = 0) => {
   const prefix = getPrefix(rating);
   return `${prefix} (${500 - answerLength} characters remaining)`;
 };

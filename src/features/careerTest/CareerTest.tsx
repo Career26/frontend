@@ -68,7 +68,7 @@ export const CareerTest = () => {
       dispatch(
         setLoginModal({
           open: !authenticated,
-          associateProfileId: data?.identifier,
+          associateProfileId: careerTestStorage?.profileId,
           initialState: 'signUp',
         }),
       );

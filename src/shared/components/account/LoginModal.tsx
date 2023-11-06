@@ -80,6 +80,7 @@ export const LoginModal = () => {
       });
       onClose();
       goToHomepage();
+      window.location.reload();
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error(`associate account error - ${error}`);

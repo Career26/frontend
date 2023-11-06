@@ -1,58 +1,21 @@
 import { Button, Group, Radio, Tabs, Text, TextInput } from '@mantine/core';
-import { isEmail, useForm } from '@mantine/form';
 import { useAuthUser } from '@shared/hooks/useAuthUser';
-import React, { useMemo, useState } from 'react';
-import { UserDetails } from '@datatypes/profile';
+import React, { useState } from 'react';
 import { IconExclamationCircle } from '@tabler/icons-react';
 
 const DetailsTab = () => {
-  const { user, loading, updateUserAttributes } = useAuthUser();
-  const initialValues = {
-    name: user?.attributes?.name || '',
-    gender: user?.attributes?.gender || '',
-    email: user?.attributes?.email || '',
-  };
-
-  const form = useForm<UserDetails>({
-    initialValues,
-    validate: {
-      name: (input) => !input && 'Name is required',
-      email: isEmail('Must be a valid email'),
-    },
-  });
-
-  const canUpdate = useMemo(() => {
-    if (form.values.name === initialValues.name && form.values.gender === initialValues.gender) {
-      return false;
-    }
-    return form.isValid();
-  }, [form.values, initialValues]);
+  const { user } = useAuthUser();
   return (
     <div>
-      <TextInput label="Email" value={form.values.email} disabled />
-      <TextInput {...form.getInputProps('name')} label="Name" />
-      <Radio.Group
-        name="Gender"
-        label="Gender"
-        value={form.values.gender}
-        onChange={(value) => form.setFieldValue('gender', value)}
-      >
+      <TextInput label="Email" value={user?.attributes?.email} disabled />
+      <TextInput value={user?.attributes?.name} label="Name" disabled />
+      <Radio.Group name="Gender" label="Gender" value={user?.attributes?.gender}>
         <Group mt="xs">
-          <Radio value="male" label="Male" />
-          <Radio value="female" label="Female" />
-          <Radio value="preferNotToSay" label="Prefer not to say" />
+          <Radio value="male" label="Male" disabled />
+          <Radio value="female" label="Female" disabled />
+          <Radio value="preferNotToSay" label="Prefer not to say" disabled />
         </Group>
       </Radio.Group>
-      <Group py="lg" display="flex" justify="flex-start">
-        <Button
-          variant="outline"
-          onClick={() => updateUserAttributes(form.values)}
-          disabled={!canUpdate || loading}
-          loading={loading}
-        >
-          Update Profile
-        </Button>
-      </Group>
     </div>
   );
 };

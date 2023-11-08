@@ -73,15 +73,11 @@ export const DiversityForm = ({ form }: { form: CareerFormProps }) => (
       </div>
       <div className={commonStyles.row}>
         <DateInput
+          {...form.getInputProps('diversity.age')}
           label="What is your date of birth?"
-          onChange={(e) => {
-            const dob = e ? new Date(e).toISOString().split('T')[0] : undefined;
-            form.setFieldValue('diversity.age', dob);
-          }}
           maxDate={new Date()}
           clearable
           valueFormat="YYYY-MM-DD"
-          value={form.values.diversity?.age ? new Date(form.values.diversity.age) : undefined}
         />
       </div>
     </FormContent>

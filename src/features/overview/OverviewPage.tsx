@@ -13,6 +13,7 @@ import { TopEmployersTile } from './tiles/TopEmployersTile';
 import { OverlapsTile } from './tiles/OverlapsTile';
 import { OverviewNavBar } from './OverviewNavBar';
 import { ProgressionTile } from './tiles/ProgressionTile';
+import { RoleSummaryTile } from './tiles/RoleSummaryTile';
 
 export const OverviewPage = () => {
   const profileId = useAppSelector(selectProfileId) || '';
@@ -64,11 +65,7 @@ export const OverviewPage = () => {
                     </Text>
                   </Group>
                 </Card.Section>
-                {anchor === 'role' && (
-                  <Text py="md" id="role">
-                    {data.roleSummary}
-                  </Text>
-                )}
+                {anchor === 'role' && <RoleSummaryTile {...data.roleSummary} />}
                 {anchor === 'employers' && <TopEmployersTile employers={data.exampleEmployers} />}
                 {anchor === 'progression' && (
                   <CareerProgressionTile

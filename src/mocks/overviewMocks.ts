@@ -1,8 +1,12 @@
 import { Overview } from '@datatypes/overview';
 
 export const mockOverview: Overview = {
-  roleSummary:
-    'A Quantitative Analyst, also known as a Quant, is a highly skilled professional who uses mathematical and statistical techniques to analyze financial markets and develop trading strategies. They work in the finance industry, typically for investment banks, hedge funds, or asset management firms.\n\nAs a Quantitative Analyst, your main responsibilities will include developing and implementing quantitative models and algorithms, conducting research and analysis on financial data, and identifying patterns and trends in the market. You will also be responsible for backtesting and optimizing trading strategies, as well as monitoring and managing risk.\n\nTo excel in this role, you will need a strong background in mathematics, statistics, and computer programming. Proficiency in programming languages such as Python, R, or MATLAB is essential, as you will be working with large datasets and complex algorithms.\n\nIn addition to technical skills, a successful Quantitative Analyst should possess strong problem-solving and critical-thinking abilities, as well as the ability to work under pressure and meet tight deadlines. Attention to detail and a strong understanding of financial markets and instruments are also crucial.\n\nA career as a Quantitative Analyst can be highly rewarding, both intellectually and financially. The demand for quantitative skills in the finance industry is growing rapidly, and there are ample opportunities for career advancement and high earning potential.\n\nTo pursue a career as a Quantitative Analyst, it is recommended to pursue a degree in a quantitative field such as mathematics, statistics, or finance. Additionally, gaining practical experience through internships or research projects in the finance industry can greatly enhance your chances of securing a job in this field.',
+  roleSummary: {
+    responsibilities: 'you will do blah',
+    dayToDay: 'daily blah',
+    skills: 'blah',
+    personalityType: 'blah',
+  },
   salaryProgression: [
     {
       age: '20',

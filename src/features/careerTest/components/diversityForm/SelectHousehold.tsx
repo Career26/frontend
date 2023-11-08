@@ -33,7 +33,11 @@ export const SelectHousehold = ({ form }: { form: CareerFormProps }) => {
     onDropdownClose: () => combobox.resetSelectedOption(),
   });
 
-  const selection = form.values.diversity?.household;
+  const selection = Object.keys(Household).find(
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    (item) => Household[item] === form.values.diversity?.household,
+  );
 
   const onSelect = (value: string) => {
     form.setFieldValue('diversity.household', value);

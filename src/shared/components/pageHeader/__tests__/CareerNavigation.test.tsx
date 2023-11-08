@@ -1,6 +1,6 @@
 import React from 'react';
 import * as pageNav from '@shared/hooks/usePageNavigation';
-import { screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import { mockUserProfile } from '@mocks/profileMocks';
 import { renderWithProviders } from '@shared/utils/testUtil';
 import userEvent from '@testing-library/user-event';
@@ -54,24 +54,30 @@ describe('CareerNavigation', () => {
     renderWithProviders(<CareerNavigation />);
     expect(screen.queryByText(initialCareerPath.title)).not.toBeInTheDocument();
   });
-  it('Should render initial career path as selected career when showNavigation=true', () => {
+  it('Should render initial career path as selected career when showNavigation=true', async () => {
     renderWithProviders(<CareerNavigation />);
-    expect(screen.getByText(initialCareerPath.title)).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: initialCareerPath.title })).toBeInTheDocument();
+    });
   });
   test('Selected career path is switched when clicking from the menu', async () => {
     renderWithProviders(<CareerNavigation />);
-    await userEvent.click(screen.getByText(initialCareerPath.title));
+    await userEvent.click(screen.getByRole('button', { name: initialCareerPath.title }));
     await userEvent.click(screen.getByText(nextCareerPath.title));
-    expect(mockToggleCareerId).toHaveBeenCalledWith(nextCareerId);
+    await waitFor(() => {
+      expect(mockToggleCareerId).toHaveBeenCalledWith(nextCareerId);
+    });
   });
   test('Career path is favourited when clicking the heart symbol', async () => {
     renderWithProviders(<CareerNavigation />);
-    await userEvent.click(screen.getByText(initialCareerPath.title));
+    await userEvent.click(screen.getByRole('button', { name: initialCareerPath.title }));
     await userEvent.click(screen.getByLabelText(`favourite-icon-${initialCareerId}`));
-    expect(mockToggleSelectedCareer).toHaveBeenCalledWith({
-      selected: !initialCareerPath.selected,
-      careerIdentifier: initialCareerId,
-      profileIdentifier: mockUserProfile.identifier,
+    await waitFor(() => {
+      expect(mockToggleSelectedCareer).toHaveBeenCalledWith({
+        selected: !initialCareerPath.selected,
+        careerIdentifier: initialCareerId,
+        profileIdentifier: mockUserProfile.identifier,
+      });
     });
   });
 });

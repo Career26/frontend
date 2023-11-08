@@ -104,16 +104,6 @@ export enum Gender {
   'Prefer not to say' = 'PREFER_NOT_TO_SAY',
 }
 
-export enum Age {
-  'Under 18' = 'UNDER_18',
-  '18-24' = '18_TO_24',
-  '25-34' = '25_TO_34',
-  '35-44' = '35_TO_44',
-  '45-54' = '45_TO_54',
-  '55 and over' = '55_AND_OVER',
-  'Prefer not to say' = 'PREFER_NOT_TO_SAY',
-}
-
 export enum Household {
   'Modern professional & traditional professional occupations' = 'PROFESSIONAL',
   'Senior, middle or junior managers or administrators' = 'MANAGEMENT',
@@ -132,6 +122,6 @@ export interface Diversity {
   ethnicity?: Ethnicity;
   gender?: Gender;
   disability?: YesNoPreferNotToSay;
-  age?: Age;
+  age?: number;
   household?: Household;
 }

@@ -1,7 +1,7 @@
 import { CareerFormProps } from '@careerTest/careerTestTypes';
-import { Accordion, Container, Select } from '@mantine/core';
+import { Accordion, Container, NumberInput, Select } from '@mantine/core';
 import React from 'react';
-import { Age, YesNoPreferNotToSay, Ethnicity, Gender, SchoolType } from '@datatypes/profile';
+import { YesNoPreferNotToSay, Ethnicity, Gender, SchoolType } from '@datatypes/profile';
 import commonStyles from '@shared/styles/commonStyles.module.scss';
 import { IconInfoCircle } from '@tabler/icons-react';
 
@@ -79,12 +79,7 @@ export const DiversityForm = ({ form }: { form: CareerFormProps }) => (
         <SelectHousehold form={form} />
       </div>
       <div className={commonStyles.row}>
-        <Select
-          {...form.getInputProps('diversity.age')}
-          w="100%"
-          label="What is your age group?"
-          data={Object.entries(Age).map(([label, value]) => ({ label, value }))}
-        />
+        <NumberInput {...form.getInputProps('diversity.age')} w="100%" label="What is your age?" />
       </div>
     </FormContent>
   </Container>

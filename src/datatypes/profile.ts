@@ -121,7 +121,6 @@ export interface Diversity {
   schoolType?: SchoolType;
   ethnicity?: Ethnicity;
   gender?: Gender;
-  disability?: YesNoPreferNotToSay;
   age?: string;
   household?: Household;
 }

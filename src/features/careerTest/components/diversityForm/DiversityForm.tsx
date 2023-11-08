@@ -69,14 +69,6 @@ export const DiversityForm = ({ form }: { form: CareerFormProps }) => (
         />
       </div>
       <div className={commonStyles.row}>
-        <Select
-          {...form.getInputProps('diversity.disability')}
-          w="100%"
-          label="Do you consider yourself to have a disability?"
-          data={yesNoPreferOptions}
-        />
-      </div>
-      <div className={commonStyles.row}>
         <SelectHousehold form={form} />
       </div>
       <div className={commonStyles.row}>

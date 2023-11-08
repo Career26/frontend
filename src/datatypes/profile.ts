@@ -122,6 +122,6 @@ export interface Diversity {
   ethnicity?: Ethnicity;
   gender?: Gender;
   disability?: YesNoPreferNotToSay;
-  age?: number;
+  age?: string;
   household?: Household;
 }

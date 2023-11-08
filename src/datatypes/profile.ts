@@ -73,7 +73,7 @@ export interface UserDetails {
   email: string;
 }
 
-export enum FirstGeneration {
+export enum YesNoPreferNotToSay {
   'Yes' = 'YES',
   'No' = 'NO',
   // eslint-disable-next-line sonarjs/no-duplicate-string
@@ -83,13 +83,13 @@ export enum FirstGeneration {
 export enum SchoolType {
   'State-funded' = 'STATE',
   'State-funded grammar/selective' = 'GRAMMAR',
-  'Independent/private school' = 'INDEPENDENT',
+  'Independent/private school (fee paying)' = 'INDEPENDENT',
   'Prefer not to say' = 'PREFER_NOT_TO_SAY',
 }
 
 export enum Ethnicity {
   'White' = 'WHITE',
-  'Black or Black British' = 'BLACK',
+  'Black, Black British, Carribbean or African' = 'BLACK',
   'Asian or Asian British' = 'ASIAN',
   'Mixed or multiple ethnic groups' = 'MIXED',
   'Other ethnic group' = 'OTHER',
@@ -100,13 +100,7 @@ export enum Gender {
   'Male' = 'MALE',
   'Female' = 'FEMALE',
   'Non-binary' = 'NON_BINARY',
-  'Transgender' = 'TRANSGENDER',
-  'Prefer not to say' = 'PREFER_NOT_TO_SAY',
-}
-
-export enum Disability {
-  'I do not consider myself to have a disability' = 'NONE',
-  'I have a disability' = 'YES',
+  'Other' = 'OTHER',
   'Prefer not to say' = 'PREFER_NOT_TO_SAY',
 }
 
@@ -120,11 +114,24 @@ export enum Age {
   'Prefer not to say' = 'PREFER_NOT_TO_SAY',
 }
 
+export enum Household {
+  'Modern professional & traditional professional occupations' = 'PROFESSIONAL',
+  'Senior, middle or junior managers or administrators' = 'MANAGEMENT',
+  'Clerical and intermediate occupations' = 'CLERICAL',
+  'Technical and craft occupations' = 'TECHNICAL',
+  'Routine, semi-routine manual and service occupations' = 'ROUTINE',
+  'Long-term unemployed' = 'UNEMPLOYED',
+  'Small business owners' = 'SMALL_BUSINESS',
+  'Other' = 'OTHER',
+  'Prefer not to say' = 'PREFER_NOT_TO_SAY',
+}
+
 export interface Diversity {
-  firstGeneration?: FirstGeneration;
+  firstGeneration?: YesNoPreferNotToSay;
   schoolType?: SchoolType;
   ethnicity?: Ethnicity;
   gender?: Gender;
-  disability?: Disability;
+  disability?: YesNoPreferNotToSay;
   age?: Age;
+  household?: Household;
 }

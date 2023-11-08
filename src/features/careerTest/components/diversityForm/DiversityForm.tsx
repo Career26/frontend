@@ -1,18 +1,17 @@
 import { CareerFormProps } from '@careerTest/careerTestTypes';
 import { Accordion, Container, Select } from '@mantine/core';
 import React from 'react';
-import {
-  Age,
-  Disability,
-  Ethnicity,
-  FirstGeneration,
-  Gender,
-  SchoolType,
-} from '@datatypes/profile';
+import { Age, YesNoPreferNotToSay, Ethnicity, Gender, SchoolType } from '@datatypes/profile';
 import commonStyles from '@shared/styles/commonStyles.module.scss';
 import { IconInfoCircle } from '@tabler/icons-react';
 
 import { FormContent } from '../FormContent';
+import { SelectHousehold } from './SelectHousehold';
+
+const yesNoPreferOptions = Object.entries(YesNoPreferNotToSay).map(([label, value]) => ({
+  label,
+  value,
+}));
 
 export const DiversityForm = ({ form }: { form: CareerFormProps }) => (
   <Container py="md">
@@ -26,10 +25,8 @@ export const DiversityForm = ({ form }: { form: CareerFormProps }) => (
             <Accordion.Panel>
               To get the most accurate results, these answers can be used to:
               <ul>
-                <li>
-                  Suggest career paths that previous users with similar backgrounds to yourself have
-                  found
-                </li>
+                <li>Provide insights into careers you may not have considered</li>
+                <li>Suggest tailored opportunities based on your background</li>
                 <li>
                   Start building your mentor network to connect with users with similar backgrounds
                 </li>
@@ -43,7 +40,7 @@ export const DiversityForm = ({ form }: { form: CareerFormProps }) => (
           {...form.getInputProps('diversity.firstGeneration')}
           w="100%"
           label="Are you the first generation in your family to attend univeristy?"
-          data={Object.entries(FirstGeneration).map(([label, value]) => ({ label, value }))}
+          data={yesNoPreferOptions}
         />
       </div>
       <div className={commonStyles.row}>
@@ -66,7 +63,7 @@ export const DiversityForm = ({ form }: { form: CareerFormProps }) => (
         <Select
           {...form.getInputProps('diversity.gender')}
           w="100%"
-          label="What is your gender?"
+          label="What is your current gender identity?"
           data={Object.entries(Gender).map(([label, value]) => ({ label, value }))}
         />
       </div>
@@ -74,9 +71,12 @@ export const DiversityForm = ({ form }: { form: CareerFormProps }) => (
         <Select
           {...form.getInputProps('diversity.disability')}
           w="100%"
-          label="What is your disability status?"
-          data={Object.entries(Disability).map(([label, value]) => ({ label, value }))}
+          label="Do you consider yourself to have a disability?"
+          data={yesNoPreferOptions}
         />
+      </div>
+      <div className={commonStyles.row}>
+        <SelectHousehold form={form} />
       </div>
       <div className={commonStyles.row}>
         <Select

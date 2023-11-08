@@ -37,7 +37,6 @@ export const CareerNavigation = () => {
         value={careerIdentifier}
         key={`household-${careerIdentifier}`}
         className={commonStyles.spaceBetweenRow}
-        w="100%"
       >
         {title}
         <ActionIcon
@@ -66,7 +65,6 @@ export const CareerNavigation = () => {
     <Combobox store={combobox} onOptionSubmit={onSelect}>
       <Combobox.Target>
         <InputBase
-          w="100%"
           component="button"
           pointer
           rightSection={<Combobox.Chevron />}

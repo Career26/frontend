@@ -46,58 +46,59 @@ export const OverviewPage = () => {
     );
   }
 
-  if (!data) {
-    return null;
-  }
-
   return (
     <Shell navbar={<OverviewNavBar />}>
       <>
-        {overviewLinks.map(({ label, Icon, anchor }) => (
-          <Container py="md" key={`career-${label}`}>
-            <Card padding="lg" radius="md" withBorder>
-              <Card.Section withBorder inheritPadding py="xs" bg="navy" c="white">
-                <Group>
-                  <Icon size={35} stroke={1} />
-                  <Text fw="bold" size="xl">
-                    {label}
+        {overviewLinks.map(({ label, Icon, anchor }) => {
+          if (!data) {
+            return null;
+          }
+          return (
+            <Container py="md" key={`career-${label}`}>
+              <Card padding="lg" radius="md" withBorder>
+                <Card.Section withBorder inheritPadding py="xs" bg="navy" c="white">
+                  <Group>
+                    <Icon size={35} stroke={1} />
+                    <Text fw="bold" size="xl">
+                      {label}
+                    </Text>
+                  </Group>
+                </Card.Section>
+                {anchor === 'role' && (
+                  <Text py="md" id="role">
+                    {data.roleSummary}
                   </Text>
-                </Group>
-              </Card.Section>
-              {anchor === 'role' && (
-                <Text py="md" id="role">
-                  {data.roleSummary}
-                </Text>
-              )}
-              {anchor === 'employers' && <TopEmployersTile employers={data.exampleEmployers} />}
-              {anchor === 'progression' && (
-                <CareerProgressionTile
-                  promotionTimeline={data.promotionTimeline}
-                  salaryProgression={data.salaryProgression}
-                />
-              )}
-              {anchor === 'preparation' && (
-                <ProgressionTile
-                  progressionList={data.supplementalExperiences.map((item) => ({
-                    title: `Year ${item.year}`,
-                    descriptions: [item.activity],
-                  }))}
-                  id="preparation"
-                />
-              )}
-              {anchor === 'timeline' && (
-                <ProgressionTile
-                  progressionList={data.assessmentStages.map((item, index) => ({
-                    title: `${index + 1} ${item.stage}`,
-                    descriptions: [item.description],
-                  }))}
-                  id="timeline"
-                />
-              )}
-              {anchor === 'overlaps' && <OverlapsTile careerOverlaps={data.careerOverlaps} />}
-            </Card>
-          </Container>
-        ))}
+                )}
+                {anchor === 'employers' && <TopEmployersTile employers={data.exampleEmployers} />}
+                {anchor === 'progression' && (
+                  <CareerProgressionTile
+                    promotionTimeline={data.promotionTimeline}
+                    salaryProgression={data.salaryProgression}
+                  />
+                )}
+                {anchor === 'preparation' && (
+                  <ProgressionTile
+                    progressionList={data.supplementalExperiences.map((item) => ({
+                      title: `Year ${item.year}`,
+                      descriptions: [item.activity],
+                    }))}
+                    id="preparation"
+                  />
+                )}
+                {anchor === 'timeline' && (
+                  <ProgressionTile
+                    progressionList={data.assessmentStages.map((item, index) => ({
+                      title: `${index + 1} ${item.stage}`,
+                      descriptions: [item.description],
+                    }))}
+                    id="timeline"
+                  />
+                )}
+                {anchor === 'overlaps' && <OverlapsTile careerOverlaps={data.careerOverlaps} />}
+              </Card>
+            </Container>
+          );
+        })}
       </>
     </Shell>
   );

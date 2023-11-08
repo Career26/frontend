@@ -39,3 +39,9 @@
     color: white;
   }
 }
+
+.spaceBetweenRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

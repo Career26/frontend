@@ -17,8 +17,9 @@ import { CareerPathsForm } from './components/careerPathsForm/CareerPathsForm';
 import { CareerTestHeader } from './components/careerTestHeader/CareerTestHeader';
 import { CareerStep } from './careerTestTypes';
 import { careerLoadingText } from './config/formConstants';
+import { DiversityForm } from './components/diversityForm/DiversityForm';
 
-const stepperLabels = ['Education', 'Experience', 'Preferences', 'Career Paths'];
+const stepperLabels = ['Education', 'Experience', 'Preferences', 'Diversity', 'Career Paths'];
 
 export const CareerTest = () => {
   const dispatch = useAppDispatch();
@@ -61,7 +62,7 @@ export const CareerTest = () => {
       return;
     }
     form.clearErrors();
-    if (activeStep === CareerStep.PREFERENCES) {
+    if (activeStep === CareerStep.DIVERSITY) {
       createProfile(form.values);
     }
     if (activeStep === CareerStep.COMPLETE) {
@@ -82,7 +83,7 @@ export const CareerTest = () => {
   };
 
   const nextLabel = useMemo(() => {
-    if (activeStep === CareerStep.PREFERENCES) {
+    if (activeStep === CareerStep.DIVERSITY) {
       return 'See Results';
     }
     if (activeStep === CareerStep.COMPLETE) {
@@ -120,6 +121,7 @@ export const CareerTest = () => {
               {activeStep === CareerStep.EDUCATION && <EducationForm form={form} />}
               {activeStep === CareerStep.WORK_EXPERIENCE && <WorkExperienceForm form={form} />}
               {activeStep === CareerStep.PREFERENCES && <PreferencesForm form={form} />}
+              {activeStep === CareerStep.DIVERSITY && <DiversityForm form={form} />}
               {(activeStep === CareerStep.CAREER_PATHS || activeStep === CareerStep.COMPLETE) && (
                 <CareerPathsForm
                   careerPaths={careerTestStorage.careerPaths}

@@ -8,6 +8,7 @@ export enum CareerStep {
   EDUCATION = 0,
   WORK_EXPERIENCE = 1,
   PREFERENCES = 2,
-  CAREER_PATHS = 3,
-  COMPLETE = 4,
+  DIVERSITY = 3,
+  CAREER_PATHS = 4,
+  COMPLETE = 5,
 }

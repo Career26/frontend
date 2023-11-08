@@ -13,6 +13,7 @@ import { store } from './state/store';
 
 import '@mantine/core/styles.css';
 import '@mantine/notifications/styles.css';
+import '@mantine/dates/styles.css';
 
 Amplify.configure({
   Auth: {

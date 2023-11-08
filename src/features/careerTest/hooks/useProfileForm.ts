@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { FORM_INDEX, useForm } from '@mantine/form';
 import { useCareerTestStorage } from '@shared/hooks/useCareerTestStorage';
 
-import { CareerFormValues } from '../careerTestTypes';
+import { CareerFormValues, CareerStep } from '../careerTestTypes';
 
 export const useProfileForm = ({ activeStep }: { activeStep: number }) => {
   const {
@@ -10,13 +10,13 @@ export const useProfileForm = ({ activeStep }: { activeStep: number }) => {
   } = useCareerTestStorage();
 
   const fieldsToCheck = useMemo(() => {
-    if (activeStep === 0) {
+    if (activeStep === CareerStep.EDUCATION) {
       return ['latestDegree', 'additionalDegrees', `additionalDegrees.${FORM_INDEX}`];
     }
-    if (activeStep === 1) {
+    if (activeStep === CareerStep.WORK_EXPERIENCE) {
       return ['previousWorkExperience', `previousWorkExperience.${FORM_INDEX}`];
     }
-    if (activeStep === 2) {
+    if (activeStep === CareerStep.PREFERENCES) {
       return ['areasOfInterest', 'expectedSalary'];
     }
     return undefined;

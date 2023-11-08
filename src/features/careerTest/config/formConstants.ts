@@ -101,6 +101,14 @@ export const initialProfileValues: CareerFormValues = {
   },
   latestDegree: initialUniversityValues,
   previousWorkExperience: [initialWorkExperienceValues],
+  diversity: {
+    firstGeneration: undefined,
+    schoolType: undefined,
+    ethnicity: undefined,
+    gender: undefined,
+    disability: undefined,
+    age: undefined,
+  },
 };
 
 export const careerLoadingText = [

@@ -1,31 +1,43 @@
-import { Authenticator, Radio, RadioGroupField, useAuthenticator } from '@aws-amplify/ui-react';
+import { Authenticator, SelectField, useAuthenticator } from '@aws-amplify/ui-react';
 import { selectLoginModal, setLoginModal } from '@slices/sessionSlice';
 import { useAppDispatch, useAppSelector } from '@state/store';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal } from '@mantine/core';
 import { useLazyAssociateProfileQuery } from '@apis/profileApi';
 import { useAuthUser } from '@shared/hooks/useAuthUser';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 import { notifications } from '@mantine/notifications';
+import { Gender } from '@datatypes/profile';
+import { useCareerTestStorage } from '@shared/hooks/useCareerTestStorage';
 import '@aws-amplify/ui-react/styles.css';
 
 import styles from './accountStyles.module.scss';
 
 const FormFields = () => {
   const { validationErrors } = useAuthenticator();
+  const {
+    careerTestStorage: {
+      formValues: { diversity },
+    },
+  } = useCareerTestStorage();
+  const [gender, setGender] = useState(diversity?.gender);
   return (
     <>
       <Authenticator.SignUp.FormFields />
-      <RadioGroupField
+      <SelectField
         label="Gender"
         name="gender"
+        value={gender}
+        onChange={({ target: { value } }) => setGender(value as Gender)}
         errorMessage={validationErrors.gender as string}
         hasError={!!validationErrors.gender}
       >
-        <Radio value="male">Male</Radio>
-        <Radio value="female">Female</Radio>
-        <Radio value="preferNotToSay">Prefer not to say</Radio>
-      </RadioGroupField>
+        {Object.entries(Gender).map(([label, value]) => (
+          <option value={value} key={`signup-gender-${value}`}>
+            {label}
+          </option>
+        ))}
+      </SelectField>
     </>
   );
 };

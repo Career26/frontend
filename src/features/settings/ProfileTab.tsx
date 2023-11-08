@@ -1,4 +1,4 @@
-import { Button, Group, Radio, Tabs, Text, TextInput } from '@mantine/core';
+import { Button, Group, Tabs, Text, TextInput } from '@mantine/core';
 import { useAuthUser } from '@shared/hooks/useAuthUser';
 import React, { useState } from 'react';
 import { IconExclamationCircle } from '@tabler/icons-react';
@@ -9,13 +9,7 @@ const DetailsTab = () => {
     <div>
       <TextInput label="Email" value={user?.attributes?.email} disabled />
       <TextInput value={user?.attributes?.name} label="Name" disabled />
-      <Radio.Group name="Gender" label="Gender" value={user?.attributes?.gender}>
-        <Group mt="xs">
-          <Radio value="male" label="Male" disabled />
-          <Radio value="female" label="Female" disabled />
-          <Radio value="preferNotToSay" label="Prefer not to say" disabled />
-        </Group>
-      </Radio.Group>
+      <TextInput value={user.attributes?.gender} label="Gender" disabled />
     </div>
   );
 };

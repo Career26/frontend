@@ -13,10 +13,7 @@ export const RoleSummaryTile = ({
     {[
       { content: responsibilities, title: 'Responsibilities' },
       { content: dayToDay, title: 'Day to Day' },
-      {
-        content: skills,
-        title: 'Skills',
-      },
+      { content: skills, title: 'Skills' },
       { content: personalityType, title: 'Personality Type' },
     ].map(({ title, content }) => (
       <Grid.Col span={{ md: 6 }} key={`role-${title}`}>

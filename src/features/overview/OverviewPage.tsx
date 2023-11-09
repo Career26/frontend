@@ -29,18 +29,8 @@ export const OverviewPage = () => {
       <Shell navbar={<OverviewNavBar />}>
         <LoaderWithText
           text={[
-            {
-              text: `Fetching insights for ${careerPath?.title}...`,
-              textDelay: 40,
-              repeatDelay: 1000,
-              deleteDelay: 2000,
-            },
-            {
-              text: `This can take up to 30 seconds...`,
-              textDelay: 40,
-              repeatDelay: 1000,
-              deleteDelay: 2000,
-            },
+            `Fetching insights for ${careerPath?.title}...`,
+            `This can take up to 30 seconds...`,
           ]}
         />
       </Shell>

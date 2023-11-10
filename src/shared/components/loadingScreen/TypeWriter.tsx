@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
 import styles from './loadingScreen.module.scss';
-import { LoadingScreenText } from './loadingTypes';
 
 const Type = ({
   text,
@@ -65,7 +64,7 @@ export const TypeWriter = ({
   repeatSequence,
 }: {
   repeatSequence?: boolean;
-  text: LoadingScreenText[];
+  text: string[];
 }) => {
   const [lineIndex, setLineIndex] = useState(0);
 
@@ -85,10 +84,10 @@ export const TypeWriter = ({
         <div className={styles.typeWriter}>
           <h1>
             <Type
-              text={selectedText.text}
-              textDelay={selectedText.textDelay}
-              repeatDelay={selectedText.repeatDelay}
-              deleteDelay={selectedText.deleteDelay}
+              text={selectedText}
+              textDelay={40}
+              repeatDelay={1000}
+              deleteDelay={2000}
               onComplete={onComplete}
             />
           </h1>

@@ -3,9 +3,8 @@ import { TypeWriter } from '@shared/components/loadingScreen/TypeWriter';
 import React from 'react';
 
 import styles from './loadingScreen.module.scss';
-import { LoadingScreenText } from './loadingTypes';
 
-export const LoaderWithText = ({ text }: { text: LoadingScreenText[] }) => (
+export const LoaderWithText = ({ text }: { text: string[] }) => (
   <div className={styles.container}>
     <div className={styles.typeWriter}>
       <TypeWriter repeatSequence text={text} />

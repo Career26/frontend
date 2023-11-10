@@ -13,6 +13,7 @@ import { TopEmployersTile } from './tiles/TopEmployersTile';
 import { OverlapsTile } from './tiles/OverlapsTile';
 import { OverviewNavBar } from './OverviewNavBar';
 import { ProgressionTile } from './tiles/ProgressionTile';
+import { RoleSummaryTile } from './tiles/RoleSummaryTile';
 
 export const OverviewPage = () => {
   const profileId = useAppSelector(selectProfileId) || '';
@@ -28,18 +29,8 @@ export const OverviewPage = () => {
       <Shell navbar={<OverviewNavBar />}>
         <LoaderWithText
           text={[
-            {
-              text: `Fetching insights for ${careerPath?.title}...`,
-              textDelay: 40,
-              repeatDelay: 1000,
-              deleteDelay: 2000,
-            },
-            {
-              text: `This can take up to 30 seconds...`,
-              textDelay: 40,
-              repeatDelay: 1000,
-              deleteDelay: 2000,
-            },
+            `Fetching insights for ${careerPath?.title}...`,
+            `This can take up to 30 seconds...`,
           ]}
         />
       </Shell>
@@ -64,11 +55,7 @@ export const OverviewPage = () => {
                     </Text>
                   </Group>
                 </Card.Section>
-                {anchor === 'role' && (
-                  <Text py="md" id="role">
-                    {data.roleSummary}
-                  </Text>
-                )}
+                {anchor === 'role' && <RoleSummaryTile {...data.roleSummary} />}
                 {anchor === 'employers' && <TopEmployersTile employers={data.exampleEmployers} />}
                 {anchor === 'progression' && (
                   <CareerProgressionTile

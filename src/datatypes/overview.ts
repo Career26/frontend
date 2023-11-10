@@ -1,3 +1,10 @@
+export interface RoleSummary {
+  responsibilities: string;
+  dayToDay: string;
+  skills: string;
+  personalityType: string;
+}
+
 export type SalaryProgression = { age: string; high: number; low: number };
 
 export type CareerOverlap = { career: string; industry: string; reason: string };
@@ -9,7 +16,7 @@ export type AssessmentStage = { stage: string; description: string };
 export type SupplementalExperience = { year: string; activity: string };
 
 export type Overview = {
-  roleSummary: string;
+  roleSummary: RoleSummary;
   salaryProgression: SalaryProgression[];
   exampleEmployers: string[];
   careerOverlaps: CareerOverlap[];

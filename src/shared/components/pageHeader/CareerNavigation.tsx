@@ -1,5 +1,5 @@
 import { selectProfileId } from '@apis/profileApi';
-import { ActionIcon, Combobox, InputBase, useCombobox } from '@mantine/core';
+import { ActionIcon, Combobox, InputBase, Text, useCombobox } from '@mantine/core';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 import { selectSelectedCareerPath } from '@slices/sessionSlice';
 import { useAppSelector } from '@state/store';
@@ -39,7 +39,7 @@ export const CareerNavigation = () => {
         className={commonStyles.spaceBetweenRow}
         w="100%"
       >
-        {title}
+        <Text onClick={() => onSelect(careerIdentifier)}>{title}</Text>
         <ActionIcon
           aria-label={`favourite-icon-${careerIdentifier}`}
           loading={loadingCareers[careerIdentifier]}
@@ -63,7 +63,7 @@ export const CareerNavigation = () => {
   });
 
   return (
-    <Combobox store={combobox} onOptionSubmit={onSelect}>
+    <Combobox store={combobox}>
       <Combobox.Target>
         <InputBase
           w="30%"

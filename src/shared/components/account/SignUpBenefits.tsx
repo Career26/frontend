@@ -6,7 +6,7 @@ import {
   IconCertificate,
   IconUsersGroup,
 } from '@tabler/icons-react';
-import { TextWithIconBlock } from '@features/interview/TextWithIconBlock';
+import { TextWithIconBlock } from '@shared/components/display/TextWithIconBlock';
 import '@aws-amplify/ui-react/styles.css';
 
 const benefits = [

@@ -8,28 +8,34 @@ import { useAuthUser } from '@shared/hooks/useAuthUser';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 import { notifications } from '@mantine/notifications';
 import { Gender } from '@datatypes/profile';
+import commonStyles from '@shared/styles/commonStyles.module.scss';
+import classNames from 'classnames';
 import '@aws-amplify/ui-react/styles.css';
 
+import { SignUpBenefits } from './SignUpBenefits';
 import styles from './accountStyles.module.scss';
 
-const FormFields = () => {
+const SignUpForm = () => {
   const { validationErrors } = useAuthenticator();
   return (
-    <>
-      <Authenticator.SignUp.FormFields />
-      <SelectField
-        label="Gender"
-        name="gender"
-        errorMessage={validationErrors.gender as string}
-        hasError={!!validationErrors.gender}
-      >
-        {Object.entries(Gender).map(([label, value]) => (
-          <option value={value} key={`signup-gender-${value}`}>
-            {label}
-          </option>
-        ))}
-      </SelectField>
-    </>
+    <div className={classNames(commonStyles.row, styles.signUpContainer)}>
+      <SignUpBenefits />
+      <div>
+        <Authenticator.SignUp.FormFields />
+        <SelectField
+          label="Gender"
+          name="gender"
+          errorMessage={validationErrors.gender as string}
+          hasError={!!validationErrors.gender}
+        >
+          {Object.entries(Gender).map(([label, value]) => (
+            <option value={value} key={`signup-gender-${value}`}>
+              {label}
+            </option>
+          ))}
+        </SelectField>
+      </div>
+    </div>
   );
 };
 
@@ -58,11 +64,12 @@ const formFields = {
 
 const components = {
   SignUp: {
-    FormFields,
+    FormFields: SignUpForm,
   },
 };
 
 export const LoginModal = () => {
+  const { route } = useAuthenticator((context) => [context.route]);
   const dispatch = useAppDispatch();
   const { open, initialState, associateProfileId } = useAppSelector(selectLoginModal);
   const [associateProfile] = useLazyAssociateProfileQuery();
@@ -103,6 +110,7 @@ export const LoginModal = () => {
       withCloseButton={false}
       centered
       radius={10}
+      size={route === 'signUp' ? 'calc(100vw - 3rem)' : undefined}
       className={styles.loginContainer}
     >
       <Authenticator

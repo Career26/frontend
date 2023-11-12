@@ -6,7 +6,7 @@
   "main": "build/bundle.js",
   "private": true,
   "scripts": {
-    "build": "rimraf build && webpack --config webpack.prod.config.ts && cp public/index.html build/index.html && cp public/CNAME build/CNAME",
+    "build": "rimraf build && webpack --config webpack.prod.config.ts && cp public/** build/",
     "start": "webpack serve --config webpack.dev.config.ts",
     "lint": "tsc --noEmit && eslint . --ext .js,.jsx,.ts,.tsx",
     "test": "jest",

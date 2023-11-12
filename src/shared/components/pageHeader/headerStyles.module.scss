@@ -11,3 +11,9 @@
   display: flex;
   justify-content: space-between;
 }
+
+.chevron {
+  &:hover {
+    background: none !important;
+  }
+}

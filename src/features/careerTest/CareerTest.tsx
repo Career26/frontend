@@ -39,7 +39,7 @@ export const CareerTest = () => {
         color: 'red',
       });
       storeTestValues({ key: 'step', value: CareerStep.PREFERENCES });
-      setActiveStep(CareerStep.PREFERENCES);
+      setActiveStep(CareerStep.DIVERSITY);
       return;
     }
     if (data?.careerPaths) {
@@ -93,11 +93,7 @@ export const CareerTest = () => {
                 label={label}
                 key={`stepper-${label}`}
                 loading={index === CareerStep.CAREER_PATHS && isLoading}
-                disabled={
-                  index > activeStep ||
-                  activeStep === CareerStep.CAREER_PATHS ||
-                  activeStep === CareerStep.COMPLETE
-                }
+                disabled={index > activeStep}
               />
             ))}
           </Stepper>
@@ -119,15 +115,13 @@ export const CareerTest = () => {
                 />
               )}
               <Group justify="center">
-                {activeStep !== CareerStep.CAREER_PATHS && activeStep !== CareerStep.COMPLETE && (
-                  <Button
-                    onClick={clickBack}
-                    disabled={activeStep === CareerStep.EDUCATION || isLoading}
-                    variant="light"
-                  >
-                    Back
-                  </Button>
-                )}
+                <Button
+                  onClick={clickBack}
+                  disabled={activeStep === CareerStep.EDUCATION || isLoading}
+                  variant="light"
+                >
+                  Back
+                </Button>
                 <Button
                   onClick={clickNext}
                   disabled={isLoading}

@@ -33,3 +33,18 @@
     width: 50%;
   }
 }
+
+.listContent {
+  padding-left: calc(var(--mantine-spacing-md) + 24px) !important;
+}
+
+.signUpHeader {
+  display: flex;
+  justify-content: space-between;
+}
+
+.authenticatorFields {
+  display: flex;
+  gap: var(--mantine-spacing-md);
+  flex-direction: column;
+}

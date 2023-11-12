@@ -2,7 +2,7 @@ import { Authenticator, SelectField, useAuthenticator } from '@aws-amplify/ui-re
 import { selectLoginModal, setLoginModal } from '@slices/sessionSlice';
 import { useAppDispatch, useAppSelector } from '@state/store';
 import React, { useEffect } from 'react';
-import { Modal } from '@mantine/core';
+import { Container, Group, Modal, Text } from '@mantine/core';
 import { useLazyAssociateProfileQuery } from '@apis/profileApi';
 import { useAuthUser } from '@shared/hooks/useAuthUser';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
@@ -18,24 +18,38 @@ import styles from './accountStyles.module.scss';
 const SignUpForm = () => {
   const { validationErrors } = useAuthenticator();
   return (
-    <div className={classNames(commonStyles.row, styles.signUpContainer)}>
-      <SignUpBenefits />
-      <div>
-        <Authenticator.SignUp.FormFields />
-        <SelectField
-          label="Gender"
-          name="gender"
-          errorMessage={validationErrors.gender as string}
-          hasError={!!validationErrors.gender}
-        >
-          {Object.entries(Gender).map(([label, value]) => (
-            <option value={value} key={`signup-gender-${value}`}>
-              {label}
-            </option>
-          ))}
-        </SelectField>
+    <>
+      <Group>
+        <Container m={0} p={0} pl="md" w="50%">
+          <Text fw="bold" size="2.5rem" py="sm">
+            Get access to
+          </Text>
+        </Container>
+        <Container m={0} p={0}>
+          <Text fw="bold" size="2.5rem" c="navy">
+            Sign up now
+          </Text>
+        </Container>
+      </Group>
+      <div className={classNames(commonStyles.row, styles.signUpContainer)}>
+        <SignUpBenefits />
+        <div className={styles.authenticatorFields}>
+          <Authenticator.SignUp.FormFields />
+          <SelectField
+            label="Gender"
+            name="gender"
+            errorMessage={validationErrors.gender as string}
+            hasError={!!validationErrors.gender}
+          >
+            {Object.entries(Gender).map(([label, value]) => (
+              <option value={value} key={`signup-gender-${value}`}>
+                {label}
+              </option>
+            ))}
+          </SelectField>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
@@ -110,7 +124,7 @@ export const LoginModal = () => {
       withCloseButton={false}
       centered
       radius={10}
-      size={route === 'signUp' ? 'calc(100vw - 3rem)' : undefined}
+      size={route === 'signUp' ? 'calc(80% - 2rem)' : undefined}
       className={styles.loginContainer}
     >
       <Authenticator

@@ -2,21 +2,13 @@ import { Button, Group, Tabs, Text, TextInput } from '@mantine/core';
 import { useAuthUser } from '@shared/hooks/useAuthUser';
 import React, { useState } from 'react';
 import { IconExclamationCircle } from '@tabler/icons-react';
-import { Gender } from '@datatypes/profile';
 
 const DetailsTab = () => {
   const { user } = useAuthUser();
-  const gender = Object.keys(Gender).find(
-    (item) =>
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      Gender[item] === user?.attributes?.gender,
-  );
   return (
     <div>
       <TextInput label="Email" value={user?.attributes?.email} disabled />
       <TextInput value={user?.attributes?.name} label="Name" disabled />
-      <TextInput value={gender} label="Gender" disabled />
     </div>
   );
 };

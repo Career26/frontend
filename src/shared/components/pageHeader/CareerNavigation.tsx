@@ -9,6 +9,8 @@ import { useCareerSelection } from '@shared/hooks/useCareerSelection';
 import { useCareerTestStorage } from '@shared/hooks/useCareerTestStorage';
 import commonStyles from '@shared/styles/commonStyles.module.scss';
 
+import styles from './headerStyles.module.scss';
+
 export const CareerNavigation = () => {
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
@@ -38,12 +40,22 @@ export const CareerNavigation = () => {
         key={`household-${careerIdentifier}`}
         className={commonStyles.spaceBetweenRow}
         w="100%"
+        id="dave"
+        onClick={(e) => {
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          if (!e.target.textContent) {
+            return;
+          }
+          onSelect(careerIdentifier);
+        }}
       >
-        <Text onClick={() => onSelect(careerIdentifier)}>{title}</Text>
+        <Text>{title}</Text>
         <ActionIcon
           aria-label={`favourite-icon-${careerIdentifier}`}
           loading={loadingCareers[careerIdentifier]}
           variant="transparent"
+          id="select"
           onClick={() =>
             toggleSelectedCareer({
               selected: !selected,
@@ -69,10 +81,18 @@ export const CareerNavigation = () => {
           w="30%"
           component="button"
           pointer
-          rightSection={<Combobox.Chevron />}
+          rightSection={
+            <ActionIcon
+              onClick={() => combobox.toggleDropdown()}
+              color="none"
+              className={styles.chevron}
+            >
+              <Combobox.Chevron color="none" />
+            </ActionIcon>
+          }
           onClick={() => combobox.toggleDropdown()}
         >
-          {selectedCareerPath.title}
+          {selectedCareerPath?.title}
         </InputBase>
       </Combobox.Target>
 

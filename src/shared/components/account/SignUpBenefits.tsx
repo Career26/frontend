@@ -18,14 +18,14 @@ const benefits = [
     Icon: IconWorldSearch,
   },
   {
-    title: 'CV Building Tools',
-    content: 'Build your CV in 5 minutes with tailored and refined content',
-    Icon: IconChecklist,
-  },
-  {
     title: 'Interactive Interviews',
     content: 'Access our interview question bank and get real-time feedback',
     Icon: IconCertificate,
+  },
+  {
+    title: 'CV Building Tools',
+    content: 'Build your CV in 5 minutes with tailored and refined content',
+    Icon: IconChecklist,
   },
   {
     title: 'Global Mentor Network',

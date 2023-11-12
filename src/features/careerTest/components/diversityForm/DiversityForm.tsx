@@ -42,6 +42,7 @@ export const DiversityForm = ({ form }: { form: CareerFormProps }) => (
           w="100%"
           label="Are you the first generation in your family to attend univeristy?"
           data={yesNoPreferOptions}
+          searchable
         />
       </div>
       <div className={commonStyles.row}>
@@ -50,6 +51,7 @@ export const DiversityForm = ({ form }: { form: CareerFormProps }) => (
           w="100%"
           label="What was the main type of school you attended for your secondary education?"
           data={Object.entries(SchoolType).map(([label, value]) => ({ label, value }))}
+          searchable
         />
       </div>
       <div className={commonStyles.row}>
@@ -58,6 +60,7 @@ export const DiversityForm = ({ form }: { form: CareerFormProps }) => (
           w="100%"
           label="What is your ethnicity?"
           data={Object.entries(Ethnicity).map(([label, value]) => ({ label, value }))}
+          searchable
         />
       </div>
       <div className={commonStyles.row}>
@@ -66,6 +69,7 @@ export const DiversityForm = ({ form }: { form: CareerFormProps }) => (
           w="100%"
           label="What is your current gender identity?"
           data={Object.entries(Gender).map(([label, value]) => ({ label, value }))}
+          searchable
         />
       </div>
       <div className={commonStyles.row}>

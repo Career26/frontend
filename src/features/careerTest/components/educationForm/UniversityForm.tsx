@@ -42,12 +42,14 @@ export const UniversityForm = ({
           withAsterisk
           placeholder="Select a grade"
           w="50%"
+          searchable
         />
         <Select
           {...form.getInputProps(`${baseKey}.level`)}
           label="Degree"
           data={degreeLevels}
           withAsterisk
+          searchable
           placeholder="Select a level"
           w="50%"
         />
@@ -58,6 +60,7 @@ export const UniversityForm = ({
         data={ratingOptions}
         placeholder="Select a rating"
         py="xs"
+        searchable
         withAsterisk
       />
       <Textarea

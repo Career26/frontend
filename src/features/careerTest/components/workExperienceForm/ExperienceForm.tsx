@@ -44,6 +44,7 @@ export const ExperienceForm = ({
           placeholder="Select experience type"
           data={experienceOptions}
           w="50%"
+          searchable
         />
         <TextInput
           {...form.getInputProps(`${baseKey}.experienceName`)}
@@ -61,6 +62,7 @@ export const ExperienceForm = ({
         data={ratingOptions}
         placeholder="Select a rating"
         py="xs"
+        searchable
       />
 
       <Textarea

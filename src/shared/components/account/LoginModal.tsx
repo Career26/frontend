@@ -1,4 +1,4 @@
-import { Authenticator, SelectField, useAuthenticator } from '@aws-amplify/ui-react';
+import { Authenticator, useAuthenticator } from '@aws-amplify/ui-react';
 import { selectLoginModal, setLoginModal } from '@slices/sessionSlice';
 import { useAppDispatch, useAppSelector } from '@state/store';
 import React, { useEffect } from 'react';
@@ -7,7 +7,6 @@ import { useLazyAssociateProfileQuery } from '@apis/profileApi';
 import { useAuthUser } from '@shared/hooks/useAuthUser';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 import { notifications } from '@mantine/notifications';
-import { Gender } from '@datatypes/profile';
 import commonStyles from '@shared/styles/commonStyles.module.scss';
 import classNames from 'classnames';
 import '@aws-amplify/ui-react/styles.css';
@@ -15,43 +14,28 @@ import '@aws-amplify/ui-react/styles.css';
 import { SignUpBenefits } from './SignUpBenefits';
 import styles from './accountStyles.module.scss';
 
-const SignUpForm = () => {
-  const { validationErrors } = useAuthenticator();
-  return (
-    <>
-      <Group>
-        <Container m={0} p={0} pl="md" w="50%">
-          <Text fw="bold" size="2.5rem" py="sm">
-            Get access to
-          </Text>
-        </Container>
-        <Container m={0} p={0}>
-          <Text fw="bold" size="2.5rem" c="navy">
-            Sign up now
-          </Text>
-        </Container>
-      </Group>
-      <div className={classNames(commonStyles.row, styles.signUpContainer)}>
-        <SignUpBenefits />
-        <div className={styles.authenticatorFields}>
-          <Authenticator.SignUp.FormFields />
-          <SelectField
-            label="Gender"
-            name="gender"
-            errorMessage={validationErrors.gender as string}
-            hasError={!!validationErrors.gender}
-          >
-            {Object.entries(Gender).map(([label, value]) => (
-              <option value={value} key={`signup-gender-${value}`}>
-                {label}
-              </option>
-            ))}
-          </SelectField>
-        </div>
+const SignUpForm = () => (
+  <>
+    <Group>
+      <Container m={0} p={0} pl="md" w="50%">
+        <Text fw="bold" size="2.5rem" py="sm">
+          Get access to
+        </Text>
+      </Container>
+      <Container m={0} p={0}>
+        <Text fw="bold" size="2.5rem" c="navy">
+          Sign up now
+        </Text>
+      </Container>
+    </Group>
+    <div className={classNames(commonStyles.row, styles.signUpContainer)}>
+      <SignUpBenefits />
+      <div className={styles.authenticatorFields}>
+        <Authenticator.SignUp.FormFields />
       </div>
-    </>
-  );
-};
+    </div>
+  </>
+);
 
 const formFields = {
   signUp: {

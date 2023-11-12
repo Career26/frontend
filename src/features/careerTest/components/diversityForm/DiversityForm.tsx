@@ -81,6 +81,7 @@ export const DiversityForm = ({ form }: { form: CareerFormProps }) => (
           label="What is your date of birth?"
           maxDate={new Date()}
           clearable
+          placeholder="YYYY-MM-DD"
           valueFormat="YYYY-MM-DD"
         />
       </div>

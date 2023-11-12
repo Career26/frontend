@@ -1,5 +1,6 @@
 import {
   IconCertificate,
+  IconChecklist,
   IconUsersGroup,
   IconWorldSearch,
   TablerIconsProps,
@@ -33,6 +34,14 @@ export const featureTiles: FeatureTile[] = [
     title: 'Mentor Network',
     description: 'Connect with professionals in your industry',
     Icon: IconUsersGroup,
+    link: urls.mentors,
+    disabled: true,
+  },
+
+  {
+    title: 'CV Builder',
+    description: 'Create and refine your CV for your new industry',
+    Icon: IconChecklist,
     link: urls.mentors,
     disabled: true,
   },

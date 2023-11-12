@@ -16,7 +16,7 @@ const yesNoPreferOptions = Object.entries(YesNoPreferNotToSay).map(([label, valu
 
 export const DiversityForm = ({ form }: { form: CareerFormProps }) => (
   <Container py="md">
-    <FormContent title="Diversity and Inclusion">
+    <FormContent title="Diversity and Inclusion (Optional)">
       <div className={commonStyles.row}>
         <Accordion w="100%">
           <Accordion.Item value="why">
@@ -81,6 +81,7 @@ export const DiversityForm = ({ form }: { form: CareerFormProps }) => (
           label="What is your date of birth?"
           maxDate={new Date()}
           clearable
+          placeholder="YYYY-MM-DD"
           valueFormat="YYYY-MM-DD"
         />
       </div>

@@ -38,7 +38,7 @@ export const CareerTest = () => {
         message: 'Could not create profile, please try again later',
         color: 'red',
       });
-      storeTestValues({ key: 'step', value: CareerStep.PREFERENCES });
+      storeTestValues({ key: 'step', value: CareerStep.DIVERSITY });
       setActiveStep(CareerStep.DIVERSITY);
       return;
     }

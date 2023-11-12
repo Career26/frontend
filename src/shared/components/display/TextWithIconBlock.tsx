@@ -14,7 +14,9 @@ export const TextWithIconBlock = ({
   <div>
     <Group className={commonStyles.row}>
       {Icon}
-      <Text fw={800}>{title}</Text>
+      <Text fw={800} size="1.5rem" py="md">
+        {title}
+      </Text>
     </Group>
     {content}
   </div>

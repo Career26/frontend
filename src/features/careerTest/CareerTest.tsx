@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Group, Button, Stepper } from '@mantine/core';
 import { Shell } from '@shared/components/shell/Shell';
 import { useCreateProfileMutation } from '@apis/profileApi';
@@ -82,16 +82,6 @@ export const CareerTest = () => {
     setActiveStep(activeStep - 1);
   };
 
-  const nextLabel = useMemo(() => {
-    if (activeStep === CareerStep.DIVERSITY) {
-      return 'See Results';
-    }
-    if (activeStep === CareerStep.COMPLETE) {
-      return 'Save Choices';
-    }
-    return 'Next';
-  }, [activeStep]);
-
   return (
     <Shell>
       <>
@@ -144,7 +134,7 @@ export const CareerTest = () => {
                   loading={isLoading}
                   variant="outline"
                 >
-                  {nextLabel}
+                  Next
                 </Button>
               </Group>
             </>

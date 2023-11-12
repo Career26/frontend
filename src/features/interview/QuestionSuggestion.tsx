@@ -5,8 +5,7 @@ import { useAppSelector } from '@state/store';
 import React, { useEffect, useState } from 'react';
 import { IconBulb, IconQuestionMark, IconStar } from '@tabler/icons-react';
 import { SampleAnswerFormat } from '@datatypes/question';
-
-import { TextWithIconBlock } from './TextWithIconBlock';
+import { TextWithIconBlock } from '@shared/components/display/TextWithIconBlock';
 
 const SuggestedFormat = ({ suggestedFormat }: { suggestedFormat: SampleAnswerFormat }) => (
   <List spacing="md" center>

@@ -3,8 +3,7 @@ import { Accordion, Button, Paper } from '@mantine/core';
 import React, { useState } from 'react';
 import { IconChecklist, IconSpeakerphone, IconWriting } from '@tabler/icons-react';
 import commonStyles from '@shared/styles/commonStyles.module.scss';
-
-import { TextWithIconBlock } from './TextWithIconBlock';
+import { TextWithIconBlock } from '@shared/components/display/TextWithIconBlock';
 
 type QuestionRatingProps = {
   onClickReset: () => void;

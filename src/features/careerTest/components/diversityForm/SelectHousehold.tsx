@@ -64,6 +64,7 @@ export const SelectHousehold = ({ form }: { form: CareerFormProps }) => {
     <Combobox store={combobox} onOptionSubmit={onSelect}>
       <Combobox.Target>
         <InputBase
+          onFocus={() => combobox.openDropdown()}
           label="What was the occupation of your main household earner when you were about age 14?"
           w="100%"
           component="button"

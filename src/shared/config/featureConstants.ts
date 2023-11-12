@@ -40,7 +40,7 @@ export const featureTiles: FeatureTile[] = [
 
   {
     title: 'CV Builder',
-    description: 'Create and refine your CV for your new industryr',
+    description: 'Create and refine your CV for your new industry',
     Icon: IconChecklist,
     link: urls.mentors,
     disabled: true,

@@ -32,7 +32,7 @@ export const CareerTest = () => {
   useEffect(() => {
     if (error) {
       // eslint-disable-next-line no-console
-      console.error(`create profile error - ${error}`);
+      console.error(`create profile error - ${JSON.stringify(error)}`);
       notifications.show({
         title: 'Profile Generation Error',
         message: 'Could not create profile, please try again later',

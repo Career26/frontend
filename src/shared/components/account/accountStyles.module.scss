@@ -17,6 +17,15 @@
   [data-amplify-authenticator] [data-amplify-container] {
     width: 100%;
   }
+  [data-amplify-authenticator-signup] {
+    > fieldset {
+      > button {
+        width: 50%;
+        display: flex;
+        align-self: flex-end;
+      }
+    }
+  }
 }
 
 .signUpContainer {

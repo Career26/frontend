@@ -37,7 +37,7 @@ export const PageHeader = ({
   return (
     <>
       <LoginModal />
-      {!menu && (
+      {(!menu || !isMobile) && (
         <Group onClick={goToHomepage} className={styles.logo} aria-label="logo-icon">
           <Image src={logo} h={35} />
           <Image src={c26} h={25} />

@@ -30,7 +30,6 @@ export const PageHeader = ({
   const { isMobile } = useMobileStyles();
   const { clickCareersTest, showNavigation, goToHomepage, goToSettings } = usePageNavigation();
 
-  const showLogo = !menu || !isMobile;
   const showC26 = !isMobile || (!menu && !showNavigation);
   const showMenu = !!menu && isMobile;
 
@@ -41,20 +40,21 @@ export const PageHeader = ({
   return (
     <>
       <LoginModal />
-      {showLogo && (
+      <Group className={classNames({ [styles.logoMobile]: isMobile })}>
         <Group onClick={goToHomepage} className={styles.logo} aria-label="logo-icon">
           <Image src={logo} h={35} />
           {showC26 && <Image src={c26} h={25} />}
         </Group>
-      )}
-      {showMenu && (
-        <Menu width={300} data-testid="header-menu" opened={opened} onChange={toggle}>
-          <Menu.Target>
-            <Burger opened={opened} onClick={toggle} />
-          </Menu.Target>
-          <Menu.Dropdown>{menu}</Menu.Dropdown>
-        </Menu>
-      )}
+
+        {showMenu && (
+          <Menu width={300} data-testid="header-menu" opened={opened} onChange={toggle}>
+            <Menu.Target>
+              <Burger opened={opened} onClick={toggle} />
+            </Menu.Target>
+            <Menu.Dropdown>{menu}</Menu.Dropdown>
+          </Menu>
+        )}
+      </Group>
       <CareerNavigation />
       {!authenticated ? (
         <div className={styles.avatars}>

@@ -43,6 +43,7 @@ export const CareerNavigation = () => {
         key={`household-${careerIdentifier}`}
         className={commonStyles.spaceBetweenRow}
         w="100%"
+        p="sm"
         id="dave"
         onClick={(e) => {
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment

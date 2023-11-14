@@ -13,6 +13,18 @@
   --amplify-components-tabs-item-hover-color: #0b356e;
 }
 
+.signUpButtonSetRight {
+  [data-amplify-authenticator-signup] {
+    > fieldset {
+      > button {
+        width: 50%;
+        display: flex;
+        align-self: flex-end;
+      }
+    }
+  }
+}
+
 .loginContainer {
   [data-amplify-authenticator] [data-amplify-container] {
     width: 100%;
@@ -20,11 +32,6 @@
   [data-amplify-authenticator-signup] {
     padding-top: var(--mantine-spacing-md);
     > fieldset {
-      > button {
-        width: 50%;
-        display: flex;
-        align-self: flex-end;
-      }
       > div {
         div {
           padding-top: 0;
@@ -39,9 +46,10 @@
   padding-left: calc(var(--mantine-spacing-md) + 24px) !important;
 }
 
-.signUpHeader {
+.signUpHeaderMobile {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  padding-top: calc(16px + var(--mantine-spacing-md)) !important;
 }
 
 .authenticatorFields {
@@ -57,7 +65,9 @@
 }
 
 .signUpHeader {
-  display: flex;
-  justify-content: center;
-  padding-top: calc(16px + var(--mantine-spacing-md)) !important;
+  justify-content: unset;
+  > p {
+    width: 50%;
+    padding-left: var(--amplify-components-authenticator-form-padding);
+  }
 }

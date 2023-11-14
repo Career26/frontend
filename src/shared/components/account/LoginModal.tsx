@@ -29,6 +29,13 @@ const SignUpNow = () => (
 
 const SignUpHeader = () => {
   const { isMobile } = useMobileStyles();
+  if (isMobile) {
+    return (
+      <div className={styles.signUpHeaderMobile}>
+        <GetAccessTo />
+      </div>
+    );
+  }
   return (
     <div className={classNames(commonStyles.row, styles.signUpHeader)}>
       {isMobile ? (
@@ -50,7 +57,7 @@ const SignUpForm = () => {
       <div>
         <SignUpBenefits />
         <div>
-          <div className={styles.signUpHeader}>
+          <div className={styles.signUpHeaderMobile}>
             <SignUpNow />
           </div>
           <div className={styles.authenticatorFields}>
@@ -62,7 +69,7 @@ const SignUpForm = () => {
   }
 
   return (
-    <div className={classNames({ [commonStyles.row]: !isMobile }, styles.signUpContainer)}>
+    <div className={classNames(commonStyles.row, styles.signUpContainer, styles.signUpHeader)}>
       <SignUpBenefits />
       <div>
         <Authenticator.SignUp.Header />
@@ -105,6 +112,7 @@ const components = {
 };
 
 export const LoginModal = () => {
+  const { isMobile } = useMobileStyles();
   const { route } = useAuthenticator((context) => [context.route]);
   const dispatch = useAppDispatch();
   const { open, initialState, associateProfileId } = useAppSelector(selectLoginModal);
@@ -147,7 +155,7 @@ export const LoginModal = () => {
       centered
       radius={10}
       size={route === 'signUp' ? '100%' : undefined}
-      className={styles.loginContainer}
+      className={classNames(styles.loginContainer, { [styles.signUpButtonSetRight]: !isMobile })}
     >
       <Authenticator
         initialState={initialState}

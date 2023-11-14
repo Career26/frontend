@@ -1,5 +1,5 @@
 import { selectProfileId } from '@apis/profileApi';
-import { ActionIcon, Combobox, InputBase, Text, useCombobox } from '@mantine/core';
+import { ActionIcon, Combobox, InputBase, Text, em, useCombobox } from '@mantine/core';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 import { selectSelectedCareerPath } from '@slices/sessionSlice';
 import { useAppSelector } from '@state/store';
@@ -8,10 +8,13 @@ import React from 'react';
 import { useCareerSelection } from '@shared/hooks/useCareerSelection';
 import { useCareerTestStorage } from '@shared/hooks/useCareerTestStorage';
 import commonStyles from '@shared/styles/commonStyles.module.scss';
+import { useMediaQuery } from '@mantine/hooks';
 
 import styles from './headerStyles.module.scss';
 
 export const CareerNavigation = () => {
+  const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
+
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
   });
@@ -78,7 +81,7 @@ export const CareerNavigation = () => {
     <Combobox store={combobox}>
       <Combobox.Target>
         <InputBase
-          w="50%"
+          w={isMobile ? '70%' : '50%'}
           component="button"
           pointer
           rightSection={

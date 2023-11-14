@@ -34,42 +34,40 @@ export const PageHeader = ({
       <LoginModal />
       <Group onClick={goToHomepage} className={styles.logo} aria-label="logo-icon">
         <Image src={logo} h={35} />
-        <Image src={c26} h={25} />
+        <Image src={c26} h={25} visibleFrom="sm" />
       </Group>
       <CareerNavigation />
-      <Group>
-        {!authenticated ? (
-          <>
-            <Button variant="outline" onClick={onClickLogin}>
-              Login
-            </Button>
-            <Button onClick={clickCareersTest}>Take the Test</Button>
-          </>
-        ) : (
-          <>
-            <NavigationCenter />
-            <Menu width={200} data-testid="user-menu">
-              <Menu.Target>
-                <Avatar
-                  radius="xl"
-                  className={classNames(commonStyles.hoverItem, commonStyles.navyBg)}
-                  color="white"
-                />
-              </Menu.Target>
+      {!authenticated ? (
+        <>
+          <Button variant="outline" onClick={onClickLogin}>
+            Login
+          </Button>
+          <Button onClick={clickCareersTest}>Take the Test</Button>
+        </>
+      ) : (
+        <>
+          <NavigationCenter />
+          <Menu width={200} data-testid="user-menu">
+            <Menu.Target>
+              <Avatar
+                radius="xl"
+                className={classNames(commonStyles.hoverItem, commonStyles.navyBg)}
+                color="white"
+              />
+            </Menu.Target>
 
-              <Menu.Dropdown>
-                <Menu.Label>Session</Menu.Label>
-                <Menu.Item onClick={signOut} leftSection={<IconLogout />}>
-                  Logout
-                </Menu.Item>
-                <Menu.Item onClick={goToSettings} leftSection={<IconSettings />}>
-                  Account Settings
-                </Menu.Item>
-              </Menu.Dropdown>
-            </Menu>
-          </>
-        )}
-      </Group>
+            <Menu.Dropdown>
+              <Menu.Label>Session</Menu.Label>
+              <Menu.Item onClick={signOut} leftSection={<IconLogout />}>
+                Logout
+              </Menu.Item>
+              <Menu.Item onClick={goToSettings} leftSection={<IconSettings />}>
+                Account Settings
+              </Menu.Item>
+            </Menu.Dropdown>
+          </Menu>
+        </>
+      )}
     </>
   );
 };

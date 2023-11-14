@@ -8,6 +8,7 @@ import commonStyles from '@shared/styles/commonStyles.module.scss';
 import c26 from '@assets/career-26.png';
 import logo from '@assets/logo.png';
 import classNames from 'classnames';
+import { useMobileStyles } from '@shared/hooks/useMobileStyles';
 
 import { LoginModal } from '../account/LoginModal';
 import { NavigationCenter } from './NavigationCenter';
@@ -22,7 +23,7 @@ export const PageHeader = ({
   authenticated: boolean;
 }) => {
   const dispatch = useAppDispatch();
-
+  const { mobileWidth } = useMobileStyles();
   const { clickCareersTest, goToHomepage, goToSettings } = usePageNavigation();
 
   const onClickLogin = () => {
@@ -34,7 +35,7 @@ export const PageHeader = ({
       <LoginModal />
       <Group onClick={goToHomepage} className={styles.logo} aria-label="logo-icon">
         <Image src={logo} h={35} />
-        <Image src={c26} h={25} visibleFrom="sm" />
+        <Image src={c26} h={25} visibleFrom={mobileWidth} />
       </Group>
       <CareerNavigation />
       {!authenticated ? (

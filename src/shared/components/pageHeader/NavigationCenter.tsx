@@ -8,6 +8,8 @@ import commonStyles from '@shared/styles/commonStyles.module.scss';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 import classNames from 'classnames';
 
+import styles from './headerStyles.module.scss';
+
 export const NavigationCenter = () => {
   const [opened, { open, close }] = useDisclosure(false);
   const history = useHistory();
@@ -36,17 +38,19 @@ export const NavigationCenter = () => {
         withCloseButton={false}
         size="md"
         overlayProps={{ blur: 3 }}
+        radius="lg"
       >
         <Container>
-          <Grid justify="center">
+          <Grid py="sm" grow>
             {featureTiles.map(({ title, Icon, disabled, link }) => (
-              <Grid.Col key={title}>
+              <Grid.Col span={6} key={title} className={styles.navCenter}>
                 <Paper
                   onClick={() => !disabled && history.push(link)}
                   withBorder
                   p="md"
                   h={150}
                   w="100%"
+                  radius="xm"
                   display="flex"
                   className={classNames(
                     commonStyles.lightNavyBg,
@@ -57,8 +61,8 @@ export const NavigationCenter = () => {
                     },
                   )}
                 >
-                  <Group display="flex" align="center" justify="space-between">
-                    <Icon size={50} stroke={1} />
+                  <Group>
+                    <Icon size={100} />
                     <Text>{title}</Text>
                   </Group>
                 </Paper>

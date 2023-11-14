@@ -8,10 +8,13 @@ import React from 'react';
 import { useCareerSelection } from '@shared/hooks/useCareerSelection';
 import { useCareerTestStorage } from '@shared/hooks/useCareerTestStorage';
 import commonStyles from '@shared/styles/commonStyles.module.scss';
+import { useMobileStyles } from '@shared/hooks/useMobileStyles';
 
 import styles from './headerStyles.module.scss';
 
 export const CareerNavigation = () => {
+  const { isMobile } = useMobileStyles();
+
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
   });
@@ -78,7 +81,7 @@ export const CareerNavigation = () => {
     <Combobox store={combobox}>
       <Combobox.Target>
         <InputBase
-          w="30%"
+          w={isMobile ? '70%' : '50%'}
           component="button"
           pointer
           rightSection={

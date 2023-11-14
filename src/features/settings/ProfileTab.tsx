@@ -2,6 +2,11 @@ import { Button, Group, Tabs, Text, TextInput } from '@mantine/core';
 import { useAuthUser } from '@shared/hooks/useAuthUser';
 import React, { useState } from 'react';
 import { IconExclamationCircle } from '@tabler/icons-react';
+import commonStyles from '@shared/styles/commonStyles.module.scss';
+import classNames from 'classnames';
+import { useMobileStyles } from '@shared/hooks/useMobileStyles';
+
+import styles from './settingsStyles.module.scss';
 
 const DetailsTab = () => {
   const { user } = useAuthUser();
@@ -14,18 +19,24 @@ const DetailsTab = () => {
 };
 
 const AccountTab = () => {
+  const { isMobile } = useMobileStyles();
   const { loading, deleteAccount } = useAuthUser();
   const [deleteText, setDeleteText] = useState('');
   return (
     <div>
-      <Group display="flex" justify="flex-start" py="sm">
-        <IconExclamationCircle color="red" size={20} />
+      <div
+        className={classNames(commonStyles.row, {
+          [styles.accountTabMobile]: isMobile,
+          [styles.accountTab]: !isMobile,
+        })}
+      >
+        <IconExclamationCircle color="red" size={40} />
         <Text fw="bold">
           Deleting your account will remove your saved careers, interview quesitons, and mentor
           network.
         </Text>
-      </Group>
-      <Group py="lg" display="flex" justify="flex-start" align="flex-end">
+      </div>
+      <Group py="lg" display="flex" justify={isMobile ? 'center' : 'flex-start'} align="flex-end">
         <TextInput
           value={deleteText}
           label="Type DELETE to confirm"

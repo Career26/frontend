@@ -13,10 +13,7 @@
   --amplify-components-tabs-item-hover-color: #0b356e;
 }
 
-.loginContainer {
-  [data-amplify-authenticator] [data-amplify-container] {
-    width: 100%;
-  }
+.signUpButtonSetRight {
   [data-amplify-authenticator-signup] {
     > fieldset {
       > button {
@@ -28,9 +25,20 @@
   }
 }
 
-.signUpContainer {
-  > div {
-    width: 50%;
+.loginContainer {
+  [data-amplify-authenticator] [data-amplify-container] {
+    width: 100%;
+  }
+  [data-amplify-authenticator-signup] {
+    padding-top: var(--mantine-spacing-md);
+    > fieldset {
+      > div {
+        div {
+          padding-top: 0;
+          padding-bottom: 0;
+        }
+      }
+    }
   }
 }
 
@@ -38,13 +46,28 @@
   padding-left: calc(var(--mantine-spacing-md) + 24px) !important;
 }
 
-.signUpHeader {
+.signUpHeaderMobile {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  padding-top: calc(16px + var(--mantine-spacing-md)) !important;
 }
 
 .authenticatorFields {
   display: flex;
   gap: var(--mantine-spacing-md);
   flex-direction: column;
+}
+
+.signUpContainer {
+  > div {
+    width: 50%;
+  }
+}
+
+.signUpHeader {
+  justify-content: unset;
+  > p {
+    width: 50%;
+    padding-left: var(--amplify-components-authenticator-form-padding);
+  }
 }

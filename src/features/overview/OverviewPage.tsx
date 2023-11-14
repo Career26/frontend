@@ -6,6 +6,7 @@ import { useGetCareerOverviewQuery } from '@apis/overviewApi';
 import { selectProfileId } from '@apis/profileApi';
 import { Card, Container, Group, Text } from '@mantine/core';
 import { LoaderWithText } from '@shared/components/loadingScreen/LoaderWithText';
+import { useMobileStyles } from '@shared/hooks/useMobileStyles';
 
 import { overviewLinks } from './config/overviewConstants';
 import { CareerProgressionTile } from './tiles/careerProgressionTile/CareerProgressionTile';
@@ -16,6 +17,7 @@ import { ProgressionTile } from './tiles/ProgressionTile';
 import { RoleSummaryTile } from './tiles/RoleSummaryTile';
 
 export const OverviewPage = () => {
+  const { isMobile } = useMobileStyles();
   const profileId = useAppSelector(selectProfileId) || '';
   const careerId = useAppSelector(selectSelectedCareerPathId);
   const careerPath = useAppSelector(selectSelectedCareerPath);
@@ -26,7 +28,7 @@ export const OverviewPage = () => {
 
   if (isFetching) {
     return (
-      <Shell navbar={<OverviewNavBar />}>
+      <Shell navbar={!isMobile ? <OverviewNavBar /> : undefined}>
         <LoaderWithText
           text={[
             `Fetching insights for ${careerPath?.title}...`,
@@ -38,7 +40,7 @@ export const OverviewPage = () => {
   }
 
   return (
-    <Shell navbar={<OverviewNavBar />}>
+    <Shell navbar={!isMobile ? <OverviewNavBar /> : undefined}>
       <>
         {overviewLinks.map(({ label, Icon, anchor }) => {
           if (!data) {

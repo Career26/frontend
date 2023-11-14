@@ -40,7 +40,7 @@ export const PageHeader = ({
       {(!menu || !isMobile) && (
         <Group onClick={goToHomepage} className={styles.logo} aria-label="logo-icon">
           <Image src={logo} h={35} />
-          <Image src={c26} h={25} />
+          {!isMobile && <Image src={c26} h={25} />}
         </Group>
       )}
       {menu && isMobile && (

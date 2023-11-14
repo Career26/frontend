@@ -28,7 +28,10 @@ export const PageHeader = ({
   const dispatch = useAppDispatch();
   const [opened, { toggle }] = useDisclosure();
   const { isMobile } = useMobileStyles();
-  const { clickCareersTest, goToHomepage, goToSettings } = usePageNavigation();
+  const { clickCareersTest, showNavigation, goToHomepage, goToSettings } = usePageNavigation();
+
+  const showLogo = !menu || !isMobile;
+  const showC26 = !isMobile || (!menu && !showNavigation);
 
   const onClickLogin = () => {
     dispatch(setLoginModal({ open: true, initialState: 'signIn' }));
@@ -37,10 +40,10 @@ export const PageHeader = ({
   return (
     <>
       <LoginModal />
-      {(!menu || !isMobile) && (
+      {showLogo && (
         <Group onClick={goToHomepage} className={styles.logo} aria-label="logo-icon">
           <Image src={logo} h={35} />
-          {!isMobile && <Image src={c26} h={25} />}
+          {showC26 && <Image src={c26} h={25} />}
         </Group>
       )}
       {menu && isMobile && (
@@ -53,12 +56,12 @@ export const PageHeader = ({
       )}
       <CareerNavigation />
       {!authenticated ? (
-        <>
+        <div className={styles.avatars}>
           <Button variant="outline" onClick={onClickLogin}>
             Login
           </Button>
           <Button onClick={clickCareersTest}>Take the Test</Button>
-        </>
+        </div>
       ) : (
         <div className={styles.avatars}>
           <NavigationCenter />

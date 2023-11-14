@@ -81,7 +81,11 @@ export const CareerTest = () => {
   };
 
   const clickBack = () => {
-    setActiveStep(activeStep - 1);
+    if (activeStep === CareerStep.COMPLETE) {
+      setActiveStep(activeStep - 2);
+    } else {
+      setActiveStep(activeStep - 1);
+    }
   };
 
   return (

@@ -9,8 +9,8 @@ export const useActiveNavScroll = <T>({ navItems, headerHeight = 150 }: NavScrol
   const [activeAnchor, setActiveAnchor] = useState<null | string>(navItems[0].anchor);
   const handleScroll = () => {
     const activeSection = navItems.reduce<{ anchor: string; top?: number }>(
-      (agg, link) => {
-        const section = document.getElementById(link.anchor);
+      (agg, { anchor }) => {
+        const section = document.getElementById(anchor);
         if (!section) {
           return agg;
         }
@@ -19,7 +19,7 @@ export const useActiveNavScroll = <T>({ navItems, headerHeight = 150 }: NavScrol
           return agg;
         }
         if (!agg.top || top < agg.top) {
-          return { anchor: link.anchor, top };
+          return { anchor, top };
         }
         return agg;
       },

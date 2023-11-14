@@ -9,7 +9,7 @@ export const RoleSummaryTile = ({
   skills,
   personalityType,
 }: RoleSummary) => (
-  <Grid py="sm" grow id="overlaps">
+  <Grid py="sm" grow id="role">
     {[
       { content: responsibilities, title: 'Responsibilities' },
       { content: dayToDay, title: 'Day to Day' },

@@ -27,7 +27,7 @@ export const PageHeader = ({
 }) => {
   const dispatch = useAppDispatch();
   const [opened, { toggle }] = useDisclosure();
-  const { mobileWidth, isMobile } = useMobileStyles();
+  const { isMobile } = useMobileStyles();
   const { clickCareersTest, goToHomepage, goToSettings } = usePageNavigation();
 
   const onClickLogin = () => {
@@ -37,15 +37,12 @@ export const PageHeader = ({
   return (
     <>
       <LoginModal />
-      <Group
-        onClick={goToHomepage}
-        className={styles.logo}
-        aria-label="logo-icon"
-        visibleFrom={mobileWidth}
-      >
-        <Image src={logo} h={35} />
-        <Image src={c26} h={25} />
-      </Group>
+      {!isMobile && (
+        <Group onClick={goToHomepage} className={styles.logo} aria-label="logo-icon">
+          <Image src={logo} h={35} />
+          <Image src={c26} h={25} />
+        </Group>
+      )}
       {menu && isMobile && (
         <Menu width={400} data-testid="header-menu">
           <Menu.Target>

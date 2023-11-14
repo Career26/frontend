@@ -23,7 +23,7 @@ const NavMenu = ({ navbar }: { navbar: ShellProps['navbar'] }) => (
 
 export const Shell = ({ children, navbar }: ShellProps) => {
   const dispatch = useAppDispatch();
-  const { isMobile, mobileWidth } = useMobileStyles();
+  const { isMobile } = useMobileStyles();
   const { authenticated, signOut } = useAuthUser();
   const { resetValues } = useCareerTestStorage();
   const onSignOut = () => {
@@ -58,8 +58,8 @@ export const Shell = ({ children, navbar }: ShellProps) => {
           menu={<NavMenu navbar={navbar} />}
         />
       </AppShell.Header>
-      {navbar && (
-        <AppShell.Navbar display="flex" visibleFrom={mobileWidth}>
+      {navbar && !isMobile && (
+        <AppShell.Navbar display="flex" w={200}>
           <AppShell.Section>
             <NavMenu navbar={navbar} />
           </AppShell.Section>

@@ -78,7 +78,7 @@ export const CareerNavigation = () => {
     <Combobox store={combobox}>
       <Combobox.Target>
         <InputBase
-          w="30%"
+          w="50%"
           component="button"
           pointer
           rightSection={

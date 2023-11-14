@@ -32,6 +32,11 @@ export const CareerTest = () => {
   const { isMobile } = useMobileStyles();
 
   useEffect(() => {
+    const newStep = activeStep >= CareerStep.COMPLETE ? CareerStep.COMPLETE : activeStep;
+    storeTestValues({ key: 'step', value: newStep });
+  }, [activeStep]);
+
+  useEffect(() => {
     if (error) {
       // eslint-disable-next-line no-console
       console.error(`create profile error - ${JSON.stringify(error)}`);
@@ -40,7 +45,6 @@ export const CareerTest = () => {
         message: 'Could not create profile, please try again later',
         color: 'red',
       });
-      storeTestValues({ key: 'step', value: CareerStep.DIVERSITY });
       setActiveStep(CareerStep.DIVERSITY);
       return;
     }
@@ -51,12 +55,6 @@ export const CareerTest = () => {
     }
   }, [data, error]);
 
-  useEffect(() => {
-    if (activeStep >= CareerStep.COMPLETE) {
-      storeTestValues({ key: 'step', value: CareerStep.COMPLETE });
-    }
-  }, [activeStep]);
-
   const clickNext = async () => {
     const formIsvalid = checkFormIsValid();
     storeTestValues({ key: 'formValues', value: form.values });
@@ -65,6 +63,7 @@ export const CareerTest = () => {
     }
     form.clearErrors();
     if (activeStep === CareerStep.DIVERSITY) {
+      storeTestValues({ key: 'careerPaths', value: undefined });
       createProfile(form.values);
     }
     if (activeStep === CareerStep.COMPLETE) {
@@ -81,7 +80,11 @@ export const CareerTest = () => {
   };
 
   const clickBack = () => {
-    setActiveStep(activeStep - 1);
+    if (activeStep === CareerStep.COMPLETE) {
+      setActiveStep(activeStep - 2);
+    } else {
+      setActiveStep(activeStep - 1);
+    }
   };
 
   return (

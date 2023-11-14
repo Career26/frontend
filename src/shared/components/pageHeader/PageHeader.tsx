@@ -44,7 +44,7 @@ export const PageHeader = ({
         </Group>
       )}
       {menu && isMobile && (
-        <Menu width={400} data-testid="header-menu">
+        <Menu width={300} data-testid="header-menu" opened={opened} onChange={toggle}>
           <Menu.Target>
             <Burger opened={opened} onClick={toggle} />
           </Menu.Target>
@@ -60,7 +60,7 @@ export const PageHeader = ({
           <Button onClick={clickCareersTest}>Take the Test</Button>
         </>
       ) : (
-        <>
+        <div className={styles.avatars}>
           <NavigationCenter />
           <Menu width={200} data-testid="user-menu">
             <Menu.Target>
@@ -81,7 +81,7 @@ export const PageHeader = ({
               </Menu.Item>
             </Menu.Dropdown>
           </Menu>
-        </>
+        </div>
       )}
     </>
   );

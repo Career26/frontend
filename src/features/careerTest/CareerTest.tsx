@@ -8,6 +8,7 @@ import { LoaderWithText } from '@shared/components/loadingScreen/LoaderWithText'
 import { useCareerTestStorage } from '@shared/hooks/useCareerTestStorage';
 import { notifications } from '@mantine/notifications';
 import { useAuthUser } from '@shared/hooks/useAuthUser';
+import { useMobileStyles } from '@shared/hooks/useMobileStyles';
 
 import { EducationForm } from './components/educationForm/EducationForm';
 import { WorkExperienceForm } from './components/workExperienceForm/WorkExperienceForm';
@@ -28,6 +29,7 @@ export const CareerTest = () => {
   const { storeTestValues, careerTestStorage } = useCareerTestStorage();
   const [activeStep, setActiveStep] = useState(careerTestStorage.step);
   const { form, checkFormIsValid } = useProfileForm({ activeStep });
+  const { isMobile } = useMobileStyles();
 
   useEffect(() => {
     if (error) {
@@ -90,7 +92,7 @@ export const CareerTest = () => {
           <Stepper active={activeStep} onStepClick={setActiveStep} py="md">
             {stepperLabels.map((label, index) => (
               <Stepper.Step
-                label={label}
+                label={!isMobile && label}
                 key={`stepper-${label}`}
                 loading={index === CareerStep.CAREER_PATHS && isLoading}
                 disabled={index > activeStep}

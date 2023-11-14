@@ -2,6 +2,8 @@ import React from 'react';
 import { Card, Container, Group, Text } from '@mantine/core';
 import { IconWriting, IconRoute, IconTrophy } from '@tabler/icons-react';
 import styles from '@careerTest/components/careerTestHeader/careerTestHeader.module.scss';
+import { useMobileStyles } from '@shared/hooks/useMobileStyles';
+import classNames from 'classnames';
 
 const headerTiles = [
   {
@@ -24,23 +26,28 @@ const headerTiles = [
   },
 ];
 
-export const CareerTestHeader = () => (
-  <Container py="md" className={styles.headerContainer}>
-    <Text fw="bold" className={styles.titleText}>
-      Career Path Test
-    </Text>
-    <Container display="flex">
-      {headerTiles.map(({ title, description, Icon }) => (
-        <Card w="400" padding="sm" mx="sm" withBorder key={`career-header-${title}`}>
-          <Group className={styles.cardGroup}>
-            <Group>
-              {Icon}
-              <Text fw="bold">{title}</Text>
+export const CareerTestHeader = () => {
+  const { isMobile } = useMobileStyles();
+  return (
+    <Container py="md" className={styles.headerContainer}>
+      <Text fw="bold" className={styles.titleText}>
+        Career Path Test
+      </Text>
+      <Container display="flex">
+        {headerTiles.map(({ title, description, Icon }) => (
+          <Card padding="sm" mx="sm" withBorder key={`career-header-${title}`}>
+            <Group className={classNames(styles.cardGroup, { [styles.cardGroupMobile]: isMobile })}>
+              <Group
+                className={classNames(styles.cardGroup, { [styles.cardGroupMobile]: isMobile })}
+              >
+                {Icon}
+                <Text fw="bold">{title}</Text>
+              </Group>
+              {!isMobile && <Text>{description}</Text>}
             </Group>
-            <Text>{description}</Text>
-          </Group>
-        </Card>
-      ))}
+          </Card>
+        ))}
+      </Container>
     </Container>
-  </Container>
-);
+  );
+};

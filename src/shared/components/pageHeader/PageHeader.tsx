@@ -32,6 +32,7 @@ export const PageHeader = ({
 
   const showLogo = !menu || !isMobile;
   const showC26 = !isMobile || (!menu && !showNavigation);
+  const showMenu = !!menu && isMobile;
 
   const onClickLogin = () => {
     dispatch(setLoginModal({ open: true, initialState: 'signIn' }));
@@ -46,7 +47,7 @@ export const PageHeader = ({
           {showC26 && <Image src={c26} h={25} />}
         </Group>
       )}
-      {menu && isMobile && (
+      {showMenu && (
         <Menu width={300} data-testid="header-menu" opened={opened} onChange={toggle}>
           <Menu.Target>
             <Burger opened={opened} onClick={toggle} />

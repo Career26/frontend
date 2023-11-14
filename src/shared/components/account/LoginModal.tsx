@@ -2,7 +2,7 @@ import { Authenticator, useAuthenticator } from '@aws-amplify/ui-react';
 import { selectLoginModal, setLoginModal } from '@slices/sessionSlice';
 import { useAppDispatch, useAppSelector } from '@state/store';
 import React, { useEffect } from 'react';
-import { Container, Group, Modal, Text } from '@mantine/core';
+import { Modal, Text } from '@mantine/core';
 import { useLazyAssociateProfileQuery } from '@apis/profileApi';
 import { useAuthUser } from '@shared/hooks/useAuthUser';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
@@ -10,32 +10,69 @@ import { notifications } from '@mantine/notifications';
 import commonStyles from '@shared/styles/commonStyles.module.scss';
 import classNames from 'classnames';
 import '@aws-amplify/ui-react/styles.css';
+import { useMobileStyles } from '@shared/hooks/useMobileStyles';
 
 import { SignUpBenefits } from './SignUpBenefits';
 import styles from './accountStyles.module.scss';
 
-const SignUpForm = () => (
-  <>
-    <Group>
-      <Container m={0} p={0} pl="md" w="50%">
-        <Text fw="bold" size="2.5rem" py="sm">
-          Get access to
-        </Text>
-      </Container>
-      <Container m={0} p={0}>
-        <Text fw="bold" size="2.5rem" c="navy">
-          Sign up now
-        </Text>
-      </Container>
-    </Group>
-    <div className={classNames(commonStyles.row, styles.signUpContainer)}>
+const GetAccessTo = () => (
+  <Text fw="bold" size="2.5rem" py="sm">
+    Get access to
+  </Text>
+);
+
+const SignUpNow = () => (
+  <Text fw="bold" size="2.5rem" c="navy" py="md">
+    Sign up now
+  </Text>
+);
+
+const SignUpHeader = () => {
+  const { isMobile } = useMobileStyles();
+  return (
+    <div className={classNames(commonStyles.row, styles.signUpHeader)}>
+      {isMobile ? (
+        <GetAccessTo />
+      ) : (
+        <>
+          <GetAccessTo />
+          <SignUpNow />
+        </>
+      )}
+    </div>
+  );
+};
+
+const SignUpForm = () => {
+  const { isMobile } = useMobileStyles();
+  if (isMobile) {
+    return (
+      <div>
+        <SignUpBenefits />
+        <div>
+          <div className={styles.signUpHeader}>
+            <SignUpNow />
+          </div>
+          <div className={styles.authenticatorFields}>
+            <Authenticator.SignUp.FormFields />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className={classNames({ [commonStyles.row]: !isMobile }, styles.signUpContainer)}>
       <SignUpBenefits />
-      <div className={styles.authenticatorFields}>
-        <Authenticator.SignUp.FormFields />
+      <div>
+        <Authenticator.SignUp.Header />
+        <div className={styles.authenticatorFields}>
+          <Authenticator.SignUp.FormFields />
+        </div>
       </div>
     </div>
-  </>
-);
+  );
+};
 
 const formFields = {
   signUp: {
@@ -63,6 +100,7 @@ const formFields = {
 const components = {
   SignUp: {
     FormFields: SignUpForm,
+    Header: SignUpHeader,
   },
 };
 
@@ -108,7 +146,7 @@ export const LoginModal = () => {
       withCloseButton={false}
       centered
       radius={10}
-      size={route === 'signUp' ? 'calc(80% - 2rem)' : undefined}
+      size={route === 'signUp' ? '100%' : undefined}
       className={styles.loginContainer}
     >
       <Authenticator

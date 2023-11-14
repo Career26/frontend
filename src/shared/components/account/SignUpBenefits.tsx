@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, List, Text } from '@mantine/core';
+import { List, Text } from '@mantine/core';
 import {
   IconChecklist,
   IconWorldSearch,
@@ -35,16 +35,14 @@ const benefits = [
 ];
 
 export const SignUpBenefits = () => (
-  <Container>
-    <List size="md" center>
-      {benefits.map(({ title, content, Icon }) => (
-        <TextWithIconBlock
-          key={`benefit-${title}`}
-          title={title}
-          content={<Text className={styles.listContent}>{content}</Text>}
-          Icon={<Icon />}
-        />
-      ))}
-    </List>
-  </Container>
+  <List size="md" center>
+    {benefits.map(({ title, content, Icon }) => (
+      <TextWithIconBlock
+        key={`benefit-${title}`}
+        title={title}
+        content={<Text className={styles.listContent}>{content}</Text>}
+        Icon={<Icon />}
+      />
+    ))}
+  </List>
 );

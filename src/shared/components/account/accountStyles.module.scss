@@ -18,19 +18,20 @@
     width: 100%;
   }
   [data-amplify-authenticator-signup] {
+    padding-top: var(--mantine-spacing-md);
     > fieldset {
       > button {
         width: 50%;
         display: flex;
         align-self: flex-end;
       }
+      > div {
+        div {
+          padding-top: 0;
+          padding-bottom: 0;
+        }
+      }
     }
-  }
-}
-
-.signUpContainer {
-  > div {
-    width: 50%;
   }
 }
 
@@ -47,4 +48,16 @@
   display: flex;
   gap: var(--mantine-spacing-md);
   flex-direction: column;
+}
+
+.signUpContainer {
+  > div {
+    width: 50%;
+  }
+}
+
+.signUpHeader {
+  display: flex;
+  justify-content: center;
+  padding-top: calc(16px + var(--mantine-spacing-md)) !important;
 }

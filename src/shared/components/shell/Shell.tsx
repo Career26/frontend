@@ -55,7 +55,7 @@ export const Shell = ({ children, navbar }: ShellProps) => {
         <PageHeader
           authenticated={authenticated}
           signOut={onSignOut}
-          menu={<NavMenu navbar={navbar} />}
+          menu={navbar && <NavMenu navbar={navbar} />}
         />
       </AppShell.Header>
       {navbar && !isMobile && (

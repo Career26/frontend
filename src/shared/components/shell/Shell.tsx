@@ -17,6 +17,10 @@ interface ShellProps {
 const navWidth = 200;
 const headerHeight = rem(80);
 
+const NavMenu = ({ navbar }: { navbar: ShellProps['navbar'] }) => (
+  <ScrollArea h={`calc(100vh - ${headerHeight})`}>{navbar}</ScrollArea>
+);
+
 export const Shell = ({ children, navbar }: ShellProps) => {
   const dispatch = useAppDispatch();
   const { isMobile, mobileWidth } = useMobileStyles();
@@ -48,12 +52,16 @@ export const Shell = ({ children, navbar }: ShellProps) => {
       navbar={navbarSettings}
     >
       <AppShell.Header className={styles.header}>
-        <PageHeader authenticated={authenticated} signOut={onSignOut} />
+        <PageHeader
+          authenticated={authenticated}
+          signOut={onSignOut}
+          menu={<NavMenu navbar={navbar} />}
+        />
       </AppShell.Header>
       {navbar && (
         <AppShell.Navbar display="flex" visibleFrom={mobileWidth}>
           <AppShell.Section>
-            <ScrollArea h={`calc(100vh - ${headerHeight})`}>{navbar}</ScrollArea>
+            <NavMenu navbar={navbar} />
           </AppShell.Section>
         </AppShell.Navbar>
       )}

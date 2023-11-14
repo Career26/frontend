@@ -1,5 +1,5 @@
 import React from 'react';
-import { Group, Button, Avatar, Menu, Image } from '@mantine/core';
+import { Group, Button, Avatar, Menu, Image, Burger } from '@mantine/core';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 import { useAppDispatch } from '@state/store';
 import { setLoginModal } from '@slices/sessionSlice';
@@ -9,6 +9,7 @@ import c26 from '@assets/career-26.png';
 import logo from '@assets/logo.png';
 import classNames from 'classnames';
 import { useMobileStyles } from '@shared/hooks/useMobileStyles';
+import { useDisclosure } from '@mantine/hooks';
 
 import { LoginModal } from '../account/LoginModal';
 import { NavigationCenter } from './NavigationCenter';
@@ -18,12 +19,15 @@ import styles from './headerStyles.module.scss';
 export const PageHeader = ({
   signOut,
   authenticated,
+  menu,
 }: {
   signOut: () => void;
   authenticated: boolean;
+  menu?: React.ReactNode;
 }) => {
   const dispatch = useAppDispatch();
-  const { mobileWidth } = useMobileStyles();
+  const [opened, { toggle }] = useDisclosure();
+  const { mobileWidth, isMobile } = useMobileStyles();
   const { clickCareersTest, goToHomepage, goToSettings } = usePageNavigation();
 
   const onClickLogin = () => {
@@ -33,10 +37,23 @@ export const PageHeader = ({
   return (
     <>
       <LoginModal />
-      <Group onClick={goToHomepage} className={styles.logo} aria-label="logo-icon">
+      <Group
+        onClick={goToHomepage}
+        className={styles.logo}
+        aria-label="logo-icon"
+        visibleFrom={mobileWidth}
+      >
         <Image src={logo} h={35} />
-        <Image src={c26} h={25} visibleFrom={mobileWidth} />
+        <Image src={c26} h={25} />
       </Group>
+      {menu && isMobile && (
+        <Menu width={400} data-testid="header-menu">
+          <Menu.Target>
+            <Burger opened={opened} onClick={toggle} />
+          </Menu.Target>
+          <Menu.Dropdown>{menu}</Menu.Dropdown>
+        </Menu>
+      )}
       <CareerNavigation />
       {!authenticated ? (
         <>

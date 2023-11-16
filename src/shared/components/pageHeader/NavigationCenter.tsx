@@ -1,19 +1,20 @@
 import React, { useEffect } from 'react';
 import { useDisclosure } from '@mantine/hooks';
-import { Modal, Grid, Paper, Container, Avatar, Group, Text } from '@mantine/core';
+import { Modal, Grid, Paper, Container, Avatar, Text } from '@mantine/core';
 import { IconLayoutDashboard } from '@tabler/icons-react';
 import { useHistory } from 'react-router-dom';
 import { featureTiles } from '@shared/config/featureConstants';
 import commonStyles from '@shared/styles/commonStyles.module.scss';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 import classNames from 'classnames';
+import { useMobileStyles } from '@shared/hooks/useMobileStyles';
 
 import styles from './headerStyles.module.scss';
 
 export const NavigationCenter = () => {
   const [opened, { open, close }] = useDisclosure(false);
   const history = useHistory();
-
+  const { isMobile } = useMobileStyles();
   const { currentPathname } = usePageNavigation();
 
   useEffect(() => {
@@ -61,10 +62,10 @@ export const NavigationCenter = () => {
                     },
                   )}
                 >
-                  <Group>
-                    <Icon size={100} />
-                    <Text>{title}</Text>
-                  </Group>
+                  <div className={classNames({ [styles.navCenterMobile]: isMobile })}>
+                    <Icon size={isMobile ? 70 : 100} />
+                    <Text size="sm">{title}</Text>
+                  </div>
                 </Paper>
               </Grid.Col>
             ))}

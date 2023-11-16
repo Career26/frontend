@@ -33,21 +33,25 @@ export const CareerTestHeader = () => {
       <Text fw="bold" className={styles.titleText}>
         Career Path Test
       </Text>
-      <Container display="flex">
-        {headerTiles.map(({ title, description, Icon }) => (
-          <Card padding="sm" mx="sm" withBorder key={`career-header-${title}`}>
-            <Group className={classNames(styles.cardGroup, { [styles.cardGroupMobile]: isMobile })}>
+      {!isMobile && (
+        <Container display="flex">
+          {headerTiles.map(({ title, description, Icon }) => (
+            <Card padding="sm" mx="sm" withBorder key={`career-header-${title}`}>
               <Group
                 className={classNames(styles.cardGroup, { [styles.cardGroupMobile]: isMobile })}
               >
-                {Icon}
-                <Text fw="bold">{title}</Text>
+                <Group
+                  className={classNames(styles.cardGroup, { [styles.cardGroupMobile]: isMobile })}
+                >
+                  {Icon}
+                  <Text fw="bold">{title}</Text>
+                </Group>
+                {!isMobile && <Text>{description}</Text>}
               </Group>
-              {!isMobile && <Text>{description}</Text>}
-            </Group>
-          </Card>
-        ))}
-      </Container>
+            </Card>
+          ))}
+        </Container>
+      )}
     </Container>
   );
 };

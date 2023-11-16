@@ -30,7 +30,7 @@ export const PageHeader = ({
   const { isMobile } = useMobileStyles();
   const { clickCareersTest, showNavigation, goToHomepage, goToSettings } = usePageNavigation();
 
-  const showC26 = !isMobile || (!menu && !showNavigation);
+  const showC26 = !isMobile || (!menu && !showNavigation && authenticated);
   const showMenu = !!menu && isMobile;
 
   const onClickLogin = () => {
@@ -41,9 +41,14 @@ export const PageHeader = ({
     <>
       <LoginModal />
       <Group className={classNames({ [styles.logoMobile]: isMobile })}>
-        <Group onClick={goToHomepage} className={styles.logo} aria-label="logo-icon">
-          <Image src={logo} h={35} />
-          {showC26 && <Image src={c26} h={25} />}
+        <Group
+          onClick={goToHomepage}
+          className={styles.logo}
+          aria-label="logo-icon"
+          w={isMobile && !authenticated ? 100 : 200}
+        >
+          <Image src={logo} h={isMobile ? 25 : 35} />
+          {showC26 && <Image src={c26} h={isMobile ? 20 : 25} />}
         </Group>
 
         {showMenu && (

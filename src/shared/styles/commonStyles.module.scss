@@ -13,6 +13,12 @@
   align-items: center;
 }
 
+.rowMobile {
+  > div {
+    width: 100% !important;
+  }
+}
+
 .lightNavyBg {
   background-color: var(--mantine-color-navy-0) !important;
   > span {

@@ -41,7 +41,7 @@ export const PageHeader = ({
     <>
       <LoginModal />
       <Group className={classNames({ [styles.logoMobile]: isMobile })}>
-        <Group onClick={goToHomepage} className={styles.logo} aria-label="logo-icon">
+        <Group onClick={goToHomepage} className={styles.logo} aria-label="logo-icon" w={200}>
           <Image src={logo} h={35} />
           {showC26 && <Image src={c26} h={25} />}
         </Group>

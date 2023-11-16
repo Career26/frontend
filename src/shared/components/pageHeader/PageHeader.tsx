@@ -45,9 +45,9 @@ export const PageHeader = ({
           onClick={goToHomepage}
           className={styles.logo}
           aria-label="logo-icon"
-          w={isMobile ? 100 : 200}
+          w={isMobile && !authenticated ? 100 : 200}
         >
-          <Image src={logo} h={35} />
+          <Image src={logo} h={isMobile ? 25 : 35} />
           {showC26 && <Image src={c26} h={isMobile ? 20 : 25} />}
         </Group>
 

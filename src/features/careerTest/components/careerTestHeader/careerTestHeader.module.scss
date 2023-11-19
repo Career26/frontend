@@ -14,10 +14,9 @@
 .cardGroup {
   display: flex !important;
   flex-direction: column !important;
-}
-
-.cardGroupMobile {
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  @media (max-width: 750px) {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
 }

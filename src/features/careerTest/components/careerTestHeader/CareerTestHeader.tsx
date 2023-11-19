@@ -3,7 +3,6 @@ import { Card, Container, Group, Text } from '@mantine/core';
 import { IconWriting, IconRoute, IconTrophy } from '@tabler/icons-react';
 import styles from '@careerTest/components/careerTestHeader/careerTestHeader.module.scss';
 import { useMobileStyles } from '@shared/hooks/useMobileStyles';
-import classNames from 'classnames';
 
 const headerTiles = [
   {
@@ -37,12 +36,8 @@ export const CareerTestHeader = () => {
         <Container display="flex">
           {headerTiles.map(({ title, description, Icon }) => (
             <Card padding="sm" mx="sm" withBorder key={`career-header-${title}`}>
-              <Group
-                className={classNames(styles.cardGroup, { [styles.cardGroupMobile]: isMobile })}
-              >
-                <Group
-                  className={classNames(styles.cardGroup, { [styles.cardGroupMobile]: isMobile })}
-                >
+              <Group className={styles.cardGroup}>
+                <Group className={styles.cardGroup}>
                   {Icon}
                   <Text fw="bold">{title}</Text>
                 </Group>

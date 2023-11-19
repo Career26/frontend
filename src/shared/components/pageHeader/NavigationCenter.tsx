@@ -62,7 +62,7 @@ export const NavigationCenter = () => {
                     },
                   )}
                 >
-                  <div>
+                  <div className={classNames({ [styles.navCenterMobile]: isMobile })}>
                     <Icon size={isMobile ? 70 : 100} />
                     <Text size="sm">{title}</Text>
                   </div>

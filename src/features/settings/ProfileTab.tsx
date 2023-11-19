@@ -24,7 +24,12 @@ const AccountTab = () => {
   const [deleteText, setDeleteText] = useState('');
   return (
     <div>
-      <div className={classNames(commonStyles.row, styles.accountTab)}>
+      <div
+        className={classNames(commonStyles.row, {
+          [styles.accountTabMobile]: isMobile,
+          [styles.accountTab]: !isMobile,
+        })}
+      >
         <IconExclamationCircle color="red" size={40} />
         <Text fw="bold">
           Deleting your account will remove your saved careers, interview quesitons, and mentor

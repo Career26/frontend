@@ -2,7 +2,6 @@ import { Group, Text } from '@mantine/core';
 import React from 'react';
 import commonStyles from '@shared/styles/commonStyles.module.scss';
 import { useMobileStyles } from '@shared/hooks/useMobileStyles';
-import classNames from 'classnames';
 
 export const TextWithIconBlock = ({
   title,
@@ -16,12 +15,7 @@ export const TextWithIconBlock = ({
   const { isMobile } = useMobileStyles();
   return (
     <div>
-      <Group
-        className={classNames({
-          [commonStyles.row]: !isMobile,
-          [commonStyles.rowMobile]: isMobile,
-        })}
-      >
+      <Group className={commonStyles.row}>
         {Icon}
         <Text fw={800} size={isMobile ? '1rem' : '1.5rem'} py="md">
           {title}

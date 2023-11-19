@@ -18,6 +18,12 @@
   justify-content: center !important;
   align-items: flex-start !important;
   flex: 4;
+  @media (max-width: 750px) {
+    display: flex;
+    flex-direction: row !important;
+    justify-content: flex-start !important;
+    padding-left: var(--mantine-spacing-md);
+  }
 }
 
 .icon {

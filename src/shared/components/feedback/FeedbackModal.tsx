@@ -3,21 +3,21 @@ import React from 'react';
 import { Button, Card, Group, Modal, Text } from '@mantine/core';
 import { useAppDispatch, useAppSelector } from '@state/store';
 import { selectShowFeedback, setShowFeedback } from '@slices/sessionSlice';
+import { Feedback } from '@datatypes/feedback';
 
-import { FeedbackValues } from './feedbackTypes';
 import { useFeedback } from './useFeedback';
 import { FeedbackForm } from './FeedbackForm';
 
 const hasAnswer = (value?: string | string[]) => !value?.length && 'Please provide an answer';
 
-export const Feedback = () => {
+export const FeedbackModal = () => {
   const dispatch = useAppDispatch();
   const opened = useAppSelector(selectShowFeedback);
   const onClose = () => {
     dispatch(setShowFeedback(false));
   };
   const { loading, data, submitFeedback } = useFeedback();
-  const form = useForm<FeedbackValues>({
+  const form = useForm<Feedback>({
     initialValues: {
       heardFrom: [],
       mostHelpful: [],

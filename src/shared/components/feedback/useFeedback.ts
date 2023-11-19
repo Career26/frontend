@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { UseFormReturnType } from '@mantine/form';
+import { Feedback } from '@datatypes/feedback';
 
-import { FeedbackValues } from './feedbackTypes';
+// TODO: BE needs endpoint
 
 export const useFeedback = () => {
   const [loading, setLoading] = useState(false);
@@ -10,7 +11,7 @@ export const useFeedback = () => {
     form,
     callback,
   }: {
-    form: UseFormReturnType<FeedbackValues>;
+    form: UseFormReturnType<Feedback>;
     callback: () => void;
   }) => {
     const { errors } = form.validate();
@@ -24,7 +25,7 @@ export const useFeedback = () => {
       setData(true);
       setTimeout(() => {
         callback();
-      }, 3000);
+      }, 1000);
     }, 5000);
   };
 

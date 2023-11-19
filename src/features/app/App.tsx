@@ -8,11 +8,15 @@ import {
   selectLoginModal,
   selectSelectedCareerPathId,
   selectSelectedQuestionId,
+  setShowFeedback,
 } from '@slices/sessionSlice';
 import { selectCareerPaths, selectProfileId, useLazyGetProfileQuery } from '@apis/profileApi';
 import { SettingsPage } from '@features/settings/SettingsPage';
 import { LoadingLens } from '@shared/components/loadingScreen/LoadingLens';
 import { useCareerTestStorage } from '@shared/hooks/useCareerTestStorage';
+import { useTimeout } from '@mantine/hooks';
+import { usePageNavigation } from '@shared/hooks/usePageNavigation';
+import { FeedbackModal } from '@shared/components/feedback/FeedbackModal';
 
 import { HomePage } from '../homePage/HomePage';
 import { LandingPage } from '../landingPage/LandingPage';
@@ -30,6 +34,15 @@ export const App = () => {
   const [getProfile, { isFetching }] = useLazyGetProfileQuery();
   const { storeTestValues } = useCareerTestStorage();
   const { open: loginOpen } = useAppSelector(selectLoginModal);
+  const { featureUrl } = usePageNavigation();
+
+  const { start } = useTimeout(() => dispatch(setShowFeedback(true)), 10_000);
+
+  useEffect(() => {
+    if (featureUrl && [urls.questions, urls.overview].includes(featureUrl)) {
+      start();
+    }
+  }, [featureUrl]);
 
   useEffect(() => {
     if (!careerPaths) {
@@ -52,6 +65,7 @@ export const App = () => {
 
   return (
     <Suspense fallback={<LoadingLens />}>
+      <FeedbackModal />
       <Switch>
         <Route
           path={urls.landingPage}

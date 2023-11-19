@@ -2,11 +2,11 @@ import { UseFormReturnType } from '@mantine/form';
 import React from 'react';
 import { Checkbox, Grid, Radio, Text, Textarea } from '@mantine/core';
 import { getCharacterCount } from '@careerTest/utils/formUtil';
+import { Feedback } from '@datatypes/feedback';
 
-import { FeedbackValues } from './feedbackTypes';
 import { experienceRatingOptions, heardFromOptions, mostHelpfulOptions } from './feedbackConstants';
 
-export const FeedbackForm = ({ form }: { form: UseFormReturnType<FeedbackValues> }) => (
+export const FeedbackForm = ({ form }: { form: UseFormReturnType<Feedback> }) => (
   <>
     <div>
       <Text py="md">
@@ -23,7 +23,7 @@ export const FeedbackForm = ({ form }: { form: UseFormReturnType<FeedbackValues>
       >
         <Grid py="xs">
           {heardFromOptions.map((label) => (
-            <Grid.Col span={{ md: 6 }} key={`heard-from-${label}`}>
+            <Grid.Col span={6} key={`heard-from-${label}`}>
               <Checkbox label={label} value={label} />
             </Grid.Col>
           ))}
@@ -37,7 +37,7 @@ export const FeedbackForm = ({ form }: { form: UseFormReturnType<FeedbackValues>
       >
         <Grid py="xs">
           {mostHelpfulOptions.map((label) => (
-            <Grid.Col span={{ md: 6 }} key={`most-helpful-${label}`}>
+            <Grid.Col span={6} key={`most-helpful-${label}`}>
               <Checkbox label={label} value={label} />
             </Grid.Col>
           ))}

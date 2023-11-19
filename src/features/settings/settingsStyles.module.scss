@@ -1,7 +1,8 @@
+.accountTabMobile {
+  flex-direction: column;
+  text-align: center;
+}
+
 .accountTab {
   justify-content: flex-start;
-  @media (max-width: 750px) {
-    flex-direction: column;
-    text-align: center;
-  }
 }

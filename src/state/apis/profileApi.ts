@@ -1,5 +1,6 @@
 import { SelectCareerInput } from '@datatypes/career';
 import { UserProfile, Profile } from '@datatypes/profile';
+import { mockUserProfile } from '@mocks/profileMocks';
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { getAuthorisedBaseQuery } from '@shared/utils/apiUtil';
 import { RootState } from '@state/store';
@@ -44,10 +45,13 @@ export const {
 export const selectProfileState = (state: RootState) =>
   profileApi.endpoints.getProfile.select()(state).data;
 
-export const selectProfile = (state: RootState) => selectProfileState(state)?.profile;
+export const selectProfile = (state: RootState) =>
+  selectProfileState(state)?.profile || mockUserProfile;
 
-export const selectCareerPaths = (state: RootState) => selectProfileState(state)?.careerPaths;
+export const selectCareerPaths = (state: RootState) =>
+  selectProfileState(state)?.careerPaths || mockUserProfile.careerPaths;
 
-export const selectProfileId = (state: RootState) => selectProfileState(state)?.identifier;
+export const selectProfileId = (state: RootState) =>
+  selectProfileState(state)?.identifier || mockUserProfile.identifier;
 
 export default profileApi.reducer;

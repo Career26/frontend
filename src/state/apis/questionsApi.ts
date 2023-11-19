@@ -5,6 +5,7 @@ import {
   SuggestionInput,
   SuggestionResponse,
 } from '@datatypes/question';
+import { mockInterviewQuestions } from '@mocks/interviewMocks';
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { getAuthorisedBaseQuery } from '@shared/utils/apiUtil';
 import { RootState } from '@state/store';
@@ -37,7 +38,7 @@ export const { useGetQuestionsQuery, useRateAnswerMutation, useGetSuggestionMuta
   questionsApi;
 
 export const selectInterviewQuestions = (state: RootState) =>
-  questionsApi.endpoints.getQuestions.select()(state).data;
+  questionsApi.endpoints.getQuestions.select()(state).data || mockInterviewQuestions;
 
 export const selectSuggestion = (state: RootState, fixedCacheKey?: string) =>
   questionsApi.endpoints.getSuggestion.select({ fixedCacheKey, requestId: undefined })(state).data;

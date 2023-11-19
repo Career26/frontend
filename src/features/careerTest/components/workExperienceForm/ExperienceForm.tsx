@@ -5,8 +5,6 @@ import { experienceOptions, ratingOptions } from '@careerTest/config/formConstan
 import { getRatingLabel } from '@careerTest/utils/formUtil';
 import commonStyles from '@shared/styles/commonStyles.module.scss';
 import { ExperienceType } from '@datatypes/profile';
-import classNames from 'classnames';
-import { useMobileStyles } from '@shared/hooks/useMobileStyles';
 
 import { FormContent } from '../FormContent';
 
@@ -32,19 +30,13 @@ export const ExperienceForm = ({
   form: CareerFormProps;
   baseKey: string;
 }) => {
-  const { isMobile } = useMobileStyles();
   const rating = form.getInputProps(`${baseKey}.rating`).value;
   const ratingReason = form.getInputProps(`${baseKey}.ratingReason`).value;
   const experienceType = form.getInputProps(`${baseKey}.experienceType`).value;
   const experienceLabel = getNameLabel(experienceType);
   return (
     <FormContent title={title}>
-      <div
-        className={classNames({
-          [commonStyles.row]: !isMobile,
-          [commonStyles.rowMobile]: isMobile,
-        })}
-      >
+      <div className={commonStyles.row}>
         <Select
           {...form.getInputProps(`${baseKey}.experienceType`)}
           withAsterisk

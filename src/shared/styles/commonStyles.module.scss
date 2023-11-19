@@ -11,11 +11,12 @@
   padding-top: var(--mantine-spacing-sm);
   padding-bottom: var(--mantine-spacing-sm);
   align-items: center;
-}
-
-.rowMobile {
-  > div {
-    width: 100% !important;
+  @media (max-width: 750px) {
+    flex-direction: column;
+    display: flex;
+    > div {
+      width: 100% !important;
+    }
   }
 }
 

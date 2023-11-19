@@ -4,8 +4,6 @@ import { CareerFormProps } from '@careerTest/careerTestTypes';
 import { degreeLevels, degreeOptions, ratingOptions } from '@careerTest/config/formConstants';
 import commonStyles from '@shared/styles/commonStyles.module.scss';
 import { getRatingLabel } from '@careerTest/utils/formUtil';
-import { useMobileStyles } from '@shared/hooks/useMobileStyles';
-import classNames from 'classnames';
 
 import { FormContent } from '../FormContent';
 
@@ -18,17 +16,11 @@ export const UniversityForm = ({
   form: CareerFormProps;
   baseKey: string;
 }) => {
-  const { isMobile } = useMobileStyles();
   const rating = form.getInputProps(`${baseKey}.rating`).value;
   const ratingReason = form.getInputProps(`${baseKey}.ratingReason`).value;
   return (
     <FormContent title={title}>
-      <div
-        className={classNames({
-          [commonStyles.row]: !isMobile,
-          [commonStyles.rowMobile]: isMobile,
-        })}
-      >
+      <div className={commonStyles.row}>
         <TextInput
           {...form.getInputProps(`${baseKey}.university`)}
           label="University Name"
@@ -42,12 +34,7 @@ export const UniversityForm = ({
           w="50%"
         />
       </div>
-      <div
-        className={classNames({
-          [commonStyles.row]: !isMobile,
-          [commonStyles.rowMobile]: isMobile,
-        })}
-      >
+      <div className={commonStyles.row}>
         <Select
           {...form.getInputProps(`${baseKey}.grade`)}
           label="Achieved/Expected Grade"

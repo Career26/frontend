@@ -3,11 +3,8 @@ import { NumberInput, Select } from '@mantine/core';
 import { exampleCities, workLifeOptions, workStyleOptions } from '@careerTest/config/formConstants';
 import { CareerFormProps } from '@careerTest/careerTestTypes';
 import commonStyles from '@shared/styles/commonStyles.module.scss';
-import classNames from 'classnames';
-import { useMobileStyles } from '@shared/hooks/useMobileStyles';
 
 export const WorkStyleForm = ({ form }: { form: CareerFormProps }) => {
-  const { isMobile } = useMobileStyles();
   const Icon = exampleCities.find((item) => item.value === form.values.expectedSalary.city)?.Icon;
 
   const onSelectCity = (value: string | null) => {
@@ -21,12 +18,7 @@ export const WorkStyleForm = ({ form }: { form: CareerFormProps }) => {
 
   return (
     <div>
-      <div
-        className={classNames({
-          [commonStyles.row]: !isMobile,
-          [commonStyles.rowMobile]: isMobile,
-        })}
-      >
+      <div className={commonStyles.row}>
         <Select
           {...form.getInputProps('personalityType.workStyle')}
           label="What is your preferred working style?"
@@ -43,12 +35,7 @@ export const WorkStyleForm = ({ form }: { form: CareerFormProps }) => {
         />
       </div>
 
-      <div
-        className={classNames({
-          [commonStyles.row]: !isMobile,
-          [commonStyles.rowMobile]: isMobile,
-        })}
-      >
+      <div className={commonStyles.row}>
         <Select
           {...form.getInputProps('expectedSalary.city')}
           label="City"

@@ -24,13 +24,13 @@ export const App = () => {
   const dispatch = useAppDispatch();
   const defaultCareerId = useAppSelector(selectSelectedCareerPathId);
   const defaultQuestionId = useAppSelector(selectSelectedQuestionId);
-  const { authenticated, unauthenticated } = useAuthUser();
+  const { unauthenticated } = useAuthUser();
   const careerPaths = useAppSelector(selectCareerPaths);
   const profileId = useAppSelector(selectProfileId);
   const [getProfile, { isFetching }] = useLazyGetProfileQuery();
   const { storeTestValues } = useCareerTestStorage();
   const { open: loginOpen } = useAppSelector(selectLoginModal);
-
+  const authenticated = true;
   useEffect(() => {
     if (!careerPaths) {
       return;

@@ -14,6 +14,7 @@ type SessionSlice = {
   industryColors: { [key: string]: string };
   questionColors: { [key: string]: string };
   selectedCareerPathId?: string;
+  showFeedback: boolean;
 };
 
 export const initialSessionState: SessionSlice = {
@@ -21,6 +22,7 @@ export const initialSessionState: SessionSlice = {
   questionColors: {},
   selectedQuestionId: undefined,
   loginModal: { open: false },
+  showFeedback: false,
 };
 
 export const sessionSlice = createSlice({
@@ -29,6 +31,9 @@ export const sessionSlice = createSlice({
   reducers: {
     setLoginModal: (state, { payload }: PayloadAction<SessionSlice['loginModal']>) => {
       state.loginModal = payload;
+    },
+    setShowFeedback: (state, { payload }: PayloadAction<SessionSlice['showFeedback']>) => {
+      state.showFeedback = payload;
     },
     setSelectedCareerPathId: (
       state,
@@ -67,6 +72,7 @@ export const {
   addIndustryColors,
   addQuestionColors,
   setSelectedQuestionId,
+  setShowFeedback,
 } = sessionSlice.actions;
 
 const selectSession = (state: RootState) => state.session;
@@ -93,5 +99,6 @@ export const selectSelectedCareerPath = createSelector(
 
 export const selectIndustryColors = (state: RootState) => selectSession(state).industryColors;
 export const selectQuestionColors = (state: RootState) => selectSession(state).questionColors;
+export const selectShowFeedback = (state: RootState) => selectSession(state).showFeedback;
 
 export default sessionSlice.reducer;

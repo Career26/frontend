@@ -34,15 +34,15 @@ export const App = () => {
   const [getProfile, { isFetching }] = useLazyGetProfileQuery();
   const { storeTestValues } = useCareerTestStorage();
   const { open: loginOpen } = useAppSelector(selectLoginModal);
-  const { featureUrl } = usePageNavigation();
+  const { showNavigation } = usePageNavigation();
 
   const { start } = useTimeout(() => dispatch(setShowFeedback(true)), 10_000);
 
   useEffect(() => {
-    if (featureUrl && [urls.questions, urls.overview].includes(featureUrl)) {
+    if (showNavigation) {
       start();
     }
-  }, [featureUrl]);
+  }, [showNavigation]);
 
   useEffect(() => {
     if (!careerPaths) {

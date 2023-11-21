@@ -2,7 +2,7 @@ import React from 'react';
 import { Select, TextInput, Textarea } from '@mantine/core';
 import { CareerFormProps } from '@careerTest/careerTestTypes';
 import { experienceOptions, ratingOptions } from '@careerTest/config/formConstants';
-import { getRatingLabel } from '@careerTest/utils/formUtil';
+import { getRatingLabel } from '@shared/utils/formUtil';
 import commonStyles from '@shared/styles/commonStyles.module.scss';
 import { ExperienceType } from '@datatypes/profile';
 

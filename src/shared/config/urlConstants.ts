@@ -8,6 +8,8 @@ export const urls = {
   linkedIn: 'https://linkedin.com/company/100135742/admin/feed/posts/',
 };
 
+export const contactEmail = 'career26.info@gmail.com';
+
 const devUrl = 'https://pk4qspd8h1.execute-api.eu-west-1.amazonaws.com/Prod/';
 const prodUrl = 'https://n47upog2gi.execute-api.eu-west-1.amazonaws.com/Prod';
 

@@ -13,6 +13,7 @@ import { selectCareerPaths, selectProfileId, useLazyGetProfileQuery } from '@api
 import { SettingsPage } from '@features/settings/SettingsPage';
 import { LoadingLens } from '@shared/components/loadingScreen/LoadingLens';
 import { useCareerTestStorage } from '@shared/hooks/useCareerTestStorage';
+import { FeedbackModal } from '@shared/components/feedback/FeedbackModal';
 
 import { HomePage } from '../homePage/HomePage';
 import { LandingPage } from '../landingPage/LandingPage';
@@ -52,6 +53,7 @@ export const App = () => {
 
   return (
     <Suspense fallback={<LoadingLens />}>
+      <FeedbackModal />
       <Switch>
         <Route
           path={urls.landingPage}

@@ -25,7 +25,7 @@ export const CareerNavigation = () => {
   } = useCareerTestStorage();
   const { loadingCareers, selectedCareers, toggleSelectedCareer } = useCareerSelection();
 
-  if (!careerPaths || !showNavigation || !selectedCareerPath || isMobile) {
+  if (!careerPaths || !showNavigation || !selectedCareerPath) {
     return null;
   }
 
@@ -81,7 +81,7 @@ export const CareerNavigation = () => {
     <Combobox store={combobox}>
       <Combobox.Target>
         <InputBase
-          w="50%"
+          w={isMobile ? '100%' : '50%'}
           component="button"
           px="xs"
           pointer

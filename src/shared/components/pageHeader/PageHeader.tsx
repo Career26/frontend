@@ -4,40 +4,42 @@ import c26 from '@assets/career-26.png';
 import logo from '@assets/logo.png';
 import { useMobileStyles } from '@shared/hooks/useMobileStyles';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
-import { useAppDispatch } from '@state/store';
-import { setLoginModal } from '@slices/sessionSlice';
 
 import { LoginModal } from '../account/LoginModal';
 import styles from './headerStyles.module.scss';
-import { MobileMenu } from './MobileMenu';
-import { DesktopMenu } from './DesktopMenu';
+import { BurgerMenu } from '../burgerMenu/BurgerMenu';
+import { CareerNavigation } from './CareerNavigation';
+import { IconButtons } from './IconButtons';
 
 export const PageHeader = ({
   signOut,
   authenticated,
+  menu,
 }: {
   signOut: () => void;
   authenticated: boolean;
+  menu?: React.ReactNode;
 }) => {
-  const dispatch = useAppDispatch();
   const { isMobile } = useMobileStyles();
   const { goToHomepage } = usePageNavigation();
-  const clickLogin = () => {
-    dispatch(setLoginModal({ open: true, initialState: 'signIn' }));
-  };
-  return (
-    <>
-      <LoginModal />
-      <Group w={200} className={styles.logo} aria-label="logo-icon">
-        <Image src={logo} h={35} onClick={goToHomepage} aria-label="logo-icon" />
-        <Image src={c26} h={25} onClick={goToHomepage} aria-label="logo-text" />
-      </Group>
 
-      {isMobile ? (
-        <MobileMenu signOut={signOut} authenticated={authenticated} clickLogin={clickLogin} />
-      ) : (
-        <DesktopMenu clickLogin={clickLogin} signOut={signOut} authenticated={authenticated} />
-      )}
-    </>
+  return (
+    <div
+      style={{
+        alignItems: 'center',
+        display: 'flex',
+        justifyContent: 'space-between',
+        width: '100%',
+      }}
+    >
+      <LoginModal />
+      {menu && isMobile && <BurgerMenu menu={menu} />}
+      <Group className={styles.logo} aria-label="logo-icon">
+        <Image src={logo} h={25} onClick={goToHomepage} aria-label="logo-icon" />
+        <Image src={c26} h={20} onClick={goToHomepage} aria-label="logo-text" />
+      </Group>
+      {!isMobile && <CareerNavigation />}
+      <IconButtons signOut={signOut} authenticated={authenticated} />
+    </div>
   );
 };

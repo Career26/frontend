@@ -5,9 +5,11 @@ import { useAuthUser } from '@shared/hooks/useAuthUser';
 import { resetSession } from '@slices/sessionSlice';
 import { useCareerTestStorage } from '@shared/hooks/useCareerTestStorage';
 import { useMobileStyles } from '@shared/hooks/useMobileStyles';
+import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 
 import { PageHeader } from '../pageHeader/PageHeader';
 import styles from './shellStyles.module.scss';
+import { CareerNavigation } from '../pageHeader/CareerNavigation';
 
 interface ShellProps {
   children: ReactElement;
@@ -26,6 +28,8 @@ export const Shell = ({ children, navbar }: ShellProps) => {
   const { isMobile } = useMobileStyles();
   const { authenticated, signOut } = useAuthUser();
   const { resetValues } = useCareerTestStorage();
+  const { showNavigation } = usePageNavigation();
+
   const onSignOut = () => {
     resetValues();
     dispatch(resetSession());
@@ -45,14 +49,18 @@ export const Shell = ({ children, navbar }: ShellProps) => {
           paddingRight: '0',
           paddingLeft,
           minHeight: 'auto',
-          paddingTop: headerHeight,
+          paddingTop: isMobile ? `calc(${headerHeight} + ${rem(60)})` : headerHeight,
         },
       }}
       header={{ height: headerHeight }}
       navbar={navbarSettings}
     >
       <AppShell.Header className={styles.header}>
-        <PageHeader authenticated={authenticated} signOut={onSignOut} />
+        <PageHeader
+          authenticated={authenticated}
+          signOut={onSignOut}
+          menu={navbar && <NavMenu navbar={navbar} />}
+        />
       </AppShell.Header>
       {navbar && !isMobile && (
         <AppShell.Navbar display="flex" w={200}>
@@ -60,6 +68,11 @@ export const Shell = ({ children, navbar }: ShellProps) => {
             <NavMenu navbar={navbar} />
           </AppShell.Section>
         </AppShell.Navbar>
+      )}
+      {isMobile && showNavigation && (
+        <div className={styles.careerNav} style={{ top: headerHeight }}>
+          <CareerNavigation />
+        </div>
       )}
       <AppShell.Main>{children}</AppShell.Main>
     </AppShell>

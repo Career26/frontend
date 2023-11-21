@@ -2,6 +2,7 @@ import { Card, Group, Text } from '@mantine/core';
 import { IconArrowBigDownLines } from '@tabler/icons-react';
 import React from 'react';
 import commonStyles from '@shared/styles/commonStyles.module.scss';
+import { useMobileStyles } from '@shared/hooks/useMobileStyles';
 
 type ProgressionItem = { title: string; descriptions: string[] };
 
@@ -26,6 +27,7 @@ export const ProgressionTile = ({
   progressionList: ProgressionItem[];
 }) => {
   const mappedList = getMappedList(progressionList);
+  const { isMobile } = useMobileStyles();
   return (
     <Group py="md" id={id}>
       {mappedList.map((item, index) => (
@@ -43,7 +45,10 @@ export const ProgressionTile = ({
             </Card.Section>
             <div className={commonStyles.row}>
               {item.descriptions.map((description) => (
-                <Text w={`${100 / item.descriptions.length}%`} key={`description-${description}`}>
+                <Text
+                  w={isMobile ? '100%' : `${100 / item.descriptions.length}%`}
+                  key={`description-${description}`}
+                >
                   {description}
                 </Text>
               ))}

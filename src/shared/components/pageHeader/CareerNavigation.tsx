@@ -14,7 +14,6 @@ import styles from './headerStyles.module.scss';
 
 export const CareerNavigation = () => {
   const { isMobile } = useMobileStyles();
-  const textSize = isMobile ? '0.8rem' : undefined;
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
   });
@@ -54,7 +53,7 @@ export const CareerNavigation = () => {
           onSelect(careerIdentifier);
         }}
       >
-        <Text size={textSize}>{title}</Text>
+        <Text>{title}</Text>
         <ActionIcon
           aria-label={`favourite-icon-${careerIdentifier}`}
           loading={loadingCareers[careerIdentifier]}
@@ -82,7 +81,7 @@ export const CareerNavigation = () => {
     <Combobox store={combobox}>
       <Combobox.Target>
         <InputBase
-          w={isMobile ? '70%' : '50%'}
+          w={isMobile ? '100%' : '50%'}
           component="button"
           px="xs"
           pointer
@@ -97,7 +96,7 @@ export const CareerNavigation = () => {
           }
           onClick={() => combobox.toggleDropdown()}
         >
-          <Text size={textSize}>{selectedCareerPath?.title}</Text>
+          <Text>{selectedCareerPath?.title}</Text>
         </InputBase>
       </Combobox.Target>
 

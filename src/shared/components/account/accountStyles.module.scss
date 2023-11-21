@@ -33,9 +33,11 @@
     padding-top: var(--mantine-spacing-md);
     > fieldset {
       > div {
-        div {
+        > div {
           padding-top: 0;
           padding-bottom: 0;
+          display: flex;
+          justify-content: space-between;
         }
       }
     }

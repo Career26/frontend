@@ -42,7 +42,7 @@ export const NavigationCenter = () => {
         radius="lg"
       >
         <Container>
-          <Grid py="sm" grow>
+          <Grid py="sm">
             {featureTiles.map(({ title, Icon, disabled, link }) => (
               <Grid.Col span={6} key={title} className={styles.navCenter}>
                 <Paper

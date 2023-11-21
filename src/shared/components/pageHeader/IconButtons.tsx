@@ -6,6 +6,7 @@ import commonStyles from '@shared/styles/commonStyles.module.scss';
 import classNames from 'classnames';
 import { useAppDispatch } from '@state/store';
 import { setLoginModal } from '@slices/sessionSlice';
+import { useMobileStyles } from '@shared/hooks/useMobileStyles';
 
 import { NavigationCenter } from './NavigationCenter';
 import styles from './headerStyles.module.scss';
@@ -18,18 +19,24 @@ export const IconButtons = ({
   authenticated: boolean;
 }) => {
   const dispatch = useAppDispatch();
+  const { isMobile } = useMobileStyles();
   const { clickCareersTest, goToSettings } = usePageNavigation();
+
   const clickLogin = () => {
     dispatch(setLoginModal({ open: true, initialState: 'signIn' }));
   };
 
+  const buttonSize = isMobile ? 'xs' : undefined;
+
   if (!authenticated) {
     return (
       <div className={styles.avatars}>
-        <Button variant="outline" onClick={clickLogin}>
+        <Button size={buttonSize} variant="outline" onClick={clickLogin}>
           Login
         </Button>
-        <Button onClick={clickCareersTest}>Take the Test</Button>
+        <Button size={buttonSize} onClick={clickCareersTest}>
+          Take the Test
+        </Button>
       </div>
     );
   }

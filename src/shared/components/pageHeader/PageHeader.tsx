@@ -1,5 +1,5 @@
 import React from 'react';
-import { Group, Image } from '@mantine/core';
+import { Image } from '@mantine/core';
 import c26 from '@assets/career-26.png';
 import logo from '@assets/logo.png';
 import { useMobileStyles } from '@shared/hooks/useMobileStyles';
@@ -24,20 +24,27 @@ export const PageHeader = ({
   const { goToHomepage } = usePageNavigation();
 
   return (
-    <div
-      style={{
-        alignItems: 'center',
-        display: 'flex',
-        justifyContent: 'space-between',
-        width: '100%',
-      }}
-    >
+    <div className={styles.headerContainer}>
       <LoginModal />
       {menu && isMobile && <BurgerMenu menu={menu} />}
-      <Group className={styles.logo} aria-label="logo-icon">
-        <Image src={logo} h={25} onClick={goToHomepage} aria-label="logo-icon" />
-        <Image src={c26} h={20} onClick={goToHomepage} aria-label="logo-text" />
-      </Group>
+      <div className={styles.logo}>
+        <Image
+          fit="contain"
+          src={logo}
+          w="auto"
+          h={25}
+          onClick={goToHomepage}
+          aria-label="logo-icon"
+        />
+        <Image
+          fit="contain"
+          src={c26}
+          w="auto"
+          h={20}
+          onClick={goToHomepage}
+          aria-label="logo-text"
+        />
+      </div>
       {!isMobile && <CareerNavigation />}
       <IconButtons signOut={signOut} authenticated={authenticated} />
     </div>

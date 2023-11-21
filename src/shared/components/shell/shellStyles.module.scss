@@ -1,7 +1,17 @@
 .header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding-left: var(--mantine-spacing-xl);
   padding-right: var(--mantine-spacing-xl);
+}
+
+.careerNav {
+  display: flex;
+  justify-content: center;
+  padding: var(--mantine-spacing-xs);
+  width: 100%;
+  z-index: 2;
+  position: fixed;
+  background-color: var(--mantine-color-gray-0);
+  border-bottom: calc(0.0625rem * var(--mantine-scale)) solid var(--_app-shell-border-color);
 }

@@ -21,10 +21,10 @@ export const LandingPage = () => {
         <Hero
           image={careerProgressImg}
           actionButtonText="Start Your Journey Now!"
-          subheadingText="Reveal your perfect career path, ace interviews, elevate your CV and connect with a network of professionals with our all-in-one
+          subheadingText="Discover your perfect career path, ace interviews, elevate your CV and connect with a network of professionals with our all-in-one
           career advisory platform"
-          headingText="Discover Your"
-          colorHeadingText="Perfect Career"
+          headingText="Get Your Free"
+          colorHeadingText="Personalised Career Coach"
           onClick={() => history.push(urls.careersTest)}
           grayBackground={false}
         />
@@ -45,7 +45,7 @@ export const LandingPage = () => {
 
         <Hero
           image={successImg}
-          actionButtonText="Try For Free!"
+          actionButtonText="Join For Free!"
           subheadingText="Ready to unleash your potential? Take our free questionnaire to view your career paths now"
           headingText="Join & Achieve"
           colorHeadingText="Career Success"

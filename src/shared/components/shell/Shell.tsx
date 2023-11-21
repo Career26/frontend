@@ -6,10 +6,12 @@ import { resetSession } from '@slices/sessionSlice';
 import { useCareerTestStorage } from '@shared/hooks/useCareerTestStorage';
 import { useMobileStyles } from '@shared/hooks/useMobileStyles';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
+import classNames from 'classnames';
 
 import { PageHeader } from '../pageHeader/PageHeader';
 import styles from './shellStyles.module.scss';
 import { CareerNavigation } from '../pageHeader/CareerNavigation';
+import { PageFooter } from '../pageFooter/PageFooter';
 
 interface ShellProps {
   children: ReactElement;
@@ -18,9 +20,10 @@ interface ShellProps {
 
 const navWidth = 200;
 const headerHeight = rem(80);
+const footerHeight = rem(50);
 
 const NavMenu = ({ navbar }: { navbar: ShellProps['navbar'] }) => (
-  <ScrollArea h={`calc(100vh - ${headerHeight})`}>{navbar}</ScrollArea>
+  <ScrollArea h={`calc(100vh - ${headerHeight} - ${footerHeight})`}>{navbar}</ScrollArea>
 );
 
 export const Shell = ({ children, navbar }: ShellProps) => {
@@ -54,8 +57,9 @@ export const Shell = ({ children, navbar }: ShellProps) => {
       }}
       header={{ height: headerHeight }}
       navbar={navbarSettings}
+      footer={{ height: footerHeight }}
     >
-      <AppShell.Header className={styles.header}>
+      <AppShell.Header className={styles.fullWidthContainer}>
         <PageHeader
           authenticated={authenticated}
           signOut={onSignOut}
@@ -75,6 +79,9 @@ export const Shell = ({ children, navbar }: ShellProps) => {
         </div>
       )}
       <AppShell.Main>{children}</AppShell.Main>
+      <AppShell.Footer className={classNames(styles.fullWidthContainer, styles.footer)}>
+        <PageFooter />
+      </AppShell.Footer>
     </AppShell>
   );
 };

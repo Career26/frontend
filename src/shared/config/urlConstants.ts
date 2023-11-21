@@ -5,6 +5,7 @@ export const urls = {
   questions: '/questions',
   mentors: '/mentors',
   settings: '/settings',
+  linkedIn: 'https://linkedin.com/company/100135742/admin/feed/posts/',
 };
 
 const devUrl = 'https://pk4qspd8h1.execute-api.eu-west-1.amazonaws.com/Prod/';

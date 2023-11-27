@@ -14,14 +14,14 @@ export const PageFooter = () => {
   const dispatch = useAppDispatch();
   return (
     <div className={styles.container}>
-      {/* <Anchor
+      <Anchor
         className={styles.anchor}
         underline="never"
         onClick={() => dispatch(setFeedbackModal({ open: true }))}
         size="lg"
       >
         Feedback
-      </Anchor> */}
+      </Anchor>
       <Anchor
         className={styles.anchor}
         target="_blank"

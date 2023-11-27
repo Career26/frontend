@@ -3,7 +3,7 @@ import { Select, TextInput, Textarea } from '@mantine/core';
 import { CareerFormProps } from '@careerTest/careerTestTypes';
 import { degreeLevels, degreeOptions, ratingOptions } from '@careerTest/config/formConstants';
 import commonStyles from '@shared/styles/commonStyles.module.scss';
-import { getRatingLabel } from '@careerTest/utils/formUtil';
+import { getRatingLabel } from '@shared/utils/formUtil';
 
 import { FormContent } from '../FormContent';
 

@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  gap: var(--mantine-spacing-xl);
+}
+
+.anchor {
+  display: flex !important;
+  align-items: center;
+  &:hover {
+    color: var(--mantine-colors-navy-9);
+  }
+}

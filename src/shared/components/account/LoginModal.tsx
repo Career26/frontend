@@ -54,17 +54,13 @@ const SignUpForm = () => {
   const { isMobile } = useMobileStyles();
   if (isMobile) {
     return (
-      <div>
+      <>
         <SignUpBenefits />
-        <div>
-          <div className={styles.signUpHeaderMobile}>
-            <SignUpNow />
-          </div>
-          <div className={styles.authenticatorFields}>
-            <Authenticator.SignUp.FormFields />
-          </div>
+        <SignUpNow />
+        <div className={styles.authenticatorFields}>
+          <Authenticator.SignUp.FormFields />
         </div>
-      </div>
+      </>
     );
   }
 

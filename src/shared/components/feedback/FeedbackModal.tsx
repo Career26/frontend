@@ -14,7 +14,7 @@ export const FeedbackModal = () => {
   const dispatch = useAppDispatch();
   const { open } = useAppSelector(selectFeedbackModal);
 
-  const [submitFeedback, { isLoading }] = useSubmitFeedbackMutation();
+  const [submitFeedback, { isLoading, data }] = useSubmitFeedbackMutation();
 
   const onClose = () => {
     dispatch(setFeedbackModal({ open: false }));
@@ -48,17 +48,23 @@ export const FeedbackModal = () => {
           <Modal.CloseButton c="white" />
         </Modal.Header>
         <Modal.Body>
-          <FeedbackForm form={form} />
-          <Group justify="flex-end" py="md">
-            <Button
-              disabled={!!Object.values(form.errors).length}
-              loading={isLoading}
-              onClick={() => submitFeedback(form.values)}
-              variant="outline"
-            >
-              Submit
-            </Button>
-          </Group>
+          {data ? (
+            <>Thank you for submitting</>
+          ) : (
+            <>
+              <FeedbackForm form={form} />
+              <Group justify="flex-end" py="md">
+                <Button
+                  disabled={!!Object.values(form.errors).length}
+                  loading={isLoading}
+                  onClick={() => submitFeedback(form.values)}
+                  variant="outline"
+                >
+                  Submit
+                </Button>
+              </Group>
+            </>
+          )}
         </Modal.Body>
       </Modal.Content>
     </Modal.Root>

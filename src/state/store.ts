@@ -4,12 +4,14 @@ import { overviewApi } from '@apis/overviewApi';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import session from '@slices/sessionSlice';
 import { questionsApi } from '@apis/questionsApi';
+import { feedbackApi } from '@apis/feedbackApi';
 
 export const rootReducer = combineReducers({
   session,
   [questionsApi.reducerPath]: questionsApi.reducer,
   [profileApi.reducerPath]: profileApi.reducer,
   [overviewApi.reducerPath]: overviewApi.reducer,
+  [feedbackApi.reducerPath]: feedbackApi.reducer,
 });
 
 export const store = configureStore({
@@ -18,12 +20,14 @@ export const store = configureStore({
     [questionsApi.reducerPath]: questionsApi.reducer,
     [profileApi.reducerPath]: profileApi.reducer,
     [overviewApi.reducerPath]: overviewApi.reducer,
+    [feedbackApi.reducerPath]: feedbackApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }).concat([
       questionsApi.middleware,
       profileApi.middleware,
       overviewApi.middleware,
+      feedbackApi.middleware,
     ]),
 });
 

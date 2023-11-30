@@ -10,7 +10,7 @@ export const urls = {
 
 export const contactEmail = 'career26.info@gmail.com';
 
-const devUrl = 'https://pk4qspd8h1.execute-api.eu-west-1.amazonaws.com/Prod/';
+const devUrl = 'https://ghs0y47spi.execute-api.eu-west-1.amazonaws.com/Prod';
 const prodUrl = 'https://n47upog2gi.execute-api.eu-west-1.amazonaws.com/Prod';
 
 const getBaseUrl = () => (process.env.NODE_ENV === 'production' ? prodUrl : devUrl);

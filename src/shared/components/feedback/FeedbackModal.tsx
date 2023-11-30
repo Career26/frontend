@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from '@state/store';
 import React from 'react';
 import { useForm } from '@mantine/form';
 import { Feedback } from '@datatypes/feedback';
+import { useSubmitFeedbackMutation } from '@apis/feedbackApi';
 
 import { FeedbackForm } from './FeedbackForm';
 
@@ -12,6 +13,8 @@ const hasAnswer = (value?: string | string[]) => !value?.length && 'Please provi
 export const FeedbackModal = () => {
   const dispatch = useAppDispatch();
   const { open } = useAppSelector(selectFeedbackModal);
+
+  const [submitFeedback, { isLoading }] = useSubmitFeedbackMutation();
 
   const onClose = () => {
     dispatch(setFeedbackModal({ open: false }));
@@ -47,7 +50,12 @@ export const FeedbackModal = () => {
         <Modal.Body>
           <FeedbackForm form={form} />
           <Group justify="flex-end" py="md">
-            <Button disabled={!!Object.values(form.errors).length} variant="outline">
+            <Button
+              disabled={!!Object.values(form.errors).length}
+              loading={isLoading}
+              onClick={() => submitFeedback(form.values)}
+              variant="outline"
+            >
               Submit
             </Button>
           </Group>

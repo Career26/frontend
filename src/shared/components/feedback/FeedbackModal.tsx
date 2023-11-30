@@ -1,10 +1,11 @@
-import { Button, Group, Modal } from '@mantine/core';
+import { Button, Group, Modal, Text } from '@mantine/core';
 import { selectFeedbackModal, setFeedbackModal } from '@slices/sessionSlice';
 import { useAppDispatch, useAppSelector } from '@state/store';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from '@mantine/form';
 import { Feedback } from '@datatypes/feedback';
 import { useSubmitFeedbackMutation } from '@apis/feedbackApi';
+import { IconCircleCheck } from '@tabler/icons-react';
 
 import { FeedbackForm } from './FeedbackForm';
 
@@ -14,11 +15,7 @@ export const FeedbackModal = () => {
   const dispatch = useAppDispatch();
   const { open } = useAppSelector(selectFeedbackModal);
 
-  const [submitFeedback, { isLoading, data }] = useSubmitFeedbackMutation();
-
-  const onClose = () => {
-    dispatch(setFeedbackModal({ open: false }));
-  };
+  const [submitFeedback, { isLoading, data, reset }] = useSubmitFeedbackMutation();
 
   const form = useForm<Feedback>({
     initialValues: {
@@ -39,8 +36,20 @@ export const FeedbackModal = () => {
     },
   });
 
+  const onClose = () => {
+    dispatch(setFeedbackModal({ open: false }));
+    reset();
+    form.reset();
+  };
+
+  useEffect(() => {
+    if (data) {
+      setTimeout(onClose, 2000);
+    }
+  }, [data]);
+
   return (
-    <Modal.Root opened={open} onClose={onClose} size="xl">
+    <Modal.Root opened={open} onClose={onClose} size="xl" centered>
       <Modal.Overlay />
       <Modal.Content>
         <Modal.Header bg="navy" c="white">
@@ -49,7 +58,10 @@ export const FeedbackModal = () => {
         </Modal.Header>
         <Modal.Body>
           {data ? (
-            <>Thank you for submitting</>
+            <Group py="md">
+              <IconCircleCheck color="green" size={50} />
+              <Text>Thank you for providing feedback!</Text>
+            </Group>
           ) : (
             <>
               <FeedbackForm form={form} />

@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Container, Group, Button, Stepper } from '@mantine/core';
 import { Shell } from '@shared/components/shell/Shell';
-import { useCreateProfileMutation } from '@apis/profileApi';
+import { useCreateProfileMutation, useLazyAssociateProfileQuery } from '@apis/profileApi';
 import { setLoginModal } from '@slices/sessionSlice';
 import { useAppDispatch } from '@state/store';
 import { LoaderWithText } from '@shared/components/loadingScreen/LoaderWithText';
@@ -30,6 +30,7 @@ export const CareerTest = () => {
   const [activeStep, setActiveStep] = useState(careerTestStorage.step);
   const { form, checkFormIsValid } = useProfileForm({ activeStep });
   const { isMobile } = useMobileStyles();
+  const [associateProfile, { isFetching }] = useLazyAssociateProfileQuery();
 
   useEffect(() => {
     const newStep = activeStep >= CareerStep.COMPLETE ? CareerStep.COMPLETE : activeStep;
@@ -55,7 +56,21 @@ export const CareerTest = () => {
     }
   }, [data, error]);
 
+  const nextLabel = useMemo(
+    () => (!authenticated || activeStep !== CareerStep.COMPLETE ? 'Next' : 'Save'),
+    [authenticated, activeStep],
+  );
+
   const clickNext = async () => {
+    if (nextLabel === 'Save') {
+      await associateProfile(data!.identifier);
+      notifications.show({
+        title: 'Saved Results',
+        message: 'Successfully saved new career paths',
+        color: 'green',
+      });
+      return;
+    }
     const formIsvalid = checkFormIsValid();
     storeTestValues({ key: 'formValues', value: form.values });
     if (!formIsvalid) {
@@ -129,11 +144,11 @@ export const CareerTest = () => {
                 </Button>
                 <Button
                   onClick={clickNext}
-                  disabled={isLoading}
-                  loading={isLoading}
+                  disabled={isLoading || (nextLabel === 'Save' && !data?.identifier)}
+                  loading={isLoading || isFetching}
                   variant="outline"
                 >
-                  Next
+                  {nextLabel}
                 </Button>
               </Group>
             </>

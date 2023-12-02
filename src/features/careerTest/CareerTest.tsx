@@ -60,6 +60,11 @@ export const CareerTest = () => {
     [authenticated, activeStep],
   );
 
+  const backLabel = useMemo(
+    () => (activeStep === CareerStep.COMPLETE ? 'Retake Test' : 'Back'),
+    [activeStep],
+  );
+
   const clickNext = async () => {
     if (nextLabel === 'Save') {
       await associateProfile(data!.identifier);
@@ -138,7 +143,7 @@ export const CareerTest = () => {
                   disabled={activeStep === CareerStep.EDUCATION || isLoading}
                   variant="light"
                 >
-                  Back
+                  {backLabel}
                 </Button>
                 <Button
                   onClick={clickNext}

@@ -43,31 +43,32 @@ export const NavigationCenter = () => {
       >
         <Container>
           <Grid py="sm">
-            {featureTiles
-              .filter(({ disabled }) => !disabled)
-              .map(({ title, Icon, link }) => (
-                <Grid.Col span={6} key={title} className={styles.navCenter}>
-                  <Paper
-                    onClick={() => history.push(link)}
-                    withBorder
-                    p="md"
-                    h={150}
-                    w="100%"
-                    radius="xm"
-                    display="flex"
-                    className={classNames(
-                      commonStyles.lightNavyBg,
-                      commonStyles.hoverItem,
-                      commonStyles.navTile,
-                    )}
-                  >
-                    <div>
-                      <Icon size={isMobile ? 70 : 100} />
-                      <Text size="sm">{title}</Text>
-                    </div>
-                  </Paper>
-                </Grid.Col>
-              ))}
+            {featureTiles.map(({ title, Icon, disabled, link }) => (
+              <Grid.Col span={6} key={title} className={styles.navCenter}>
+                <Paper
+                  onClick={() => !disabled && history.push(link)}
+                  withBorder
+                  p="md"
+                  h={150}
+                  w="100%"
+                  radius="xm"
+                  display="flex"
+                  className={classNames(
+                    commonStyles.lightNavyBg,
+                    commonStyles.hoverItem,
+                    commonStyles.navTile,
+                    {
+                      [commonStyles.disabled]: disabled,
+                    },
+                  )}
+                >
+                  <div>
+                    <Icon size={isMobile ? 70 : 100} />
+                    <Text size="sm">{title}</Text>
+                  </div>
+                </Paper>
+              </Grid.Col>
+            ))}
           </Grid>
         </Container>
       </Modal>

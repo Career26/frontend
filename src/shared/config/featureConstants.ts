@@ -1,6 +1,7 @@
 import {
   IconCertificate,
   IconChecklist,
+  IconReportSearch,
   IconUsersGroup,
   IconWorldSearch,
   TablerIconsProps,
@@ -17,6 +18,12 @@ export type FeatureTile = {
 };
 
 export const featureTiles: FeatureTile[] = [
+  {
+    title: 'Career Paths',
+    description: 'View your career path results and re-take the test',
+    Icon: IconReportSearch,
+    link: urls.careersTest,
+  },
   {
     title: 'Industry Insights',
     description: 'Explore industry insights and discover the potential of your careers',

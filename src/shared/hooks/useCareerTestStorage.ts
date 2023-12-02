@@ -36,9 +36,16 @@ export const useCareerTestStorage = () => {
     localStorage.setItem(baseKey, JSON.stringify(initialStoredValues));
   };
 
+  const setupFormValues = ({ profile, careerPaths }: UserProfile) => {
+    storeTestValues({ key: 'formValues', value: profile });
+    storeTestValues({ key: 'careerPaths', value: careerPaths });
+    storeTestValues({ key: 'step', value: CareerStep.COMPLETE });
+  };
+
   return {
     resetValues,
     storeTestValues,
+    setupFormValues,
     careerTestStorage: getValues(),
   };
 };

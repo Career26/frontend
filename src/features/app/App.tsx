@@ -9,15 +9,20 @@ import {
   selectSelectedCareerPathId,
   selectSelectedQuestionId,
 } from '@slices/sessionSlice';
-import { selectCareerPaths, selectProfileId, useLazyGetProfileQuery } from '@apis/profileApi';
+import {
+  selectCareerPaths,
+  selectProfileId,
+  selectProfileState,
+  useLazyGetProfileQuery,
+} from '@apis/profileApi';
 import { SettingsPage } from '@features/settings/SettingsPage';
 import { LoadingLens } from '@shared/components/loadingScreen/LoadingLens';
 import { useCareerTestStorage } from '@shared/hooks/useCareerTestStorage';
 import { FeedbackModal } from '@shared/components/feedback/FeedbackModal';
+import { CareerTest } from '@careerTest/CareerTest';
 
 import { HomePage } from '../homePage/HomePage';
 import { LandingPage } from '../landingPage/LandingPage';
-import { CareerTest } from '../careerTest/CareerTest';
 import { OverviewPage } from '../overview/OverviewPage';
 import { InterviewPage } from '../interview/InterviewPage';
 
@@ -28,18 +33,19 @@ export const App = () => {
   const { authenticated, unauthenticated } = useAuthUser();
   const careerPaths = useAppSelector(selectCareerPaths);
   const profileId = useAppSelector(selectProfileId);
+  const profile = useAppSelector(selectProfileState);
   const [getProfile, { isFetching }] = useLazyGetProfileQuery();
-  const { storeTestValues } = useCareerTestStorage();
+  const { setupFormValues } = useCareerTestStorage();
   const { open: loginOpen } = useAppSelector(selectLoginModal);
 
   useEffect(() => {
-    if (!careerPaths) {
+    if (!careerPaths || !profile) {
       return;
     }
     const industries = Object.values(careerPaths).map(({ industry }) => industry);
     dispatch(addIndustryColors(industries));
-    storeTestValues({ key: 'careerPaths', value: careerPaths });
-  }, [careerPaths]);
+    setupFormValues(profile);
+  }, [careerPaths, profile]);
 
   useEffect(() => {
     if (authenticated && !profileId && !loginOpen) {
@@ -71,15 +77,7 @@ export const App = () => {
             return <LoadingLens />;
           }}
         />
-        <Route
-          path={urls.careersTest}
-          render={() => {
-            if (authenticated && !!profileId) {
-              return <Redirect to={urls.landingPage} />;
-            }
-            return <CareerTest />;
-          }}
-        />
+        <Route path={urls.careersTest} component={CareerTest} />
         <Route
           path={`${urls.overview}/:careerId?`}
           render={({

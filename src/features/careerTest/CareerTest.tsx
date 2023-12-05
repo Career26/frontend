@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Container, Group, Button, Stepper } from '@mantine/core';
 import { Shell } from '@shared/components/shell/Shell';
-import { useCreateProfileMutation } from '@apis/profileApi';
+import { useCreateProfileMutation, useLazyAssociateProfileQuery } from '@apis/profileApi';
 import { setLoginModal } from '@slices/sessionSlice';
 import { useAppDispatch } from '@state/store';
 import { LoaderWithText } from '@shared/components/loadingScreen/LoaderWithText';
@@ -18,9 +18,8 @@ import { CareerPathsForm } from './components/careerPathsForm/CareerPathsForm';
 import { CareerTestHeader } from './components/careerTestHeader/CareerTestHeader';
 import { CareerStep } from './careerTestTypes';
 import { careerLoadingText } from './config/formConstants';
-import { DiversityForm } from './components/diversityForm/DiversityForm';
 
-const stepperLabels = ['Education', 'Experience', 'Preferences', 'Diversity', 'Career Paths'];
+const stepperLabels = ['Education', 'Experience', 'Preferences', 'Career Paths'];
 
 export const CareerTest = () => {
   const dispatch = useAppDispatch();
@@ -30,6 +29,7 @@ export const CareerTest = () => {
   const [activeStep, setActiveStep] = useState(careerTestStorage.step);
   const { form, checkFormIsValid } = useProfileForm({ activeStep });
   const { isMobile } = useMobileStyles();
+  const [associateProfile, { isFetching }] = useLazyAssociateProfileQuery();
 
   useEffect(() => {
     const newStep = activeStep >= CareerStep.COMPLETE ? CareerStep.COMPLETE : activeStep;
@@ -45,7 +45,7 @@ export const CareerTest = () => {
         message: 'Could not create profile, please try again later',
         color: 'red',
       });
-      setActiveStep(CareerStep.DIVERSITY);
+      setActiveStep(CareerStep.PREFERENCES);
       return;
     }
     if (data?.careerPaths) {
@@ -55,14 +55,33 @@ export const CareerTest = () => {
     }
   }, [data, error]);
 
+  const nextLabel = useMemo(
+    () => (!authenticated || activeStep !== CareerStep.COMPLETE ? 'Next' : 'Save'),
+    [authenticated, activeStep],
+  );
+
+  const backLabel = useMemo(
+    () => (activeStep === CareerStep.COMPLETE ? 'Retake Test' : 'Back'),
+    [activeStep],
+  );
+
   const clickNext = async () => {
+    if (nextLabel === 'Save') {
+      await associateProfile(data!.identifier);
+      notifications.show({
+        title: 'Saved Results',
+        message: 'Successfully saved new career paths',
+        color: 'green',
+      });
+      return;
+    }
     const formIsvalid = checkFormIsValid();
     storeTestValues({ key: 'formValues', value: form.values });
     if (!formIsvalid) {
       return;
     }
     form.clearErrors();
-    if (activeStep === CareerStep.DIVERSITY) {
+    if (activeStep === CareerStep.PREFERENCES) {
       storeTestValues({ key: 'careerPaths', value: undefined });
       createProfile(form.values);
     }
@@ -112,7 +131,6 @@ export const CareerTest = () => {
               {activeStep === CareerStep.EDUCATION && <EducationForm form={form} />}
               {activeStep === CareerStep.WORK_EXPERIENCE && <WorkExperienceForm form={form} />}
               {activeStep === CareerStep.PREFERENCES && <PreferencesForm form={form} />}
-              {activeStep === CareerStep.DIVERSITY && <DiversityForm form={form} />}
               {(activeStep === CareerStep.CAREER_PATHS || activeStep === CareerStep.COMPLETE) && (
                 <CareerPathsForm
                   careerPaths={careerTestStorage.careerPaths}
@@ -125,15 +143,15 @@ export const CareerTest = () => {
                   disabled={activeStep === CareerStep.EDUCATION || isLoading}
                   variant="light"
                 >
-                  Back
+                  {backLabel}
                 </Button>
                 <Button
                   onClick={clickNext}
-                  disabled={isLoading}
-                  loading={isLoading}
+                  disabled={isLoading || (nextLabel === 'Save' && !data?.identifier)}
+                  loading={isLoading || isFetching}
                   variant="outline"
                 >
-                  Next
+                  {nextLabel}
                 </Button>
               </Group>
             </>

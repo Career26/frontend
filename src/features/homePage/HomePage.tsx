@@ -5,19 +5,20 @@ import { Shell } from '@shared/components/shell/Shell';
 import { featureTiles } from '@shared/config/featureConstants';
 import commonStyles from '@shared/styles/commonStyles.module.scss';
 import classNames from 'classnames';
+import { useMobileStyles } from '@shared/hooks/useMobileStyles';
 
 import styles from './homePageStyles.module.scss';
 
 export const HomePage = () => {
   const history = useHistory();
-
+  const { isMobile } = useMobileStyles();
   return (
     <Shell>
       <Container className={styles.container}>
-        <Grid>
+        <Grid py="md">
           {featureTiles.map(({ title, Icon, link, description, disabled }) => (
             <Tooltip label={`${title} Coming Soon`} key={title} disabled={!disabled}>
-              <Grid.Col>
+              <Grid.Col span={isMobile ? undefined : 6}>
                 <Paper
                   onClick={() => !disabled && history.push(link)}
                   withBorder

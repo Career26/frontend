@@ -60,9 +60,10 @@ export const Shell = ({ children, navbar }: ShellProps) => {
     <AppShell
       styles={{
         main: {
+          backgroundColor: 'var(--mantine-color-gray-0)',
+          height: '100%',
           paddingRight: '0',
           paddingLeft,
-          minHeight: 'auto',
           paddingTop,
         },
       }}

@@ -1,4 +1,4 @@
-.container {
+.right {
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -11,5 +11,18 @@
   align-items: center;
   &:hover {
     color: var(--mantine-colors-navy-9);
+  }
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.copyright {
+  @media (max-width: 750px) {
+    font-size: 0.6rem;
   }
 }

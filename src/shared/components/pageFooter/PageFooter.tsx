@@ -1,4 +1,4 @@
-import { Anchor } from '@mantine/core';
+import { Anchor, Text } from '@mantine/core';
 import React from 'react';
 import { IconBrandLinkedin, IconMail } from '@tabler/icons-react';
 import { contactEmail, urls } from '@shared/config/urlConstants';
@@ -14,25 +14,30 @@ export const PageFooter = () => {
   const dispatch = useAppDispatch();
   return (
     <div className={styles.container}>
-      <Anchor
-        className={styles.anchor}
-        underline="never"
-        onClick={() => dispatch(setFeedbackModal({ open: true }))}
-        size="lg"
-      >
-        Feedback
-      </Anchor>
-      <Anchor
-        className={styles.anchor}
-        target="_blank"
-        size="lg"
-        onClick={() => window.open(mailtoLink)}
-      >
-        <IconMail />
-      </Anchor>
-      <Anchor className={styles.anchor} href={urls.linkedIn} target="_blank" size="lg">
-        <IconBrandLinkedin />
-      </Anchor>
+      <Text w="50%" c="navy" className={styles.copyright}>
+        ©2023 Career26 Ltd
+      </Text>
+      <div className={styles.right}>
+        <Anchor
+          className={styles.anchor}
+          underline="never"
+          onClick={() => dispatch(setFeedbackModal({ open: true }))}
+          size="lg"
+        >
+          Feedback
+        </Anchor>
+        <Anchor
+          className={styles.anchor}
+          target="_blank"
+          size="lg"
+          onClick={() => window.open(mailtoLink)}
+        >
+          <IconMail />
+        </Anchor>
+        <Anchor className={styles.anchor} href={urls.linkedIn} target="_blank" size="lg">
+          <IconBrandLinkedin />
+        </Anchor>
+      </div>
     </div>
   );
 };

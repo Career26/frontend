@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image } from '@mantine/core';
-import c26 from '@assets/career-26.png';
+import c26 from '@assets/career26.png';
 import logo from '@assets/logo.png';
 import { useMobileStyles } from '@shared/hooks/useMobileStyles';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';

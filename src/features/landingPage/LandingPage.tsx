@@ -1,15 +1,11 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { Container, Text } from '@mantine/core';
+import { Button, Container, Text } from '@mantine/core';
 import { urls } from '@shared/config/urlConstants';
 import { Shell } from '@shared/components/shell/Shell';
-import careerProgressImg from '@assets/careerProgress.png';
-import successImg from '@assets/success.png';
 
-import { Feature } from './components/feature/Feature';
-import { featureList, featuresTag } from './config/landingPageConstants';
 import styles from './landingPageStyles.module.scss';
-import { Hero } from './components/hero/Hero';
+import { FeatureSlider } from './featureSlider/FeatureSlider';
 
 export const LandingPage = () => {
   const history = useHistory();
@@ -18,40 +14,17 @@ export const LandingPage = () => {
   return (
     <Shell>
       <>
-        <Hero
-          image={careerProgressImg}
-          actionButtonText="Start Your Journey Now!"
-          subheadingText="Discover your perfect career path, ace interviews, elevate your CV and connect with a network of professionals with our all-in-one
-          career advisory platform"
-          headingText="Get Your Free"
-          colorHeadingText="Personalised Career Coach"
-          onClick={() => history.push(urls.careersTest)}
-          grayBackground={false}
-        />
-
-        <Container className={styles.featuresContainer} id={featuresTag}>
-          <Text fw="bold" className={styles.pricingText}>
+        <FeatureSlider />
+        <Container className={styles.footer} py="lg">
+          <Text fw="bold" className={styles.title}>
             Your All-In-One Career Platform
           </Text>
-          {featureList.map((item) => (
-            <Feature
-              title={item.title}
-              key={item.title}
-              image={item.image}
-              description={item.description}
-            />
-          ))}
+          <Container py="xs">
+            <Button onClick={takeTest} color="navy">
+              Start Now
+            </Button>
+          </Container>
         </Container>
-
-        <Hero
-          image={successImg}
-          actionButtonText="Join For Free!"
-          subheadingText="Ready to unleash your potential? Take our free questionnaire to view your career paths now"
-          headingText="Join & Achieve"
-          colorHeadingText="Career Success"
-          onClick={takeTest}
-          grayBackground
-        />
       </>
     </Shell>
   );

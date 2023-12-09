@@ -33,11 +33,22 @@ export const Shell = ({ children, navbar }: ShellProps) => {
   const { resetValues } = useCareerTestStorage();
   const { showNavigation } = usePageNavigation();
 
+  const paddingTop = useMemo(() => {
+    if (!isMobile) {
+      return headerHeight;
+    }
+    if (!showNavigation) {
+      return `calc(${headerHeight})`;
+    }
+    return `calc(${headerHeight} + ${rem(60)})`;
+  }, [isMobile, showNavigation]);
+
   const onSignOut = () => {
     resetValues();
     dispatch(resetSession());
     signOut();
   };
+
   const { paddingLeft, navbarSettings } = useMemo(() => {
     if (isMobile || !navbar) {
       return { paddingLeft: 0, navbarSettings: undefined };
@@ -52,7 +63,7 @@ export const Shell = ({ children, navbar }: ShellProps) => {
           paddingRight: '0',
           paddingLeft,
           minHeight: 'auto',
-          paddingTop: isMobile ? `calc(${headerHeight} + ${rem(60)})` : headerHeight,
+          paddingTop,
         },
       }}
       header={{ height: headerHeight }}
@@ -78,7 +89,7 @@ export const Shell = ({ children, navbar }: ShellProps) => {
           <CareerNavigation />
         </div>
       )}
-      <AppShell.Main>{children}</AppShell.Main>
+      <AppShell.Main className={styles.main}>{children}</AppShell.Main>
       <AppShell.Footer className={classNames(styles.fullWidthContainer, styles.footer)}>
         <PageFooter />
       </AppShell.Footer>

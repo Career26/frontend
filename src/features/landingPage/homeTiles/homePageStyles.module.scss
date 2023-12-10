@@ -1,0 +1,17 @@
+.homeTile {
+  display: flex;
+  padding-top: var(--mantine-spacing-md);
+  align-items: center;
+  .left {
+    display: flex;
+    width: 30%;
+    align-items: flex-start;
+    flex-direction: column;
+    > div {
+      align-self: center;
+    }
+  }
+  .right {
+    padding-left: var(--mantine-spacing-md);
+  }
+}

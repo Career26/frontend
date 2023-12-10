@@ -15,11 +15,11 @@ import { WorkExperienceForm } from './components/workExperienceForm/WorkExperien
 import { PreferencesForm } from './components/preferencesForm/PreferencesForm';
 import { useProfileForm } from './hooks/useProfileForm';
 import { CareerPathsForm } from './components/careerPathsForm/CareerPathsForm';
-import { CareerTestHeader } from './components/careerTestHeader/CareerTestHeader';
 import { CareerStep } from './careerTestTypes';
 import { careerLoadingText } from './config/formConstants';
+import { DiversityForm } from './components/diversityForm/DiversityForm';
 
-const stepperLabels = ['Education', 'Experience', 'Preferences', 'Career Paths'];
+const stepperLabels = ['Education', 'Experience', 'Preferences', 'Diversity', 'Career Paths'];
 
 export const CareerTest = () => {
   const dispatch = useAppDispatch();
@@ -45,7 +45,7 @@ export const CareerTest = () => {
         message: 'Could not create profile, please try again later',
         color: 'red',
       });
-      setActiveStep(CareerStep.PREFERENCES);
+      setActiveStep(CareerStep.DIVERSITY);
       return;
     }
     if (data?.careerPaths) {
@@ -81,7 +81,7 @@ export const CareerTest = () => {
       return;
     }
     form.clearErrors();
-    if (activeStep === CareerStep.PREFERENCES) {
+    if (activeStep === CareerStep.DIVERSITY) {
       storeTestValues({ key: 'careerPaths', value: undefined });
       createProfile(form.values);
     }
@@ -109,7 +109,6 @@ export const CareerTest = () => {
   return (
     <Shell>
       <>
-        <CareerTestHeader />
         <Container>
           <Stepper active={activeStep} onStepClick={setActiveStep} py="md">
             {stepperLabels.map((label, index) => (
@@ -131,6 +130,7 @@ export const CareerTest = () => {
               {activeStep === CareerStep.EDUCATION && <EducationForm form={form} />}
               {activeStep === CareerStep.WORK_EXPERIENCE && <WorkExperienceForm form={form} />}
               {activeStep === CareerStep.PREFERENCES && <PreferencesForm form={form} />}
+              {activeStep === CareerStep.DIVERSITY && <DiversityForm form={form} />}
               {(activeStep === CareerStep.CAREER_PATHS || activeStep === CareerStep.COMPLETE) && (
                 <CareerPathsForm
                   careerPaths={careerTestStorage.careerPaths}

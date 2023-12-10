@@ -16,3 +16,15 @@
     font-size: 1.5rem !important;
   }
 }
+
+.container {
+  > div {
+    padding-top: var(--mantine-spacing-md);
+  }
+  @media (min-width: 750px) {
+    display: flex;
+    > div {
+      width: 50%;
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import { Button, Group, Modal, Text } from '@mantine/core';
+import { Group, Text } from '@mantine/core';
 import { selectFeedbackModal, setFeedbackModal } from '@slices/sessionSlice';
 import { useAppDispatch, useAppSelector } from '@state/store';
 import React, { useEffect } from 'react';
@@ -8,6 +8,7 @@ import { useSubmitFeedbackMutation } from '@apis/feedbackApi';
 import { IconCircleCheck } from '@tabler/icons-react';
 
 import { FeedbackForm } from './FeedbackForm';
+import { ActionModal } from '../actionModal/ActionModal';
 
 const hasAnswer = (value?: string | string[]) => !value?.length && 'Please provide an answer';
 
@@ -48,37 +49,25 @@ export const FeedbackModal = () => {
     }
   }, [data]);
 
+  const body = data ? (
+    <Group py="md">
+      <IconCircleCheck color="green" size={50} />
+      <Text>Thank you for providing feedback!</Text>
+    </Group>
+  ) : (
+    <FeedbackForm form={form} />
+  );
+
   return (
-    <Modal.Root opened={open} onClose={onClose} size="xl" centered>
-      <Modal.Overlay />
-      <Modal.Content>
-        <Modal.Header bg="navy" c="white">
-          <Modal.Title fw="bold">Feedback</Modal.Title>
-          <Modal.CloseButton c="white" />
-        </Modal.Header>
-        <Modal.Body>
-          {data ? (
-            <Group py="md">
-              <IconCircleCheck color="green" size={50} />
-              <Text>Thank you for providing feedback!</Text>
-            </Group>
-          ) : (
-            <>
-              <FeedbackForm form={form} />
-              <Group justify="flex-end" py="md">
-                <Button
-                  disabled={!!Object.values(form.errors).length}
-                  loading={isLoading}
-                  onClick={() => submitFeedback(form.values)}
-                  variant="outline"
-                >
-                  Submit
-                </Button>
-              </Group>
-            </>
-          )}
-        </Modal.Body>
-      </Modal.Content>
-    </Modal.Root>
+    <ActionModal
+      label="Submit"
+      title="Feedback"
+      opened={open}
+      onClose={onClose}
+      body={body}
+      disabled={!!Object.values(form.errors).length}
+      loading={isLoading}
+      onClick={() => submitFeedback(form.values)}
+    />
   );
 };

@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@state/store';
 import { selectCareerPaths, selectProfile } from '@apis/profileApi';
 import { useAuthUser } from '@shared/hooks/useAuthUser';
-import { setCareerTestModal, setDiversityModal, setLoginModal } from '@slices/sessionSlice';
+import { setCareerTestModal, setDiversityModal } from '@slices/sessionSlice';
 
 import styles from './homePageStyles.module.scss';
 
@@ -28,7 +28,7 @@ export const HomeTiles = () => {
       return;
     }
     if (!authenticated) {
-      dispatch(setLoginModal({ open: true, initialState: 'signUp' }));
+      dispatch(setCareerTestModal({ open: true, noProfile: true }));
       return;
     }
     if ([urls.mentors, urls.jobs].includes(link) && !profile?.diversity) {
@@ -43,7 +43,7 @@ export const HomeTiles = () => {
   };
 
   return (
-    <Container>
+    <Container py={0}>
       <Grid py="sm" id="mentors-grid">
         {featureTiles.map(({ title, Icon, link, description, disabled }) => (
           <Tooltip

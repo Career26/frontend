@@ -42,7 +42,6 @@ export const featureTiles: FeatureTile[] = [
     description: 'Connect with professionals in your industry',
     Icon: IconUsersGroup,
     link: urls.mentors,
-    disabled: true,
   },
 
   {

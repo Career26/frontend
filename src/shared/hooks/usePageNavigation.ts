@@ -51,9 +51,14 @@ export const usePageNavigation = () => {
     history.push(urls.settings);
   };
 
+  const goToMentors = () => {
+    history.push(urls.mentors);
+  };
+
   return {
     goToHomepage,
     goToSettings,
+    goToMentors,
     clickCareersTest,
     toggleCareerId,
     toggleQuestionId,

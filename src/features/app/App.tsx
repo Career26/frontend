@@ -22,6 +22,7 @@ import { FeedbackModal } from '@shared/components/feedback/FeedbackModal';
 import { CareerTest } from '@careerTest/CareerTest';
 import { Mentors } from '@features/mentors/Mentors';
 import { CareerTestModal } from '@shared/components/careerTestModal/CareerTestModal';
+import { DiversityModal } from '@shared/components/diverstiyModal/DiversityModal';
 
 import { LandingPage } from '../landingPage/LandingPage';
 import { OverviewPage } from '../overview/OverviewPage';
@@ -62,6 +63,7 @@ export const App = () => {
     <Suspense fallback={<LoadingLens />}>
       <FeedbackModal />
       <CareerTestModal />
+      <DiversityModal />
       <Switch>
         <Route path={urls.landingPage} exact component={LandingPage} />
         <Route path={urls.careersTest} component={CareerTest} />

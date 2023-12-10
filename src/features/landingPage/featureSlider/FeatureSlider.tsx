@@ -7,45 +7,47 @@ import interviewImage from '@assets/interviewQuestion.png';
 import careerTestImage from '@assets/careerTest.png';
 import industryInsightsImage from '@assets/industryInsights.png';
 import networkImg from '@assets/network.png';
+import { useMobileStyles } from '@shared/hooks/useMobileStyles';
 
 import styles from './featureSlider.module.scss';
 
 const slides = [
   {
-    title: 'Take Our Free',
-    subTitle: 'Career Test',
+    title: 'Take A Quick',
+    subTitle: 'Career26 Test',
     image: careerTestImage,
   },
   {
-    title: 'Find Your',
-    subTitle: 'Perfect Career',
+    title: 'Get Your',
+    subTitle: 'Personalised Career Advice',
     image: careerResultsImage,
   },
   {
-    title: 'Gain Industry',
-    subTitle: 'Insights',
+    title: 'Explore Industry',
+    subTitle: 'Insights and Guidance',
     image: industryInsightsImage,
   },
   {
-    title: 'Interview With',
-    subTitle: 'Confidence',
+    title: 'Practice Interviews',
+    subTitle: 'With Real-time Feedback',
     image: interviewImage,
   },
   {
-    title: 'Connect With',
-    subTitle: 'Industry Mentors',
+    title: 'Find A Mentor',
+    subTitle: 'In Our Global Network',
     image: networkImg,
   },
 ];
 
 export const FeatureSlider = () => {
-  const autoplay = useRef(Autoplay({ delay: 4000 }));
+  const { isMobile } = useMobileStyles();
+  const autoplay = useRef(Autoplay({ delay: 2000 }));
   return (
     <Container className={styles.container}>
       <Carousel
         classNames={styles}
         withIndicators
-        height={500}
+        height={isMobile ? 300 : 500}
         loop
         plugins={[autoplay.current]}
         onMouseEnter={autoplay.current.stop}

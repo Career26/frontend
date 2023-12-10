@@ -28,38 +28,47 @@
   }
 }
 
-.titleContainer {
-  flex: 1;
-
-  .title {
-    margin: 0;
-    padding: 0;
-    color: black;
-    display: flex;
-    flex-direction: column;
-    font-size: 3.5rem !important;
-    font-weight: 'bold' !important;
-
-    @media (max-width: 750px) {
-      font-size: 2rem !important;
-      text-align: center;
-    }
-  }
-  .description {
-    font-size: 1.5rem !important;
-    @media (max-width: 750px) {
-      font-size: 1rem !important;
-      text-align: center;
-    }
+.title {
+  display: flex;
+  width: 100% !important;
+  gap: var(--mantine-spacing-xs) !important;
+  justify-content: center;
+  padding-bottom: var(--mantine-spacing-md);
+  > h1 {
+    font-size: 1.5rem;
   }
 }
 
+// .titleContainer {
+//   display: flex;
+//   gap: 1rem;
+//   width: 100%;
+
+//   .title {
+//     margin: 0;
+//     padding: 0;
+//     color: black;
+//     display: flex;
+//     flex-direction: column;
+//     font-size: 2rem !important;
+
+//     @media (max-width: 750px) {
+//       // font-size: 2rem !important;
+//       text-align: center;
+//     }
+//   }
+//   .description {
+//     font-size: 1.5rem !important;
+//     @media (max-width: 750px) {
+//       font-size: 1rem !important;
+//       text-align: center;
+//     }
+//   }
+// }
+
 .slide {
   display: flex;
-  flex-direction: row;
-  @media (max-width: 750px) {
-    flex-direction: column;
-  }
+  flex-direction: column;
   @media (min-width: 750px) {
     > div {
       width: 60%;

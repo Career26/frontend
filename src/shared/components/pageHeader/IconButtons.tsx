@@ -11,19 +11,18 @@ import { useMobileStyles } from '@shared/hooks/useMobileStyles';
 import { NavigationCenter } from './NavigationCenter';
 import styles from './headerStyles.module.scss';
 
-export const IconButtons = ({
-  signOut,
-  authenticated,
-}: {
+interface IconButtonsProps {
   signOut: () => void;
   authenticated: boolean;
-}) => {
+}
+
+export const IconButtons = ({ signOut, authenticated }: IconButtonsProps) => {
   const dispatch = useAppDispatch();
   const { isMobile } = useMobileStyles();
-  const { clickCareersTest, goToSettings } = usePageNavigation();
+  const { goToSettings } = usePageNavigation();
 
-  const clickLogin = () => {
-    dispatch(setLoginModal({ open: true, initialState: 'signIn' }));
+  const clickLogin = (initialState: 'signIn' | 'signUp') => {
+    dispatch(setLoginModal({ open: true, initialState }));
   };
 
   const buttonSize = isMobile ? 'xs' : undefined;
@@ -31,11 +30,11 @@ export const IconButtons = ({
   if (!authenticated) {
     return (
       <div className={styles.avatars}>
-        <Button size={buttonSize} variant="outline" onClick={clickLogin}>
+        <Button size={buttonSize} variant="outline" onClick={() => clickLogin('signIn')}>
           Login
         </Button>
-        <Button size={buttonSize} onClick={clickCareersTest}>
-          Take the Test
+        <Button size={buttonSize} onClick={() => clickLogin('signUp')}>
+          Sign Up
         </Button>
       </div>
     );

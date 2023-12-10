@@ -20,6 +20,7 @@ import { LoadingLens } from '@shared/components/loadingScreen/LoadingLens';
 import { useCareerTestStorage } from '@shared/hooks/useCareerTestStorage';
 import { FeedbackModal } from '@shared/components/feedback/FeedbackModal';
 import { CareerTest } from '@careerTest/CareerTest';
+import { Mentors } from '@features/mentors/Mentors';
 
 import { HomePage } from '../homePage/HomePage';
 import { LandingPage } from '../landingPage/LandingPage';
@@ -78,6 +79,7 @@ export const App = () => {
           }}
         />
         <Route path={urls.careersTest} component={CareerTest} />
+        <Route path={urls.mentors} component={Mentors} />
         <Route
           path={`${urls.overview}/:careerId?`}
           render={({

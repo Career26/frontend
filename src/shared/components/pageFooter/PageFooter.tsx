@@ -15,7 +15,7 @@ export const PageFooter = () => {
   return (
     <div className={styles.container}>
       <Text w="50%" c="navy" className={styles.copyright}>
-        ©2023 Career26 Ltd
+        ©2023 CAREER26 Limited
       </Text>
       <div className={styles.right}>
         <Anchor

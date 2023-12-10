@@ -22,6 +22,8 @@ export const HomeTiles = () => {
   const handleClick = (link: string) => {
     if (link === urls.careersTest) {
       dispatch(setCareerTestModal({ open: true, noProfile: false }));
+      history.push(link);
+      return;
     }
     if (!authenticated) {
       dispatch(setLoginModal({ open: true, initialState: 'signUp' }));

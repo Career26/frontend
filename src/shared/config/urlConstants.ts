@@ -5,6 +5,7 @@ export const urls = {
   questions: '/questions',
   mentors: '/mentors',
   settings: '/settings',
+  jobs: '/jobs',
   linkedIn: 'https://linkedin.com/company/100135742/admin/feed/posts/',
 };
 

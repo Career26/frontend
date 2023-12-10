@@ -20,8 +20,8 @@ import { LoadingLens } from '@shared/components/loadingScreen/LoadingLens';
 import { useCareerTestStorage } from '@shared/hooks/useCareerTestStorage';
 import { FeedbackModal } from '@shared/components/feedback/FeedbackModal';
 import { CareerTest } from '@careerTest/CareerTest';
+import { CareerTestModal } from '@shared/components/careerTestModal/CareerTestModal';
 
-import { HomePage } from '../homePage/HomePage';
 import { LandingPage } from '../landingPage/LandingPage';
 import { OverviewPage } from '../overview/OverviewPage';
 import { InterviewPage } from '../interview/InterviewPage';
@@ -60,23 +60,9 @@ export const App = () => {
   return (
     <Suspense fallback={<LoadingLens />}>
       <FeedbackModal />
+      <CareerTestModal />
       <Switch>
-        <Route
-          path={urls.landingPage}
-          exact
-          render={() => {
-            if (authenticated) {
-              if (!profileId) {
-                return <CareerTest />;
-              }
-              return <HomePage />;
-            }
-            if (unauthenticated) {
-              return <LandingPage />;
-            }
-            return <LoadingLens />;
-          }}
-        />
+        <Route path={urls.landingPage} exact component={LandingPage} />
         <Route path={urls.careersTest} component={CareerTest} />
         <Route
           path={`${urls.overview}/:careerId?`}
@@ -92,7 +78,7 @@ export const App = () => {
               return <LoadingLens />;
             }
             if (authenticated && !profileId) {
-              return <CareerTest />;
+              return <LandingPage />;
             }
             if (!careerId) {
               return <Redirect to={`${urls.overview}/${defaultCareerId}`} />;
@@ -114,7 +100,7 @@ export const App = () => {
               return <LoadingLens />;
             }
             if (authenticated && !profileId) {
-              return <CareerTest />;
+              return <LandingPage />;
             }
             if (!careerId && !!defaultCareerId) {
               return <Redirect to={`${urls.questions}/${defaultCareerId}/${defaultQuestionId}`} />;

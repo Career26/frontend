@@ -1,6 +1,7 @@
 .hoverItem {
   &:hover {
     cursor: pointer;
+    box-shadow: var(--mantine-shadow-md);
   }
 }
 

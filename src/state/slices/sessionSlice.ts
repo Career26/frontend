@@ -15,6 +15,8 @@ type SessionSlice = {
   questionColors: { [key: string]: string };
   selectedCareerPathId?: string;
   feedbackModal: { open: boolean };
+  diversityModal: { open: boolean };
+  careerTestModal: { open: boolean; noProfile?: boolean };
 };
 
 export const initialSessionState: SessionSlice = {
@@ -23,12 +25,20 @@ export const initialSessionState: SessionSlice = {
   selectedQuestionId: undefined,
   loginModal: { open: false },
   feedbackModal: { open: false },
+  careerTestModal: { open: false },
+  diversityModal: { open: false },
 };
 
 export const sessionSlice = createSlice({
   name: 'session',
   initialState: initialSessionState,
   reducers: {
+    setDiversityModal: (state, { payload }: PayloadAction<SessionSlice['diversityModal']>) => {
+      state.diversityModal = payload;
+    },
+    setCareerTestModal: (state, { payload }: PayloadAction<SessionSlice['careerTestModal']>) => {
+      state.careerTestModal = payload;
+    },
     setLoginModal: (state, { payload }: PayloadAction<SessionSlice['loginModal']>) => {
       state.loginModal = payload;
     },
@@ -73,6 +83,8 @@ export const {
   addQuestionColors,
   setSelectedQuestionId,
   setFeedbackModal,
+  setCareerTestModal,
+  setDiversityModal,
 } = sessionSlice.actions;
 
 const selectSession = (state: RootState) => state.session;
@@ -84,6 +96,8 @@ export const selectSelectedQuestion = (state: RootState) => {
   return questions?.[id];
 };
 export const selectLoginModal = (state: RootState) => selectSession(state).loginModal;
+export const selectDiversityModal = (state: RootState) => selectSession(state).diversityModal;
+export const selectCareerTestModal = (state: RootState) => selectSession(state).careerTestModal;
 export const selectFeedbackModal = (state: RootState) => selectSession(state).feedbackModal;
 export const selectSelectedCareerPathId = (state: RootState) =>
   selectSession(state).selectedCareerPathId || Object.keys(selectCareerPaths(state) || {})[0];

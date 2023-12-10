@@ -15,7 +15,6 @@ import { WorkExperienceForm } from './components/workExperienceForm/WorkExperien
 import { PreferencesForm } from './components/preferencesForm/PreferencesForm';
 import { useProfileForm } from './hooks/useProfileForm';
 import { CareerPathsForm } from './components/careerPathsForm/CareerPathsForm';
-import { CareerTestHeader } from './components/careerTestHeader/CareerTestHeader';
 import { CareerStep } from './careerTestTypes';
 import { careerLoadingText } from './config/formConstants';
 
@@ -109,7 +108,6 @@ export const CareerTest = () => {
   return (
     <Shell>
       <>
-        <CareerTestHeader />
         <Container>
           <Stepper active={activeStep} onStepClick={setActiveStep} py="md">
             {stepperLabels.map((label, index) => (

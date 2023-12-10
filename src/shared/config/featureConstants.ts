@@ -19,8 +19,8 @@ export type FeatureTile = {
 
 export const featureTiles: FeatureTile[] = [
   {
-    title: 'Career Paths',
-    description: 'View your career path results and re-take the test',
+    title: 'Career Test',
+    description: 'Take our career test and view your career path results',
     Icon: IconReportSearch,
     link: urls.careersTest,
   },

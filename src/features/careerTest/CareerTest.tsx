@@ -147,7 +147,7 @@ export const CareerTest = () => {
                 </Button>
                 <Button
                   onClick={clickNext}
-                  disabled={isLoading || (nextLabel === 'Save' && !data?.identifier)}
+                  disabled={isLoading}
                   loading={isLoading || isFetching}
                   variant="outline"
                 >

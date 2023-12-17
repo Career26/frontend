@@ -9,6 +9,7 @@ import { useCareerTestStorage } from '@shared/hooks/useCareerTestStorage';
 import { notifications } from '@mantine/notifications';
 import { useAuthUser } from '@shared/hooks/useAuthUser';
 import { useMobileStyles } from '@shared/hooks/useMobileStyles';
+import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 
 import { EducationForm } from './components/educationForm/EducationForm';
 import { WorkExperienceForm } from './components/workExperienceForm/WorkExperienceForm';
@@ -30,6 +31,7 @@ export const CareerTest = () => {
   const { form, checkFormIsValid } = useProfileForm({ activeStep });
   const { isMobile } = useMobileStyles();
   const [associateProfile, { isFetching }] = useLazyAssociateProfileQuery();
+  const { goToHomepage } = usePageNavigation();
 
   useEffect(() => {
     const newStep = activeStep >= CareerStep.COMPLETE ? CareerStep.COMPLETE : activeStep;
@@ -67,12 +69,14 @@ export const CareerTest = () => {
 
   const clickNext = async () => {
     if (nextLabel === 'Save') {
-      await associateProfile(data!.identifier);
+      await associateProfile(careerTestStorage.profileId!);
       notifications.show({
         title: 'Saved Results',
         message: 'Successfully saved new career paths',
         color: 'green',
       });
+      goToHomepage();
+      window.location.reload();
       return;
     }
     const formIsvalid = checkFormIsValid();

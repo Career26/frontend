@@ -1,4 +1,4 @@
-import { Container, NavLink } from '@mantine/core';
+import { Card, Container, NavLink } from '@mantine/core';
 import { Shell } from '@shared/components/shell/Shell';
 import React, { useState } from 'react';
 
@@ -30,7 +30,9 @@ export const SettingsPage = () => {
       }
     >
       <Container py="md">
-        <Component />
+        <Card radius="md" p="md" withBorder>
+          <Component />
+        </Card>
       </Container>
     </Shell>
   );

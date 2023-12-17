@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Container, Group, Button, Stepper } from '@mantine/core';
 import { Shell } from '@shared/components/shell/Shell';
-import { useCreateProfileMutation, useLazyAssociateProfileQuery } from '@apis/profileApi';
+import { useCreateProfileMutation } from '@apis/profileApi';
 import { setLoginModal } from '@slices/sessionSlice';
 import { useAppDispatch } from '@state/store';
 import { LoaderWithText } from '@shared/components/loadingScreen/LoaderWithText';
@@ -9,6 +9,7 @@ import { useCareerTestStorage } from '@shared/hooks/useCareerTestStorage';
 import { notifications } from '@mantine/notifications';
 import { useAuthUser } from '@shared/hooks/useAuthUser';
 import { useMobileStyles } from '@shared/hooks/useMobileStyles';
+import { useAssociate } from '@shared/hooks/useAssociate';
 
 import { EducationForm } from './components/educationForm/EducationForm';
 import { WorkExperienceForm } from './components/workExperienceForm/WorkExperienceForm';
@@ -29,7 +30,7 @@ export const CareerTest = () => {
   const [activeStep, setActiveStep] = useState(careerTestStorage.step);
   const { form, checkFormIsValid } = useProfileForm({ activeStep });
   const { isMobile } = useMobileStyles();
-  const [associateProfile, { isFetching }] = useLazyAssociateProfileQuery();
+  const { associateProfile, loading } = useAssociate();
 
   useEffect(() => {
     const newStep = activeStep >= CareerStep.COMPLETE ? CareerStep.COMPLETE : activeStep;
@@ -65,14 +66,9 @@ export const CareerTest = () => {
     [activeStep],
   );
 
-  const clickNext = async () => {
+  const clickNext = () => {
     if (nextLabel === 'Save') {
-      await associateProfile(data!.identifier);
-      notifications.show({
-        title: 'Saved Results',
-        message: 'Successfully saved new career paths',
-        color: 'green',
-      });
+      associateProfile(careerTestStorage.profileId!);
       return;
     }
     const formIsvalid = checkFormIsValid();
@@ -147,8 +143,8 @@ export const CareerTest = () => {
                 </Button>
                 <Button
                   onClick={clickNext}
-                  disabled={isLoading}
-                  loading={isLoading || isFetching}
+                  disabled={isLoading || loading}
+                  loading={isLoading || loading}
                   variant="outline"
                 >
                   {nextLabel}

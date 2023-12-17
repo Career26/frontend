@@ -3,14 +3,12 @@ import { selectLoginModal, setLoginModal } from '@slices/sessionSlice';
 import { useAppDispatch, useAppSelector } from '@state/store';
 import React, { useEffect } from 'react';
 import { Modal, Text } from '@mantine/core';
-import { useLazyAssociateProfileQuery } from '@apis/profileApi';
 import { useAuthUser } from '@shared/hooks/useAuthUser';
-import { usePageNavigation } from '@shared/hooks/usePageNavigation';
-import { notifications } from '@mantine/notifications';
 import commonStyles from '@shared/styles/commonStyles.module.scss';
 import classNames from 'classnames';
 import '@aws-amplify/ui-react/styles.css';
 import { useMobileStyles } from '@shared/hooks/useMobileStyles';
+import { useAssociate } from '@shared/hooks/useAssociate';
 
 import { SignUpBenefits } from './SignUpBenefits';
 import styles from './accountStyles.module.scss';
@@ -112,34 +110,17 @@ export const LoginModal = () => {
   const { route } = useAuthenticator((context) => [context.route]);
   const dispatch = useAppDispatch();
   const { open, initialState, associateProfileId } = useAppSelector(selectLoginModal);
-  const [associateProfile] = useLazyAssociateProfileQuery();
   const { authenticated } = useAuthUser();
-  const { goToHomepage } = usePageNavigation();
+
+  const { associateProfile } = useAssociate();
 
   const onClose = () => {
     dispatch(setLoginModal({ open: false }));
   };
 
-  const handleAssociate = async (profileId: string) => {
-    try {
-      await associateProfile(profileId);
-      notifications.show({
-        title: 'Created Account',
-        message: 'Successfully created account',
-        color: 'green',
-      });
-      onClose();
-      goToHomepage();
-      window.location.reload();
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error(`associate account error - ${error}`);
-    }
-  };
-
   useEffect(() => {
     if (!!associateProfileId && authenticated) {
-      handleAssociate(associateProfileId);
+      associateProfile(associateProfileId, onClose);
     }
   }, [authenticated, associateProfileId]);
 

@@ -1,8 +1,8 @@
 import { Card, Container, NavLink } from '@mantine/core';
 import { useState } from 'react';
 
-import { ProfileTab } from '@settings/ProfileTab';
-import { UserInfoTab } from '@settings/UserInfoTab';
+import { ProfileTab } from './ProfileTab';
+import { UserInfoTab } from './UserInfoTab';
 import { Shell } from '@shared/components/shell/Shell';
 
 const profileLinks = [

@@ -33,7 +33,7 @@ export const useActiveNavScroll = <T>({ navItems, headerHeight = 150 }: NavScrol
   };
   useEffect(() => {
     if (typeof document === 'undefined' || typeof window === 'undefined') {
-      return;
+      return () => {};
     }
     window.addEventListener('scroll', handleScroll);
     return () => {

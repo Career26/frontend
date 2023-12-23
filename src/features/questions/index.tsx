@@ -1,4 +1,3 @@
-// import { useLoaderData, useNavigate } from '@remix-run/react';
 import { useEffect } from 'react';
 import { Button, Container, Group, Textarea } from '@mantine/core';
 import { hasLength, useForm } from '@mantine/form';
@@ -11,7 +10,6 @@ import { QuestionRating } from '@questions/QuestionRating';
 import { QuestionCard } from '@questions/QuestionCard';
 
 import { useGetQuestionsQuery, useRateAnswerMutation } from '@apis/questionsApi';
-import { usePageSetup } from '@shared/hooks/usePageSetup';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 import {
   addQuestionColors,
@@ -22,24 +20,11 @@ import {
 } from '@slices/sessionSlice';
 import { useAppDispatch, useAppSelector } from '@state/store';
 
-import { urls } from '@shared/constants/urlConstants';
-
-// import type { LoaderFunctionArgs } from '@remix-run/node';
-
 import styles from '@questions/questions.module.css';
 
-// export const loader = async ({ params }: LoaderFunctionArgs) => {
-//   const id = params['*'];
-//   const [careerId, questionId] = id?.split('/') || [];
-//   return { careerId, questionId };
-// };
-
 const Index = () => {
-  const navigate = useNavigate();
-  const { careerId: _cId, questionId: _qId } = useLoaderData<typeof loader>();
   const dispatch = useAppDispatch();
-  const { loading, unauthenticated } = usePageSetup();
-  const { toggleQuestionId, toggleCareerId } = usePageNavigation();
+  const { toggleQuestionId } = usePageNavigation();
   const careerPathId = useAppSelector(selectSelectedCareerPathId);
   const selectedQuestion = useAppSelector(selectSelectedQuestion);
   const selectedQuestionId = useAppSelector(selectSelectedQuestionId);
@@ -48,17 +33,17 @@ const Index = () => {
     useRateAnswerMutation();
   const questionColors = useAppSelector(selectQuestionColors);
 
-  const onClickReset = () => {
-    form.reset();
-    resetRating();
-  };
-
   const form = useForm<{ answer: string }>({
     initialValues: { answer: '' },
     validate: {
       answer: hasLength({ min: 1, max: 1000 }, 'Answer must be 10-1000 characters long'),
     },
   });
+
+  const onClickReset = () => {
+    form.reset();
+    resetRating();
+  };
 
   useEffect(() => {
     if (!questions) {
@@ -68,29 +53,7 @@ const Index = () => {
     dispatch(addQuestionColors(categoies));
   }, [questions]);
 
-  // useEffect(() => {
-  //   if (!careerPaths || !questions) {
-  //     return;
-  //   }
-  //   if (!careerPaths[careerId]) {
-  //     toggleCareerId(defaultCareerId);
-  //     toggleQuestionId(defaultQuestionId);
-  //     return;
-  //   }
-  //   if (typeof questionId !== 'number' || questionId < 0 || questionId > questions.length - 1) {
-  //     toggleQuestionId(defaultQuestionId);
-  //     return;
-  //   }
-  //   dispatch(setSelectedCareerPathId(careerId));
-  //   dispatch(setSelectedQuestionId(questionId));
-  // }, [questions, careerPaths, careerId, questionId]);
-
-  if (loading || isFetching) {
-    return <LoadingLens />;
-  }
-
-  if (unauthenticated) {
-    navigate(urls.landingPage);
+  if (isFetching) {
     return <LoadingLens />;
   }
 

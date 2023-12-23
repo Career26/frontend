@@ -1,5 +1,4 @@
-// import { LoaderFunctionArgs } from '@remix-run/node';
-// import { useLoaderData, useNavigate } from '@remix-run/react';
+import { useHistory } from 'react-router-dom';
 import { Card, Container, Group, Text } from '@mantine/core';
 
 import { useAppSelector } from '@state/store';
@@ -22,14 +21,11 @@ import { RoleSummaryTile } from '@overview/RoleSummaryTile';
 import { overviewLinks } from '@shared/constants/overviewConstants';
 import { urls } from '@shared/constants/urlConstants';
 
-// export const loader = async ({ params }: LoaderFunctionArgs) => ({ careerId: params['*'] });
-
 const Index = () => {
-  //   const { careerId: careerIdUrl } = useLoaderData<typeof loader>();
   const { loading, unauthenticated } = usePageSetup();
   const { isMobile } = useMobileStyles();
   const profileId = useAppSelector(selectProfileId) || '';
-  const navigate = useNavigate();
+  const history = useHistory();
   const careerId = useAppSelector(selectSelectedCareerPathId);
   const careerPath = useAppSelector(selectSelectedCareerPath);
   const { data, isFetching } = useGetCareerOverviewQuery(
@@ -42,8 +38,8 @@ const Index = () => {
   }
 
   if (unauthenticated) {
-    navigate(urls.landingPage);
-    return null;
+    history.push(urls.landingPage);
+    return <LoadingLens />;
   }
 
   if (isFetching) {

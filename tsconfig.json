@@ -2,7 +2,7 @@
   "include": ["./src/**/*", "custom.d.ts"],
   "exclude": ["node_modules", "build", "dist"],
   "compilerOptions": {
-    "jsx": "react",
+    "jsx": "react-jsx",
     "esModuleInterop": true,
     "module": "commonjs",
     "moduleResolution": "node",
@@ -22,6 +22,10 @@
       "@mocks/*": ["./src/mocks/*"],
       "@assets/*": ["./src/assets/*"],
       "@careerTest/*": ["./src/features/careerTest/*"],
+      "@settings/*": ["./src/features/settings/*"],
+      "@overview/*": ["./src/features/overview/*"],
+      "@questions/*": ["./src/features/questions/*"],
+      "@landingPage/*": ["./src/features/landingPage/*"],
       "@features/*": ["./src/features/*"]
     },
     "plugins": [{ "name": "typescript-plugin-css-modules" }]

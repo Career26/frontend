@@ -1,59 +1,25 @@
-import React, { Suspense, useEffect } from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
-import { urls } from '@shared/config/urlConstants';
-import { useAppDispatch, useAppSelector } from '@state/store';
-import { useAuthUser } from '@shared/hooks/useAuthUser';
-import {
-  addIndustryColors,
-  selectLoginModal,
-  selectSelectedCareerPathId,
-  selectSelectedQuestionId,
-} from '@slices/sessionSlice';
-import {
-  selectCareerPaths,
-  selectProfileId,
-  selectProfileState,
-  useLazyGetProfileQuery,
-} from '@apis/profileApi';
-import { SettingsPage } from '@features/settings/SettingsPage';
+import { Suspense } from 'react';
+import { Route, Switch, useHistory } from 'react-router-dom';
+
+import { usePageSetup } from '@shared/hooks/usePageSetup';
+
 import { LoadingLens } from '@shared/components/loadingScreen/LoadingLens';
-import { useCareerTestStorage } from '@shared/hooks/useCareerTestStorage';
 import { FeedbackModal } from '@shared/components/feedback/FeedbackModal';
-import { CareerTest } from '@careerTest/CareerTest';
+import CareerTest from '@features/careerTest';
+import SettingsPage from '@features/settings';
+import LandingPage from '@features/landingPage';
+import OverviewPage from '@features/overview';
+import QuestionsPage from '@features/questions';
+
 import { CareerTestModal } from '@shared/components/careerTestModal/CareerTestModal';
 
-import { LandingPage } from '../landingPage/LandingPage';
-import { OverviewPage } from '../overview/OverviewPage';
-import { InterviewPage } from '../interview/InterviewPage';
+import { urls } from '@shared/constants/urlConstants';
 
 export const App = () => {
-  const dispatch = useAppDispatch();
-  const defaultCareerId = useAppSelector(selectSelectedCareerPathId);
-  const defaultQuestionId = useAppSelector(selectSelectedQuestionId);
-  const { authenticated, unauthenticated } = useAuthUser();
-  const careerPaths = useAppSelector(selectCareerPaths);
-  const profileId = useAppSelector(selectProfileId);
-  const profile = useAppSelector(selectProfileState);
-  const [getProfile, { isFetching }] = useLazyGetProfileQuery();
-  const { setupFormValues } = useCareerTestStorage();
-  const { open: loginOpen } = useAppSelector(selectLoginModal);
+  const { loading, authenticated } = usePageSetup();
+  const history = useHistory();
 
-  useEffect(() => {
-    if (!careerPaths || !profile) {
-      return;
-    }
-    const industries = Object.values(careerPaths).map(({ industry }) => industry);
-    dispatch(addIndustryColors(industries));
-    setupFormValues(profile);
-  }, [careerPaths, profile]);
-
-  useEffect(() => {
-    if (authenticated && !profileId && !loginOpen) {
-      getProfile();
-    }
-  }, [authenticated, profileId, loginOpen]);
-
-  if (isFetching) {
+  if (loading) {
     return <LoadingLens />;
   }
 
@@ -65,62 +31,34 @@ export const App = () => {
         <Route path={urls.landingPage} exact component={LandingPage} />
         <Route path={urls.careersTest} component={CareerTest} />
         <Route
-          path={`${urls.overview}/:careerId?`}
-          render={({
-            match: {
-              params: { careerId },
-            },
-          }) => {
-            if (unauthenticated) {
-              return <Redirect to={urls.landingPage} />;
+          path={urls.overview}
+          render={() => {
+            if (authenticated) {
+              return <OverviewPage />;
             }
-            if (!authenticated) {
-              return <LoadingLens />;
-            }
-            if (authenticated && !profileId) {
-              return <LandingPage />;
-            }
-            if (!careerId) {
-              return <Redirect to={`${urls.overview}/${defaultCareerId}`} />;
-            }
-            return <OverviewPage />;
+            history.push(urls.landingPage);
+            return <LoadingLens />;
           }}
         />
         <Route
-          path={`${urls.questions}/:careerId?/:interviewId?`}
-          render={({
-            match: {
-              params: { careerId, interviewId },
-            },
-          }) => {
-            if (unauthenticated) {
-              return <Redirect to={urls.landingPage} />;
+          path={urls.questions}
+          render={() => {
+            if (authenticated) {
+              return <QuestionsPage />;
             }
-            if (!authenticated) {
-              return <LoadingLens />;
-            }
-            if (authenticated && !profileId) {
-              return <LandingPage />;
-            }
-            if (!careerId && !!defaultCareerId) {
-              return <Redirect to={`${urls.questions}/${defaultCareerId}/${defaultQuestionId}`} />;
-            }
-            if (!interviewId && !!careerId) {
-              return <Redirect to={`${urls.questions}/${careerId}/${defaultQuestionId}`} />;
-            }
-            return <InterviewPage />;
+            history.push(urls.landingPage);
+            return <LoadingLens />;
           }}
         />
         <Route
           path={urls.settings}
+          component={SettingsPage}
           render={() => {
-            if (unauthenticated) {
-              return <Redirect to={urls.landingPage} />;
+            if (authenticated) {
+              return <SettingsPage />;
             }
-            if (!authenticated) {
-              return <LoadingLens />;
-            }
-            return <SettingsPage />;
+            history.push(urls.landingPage);
+            return <LoadingLens />;
           }}
         />
       </Switch>

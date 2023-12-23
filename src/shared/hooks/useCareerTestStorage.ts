@@ -10,12 +10,12 @@ const initialStoredValues = {
   formValues: initialProfileValues,
 };
 
-type CareerTestStorage = {
+interface CareerTestStorage {
   step: CareerStep;
   formValues: CareerFormValues;
   profileId?: string;
   careerPaths?: UserProfile['careerPaths'];
-};
+}
 
 type ValueForKey<T, K extends keyof T> = K extends keyof T ? T[K] : never;
 

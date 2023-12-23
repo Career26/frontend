@@ -7,7 +7,7 @@ import { useAuthUser } from '@shared/hooks/useAuthUser';
 import { useMobileStyles } from '@shared/hooks/useMobileStyles';
 
 import commonStyles from '@shared/styles/commonStyles.module.css';
-import styles from './settingsStyles.module.css';
+import styles from './settings.module.css';
 
 const DetailsTab = () => {
   const { user } = useAuthUser();

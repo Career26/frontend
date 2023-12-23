@@ -11,7 +11,6 @@ export const AreasOfInterestForm = ({ form }: CareerTestFormProps) => (
     <CreateableSelect
       className={styles.areasOfInterest}
       form={form}
-      multiple
       field="areasOfInterest"
       options={exampleAreasOfInterest}
       placeholder="Enter interest"

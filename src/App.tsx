@@ -15,7 +15,7 @@ import { CareerTestModal } from '@shared/components/careerTestModal/CareerTestMo
 
 import { urls } from '@shared/constants/urlConstants';
 
-export const App = () => {
+const Index = () => {
   const { loading, authenticated } = usePageSetup();
   const history = useHistory();
 
@@ -65,3 +65,5 @@ export const App = () => {
     </Suspense>
   );
 };
+
+export default Index;

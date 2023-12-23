@@ -56,10 +56,12 @@ export const CareerTest = () => {
     }
   }, [data, error]);
 
-  const nextLabel = useMemo(
-    () => (!authenticated || activeStep !== CareerStep.COMPLETE ? 'Next' : 'Save'),
-    [authenticated, activeStep],
-  );
+  const nextLabel = useMemo(() => {
+    if (activeStep !== CareerStep.COMPLETE) {
+      return 'Next';
+    }
+    return authenticated ? 'Save' : 'Explore Insights';
+  }, [authenticated, activeStep]);
 
   const backLabel = useMemo(
     () => (activeStep === CareerStep.COMPLETE ? 'Retake Test' : 'Back'),

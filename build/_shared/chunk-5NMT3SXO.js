@@ -1,1 +1,0 @@
-var r=t=>{switch(t){case"I hated it":return"Why did you hate it?";case"I disliked it":return"Why did you dislike it?";case"I liked it":return"Why did you like it?";case"I loved it":return"Why did you love it?";default:return"Provide a reason for this rating"}},n=(t,e=0)=>`${t} (${500-e} characters remaining)`,a=(t,e=0)=>{let i=r(t);return n(i,e)};export{n as a,a as b};

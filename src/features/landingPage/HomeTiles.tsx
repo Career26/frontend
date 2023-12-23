@@ -1,4 +1,4 @@
-import { useNavigate } from '@remix-run/react';
+import { useHistory } from 'react-router-dom';
 import { Card, Container, Grid, Group, Text, Tooltip } from '@mantine/core';
 import classNames from 'classnames';
 
@@ -16,7 +16,7 @@ import styles from './landingPage.module.css';
 export const HomeTiles = () => {
   const dispatch = useAppDispatch();
   const { authenticated } = useAuthUser();
-  const navigate = useNavigate();
+  const history = useHistory();
   const profile = useAppSelector(selectProfile);
   const careerPaths = useAppSelector(selectCareerPaths);
 
@@ -25,7 +25,7 @@ export const HomeTiles = () => {
       if (!careerPaths) {
         dispatch(setCareerTestModal({ open: true, noProfile: false }));
       }
-      navigate(link);
+      history.push(link);
       return;
     }
     if (!authenticated) {
@@ -40,7 +40,7 @@ export const HomeTiles = () => {
       dispatch(setCareerTestModal({ open: true, noProfile: true }));
       return;
     }
-    navigate(link);
+    history.push(link);
   };
 
   return (

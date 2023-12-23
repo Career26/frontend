@@ -14,18 +14,17 @@
     "baseUrl": ".",
     "noEmit": false,
     "paths": {
-      // state
       "@slices/*": ["./src/state/slices/*"],
       "@datatypes/*": ["./src/datatypes/*"],
       "@apis/*": ["./src/state/apis/*"],
       "@state/*": ["./src/state/*"],
-      // assets
+
       "@assets/*": ["./src/assets/*"],
-      // shared
+
       "@shared/*": ["./src/shared/*"],
-      // mocks
+
       "@mocks/*": ["./src/mocks/*"],
-      // features
+
       "@careerTest/*": ["./src/features/careerTest/*"],
       "@settings/*": ["./src/features/settings/*"],
       "@overview/*": ["./src/features/overview/*"],

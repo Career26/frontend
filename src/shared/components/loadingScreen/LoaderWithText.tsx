@@ -4,7 +4,11 @@ import { TypeWriter } from './TypeWriter';
 
 import styles from './loadingScreen.module.css';
 
-export const LoaderWithText = ({ text }: { text: string[] }) => (
+interface LoaderWithTextProps {
+  text: string[];
+}
+
+export const LoaderWithText = ({ text }: LoaderWithTextProps) => (
   <div className={styles.container}>
     <div className={styles.typeWriter}>
       <TypeWriter repeatSequence text={text} />

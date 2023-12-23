@@ -1,19 +1,21 @@
-import React, { useEffect } from 'react';
+import { useNavigate } from '@remix-run/react';
+import { useEffect } from 'react';
 import { useDisclosure } from '@mantine/hooks';
 import { Modal, Grid, Paper, Container, Avatar, Text } from '@mantine/core';
 import { IconLayoutDashboard } from '@tabler/icons-react';
-import { useHistory } from 'react-router-dom';
-import { featureTiles } from '@shared/config/featureConstants';
-import commonStyles from '@shared/styles/commonStyles.module.scss';
-import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 import classNames from 'classnames';
+
+import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 import { useMobileStyles } from '@shared/hooks/useMobileStyles';
 
-import styles from './headerStyles.module.scss';
+import { featureTiles } from '@shared/constants/featureConstants';
+
+import commonStyles from '@shared/styles/commonStyles.module.css';
+import styles from './pageHeader.module.css';
 
 export const NavigationCenter = () => {
   const [opened, { open, close }] = useDisclosure(false);
-  const history = useHistory();
+  const navigate = useNavigate();
   const { isMobile } = useMobileStyles();
   const { currentPathname } = usePageNavigation();
 
@@ -46,7 +48,7 @@ export const NavigationCenter = () => {
             {featureTiles.map(({ title, Icon, disabled, link }) => (
               <Grid.Col span={6} key={title} className={styles.navCenter}>
                 <Paper
-                  onClick={() => !disabled && history.push(link)}
+                  onClick={() => !disabled && navigate(link)}
                   withBorder
                   p="md"
                   h={150}

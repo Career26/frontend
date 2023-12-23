@@ -1,17 +1,16 @@
 import { Group, Text } from '@mantine/core';
-import React from 'react';
-import commonStyles from '@shared/styles/commonStyles.module.scss';
+
 import { useMobileStyles } from '@shared/hooks/useMobileStyles';
 
-export const TextWithIconBlock = ({
-  title,
-  content,
-  Icon,
-}: {
+import commonStyles from '@shared/styles/commonStyles.module.css';
+
+interface TextWithIconBlockProps {
   title: string;
   content: React.ReactNode;
   Icon: React.ReactNode;
-}) => {
+}
+
+export const TextWithIconBlock = ({ title, content, Icon }: TextWithIconBlockProps) => {
   const { isMobile } = useMobileStyles();
   return (
     <div>

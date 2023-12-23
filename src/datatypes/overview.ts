@@ -5,17 +5,34 @@ export interface RoleSummary {
   personalityType: string;
 }
 
-export type SalaryProgression = { age: string; high: number; low: number };
+export interface SalaryProgression {
+  age: string;
+  high: number;
+  low: number;
+}
 
-export type CareerOverlap = { career: string; industry: string; reason: string };
+export interface CareerOverlap {
+  career: string;
+  industry: string;
+  reason: string;
+}
 
-export type PromotionTimeline = { title: string; age: string };
+export interface PromotionTimeline {
+  title: string;
+  age: string;
+}
 
-export type AssessmentStage = { stage: string; description: string };
+export interface AssessmentStage {
+  stage: string;
+  description: string;
+}
 
-export type SupplementalExperience = { year: string; activity: string };
+export interface SupplementalExperience {
+  year: string;
+  activity: string;
+}
 
-export type Overview = {
+export interface Overview {
   roleSummary: RoleSummary;
   salaryProgression: SalaryProgression[];
   exampleEmployers: string[];
@@ -26,7 +43,7 @@ export type Overview = {
   openMonths: string;
   profileIdentifier: string;
   careerIdentifier: string;
-};
+}
 
 export interface CareerOverviewInput {
   profileId: string;

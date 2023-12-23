@@ -1,14 +1,16 @@
 import { Group, Text } from '@mantine/core';
+import { useEffect } from 'react';
+import { useForm } from '@mantine/form';
+import { IconCircleCheck } from '@tabler/icons-react';
+
 import { selectFeedbackModal, setFeedbackModal } from '@slices/sessionSlice';
 import { useAppDispatch, useAppSelector } from '@state/store';
-import React, { useEffect } from 'react';
-import { useForm } from '@mantine/form';
-import { Feedback } from '@datatypes/feedback';
 import { useSubmitFeedbackMutation } from '@apis/feedbackApi';
-import { IconCircleCheck } from '@tabler/icons-react';
 
 import { FeedbackForm } from './FeedbackForm';
 import { ActionModal } from '../actionModal/ActionModal';
+
+import type { Feedback } from '@datatypes/feedback';
 
 const hasAnswer = (value?: string | string[]) => !value?.length && 'Please provide an answer';
 

@@ -1,15 +1,17 @@
-import { urls } from '@shared/config/urlConstants';
+import { useLocation, useNavigate } from '@remix-run/react';
+import { useMemo } from 'react';
+
 import {
   selectSelectedCareerPathId,
   setSelectedCareerPathId,
   setSelectedQuestionId,
 } from '@slices/sessionSlice';
 import { useAppDispatch, useAppSelector } from '@state/store';
-import { useMemo } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+
+import { urls } from '@shared/constants/urlConstants';
 
 export const usePageNavigation = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { pathname: currentPathname } = useLocation();
   const careerId = useAppSelector(selectSelectedCareerPathId);
@@ -22,14 +24,14 @@ export const usePageNavigation = () => {
       return urls.overview;
     }
     return undefined;
-  }, [currentPathname, history]);
+  }, [currentPathname, navigate]);
 
   const toggleCareerId = (newCareerId: string) => {
     const newPathname = currentPathname.replace(
       new RegExp(`${featureUrl}/(.*)`),
       `${featureUrl}/${newCareerId}`,
     );
-    history.push(newPathname);
+    navigate(newPathname);
     dispatch(setSelectedCareerPathId(newCareerId));
   };
   const toggleQuestionId = (newQuestionId: number) => {
@@ -37,18 +39,18 @@ export const usePageNavigation = () => {
       new RegExp(`${featureUrl}/${careerId}/(.*)`),
       `${featureUrl}/${careerId}/${newQuestionId}`,
     );
-    history.push(newPathname);
+    navigate(newPathname);
     dispatch(setSelectedQuestionId(newQuestionId));
   };
 
   const goToHomepage = () => {
-    history.push(urls.landingPage);
+    navigate(urls.landingPage);
   };
   const clickCareersTest = () => {
-    history.push(urls.careersTest);
+    navigate(urls.careersTest);
   };
   const goToSettings = () => {
-    history.push(urls.settings);
+    navigate(urls.settings);
   };
 
   return {

@@ -1,11 +1,12 @@
 import { Anchor, Text } from '@mantine/core';
-import React from 'react';
 import { IconBrandLinkedin, IconMail } from '@tabler/icons-react';
-import { contactEmail, urls } from '@shared/config/urlConstants';
+
 import { useAppDispatch } from '@state/store';
 import { setFeedbackModal } from '@slices/sessionSlice';
 
-import styles from './pageFooter.module.scss';
+import { contactEmail, urls } from '@shared/constants/urlConstants';
+
+import styles from './pageFooter.module.css';
 
 const subject = 'Career26 - Contact Us';
 const mailtoLink = `mailto:${contactEmail}?subject=${encodeURIComponent(subject)}`;

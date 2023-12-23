@@ -1,6 +1,7 @@
 import { fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { Auth } from 'aws-amplify';
-import { baseUrl } from '@shared/config/urlConstants';
+
+import { baseUrl } from '@shared/constants/urlConstants';
 
 export const getAuthorisedBaseQuery = (unauthorisedEndpoints?: string[]) =>
   fetchBaseQuery({

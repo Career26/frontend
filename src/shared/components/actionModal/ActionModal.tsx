@@ -1,7 +1,7 @@
 import { Button, Group, Modal } from '@mantine/core';
 import React from 'react';
 
-import styles from './actionModal.module.scss';
+import styles from './actionModal.module.css';
 
 interface ActionModalProps {
   opened: boolean;

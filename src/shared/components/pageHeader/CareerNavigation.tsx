@@ -1,16 +1,16 @@
-import { selectProfileId } from '@apis/profileApi';
+import { IconHeart } from '@tabler/icons-react';
 import { ActionIcon, Combobox, InputBase, Text, useCombobox } from '@mantine/core';
+
+import { selectProfileId } from '@apis/profileApi';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 import { selectSelectedCareerPath } from '@slices/sessionSlice';
 import { useAppSelector } from '@state/store';
-import { IconHeart } from '@tabler/icons-react';
-import React from 'react';
 import { useCareerSelection } from '@shared/hooks/useCareerSelection';
 import { useCareerTestStorage } from '@shared/hooks/useCareerTestStorage';
-import commonStyles from '@shared/styles/commonStyles.module.scss';
 import { useMobileStyles } from '@shared/hooks/useMobileStyles';
 
-import styles from './headerStyles.module.scss';
+import commonStyles from '@shared/styles/commonStyles.module.css';
+import styles from './pageHeader.module.css';
 
 export const CareerNavigation = () => {
   const { isMobile } = useMobileStyles();

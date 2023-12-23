@@ -1,8 +1,8 @@
 import { Loader } from '@mantine/core';
-import { TypeWriter } from '@shared/components/loadingScreen/TypeWriter';
-import React from 'react';
 
-import styles from './loadingScreen.module.scss';
+import { TypeWriter } from './TypeWriter';
+
+import styles from './loadingScreen.module.css';
 
 export const LoaderWithText = ({ text }: { text: string[] }) => (
   <div className={styles.container}>

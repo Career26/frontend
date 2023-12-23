@@ -1,11 +1,12 @@
-import { selectCareerTestModal, setCareerTestModal } from '@slices/sessionSlice';
-import { useAppDispatch, useAppSelector } from '@state/store';
-import React from 'react';
-import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 import { Container, Text } from '@mantine/core';
 
+import { selectCareerTestModal, setCareerTestModal } from '@slices/sessionSlice';
+import { useAppDispatch, useAppSelector } from '@state/store';
+import { usePageNavigation } from '@shared/hooks/usePageNavigation';
+
 import { ActionModal } from '../actionModal/ActionModal';
-import styles from './careerTestModal.module.scss';
+
+import styles from './careerTestModal.module.css';
 
 const NoProfileBody = () => (
   <Container py="md" className={styles.container}>

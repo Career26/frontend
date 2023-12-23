@@ -1,10 +1,14 @@
-import { CareerFormValues, CareerStep } from '@careerTest/careerTestTypes';
-import { initialProfileValues } from '@careerTest/config/formConstants';
-import { UserProfile } from '@datatypes/profile';
+import { initialProfileValues } from '@shared/constants/formConstants';
+
+import { CareerFormValues, CareerStep } from '@datatypes/careerTest';
+import type { UserProfile } from '@datatypes/profile';
 
 const baseKey = 'careerTest';
 
-const initialStoredValues = { step: CareerStep.EDUCATION, formValues: initialProfileValues };
+const initialStoredValues = {
+  step: CareerStep.EDUCATION,
+  formValues: initialProfileValues,
+};
 
 type CareerTestStorage = {
   step: CareerStep;
@@ -17,6 +21,9 @@ type ValueForKey<T, K extends keyof T> = K extends keyof T ? T[K] : never;
 
 export const useCareerTestStorage = () => {
   const getValues = (): CareerTestStorage => {
+    if (typeof localStorage === 'undefined') {
+      return initialStoredValues;
+    }
     const storedValues = localStorage.getItem(baseKey);
     return storedValues ? JSON.parse(storedValues) : initialStoredValues;
   };
@@ -28,11 +35,17 @@ export const useCareerTestStorage = () => {
     key: K;
     value: ValueForKey<CareerTestStorage, K>;
   }) => {
+    if (typeof localStorage === 'undefined') {
+      return;
+    }
     const newValues = { ...getValues(), [key]: value };
     localStorage.setItem(baseKey, JSON.stringify(newValues));
   };
 
   const resetValues = () => {
+    if (typeof localStorage === 'undefined') {
+      return;
+    }
     localStorage.setItem(baseKey, JSON.stringify(initialStoredValues));
   };
 

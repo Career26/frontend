@@ -1,8 +1,9 @@
-import { useSelectCareerMutation } from '@apis/profileApi';
 import { useEffect, useState } from 'react';
-import { UserProfile } from '@datatypes/profile';
 
+import { useSelectCareerMutation } from '@apis/profileApi';
 import { useCareerTestStorage } from './useCareerTestStorage';
+
+import type { UserProfile } from '@datatypes/profile';
 
 const getSelectedCareers = (careerPaths?: UserProfile['careerPaths']) =>
   Object.entries(careerPaths || {}).reduce(
@@ -12,14 +13,16 @@ const getSelectedCareers = (careerPaths?: UserProfile['careerPaths']) =>
 
 export const useCareerSelection = () => {
   const [selectCareer] = useSelectCareerMutation();
-  const [loadingCareers, setLoadingCareers] = useState<{ [key: string]: boolean }>({});
+  const [loadingCareers, setLoadingCareers] = useState<{
+    [key: string]: boolean;
+  }>({});
   const {
     storeTestValues,
     careerTestStorage: { careerPaths },
   } = useCareerTestStorage();
-  const [selectedCareers, setSelectedCareers] = useState<{ [key: string]: boolean }>(
-    getSelectedCareers(careerPaths),
-  );
+  const [selectedCareers, setSelectedCareers] = useState<{
+    [key: string]: boolean;
+  }>(getSelectedCareers(careerPaths));
 
   const handleSelection = async ({
     careerIdentifier,
@@ -32,7 +35,11 @@ export const useCareerSelection = () => {
   }) => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    const { error } = await selectCareer({ careerIdentifier, profileIdentifier, selected });
+    const { error } = await selectCareer({
+      careerIdentifier,
+      profileIdentifier,
+      selected,
+    });
     if (error) {
       // eslint-disable-next-line no-console
       console.error(`select endpoint did not return data, response: ${error}`);

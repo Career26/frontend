@@ -1,17 +1,19 @@
 import { Authenticator, useAuthenticator } from '@aws-amplify/ui-react';
+import { useEffect } from 'react';
+import { Modal, Text } from '@mantine/core';
+import classNames from 'classnames';
+
 import { selectLoginModal, setLoginModal } from '@slices/sessionSlice';
 import { useAppDispatch, useAppSelector } from '@state/store';
-import React, { useEffect } from 'react';
-import { Modal, Text } from '@mantine/core';
 import { useAuthUser } from '@shared/hooks/useAuthUser';
-import commonStyles from '@shared/styles/commonStyles.module.scss';
-import classNames from 'classnames';
-import '@aws-amplify/ui-react/styles.css';
 import { useMobileStyles } from '@shared/hooks/useMobileStyles';
 import { useAssociate } from '@shared/hooks/useAssociate';
 
 import { SignUpBenefits } from './SignUpBenefits';
-import styles from './accountStyles.module.scss';
+
+import '@aws-amplify/ui-react/styles.css';
+import commonStyles from '@shared/styles/commonStyles.module.css';
+import styles from './account.module.css';
 
 const GetAccessTo = () => (
   <Text fw="bold" size="2.5rem" py="sm">
@@ -132,7 +134,9 @@ export const LoginModal = () => {
       centered
       radius={10}
       size={route === 'signUp' ? '100%' : undefined}
-      className={classNames(styles.loginContainer, { [styles.signUpButtonSetRight]: !isMobile })}
+      className={classNames(styles.loginContainer, {
+        [styles.signUpButtonSetRight]: !isMobile,
+      })}
     >
       <Authenticator
         initialState={initialState}

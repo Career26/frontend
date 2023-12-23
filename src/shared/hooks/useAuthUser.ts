@@ -1,13 +1,14 @@
 import { useAuthenticator } from '@aws-amplify/ui-react';
-import { resetSession, selectLoginModal, setLoginModal } from '@slices/sessionSlice';
-import { useAppDispatch, useAppSelector } from '@state/store';
 import { Auth } from 'aws-amplify';
 import { useEffect, useState } from 'react';
 import { notifications } from '@mantine/notifications';
-import { UserDetails } from '@datatypes/profile';
-import { useCareerTestStorage } from '@shared/hooks/useCareerTestStorage';
 
+import { resetSession, selectLoginModal, setLoginModal } from '@slices/sessionSlice';
+import { useAppDispatch, useAppSelector } from '@state/store';
+import { useCareerTestStorage } from './useCareerTestStorage';
 import { usePageNavigation } from './usePageNavigation';
+
+import type { UserDetails } from '@datatypes/profile';
 
 export const useAuthUser = () => {
   const [loading, setLoading] = useState(false);
@@ -72,7 +73,7 @@ export const useAuthUser = () => {
   };
 
   return {
-    loading,
+    loading: loading || authStatus === 'configuring',
     unauthenticated,
     authenticated,
     user,

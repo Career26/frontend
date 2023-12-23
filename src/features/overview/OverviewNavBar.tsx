@@ -1,8 +1,8 @@
-import React from 'react';
-import { useActiveNavScroll } from '@shared/hooks/useActiveNavScroll';
 import { NavLink } from '@mantine/core';
 
-import { overviewLinks } from './config/overviewConstants';
+import { useActiveNavScroll } from '@shared/hooks/useActiveNavScroll';
+
+import { overviewLinks } from '@shared/constants/overviewConstants';
 
 export const OverviewNavBar = () => {
   const { activeAnchor } = useActiveNavScroll({ navItems: overviewLinks });

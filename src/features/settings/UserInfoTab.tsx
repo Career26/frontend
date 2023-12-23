@@ -1,12 +1,19 @@
-import { selectProfile } from '@apis/profileApi';
-import { experienceOptions } from '@careerTest/config/formConstants';
-import { Profile } from '@datatypes/profile';
 import { Select, Tabs, TextInput, Textarea } from '@mantine/core';
-import { useAppSelector } from '@state/store';
-import React from 'react';
-import commonStyles from '@shared/styles/commonStyles.module.scss';
 
-const UniversitiesTab = ({ profile }: { profile: Profile }) => {
+import { useAppSelector } from '@state/store';
+import { selectProfile } from '@apis/profileApi';
+
+import { experienceOptions } from '@shared/constants/formConstants';
+
+import type { Profile } from '@datatypes/profile';
+
+import commonStyles from '@shared/styles/commonStyles.module.css';
+
+interface TabProps {
+  profile: Profile;
+}
+
+const UniversitiesTab = ({ profile }: TabProps) => {
   const universities = [profile.latestDegree, ...profile.additionalDegrees];
   return (
     <div>
@@ -27,7 +34,7 @@ const UniversitiesTab = ({ profile }: { profile: Profile }) => {
   );
 };
 
-const ExperiencesTab = ({ profile }: { profile: Profile }) => (
+const ExperiencesTab = ({ profile }: TabProps) => (
   <div>
     {profile.previousWorkExperience.map((experience) => (
       <div key={`experience-${experience.experienceName}`}>

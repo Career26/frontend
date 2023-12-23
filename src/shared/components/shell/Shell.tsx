@@ -1,17 +1,19 @@
-import React, { ReactElement, useMemo } from 'react';
+import { ReactElement, useMemo } from 'react';
 import { AppShell, ScrollArea, rem } from '@mantine/core';
+import classNames from 'classnames';
+
 import { useAppDispatch } from '@state/store';
 import { useAuthUser } from '@shared/hooks/useAuthUser';
 import { resetSession } from '@slices/sessionSlice';
 import { useCareerTestStorage } from '@shared/hooks/useCareerTestStorage';
 import { useMobileStyles } from '@shared/hooks/useMobileStyles';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
-import classNames from 'classnames';
 
 import { PageHeader } from '../pageHeader/PageHeader';
-import styles from './shellStyles.module.scss';
 import { CareerNavigation } from '../pageHeader/CareerNavigation';
 import { PageFooter } from '../pageFooter/PageFooter';
+
+import styles from './shell.module.css';
 
 interface ShellProps {
   children: ReactElement;
@@ -22,7 +24,11 @@ const navWidth = 200;
 const headerHeight = rem(80);
 const footerHeight = rem(50);
 
-const NavMenu = ({ navbar }: { navbar: ShellProps['navbar'] }) => (
+interface NavMenuProps {
+  navbar: ShellProps['navbar'];
+}
+
+const NavMenu = ({ navbar }: NavMenuProps) => (
   <ScrollArea h={`calc(100vh - ${headerHeight} - ${footerHeight})`}>{navbar}</ScrollArea>
 );
 
@@ -53,7 +59,10 @@ export const Shell = ({ children, navbar }: ShellProps) => {
     if (isMobile || !navbar) {
       return { paddingLeft: 0, navbarSettings: undefined };
     }
-    return { paddingLeft: navWidth, navbarSettings: { width: navWidth, breakpoint: 'sm' } };
+    return {
+      paddingLeft: navWidth,
+      navbarSettings: { width: navWidth, breakpoint: 'sm' },
+    };
   }, [isMobile, navbar]);
 
   return (

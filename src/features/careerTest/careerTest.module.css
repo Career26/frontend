@@ -22,3 +22,8 @@
   flex-direction: column;
   gap: 8px;
 }
+
+.areasOfInterest {
+  padding-top: var(--mantine-spacing-xs);
+  padding-bottom: var(--mantine-spacing-xs);
+}

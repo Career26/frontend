@@ -97,7 +97,7 @@ export const usDegreeGrades = [
 
 export const otherGrades = ['Distinction', 'Merit', 'Pass', 'N/A'];
 
-export const degreeLevels = ['PhD', 'MSc', 'MA', 'BSc', 'BA', 'MEng', 'BEng'];
+export const degreeLevels = ['PhD', 'MSc', 'MA', 'BSc', 'BA', 'MEng', 'BEng', 'MChem'];
 
 export const degreeOptions = [
   { group: 'UK Grading', items: ukDegreeGrades },

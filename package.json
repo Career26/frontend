@@ -3,12 +3,13 @@
   "private": true,
   "sideEffects": false,
   "type": "module",
+  "homepage": "https://career26.com",
   "scripts": {
     "build": "remix build",
     "dev": "remix dev --manual",
     "start": "remix-serve ./build/index.js",
     "lint": "tsc --noEmit && eslint . --ext .js,.jsx,.ts,.tsx",
-    "predeploy": "NODE_ENV=production npm run build",
+    "predeploy": "NODE_ENV=production npm run build && cp public/CNAME build && cp public/favicon.ico build && cp public/index.html build",
     "deploy": "gh-pages -d build"
   },
   "dependencies": {

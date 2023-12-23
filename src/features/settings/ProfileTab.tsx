@@ -1,12 +1,13 @@
-import { Button, Group, Tabs, Text, TextInput } from '@mantine/core';
-import { useAuthUser } from '@shared/hooks/useAuthUser';
-import React, { useState } from 'react';
-import { IconExclamationCircle } from '@tabler/icons-react';
-import commonStyles from '@shared/styles/commonStyles.module.scss';
 import classNames from 'classnames';
+import { useState } from 'react';
+import { Button, Group, Tabs, Text, TextInput } from '@mantine/core';
+import { IconExclamationCircle } from '@tabler/icons-react';
+
+import { useAuthUser } from '@shared/hooks/useAuthUser';
 import { useMobileStyles } from '@shared/hooks/useMobileStyles';
 
-import styles from './settingsStyles.module.scss';
+import commonStyles from '@shared/styles/commonStyles.module.css';
+import styles from './settings.module.css';
 
 const DetailsTab = () => {
   const { user } = useAuthUser();

@@ -1,9 +1,9 @@
-import React from 'react';
-import logo from '@assets/logo.png';
-import c26 from '@assets/career26.png';
 import { Image, Loader } from '@mantine/core';
 
-import styles from './loadingScreen.module.scss';
+import logo from '@assets/logo.png';
+import c26 from '@assets/career26.png';
+
+import styles from './loadingScreen.module.css';
 
 export const LoadingLens = () => (
   <div className={styles.lensContainer}>

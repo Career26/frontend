@@ -1,6 +1,8 @@
-import { Feedback } from '@datatypes/feedback';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { baseUrl } from '@shared/config/urlConstants';
+
+import { baseUrl } from '@shared/constants/urlConstants';
+
+import type { Feedback } from '@datatypes/feedback';
 
 export const feedbackApi = createApi({
   reducerPath: 'feedback',

@@ -1,5 +1,6 @@
-import { useLazyAssociateProfileQuery } from '@apis/profileApi';
 import { notifications } from '@mantine/notifications';
+
+import { useLazyAssociateProfileQuery } from '@apis/profileApi';
 
 import { usePageNavigation } from './usePageNavigation';
 
@@ -17,7 +18,7 @@ export const useAssociate = () => {
       });
       onSuccess?.();
       goToHomepage();
-      window.location.reload();
+      window?.location?.reload();
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error(`associate account error - ${error}`);

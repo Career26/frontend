@@ -1,15 +1,17 @@
-import React, { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useEffect } from 'react';
 import { useDisclosure } from '@mantine/hooks';
 import { Modal, Grid, Paper, Container, Avatar, Text } from '@mantine/core';
 import { IconLayoutDashboard } from '@tabler/icons-react';
-import { useHistory } from 'react-router-dom';
-import { featureTiles } from '@shared/config/featureConstants';
-import commonStyles from '@shared/styles/commonStyles.module.scss';
-import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 import classNames from 'classnames';
+
+import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 import { useMobileStyles } from '@shared/hooks/useMobileStyles';
 
-import styles from './headerStyles.module.scss';
+import { featureTiles } from '@shared/constants/featureConstants';
+
+import commonStyles from '@shared/styles/commonStyles.module.css';
+import styles from './pageHeader.module.css';
 
 export const NavigationCenter = () => {
   const [opened, { open, close }] = useDisclosure(false);

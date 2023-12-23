@@ -1,4 +1,3 @@
-import React from 'react';
 import { List, Text } from '@mantine/core';
 import {
   IconChecklist,
@@ -6,10 +5,11 @@ import {
   IconCertificate,
   IconUsersGroup,
 } from '@tabler/icons-react';
-import { TextWithIconBlock } from '@shared/components/display/TextWithIconBlock';
-import '@aws-amplify/ui-react/styles.css';
 
-import styles from './accountStyles.module.scss';
+import { TextWithIconBlock } from '@shared/components/display/TextWithIconBlock';
+
+import '@aws-amplify/ui-react/styles.css';
+import styles from './account.module.css';
 
 const benefits = [
   {

@@ -58,12 +58,14 @@ module.exports = {
     '@typescript-eslint/no-non-null-assertion': 0,
     'no-param-reassign': ['error', { props: true, ignorePropertyModificationsFor: ['state'] }],
     'react-hooks/exhaustive-deps': 0,
-    'import/order': [
-      'error',
-      {
-        groups: [['builtin', 'external'], 'internal', ['parent', 'sibling', 'index']],
-        'newlines-between': 'always',
-      },
-    ],
+    'react/react-in-jsx-scope': 0,
+    'import/order': 0,
+    // 'import/order': [
+    //   'error',
+    //   {
+    //     groups: [['builtin', 'external'], 'internal', ['parent', 'sibling', 'index']],
+    //     'newlines-between': 'always',
+    //   },
+    // ],
   },
 };

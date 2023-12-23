@@ -1,13 +1,16 @@
-import {
+import { createApi } from '@reduxjs/toolkit/query/react';
+
+import { RootState } from '@state/store';
+
+import { getAuthorisedBaseQuery } from '@shared/utils/apiUtil';
+
+import type {
   Question,
   RateAnswerInput,
   RatingResponse,
   SuggestionInput,
   SuggestionResponse,
 } from '@datatypes/question';
-import { createApi } from '@reduxjs/toolkit/query/react';
-import { getAuthorisedBaseQuery } from '@shared/utils/apiUtil';
-import { RootState } from '@state/store';
 
 export const questionsApi = createApi({
   reducerPath: 'questions',
@@ -40,6 +43,9 @@ export const selectInterviewQuestions = (state: RootState) =>
   questionsApi.endpoints.getQuestions.select()(state).data;
 
 export const selectSuggestion = (state: RootState, fixedCacheKey?: string) =>
-  questionsApi.endpoints.getSuggestion.select({ fixedCacheKey, requestId: undefined })(state).data;
+  questionsApi.endpoints.getSuggestion.select({
+    fixedCacheKey,
+    requestId: undefined,
+  })(state).data;
 
 export default questionsApi.reducer;

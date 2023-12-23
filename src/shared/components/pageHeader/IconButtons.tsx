@@ -1,15 +1,16 @@
-import React from 'react';
 import { Button, Avatar, Menu } from '@mantine/core';
-import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 import { IconLogout, IconSettings } from '@tabler/icons-react';
-import commonStyles from '@shared/styles/commonStyles.module.scss';
 import classNames from 'classnames';
+
+import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 import { useAppDispatch } from '@state/store';
 import { setLoginModal } from '@slices/sessionSlice';
 import { useMobileStyles } from '@shared/hooks/useMobileStyles';
 
 import { NavigationCenter } from './NavigationCenter';
-import styles from './headerStyles.module.scss';
+
+import commonStyles from '@shared/styles/commonStyles.module.css';
+import styles from './pageHeader.module.css';
 
 interface IconButtonsProps {
   signOut: () => void;

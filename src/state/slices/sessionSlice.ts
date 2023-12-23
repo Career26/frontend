@@ -1,10 +1,12 @@
+import { PayloadAction, createSelector, createSlice } from '@reduxjs/toolkit';
+
 import { selectInterviewQuestions } from '@apis/questionsApi';
 import { selectCareerPaths } from '@apis/profileApi';
-import { PayloadAction, createSelector, createSlice } from '@reduxjs/toolkit';
-import { getColorsObject } from '@shared/utils/colorUtil';
 import { RootState } from '@state/store';
 
-type SessionSlice = {
+import { getColorsObject } from '@shared/utils/colorUtil';
+
+interface SessionSlice {
   loginModal: {
     open: boolean;
     associateProfileId?: string;
@@ -17,7 +19,7 @@ type SessionSlice = {
   feedbackModal: { open: boolean };
   diversityModal: { open: boolean };
   careerTestModal: { open: boolean; noProfile?: boolean };
-};
+}
 
 export const initialSessionState: SessionSlice = {
   industryColors: {},

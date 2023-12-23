@@ -32,6 +32,9 @@ export const useActiveNavScroll = <T>({ navItems, headerHeight = 150 }: NavScrol
     }
   };
   useEffect(() => {
+    if (typeof document === 'undefined' || typeof window === 'undefined') {
+      return () => {};
+    }
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
@@ -48,6 +51,10 @@ export const useActiveNavScroll = <T>({ navItems, headerHeight = 150 }: NavScrol
       });
     }
   };
+
+  if (typeof document === 'undefined') {
+    return { activeAnchor: '' };
+  }
 
   const anchorLinks = document.querySelectorAll('a[href^="#"]');
   anchorLinks.forEach((anchor) => {

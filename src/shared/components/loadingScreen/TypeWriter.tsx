@@ -1,20 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import styles from './loadingScreen.module.scss';
+import styles from './loadingScreen.module.css';
 
-const Type = ({
-  text,
-  textDelay,
-  repeatDelay,
-  deleteDelay,
-  onComplete,
-}: {
+interface TypeSomethingProps {
   text: string;
   textDelay: number;
   repeatDelay?: number;
   deleteDelay?: number;
   onComplete?: () => void;
-}) => {
+}
+
+const TypeSomething = ({
+  text,
+  textDelay,
+  repeatDelay,
+  deleteDelay,
+  onComplete,
+}: TypeSomethingProps) => {
   const [currentText, setCurrentText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
@@ -83,7 +85,7 @@ export const TypeWriter = ({
       {selectedText && (
         <div className={styles.typeWriter}>
           <h1>
-            <Type
+            <TypeSomething
               text={selectedText}
               textDelay={40}
               repeatDelay={1000}

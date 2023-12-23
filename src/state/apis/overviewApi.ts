@@ -1,6 +1,8 @@
-import type { CareerOverviewInput, Overview } from '@datatypes/overview';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { baseUrl } from '@shared/config/urlConstants';
+
+import { baseUrl } from '@shared/constants/urlConstants';
+
+import type { CareerOverviewInput, Overview } from '@datatypes/overview';
 
 export const overviewApi = createApi({
   reducerPath: 'overview',

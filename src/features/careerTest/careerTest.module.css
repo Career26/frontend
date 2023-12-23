@@ -1,0 +1,29 @@
+.workLifeCheckbox {
+  width: 50%;
+  padding-top: 32px;
+}
+
+.result {
+  width: 100vh;
+}
+
+.typeWriter {
+  height: 10vh;
+}
+
+.loader {
+  justify-content: center;
+  display: flex;
+  bottom: 25rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.areasOfInterest {
+  padding-top: var(--mantine-spacing-xs);
+  padding-bottom: var(--mantine-spacing-xs);
+}

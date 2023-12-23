@@ -1,12 +1,14 @@
-import { urls } from '@shared/config/urlConstants';
+import { useHistory, useLocation } from 'react-router-dom';
+import { useMemo } from 'react';
+
 import {
   selectSelectedCareerPathId,
   setSelectedCareerPathId,
   setSelectedQuestionId,
 } from '@slices/sessionSlice';
 import { useAppDispatch, useAppSelector } from '@state/store';
-import { useMemo } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+
+import { urls } from '@shared/constants/urlConstants';
 
 export const usePageNavigation = () => {
   const history = useHistory();

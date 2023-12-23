@@ -1,15 +1,18 @@
 import React from 'react';
 import { Image } from '@mantine/core';
+
 import c26 from '@assets/career26.png';
 import logo from '@assets/logo.png';
+
 import { useMobileStyles } from '@shared/hooks/useMobileStyles';
 import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 
 import { LoginModal } from '../account/LoginModal';
-import styles from './headerStyles.module.scss';
 import { BurgerMenu } from '../burgerMenu/BurgerMenu';
 import { CareerNavigation } from './CareerNavigation';
 import { IconButtons } from './IconButtons';
+
+import styles from './pageHeader.module.css';
 
 export const PageHeader = ({
   signOut,

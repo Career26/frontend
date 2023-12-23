@@ -1,11 +1,12 @@
 import { UseFormReturnType } from '@mantine/form';
-import React from 'react';
 import { Checkbox, Grid, Radio, Text, Textarea } from '@mantine/core';
-import { getCharacterCount } from '@shared/utils/formUtil';
-import { Feedback } from '@datatypes/feedback';
 
+import { getCharacterCount } from '@shared/utils/formUtil';
 import { experienceRatingOptions, heardFromOptions, mostHelpfulOptions } from './feedbackConstants';
-import styles from './feedback.module.scss';
+
+import type { Feedback } from '@datatypes/feedback';
+
+import styles from './feedback.module.css';
 
 export const FeedbackForm = ({ form }: { form: UseFormReturnType<Feedback> }) => (
   <>

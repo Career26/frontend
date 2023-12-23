@@ -1,4 +1,4 @@
-import { CareerPath } from './career';
+import type { CareerPath } from './career';
 
 export enum WorkStyle {
   'I prefer working in a team' = 'TEAM',

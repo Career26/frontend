@@ -7,9 +7,11 @@ import { Authenticator } from '@aws-amplify/ui-react';
 import { Amplify } from 'aws-amplify';
 import { Notifications } from '@mantine/notifications';
 
-import awsExports from './awsExports';
-import { App } from './features/app/App';
 import { store } from './state/store';
+
+import App from './App';
+
+import awsExports from '@shared/constants/awsConstants';
 
 import '@mantine/core/styles.css';
 import '@mantine/notifications/styles.css';

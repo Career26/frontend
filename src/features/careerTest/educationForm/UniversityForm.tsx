@@ -13,7 +13,6 @@ import styles from '@careerTest/careerTest.module.css';
 
 export const UniversityForm = ({ form, baseKey, title }: SubFormProps) => {
   const rating = form.getInputProps(`${baseKey}.rating`).value;
-  const ratingReason = form.getInputProps(`${baseKey}.ratingReason`).value;
   return (
     <FormContent title={title}>
       <div className={commonStyles.row}>
@@ -60,7 +59,7 @@ export const UniversityForm = ({ form, baseKey, title }: SubFormProps) => {
       />
       <Textarea
         {...form.getInputProps(`${baseKey}.ratingReason`)}
-        label={getRatingLabel(rating, ratingReason?.length)}
+        label={getRatingLabel(rating)}
         minRows={3}
         autosize
         py="xs"

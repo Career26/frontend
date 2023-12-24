@@ -14,7 +14,8 @@ const optionsFilter: OptionsFilter = ({ options, search }) => {
 
 export const MentorSearch = () => {
   const data = useMemo(
-    () => mentorList.map((item) => ({ label: item.name, value: item.id })),
+    () =>
+      mentorList.map((item) => ({ label: item.name, value: item.id, description: item.industry })),
     [mentorList],
   );
 

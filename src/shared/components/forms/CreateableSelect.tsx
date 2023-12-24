@@ -72,7 +72,7 @@ export const CreateableSelect = ({
       </Combobox.Target>
 
       <Combobox.Dropdown>
-        <Combobox.Options>
+        <Combobox.Options mah={200} style={{ overflowY: 'auto' }}>
           {filteredOptions.map((item) => (
             <Combobox.Option value={item} key={item}>
               {item}

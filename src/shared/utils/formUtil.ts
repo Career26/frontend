@@ -1,3 +1,5 @@
+import { smallAnswer } from '@shared/constants/formConstants';
+
 const getPrefix = (rating: string) => {
   switch (rating) {
     case 'I hated it':
@@ -16,7 +18,7 @@ const getPrefix = (rating: string) => {
 export const getCharacterCount = (prefix: string, answerLength = 0) =>
   `${prefix} (${500 - answerLength} characters remaining)`;
 
-export const getRatingLabel = (rating: string, answerLength = 0) => {
+export const getRatingLabel = (rating: string) => {
   const prefix = getPrefix(rating);
-  return getCharacterCount(prefix, answerLength);
+  return `${prefix} ${smallAnswer}`;
 };

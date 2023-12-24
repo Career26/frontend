@@ -30,6 +30,7 @@
       "@overview/*": ["./src/features/overview/*"],
       "@questions/*": ["./src/features/questions/*"],
       "@landingPage/*": ["./src/features/landingPage/*"],
+      "@network/*": ["./src/features/network/*"],
       "@features/*": ["./src/features/*"]
     },
     "plugins": [{ "name": "typescript-plugin-css-modules" }]

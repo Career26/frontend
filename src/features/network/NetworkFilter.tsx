@@ -8,7 +8,7 @@ import commonStlyes from '@shared/styles/commonStyles.module.css';
 
 const filters = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((id) => `Filter ${id}`);
 
-export const MentorFilter = () => {
+export const NetworkFilter = () => {
   const [activeFilters, setActiveFilters] = useState<string[]>([]);
   const { isMobile } = useMobileStyles();
 

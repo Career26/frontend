@@ -11,3 +11,8 @@ export interface Mentor {
   reason: string;
   email: string;
 }
+
+export enum NetworkView {
+  MENTOR = 'MENTOR',
+  STUDENT = 'STUDENT',
+}

@@ -10,7 +10,7 @@ import SettingsPage from '@features/settings';
 import LandingPage from '@features/landingPage';
 import OverviewPage from '@features/overview';
 import QuestionsPage from '@features/questions';
-import MentorsPage from '@features/mentors';
+import NetworkPage from '@features/network';
 import { CareerTestModal } from '@shared/components/careerTestModal/CareerTestModal';
 
 import { urls } from '@shared/constants/urlConstants';
@@ -62,9 +62,9 @@ const Index = () => {
           )}
         />
         <Route
-          path={urls.mentors}
+          path={urls.network}
           render={() => (
-            <AuthenticatedComponent authenticated={authenticated} Component={MentorsPage} />
+            <AuthenticatedComponent authenticated={authenticated} Component={NetworkPage} />
           )}
         />
       </Switch>

@@ -6,6 +6,8 @@ import { RootState } from '@state/store';
 
 import { getColorsObject } from '@shared/utils/colorUtil';
 
+import { NetworkView } from '@datatypes/network';
+
 interface SessionSlice {
   loginModal: {
     open: boolean;
@@ -19,6 +21,7 @@ interface SessionSlice {
   feedbackModal: { open: boolean };
   diversityModal: { open: boolean };
   careerTestModal: { open: boolean; noProfile?: boolean };
+  networkView: NetworkView;
 }
 
 export const initialSessionState: SessionSlice = {
@@ -29,12 +32,16 @@ export const initialSessionState: SessionSlice = {
   feedbackModal: { open: false },
   careerTestModal: { open: false },
   diversityModal: { open: false },
+  networkView: NetworkView.STUDENT,
 };
 
 export const sessionSlice = createSlice({
   name: 'session',
   initialState: initialSessionState,
   reducers: {
+    setNetworkView: (state, { payload }: PayloadAction<SessionSlice['networkView']>) => {
+      state.networkView = payload;
+    },
     setDiversityModal: (state, { payload }: PayloadAction<SessionSlice['diversityModal']>) => {
       state.diversityModal = payload;
     },
@@ -87,6 +94,7 @@ export const {
   setFeedbackModal,
   setCareerTestModal,
   setDiversityModal,
+  setNetworkView,
 } = sessionSlice.actions;
 
 const selectSession = (state: RootState) => state.session;
@@ -97,6 +105,7 @@ export const selectSelectedQuestion = (state: RootState) => {
   const id = selectSelectedQuestionId(state);
   return questions?.[id];
 };
+export const selectNetworkView = (state: RootState) => selectSession(state).networkView;
 export const selectLoginModal = (state: RootState) => selectSession(state).loginModal;
 export const selectDiversityModal = (state: RootState) => selectSession(state).diversityModal;
 export const selectCareerTestModal = (state: RootState) => selectSession(state).careerTestModal;

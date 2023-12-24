@@ -3,7 +3,7 @@ export const urls = {
   careersTest: '/career-test',
   overview: '/overview',
   questions: '/questions',
-  mentors: '/mentors',
+  network: '/network',
   settings: '/settings',
   jobs: '/jobs',
   linkedIn: 'https://linkedin.com/company/100135742/admin/feed/posts/',

@@ -64,6 +64,7 @@ export interface Profile extends WorkPreference {
 export interface UserProfile {
   identifier: string;
   profile: Profile;
+  isMentor?: boolean;
   careerPaths: { [key: string]: CareerPath };
 }
 

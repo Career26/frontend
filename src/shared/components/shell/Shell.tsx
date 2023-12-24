@@ -13,16 +13,14 @@ import { PageHeader } from '../pageHeader/PageHeader';
 import { CareerNavigation } from '../pageHeader/CareerNavigation';
 import { PageFooter } from '../pageFooter/PageFooter';
 
+import { footerHeight, headerHeight, navWidth } from '@shared/constants/appConstants';
+
 import styles from './shell.module.css';
 
 interface ShellProps {
   children: ReactElement;
   navbar?: ReactElement;
 }
-
-const navWidth = 200;
-const headerHeight = rem(80);
-const footerHeight = rem(50);
 
 interface NavMenuProps {
   navbar: ShellProps['navbar'];

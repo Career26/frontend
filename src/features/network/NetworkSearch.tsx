@@ -12,7 +12,7 @@ const optionsFilter: OptionsFilter = ({ options, search }) => {
   });
 };
 
-export const MentorSearch = () => {
+export const NetworkSearch = () => {
   const data = useMemo(
     () =>
       mentorList.map((item) => ({ label: item.name, value: item.id, description: item.industry })),
@@ -22,10 +22,10 @@ export const MentorSearch = () => {
   return (
     <Autocomplete
       py="md"
+      w="70%"
       data={data}
       rightSectionPointerEvents="none"
       rightSection={<IconSearch />}
-      label="Find a mentor"
       placeholder="Find a mentor"
       filter={optionsFilter}
     />

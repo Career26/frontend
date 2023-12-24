@@ -4,10 +4,12 @@ import { FormContent } from '@shared/components/forms/FormContent';
 
 import { getRatingLabel } from '@shared/utils/formUtil';
 import { degreeLevels, degreeOptions, ratingOptions } from '@shared/constants/formConstants';
+import { CreateableSelect } from '@shared/components/forms/CreateableSelect';
 
 import type { SubFormProps } from '@datatypes/careerTest';
 
 import commonStyles from '@shared/styles/commonStyles.module.css';
+import styles from '@careerTest/careerTest.module.css';
 
 export const UniversityForm = ({ form, baseKey, title }: SubFormProps) => {
   const rating = form.getInputProps(`${baseKey}.rating`).value;
@@ -38,14 +40,13 @@ export const UniversityForm = ({ form, baseKey, title }: SubFormProps) => {
           w="50%"
           searchable
         />
-        <Select
-          {...form.getInputProps(`${baseKey}.level`)}
+        <CreateableSelect
+          options={degreeLevels}
+          placeholder="Degree level"
+          onChange={(val) => form.setFieldValue(`${baseKey}.level`, val)}
+          value={form.getInputProps(`${baseKey}.level`).value}
           label="Degree"
-          data={degreeLevels}
-          withAsterisk
-          searchable
-          placeholder="Select a level"
-          w="50%"
+          className={styles.degreeLevel}
         />
       </div>
       <Select

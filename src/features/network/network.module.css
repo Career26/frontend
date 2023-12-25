@@ -36,5 +36,5 @@
   gap: 16px;
   width: 100%;
   z-index: 200;
-  background-color: white;
+  background-color: var(--mantine-color-gray-0);
 }

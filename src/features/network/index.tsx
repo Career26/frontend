@@ -11,8 +11,6 @@ import { NetworkToggle } from './NetworkToggle';
 
 import { NetworkView } from '@datatypes/network';
 
-import { headerHeight } from '@shared/constants/appConstants';
-
 import styles from './network.module.css';
 
 const Index = () => {
@@ -21,13 +19,11 @@ const Index = () => {
   return (
     <Shell navbar={<NetworkFilter />}>
       <Container>
-        <div style={{ position: 'sticky', top: headerHeight }} className={styles.header}>
+        <div style={{ position: 'sticky', top: 0 }} className={styles.header}>
           <NetworkSearch />
           <NetworkToggle view={view} />
         </div>
-        <div style={{ paddingTop: headerHeight }}>
-          {view === NetworkView.MENTOR ? <>Coming Soon...</> : <MentorGrid />}
-        </div>
+        <div>{view === NetworkView.MENTOR ? <>Coming Soon...</> : <MentorGrid />}</div>
       </Container>
     </Shell>
   );

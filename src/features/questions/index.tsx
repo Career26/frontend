@@ -3,7 +3,7 @@ import { Button, Container, Group, Textarea } from '@mantine/core';
 import { hasLength, useForm } from '@mantine/form';
 
 import { Shell } from '@shared/components/shell/Shell';
-import { LoadingLens } from '@shared/components/loadingScreen/LoadingLens';
+import { LoaderWithText } from '@shared/components/loadingScreen/LoaderWithText';
 import { QuestionSuggestion } from '@questions/QuestionSuggestion';
 import { QuestionNavBar } from '@questions/QuestionNavBar';
 import { QuestionRating } from '@questions/QuestionRating';
@@ -14,6 +14,7 @@ import { usePageNavigation } from '@shared/hooks/usePageNavigation';
 import {
   addQuestionColors,
   selectQuestionColors,
+  selectSelectedCareerPath,
   selectSelectedCareerPathId,
   selectSelectedQuestion,
   selectSelectedQuestionId,
@@ -25,6 +26,7 @@ import styles from '@questions/questions.module.css';
 const Index = () => {
   const dispatch = useAppDispatch();
   const { toggleQuestionId } = usePageNavigation();
+  const careerPath = useAppSelector(selectSelectedCareerPath);
   const careerPathId = useAppSelector(selectSelectedCareerPathId);
   const selectedQuestion = useAppSelector(selectSelectedQuestion);
   const selectedQuestionId = useAppSelector(selectSelectedQuestionId);
@@ -54,7 +56,14 @@ const Index = () => {
   }, [questions]);
 
   if (isFetching) {
-    return <LoadingLens />;
+    return (
+      <LoaderWithText
+        text={[
+          `Fetching questions for ${careerPath?.title}...`,
+          `This can take up to 30 seconds...`,
+        ]}
+      />
+    );
   }
 
   if (!selectedQuestion) {

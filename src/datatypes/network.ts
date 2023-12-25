@@ -13,6 +13,6 @@ export interface Mentor {
 }
 
 export enum NetworkView {
-  MENTOR = 'MENTOR',
   STUDENT = 'STUDENT',
+  MENTOR = 'MENTOR',
 }

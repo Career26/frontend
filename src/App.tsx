@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import { Route, Switch, useHistory } from 'react-router-dom';
+import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 
 import { usePageSetup } from '@shared/hooks/usePageSetup';
 
@@ -10,7 +10,7 @@ import SettingsPage from '@features/settings';
 import LandingPage from '@features/landingPage';
 import OverviewPage from '@features/overview';
 import QuestionsPage from '@features/questions';
-import NetworkPage from '@features/network';
+// import NetworkPage from '@features/network';
 import { CareerTestModal } from '@shared/components/careerTestModal/CareerTestModal';
 
 import { urls } from '@shared/constants/urlConstants';
@@ -61,12 +61,13 @@ const Index = () => {
             <AuthenticatedComponent authenticated={authenticated} Component={SettingsPage} />
           )}
         />
-        <Route
+        {/* <Route
           path={urls.network}
           render={() => (
             <AuthenticatedComponent authenticated={authenticated} Component={NetworkPage} />
           )}
-        />
+        /> */}
+        <Redirect to={urls.landingPage} />
       </Switch>
     </Suspense>
   );

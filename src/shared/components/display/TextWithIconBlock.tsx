@@ -7,7 +7,7 @@ import commonStyles from '@shared/styles/commonStyles.module.css';
 interface TextWithIconBlockProps {
   title: string;
   content: React.ReactNode;
-  Icon: React.ReactNode;
+  Icon?: React.ReactNode;
 }
 
 export const TextWithIconBlock = ({ title, content, Icon }: TextWithIconBlockProps) => {

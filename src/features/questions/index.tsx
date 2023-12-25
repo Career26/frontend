@@ -57,12 +57,14 @@ const Index = () => {
 
   if (isFetching) {
     return (
-      <LoaderWithText
-        text={[
-          `Fetching questions for ${careerPath?.title}...`,
-          `This can take up to 30 seconds...`,
-        ]}
-      />
+      <Shell>
+        <LoaderWithText
+          text={[
+            `Fetching questions for ${careerPath?.title}...`,
+            `This can take up to 30 seconds...`,
+          ]}
+        />
+      </Shell>
     );
   }
 

@@ -1,4 +1,3 @@
-import { useHistory } from 'react-router-dom';
 import { Card, Container, Group, Text } from '@mantine/core';
 
 import { useAppSelector } from '@state/store';
@@ -6,11 +5,9 @@ import { selectSelectedCareerPath, selectSelectedCareerPathId } from '@slices/se
 import { useGetCareerOverviewQuery } from '@apis/overviewApi';
 import { selectProfileId } from '@apis/profileApi';
 import { useMobileStyles } from '@shared/hooks/useMobileStyles';
-import { usePageSetup } from '@shared/hooks/usePageSetup';
 
 import { LoaderWithText } from '@shared/components/loadingScreen/LoaderWithText';
 import { Shell } from '@shared/components/shell/Shell';
-import { LoadingLens } from '@shared/components/loadingScreen/LoadingLens';
 import { CareerProgressionTile } from '@overview/careerProgressionTile/CareerProgressionTile';
 import { TopEmployersTile } from '@overview/TopEmployersTile';
 import { OverlapsTile } from '@overview/OverlapsTile';
@@ -19,28 +16,16 @@ import { ProgressionTile } from '@overview/ProgressionTile';
 import { RoleSummaryTile } from '@overview/RoleSummaryTile';
 
 import { overviewLinks } from '@shared/constants/overviewConstants';
-import { urls } from '@shared/constants/urlConstants';
 
 const Index = () => {
-  const { loading, unauthenticated } = usePageSetup();
   const { isMobile } = useMobileStyles();
   const profileId = useAppSelector(selectProfileId) || '';
-  const history = useHistory();
   const careerId = useAppSelector(selectSelectedCareerPathId);
   const careerPath = useAppSelector(selectSelectedCareerPath);
   const { data, isFetching } = useGetCareerOverviewQuery(
     { careerId, profileId },
     { skip: !profileId || !careerId },
   );
-
-  if (loading) {
-    return <LoadingLens />;
-  }
-
-  if (unauthenticated) {
-    history.push(urls.landingPage);
-    return <LoadingLens />;
-  }
 
   if (isFetching) {
     return (

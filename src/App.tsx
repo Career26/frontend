@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import { Route, Switch, useHistory } from 'react-router-dom';
+import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 
 import { usePageSetup } from '@shared/hooks/usePageSetup';
 
@@ -10,14 +10,27 @@ import SettingsPage from '@features/settings';
 import LandingPage from '@features/landingPage';
 import OverviewPage from '@features/overview';
 import QuestionsPage from '@features/questions';
-
+// import NetworkPage from '@features/network';
 import { CareerTestModal } from '@shared/components/careerTestModal/CareerTestModal';
 
 import { urls } from '@shared/constants/urlConstants';
 
+interface AuthenticatedComponentProps {
+  authenticated: boolean;
+  Component: () => JSX.Element | null;
+}
+
+const AuthenticatedComponent = ({ authenticated, Component }: AuthenticatedComponentProps) => {
+  const history = useHistory();
+  if (authenticated) {
+    return <Component />;
+  }
+  history.push(urls.landingPage);
+  return <LoadingLens />;
+};
+
 const Index = () => {
   const { loading, authenticated } = usePageSetup();
-  const history = useHistory();
 
   if (loading) {
     return <LoadingLens />;
@@ -32,35 +45,29 @@ const Index = () => {
         <Route path={urls.careersTest} component={CareerTest} />
         <Route
           path={urls.overview}
-          render={() => {
-            if (authenticated) {
-              return <OverviewPage />;
-            }
-            history.push(urls.landingPage);
-            return <LoadingLens />;
-          }}
+          render={() => (
+            <AuthenticatedComponent authenticated={authenticated} Component={OverviewPage} />
+          )}
         />
         <Route
           path={urls.questions}
-          render={() => {
-            if (authenticated) {
-              return <QuestionsPage />;
-            }
-            history.push(urls.landingPage);
-            return <LoadingLens />;
-          }}
+          render={() => (
+            <AuthenticatedComponent authenticated={authenticated} Component={QuestionsPage} />
+          )}
         />
         <Route
           path={urls.settings}
-          component={SettingsPage}
-          render={() => {
-            if (authenticated) {
-              return <SettingsPage />;
-            }
-            history.push(urls.landingPage);
-            return <LoadingLens />;
-          }}
+          render={() => (
+            <AuthenticatedComponent authenticated={authenticated} Component={SettingsPage} />
+          )}
         />
+        {/* <Route
+          path={urls.network}
+          render={() => (
+            <AuthenticatedComponent authenticated={authenticated} Component={NetworkPage} />
+          )}
+        /> */}
+        <Redirect to={urls.landingPage} />
       </Switch>
     </Suspense>
   );

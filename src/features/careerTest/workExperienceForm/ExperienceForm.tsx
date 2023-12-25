@@ -25,7 +25,6 @@ const getNameLabel = (experienceType: ExperienceType) => {
 
 export const ExperienceForm = ({ form, baseKey, title }: SubFormProps) => {
   const rating = form.getInputProps(`${baseKey}.rating`).value;
-  const ratingReason = form.getInputProps(`${baseKey}.ratingReason`).value;
   const experienceType = form.getInputProps(`${baseKey}.experienceType`).value;
   const experienceLabel = getNameLabel(experienceType);
   return (
@@ -61,7 +60,7 @@ export const ExperienceForm = ({ form, baseKey, title }: SubFormProps) => {
 
       <Textarea
         {...form.getInputProps(`${baseKey}.ratingReason`)}
-        label={getRatingLabel(rating, ratingReason.length)}
+        label={getRatingLabel(rating)}
         minRows={3}
         autosize
         withAsterisk

@@ -1,0 +1,40 @@
+.mentorCard {
+  display: flex;
+  padding-top: var(--mantine-spacing-md);
+  align-items: flex-start;
+  .left {
+    display: flex;
+    width: 30%;
+    align-items: flex-start;
+    flex-direction: column;
+    > div {
+      align-self: center;
+    }
+  }
+  .right {
+    padding-left: var(--mantine-spacing-md);
+  }
+}
+
+.mentorInfo {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.mentorHeader {
+  display: flex !important;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  z-index: 200;
+  background-color: var(--mantine-color-gray-0);
+}

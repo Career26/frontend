@@ -27,3 +27,7 @@
   padding-top: var(--mantine-spacing-xs);
   padding-bottom: var(--mantine-spacing-xs);
 }
+
+.degreeLevel {
+  width: 50%;
+}

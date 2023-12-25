@@ -116,7 +116,7 @@ export const initialUniversityValues: Degree = {
 
 export const initialWorkExperienceValues: Experience = {
   experienceName: '',
-  experienceType: ExperienceType.Company,
+  experienceType: ExperienceType['Work Experience'],
   rating: '',
   ratingReason: '',
   role: '',
@@ -150,3 +150,5 @@ export const careerLoadingText = [
   'This may take up to 30 seconds...',
   "You're almost there...",
 ];
+
+export const smallAnswer = '(1 to 2 sentences)';

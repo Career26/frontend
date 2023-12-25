@@ -13,9 +13,9 @@ export enum WorkValue {
 }
 
 export enum ExperienceType {
-  'Company' = 'COMPANY',
-  'Project' = 'PROJECT',
-  'Society' = 'SOCIETY',
+  'Work Experience / Internship' = 'COMPANY',
+  'Project / Self Study' = 'PROJECT',
+  'Society / Club' = 'SOCIETY',
   'Volunteering' = 'VOLUNTEERING',
   'Other' = 'OTHER',
 }
@@ -64,6 +64,7 @@ export interface Profile extends WorkPreference {
 export interface UserProfile {
   identifier: string;
   profile: Profile;
+  isMentor?: boolean;
   careerPaths: { [key: string]: CareerPath };
 }
 

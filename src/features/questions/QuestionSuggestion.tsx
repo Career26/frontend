@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import { IconBulb, IconQuestionMark, IconStar } from '@tabler/icons-react';
-import { Accordion, Badge, List, Loader, Paper } from '@mantine/core';
+import { Badge, List, Loader, Paper, Switch } from '@mantine/core';
 
 import { selectSuggestion, useGetSuggestionMutation } from '@apis/questionsApi';
 import { selectSelectedCareerPathId, selectSelectedQuestion } from '@slices/sessionSlice';
@@ -17,7 +16,7 @@ interface SuggestedFormatProps {
 const SuggestedFormat = ({ suggestedFormat }: SuggestedFormatProps) => (
   <List spacing="md" center>
     {Object.entries(suggestedFormat).map(([key, value]) => (
-      <List.Item key={`suggestion-${key}`} icon={<Badge>{key}</Badge>}>
+      <List.Item key={`suggestion-${key}`} icon={<Badge w="100px">{key}</Badge>}>
         {value}
       </List.Item>
     ))}
@@ -25,7 +24,7 @@ const SuggestedFormat = ({ suggestedFormat }: SuggestedFormatProps) => (
 );
 
 export const QuestionSuggestion = () => {
-  const [value, setValue] = useState<string | null>(null);
+  const [showSuggestion, setShowSuggestion] = useState(false);
   const careerPathId = useAppSelector(selectSelectedCareerPathId);
   const selectedQuestion = useAppSelector(selectSelectedQuestion);
   const fixedCacheKey = `suggestion-${careerPathId}-${selectedQuestion?.question}`;
@@ -35,51 +34,45 @@ export const QuestionSuggestion = () => {
   const suggestion = useAppSelector((state) => selectSuggestion(state, fixedCacheKey));
 
   useEffect(() => {
-    if (!selectedQuestion || !value || !careerPathId) {
+    if (!selectedQuestion || !showSuggestion || !careerPathId) {
       return;
     }
     if (suggestion) {
       return;
     }
     getSuggestion({ question: selectedQuestion.question, careerPathId });
-  }, [value, selectedQuestion, careerPathId]);
+  }, [showSuggestion, selectedQuestion, careerPathId]);
 
   useEffect(() => {
-    setValue(null);
+    setShowSuggestion(false);
   }, [selectedQuestion, careerPathId]);
 
   return (
-    <Paper withBorder>
-      <Accordion value={value} onChange={setValue}>
-        <Accordion.Item value="suggestion">
-          <Accordion.Control>Show Suggestion</Accordion.Control>
-          <Accordion.Panel>
-            {suggestionLoading ? (
-              <Loader type="dots" />
-            ) : (
-              suggestion && (
-                <>
-                  <TextWithIconBlock
-                    title="Suggested Format"
-                    content={<SuggestedFormat suggestedFormat={suggestion?.suggestedFormat} />}
-                    Icon={<IconStar fill="yellow" />}
-                  />
-                  <TextWithIconBlock
-                    title="Sample Answer"
-                    content={suggestion?.sampleAnswer}
-                    Icon={<IconBulb fill="yellow" />}
-                  />
-                  <TextWithIconBlock
-                    title="Reasoning"
-                    content={suggestion?.whySuitable}
-                    Icon={<IconQuestionMark />}
-                  />
-                </>
-              )
-            )}
-          </Accordion.Panel>
-        </Accordion.Item>
-      </Accordion>
-    </Paper>
+    <>
+      <Switch
+        py="md"
+        label="Show Suggestion"
+        checked={showSuggestion}
+        onChange={() => setShowSuggestion(!showSuggestion)}
+      />
+      {showSuggestion && (
+        <Paper withBorder p="md">
+          {suggestionLoading ? (
+            <Loader type="dots" />
+          ) : (
+            suggestion && (
+              <>
+                <TextWithIconBlock
+                  title="Suggested Format"
+                  content={<SuggestedFormat suggestedFormat={suggestion?.suggestedFormat} />}
+                />
+                <TextWithIconBlock title="Sample Answer" content={suggestion?.sampleAnswer} />
+                <TextWithIconBlock title="Reasoning" content={suggestion?.whySuitable} />
+              </>
+            )
+          )}
+        </Paper>
+      )}
+    </>
   );
 };

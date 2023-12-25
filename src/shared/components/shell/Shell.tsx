@@ -97,7 +97,11 @@ export const Shell = ({ children, navbar }: ShellProps) => {
           <CareerNavigation />
         </div>
       )}
-      <AppShell.Main className={styles.main}>{children}</AppShell.Main>
+      <AppShell.Main className={styles.main}>
+        <ScrollArea type="auto" h="80vh">
+          {children}
+        </ScrollArea>
+      </AppShell.Main>
       <AppShell.Footer className={classNames(styles.fullWidthContainer, styles.footer)}>
         <PageFooter />
       </AppShell.Footer>

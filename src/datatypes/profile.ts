@@ -13,7 +13,7 @@ export enum WorkValue {
 }
 
 export enum ExperienceType {
-  'Work Experience' = 'COMPANY',
+  'Work Experience / Internship' = 'COMPANY',
   'Project / Self Study' = 'PROJECT',
   'Society / Club' = 'SOCIETY',
   'Volunteering' = 'VOLUNTEERING',

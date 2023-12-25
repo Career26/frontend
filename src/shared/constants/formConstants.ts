@@ -116,7 +116,7 @@ export const initialUniversityValues: Degree = {
 
 export const initialWorkExperienceValues: Experience = {
   experienceName: '',
-  experienceType: ExperienceType.Company,
+  experienceType: ExperienceType['Work Experience'],
   rating: '',
   ratingReason: '',
   role: '',

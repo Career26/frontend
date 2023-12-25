@@ -13,9 +13,9 @@ export enum WorkValue {
 }
 
 export enum ExperienceType {
-  'Company' = 'COMPANY',
-  'Project' = 'PROJECT',
-  'Society' = 'SOCIETY',
+  'Work Experience' = 'COMPANY',
+  'Project / Self Study' = 'PROJECT',
+  'Society / Club' = 'SOCIETY',
   'Volunteering' = 'VOLUNTEERING',
   'Other' = 'OTHER',
 }

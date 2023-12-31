@@ -7,12 +7,12 @@ import { addIndustryColors, selectIndustryColors } from '@slices/sessionSlice';
 
 import { mentorList } from '@mocks/mentorMocks';
 
-import { getSrc } from './networkUtil';
+import { getSrc } from '../networkUtil';
 
 import commonStyles from '@shared/styles/commonStyles.module.css';
 import styles from './network.module.css';
 
-export const MentorGrid = () => {
+export const NetworkGrid = () => {
   const dispatch = useAppDispatch();
   const industryColors = useAppSelector(selectIndustryColors);
 

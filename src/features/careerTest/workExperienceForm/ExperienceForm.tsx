@@ -57,7 +57,6 @@ export const ExperienceForm = ({ form, baseKey, title }: SubFormProps) => {
         py="xs"
         searchable
       />
-
       <Textarea
         {...form.getInputProps(`${baseKey}.ratingReason`)}
         label={getRatingLabel(rating)}

@@ -3,6 +3,8 @@ import { FORM_INDEX, useForm } from '@mantine/form';
 
 import { useCareerTestStorage } from '@shared/hooks/useCareerTestStorage';
 
+import { checkDegree, checkExperience } from '@shared/utils/formUtil';
+
 import { CareerFormValues, CareerStep } from '@datatypes/careerTest';
 
 interface UseCareerTestFormProps {
@@ -31,40 +33,10 @@ export const useCareerTestForm = ({ activeStep }: UseCareerTestFormProps) => {
     initialValues: formValues,
     validateInputOnChange: true,
     validate: {
-      latestDegree: {
-        name: (value) => !value && 'Course name is required',
-        university: (value) => !value && 'University is required',
-        grade: (value) => !value && 'Grade is required',
-        level: (value) => !value && 'Level is required',
-        rating: (value) => !value && 'Rating is required',
-        ratingReason: (value) => {
-          if (!value) {
-            return 'You must provide a reason for the rating';
-          }
-          if (value.length > 500) {
-            return 'Maximum character length is 300';
-          }
-          return null;
-        },
-      },
-      additionalDegrees: {
-        name: (value) => !value && 'Course name is required',
-        university: (value) => !value && 'University is required',
-      },
+      latestDegree: checkDegree,
+      additionalDegrees: checkDegree,
       previousWorkExperience: {
-        role: (value) => !value && 'Role is required',
-        experienceName: (value) => !value && 'Experience name is required',
-        experienceType: (value) => !value && 'Experience type is required',
-        ratingReason: (value) => {
-          if (!value) {
-            return 'You must provide a reason for the rating';
-          }
-          if (value.length > 500) {
-            return 'Maximum character length is 300';
-          }
-          return null;
-        },
-        rating: (value) => !value && 'Rating is required',
+        ...checkExperience,
       },
       areasOfInterest: (value) => {
         if (!value.length) {

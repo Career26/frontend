@@ -13,7 +13,7 @@ import { useCareerTestForm } from './useCareerTestForm';
 
 import { Shell } from '@shared/components/shell/Shell';
 import { LoaderWithText } from '@shared/components/loadingScreen/LoaderWithText';
-import { EducationForm } from '@careerTest/educationForm/EducationForm';
+import EducationForm from '@shared/components/forms/EducationForm';
 import WorkExperienceForm from '@shared/components/forms/WorkExperienceForm';
 import { PreferencesForm } from '@careerTest/preferencesForm/PreferencesForm';
 import { CareerPathsForm } from '@careerTest/careerPathsForm/CareerPathsForm';
@@ -126,7 +126,13 @@ const Index = () => {
             <LoaderWithText text={careerLoadingText} />
           ) : (
             <>
-              {activeStep === CareerStep.EDUCATION && <EducationForm form={form} />}
+              {activeStep === CareerStep.EDUCATION && (
+                <EducationForm<CareerFormValues>
+                  firstField="latestDegree"
+                  additionalField="additionalDegrees"
+                  form={form}
+                />
+              )}
               {activeStep === CareerStep.WORK_EXPERIENCE && (
                 <WorkExperienceForm<CareerFormValues> field="previousWorkExperience" form={form} />
               )}

@@ -2,7 +2,7 @@ import { IconCurrencyDollar, IconCurrencyPound, IconCurrencyYen } from '@tabler/
 
 import { Degree, Experience, ExperienceType, WorkValue, WorkStyle } from '@datatypes/profile';
 import type { CareerFormValues } from '@datatypes/careerTest';
-import type { BasicExperience } from '@datatypes/network';
+import type { BasicDegree, BasicExperience } from '@datatypes/network';
 
 export const exampleCities = [
   {
@@ -106,11 +106,15 @@ export const degreeOptions = [
   { group: 'Other', items: otherGrades },
 ];
 
-export const initialUniversityValues: Degree = {
-  grade: '',
+export const initiaBasiclUniversityValues: BasicDegree = {
   level: '',
   name: '',
   university: '',
+};
+
+export const initialUniversityValues: Degree = {
+  ...initiaBasiclUniversityValues,
+  grade: '',
   rating: '',
   ratingReason: '',
 };

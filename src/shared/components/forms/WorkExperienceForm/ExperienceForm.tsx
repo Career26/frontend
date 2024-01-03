@@ -26,24 +26,19 @@ const getNameLabel = (experienceType: ExperienceType) => {
 
 interface ExperienceFormProps<T> {
   form: UseFormReturnType<T>;
-  withRating?: boolean;
+  basic?: boolean;
   baseKey: string;
   title?: string;
 }
 
-export const ExperienceForm = <T,>({
-  form,
-  baseKey,
-  title,
-  withRating,
-}: ExperienceFormProps<T>) => {
+export const ExperienceForm = <T,>({ form, baseKey, title, basic }: ExperienceFormProps<T>) => {
   const rating = form.getInputProps(`${baseKey}.rating`).value;
   const experienceType = form.getInputProps(`${baseKey}.experienceType`).value;
   const experienceLabel = getNameLabel(experienceType);
   return (
     <FormContent title={title}>
       <div className={commonStyles.row}>
-        {withRating && (
+        {!basic && (
           <Select
             {...form.getInputProps(`${baseKey}.experienceType`)}
             withAsterisk
@@ -63,7 +58,7 @@ export const ExperienceForm = <T,>({
         />
       </div>
       <TextInput {...form.getInputProps(`${baseKey}.role`)} label="Role" withAsterisk />
-      {withRating && (
+      {!basic && (
         <>
           <Select
             {...form.getInputProps(`${baseKey}.rating`)}

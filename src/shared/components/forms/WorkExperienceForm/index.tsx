@@ -1,4 +1,3 @@
-import type { UseFormReturnType } from '@mantine/form';
 import { Button, Container, Group } from '@mantine/core';
 import { IconPlus } from '@tabler/icons-react';
 
@@ -10,24 +9,18 @@ import {
   initialWorkExperienceValues,
 } from '@shared/constants/formConstants';
 
+import type { UseFormReturnType } from '@mantine/form';
 import type { BasicExperience } from '@datatypes/network';
 import type { Experience } from '@datatypes/profile';
+import type { FormFieldWithArray, MappedArrayValue } from '@datatypes/form';
 
 import styles from '@careerTest/careerTest.module.css';
 
-type ArrayKeys<T> = {
-  [K in keyof T]: T[K] extends any[] ? K : never;
-}[keyof T];
-
 interface WorkExperienceFormProps<T> {
   form: UseFormReturnType<T>;
-  field: Extract<ArrayKeys<T>, string>;
+  field: FormFieldWithArray<T>;
   basic?: boolean;
 }
-
-type MappedValue<T> = Extract<ArrayKeys<T>, string> extends keyof T
-  ? T[Extract<ArrayKeys<T>, string>]
-  : unknown;
 
 const WorkExperienceForm = <T,>({ form, field, basic }: WorkExperienceFormProps<T>) => {
   const workExperiences = form.values[field] as (BasicExperience | Experience)[];
@@ -37,12 +30,15 @@ const WorkExperienceForm = <T,>({ form, field, basic }: WorkExperienceFormProps<
     const newValue = [
       ...workExperiences,
       basic ? initialBasicWorkExperienceValues : initialWorkExperienceValues,
-    ] as MappedValue<T>;
+    ] as MappedArrayValue<T>;
     form.setFieldValue(field, newValue);
   };
 
   const onClickRemoveExperience = (key: number) => {
-    form.setFieldValue(field, workExperiences.filter((_degree, i) => i !== key) as MappedValue<T>);
+    form.setFieldValue(
+      field,
+      workExperiences.filter((_degree, i) => i !== key) as MappedArrayValue<T>,
+    );
   };
 
   return (
@@ -56,7 +52,7 @@ const WorkExperienceForm = <T,>({ form, field, basic }: WorkExperienceFormProps<
               form={form}
               baseKey={baseKey}
               key={baseKey}
-              withRating
+              basic
             />
             {key > 0 && key + 1 !== workExperienceCount && (
               <RemoveRowButton onClick={() => onClickRemoveExperience(key)} label="Experience" />

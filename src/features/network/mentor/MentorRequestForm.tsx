@@ -6,6 +6,9 @@ import { selectMentorProfile } from '@apis/profileApi';
 import { useMobileStyles } from '@shared/hooks/useMobileStyles';
 import { useAppSelector } from '@state/store';
 
+import { UniversityForm } from '@shared/components/forms/EducationForm/UniversityForm';
+import WorkExperienceForm from '@shared/components/forms/WorkExperienceForm';
+
 import { checkBasicDegree, checkBasicExperience } from '@shared/utils/formUtil';
 import { initialMentorRequestFormValues } from '@shared/constants/networkConstants';
 
@@ -20,6 +23,22 @@ enum MentorStep {
   COMPLETE = 2,
 }
 
+const useSubmitMentorRequest = () => {
+  const [data, setData] = useState(false);
+  const [isFetching, setIsFetching] = useState(false);
+
+  const submitMentorRequest = (values: MentorRequestValues) => {
+    console.log(values);
+    setIsFetching(true);
+    setTimeout(() => {
+      setIsFetching(false);
+      setData(true);
+    }, 2000);
+  };
+
+  return { submitMentorRequest, data, isFetching };
+};
+
 export const MentorRequestForm = () => {
   const mentorProfile = useAppSelector(selectMentorProfile);
   const [activeStep, setActiveStep] = useState(
@@ -27,7 +46,7 @@ export const MentorRequestForm = () => {
   );
   const { isMobile } = useMobileStyles();
 
-  const [submitMentorRequest, { data, isFetching }] = useSubmitMentorRequest();
+  const { submitMentorRequest, data, isFetching } = useSubmitMentorRequest();
 
   const form = useForm<MentorRequestValues>({
     initialValues: initialMentorRequestFormValues,
@@ -38,7 +57,7 @@ export const MentorRequestForm = () => {
   });
 
   const clickNext = () => {
-    if (activeStep === MentorStep.EDUCATION) {
+    if (activeStep === MentorStep.WORK_EXPERIENCE) {
       submitMentorRequest(form.values);
     }
     setActiveStep(activeStep + 1);
@@ -57,18 +76,31 @@ export const MentorRequestForm = () => {
         {mentorProfile?.status === MentorStatus.PENDING || !!data ? (
           <div>Thank you for submitting...</div>
         ) : (
-          <Group justify="center">
-            <Button
-              onClick={() => setActiveStep(activeStep - 1)}
-              disabled={activeStep === MentorStep.EDUCATION}
-              variant="light"
-            >
-              Back
-            </Button>
-            <Button onClick={clickNext} variant="outline" loading={isFetching}>
-              {activeStep === MentorStep.WORK_EXPERIENCE ? 'Submit' : 'Next'}
-            </Button>
-          </Group>
+          <>
+            {activeStep === MentorStep.EDUCATION && (
+              <UniversityForm<MentorRequestValues>
+                baseKey="degree.0"
+                form={form}
+                basic
+                title="Latest Degree"
+              />
+            )}
+            {activeStep === MentorStep.WORK_EXPERIENCE && (
+              <WorkExperienceForm<MentorRequestValues> form={form} basic field="experience" />
+            )}
+            <Group justify="center">
+              <Button
+                onClick={() => setActiveStep(activeStep - 1)}
+                disabled={activeStep === MentorStep.EDUCATION}
+                variant="light"
+              >
+                Back
+              </Button>
+              <Button onClick={clickNext} variant="outline" loading={isFetching}>
+                {activeStep === MentorStep.WORK_EXPERIENCE ? 'Submit' : 'Next'}
+              </Button>
+            </Group>
+          </>
         )}
       </Container>
     </>

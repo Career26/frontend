@@ -8,7 +8,7 @@ import { NetworkSearch } from './NetworkSearch';
 import { NetworkToggle } from './NetworkToggle';
 import { NetworkFilter } from './NetworkFilter';
 
-import styles from './network.module.css';
+import styles from '../network.module.css';
 
 interface NetworkContainerProps {
   children: React.ReactNode;
@@ -20,8 +20,8 @@ export const NetworkContainer = ({ children }: NetworkContainerProps) => {
     <Shell navbar={<NetworkFilter />}>
       <Container>
         <div style={{ position: 'sticky', top: 0 }} className={styles.header}>
-          <NetworkSearch />
           <NetworkToggle view={view} />
+          <NetworkSearch />
         </div>
         {children}
       </Container>

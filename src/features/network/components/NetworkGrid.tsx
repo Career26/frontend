@@ -10,7 +10,7 @@ import { mentorList } from '@mocks/mentorMocks';
 import { getSrc } from '../networkUtil';
 
 import commonStyles from '@shared/styles/commonStyles.module.css';
-import styles from './network.module.css';
+import styles from '../network.module.css';
 
 export const NetworkGrid = () => {
   const dispatch = useAppDispatch();

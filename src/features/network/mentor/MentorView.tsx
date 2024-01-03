@@ -10,13 +10,9 @@ import { MentorStatus } from '@datatypes/profile';
 
 export const MentorView = () => {
   const mentorProfile = useAppSelector(selectMentorProfile);
-
-  if (mentorProfile?.status !== MentorStatus.APPROVED) {
-    return <MentorRequestForm />;
-  }
   return (
     <NetworkContainer>
-      <NetworkGrid />
+      {mentorProfile?.status === MentorStatus.APPROVED ? <NetworkGrid /> : <MentorRequestForm />}
     </NetworkContainer>
   );
 };

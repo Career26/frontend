@@ -22,7 +22,7 @@ export const NetworkContainer = ({ children }: NetworkContainerProps) => {
       <Container>
         <div style={{ position: 'sticky', top: 0 }} className={styles.header}>
           <NetworkToggle view={view} />
-          <NetworkSearch />
+          {!children && <NetworkSearch />}
         </div>
         {children || <NetworkGrid />}
       </Container>

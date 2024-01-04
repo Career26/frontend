@@ -51,6 +51,7 @@ export const UniversityForm = <T,>({ form, baseKey, title, basic }: UniversityFo
         <CreateableSelect
           options={degreeLevels}
           placeholder="Degree level"
+          errorMessage={form.errors[`${baseKey}.level`] as string}
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
           onChange={(val) => form.setFieldValue(`${baseKey}.level`, val)}

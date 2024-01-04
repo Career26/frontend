@@ -8,6 +8,7 @@ interface CreateableSelectProps {
   value?: string;
   label: string;
   className?: string;
+  errorMessage?: string;
 }
 
 export const CreateableSelect = ({
@@ -16,6 +17,7 @@ export const CreateableSelect = ({
   onChange,
   placeholder,
   label,
+  errorMessage,
   className,
 }: CreateableSelectProps) => {
   const combobox = useCombobox({
@@ -51,6 +53,7 @@ export const CreateableSelect = ({
     >
       <Combobox.Target>
         <InputBase
+          error={errorMessage}
           withAsterisk
           rightSection={<Combobox.Chevron />}
           value={search}

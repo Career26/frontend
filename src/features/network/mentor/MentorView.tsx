@@ -11,7 +11,7 @@ export const MentorView = () => {
   const mentorProfile = useAppSelector(selectMentorProfile);
   return (
     <NetworkContainer>
-      {mentorProfile?.status === MentorStatus.APPROVED && <MentorRequestForm />}
+      {mentorProfile?.status !== MentorStatus.APPROVED && <MentorRequestForm />}
     </NetworkContainer>
   );
 };

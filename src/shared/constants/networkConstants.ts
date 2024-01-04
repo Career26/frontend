@@ -3,6 +3,6 @@ import { initiaBasiclUniversityValues, initialBasicWorkExperienceValues } from '
 
 export const initialMentorRequestFormValues: MentorRequestValues = {
   linkedIn: '',
-  degree: [initiaBasiclUniversityValues],
+  latestDegree: initiaBasiclUniversityValues,
   experience: [initialBasicWorkExperienceValues],
 };

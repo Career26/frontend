@@ -22,7 +22,7 @@ export enum NetworkView {
 }
 
 export interface MentorRequestValues {
-  degree: BasicDegree[];
+  latestDegree: BasicDegree;
   experience: BasicExperience[];
   linkedIn?: string;
 }

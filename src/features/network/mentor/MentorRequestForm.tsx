@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Button, Container, Group, Stepper } from '@mantine/core';
-import { useForm } from '@mantine/form';
+import { FORM_INDEX, useForm } from '@mantine/form';
 
 import { selectMentorProfile } from '@apis/profileApi';
 import { useMobileStyles } from '@shared/hooks/useMobileStyles';
@@ -50,13 +50,20 @@ export const MentorRequestForm = () => {
 
   const form = useForm<MentorRequestValues>({
     initialValues: initialMentorRequestFormValues,
+    validateInputOnChange: true,
     validate: {
-      degree: checkBasicDegree,
+      latestDegree: checkBasicDegree,
       experience: checkBasicExperience,
     },
   });
 
   const clickNext = () => {
+    form.validate();
+    const fieldToCheck =
+      activeStep === MentorStep.WORK_EXPERIENCE ? `experience.${FORM_INDEX}` : 'latestDegree';
+    if (!form.isValid(fieldToCheck)) {
+      return;
+    }
     if (activeStep === MentorStep.WORK_EXPERIENCE) {
       submitMentorRequest(form.values);
     }
@@ -79,7 +86,7 @@ export const MentorRequestForm = () => {
           <>
             {activeStep === MentorStep.EDUCATION && (
               <UniversityForm<MentorRequestValues>
-                baseKey="degree.0"
+                baseKey="latestDegree"
                 form={form}
                 basic
                 title="Latest Degree"

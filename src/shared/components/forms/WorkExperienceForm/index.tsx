@@ -4,33 +4,47 @@ import { IconPlus } from '@tabler/icons-react';
 import { RemoveRowButton } from '@shared/components/forms/RemoveRowButton';
 import { ExperienceForm } from './ExperienceForm';
 
-import { initialWorkExperienceValues } from '@shared/constants/formConstants';
+import {
+  initialBasicWorkExperienceValues,
+  initialWorkExperienceValues,
+} from '@shared/constants/formConstants';
 
-import type { CareerTestFormProps } from '@datatypes/careerTest';
+import type { UseFormReturnType } from '@mantine/form';
+import type { BasicExperience } from '@datatypes/network';
+import type { Experience } from '@datatypes/profile';
+import type { FormFieldWithArray, MappedArrayValue } from '@datatypes/form';
 
 import styles from '@careerTest/careerTest.module.css';
 
-export const WorkExperienceForm = ({ form }: CareerTestFormProps) => {
-  const workExperienceCount = form.values.previousWorkExperience.length;
+interface WorkExperienceFormProps<T> {
+  form: UseFormReturnType<T>;
+  field: FormFieldWithArray<T>;
+  basic?: boolean;
+}
+
+const WorkExperienceForm = <T,>({ form, field, basic }: WorkExperienceFormProps<T>) => {
+  const workExperiences = form.values[field] as (BasicExperience | Experience)[];
+  const workExperienceCount = workExperiences.length;
 
   const onClickAddExperience = () => {
-    form.setFieldValue('previousWorkExperience', [
-      ...form.values.previousWorkExperience,
-      initialWorkExperienceValues,
-    ]);
+    const newValue = [
+      ...workExperiences,
+      basic ? initialBasicWorkExperienceValues : initialWorkExperienceValues,
+    ] as MappedArrayValue<T>;
+    form.setFieldValue(field, newValue);
   };
 
   const onClickRemoveExperience = (key: number) => {
     form.setFieldValue(
-      'previousWorkExperience',
-      form.values.previousWorkExperience.filter((_degree, i) => i !== key),
+      field,
+      workExperiences.filter((_degree, i) => i !== key) as MappedArrayValue<T>,
     );
   };
 
   return (
     <Container py="md" className={styles.container}>
       {[...Array(workExperienceCount).keys()].map((key) => {
-        const baseKey = `previousWorkExperience.${key}`;
+        const baseKey = `${field}.${key}`;
         return (
           <div key={baseKey}>
             <ExperienceForm
@@ -38,6 +52,7 @@ export const WorkExperienceForm = ({ form }: CareerTestFormProps) => {
               form={form}
               baseKey={baseKey}
               key={baseKey}
+              basic
             />
             {key > 0 && key + 1 !== workExperienceCount && (
               <RemoveRowButton onClick={() => onClickRemoveExperience(key)} label="Experience" />
@@ -60,3 +75,5 @@ export const WorkExperienceForm = ({ form }: CareerTestFormProps) => {
     </Container>
   );
 };
+
+export default WorkExperienceForm;

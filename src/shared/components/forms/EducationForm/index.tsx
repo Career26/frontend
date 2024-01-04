@@ -4,34 +4,49 @@ import { IconPlus } from '@tabler/icons-react';
 import { RemoveRowButton } from '@shared/components/forms/RemoveRowButton';
 import { UniversityForm } from './UniversityForm';
 
-import { initialUniversityValues } from '@shared/constants/formConstants';
+import {
+  initiaBasiclUniversityValues,
+  initialUniversityValues,
+} from '@shared/constants/formConstants';
 
-import type { CareerTestFormProps } from '@datatypes/careerTest';
+import type { UseFormReturnType } from '@mantine/form';
+import type { FormFieldWithArray, MappedArrayValue } from '@datatypes/form';
+import type { Degree } from '@datatypes/profile';
+import type { BasicDegree } from '@datatypes/network';
 
 import styles from '@careerTest/careerTest.module.css';
 
-export const EducationForm = ({ form }: CareerTestFormProps) => {
-  const additionalDegreesCount = form.values.additionalDegrees.length;
+interface EducationFormProps<T> {
+  form: UseFormReturnType<T>;
+  firstField: string;
+  additionalField: FormFieldWithArray<T>;
+  basic?: boolean;
+}
+
+const EducationForm = <T,>({ form, firstField, additionalField, basic }: EducationFormProps<T>) => {
+  const additionalDegrees = form.values[additionalField] as (Degree | BasicDegree)[];
+  const additionalDegreesCount = additionalDegrees.length;
 
   const onClickAddUniversity = () => {
-    form.setFieldValue('additionalDegrees', [
-      ...form.values.additionalDegrees,
-      initialUniversityValues,
-    ]);
+    const newValue = [
+      ...additionalDegrees,
+      basic ? initiaBasiclUniversityValues : initialUniversityValues,
+    ] as MappedArrayValue<T>;
+    form.setFieldValue(additionalField, newValue);
   };
 
   const onClickRemoveUniversity = (key: number) => {
     form.setFieldValue(
-      'additionalDegrees',
-      form.values.additionalDegrees.filter((_degree, i) => i !== key),
+      additionalField,
+      additionalDegrees.filter((_degree, i) => i !== key) as MappedArrayValue<T>,
     );
   };
 
   return (
     <Container py="md" className={styles.container}>
-      <UniversityForm form={form} baseKey="latestDegree" title="Your Education History" />
+      <UniversityForm form={form} baseKey={firstField} title="Your Education History" />
       {[...Array(additionalDegreesCount).keys()].map((key) => {
-        const baseKey = `additionalDegrees.${key}`;
+        const baseKey = `${additionalField}.${key}`;
         return (
           <div key={baseKey}>
             <UniversityForm form={form} baseKey={baseKey} />
@@ -56,3 +71,5 @@ export const EducationForm = ({ form }: CareerTestFormProps) => {
     </Container>
   );
 };
+
+export default EducationForm;

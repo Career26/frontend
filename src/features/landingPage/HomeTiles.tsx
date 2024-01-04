@@ -32,7 +32,7 @@ export const HomeTiles = () => {
       dispatch(setCareerTestModal({ open: true, noProfile: true }));
       return;
     }
-    if ([urls.mentors, urls.jobs].includes(link) && !profile?.diversity) {
+    if ([urls.network, urls.jobs].includes(link) && !profile?.diversity) {
       dispatch(setDiversityModal({ open: true }));
       return;
     }

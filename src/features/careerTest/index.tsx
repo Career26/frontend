@@ -13,15 +13,15 @@ import { useCareerTestForm } from './useCareerTestForm';
 
 import { Shell } from '@shared/components/shell/Shell';
 import { LoaderWithText } from '@shared/components/loadingScreen/LoaderWithText';
-import { EducationForm } from '@careerTest/educationForm/EducationForm';
-import { WorkExperienceForm } from '@careerTest/workExperienceForm/WorkExperienceForm';
+import EducationForm from '@shared/components/forms/EducationForm';
+import WorkExperienceForm from '@shared/components/forms/WorkExperienceForm';
 import { PreferencesForm } from '@careerTest/preferencesForm/PreferencesForm';
 import { CareerPathsForm } from '@careerTest/careerPathsForm/CareerPathsForm';
 import { DiversityForm } from '@careerTest/diversityForm/DiversityForm';
 
 import { careerLoadingText } from '@shared/constants/formConstants';
 
-import { CareerStep } from '@datatypes/careerTest';
+import { CareerStep, CareerFormValues } from '@datatypes/careerTest';
 
 const stepperLabels = ['Education', 'Experience', 'Preferences', 'Diversity', 'Career Paths'];
 
@@ -126,8 +126,16 @@ const Index = () => {
             <LoaderWithText text={careerLoadingText} />
           ) : (
             <>
-              {activeStep === CareerStep.EDUCATION && <EducationForm form={form} />}
-              {activeStep === CareerStep.WORK_EXPERIENCE && <WorkExperienceForm form={form} />}
+              {activeStep === CareerStep.EDUCATION && (
+                <EducationForm<CareerFormValues>
+                  firstField="latestDegree"
+                  additionalField="additionalDegrees"
+                  form={form}
+                />
+              )}
+              {activeStep === CareerStep.WORK_EXPERIENCE && (
+                <WorkExperienceForm<CareerFormValues> field="previousWorkExperience" form={form} />
+              )}
               {activeStep === CareerStep.PREFERENCES && <PreferencesForm form={form} />}
               {activeStep === CareerStep.DIVERSITY && <DiversityForm form={form} />}
               {(activeStep === CareerStep.CAREER_PATHS || activeStep === CareerStep.COMPLETE) && (

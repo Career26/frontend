@@ -61,10 +61,17 @@ export interface Profile extends WorkPreference {
   diversity?: Diversity;
 }
 
+export enum MentorStatus {
+  PENDING,
+  APPROVED,
+}
+
 export interface UserProfile {
   identifier: string;
   profile: Profile;
-  isMentor?: boolean;
+  mentor?: {
+    status: MentorStatus;
+  };
   careerPaths: { [key: string]: CareerPath };
 }
 

@@ -48,7 +48,7 @@ export const selectProfileState = (state: RootState) =>
   profileApi.endpoints.getProfile.select()(state).data;
 
 export const selectProfile = (state: RootState) => selectProfileState(state)?.profile;
-
+export const selectMentorProfile = (state: RootState) => selectProfileState(state)?.mentor;
 export const selectCareerPaths = (state: RootState) => selectProfileState(state)?.careerPaths;
 
 export const selectProfileId = (state: RootState) => selectProfileState(state)?.identifier;

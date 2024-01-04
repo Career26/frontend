@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { Autocomplete, ComboboxItem, OptionsFilter } from '@mantine/core';
 import { IconSearch } from '@tabler/icons-react';
 
-import { mentorList } from '@mocks/mentorMocks';
+import { mockNetworkUserList } from '@mocks/networkMocks';
 
 const optionsFilter: OptionsFilter = ({ options, search }) => {
   const splittedSearch = search.toLowerCase().trim().split(' ');
@@ -15,8 +15,12 @@ const optionsFilter: OptionsFilter = ({ options, search }) => {
 export const NetworkSearch = () => {
   const data = useMemo(
     () =>
-      mentorList.map((item) => ({ label: item.name, value: item.id, description: item.industry })),
-    [mentorList],
+      mockNetworkUserList.map((item) => ({
+        label: item.name,
+        value: item.id,
+        description: item.industry,
+      })),
+    [mockNetworkUserList],
   );
 
   return (

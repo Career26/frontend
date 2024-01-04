@@ -6,12 +6,19 @@ import { getRatingLabel } from '@shared/utils/formUtil';
 import { degreeLevels, degreeOptions, ratingOptions } from '@shared/constants/formConstants';
 import { CreateableSelect } from '@shared/components/forms/CreateableSelect';
 
-import type { SubFormProps } from '@datatypes/careerTest';
+import type { UseFormReturnType } from '@mantine/form';
 
 import commonStyles from '@shared/styles/commonStyles.module.css';
 import styles from '@careerTest/careerTest.module.css';
 
-export const UniversityForm = ({ form, baseKey, title }: SubFormProps) => {
+interface UniversityFormProps<T> {
+  form: UseFormReturnType<T>;
+  basic?: boolean;
+  baseKey: string;
+  title?: string;
+}
+
+export const UniversityForm = <T,>({ form, baseKey, title, basic }: UniversityFormProps<T>) => {
   const rating = form.getInputProps(`${baseKey}.rating`).value;
   return (
     <FormContent title={title}>
@@ -30,41 +37,50 @@ export const UniversityForm = ({ form, baseKey, title }: SubFormProps) => {
         />
       </div>
       <div className={commonStyles.row}>
-        <Select
-          {...form.getInputProps(`${baseKey}.grade`)}
-          label="Achieved/Expected Grade"
-          data={degreeOptions}
-          withAsterisk
-          placeholder="Select a grade"
-          w="50%"
-          searchable
-        />
+        {!basic && (
+          <Select
+            {...form.getInputProps(`${baseKey}.grade`)}
+            label="Achieved/Expected Grade"
+            data={degreeOptions}
+            withAsterisk
+            placeholder="Select a grade"
+            w="50%"
+            searchable
+          />
+        )}
         <CreateableSelect
           options={degreeLevels}
           placeholder="Degree level"
+          errorMessage={form.errors[`${baseKey}.level`] as string}
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
           onChange={(val) => form.setFieldValue(`${baseKey}.level`, val)}
           value={form.getInputProps(`${baseKey}.level`).value}
           label="Degree"
           className={styles.degreeLevel}
         />
       </div>
-      <Select
-        {...form.getInputProps(`${baseKey}.rating`)}
-        label="Course Rating"
-        data={ratingOptions}
-        placeholder="Select a rating"
-        py="xs"
-        searchable
-        withAsterisk
-      />
-      <Textarea
-        {...form.getInputProps(`${baseKey}.ratingReason`)}
-        label={getRatingLabel(rating)}
-        minRows={3}
-        autosize
-        py="xs"
-        withAsterisk
-      />
+      {!basic && (
+        <>
+          <Select
+            {...form.getInputProps(`${baseKey}.rating`)}
+            label="Course Rating"
+            data={ratingOptions}
+            placeholder="Select a rating"
+            py="xs"
+            searchable
+            withAsterisk
+          />
+          <Textarea
+            {...form.getInputProps(`${baseKey}.ratingReason`)}
+            label={getRatingLabel(rating)}
+            minRows={3}
+            autosize
+            py="xs"
+            withAsterisk
+          />
+        </>
+      )}
     </FormContent>
   );
 };

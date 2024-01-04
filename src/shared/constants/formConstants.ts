@@ -2,6 +2,7 @@ import { IconCurrencyDollar, IconCurrencyPound, IconCurrencyYen } from '@tabler/
 
 import { Degree, Experience, ExperienceType, WorkValue, WorkStyle } from '@datatypes/profile';
 import type { CareerFormValues } from '@datatypes/careerTest';
+import type { BasicDegree, BasicExperience } from '@datatypes/network';
 
 export const exampleCities = [
   {
@@ -105,21 +106,29 @@ export const degreeOptions = [
   { group: 'Other', items: otherGrades },
 ];
 
-export const initialUniversityValues: Degree = {
-  grade: '',
+export const initiaBasiclUniversityValues: BasicDegree = {
   level: '',
   name: '',
   university: '',
+};
+
+export const initialUniversityValues: Degree = {
+  ...initiaBasiclUniversityValues,
+  grade: '',
   rating: '',
   ratingReason: '',
 };
 
-export const initialWorkExperienceValues: Experience = {
+export const initialBasicWorkExperienceValues: BasicExperience = {
   experienceName: '',
-  experienceType: ExperienceType['Work Experience'],
+  role: '',
+};
+
+export const initialWorkExperienceValues: Experience = {
+  ...initialBasicWorkExperienceValues,
+  experienceType: ExperienceType['Work Experience / Internship'],
   rating: '',
   ratingReason: '',
-  role: '',
 };
 
 export const initialProfileValues: CareerFormValues = {

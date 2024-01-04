@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { useAppDispatch, useAppSelector } from '@state/store';
 import { addIndustryColors, selectIndustryColors } from '@slices/sessionSlice';
 
-import { mentorList } from '@mocks/mentorMocks';
+import { mockNetworkUserList } from '@mocks/networkMocks';
 
 import { getSrc } from '../networkUtil';
 
@@ -17,13 +17,13 @@ export const NetworkGrid = () => {
   const industryColors = useAppSelector(selectIndustryColors);
 
   useEffect(() => {
-    const industries = mentorList.map((item) => item.industry);
+    const industries = mockNetworkUserList.map((item) => item.industry);
     dispatch(addIndustryColors(industries));
-  }, [mentorList]);
+  }, [mockNetworkUserList]);
 
   return (
     <Grid py="sm" grow id="mentors-grid">
-      {mentorList.map(({ id, gender, name, industry, reason, experience, img }) => (
+      {mockNetworkUserList.map(({ id, gender, name, industry, reason, experience, img }) => (
         <Grid.Col span={{ md: 6 }} key={id}>
           <Card padding="sm" radius="md" withBorder h="100%">
             <Card.Section

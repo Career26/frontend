@@ -3,7 +3,7 @@ import type { Degree, Experience, Gender } from './profile';
 export type BasicDegree = Omit<Degree, 'rating' | 'ratingReason' | 'grade'>;
 export type BasicExperience = Omit<Experience, 'experienceType' | 'rating' | 'ratingReason'>;
 
-export interface Mentor {
+export interface NetworkUser {
   name: string;
   degree: BasicDegree;
   experience: BasicExperience;
@@ -11,8 +11,9 @@ export interface Mentor {
   id: string;
   gender: Gender;
   industry: string;
-  reason: string;
+  reason?: string;
   email: string;
+  linkedIn?: string;
 }
 
 export enum NetworkView {

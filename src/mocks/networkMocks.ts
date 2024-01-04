@@ -1,7 +1,7 @@
 import { ExperienceType, Gender } from '@datatypes/profile';
-import type { Mentor } from '@datatypes/mentor';
+import type { NetworkUser } from '@datatypes/network';
 
-export const mentorList: Mentor[] = [1, 2, 3, 4, 5, 6].map((id) => ({
+export const mockNetworkUserList: NetworkUser[] = [1, 2, 3, 4, 5, 6].map((id) => ({
   id: `mentor-${id}`,
   name: `Mentor Name ${id}`,
   email: `mentor-${id}@something.com`,
@@ -12,7 +12,7 @@ export const mentorList: Mentor[] = [1, 2, 3, 4, 5, 6].map((id) => ({
   },
   experience: {
     experienceName: `Company Name ${id}`,
-    experienceType: ExperienceType.Company,
+    experienceType: ExperienceType['Work Experience / Internship'],
     role: `Role Name ${id}`,
   },
   gender: id % 2 === 0 ? Gender.Male : Gender.Female,

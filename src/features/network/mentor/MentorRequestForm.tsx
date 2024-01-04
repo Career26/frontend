@@ -14,6 +14,8 @@ import { initialMentorRequestFormValues } from '@shared/constants/networkConstan
 
 import { MentorStatus } from '@datatypes/profile';
 import type { MentorRequestValues } from '@datatypes/network';
+import { TextWithIconBlock } from '@shared/components/display/TextWithIconBlock';
+import { IconCircleCheck } from '@tabler/icons-react';
 
 const stepperLabels = ['Education', 'Experience'];
 
@@ -81,7 +83,11 @@ export const MentorRequestForm = () => {
       </Container>
       <Container py="md">
         {mentorProfile?.status === MentorStatus.PENDING || !!data ? (
-          <div>Thank you for submitting...</div>
+          <TextWithIconBlock
+            title="Thankyou for Submitting"
+            content="We will review your application to become a mentor. This can take up to 5 working days."
+            Icon={<IconCircleCheck color="green" size={50} />}
+          />
         ) : (
           <>
             {activeStep === MentorStep.EDUCATION && (
